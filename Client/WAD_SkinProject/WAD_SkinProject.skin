@@ -1,0 +1,6 @@
+﻿<SkinItems version="1.0" application="SkinEditor" assembly="WAD_SkinProject" class="" extranamespace="">
+  <Item>
+    <ItemName>WADSkin</ItemName>
+    <TemplateName>DevExpress Dark Style</TemplateName>
+  </Item>
+</SkinItems>
