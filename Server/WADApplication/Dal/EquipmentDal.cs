@@ -295,23 +295,23 @@ namespace Dal
         public static bool CreateTable(int equipmentId)
         {
             string tableName = string.Format("tb_EquipmentData{0}", equipmentId);
-            string sql = @"CREATE TABLE @name (
+            string sql = string.Format(@"CREATE TABLE {0} (
   [ID] INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 
   [Chroma] FLOAT, 
   [Temperature] FLOAT, 
   [Humidity] FLOAT, 
-  [AddTime] NVARCHAR)";
+  [AddTime] NVARCHAR)", tableName);
             using (SQLiteConnection con = new SQLiteConnection(SqliteHelper.ConnectionString))
             {
                 con.Open();
                 SQLiteCommand cmd = con.CreateCommand();
                 cmd.CommandText = string.Format("SELECT COUNT(*) FROM sqlite_master where type='table' and name=@name");
                 cmd.Parameters.AddWithValue("@name", tableName);
-                if (0 == (int)cmd.ExecuteScalar())
+                //var aaa = cmd.ExecuteScalar().ToString();
+                if (0 == Convert.ToInt32(cmd.ExecuteScalar()))
                 {
                     SQLiteCommand ccmd = con.CreateCommand();
                     ccmd.CommandText = sql;
-                    ccmd.Parameters.AddWithValue("@name", tableName);
                     ccmd.ExecuteNonQuery();
                     return true;
                 }

@@ -130,17 +130,6 @@ namespace Dal
                 return null;
             }
         }
-
-        public static void CreateTable()
-        {
-            if (connection == null)
-            {
-                connection = new SQLiteConnection(ConnectionString);
-            }
-            connection.in
-            SQLiteCommand cmd = connection.CreateCommand();
-            
-        }
         #endregion
 
 

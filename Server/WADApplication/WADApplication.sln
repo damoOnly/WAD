@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WADApplication", "WADApplication\WADApplication.csproj", "{5903D345-2982-498B-90B0-8A6B6A5B6DDB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandManager", "CommandManager\CommandManager.csproj", "{B9FC7165-C65B-4CCC-906D-2ED31BDF07B5}"
@@ -14,6 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataStruct", "DataStruct\DataStruct.csproj", "{7F4AA805-6668-460F-A960-CD76F944100D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibMessageHelper", "LibMessageHelper\LibMessageHelper.csproj", "{76EB986A-7BDF-4C54-A759-12A6DF83B82E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLiteTest", "SQLiteTest\SQLiteTest.csproj", "{C00FF520-535C-4CDE-958B-8D416698C940}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -95,6 +99,16 @@ Global
 		{76EB986A-7BDF-4C54-A759-12A6DF83B82E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{76EB986A-7BDF-4C54-A759-12A6DF83B82E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{76EB986A-7BDF-4C54-A759-12A6DF83B82E}.Release|x86.ActiveCfg = Release|Any CPU
+		{C00FF520-535C-4CDE-958B-8D416698C940}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C00FF520-535C-4CDE-958B-8D416698C940}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C00FF520-535C-4CDE-958B-8D416698C940}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C00FF520-535C-4CDE-958B-8D416698C940}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C00FF520-535C-4CDE-958B-8D416698C940}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C00FF520-535C-4CDE-958B-8D416698C940}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C00FF520-535C-4CDE-958B-8D416698C940}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C00FF520-535C-4CDE-958B-8D416698C940}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C00FF520-535C-4CDE-958B-8D416698C940}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{C00FF520-535C-4CDE-958B-8D416698C940}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
