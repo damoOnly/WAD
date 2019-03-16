@@ -11,40 +11,56 @@ namespace Dal
 {
     public static class EquipmentDataDal
     {
-        public static bool AddOne(EquipmentData ed)
+        public static bool AddOne(EquipmentData ed, int equipmentId)
         {
-            //string sql = string.Format("insert into [tb_EquipmentData] (EquipmentID,Chroma,Temperature,Humidity,AddTime) values ({0},{1},{2},{3},'{4}')", ed.EquipmentID, ed.Chroma, ed.Temperature, ed.Humidity, ed.AddTime);
-            string sql = string.Format("insert into tb_EquipmentData (EquipmentID,Chroma,AddTime) values ({0},{1},'{2}')", ed.EquipmentID, ed.Chroma, ed.AddTime.ToString("yyyy-MM-dd HH:mm:ss"));
-            if (SqliteHelper.ExecuteNonQuery(sql) == 1)
+            string sql = string.Format("insert into tb_EquipmentData{0} (Chroma,AddTime) values (@chroma, strftime('%Y-%m-%d %H:%M:%f','now','localtime'))", equipmentId);
+            using (SQLiteConnection conn = new SQLiteConnection(SqliteHelper.ConnectionString))
             {
-                return true;
-            }
-            else
-            {
-                LogLib.Log.GetLogger("EquipmentDataDal").Warn("添加浓度数据失败");
-                return false;
+                conn.Open();
+
+                SQLiteCommand cmd = new SQLiteCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@chroma", ed.Chroma);
+
+                return cmd.ExecuteNonQuery() == 1;
             }
         }
-        //9.18 以0X格式补齐日期和时间
-        //public static List<EquipmentData> GetListByTime(long equipmentID,string dt1,string dt2)
-        public static List<EquipmentData> GetListByTime(long equipmentID,DateTime dt1,DateTime dt2)        
+
+        public static bool AddOne(EquipmentData ed, int equipmentId, SQLiteTransaction trans, SQLiteConnection conn)
+        {
+            //string sql = string.Format("insert into tb_EquipmentData{0} (Chroma,AddTime) values (@chroma, strftime('%Y-%m-%d %H:%M:%f','now','localtime'))", equipmentId);
+            string sql = string.Format("insert into tb_EquipmentData{0} (Chroma,AddTime) values (@chroma, @addTime)", equipmentId);
+
+
+            SQLiteCommand cmd = new SQLiteCommand(sql, conn, trans);
+            cmd.Parameters.AddWithValue("@chroma", ed.Chroma);
+            cmd.Parameters.AddWithValue("@addTime", ed.AddTime);
+
+            return cmd.ExecuteNonQuery() == 1;
+        }
+        
+        public static List<EquipmentData> GetListByTime(long equipmentID, DateTime dt1, DateTime dt2)
         {
             //dt2 = dt2.AddDays(1);
-            string sql = string.Format("select a.EquipmentID,a.Chroma,a.Temperature,a.Humidity,a.AddTime,b.UnitType from tb_EquipmentData a left join tb_Equipment b on a.EquipmentID=b.ID where EquipmentID={0} and AddTime >='{1}' and AddTime <='{2}'", equipmentID, dt1.ToString("yyyy-MM-dd HH:mm:ss"), dt2.ToString("yyyy-MM-dd HH:mm:ss"));
+            string sql = string.Format("select a.Chroma,a.Temperature,a.Humidity,a.AddTime from tb_EquipmentData{0} a where AddTime >= @dt1 and AddTime <= @dt2", equipmentID);
+
             List<EquipmentData> list = new List<EquipmentData>();
-            using (SQLiteDataReader reader = SqliteHelper.ExecuteReader(sql))
-            {                
+            using (SQLiteConnection conn = new SQLiteConnection(SqliteHelper.ConnectionString))
+            {
+                conn.Open();
+                SQLiteCommand cmd = new SQLiteCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@dt1", dt1);
+                cmd.Parameters.AddWithValue("@dt2", dt2);
+
+                SQLiteDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
                     EquipmentData eq = new EquipmentData();
-                    eq.EquipmentID = reader.GetInt32(0);
-                    eq.Chroma = reader.GetFloat(1);
-                    eq.Chroma = eq.Chroma < 10000 ? eq.Chroma : 0;
-                    eq.AddTime = reader.GetDateTime(4);
-                    eq.UnitType = reader.GetByte(5);
+                    eq.Chroma = reader.GetFloat(0);
+                    eq.AddTime = reader.GetDateTime(3);
                     list.Add(eq);
-                }                
+                }
             }
+            
             return list;
         }
 
@@ -95,6 +111,20 @@ namespace Dal
         {
             string sql = string.Format("delete from tb_EquipmentData where EquipmentID={0}", equipmentID);
             return SqliteHelper.ExecuteNonQuery(sql);
+        }
+
+        public static void AddList(int equipmentId, List<EquipmentData> list)
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(SqliteHelper.ConnectionString))
+            {
+                conn.Open();
+                SQLiteTransaction tran = conn.BeginTransaction();
+                foreach (var item in list)
+                {
+                    AddOne(item, equipmentId, tran, conn);
+                }
+                tran.Commit();
+            }
         }
     }
 }

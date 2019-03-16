@@ -300,7 +300,7 @@ namespace Dal
   [Chroma] FLOAT, 
   [Temperature] FLOAT, 
   [Humidity] FLOAT, 
-  [AddTime] NVARCHAR)", tableName);
+  [AddTime] DATETIME)", tableName);
             using (SQLiteConnection con = new SQLiteConnection(SqliteHelper.ConnectionString))
             {
                 con.Open();

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "standardApplication", "standardApplication\standardApplication.csproj", "{78FF997E-A93A-43AF-8AC6-EEBB976FC454}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandManager", "CommandManager\CommandManager.csproj", "{086FE40D-077B-4824-B601-4C5A5E340E17}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogLib", "LogLib\LogLib.csproj", "{664237F0-6F59-477A-9B2E-3879E6128F7E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{4412BE1B-26C6-4FDC-B386-42E41915674C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,8 +35,15 @@ Global
 		{664237F0-6F59-477A-9B2E-3879E6128F7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{664237F0-6F59-477A-9B2E-3879E6128F7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{664237F0-6F59-477A-9B2E-3879E6128F7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4412BE1B-26C6-4FDC-B386-42E41915674C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4412BE1B-26C6-4FDC-B386-42E41915674C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4412BE1B-26C6-4FDC-B386-42E41915674C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4412BE1B-26C6-4FDC-B386-42E41915674C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2057BFBD-39F9-433E-A4C6-B98F5A86B408}
 	EndGlobalSection
 EndGlobal
