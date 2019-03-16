@@ -1137,6 +1137,7 @@ namespace WADApplication
 
             // 重置消息
             resetMessageCallBack = new ResetMessage(resetMessage);
+            #endregion
         }
 
         static string GetLocalIp()//获取本地IP
