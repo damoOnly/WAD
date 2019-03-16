@@ -43,9 +43,9 @@ namespace standardApplication
             normalParam.RelayInterval1 = (ushort)spinEdit9.Value;
             normalParam.RelayInterval2 = (ushort)spinEdit8.Value;
             normalParam.RelayInterval3 = (ushort)spinEdit7.Value;
-            normalParam.RelayMatchChannel1 = short.Parse(comboBoxEdit8.Text);
-            normalParam.RelayMatchChannel2 = short.Parse(comboBoxEdit11.Text);
-            normalParam.RelayMatchChannel3 = short.Parse(comboBoxEdit12.Text);
+            normalParam.RelayMatchChannel1 = (short)spinEdit10.Value;
+            normalParam.RelayMatchChannel2 = (short)spinEdit11.Value;
+            normalParam.RelayMatchChannel3 = (short)spinEdit12.Value;
             normalParam.RelayModel1.Name = comboBoxEdit7.Text;
             normalParam.RelayModel1.Value = Gloab.Config.RelayModel[comboBoxEdit7.Text];
             normalParam.RelayModel2.Name = comboBoxEdit9.Text;
@@ -75,9 +75,9 @@ namespace standardApplication
             spinEdit9.Value = normalParam.RelayInterval1;
             spinEdit8.Value = normalParam.RelayInterval2;
             spinEdit7.Value = normalParam.RelayInterval3;
-            comboBoxEdit8.Text = normalParam.RelayMatchChannel1.ToString();
-            comboBoxEdit11.Text = normalParam.RelayMatchChannel2.ToString();
-            comboBoxEdit12.Text = normalParam.RelayMatchChannel3.ToString();
+            spinEdit10.Value = normalParam.RelayMatchChannel1;
+            spinEdit11.Value = normalParam.RelayMatchChannel2;
+            spinEdit12.Value = normalParam.RelayMatchChannel3;
             comboBoxEdit7.Text = normalParam.RelayModel1.Name;
             comboBoxEdit9.Text = normalParam.RelayModel2.Name;
             comboBoxEdit10.Text = normalParam.RelayModel3.Name;
@@ -105,16 +105,7 @@ namespace standardApplication
 
             comboBoxEdit10.Properties.Items.Clear();
             comboBoxEdit10.Properties.Items.AddRange(Gloab.Config.RelayModel.Keys);
-
-            comboBoxEdit8.Properties.Items.Clear();
-            comboBoxEdit8.Properties.Items.AddRange(Gloab.Config.MatchChannel.Keys);
-
-            comboBoxEdit11.Properties.Items.Clear();
-            comboBoxEdit11.Properties.Items.AddRange(Gloab.Config.MatchChannel.Keys);
-
-            comboBoxEdit12.Properties.Items.Clear();
-            comboBoxEdit12.Properties.Items.AddRange(Gloab.Config.MatchChannel.Keys);
-
+            
             if (Gloab.AllData == null)
             {
                 return;
@@ -204,7 +195,7 @@ namespace standardApplication
         private void simpleButton16_Click(object sender, EventArgs e)
         {
             GetNormalFromControl();
-            ModelFile.SaveNormal(normalParam);
+            ModelFile.SaveModel<NormalParamEntity>(normalParam, ModelType.Normal);
             if (SaveModelFileEvent != null)
             {
                 SaveModelFileEvent(this, new EventArgs());

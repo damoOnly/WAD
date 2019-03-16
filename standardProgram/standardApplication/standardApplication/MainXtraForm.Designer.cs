@@ -401,6 +401,7 @@
             this.xtraTabPage5,
             this.xtraTabPage6,
             this.xtraTabPage7});
+            this.xtraTabControl1.SelectedPageChanged += new DevExpress.XtraTab.TabPageChangedEventHandler(this.xtraTabControl1_SelectedPageChanged);
             this.xtraTabControl1.SelectedPageChanging += new DevExpress.XtraTab.TabPageChangingEventHandler(this.xtraTabControl2_SelectedPageChanging);
             // 
             // xtraTabPage1
@@ -1257,6 +1258,7 @@
             this.userControlNormal1.Size = new System.Drawing.Size(678, 421);
             this.userControlNormal1.TabIndex = 0;
             this.userControlNormal1.ChangeNormalEvent += new standardApplication.UserControlNormal.ChangeNormalEventHandler(this.userControlNormal1_ChangeNormalEvent);
+            this.userControlNormal1.SaveModelFileEvent += new standardApplication.UserControlNormal.SaveModelFileEventHandler(this.userControlNormal1_SaveModelFileEvent);
             // 
             // xtraTabPage7
             // 
@@ -1712,7 +1714,7 @@
             // spinEdit8
             // 
             this.spinEdit8.EditValue = new decimal(new int[] {
-            2000,
+            100,
             0,
             0,
             0});

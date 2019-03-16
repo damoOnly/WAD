@@ -29,7 +29,7 @@ namespace CommandManager
                 byte[] rbytes = PLAASerialPort.Read(sendb);
                 callback(string.Format("R: {0}", CommandUnits.ByteToHexStr(rbytes)));
                 WeatherEntity weather = new WeatherEntity();
-                weather.WeatherID = i + 1;
+                weather.WeatherID = i;
                 Array.Reverse(rbytes, 3, 2);
                 weather.WeatherName.Value = BitConverter.ToInt16(rbytes, 3);
                 weather.WeatherName.Name = config.WeatherName.FirstOrDefault(c => c.Value == weather.WeatherName.Value).Key;
@@ -87,7 +87,7 @@ namespace CommandManager
                 Array.Reverse(byteTemp, 2, 2);
                 content.AddRange(byteTemp);
 
-                byte[] sendb = Command.GetWiteSendByte(address, (byte)weather.WeatherID, 0x10, content.ToArray());
+                byte[] sendb = Command.GetWiteSendByte(address, (byte)(0x10 + weather.WeatherID), 0x10, content.ToArray());
                 callback(string.Format("W: {0}", CommandUnits.ByteToHexStr(sendb)));
                 PLAASerialPort.Write(sendb);
             }

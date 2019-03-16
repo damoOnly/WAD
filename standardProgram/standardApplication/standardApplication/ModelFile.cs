@@ -45,7 +45,7 @@ namespace standardApplication
             {
                 //OpenFileDialog fileDialog = new OpenFileDialog();
                 string directoryName = GetDirectoryName(modelType);
-                string path = AppDomain.CurrentDomain.BaseDirectory + directoryName +"//"+fileName+".xml";
+                string path = AppDomain.CurrentDomain.BaseDirectory + directoryName +"//"+fileName;
                 //fileDialog.Filter = "Xml Files (*.xml)|*.xml";
                 //fileDialog.FilterIndex = 2;
                 //fileDialog.RestoreDirectory = true;
@@ -93,11 +93,15 @@ namespace standardApplication
         {
             List<string> list = new List<string>();
             string directoryName = GetDirectoryName(modelType);
-            DirectoryInfo folder = new DirectoryInfo(directoryName);
-            foreach (var item in folder.EnumerateFiles("*.xml"))
+            if (System.IO.Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + directoryName))
             {
-                list.Add(item.Name);
+                DirectoryInfo folder = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + directoryName);
+                foreach (var item in folder.EnumerateFiles("*.xml"))
+                {
+                    list.Add(item.Name);
+                }
             }
+            
             return list;
         }
 
@@ -107,6 +111,7 @@ namespace standardApplication
     {
         All,
         Gas,
+        Weather,
         Normal,
         Serial
     }

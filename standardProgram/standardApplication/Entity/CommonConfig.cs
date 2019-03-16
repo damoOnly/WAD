@@ -27,8 +27,6 @@ namespace Entity
 
         public Dictionary<string, byte> RelayModelA { get; set; }
 
-        public Dictionary<string, byte> MatchChannel { get; set; }
-
         public Dictionary<string, byte> SerialPortModel { get; set; }
 
         public CommonConfig()
@@ -42,7 +40,6 @@ namespace Entity
             WeatherUnit = new Dictionary<string, byte>();
             RelayModel = new Dictionary<string, byte>();
             RelayModelA = new Dictionary<string, byte>();
-            MatchChannel = new Dictionary<string, byte>();
             SerialPortModel = new Dictionary<string, byte>();
         }
 

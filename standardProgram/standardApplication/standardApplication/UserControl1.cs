@@ -290,6 +290,10 @@ namespace standardApplication
         {
             if (simpleButton2.Text == "采样")
             {
+                if (CheckIsSampling())
+                {
+                    return;
+                }
                 simpleButton2.Text = "停止";
                 try
                 {
@@ -358,6 +362,10 @@ namespace standardApplication
         {
             if (simpleButton7.Text == "采样")
             {
+                if (CheckIsSampling())
+                {
+                    return;
+                }
                 simpleButton7.Text = "停止";
                 try
                 {
@@ -389,6 +397,10 @@ namespace standardApplication
         {
             if (simpleButton10.Text == "采样")
             {
+                if (CheckIsSampling())
+                {
+                    return;
+                }
                 simpleButton10.Text = "停止";
                 try
                 {
@@ -578,7 +590,7 @@ namespace standardApplication
         private void simpleButton13_Click(object sender, EventArgs e)
         {
             GetGasFromControl();
-            ModelFile.SaveGas(Gas);
+            ModelFile.SaveModel<GasEntity>(Gas,ModelType.Gas);
             if (SaveModelFileEvent != null)
             {
                 SaveModelFileEvent(this, new EventArgs());

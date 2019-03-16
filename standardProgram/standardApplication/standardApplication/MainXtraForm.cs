@@ -764,30 +764,45 @@ namespace standardApplication
 
         private void SetDebugStr(string str)
         {
-            int MaxLines = 1000;
-            //cjComment这部分来的奇怪。应该会自己滚动的
-            if (richTextBox1.Lines.Length > MaxLines)
+            if (this.richTextBox1.InvokeRequired)
             {
-                richTextBox1.Clear();
+                this.richTextBox1.Invoke(new Action<string>(SetDebugStr), str);
             }
-            richTextBox1.AppendText(str+"\r\n");
-            // 自动滚到底部
-            richTextBox1.SelectionStart = richTextBox1.Text.Length;
-            richTextBox1.ScrollToCaret();
+            else
+            {
+                int MaxLines = 1000;
+                //cjComment这部分来的奇怪。应该会自己滚动的
+                if (richTextBox1.Lines.Length > MaxLines)
+                {
+                    richTextBox1.Clear();
+                }
+                richTextBox1.AppendText(str + "\r\n");
+                // 自动滚到底部
+                richTextBox1.SelectionStart = richTextBox1.Text.Length;
+                richTextBox1.ScrollToCaret();
+            }
+            
         }
 
         private void CommandCallback(string str)
         {
-            int MaxLines = 1000;
-            //cjComment这部分来的奇怪。应该会自己滚动的
-            if (richTextBox1.Lines.Length > MaxLines)
+            if (this.richTextBox1.InvokeRequired)
             {
-                richTextBox1.Clear();
+                this.richTextBox1.Invoke(new Action<string>(CommandCallback), str);
             }
-            richTextBox1.AppendText(str + "\r\n");
-            // 自动滚到底部
-            richTextBox1.SelectionStart = richTextBox1.Text.Length;
-            richTextBox1.ScrollToCaret();
+            else
+            {
+                int MaxLines = 1000;
+                //cjComment这部分来的奇怪。应该会自己滚动的
+                if (richTextBox1.Lines.Length > MaxLines)
+                {
+                    richTextBox1.Clear();
+                }
+                richTextBox1.AppendText(str + "\r\n");
+                // 自动滚到底部
+                richTextBox1.SelectionStart = richTextBox1.Text.Length;
+                richTextBox1.ScrollToCaret();
+            }            
         }
 
         private void userControl11_ChangeGasEvent(object sender, EventArgs e)
@@ -799,6 +814,25 @@ namespace standardApplication
         {
             //xtraTabPage1.Focus();
             
+        }
+
+        private void ReadModelFileName(ModelType type)
+        {
+            listBoxControl1.Items.Clear();
+            if (type != ModelType.Weather)
+            {
+                listBoxControl1.Items.AddRange(ModelFile.ReadFileNameList(type).ToArray());
+            }            
+        }
+
+        private void xtraTabControl1_SelectedPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)
+        {
+            ReadModelFileName((ModelType)xtraTabControl1.SelectedTabPageIndex);
+        }
+
+        private void userControlNormal1_SaveModelFileEvent(object sender, EventArgs e)
+        {
+            ReadModelFileName(ModelType.Normal);
         }
     }
 }

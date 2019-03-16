@@ -192,17 +192,38 @@ namespace CommandManager
             return gas;
         }
 
-        private static Thread thread;
+        private static System.Timers.Timer sampleTimer = new System.Timers.Timer();
         public static void StartSample(byte address, int gasId, EnumChromaLevel level, Action<EnumChromaLevel, GasEntity> callback, Action<string> commandCallback)
         {
-            if (CommandUnits.IsCommandding)
-            {
-                throw new CommandException("命令正在执行");
-            }
-            CommandUnits.IsCommandding = true;
-            thread = new Thread(new ParameterizedThreadStart(Sampling));
-            thread.Start(new List<object>() { address, gasId, level, callback, commandCallback });
+            sampleTimer = new System.Timers.Timer();
+            sampleTimer.Enabled = true;
+            sampleTimer.Interval = 1000 + CommandUnits.CommandDelay;
+            sampleTimer.Elapsed += new System.Timers.ElapsedEventHandler((s, e) => sampleTimer_Elapsed(s, e, new List<object>() { address, gasId, level, callback, commandCallback }));
+            sampleTimer.Start();
 
+        }
+
+        static void sampleTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e, object param)
+        {
+            try
+            {
+                List<object> list = param as List<object>;
+                byte address = (byte)list[0];
+                int gasId = (int)list[1];
+                EnumChromaLevel level = (EnumChromaLevel)list[2];
+                Action<EnumChromaLevel, GasEntity> callback = list[3] as Action<EnumChromaLevel, GasEntity>;
+                Action<string> commandCallback = list[4] as Action<string>;
+                GasEntity gas = ReadChromaAndAD(gasId, level, address, commandCallback);
+                callback(level, gas);
+            }
+            //catch (CommandException exp)
+            //{
+            //    throw exp;
+            //}
+            catch (Exception ex)
+            {
+                log.Error(ex);
+            }
         }
 
         private static void Sampling(object param)
@@ -221,6 +242,10 @@ namespace CommandManager
                     GasEntity gas = ReadChromaAndAD(gasId, level, address, commandCallback);
                     callback(level, gas);
                 }
+                catch (CommandException exp)
+                {
+                    throw exp;
+                }
                 catch (Exception ex)
                 {
                     log.Error(ex);
@@ -231,11 +256,7 @@ namespace CommandManager
 
         public static void StopSample()
         {
-            if (thread != null)
-            {
-                thread.Abort();
-            }
-            CommandUnits.IsCommandding = false;
+            sampleTimer.Stop();
         }
 
         public static GasEntity ReadChromaAndAD(int gasId, EnumChromaLevel level, byte address, Action<string> callback)
@@ -272,19 +293,19 @@ namespace CommandManager
             switch (level)
             {
                 case EnumChromaLevel.Zero:
-                    gas.ZeroAD = BitConverter.ToInt32(rbytes, 5);
+                    gas.ZeroAD = BitConverter.ToInt32(rbytes, 3);
                     gas.ZeroChroma = BitConverter.ToSingle(rbytes, 7);
                     break;
                 case EnumChromaLevel.One:
-                    gas.OneAD = BitConverter.ToInt32(rbytes, 5);
+                    gas.OneAD = BitConverter.ToInt32(rbytes, 3);
                     gas.OneChroma = BitConverter.ToSingle(rbytes, 7);
                     break;
                 case EnumChromaLevel.Two:
-                    gas.TwoAD = BitConverter.ToInt32(rbytes, 5);
+                    gas.TwoAD = BitConverter.ToInt32(rbytes, 3);
                     gas.TwoChroma = BitConverter.ToSingle(rbytes, 7);
                     break;
                 case EnumChromaLevel.Three:
-                    gas.ThreeAD = BitConverter.ToInt32(rbytes, 5);
+                    gas.ThreeAD = BitConverter.ToInt32(rbytes, 3);
                     gas.ThreeChroma = BitConverter.ToSingle(rbytes, 7);
                     break;
                 default:
