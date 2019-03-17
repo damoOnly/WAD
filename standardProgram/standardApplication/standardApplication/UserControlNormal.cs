@@ -19,13 +19,13 @@ namespace standardApplication
         public Action<string> Callback;
         public Action<string> CommandCallback;
         private LogLib.Log log = LogLib.Log.GetLogger("UserControlNormal");
-        private NormalParamEntity normalParam { get; set; }
+        public NormalParamEntity normalParam { get; set; }
         public UserControlNormal()
         {
             InitializeComponent();
         }
 
-        private void GetNormalFromControl()
+        public void GetNormalFromControl()
         {
             if (normalParam == null)
             {

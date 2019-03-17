@@ -11,6 +11,7 @@ using DevExpress.XtraEditors;
 using Entity;
 using CommandManager;
 using DevExpress.Utils;
+using DevExpress.XtraTab;
 
 namespace standardApplication
 {
@@ -189,11 +190,11 @@ namespace standardApplication
             CommandUnits.CommandDelay = (int)spinEdit8.Value;
 
             InitWeatherPage();
-            InitSerialPage();
-
-            spinEdit7.Value = Gloab.AllData.Address;
+            InitSerialPage(); 
+        
             setAllDataToControl();
-            
+
+            ReadModelFileName(ModelType.All);
         }
 
         void CMclear_Click(object sender, EventArgs e)
@@ -609,6 +610,7 @@ namespace standardApplication
             SetSerialParamToPage(Gloab.AllData.Serial);
             SetRealTimeToControl();
             SetOutDateToControl();
+            spinEdit7.Value = Gloab.AllData.Address;
         }
 
         private void SetGasToControl()
@@ -833,6 +835,77 @@ namespace standardApplication
         private void userControlNormal1_SaveModelFileEvent(object sender, EventArgs e)
         {
             ReadModelFileName(ModelType.Normal);
+        }
+
+        private void listBoxControl1_DoubleClick(object sender, EventArgs e)
+        {
+            string fileName = listBoxControl1.SelectedItem.ToString();
+            switch ((ModelType)xtraTabControl1.SelectedTabPageIndex)
+            {
+                case ModelType.All:
+                    Gloab.AllData = ModelFile.ReadModel<AllEntity>(fileName, ModelType.All);
+                    setAllDataToControl();
+                    break;
+                case ModelType.Gas:
+                    UserControl1 u1 = xtraTabControl2.SelectedTabPage.Controls[0] as UserControl1;
+                    int index = Gloab.AllData.GasList.FindIndex(c => c.GasID == u1.GasID);
+                    Gloab.AllData.GasList[index] = ModelFile.ReadModel<GasEntity>(fileName, ModelType.Gas);
+                    u1.BindGas();
+                    gridControl2.DataSource = Gloab.AllData.GasList;
+                    gridControl2.RefreshDataSource();
+                    break;
+                //case ModelType.Weather:
+                //    break;
+                case ModelType.Normal:
+                    Gloab.AllData.Normal = ModelFile.ReadModel<NormalParamEntity>(fileName, ModelType.Normal);
+                    Gloab.AllData.NormalList = Gloab.AllData.Normal.ConvertToNormalList();
+                    SetNormalToControl();
+                    break;
+                case ModelType.Serial:
+                    Gloab.AllData.Serial = ModelFile.ReadModel<SerialEntity>(fileName, ModelType.Serial);
+                    SetSerialParamToPage(Gloab.AllData.Serial);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void simpleButton11_Click(object sender, EventArgs e)
+        {
+            ModelFile.SaveModel<AllEntity>(Gloab.AllData, ModelType.All);
+            if ((int)ModelType.All == xtraTabControl1.SelectedTabPageIndex)
+            {
+                ReadModelFileName(ModelType.All);
+            }
+        }
+
+        private void simpleButton22_Click(object sender, EventArgs e)
+        {
+            ModelFile.SaveModel<SerialEntity>(Gloab.AllData.Serial, ModelType.Serial);
+            ReadModelFileName(ModelType.Serial);
+        }
+
+        private void simpleButton10_Click(object sender, EventArgs e)
+        {
+            Gloab.AllData.EquipmentDataTime = (DateTime)dateEdit2.EditValue;
+            Gloab.AllData.OutDate = (DateTime)dateEdit1.EditValue;
+
+            foreach (XtraTabPage gaspage in xtraTabControl2.TabPages)
+            {
+                if (gaspage.PageVisible)
+                {
+                    UserControl1 uc = gaspage.Controls[0] as UserControl1;
+                    uc.GetGasFromControl();
+                    Gloab.AllData.GasList.Add(uc.Gas);
+                }
+            }
+
+            userControlNormal1.GetNormalFromControl();
+            Gloab.AllData.Normal = userControlNormal1.normalParam;
+
+            Gloab.AllData.Serial = GetSerialParamFromPage();
+
+            AllInstruction.WriteAll(Gloab.AllData, Gloab.Config, SetDebugStr, CommandCallback);
         }
     }
 }

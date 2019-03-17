@@ -34,7 +34,7 @@ namespace standardApplication
 
         //}
 
-        private void GetGasFromControl()
+        public void GetGasFromControl()
         {
             if (Gas == null)
             {

@@ -1349,7 +1349,7 @@
             this.comboBoxEdit2.Properties.Items.AddRange(new object[] {
             "主发模式"});
             this.comboBoxEdit2.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.comboBoxEdit2.Size = new System.Drawing.Size(100, 20);
+            this.comboBoxEdit2.Size = new System.Drawing.Size(129, 20);
             this.comboBoxEdit2.TabIndex = 21;
             // 
             // comboBoxEdit1
@@ -1541,7 +1541,7 @@
             this.comboBoxEdit4.Properties.Items.AddRange(new object[] {
             "主发模式"});
             this.comboBoxEdit4.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.comboBoxEdit4.Size = new System.Drawing.Size(100, 20);
+            this.comboBoxEdit4.Size = new System.Drawing.Size(129, 20);
             this.comboBoxEdit4.TabIndex = 22;
             // 
             // comboBoxEdit3
@@ -1656,6 +1656,7 @@
             this.simpleButton22.Size = new System.Drawing.Size(105, 23);
             this.simpleButton22.TabIndex = 3;
             this.simpleButton22.Text = "保存配置";
+            this.simpleButton22.Click += new System.EventHandler(this.simpleButton22_Click);
             // 
             // simpleButton21
             // 
@@ -1691,6 +1692,7 @@
             this.listBoxControl1.Name = "listBoxControl1";
             this.listBoxControl1.Size = new System.Drawing.Size(229, 450);
             this.listBoxControl1.TabIndex = 0;
+            this.listBoxControl1.DoubleClick += new System.EventHandler(this.listBoxControl1_DoubleClick);
             // 
             // splitContainerControl2
             // 
@@ -1996,6 +1998,7 @@
             this.simpleButton11.Size = new System.Drawing.Size(105, 23);
             this.simpleButton11.TabIndex = 18;
             this.simpleButton11.Text = "保存全部";
+            this.simpleButton11.Click += new System.EventHandler(this.simpleButton11_Click);
             // 
             // simpleButton10
             // 
@@ -2004,6 +2007,7 @@
             this.simpleButton10.Size = new System.Drawing.Size(105, 23);
             this.simpleButton10.TabIndex = 17;
             this.simpleButton10.Text = "设置全部";
+            this.simpleButton10.Click += new System.EventHandler(this.simpleButton10_Click);
             // 
             // simpleButton9
             // 

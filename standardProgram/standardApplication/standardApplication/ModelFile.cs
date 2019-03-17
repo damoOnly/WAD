@@ -45,7 +45,7 @@ namespace standardApplication
             {
                 //OpenFileDialog fileDialog = new OpenFileDialog();
                 string directoryName = GetDirectoryName(modelType);
-                string path = AppDomain.CurrentDomain.BaseDirectory + directoryName +"//"+fileName;
+                string path = AppDomain.CurrentDomain.BaseDirectory + directoryName +"\\"+fileName;
                 //fileDialog.Filter = "Xml Files (*.xml)|*.xml";
                 //fileDialog.FilterIndex = 2;
                 //fileDialog.RestoreDirectory = true;

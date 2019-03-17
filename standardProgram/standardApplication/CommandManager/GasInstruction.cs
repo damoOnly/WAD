@@ -134,14 +134,17 @@ namespace CommandManager
             Array.Reverse(rbytes, 9, 2); 
             Array.Reverse(rbytes, 11, 2);
             gas.GasRang = BitConverter.ToSingle(rbytes, 9);
-            byte[] byteTemp = new byte[6];
+            List<byte> byteTemp = new List<byte>();
             for (int i = 13; i < 13 + 12; )
             {
-                byteTemp[(i - 13) / 2] = rbytes[i + 1];
+                if (rbytes[i+1] != 0x00)
+                {
+                    byteTemp.Add(rbytes[i+1]);
+                }
                 i += 2;
             }
             // to do test
-            gas.Factor = ASCIIEncoding.ASCII.GetString(byteTemp);
+            gas.Factor = ASCIIEncoding.ASCII.GetString(byteTemp.ToArray());
             gas.IfGasAlarm = BitConverter.ToBoolean(rbytes, 26);
             Array.Reverse(rbytes, 27, 2);
             gas.AlertModel.Value = BitConverter.ToInt16(rbytes, 27);

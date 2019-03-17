@@ -42,13 +42,16 @@ namespace CommandManager
                 Array.Reverse(rbytes, 9, 2);
                 Array.Reverse(rbytes, 11, 2);
                 weather.Rang = BitConverter.ToSingle(rbytes, 9);
-                byte[] byteTemp = new byte[6];
+                List<byte> byteTemp = new List<byte>(); 
                 for (int j = 13; j < 13 + 12; )
                 {
-                    byteTemp[(j - 13) / 2] = rbytes[j + 1];
+                    if (rbytes[j+1] != 0x00)
+                    {
+                        byteTemp.Add(rbytes[j+1]);
+                    }
                     j += 2;
                 }
-                weather.WeatherFactor = ASCIIEncoding.ASCII.GetString(byteTemp);
+                weather.WeatherFactor = ASCIIEncoding.ASCII.GetString(byteTemp.ToArray());
                 Array.Reverse(rbytes, 25, 2);
                 Array.Reverse(rbytes, 27, 2);
                 weather.Compensation = BitConverter.ToSingle(rbytes, 25);

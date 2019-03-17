@@ -79,6 +79,90 @@ namespace CommandManager
             return all;
         }
 
+        public static void WriteAll(AllEntity all, CommonConfig config, Action<string> callback, Action<string> commandCallback)
+        {
+            try
+            {
+                WriteRealTime(all.Address, all.EquipmentDataTime, commandCallback);
+                callback("写入时间成功");
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+                callback("写入时间失败");
+            }
+
+            try
+            {
+                WriteOutDate(all.Address, all.OutDate, commandCallback);
+                callback("写入出厂日期成功");
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+                callback("写入出厂日期失败");
+            }
+
+            try
+            {
+                NormalInstruction.WriteGasCount((short)all.GasList.Count,all.Address, config,commandCallback);
+                callback("写入气体个数成功");
+
+                foreach (var gas in all.GasList)
+                {
+                    try
+                    {
+                        GasInstruction.WriteGas(gas, all.Address, commandCallback);
+                        callback(string.Format("写入气体{0}成功", gas.GasID));
+                    }
+                    catch (Exception ex)
+                    {
+                        log.Error(ex);
+                        callback(string.Format("写入气体{0}失败", gas.GasID));
+                    }
+                }  
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+                callback("写入气体个数失败");
+            }                      
+
+            try
+            {
+                NormalInstruction.WriteWeatherCount((short)all.WeatherList.Count,all.Address, config,commandCallback);
+                WeatherInstruction.WriteWeather(all.WeatherList, all.Address, commandCallback);
+                callback("写入气象参数成功");
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+                callback("写入气象参数失败");
+            }
+
+            try
+            {
+                NormalInstruction.WriteNormal(all.Normal, all.Address, commandCallback);
+                callback("写入通用参数成功");
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+                callback("写入通用参数失败");
+            }
+
+            try
+            {
+                SerialInstruction.WriteSerialParam(all.Serial, all.Address, commandCallback);
+                callback("写入串口参数成功");
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+                callback("写入串口参数失败");
+            }
+        }
+
         public static void WriteAddress(byte oldAddress, byte newAddress, Action<string> callBack)
         {
             byte[] content = new byte[2];
