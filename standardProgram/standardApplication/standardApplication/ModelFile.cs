@@ -105,6 +105,16 @@ namespace standardApplication
             return list;
         }
 
+        public static void DeleteFile(ModelType modelType, string fileName)
+        {
+            string directoryName = GetDirectoryName(modelType);
+            string path = AppDomain.CurrentDomain.BaseDirectory + directoryName + "\\" + fileName;
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
+        }
+
     }
 
     enum ModelType

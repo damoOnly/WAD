@@ -216,7 +216,7 @@ namespace CommandManager
                 EnumChromaLevel level = (EnumChromaLevel)list[2];
                 Action<EnumChromaLevel, GasEntity> callback = list[3] as Action<EnumChromaLevel, GasEntity>;
                 Action<string> commandCallback = list[4] as Action<string>;
-                GasEntity gas = ReadChromaAndAD(gasId, level, address, commandCallback);
+                GasEntity gas = ReadCurrent(gasId, address,null, commandCallback);
                 callback(level, gas);
             }
             //catch (CommandException exp)
@@ -242,7 +242,24 @@ namespace CommandManager
                     EnumChromaLevel level = (EnumChromaLevel)list[2];
                     Action<EnumChromaLevel, GasEntity> callback = list[3] as Action<EnumChromaLevel, GasEntity>;
                     Action<string> commandCallback = list[4] as Action<string>;
-                    GasEntity gas = ReadChromaAndAD(gasId, level, address, commandCallback);
+                    GasEntity gas = ReadCurrent(gasId, address,null, commandCallback);
+                    switch (level)
+                    {
+                        case EnumChromaLevel.Zero:
+                            gas.ZeroAD = gas.CurrentAD;
+                            break;
+                        case EnumChromaLevel.One:
+                            gas.OneAD = gas.CurrentAD;
+                            break;
+                        case EnumChromaLevel.Two:
+                            gas.TwoAD = gas.CurrentAD;
+                            break;
+                        case EnumChromaLevel.Three:
+                            gas.ThreeAD = gas.CurrentAD;
+                            break;
+                        default:
+                            break;
+                    }
                     callback(level, gas);
                 }
                 catch (CommandException exp)
@@ -369,8 +386,12 @@ namespace CommandManager
             GasEntity gas = new GasEntity();
             gas.CurrentAD = BitConverter.ToInt32(rbytes, 3);
             gas.CurrentChroma = BitConverter.ToSingle(rbytes, 7);
-            gas.AlertStatus.Value = rbytes[12];
-            gas.AlertStatus.Name = config.AlertStatus.FirstOrDefault(c => c.Value == gas.AlertStatus.Value).Key;
+            if (config != null)
+            {
+                gas.AlertStatus.Value = rbytes[12];
+                gas.AlertStatus.Name = config.AlertStatus.FirstOrDefault(c => c.Value == gas.AlertStatus.Value).Key;
+            }
+            
             return gas;
         }
 

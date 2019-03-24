@@ -12,6 +12,7 @@ using Entity;
 using CommandManager;
 using DevExpress.Utils;
 using DevExpress.XtraTab;
+using DevExpress.XtraEditors.ViewInfo;
 
 namespace standardApplication
 {
@@ -74,6 +75,7 @@ namespace standardApplication
             Gloab.AllData.WeatherList = weatherList;
         }
 
+        ContextMenuStrip listMenu = new System.Windows.Forms.ContextMenuStrip();
         private void MainXtraForm_Load(object sender, EventArgs e)
         {
             #region testcode
@@ -173,6 +175,12 @@ namespace standardApplication
             richMenu.Items.Add(CMclear);
             richTextBox1.ContextMenuStrip = richMenu;
 
+            
+            ToolStripMenuItem deleteItem = new ToolStripMenuItem("删除");
+            deleteItem.Click += deleteItem_Click;
+            listMenu.Items.Add(deleteItem);
+            //listBoxControl1.ContextMenuStrip = listMenu;
+
             comboBoxEdit5.Properties.Items.Clear();
             foreach (string port in System.IO.Ports.SerialPort.GetPortNames())
             {
@@ -195,6 +203,14 @@ namespace standardApplication
             setAllDataToControl();
 
             ReadModelFileName(ModelType.All);
+        }
+
+        void deleteItem_Click(object sender, EventArgs e)
+        {
+            ModelType type = (ModelType)xtraTabControl1.SelectedTabPageIndex;
+            string fileName = listBoxControl1.SelectedItem.ToString();
+            ModelFile.DeleteFile(type, fileName);
+            ReadModelFileName(type);
         }
 
         void CMclear_Click(object sender, EventArgs e)
@@ -229,7 +245,7 @@ namespace standardApplication
 
         private void userControl11_SaveModelFileEvent(object sender, EventArgs e)
         {
-
+            ReadModelFileName(ModelType.Gas);
         }
 
         private void xtraTabControl2_SelectedPageChanging(object sender, DevExpress.XtraTab.TabPageChangingEventArgs e)
@@ -838,36 +854,8 @@ namespace standardApplication
         }
 
         private void listBoxControl1_DoubleClick(object sender, EventArgs e)
-        {
-            string fileName = listBoxControl1.SelectedItem.ToString();
-            switch ((ModelType)xtraTabControl1.SelectedTabPageIndex)
-            {
-                case ModelType.All:
-                    Gloab.AllData = ModelFile.ReadModel<AllEntity>(fileName, ModelType.All);
-                    setAllDataToControl();
-                    break;
-                case ModelType.Gas:
-                    UserControl1 u1 = xtraTabControl2.SelectedTabPage.Controls[0] as UserControl1;
-                    int index = Gloab.AllData.GasList.FindIndex(c => c.GasID == u1.GasID);
-                    Gloab.AllData.GasList[index] = ModelFile.ReadModel<GasEntity>(fileName, ModelType.Gas);
-                    u1.BindGas();
-                    gridControl2.DataSource = Gloab.AllData.GasList;
-                    gridControl2.RefreshDataSource();
-                    break;
-                //case ModelType.Weather:
-                //    break;
-                case ModelType.Normal:
-                    Gloab.AllData.Normal = ModelFile.ReadModel<NormalParamEntity>(fileName, ModelType.Normal);
-                    Gloab.AllData.NormalList = Gloab.AllData.Normal.ConvertToNormalList();
-                    SetNormalToControl();
-                    break;
-                case ModelType.Serial:
-                    Gloab.AllData.Serial = ModelFile.ReadModel<SerialEntity>(fileName, ModelType.Serial);
-                    SetSerialParamToPage(Gloab.AllData.Serial);
-                    break;
-                default:
-                    break;
-            }
+        {            
+            
         }
 
         private void simpleButton11_Click(object sender, EventArgs e)
@@ -906,6 +894,71 @@ namespace standardApplication
             Gloab.AllData.Serial = GetSerialParamFromPage();
 
             AllInstruction.WriteAll(Gloab.AllData, Gloab.Config, SetDebugStr, CommandCallback);
+        }
+
+        private void listBoxControl1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                ListBoxControl edit = sender as ListBoxControl;
+                BaseListBoxViewInfo vi = edit.GetViewInfo() as BaseListBoxViewInfo;
+                BaseListBoxViewInfo.ItemInfo ii = vi.GetItemInfoByPoint(e.Location) as BaseListBoxViewInfo.ItemInfo;
+                if (ii != null)
+                {
+                    edit.SelectedIndex = ii.Index;
+                    listMenu.Show(Cursor.Position);
+                }
+                else
+                {
+                    listMenu.Hide();
+                }
+            }
+        }
+
+        private void listBoxControl1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button != System.Windows.Forms.MouseButtons.Left)
+            {
+                return;
+            }
+
+            ListBoxControl edit = sender as ListBoxControl;
+            BaseListBoxViewInfo vi = edit.GetViewInfo() as BaseListBoxViewInfo;
+            BaseListBoxViewInfo.ItemInfo ii = vi.GetItemInfoByPoint(e.Location) as BaseListBoxViewInfo.ItemInfo;
+            if (ii == null)
+            {
+                return;
+            }
+
+            string fileName = listBoxControl1.SelectedItem.ToString();
+            switch ((ModelType)xtraTabControl1.SelectedTabPageIndex)
+            {
+                case ModelType.All:
+                    Gloab.AllData = ModelFile.ReadModel<AllEntity>(fileName, ModelType.All);
+                    setAllDataToControl();
+                    break;
+                case ModelType.Gas:
+                    UserControl1 u1 = xtraTabControl2.SelectedTabPage.Controls[0] as UserControl1;
+                    int index = Gloab.AllData.GasList.FindIndex(c => c.GasID == u1.GasID);
+                    Gloab.AllData.GasList[index] = ModelFile.ReadModel<GasEntity>(fileName, ModelType.Gas);
+                    u1.BindGas();
+                    gridControl2.DataSource = Gloab.AllData.GasList;
+                    gridControl2.RefreshDataSource();
+                    break;
+                //case ModelType.Weather:
+                //    break;
+                case ModelType.Normal:
+                    Gloab.AllData.Normal = ModelFile.ReadModel<NormalParamEntity>(fileName, ModelType.Normal);
+                    Gloab.AllData.NormalList = Gloab.AllData.Normal.ConvertToNormalList();
+                    SetNormalToControl();
+                    break;
+                case ModelType.Serial:
+                    Gloab.AllData.Serial = ModelFile.ReadModel<SerialEntity>(fileName, ModelType.Serial);
+                    SetSerialParamToPage(Gloab.AllData.Serial);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

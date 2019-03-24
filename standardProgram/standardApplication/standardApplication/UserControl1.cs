@@ -277,7 +277,7 @@ namespace standardApplication
 
         public bool CheckIsSampling()
         {
-            if (simpleButton2.Text == "停止" || simpleButton7.Text == "停止" || simpleButton10.Text == "停止")
+            if (simpleButton2.Text == "停止" || simpleButton7.Text == "停止" || simpleButton10.Text == "停止" || simpleButton16.Text == "停止")
             {
                 XtraMessageBox.Show("请先停止采样");
                 return true;
@@ -326,20 +326,22 @@ namespace standardApplication
         {
             try
             {
+                Gas.CurrentAD = ge.CurrentAD;
+                Gas.CurrentChroma = ge.CurrentChroma;
                 EnumChromaLevel cl = level;
                 switch (cl)
                 {
+                    case EnumChromaLevel.Zero:
+                        Gas.ZeroAD = ge.CurrentAD;
+                        break;
                     case EnumChromaLevel.One:
-                        Gas.OneChroma = ge.OneChroma;
-                        Gas.OneAD = ge.OneAD;
+                        Gas.OneAD = ge.CurrentAD;
                         break;
                     case EnumChromaLevel.Two:
-                        Gas.TwoChroma = ge.TwoChroma;
-                        Gas.TwoAD = ge.TwoAD;
+                        Gas.TwoAD = ge.CurrentAD;
                         break;
                     case EnumChromaLevel.Three:
-                        Gas.ThreeChroma = ge.ThreeChroma;
-                        Gas.ThreeAD = ge.ThreeAD;
+                        Gas.ThreeAD = ge.CurrentAD;
                         break;
                     default:
                         break;
@@ -619,5 +621,92 @@ namespace standardApplication
         }
 
         public event EventHandler ChangeGasEvent;
+
+        private void simpleButton16_Click(object sender, EventArgs e)
+        {
+            if (simpleButton16.Text == "采样")
+            {
+                if (CheckIsSampling())
+                {
+                    return;
+                }
+                simpleButton16.Text = "停止";
+                try
+                {
+                    GasInstruction.StartSample(Gloab.AllData.Address, GasID, EnumChromaLevel.Zero, Sampling, CommandCallback);
+                    Callback("开始采样");
+                }
+                catch (CommandException ex)
+                {
+                    Callback("采样失败");
+                    XtraMessageBox.Show(ex.Message);
+                    simpleButton16.Text = "采样";
+                }
+                catch (Exception ecp)
+                {
+                    log.Error(ecp);
+                    simpleButton16.Text = "采样";
+                    Callback("采样失败");
+                }
+            }
+            else
+            {
+                GasInstruction.StopSample();
+                simpleButton16.Text = "采样";
+                Callback("停止采样");
+            }
+        }
+
+        private void simpleButton15_Click(object sender, EventArgs e)
+        {
+            WaitDialogForm wdf = new WaitDialogForm("命令执行中，请稍候......");
+            try
+            {
+                GasEntity ge = GasInstruction.ReadChromaAndAD(GasID, EnumChromaLevel.Zero, Gloab.AllData.Address, CommandCallback);
+                Gas.OneChroma = ge.ZeroChroma;
+                Gas.OneAD = ge.ZeroAD;
+                SetGasToControl();
+                Callback("读取零点成功");
+            }
+            catch (CommandException ex)
+            {
+                Callback("读取零点失败");
+                XtraMessageBox.Show(ex.Message);
+            }
+            catch (Exception ecp)
+            {
+                Callback("读取零点失败");
+                log.Error(ecp);
+            }
+            finally
+            {
+                wdf.Close();
+            }
+        }
+
+        private void simpleButton14_Click(object sender, EventArgs e)
+        {
+            WaitDialogForm wdf = new WaitDialogForm("命令执行中，请稍候......");
+            try
+            {
+                GetGasFromControl();
+                GasInstruction.WriteChromaAndAD(Gas, EnumChromaLevel.Zero, Gloab.AllData.Address, CommandCallback);
+                Callback("写入零点成功");
+            }
+            catch (CommandException ex)
+            {
+                Callback("写入零点失败");
+                XtraMessageBox.Show(ex.Message);
+            }
+            catch (Exception ecp)
+            {
+                Callback("写入零点失败");
+                log.Error(ecp);
+            }
+            finally
+            {
+                wdf.Close();
+            }
+        }
     }
 }

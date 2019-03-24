@@ -1255,6 +1255,7 @@
             this.userControlNormal1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.userControlNormal1.Location = new System.Drawing.Point(0, 0);
             this.userControlNormal1.Name = "userControlNormal1";
+            this.userControlNormal1.normalParam = null;
             this.userControlNormal1.Size = new System.Drawing.Size(678, 421);
             this.userControlNormal1.TabIndex = 0;
             this.userControlNormal1.ChangeNormalEvent += new standardApplication.UserControlNormal.ChangeNormalEventHandler(this.userControlNormal1_ChangeNormalEvent);
@@ -1693,6 +1694,8 @@
             this.listBoxControl1.Size = new System.Drawing.Size(229, 450);
             this.listBoxControl1.TabIndex = 0;
             this.listBoxControl1.DoubleClick += new System.EventHandler(this.listBoxControl1_DoubleClick);
+            this.listBoxControl1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listBoxControl1_MouseDown);
+            this.listBoxControl1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBoxControl1_MouseDoubleClick);
             // 
             // splitContainerControl2
             // 

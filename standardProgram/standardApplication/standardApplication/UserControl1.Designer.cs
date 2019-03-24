@@ -82,6 +82,9 @@
             this.spinEdit13 = new DevExpress.XtraEditors.SpinEdit();
             this.spinEdit14 = new DevExpress.XtraEditors.SpinEdit();
             this.spinEdit16 = new DevExpress.XtraEditors.SpinEdit();
+            this.simpleButton14 = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButton15 = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButton16 = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit8.Properties)).BeginInit();
@@ -668,10 +671,40 @@
             this.spinEdit16.Size = new System.Drawing.Size(100, 20);
             this.spinEdit16.TabIndex = 73;
             // 
+            // simpleButton14
+            // 
+            this.simpleButton14.Location = new System.Drawing.Point(511, 139);
+            this.simpleButton14.Name = "simpleButton14";
+            this.simpleButton14.Size = new System.Drawing.Size(48, 23);
+            this.simpleButton14.TabIndex = 76;
+            this.simpleButton14.Text = "校准";
+            this.simpleButton14.Click += new System.EventHandler(this.simpleButton14_Click);
+            // 
+            // simpleButton15
+            // 
+            this.simpleButton15.Location = new System.Drawing.Point(457, 139);
+            this.simpleButton15.Name = "simpleButton15";
+            this.simpleButton15.Size = new System.Drawing.Size(48, 23);
+            this.simpleButton15.TabIndex = 75;
+            this.simpleButton15.Text = "读取";
+            this.simpleButton15.Click += new System.EventHandler(this.simpleButton15_Click);
+            // 
+            // simpleButton16
+            // 
+            this.simpleButton16.Location = new System.Drawing.Point(403, 139);
+            this.simpleButton16.Name = "simpleButton16";
+            this.simpleButton16.Size = new System.Drawing.Size(48, 23);
+            this.simpleButton16.TabIndex = 74;
+            this.simpleButton16.Text = "采样";
+            this.simpleButton16.Click += new System.EventHandler(this.simpleButton16_Click);
+            // 
             // UserControl1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.simpleButton14);
+            this.Controls.Add(this.simpleButton15);
+            this.Controls.Add(this.simpleButton16);
             this.Controls.Add(this.spinEdit16);
             this.Controls.Add(this.spinEdit13);
             this.Controls.Add(this.spinEdit14);
@@ -815,5 +848,8 @@
         private DevExpress.XtraEditors.SpinEdit spinEdit13;
         private DevExpress.XtraEditors.SpinEdit spinEdit14;
         private DevExpress.XtraEditors.SpinEdit spinEdit16;
+        private DevExpress.XtraEditors.SimpleButton simpleButton14;
+        private DevExpress.XtraEditors.SimpleButton simpleButton15;
+        private DevExpress.XtraEditors.SimpleButton simpleButton16;
     }
 }
