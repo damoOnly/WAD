@@ -23,7 +23,7 @@ namespace Entity
         public FieldValue WeatherPoint { get; set; }
         public string WeatherFactor { get; set; }
         public float Rang { get; set; }
-        public float Compensation { get; set; }
+        public float WeatherCompensation { get; set; }
         public float CurrentWeather { get; set; }
         public FieldValue WeatherAlertStatus { get; set; }
     }

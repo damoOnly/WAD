@@ -29,12 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Entity.GasEntity gasEntity1 = new Entity.GasEntity();
-            Entity.FieldValue fieldValue1 = new Entity.FieldValue();
-            Entity.FieldValue fieldValue2 = new Entity.FieldValue();
-            Entity.FieldValue fieldValue3 = new Entity.FieldValue();
-            Entity.FieldValue fieldValue4 = new Entity.FieldValue();
-            Entity.FieldValue fieldValue5 = new Entity.FieldValue();
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
             this.splitContainerControl4 = new DevExpress.XtraEditors.SplitContainerControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
@@ -47,22 +41,6 @@
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
             this.xtraScrollableControl1 = new DevExpress.XtraEditors.XtraScrollableControl();
-            this.gridControl2 = new DevExpress.XtraGrid.GridControl();
-            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.GasID = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.GasName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.GasUnit = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.GasPoint = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.GasRang = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.GasA1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.GasA2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.GasModel = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridControl1 = new DevExpress.XtraGrid.GridControl();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.Name1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.Value1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.Name2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.Value2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridControl3 = new DevExpress.XtraGrid.GridControl();
             this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.WeatherID = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -70,6 +48,29 @@
             this.WeatherUnit = new DevExpress.XtraGrid.Columns.GridColumn();
             this.WeatherPoint = new DevExpress.XtraGrid.Columns.GridColumn();
             this.WeatherFactor = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridControl2 = new DevExpress.XtraGrid.GridControl();
+            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.GasID = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.GasName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.GasUnit = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.GasPoint = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.GasRang = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.GasModel = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.GasA1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.GasA2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Factor = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Show = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Compensation = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridControl1 = new DevExpress.XtraGrid.GridControl();
+            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.Name1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Value1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Name2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Value2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Name3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Value3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Name4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Value4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
             this.splitContainerControl6 = new DevExpress.XtraEditors.SplitContainerControl();
             this.simpleButton23 = new DevExpress.XtraEditors.SimpleButton();
@@ -77,22 +78,6 @@
             this.simpleButton12 = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl10 = new DevExpress.XtraEditors.LabelControl();
             this.xtraTabControl2 = new DevExpress.XtraTab.XtraTabControl();
-            this.xtraTabPage3 = new DevExpress.XtraTab.XtraTabPage();
-            this.userControl11 = new standardApplication.UserControl1();
-            this.xtraTabPage4 = new DevExpress.XtraTab.XtraTabPage();
-            this.userControl12 = new standardApplication.UserControl1();
-            this.xtraTabPage8 = new DevExpress.XtraTab.XtraTabPage();
-            this.userControl13 = new standardApplication.UserControl1();
-            this.xtraTabPage9 = new DevExpress.XtraTab.XtraTabPage();
-            this.userControl14 = new standardApplication.UserControl1();
-            this.xtraTabPage10 = new DevExpress.XtraTab.XtraTabPage();
-            this.userControl15 = new standardApplication.UserControl1();
-            this.xtraTabPage11 = new DevExpress.XtraTab.XtraTabPage();
-            this.userControl16 = new standardApplication.UserControl1();
-            this.xtraTabPage12 = new DevExpress.XtraTab.XtraTabPage();
-            this.userControl17 = new standardApplication.UserControl1();
-            this.xtraTabPage13 = new DevExpress.XtraTab.XtraTabPage();
-            this.userControl18 = new standardApplication.UserControl1();
             this.xtraTabPage5 = new DevExpress.XtraTab.XtraTabPage();
             this.splitContainerControl7 = new DevExpress.XtraEditors.SplitContainerControl();
             this.spinEdit2 = new DevExpress.XtraEditors.SpinEdit();
@@ -192,6 +177,7 @@
             this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.WeatherCompensation = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             this.splitContainerControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl4)).BeginInit();
@@ -204,26 +190,17 @@
             this.xtraTabControl1.SuspendLayout();
             this.xtraTabPage1.SuspendLayout();
             this.xtraScrollableControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView3)).BeginInit();
             this.xtraTabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl6)).BeginInit();
             this.splitContainerControl6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl2)).BeginInit();
-            this.xtraTabControl2.SuspendLayout();
-            this.xtraTabPage3.SuspendLayout();
-            this.xtraTabPage4.SuspendLayout();
-            this.xtraTabPage8.SuspendLayout();
-            this.xtraTabPage9.SuspendLayout();
-            this.xtraTabPage10.SuspendLayout();
-            this.xtraTabPage11.SuspendLayout();
-            this.xtraTabPage12.SuspendLayout();
-            this.xtraTabPage13.SuspendLayout();
             this.xtraTabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl7)).BeginInit();
             this.splitContainerControl7.SuspendLayout();
@@ -290,6 +267,7 @@
             // splitContainerControl1
             // 
             this.splitContainerControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerControl1.FixedPanel = DevExpress.XtraEditors.SplitFixedPanel.Panel2;
             this.splitContainerControl1.Horizontal = false;
             this.splitContainerControl1.Location = new System.Drawing.Point(0, 0);
             this.splitContainerControl1.Name = "splitContainerControl1";
@@ -298,7 +276,7 @@
             this.splitContainerControl1.Panel2.Controls.Add(this.splitContainerControl2);
             this.splitContainerControl1.Panel2.Text = "Panel2";
             this.splitContainerControl1.Size = new System.Drawing.Size(1121, 630);
-            this.splitContainerControl1.SplitterPosition = 450;
+            this.splitContainerControl1.SplitterPosition = 172;
             this.splitContainerControl1.TabIndex = 0;
             this.splitContainerControl1.Text = "splitContainerControl1";
             // 
@@ -311,7 +289,7 @@
             this.splitContainerControl4.Panel1.Text = "Panel1";
             this.splitContainerControl4.Panel2.Controls.Add(this.splitContainerControl5);
             this.splitContainerControl4.Panel2.Text = "Panel2";
-            this.splitContainerControl4.Size = new System.Drawing.Size(1121, 450);
+            this.splitContainerControl4.Size = new System.Drawing.Size(1121, 453);
             this.splitContainerControl4.SplitterPosition = 198;
             this.splitContainerControl4.TabIndex = 0;
             this.splitContainerControl4.Text = "splitContainerControl4";
@@ -376,14 +354,15 @@
             // splitContainerControl5
             // 
             this.splitContainerControl5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerControl5.FixedPanel = DevExpress.XtraEditors.SplitFixedPanel.Panel2;
             this.splitContainerControl5.Location = new System.Drawing.Point(0, 0);
             this.splitContainerControl5.Name = "splitContainerControl5";
             this.splitContainerControl5.Panel1.Controls.Add(this.xtraTabControl1);
             this.splitContainerControl5.Panel1.Text = "Panel1";
             this.splitContainerControl5.Panel2.Controls.Add(this.listBoxControl1);
             this.splitContainerControl5.Panel2.Text = "Panel2";
-            this.splitContainerControl5.Size = new System.Drawing.Size(918, 450);
-            this.splitContainerControl5.SplitterPosition = 684;
+            this.splitContainerControl5.Size = new System.Drawing.Size(918, 453);
+            this.splitContainerControl5.SplitterPosition = 230;
             this.splitContainerControl5.TabIndex = 0;
             this.splitContainerControl5.Text = "splitContainerControl5";
             // 
@@ -393,7 +372,7 @@
             this.xtraTabControl1.Location = new System.Drawing.Point(0, 0);
             this.xtraTabControl1.Name = "xtraTabControl1";
             this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
-            this.xtraTabControl1.Size = new System.Drawing.Size(684, 450);
+            this.xtraTabControl1.Size = new System.Drawing.Size(683, 453);
             this.xtraTabControl1.TabIndex = 0;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPage1,
@@ -409,230 +388,27 @@
             this.xtraTabPage1.AutoScroll = true;
             this.xtraTabPage1.Controls.Add(this.xtraScrollableControl1);
             this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(678, 421);
+            this.xtraTabPage1.Size = new System.Drawing.Size(677, 424);
             this.xtraTabPage1.Text = "xtraTabPage1";
             // 
             // xtraScrollableControl1
             // 
+            this.xtraScrollableControl1.Controls.Add(this.gridControl3);
             this.xtraScrollableControl1.Controls.Add(this.gridControl2);
             this.xtraScrollableControl1.Controls.Add(this.gridControl1);
-            this.xtraScrollableControl1.Controls.Add(this.gridControl3);
             this.xtraScrollableControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.xtraScrollableControl1.Location = new System.Drawing.Point(0, 0);
             this.xtraScrollableControl1.Name = "xtraScrollableControl1";
-            this.xtraScrollableControl1.Size = new System.Drawing.Size(678, 421);
+            this.xtraScrollableControl1.Size = new System.Drawing.Size(677, 424);
             this.xtraScrollableControl1.TabIndex = 4;
-            // 
-            // gridControl2
-            // 
-            this.gridControl2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gridControl2.Location = new System.Drawing.Point(0, 217);
-            this.gridControl2.MainView = this.gridView2;
-            this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(661, 180);
-            this.gridControl2.TabIndex = 2;
-            this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView2});
-            // 
-            // gridView2
-            // 
-            this.gridView2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.GasID,
-            this.GasName,
-            this.GasUnit,
-            this.GasPoint,
-            this.GasRang,
-            this.GasA1,
-            this.GasA2,
-            this.GasModel});
-            this.gridView2.GridControl = this.gridControl2;
-            this.gridView2.Name = "gridView2";
-            this.gridView2.OptionsView.ShowGroupPanel = false;
-            // 
-            // GasID
-            // 
-            this.GasID.Caption = "气体通道";
-            this.GasID.FieldName = "GasID";
-            this.GasID.Name = "GasID";
-            this.GasID.OptionsColumn.AllowEdit = false;
-            this.GasID.OptionsColumn.AllowFocus = false;
-            this.GasID.OptionsColumn.AllowMove = false;
-            this.GasID.OptionsColumn.ReadOnly = true;
-            this.GasID.Visible = true;
-            this.GasID.VisibleIndex = 0;
-            // 
-            // GasName
-            // 
-            this.GasName.Caption = "名称";
-            this.GasName.FieldName = "GasName";
-            this.GasName.Name = "GasName";
-            this.GasName.OptionsColumn.AllowEdit = false;
-            this.GasName.OptionsColumn.AllowFocus = false;
-            this.GasName.OptionsColumn.AllowMove = false;
-            this.GasName.OptionsColumn.ReadOnly = true;
-            this.GasName.Visible = true;
-            this.GasName.VisibleIndex = 1;
-            // 
-            // GasUnit
-            // 
-            this.GasUnit.Caption = "单位";
-            this.GasUnit.FieldName = "GasUnit";
-            this.GasUnit.Name = "GasUnit";
-            this.GasUnit.OptionsColumn.AllowEdit = false;
-            this.GasUnit.OptionsColumn.AllowFocus = false;
-            this.GasUnit.OptionsColumn.AllowMove = false;
-            this.GasUnit.OptionsColumn.ReadOnly = true;
-            this.GasUnit.Visible = true;
-            this.GasUnit.VisibleIndex = 2;
-            // 
-            // GasPoint
-            // 
-            this.GasPoint.Caption = "小数点";
-            this.GasPoint.FieldName = "GasPoint";
-            this.GasPoint.Name = "GasPoint";
-            this.GasPoint.OptionsColumn.AllowEdit = false;
-            this.GasPoint.OptionsColumn.AllowFocus = false;
-            this.GasPoint.OptionsColumn.AllowMove = false;
-            this.GasPoint.OptionsColumn.ReadOnly = true;
-            this.GasPoint.Visible = true;
-            this.GasPoint.VisibleIndex = 3;
-            // 
-            // GasRang
-            // 
-            this.GasRang.Caption = "测量范围";
-            this.GasRang.FieldName = "GasRang";
-            this.GasRang.Name = "GasRang";
-            this.GasRang.OptionsColumn.AllowEdit = false;
-            this.GasRang.OptionsColumn.AllowFocus = false;
-            this.GasRang.OptionsColumn.AllowMove = false;
-            this.GasRang.OptionsColumn.ReadOnly = true;
-            this.GasRang.Visible = true;
-            this.GasRang.VisibleIndex = 4;
-            // 
-            // GasA1
-            // 
-            this.GasA1.Caption = "A1报警值";
-            this.GasA1.FieldName = "GasA1";
-            this.GasA1.Name = "GasA1";
-            this.GasA1.OptionsColumn.AllowEdit = false;
-            this.GasA1.OptionsColumn.AllowFocus = false;
-            this.GasA1.OptionsColumn.AllowMove = false;
-            this.GasA1.OptionsColumn.ReadOnly = true;
-            this.GasA1.Visible = true;
-            this.GasA1.VisibleIndex = 5;
-            // 
-            // GasA2
-            // 
-            this.GasA2.Caption = "A2报警值";
-            this.GasA2.FieldName = "GasA2";
-            this.GasA2.Name = "GasA2";
-            this.GasA2.OptionsColumn.AllowEdit = false;
-            this.GasA2.OptionsColumn.AllowFocus = false;
-            this.GasA2.OptionsColumn.AllowMove = false;
-            this.GasA2.OptionsColumn.ReadOnly = true;
-            this.GasA2.Visible = true;
-            this.GasA2.VisibleIndex = 6;
-            // 
-            // GasModel
-            // 
-            this.GasModel.Caption = "报警模式";
-            this.GasModel.FieldName = "GasModel";
-            this.GasModel.Name = "GasModel";
-            this.GasModel.OptionsColumn.AllowEdit = false;
-            this.GasModel.OptionsColumn.AllowFocus = false;
-            this.GasModel.OptionsColumn.AllowMove = false;
-            this.GasModel.OptionsColumn.ReadOnly = true;
-            this.GasModel.Visible = true;
-            this.GasModel.VisibleIndex = 7;
-            // 
-            // gridControl1
-            // 
-            this.gridControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gridControl1.Location = new System.Drawing.Point(0, 0);
-            this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(661, 217);
-            this.gridControl1.TabIndex = 1;
-            this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView1});
-            this.gridControl1.Click += new System.EventHandler(this.gridControl1_Click);
-            // 
-            // gridView1
-            // 
-            this.gridView1.Appearance.GroupPanel.Font = new System.Drawing.Font("Tahoma", 11F, System.Drawing.FontStyle.Bold);
-            this.gridView1.Appearance.GroupPanel.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.gridView1.Appearance.GroupPanel.Options.UseFont = true;
-            this.gridView1.Appearance.GroupPanel.Options.UseForeColor = true;
-            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.Name1,
-            this.Value1,
-            this.Name2,
-            this.Value2});
-            this.gridView1.GridControl = this.gridControl1;
-            this.gridView1.GroupPanelText = "通用参数";
-            this.gridView1.Name = "gridView1";
-            this.gridView1.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
-            this.gridView1.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
-            this.gridView1.OptionsBehavior.ReadOnly = true;
-            this.gridView1.OptionsLayout.Columns.AddNewColumns = false;
-            this.gridView1.OptionsLayout.Columns.RemoveOldColumns = false;
-            this.gridView1.OptionsView.ShowColumnHeaders = false;
-            // 
-            // Name1
-            // 
-            this.Name1.Caption = "gridColumn1";
-            this.Name1.FieldName = "Name1";
-            this.Name1.Name = "Name1";
-            this.Name1.OptionsColumn.AllowEdit = false;
-            this.Name1.OptionsColumn.AllowFocus = false;
-            this.Name1.OptionsColumn.AllowMove = false;
-            this.Name1.OptionsColumn.ReadOnly = true;
-            this.Name1.Visible = true;
-            this.Name1.VisibleIndex = 0;
-            // 
-            // Value1
-            // 
-            this.Value1.Caption = "gridColumn1";
-            this.Value1.FieldName = "Value1";
-            this.Value1.Name = "Value1";
-            this.Value1.OptionsColumn.AllowEdit = false;
-            this.Value1.OptionsColumn.AllowFocus = false;
-            this.Value1.OptionsColumn.AllowMove = false;
-            this.Value1.OptionsColumn.ReadOnly = true;
-            this.Value1.Visible = true;
-            this.Value1.VisibleIndex = 1;
-            // 
-            // Name2
-            // 
-            this.Name2.Caption = "gridColumn1";
-            this.Name2.FieldName = "Name2";
-            this.Name2.Name = "Name2";
-            this.Name2.OptionsColumn.AllowEdit = false;
-            this.Name2.OptionsColumn.AllowFocus = false;
-            this.Name2.OptionsColumn.AllowMove = false;
-            this.Name2.OptionsColumn.ReadOnly = true;
-            this.Name2.Visible = true;
-            this.Name2.VisibleIndex = 2;
-            // 
-            // Value2
-            // 
-            this.Value2.Caption = "gridColumn1";
-            this.Value2.FieldName = "Value2";
-            this.Value2.Name = "Value2";
-            this.Value2.OptionsColumn.AllowEdit = false;
-            this.Value2.OptionsColumn.AllowFocus = false;
-            this.Value2.OptionsColumn.AllowMove = false;
-            this.Value2.OptionsColumn.ReadOnly = true;
-            this.Value2.Visible = true;
-            this.Value2.VisibleIndex = 3;
             // 
             // gridControl3
             // 
-            this.gridControl3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.gridControl3.Dock = System.Windows.Forms.DockStyle.Top;
             this.gridControl3.Location = new System.Drawing.Point(0, 397);
             this.gridControl3.MainView = this.gridView3;
             this.gridControl3.Name = "gridControl3";
-            this.gridControl3.Size = new System.Drawing.Size(661, 150);
+            this.gridControl3.Size = new System.Drawing.Size(660, 150);
             this.gridControl3.TabIndex = 3;
             this.gridControl3.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView3});
@@ -644,7 +420,8 @@
             this.WeatherName,
             this.WeatherUnit,
             this.WeatherPoint,
-            this.WeatherFactor});
+            this.WeatherFactor,
+            this.WeatherCompensation});
             this.gridView3.GridControl = this.gridControl3;
             this.gridView3.Name = "gridView3";
             this.gridView3.OptionsView.ShowGroupPanel = false;
@@ -709,11 +486,302 @@
             this.WeatherFactor.Visible = true;
             this.WeatherFactor.VisibleIndex = 4;
             // 
+            // gridControl2
+            // 
+            this.gridControl2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.gridControl2.Location = new System.Drawing.Point(0, 217);
+            this.gridControl2.MainView = this.gridView2;
+            this.gridControl2.Name = "gridControl2";
+            this.gridControl2.Size = new System.Drawing.Size(660, 180);
+            this.gridControl2.TabIndex = 2;
+            this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView2});
+            // 
+            // gridView2
+            // 
+            this.gridView2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.GasID,
+            this.GasName,
+            this.GasUnit,
+            this.GasPoint,
+            this.GasRang,
+            this.GasModel,
+            this.GasA1,
+            this.GasA2,
+            this.Factor,
+            this.Show,
+            this.Compensation});
+            this.gridView2.GridControl = this.gridControl2;
+            this.gridView2.Name = "gridView2";
+            this.gridView2.OptionsView.ShowGroupPanel = false;
+            // 
+            // GasID
+            // 
+            this.GasID.Caption = "气体通道";
+            this.GasID.FieldName = "GasID";
+            this.GasID.Name = "GasID";
+            this.GasID.OptionsColumn.AllowEdit = false;
+            this.GasID.OptionsColumn.AllowFocus = false;
+            this.GasID.OptionsColumn.AllowMove = false;
+            this.GasID.OptionsColumn.ReadOnly = true;
+            this.GasID.Visible = true;
+            this.GasID.VisibleIndex = 0;
+            // 
+            // GasName
+            // 
+            this.GasName.Caption = "名称";
+            this.GasName.FieldName = "GasName";
+            this.GasName.Name = "GasName";
+            this.GasName.OptionsColumn.AllowEdit = false;
+            this.GasName.OptionsColumn.AllowFocus = false;
+            this.GasName.OptionsColumn.AllowMove = false;
+            this.GasName.OptionsColumn.ReadOnly = true;
+            this.GasName.Visible = true;
+            this.GasName.VisibleIndex = 1;
+            // 
+            // GasUnit
+            // 
+            this.GasUnit.Caption = "单位";
+            this.GasUnit.FieldName = "GasUnit";
+            this.GasUnit.Name = "GasUnit";
+            this.GasUnit.OptionsColumn.AllowEdit = false;
+            this.GasUnit.OptionsColumn.AllowFocus = false;
+            this.GasUnit.OptionsColumn.AllowMove = false;
+            this.GasUnit.OptionsColumn.ReadOnly = true;
+            this.GasUnit.Visible = true;
+            this.GasUnit.VisibleIndex = 2;
+            // 
+            // GasPoint
+            // 
+            this.GasPoint.Caption = "小数点";
+            this.GasPoint.FieldName = "GasPoint";
+            this.GasPoint.Name = "GasPoint";
+            this.GasPoint.OptionsColumn.AllowEdit = false;
+            this.GasPoint.OptionsColumn.AllowFocus = false;
+            this.GasPoint.OptionsColumn.AllowMove = false;
+            this.GasPoint.OptionsColumn.ReadOnly = true;
+            this.GasPoint.Visible = true;
+            this.GasPoint.VisibleIndex = 3;
+            // 
+            // GasRang
+            // 
+            this.GasRang.Caption = "测量范围";
+            this.GasRang.FieldName = "GasRang";
+            this.GasRang.Name = "GasRang";
+            this.GasRang.OptionsColumn.AllowEdit = false;
+            this.GasRang.OptionsColumn.AllowFocus = false;
+            this.GasRang.OptionsColumn.AllowMove = false;
+            this.GasRang.OptionsColumn.ReadOnly = true;
+            // 
+            // GasModel
+            // 
+            this.GasModel.Caption = "报警模式";
+            this.GasModel.FieldName = "GasModel";
+            this.GasModel.Name = "GasModel";
+            this.GasModel.OptionsColumn.AllowEdit = false;
+            this.GasModel.OptionsColumn.AllowFocus = false;
+            this.GasModel.OptionsColumn.AllowMove = false;
+            this.GasModel.OptionsColumn.ReadOnly = true;
+            this.GasModel.Visible = true;
+            this.GasModel.VisibleIndex = 6;
+            // 
+            // GasA1
+            // 
+            this.GasA1.Caption = "A1报警值";
+            this.GasA1.FieldName = "GasA1";
+            this.GasA1.Name = "GasA1";
+            this.GasA1.OptionsColumn.AllowEdit = false;
+            this.GasA1.OptionsColumn.AllowFocus = false;
+            this.GasA1.OptionsColumn.AllowMove = false;
+            this.GasA1.OptionsColumn.ReadOnly = true;
+            this.GasA1.Visible = true;
+            this.GasA1.VisibleIndex = 4;
+            // 
+            // GasA2
+            // 
+            this.GasA2.Caption = "A2报警值";
+            this.GasA2.FieldName = "GasA2";
+            this.GasA2.Name = "GasA2";
+            this.GasA2.OptionsColumn.AllowEdit = false;
+            this.GasA2.OptionsColumn.AllowFocus = false;
+            this.GasA2.OptionsColumn.AllowMove = false;
+            this.GasA2.OptionsColumn.ReadOnly = true;
+            this.GasA2.Visible = true;
+            this.GasA2.VisibleIndex = 5;
+            // 
+            // Factor
+            // 
+            this.Factor.Caption = "因子编码";
+            this.Factor.FieldName = "Factor";
+            this.Factor.Name = "Factor";
+            this.Factor.OptionsColumn.AllowEdit = false;
+            this.Factor.OptionsColumn.AllowFocus = false;
+            this.Factor.OptionsColumn.AllowMove = false;
+            this.Factor.OptionsColumn.ReadOnly = true;
+            this.Factor.Visible = true;
+            this.Factor.VisibleIndex = 7;
+            // 
+            // Show
+            // 
+            this.Show.Caption = "显示系数";
+            this.Show.FieldName = "Show";
+            this.Show.Name = "Show";
+            this.Show.OptionsColumn.AllowEdit = false;
+            this.Show.OptionsColumn.AllowFocus = false;
+            this.Show.OptionsColumn.AllowMove = false;
+            this.Show.OptionsColumn.ReadOnly = true;
+            this.Show.Visible = true;
+            this.Show.VisibleIndex = 8;
+            // 
+            // Compensation
+            // 
+            this.Compensation.Caption = "补偿值";
+            this.Compensation.FieldName = "Compensation";
+            this.Compensation.Name = "Compensation";
+            this.Compensation.OptionsColumn.AllowEdit = false;
+            this.Compensation.OptionsColumn.AllowFocus = false;
+            this.Compensation.OptionsColumn.ReadOnly = true;
+            this.Compensation.Visible = true;
+            this.Compensation.VisibleIndex = 9;
+            // 
+            // gridControl1
+            // 
+            this.gridControl1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.gridControl1.Location = new System.Drawing.Point(0, 0);
+            this.gridControl1.MainView = this.gridView1;
+            this.gridControl1.Name = "gridControl1";
+            this.gridControl1.Size = new System.Drawing.Size(660, 217);
+            this.gridControl1.TabIndex = 1;
+            this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView1});
+            this.gridControl1.Click += new System.EventHandler(this.gridControl1_Click);
+            // 
+            // gridView1
+            // 
+            this.gridView1.Appearance.GroupPanel.Font = new System.Drawing.Font("Tahoma", 11F, System.Drawing.FontStyle.Bold);
+            this.gridView1.Appearance.GroupPanel.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.gridView1.Appearance.GroupPanel.Options.UseFont = true;
+            this.gridView1.Appearance.GroupPanel.Options.UseForeColor = true;
+            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.Name1,
+            this.Value1,
+            this.Name2,
+            this.Value2,
+            this.Name3,
+            this.Value3,
+            this.Name4,
+            this.Value4});
+            this.gridView1.GridControl = this.gridControl1;
+            this.gridView1.GroupPanelText = "通用参数";
+            this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
+            this.gridView1.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
+            this.gridView1.OptionsBehavior.ReadOnly = true;
+            this.gridView1.OptionsLayout.Columns.AddNewColumns = false;
+            this.gridView1.OptionsLayout.Columns.RemoveOldColumns = false;
+            this.gridView1.OptionsView.ShowColumnHeaders = false;
+            // 
+            // Name1
+            // 
+            this.Name1.Caption = "gridColumn1";
+            this.Name1.FieldName = "Name1";
+            this.Name1.Name = "Name1";
+            this.Name1.OptionsColumn.AllowEdit = false;
+            this.Name1.OptionsColumn.AllowFocus = false;
+            this.Name1.OptionsColumn.AllowMove = false;
+            this.Name1.OptionsColumn.ReadOnly = true;
+            this.Name1.Visible = true;
+            this.Name1.VisibleIndex = 0;
+            // 
+            // Value1
+            // 
+            this.Value1.Caption = "gridColumn1";
+            this.Value1.FieldName = "Value1";
+            this.Value1.Name = "Value1";
+            this.Value1.OptionsColumn.AllowEdit = false;
+            this.Value1.OptionsColumn.AllowFocus = false;
+            this.Value1.OptionsColumn.AllowMove = false;
+            this.Value1.OptionsColumn.ReadOnly = true;
+            this.Value1.Visible = true;
+            this.Value1.VisibleIndex = 1;
+            // 
+            // Name2
+            // 
+            this.Name2.Caption = "gridColumn1";
+            this.Name2.FieldName = "Name2";
+            this.Name2.Name = "Name2";
+            this.Name2.OptionsColumn.AllowEdit = false;
+            this.Name2.OptionsColumn.AllowFocus = false;
+            this.Name2.OptionsColumn.AllowMove = false;
+            this.Name2.OptionsColumn.ReadOnly = true;
+            this.Name2.Visible = true;
+            this.Name2.VisibleIndex = 2;
+            // 
+            // Value2
+            // 
+            this.Value2.Caption = "gridColumn1";
+            this.Value2.FieldName = "Value2";
+            this.Value2.Name = "Value2";
+            this.Value2.OptionsColumn.AllowEdit = false;
+            this.Value2.OptionsColumn.AllowFocus = false;
+            this.Value2.OptionsColumn.AllowMove = false;
+            this.Value2.OptionsColumn.ReadOnly = true;
+            this.Value2.Visible = true;
+            this.Value2.VisibleIndex = 3;
+            // 
+            // Name3
+            // 
+            this.Name3.Caption = "gridColumn1";
+            this.Name3.FieldName = "Name3";
+            this.Name3.Name = "Name3";
+            this.Name3.OptionsColumn.AllowEdit = false;
+            this.Name3.OptionsColumn.AllowFocus = false;
+            this.Name3.OptionsColumn.AllowMove = false;
+            this.Name3.OptionsColumn.ReadOnly = true;
+            this.Name3.Visible = true;
+            this.Name3.VisibleIndex = 4;
+            // 
+            // Value3
+            // 
+            this.Value3.Caption = "gridColumn1";
+            this.Value3.FieldName = "Value3";
+            this.Value3.Name = "Value3";
+            this.Value3.OptionsColumn.AllowEdit = false;
+            this.Value3.OptionsColumn.AllowFocus = false;
+            this.Value3.OptionsColumn.AllowMove = false;
+            this.Value3.OptionsColumn.ReadOnly = true;
+            this.Value3.Visible = true;
+            this.Value3.VisibleIndex = 5;
+            // 
+            // Name4
+            // 
+            this.Name4.Caption = "gridColumn1";
+            this.Name4.FieldName = "Name4";
+            this.Name4.Name = "Name4";
+            this.Name4.OptionsColumn.AllowEdit = false;
+            this.Name4.OptionsColumn.AllowFocus = false;
+            this.Name4.OptionsColumn.AllowMove = false;
+            this.Name4.OptionsColumn.ReadOnly = true;
+            this.Name4.Visible = true;
+            this.Name4.VisibleIndex = 6;
+            // 
+            // Value4
+            // 
+            this.Value4.Caption = "gridColumn1";
+            this.Value4.FieldName = "Value4";
+            this.Value4.Name = "Value4";
+            this.Value4.OptionsColumn.AllowEdit = false;
+            this.Value4.OptionsColumn.AllowFocus = false;
+            this.Value4.OptionsColumn.AllowMove = false;
+            this.Value4.OptionsColumn.ReadOnly = true;
+            this.Value4.Visible = true;
+            this.Value4.VisibleIndex = 7;
+            // 
             // xtraTabPage2
             // 
             this.xtraTabPage2.Controls.Add(this.splitContainerControl6);
             this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(678, 421);
+            this.xtraTabPage2.Size = new System.Drawing.Size(677, 424);
             this.xtraTabPage2.Text = "xtraTabPage2";
             // 
             // splitContainerControl6
@@ -729,7 +797,7 @@
             this.splitContainerControl6.Panel1.Text = "Panel1";
             this.splitContainerControl6.Panel2.Controls.Add(this.xtraTabControl2);
             this.splitContainerControl6.Panel2.Text = "Panel2";
-            this.splitContainerControl6.Size = new System.Drawing.Size(678, 421);
+            this.splitContainerControl6.Size = new System.Drawing.Size(677, 424);
             this.splitContainerControl6.SplitterPosition = 38;
             this.splitContainerControl6.TabIndex = 0;
             this.splitContainerControl6.Text = "splitContainerControl6";
@@ -757,7 +825,7 @@
             this.spinEdit1.Properties.IsFloatValue = false;
             this.spinEdit1.Properties.Mask.EditMask = "N00";
             this.spinEdit1.Properties.MaxValue = new decimal(new int[] {
-            8,
+            12,
             0,
             0,
             0});
@@ -786,213 +854,15 @@
             this.xtraTabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.xtraTabControl2.Location = new System.Drawing.Point(0, 0);
             this.xtraTabControl2.Name = "xtraTabControl2";
-            this.xtraTabControl2.SelectedTabPage = this.xtraTabPage3;
-            this.xtraTabControl2.Size = new System.Drawing.Size(678, 378);
+            this.xtraTabControl2.Size = new System.Drawing.Size(677, 381);
             this.xtraTabControl2.TabIndex = 0;
-            this.xtraTabControl2.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
-            this.xtraTabPage3,
-            this.xtraTabPage4,
-            this.xtraTabPage8,
-            this.xtraTabPage9,
-            this.xtraTabPage10,
-            this.xtraTabPage11,
-            this.xtraTabPage12,
-            this.xtraTabPage13});
             this.xtraTabControl2.SelectedPageChanging += new DevExpress.XtraTab.TabPageChangingEventHandler(this.xtraTabControl2_SelectedPageChanging);
-            // 
-            // xtraTabPage3
-            // 
-            this.xtraTabPage3.Controls.Add(this.userControl11);
-            this.xtraTabPage3.Name = "xtraTabPage3";
-            this.xtraTabPage3.Size = new System.Drawing.Size(672, 349);
-            this.xtraTabPage3.Text = "通道1";
-            // 
-            // userControl11
-            // 
-            this.userControl11.Dock = System.Windows.Forms.DockStyle.Fill;
-            fieldValue1.Name = "高报模式";
-            fieldValue1.Value = ((short)(0));
-            gasEntity1.AlertModel = fieldValue1;
-            fieldValue2.Name = "正常";
-            fieldValue2.Value = ((short)(0));
-            gasEntity1.AlertStatus = fieldValue2;
-            gasEntity1.CheckNum = ((byte)(2));
-            gasEntity1.Compensation = 4.4F;
-            gasEntity1.CurrentAD = 22;
-            gasEntity1.CurrentChroma = 3.3F;
-            gasEntity1.Factor = "abc";
-            gasEntity1.GasA1 = 2.2F;
-            gasEntity1.GasA2 = 3.3F;
-            gasEntity1.GasID = 1;
-            fieldValue3.Name = "可燃气体";
-            fieldValue3.Value = ((short)(1));
-            gasEntity1.GasName = fieldValue3;
-            fieldValue4.Name = "整形";
-            fieldValue4.Value = ((short)(0));
-            gasEntity1.GasPoint = fieldValue4;
-            gasEntity1.GasRang = 5.5F;
-            fieldValue5.Name = "ppm";
-            fieldValue5.Value = ((short)(0));
-            gasEntity1.GasUnit = fieldValue5;
-            gasEntity1.IfGasAlarm = true;
-            gasEntity1.IfThree = true;
-            gasEntity1.IfTwo = true;
-            gasEntity1.OneAD = 66;
-            gasEntity1.OneChroma = 6.6F;
-            gasEntity1.Show = 8.8F;
-            gasEntity1.ThreeAD = 99;
-            gasEntity1.ThreeChroma = 9.9F;
-            gasEntity1.TwoAD = 11;
-            gasEntity1.TwoChroma = 1.1F;
-            gasEntity1.ZeroAD = 13;
-            gasEntity1.ZeroChroma = 1.3F;
-            this.userControl11.Gas = gasEntity1;
-            this.userControl11.GasID = 1;
-            this.userControl11.Location = new System.Drawing.Point(0, 0);
-            this.userControl11.Name = "userControl11";
-            this.userControl11.Size = new System.Drawing.Size(672, 349);
-            this.userControl11.TabIndex = 0;
-            this.userControl11.SaveModelFileEvent += new standardApplication.UserControl1.SaveModelFileEventHandler(this.userControl11_SaveModelFileEvent);
-            this.userControl11.ChangeGasEvent += new System.EventHandler(this.userControl11_ChangeGasEvent);
-            // 
-            // xtraTabPage4
-            // 
-            this.xtraTabPage4.Controls.Add(this.userControl12);
-            this.xtraTabPage4.Name = "xtraTabPage4";
-            this.xtraTabPage4.Size = new System.Drawing.Size(672, 349);
-            this.xtraTabPage4.Text = "通道2";
-            // 
-            // userControl12
-            // 
-            this.userControl12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.userControl12.Gas = null;
-            this.userControl12.GasID = 2;
-            this.userControl12.Location = new System.Drawing.Point(0, 0);
-            this.userControl12.Name = "userControl12";
-            this.userControl12.Size = new System.Drawing.Size(672, 349);
-            this.userControl12.TabIndex = 0;
-            this.userControl12.SaveModelFileEvent += new standardApplication.UserControl1.SaveModelFileEventHandler(this.userControl11_SaveModelFileEvent);
-            this.userControl12.ChangeGasEvent += new System.EventHandler(this.userControl11_ChangeGasEvent);
-            // 
-            // xtraTabPage8
-            // 
-            this.xtraTabPage8.Controls.Add(this.userControl13);
-            this.xtraTabPage8.Name = "xtraTabPage8";
-            this.xtraTabPage8.Size = new System.Drawing.Size(672, 349);
-            this.xtraTabPage8.Text = "通道3";
-            // 
-            // userControl13
-            // 
-            this.userControl13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.userControl13.Gas = null;
-            this.userControl13.GasID = 3;
-            this.userControl13.Location = new System.Drawing.Point(0, 0);
-            this.userControl13.Name = "userControl13";
-            this.userControl13.Size = new System.Drawing.Size(672, 349);
-            this.userControl13.TabIndex = 0;
-            this.userControl13.SaveModelFileEvent += new standardApplication.UserControl1.SaveModelFileEventHandler(this.userControl11_SaveModelFileEvent);
-            this.userControl13.ChangeGasEvent += new System.EventHandler(this.userControl11_ChangeGasEvent);
-            // 
-            // xtraTabPage9
-            // 
-            this.xtraTabPage9.Controls.Add(this.userControl14);
-            this.xtraTabPage9.Name = "xtraTabPage9";
-            this.xtraTabPage9.Size = new System.Drawing.Size(672, 349);
-            this.xtraTabPage9.Text = "通道4";
-            // 
-            // userControl14
-            // 
-            this.userControl14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.userControl14.Gas = null;
-            this.userControl14.GasID = 4;
-            this.userControl14.Location = new System.Drawing.Point(0, 0);
-            this.userControl14.Name = "userControl14";
-            this.userControl14.Size = new System.Drawing.Size(672, 349);
-            this.userControl14.TabIndex = 0;
-            this.userControl14.SaveModelFileEvent += new standardApplication.UserControl1.SaveModelFileEventHandler(this.userControl11_SaveModelFileEvent);
-            this.userControl14.ChangeGasEvent += new System.EventHandler(this.userControl11_ChangeGasEvent);
-            // 
-            // xtraTabPage10
-            // 
-            this.xtraTabPage10.Controls.Add(this.userControl15);
-            this.xtraTabPage10.Name = "xtraTabPage10";
-            this.xtraTabPage10.Size = new System.Drawing.Size(672, 349);
-            this.xtraTabPage10.Text = "通道5";
-            // 
-            // userControl15
-            // 
-            this.userControl15.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.userControl15.Gas = null;
-            this.userControl15.GasID = 5;
-            this.userControl15.Location = new System.Drawing.Point(0, 0);
-            this.userControl15.Name = "userControl15";
-            this.userControl15.Size = new System.Drawing.Size(672, 349);
-            this.userControl15.TabIndex = 0;
-            this.userControl15.SaveModelFileEvent += new standardApplication.UserControl1.SaveModelFileEventHandler(this.userControl11_SaveModelFileEvent);
-            this.userControl15.ChangeGasEvent += new System.EventHandler(this.userControl11_ChangeGasEvent);
-            // 
-            // xtraTabPage11
-            // 
-            this.xtraTabPage11.Controls.Add(this.userControl16);
-            this.xtraTabPage11.Name = "xtraTabPage11";
-            this.xtraTabPage11.Size = new System.Drawing.Size(672, 349);
-            this.xtraTabPage11.Text = "通道6";
-            // 
-            // userControl16
-            // 
-            this.userControl16.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.userControl16.Gas = null;
-            this.userControl16.GasID = 6;
-            this.userControl16.Location = new System.Drawing.Point(0, 0);
-            this.userControl16.Name = "userControl16";
-            this.userControl16.Size = new System.Drawing.Size(672, 349);
-            this.userControl16.TabIndex = 0;
-            this.userControl16.SaveModelFileEvent += new standardApplication.UserControl1.SaveModelFileEventHandler(this.userControl11_SaveModelFileEvent);
-            this.userControl16.ChangeGasEvent += new System.EventHandler(this.userControl11_ChangeGasEvent);
-            // 
-            // xtraTabPage12
-            // 
-            this.xtraTabPage12.Controls.Add(this.userControl17);
-            this.xtraTabPage12.Name = "xtraTabPage12";
-            this.xtraTabPage12.Size = new System.Drawing.Size(672, 349);
-            this.xtraTabPage12.Text = "通道7";
-            // 
-            // userControl17
-            // 
-            this.userControl17.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.userControl17.Gas = null;
-            this.userControl17.GasID = 7;
-            this.userControl17.Location = new System.Drawing.Point(0, 0);
-            this.userControl17.Name = "userControl17";
-            this.userControl17.Size = new System.Drawing.Size(672, 349);
-            this.userControl17.TabIndex = 0;
-            this.userControl17.SaveModelFileEvent += new standardApplication.UserControl1.SaveModelFileEventHandler(this.userControl11_SaveModelFileEvent);
-            this.userControl17.ChangeGasEvent += new System.EventHandler(this.userControl11_ChangeGasEvent);
-            // 
-            // xtraTabPage13
-            // 
-            this.xtraTabPage13.Controls.Add(this.userControl18);
-            this.xtraTabPage13.Name = "xtraTabPage13";
-            this.xtraTabPage13.Size = new System.Drawing.Size(672, 349);
-            this.xtraTabPage13.Text = "通道8";
-            // 
-            // userControl18
-            // 
-            this.userControl18.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.userControl18.Gas = null;
-            this.userControl18.GasID = 8;
-            this.userControl18.Location = new System.Drawing.Point(0, 0);
-            this.userControl18.Name = "userControl18";
-            this.userControl18.Size = new System.Drawing.Size(672, 349);
-            this.userControl18.TabIndex = 0;
-            this.userControl18.SaveModelFileEvent += new standardApplication.UserControl1.SaveModelFileEventHandler(this.userControl11_SaveModelFileEvent);
-            this.userControl18.ChangeGasEvent += new System.EventHandler(this.userControl11_ChangeGasEvent);
             // 
             // xtraTabPage5
             // 
             this.xtraTabPage5.Controls.Add(this.splitContainerControl7);
             this.xtraTabPage5.Name = "xtraTabPage5";
-            this.xtraTabPage5.Size = new System.Drawing.Size(678, 421);
+            this.xtraTabPage5.Size = new System.Drawing.Size(677, 424);
             this.xtraTabPage5.Text = "xtraTabPage5";
             // 
             // splitContainerControl7
@@ -1007,7 +877,7 @@
             this.splitContainerControl7.Panel1.Text = "Panel1";
             this.splitContainerControl7.Panel2.Controls.Add(this.splitContainerControl8);
             this.splitContainerControl7.Panel2.Text = "Panel2";
-            this.splitContainerControl7.Size = new System.Drawing.Size(678, 421);
+            this.splitContainerControl7.Size = new System.Drawing.Size(677, 424);
             this.splitContainerControl7.SplitterPosition = 52;
             this.splitContainerControl7.TabIndex = 0;
             this.splitContainerControl7.Text = "splitContainerControl7";
@@ -1026,7 +896,7 @@
             this.spinEdit2.Properties.IsFloatValue = false;
             this.spinEdit2.Properties.Mask.EditMask = "N00";
             this.spinEdit2.Properties.MaxValue = new decimal(new int[] {
-            8,
+            12,
             0,
             0,
             0});
@@ -1062,7 +932,7 @@
             this.splitContainerControl8.Panel2.Controls.Add(this.simpleButton18);
             this.splitContainerControl8.Panel2.Controls.Add(this.simpleButton17);
             this.splitContainerControl8.Panel2.Text = "Panel2";
-            this.splitContainerControl8.Size = new System.Drawing.Size(678, 364);
+            this.splitContainerControl8.Size = new System.Drawing.Size(677, 367);
             this.splitContainerControl8.SplitterPosition = 303;
             this.splitContainerControl8.TabIndex = 1;
             this.splitContainerControl8.Text = "splitContainerControl8";
@@ -1080,7 +950,7 @@
             this.repositoryItemLookUpEdit1,
             this.repositoryItemLookUpEdit2,
             this.repositoryItemLookUpEdit3});
-            this.gridControl4.Size = new System.Drawing.Size(678, 303);
+            this.gridControl4.Size = new System.Drawing.Size(677, 303);
             this.gridControl4.TabIndex = 0;
             this.gridControl4.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView4});
@@ -1247,7 +1117,7 @@
             // 
             this.xtraTabPage6.Controls.Add(this.userControlNormal1);
             this.xtraTabPage6.Name = "xtraTabPage6";
-            this.xtraTabPage6.Size = new System.Drawing.Size(678, 421);
+            this.xtraTabPage6.Size = new System.Drawing.Size(677, 424);
             this.xtraTabPage6.Text = "xtraTabPage6";
             // 
             // userControlNormal1
@@ -1256,7 +1126,7 @@
             this.userControlNormal1.Location = new System.Drawing.Point(0, 0);
             this.userControlNormal1.Name = "userControlNormal1";
             this.userControlNormal1.normalParam = null;
-            this.userControlNormal1.Size = new System.Drawing.Size(678, 421);
+            this.userControlNormal1.Size = new System.Drawing.Size(677, 424);
             this.userControlNormal1.TabIndex = 0;
             this.userControlNormal1.ChangeNormalEvent += new standardApplication.UserControlNormal.ChangeNormalEventHandler(this.userControlNormal1_ChangeNormalEvent);
             this.userControlNormal1.SaveModelFileEvent += new standardApplication.UserControlNormal.SaveModelFileEventHandler(this.userControlNormal1_SaveModelFileEvent);
@@ -1265,7 +1135,7 @@
             // 
             this.xtraTabPage7.Controls.Add(this.splitContainerControl9);
             this.xtraTabPage7.Name = "xtraTabPage7";
-            this.xtraTabPage7.Size = new System.Drawing.Size(678, 421);
+            this.xtraTabPage7.Size = new System.Drawing.Size(677, 424);
             this.xtraTabPage7.Text = "xtraTabPage7";
             // 
             // splitContainerControl9
@@ -1278,7 +1148,7 @@
             this.splitContainerControl9.Panel1.Text = "Panel1";
             this.splitContainerControl9.Panel2.Controls.Add(this.splitContainerControl10);
             this.splitContainerControl9.Panel2.Text = "Panel2";
-            this.splitContainerControl9.Size = new System.Drawing.Size(678, 421);
+            this.splitContainerControl9.Size = new System.Drawing.Size(677, 424);
             this.splitContainerControl9.SplitterPosition = 157;
             this.splitContainerControl9.TabIndex = 0;
             this.splitContainerControl9.Text = "splitContainerControl9";
@@ -1304,7 +1174,7 @@
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(678, 157);
+            this.groupControl1.Size = new System.Drawing.Size(677, 157);
             this.groupControl1.TabIndex = 0;
             this.groupControl1.Text = "串口1设置";
             // 
@@ -1470,7 +1340,7 @@
             this.splitContainerControl10.Panel2.Controls.Add(this.simpleButton21);
             this.splitContainerControl10.Panel2.Controls.Add(this.simpleButton20);
             this.splitContainerControl10.Panel2.Text = "Panel2";
-            this.splitContainerControl10.Size = new System.Drawing.Size(678, 259);
+            this.splitContainerControl10.Size = new System.Drawing.Size(677, 262);
             this.splitContainerControl10.SplitterPosition = 196;
             this.splitContainerControl10.TabIndex = 0;
             this.splitContainerControl10.Text = "splitContainerControl10";
@@ -1496,7 +1366,7 @@
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl2.Location = new System.Drawing.Point(0, 0);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(678, 196);
+            this.groupControl2.Size = new System.Drawing.Size(677, 196);
             this.groupControl2.TabIndex = 1;
             this.groupControl2.Text = "串口2设置";
             // 
@@ -1690,8 +1560,9 @@
             "模板5",
             "模板6"});
             this.listBoxControl1.Location = new System.Drawing.Point(0, 0);
+            this.listBoxControl1.MaximumSize = new System.Drawing.Size(230, 0);
             this.listBoxControl1.Name = "listBoxControl1";
-            this.listBoxControl1.Size = new System.Drawing.Size(229, 450);
+            this.listBoxControl1.Size = new System.Drawing.Size(230, 453);
             this.listBoxControl1.TabIndex = 0;
             this.listBoxControl1.DoubleClick += new System.EventHandler(this.listBoxControl1_DoubleClick);
             this.listBoxControl1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listBoxControl1_MouseDown);
@@ -1711,7 +1582,7 @@
             this.splitContainerControl2.Panel1.Text = "Panel1";
             this.splitContainerControl2.Panel2.Controls.Add(this.splitContainerControl3);
             this.splitContainerControl2.Panel2.Text = "Panel2";
-            this.splitContainerControl2.Size = new System.Drawing.Size(1121, 175);
+            this.splitContainerControl2.Size = new System.Drawing.Size(1121, 172);
             this.splitContainerControl2.SplitterPosition = 218;
             this.splitContainerControl2.TabIndex = 0;
             this.splitContainerControl2.Text = "splitContainerControl2";
@@ -1918,7 +1789,7 @@
             this.splitContainerControl3.Panel1.Text = "Panel1";
             this.splitContainerControl3.Panel2.Controls.Add(this.richTextBox1);
             this.splitContainerControl3.Panel2.Text = "Panel2";
-            this.splitContainerControl3.Size = new System.Drawing.Size(898, 175);
+            this.splitContainerControl3.Size = new System.Drawing.Size(898, 172);
             this.splitContainerControl3.SplitterPosition = 591;
             this.splitContainerControl3.TabIndex = 0;
             this.splitContainerControl3.Text = "splitContainerControl3";
@@ -2077,9 +1948,21 @@
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox1.Location = new System.Drawing.Point(0, 0);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(302, 175);
+            this.richTextBox1.Size = new System.Drawing.Size(302, 172);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
+            // 
+            // WeatherCompensation
+            // 
+            this.WeatherCompensation.Caption = "补偿值";
+            this.WeatherCompensation.FieldName = "WeatherCompensation";
+            this.WeatherCompensation.Name = "WeatherCompensation";
+            this.WeatherCompensation.OptionsColumn.AllowEdit = false;
+            this.WeatherCompensation.OptionsColumn.AllowFocus = false;
+            this.WeatherCompensation.OptionsColumn.AllowMove = false;
+            this.WeatherCompensation.OptionsColumn.ReadOnly = true;
+            this.WeatherCompensation.Visible = true;
+            this.WeatherCompensation.VisibleIndex = 5;
             // 
             // MainXtraForm
             // 
@@ -2092,6 +1975,7 @@
             this.Text = "MainXtraForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainXtraForm_FormClosing);
             this.Load += new System.EventHandler(this.MainXtraForm_Load);
+            this.SizeChanged += new System.EventHandler(this.MainXtraForm_SizeChanged);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();
             this.splitContainerControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl4)).EndInit();
@@ -2104,26 +1988,17 @@
             this.xtraTabControl1.ResumeLayout(false);
             this.xtraTabPage1.ResumeLayout(false);
             this.xtraScrollableControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView3)).EndInit();
             this.xtraTabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl6)).EndInit();
             this.splitContainerControl6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl2)).EndInit();
-            this.xtraTabControl2.ResumeLayout(false);
-            this.xtraTabPage3.ResumeLayout(false);
-            this.xtraTabPage4.ResumeLayout(false);
-            this.xtraTabPage8.ResumeLayout(false);
-            this.xtraTabPage9.ResumeLayout(false);
-            this.xtraTabPage10.ResumeLayout(false);
-            this.xtraTabPage11.ResumeLayout(false);
-            this.xtraTabPage12.ResumeLayout(false);
-            this.xtraTabPage13.ResumeLayout(false);
             this.xtraTabPage5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl7)).EndInit();
             this.splitContainerControl7.ResumeLayout(false);
@@ -2258,10 +2133,6 @@
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl6;
         private DevExpress.XtraEditors.SimpleButton simpleButton12;
         private DevExpress.XtraEditors.LabelControl labelControl10;
-        private DevExpress.XtraTab.XtraTabControl xtraTabControl2;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPage3;
-        private UserControl1 userControl11;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPage4;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage5;
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl7;
         private DevExpress.XtraEditors.LabelControl labelControl11;
@@ -2317,19 +2188,6 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox1;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox2;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox3;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPage8;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPage9;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPage10;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPage11;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPage12;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPage13;
-        private UserControl1 userControl12;
-        private UserControl1 userControl13;
-        private UserControl1 userControl14;
-        private UserControl1 userControl15;
-        private UserControl1 userControl16;
-        private UserControl1 userControl17;
-        private UserControl1 userControl18;
         private DevExpress.XtraEditors.SpinEdit spinEdit1;
         private DevExpress.XtraEditors.SpinEdit spinEdit2;
         private DevExpress.XtraEditors.SimpleButton simpleButton23;
@@ -2352,6 +2210,15 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEdit2;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEdit3;
         private DevExpress.XtraEditors.XtraScrollableControl xtraScrollableControl1;
+        private DevExpress.XtraTab.XtraTabControl xtraTabControl2;
+        private DevExpress.XtraGrid.Columns.GridColumn Name3;
+        private DevExpress.XtraGrid.Columns.GridColumn Value3;
+        private DevExpress.XtraGrid.Columns.GridColumn Name4;
+        private DevExpress.XtraGrid.Columns.GridColumn Value4;
+        private DevExpress.XtraGrid.Columns.GridColumn Factor;
+        private DevExpress.XtraGrid.Columns.GridColumn Show;
+        private DevExpress.XtraGrid.Columns.GridColumn Compensation;
+        private DevExpress.XtraGrid.Columns.GridColumn WeatherCompensation;
 
     }
 }

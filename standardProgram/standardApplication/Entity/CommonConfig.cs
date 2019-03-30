@@ -29,6 +29,8 @@ namespace Entity
 
         public Dictionary<string, byte> SerialPortModel { get; set; }
 
+        public int TimeInterval { get; set; }
+
         public CommonConfig()
         {
             GasName = new Dictionary<string, byte>();
@@ -41,6 +43,7 @@ namespace Entity
             RelayModel = new Dictionary<string, byte>();
             RelayModelA = new Dictionary<string, byte>();
             SerialPortModel = new Dictionary<string, byte>();
+            TimeInterval = 60;
         }
 
     }

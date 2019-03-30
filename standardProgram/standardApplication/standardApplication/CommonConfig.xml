@@ -1,216 +1,239 @@
 ﻿<CommonConfig xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.datacontract.org/2004/07/Entity">
   <AlertModel xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-    <d2p1:KeyValueOfstringint>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>高报模式</d2p1:Key>
       <d2p1:Value>0</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
-    <d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>区间模式</d2p1:Key>
       <d2p1:Value>1</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
-    <d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>低报模式</d2p1:Key>
       <d2p1:Value>2</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
   </AlertModel>
+  <AlertStatus xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+    <d2p1:KeyValueOfstringunsignedByte>
+      <d2p1:Key>正常</d2p1:Key>
+      <d2p1:Value>0</d2p1:Value>
+    </d2p1:KeyValueOfstringunsignedByte>
+    <d2p1:KeyValueOfstringunsignedByte>
+      <d2p1:Key>故障</d2p1:Key>
+      <d2p1:Value>1</d2p1:Value>
+    </d2p1:KeyValueOfstringunsignedByte>
+    <d2p1:KeyValueOfstringunsignedByte>
+      <d2p1:Key>超量程</d2p1:Key>
+      <d2p1:Value>2</d2p1:Value>
+    </d2p1:KeyValueOfstringunsignedByte>
+    <d2p1:KeyValueOfstringunsignedByte>
+      <d2p1:Key>A2报警</d2p1:Key>
+      <d2p1:Value>3</d2p1:Value>
+    </d2p1:KeyValueOfstringunsignedByte>
+    <d2p1:KeyValueOfstringunsignedByte>
+      <d2p1:Key>A1报警</d2p1:Key>
+      <d2p1:Value>4</d2p1:Value>
+    </d2p1:KeyValueOfstringunsignedByte>
+  </AlertStatus>
   <BaudRate xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-    <d2p1:KeyValueOfstringint>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>4800</d2p1:Key>
       <d2p1:Value>0</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
-    <d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>9600</d2p1:Key>
       <d2p1:Value>1</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
-    <d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>38400</d2p1:Key>
       <d2p1:Value>2</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
-    <d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>115200</d2p1:Key>
       <d2p1:Value>3</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
   </BaudRate>
   <GasName xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-    <d2p1:KeyValueOfstringstring>
-      <d2p1:Key>EX</d2p1:Key>
-      <d2p1:Value>可燃气体</d2p1:Value>
-    </d2p1:KeyValueOfstringstring>
-    <d2p1:KeyValueOfstringstring>
-      <d2p1:Key>CO2</d2p1:Key>
-      <d2p1:Value>二氧化碳</d2p1:Value>
-    </d2p1:KeyValueOfstringstring>
-    <d2p1:KeyValueOfstringstring>
-      <d2p1:Key>CO</d2p1:Key>
-      <d2p1:Value>一氧化碳</d2p1:Value>
-    </d2p1:KeyValueOfstringstring>
-    <d2p1:KeyValueOfstringstring>
-      <d2p1:Key>O2</d2p1:Key>
-      <d2p1:Value>氧气</d2p1:Value>
-    </d2p1:KeyValueOfstringstring>
-    <d2p1:KeyValueOfstringstring>
-      <d2p1:Key>H2S</d2p1:Key>
-      <d2p1:Value>硫化氢</d2p1:Value>
-    </d2p1:KeyValueOfstringstring>
+    <d2p1:KeyValueOfstringunsignedByte>
+      <d2p1:Key>可燃气体</d2p1:Key>
+      <d2p1:Value>0</d2p1:Value>
+    </d2p1:KeyValueOfstringunsignedByte>
+    <d2p1:KeyValueOfstringunsignedByte>
+      <d2p1:Key>二氧化碳</d2p1:Key>
+      <d2p1:Value>1</d2p1:Value>
+    </d2p1:KeyValueOfstringunsignedByte>
+    <d2p1:KeyValueOfstringunsignedByte>
+      <d2p1:Key>一氧化碳</d2p1:Key>
+      <d2p1:Value>3</d2p1:Value>
+    </d2p1:KeyValueOfstringunsignedByte>
+    <d2p1:KeyValueOfstringunsignedByte>
+      <d2p1:Key>氧气</d2p1:Key>
+      <d2p1:Value>4</d2p1:Value>
+    </d2p1:KeyValueOfstringunsignedByte>
+    <d2p1:KeyValueOfstringunsignedByte>
+      <d2p1:Key>硫化氢</d2p1:Key>
+      <d2p1:Value>5</d2p1:Value>
+    </d2p1:KeyValueOfstringunsignedByte>
   </GasName>
   <GasUnit xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-    <d2p1:KeyValueOfstringint>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>ppm</d2p1:Key>
       <d2p1:Value>0</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
-    <d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>mg/m3</d2p1:Key>
       <d2p1:Value>1</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
-    <d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>ppb</d2p1:Key>
       <d2p1:Value>2</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
-    <d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>ug/m3</d2p1:Key>
       <d2p1:Value>3</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
-    <d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>%Vol</d2p1:Key>
       <d2p1:Value>4</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
-    <d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>g/m3</d2p1:Key>
       <d2p1:Value>5</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
-    <d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>%LEL</d2p1:Key>
       <d2p1:Value>6</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
   </GasUnit>
   <MatchChannel xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-    <d2p1:KeyValueOfstringint>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>保留</d2p1:Key>
       <d2p1:Value>0</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
-    <d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>对应通道</d2p1:Key>
       <d2p1:Value>1</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
   </MatchChannel>
   <Point xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-    <d2p1:KeyValueOfstringint>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>整形</d2p1:Key>
       <d2p1:Value>0</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
-    <d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>一位小数</d2p1:Key>
       <d2p1:Value>1</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
-    <d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>两位小数</d2p1:Key>
       <d2p1:Value>2</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
-    <d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>三位小数</d2p1:Key>
       <d2p1:Value>3</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
   </Point>
   <RelayModel xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-    <d2p1:KeyValueOfstringint>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>时间模式</d2p1:Key>
       <d2p1:Value>0</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
-    <d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>单通道模式</d2p1:Key>
       <d2p1:Value>1</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
-    <d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>A1模式</d2p1:Key>
       <d2p1:Value>2</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
-    <d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>A2模式</d2p1:Key>
       <d2p1:Value>3</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
-    <d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>关闭模式</d2p1:Key>
       <d2p1:Value>4</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
   </RelayModel>
   <RelayModelA xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-    <d2p1:KeyValueOfstringint>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>独立模式</d2p1:Key>
       <d2p1:Value>0</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
-    <d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>联动模式</d2p1:Key>
       <d2p1:Value>1</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
-    <d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>关闭模式</d2p1:Key>
       <d2p1:Value>2</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
   </RelayModelA>
   <SerialPortModel xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-    <d2p1:KeyValueOfstringint>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>Modbus主发模式</d2p1:Key>
       <d2p1:Value>0</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
-    <d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>Modbus被动模式</d2p1:Key>
       <d2p1:Value>1</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
-    <d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>H212协议模式</d2p1:Key>
       <d2p1:Value>2</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
   </SerialPortModel>
   <WeatherName xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-    <d2p1:KeyValueOfstringint>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>温度</d2p1:Key>
       <d2p1:Value>0</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
-    <d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>湿度</d2p1:Key>
       <d2p1:Value>1</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
-    <d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>风速</d2p1:Key>
       <d2p1:Value>2</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
-    <d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>风向</d2p1:Key>
       <d2p1:Value>3</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
-    <d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>大气压</d2p1:Key>
       <d2p1:Value>4</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
-    <d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>光照</d2p1:Key>
       <d2p1:Value>5</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
-    <d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>降雨量</d2p1:Key>
       <d2p1:Value>6</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
   </WeatherName>
   <WeatherUnit xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-    <d2p1:KeyValueOfstringint>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>℃</d2p1:Key>
       <d2p1:Value>0</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
-    <d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>%RH</d2p1:Key>
       <d2p1:Value>1</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
-    <d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>m/s</d2p1:Key>
       <d2p1:Value>2</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
-    <d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>aa</d2p1:Key>
       <d2p1:Value>3</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
-    <d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
+    <d2p1:KeyValueOfstringunsignedByte>
       <d2p1:Key>Kpa</d2p1:Key>
       <d2p1:Value>4</d2p1:Value>
-    </d2p1:KeyValueOfstringint>
+    </d2p1:KeyValueOfstringunsignedByte>
   </WeatherUnit>
+  <TimeInterval>60</TimeInterval>
 </CommonConfig>

@@ -129,7 +129,7 @@
             // 
             // labelControl2
             // 
-            this.labelControl2.Location = new System.Drawing.Point(46, 40);
+            this.labelControl2.Location = new System.Drawing.Point(415, 40);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(36, 14);
             this.labelControl2.TabIndex = 2;
@@ -145,7 +145,7 @@
             // 
             // labelControl4
             // 
-            this.labelControl4.Location = new System.Drawing.Point(391, 40);
+            this.labelControl4.Location = new System.Drawing.Point(22, 38);
             this.labelControl4.Name = "labelControl4";
             this.labelControl4.Size = new System.Drawing.Size(60, 14);
             this.labelControl4.TabIndex = 6;
@@ -442,7 +442,7 @@
             // comboBoxEdit3
             // 
             this.comboBoxEdit3.EditValue = "ppm";
-            this.comboBoxEdit3.Location = new System.Drawing.Point(88, 37);
+            this.comboBoxEdit3.Location = new System.Drawing.Point(457, 37);
             this.comboBoxEdit3.Name = "comboBoxEdit3";
             this.comboBoxEdit3.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -650,7 +650,7 @@
             0,
             0,
             0});
-            this.spinEdit14.Location = new System.Drawing.Point(457, 39);
+            this.spinEdit14.Location = new System.Drawing.Point(88, 37);
             this.spinEdit14.Name = "spinEdit14";
             this.spinEdit14.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});

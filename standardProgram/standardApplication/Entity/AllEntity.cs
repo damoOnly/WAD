@@ -15,7 +15,7 @@ namespace Entity
             WeatherList = new List<WeatherEntity>();
             Normal = new NormalParamEntity();
             Serial = new SerialEntity();
-            Address = 5;
+            Address = 0;
 
             EquipmentDataTime = DateTime.Now;
             OutDate = DateTime.Now;

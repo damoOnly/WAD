@@ -54,7 +54,7 @@ namespace CommandManager
                 weather.WeatherFactor = ASCIIEncoding.ASCII.GetString(byteTemp.ToArray());
                 Array.Reverse(rbytes, 25, 2);
                 Array.Reverse(rbytes, 27, 2);
-                weather.Compensation = BitConverter.ToSingle(rbytes, 25);
+                weather.WeatherCompensation = BitConverter.ToSingle(rbytes, 25);
                 Array.Reverse(rbytes, 29, 2);
                 Array.Reverse(rbytes, 31, 2);
                 weather.CurrentWeather = BitConverter.ToSingle(rbytes, 29);
@@ -85,7 +85,7 @@ namespace CommandManager
                     byteFactor[j * 2 + 1] = byteTemp[j];
                 }
                 content.AddRange(byteFactor);
-                byteTemp = BitConverter.GetBytes(weather.Compensation);
+                byteTemp = BitConverter.GetBytes(weather.WeatherCompensation);
                 Array.Reverse(byteTemp, 0, 2);
                 Array.Reverse(byteTemp, 2, 2);
                 content.AddRange(byteTemp);

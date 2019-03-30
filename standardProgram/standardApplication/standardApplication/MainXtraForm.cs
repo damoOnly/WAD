@@ -13,12 +13,16 @@ using CommandManager;
 using DevExpress.Utils;
 using DevExpress.XtraTab;
 using DevExpress.XtraEditors.ViewInfo;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using DevExpress.XtraGrid;
 
 namespace standardApplication
 {
     public partial class MainXtraForm : DevExpress.XtraEditors.XtraForm
     {
         LogLib.Log log = LogLib.Log.GetLogger("MainXtraForm");
+        System.Timers.Timer timer = new System.Timers.Timer();
         public MainXtraForm()
         {
             Gloab.Config = XmlSerializerProvider.DeSerialize<CommonConfig>(AppDomain.CurrentDomain.BaseDirectory + "CommonConfig.xml");
@@ -41,19 +45,6 @@ namespace standardApplication
 
         private void TestData()
         {
-            List<NormalParamEntityForList> normalList = new List<NormalParamEntityForList>() { 
-                new NormalParamEntityForList(){ Name1="气体通道数", Value1="6", Name2="气象通道数", Value2="4"},
-                new NormalParamEntityForList(){ Name1="预热时间", Value1="60", Name2="数据存储间隔", Value2="60"},
-                new NormalParamEntityForList(){ Name1="曲线时长", Value1="60", Name2="声光报警开关", Value2="打开"},
-                new NormalParamEntityForList(){ Name1="A1继电器模式", Value1="高报", Name2="A2继电器模式", Value2="高报"},
-                new NormalParamEntityForList(){ Name1="继电器1模式", Value1="高报", Name2="继电器1对应通道", Value2="6"},
-                new NormalParamEntityForList(){ Name1="继电器1动作时间", Value1="60", Name2="继电器1间隔时间", Value2="60"},
-                new NormalParamEntityForList(){ Name1="继电器2模式", Value1="高报", Name2="继电器2对应通道", Value2="6"},
-                new NormalParamEntityForList(){ Name1="继电器2动作时间", Value1="60", Name2="继电器2间隔时间", Value2="60"},
-                new NormalParamEntityForList(){ Name1="继电器3模式", Value1="高报", Name2="继电器3对应通道", Value2="6"},
-                new NormalParamEntityForList(){ Name1="继电器3动作时间", Value1="60", Name2="继电器3间隔时间", Value2="60"},
-            };
-
             List<GasEntity> gasList = new List<GasEntity>();
 
             GasEntity gas1 = new GasEntity();
@@ -69,8 +60,10 @@ namespace standardApplication
                 new WeatherEntity() {WeatherID=2}
             };
 
+            Gloab.AllData.Normal = new NormalParamEntity();
 
-            Gloab.AllData.NormalList = normalList;
+
+            Gloab.AllData.NormalList = Gloab.AllData.Normal.ConvertToNormalList();
             Gloab.AllData.GasList = gasList;
             Gloab.AllData.WeatherList = weatherList;
         }
@@ -102,9 +95,6 @@ namespace standardApplication
             //config.GasUnit.Add("%Vol", 4);
             //config.GasUnit.Add("g/m3", 5);
             //config.GasUnit.Add("%LEL", 6);
-
-            //config.MatchChannel.Add("保留", 0);
-            //config.MatchChannel.Add("对应通道", 1);
 
             //config.Point.Add("整形", 0);
             //config.Point.Add("一位小数", 1);
@@ -141,31 +131,7 @@ namespace standardApplication
 
             //XmlSerializerProvider.Serialize<CommonConfig>(config, AppDomain.CurrentDomain.BaseDirectory + "CommonConfig.xml");
             #endregion          
-
-            userControl11.Callback = SetDebugStr;
-            userControl11.CommandCallback = CommandCallback;
-            userControl12.Callback = SetDebugStr;
-            userControl12.CommandCallback = CommandCallback;
-            userControl13.Callback = SetDebugStr;
-            userControl13.CommandCallback = CommandCallback;
-            userControl14.Callback = SetDebugStr;
-            userControl14.CommandCallback = CommandCallback;
-            userControl15.Callback = SetDebugStr;
-            userControl15.CommandCallback = CommandCallback;
-            userControl16.Callback = SetDebugStr;
-            userControl16.CommandCallback = CommandCallback;
-            userControl17.Callback = SetDebugStr;
-            userControl17.CommandCallback = CommandCallback;
-            userControl18.Callback = SetDebugStr;
-            userControl18.CommandCallback = CommandCallback;
-            //userControl19.Callback = SetDebugStr;
-            //userControl19.CommandCallback = CommandCallback;
-            //userControl110.Callback = SetDebugStr;
-            //userControl110.CommandCallback = CommandCallback;
-            //userControl111.Callback = SetDebugStr;
-            //userControl111.CommandCallback = CommandCallback;
-            //userControl112.Callback = SetDebugStr;
-            //userControl112.CommandCallback = CommandCallback;
+                        
             userControlNormal1.Callback = SetDebugStr;
             userControlNormal1.CommandCallback = CommandCallback;
 
@@ -174,23 +140,13 @@ namespace standardApplication
             CMclear.Click += CMclear_Click;
             richMenu.Items.Add(CMclear);
             richTextBox1.ContextMenuStrip = richMenu;
-
             
             ToolStripMenuItem deleteItem = new ToolStripMenuItem("删除");
             deleteItem.Click += deleteItem_Click;
             listMenu.Items.Add(deleteItem);
-            //listBoxControl1.ContextMenuStrip = listMenu;
+            //listBoxControl1.ContextMenuStrip = listMenu;   
 
-            comboBoxEdit5.Properties.Items.Clear();
-            foreach (string port in System.IO.Ports.SerialPort.GetPortNames())
-            {
-                comboBoxEdit5.Properties.Items.Add(port);
-            }
-            if (comboBoxEdit5.Properties.Items.Count > 0)
-            {
-                comboBoxEdit5.SelectedIndex = 0;
-            }
-
+            timer_Elapsed(null, null);
             comboBoxEdit6.Properties.Items.Clear();
             comboBoxEdit6.Properties.Items.AddRange(Gloab.Config.BaudRate.Keys);
             comboBoxEdit6.Text = "115200";
@@ -203,6 +159,44 @@ namespace standardApplication
             setAllDataToControl();
 
             ReadModelFileName(ModelType.All);
+
+            AdjustGridMinHeight(gridControl1);
+            AdjustGridMinHeight(gridControl2);
+            AdjustGridMinHeight(gridControl3);
+
+            timer.Enabled = true;
+            timer.Interval = Gloab.Config.TimeInterval*1000;
+            timer.Elapsed += timer_Elapsed;
+            timer.Start();
+        }
+
+        void timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            this.Invoke(new Action(() => {
+                int index = comboBoxEdit5.SelectedIndex;
+                comboBoxEdit5.Properties.Items.Clear();
+                foreach (string port in System.IO.Ports.SerialPort.GetPortNames())
+                {
+                    comboBoxEdit5.Properties.Items.Add(port);
+                }
+
+                if (comboBoxEdit5.Properties.Items.Count == 0)
+                {
+                    comboBoxEdit5.SelectedIndex = -1;
+                }
+                else if (index < 0 && comboBoxEdit5.Properties.Items.Count > 0)
+                {
+                    comboBoxEdit5.SelectedIndex = 0;
+                }
+                else if (index > comboBoxEdit5.Properties.Items.Count)
+                {
+                    comboBoxEdit5.SelectedIndex = comboBoxEdit5.Properties.Items.Count-1;
+                }
+
+                dateEdit2.EditValue = DateTime.Now;
+                dateEdit1.EditValue = DateTime.Now;
+            }));
+            
         }
 
         void deleteItem_Click(object sender, EventArgs e)
@@ -250,6 +244,10 @@ namespace standardApplication
 
         private void xtraTabControl2_SelectedPageChanging(object sender, DevExpress.XtraTab.TabPageChangingEventArgs e)
         {
+            if (xtraTabControl2.TabPages.Count <= 0 || xtraTabControl2.SelectedTabPageIndex < 0)
+            {
+                return;
+            }
             UserControl1 uc = this.xtraTabControl2.TabPages[xtraTabControl2.SelectedTabPageIndex].Controls[0] as UserControl1;
             e.Cancel = uc.CheckIsSampling();
         }
@@ -261,9 +259,10 @@ namespace standardApplication
             {
                 short count = (short)spinEdit1.Value;
                 Gloab.AllData.GasList = NormalInstruction.WriteGasCount(count, Gloab.AllData.Address, Gloab.Config,CommandCallback);
-                // to do
-                Gloab.AllData.NormalList.FirstOrDefault(c => c.Name1 == "气体通道数").Value1 = count.ToString();
-                showGasControl(count);
+                Gloab.AllData.Normal.GasCount = count;
+                Gloab.AllData.NormalList = Gloab.AllData.Normal.ConvertToNormalList();
+                SetGasToControl();
+                SetNormalToControl();
                 SetDebugStr("写入气体个数成功");
             }
             catch (CommandException ex)
@@ -283,19 +282,32 @@ namespace standardApplication
             
         }
 
-        private void showGasControl(int count)
+        private void showGasControl()
         {
-            for (int i = 0; i < 8; i++)
+            xtraTabControl2.TabPages.Clear();
+
+            foreach (var gas in Gloab.AllData.GasList)
             {
-                if (i + 1 <= count)
-                {
-                    xtraTabControl2.TabPages[i].PageVisible = true;
-                    (xtraTabControl2.TabPages[i].Controls[0] as UserControl1).BindGas();
-                }
-                else
-                {
-                    xtraTabControl2.TabPages[i].PageVisible = false;
-                }
+                UserControl1 userControl = new UserControl1();
+                userControl.GasID = gas.GasID;
+                userControl.BindGas();
+                userControl.SaveModelFileEvent += userControl11_SaveModelFileEvent;
+                userControl.ChangeGasEvent += userControl11_ChangeGasEvent;
+                userControl.Callback = SetDebugStr;
+                userControl.CommandCallback = CommandCallback;
+
+                XtraTabPage tabPage = new XtraTabPage();
+                tabPage.Text = "通道" + gas.GasID;
+                tabPage.Controls.Add(userControl);
+
+                xtraTabControl2.TabPages.Add(tabPage);
+
+                userControl.Dock = DockStyle.Fill;
+            }
+
+            if (Gloab.AllData.GasList.Count > 0)
+            {
+                xtraTabControl2.SelectedTabPageIndex = 0;
             }
         }
 
@@ -306,9 +318,11 @@ namespace standardApplication
             try
             {
                 Gloab.AllData.WeatherList = NormalInstruction.WriteWeatherCount((short)spinEdit2.Value, Gloab.AllData.Address, Gloab.Config,CommandCallback);
-                // to do
-                Gloab.AllData.NormalList.FirstOrDefault(c => c.Name2 == "气象通道数").Value2 = spinEdit2.Value.ToString();
-                gridControl4.DataSource = Gloab.AllData.WeatherList;
+                Gloab.AllData.Normal.WeatherCount = (short)Gloab.AllData.WeatherList.Count;
+                Gloab.AllData.NormalList = Gloab.AllData.Normal.ConvertToNormalList();
+                SetWeatherToControl();
+                SetNormalToControl();
+                
                 gridControl4.RefreshDataSource();
                 SetDebugStr("写入气象个数成功");
             }
@@ -634,7 +648,7 @@ namespace standardApplication
             spinEdit1.Value = Gloab.AllData.Normal.GasCount;
             gridControl2.DataSource = Gloab.AllData.GasList;
             gridControl2.RefreshDataSource();
-            showGasControl(Gloab.AllData.Normal.GasCount);
+            showGasControl();
         }
         private void SetWeatherToControl()
         {
@@ -649,6 +663,7 @@ namespace standardApplication
             userControlNormal1.UpdateNormal();
             gridControl1.DataSource = Gloab.AllData.NormalList;
             gridControl1.RefreshDataSource();
+            gridView1.BestFitColumns();
         }
         private void SetRealTimeToControl()
         {
@@ -959,6 +974,49 @@ namespace standardApplication
                 default:
                     break;
             }
+        }
+
+        private void MainXtraForm_SizeChanged(object sender, EventArgs e)
+        {
+            //AdjustGridMinHeight(gridControl1);
+            ////gridControl1.Height = GetInvisibleRowsHeight(gridView1);
+            //size gridControl1.ClientSize;
+            // https://www.devexpress.com/Support/Center/Question/Details/Q277188/listview-gridview-auto-height
+        }
+
+        private GridViewInfo GetViewInfo(GridView view)
+        {
+            return (GridViewInfo)view.GetViewInfo();
+        }
+
+        private int GetRowHeight(GridView view, int rowHandle)
+        {
+            GridViewInfo viewInfo = GetViewInfo(view);
+            return viewInfo.CalcRowHeight(view.GridControl.CreateGraphics(), rowHandle, 0);
+        }
+
+        private int GetInvisibleRowsHeight(GridView view)
+        {
+            int height = 0;
+            for (int i = 0; i < view.RowCount; i++)
+            {
+                int rowHandle = view.GetVisibleRowHandle(i);
+                if (view.IsRowVisible(rowHandle) != RowVisibleState.Visible)
+                    height += GetRowHeight(view, rowHandle);
+            }
+            return height;
+        }
+
+        int GetEmptyHeight(GridView view)
+        {
+            GridViewInfo viewInfo = GetViewInfo(view);
+            return viewInfo.ViewRects.EmptyRows.Height;
+        }
+
+        void AdjustGridMinHeight(GridControl grid)
+        {
+            grid.Height += GetInvisibleRowsHeight(grid.MainView as GridView);
+            grid.Height -= GetEmptyHeight(grid.MainView as GridView);
         }
     }
 }
