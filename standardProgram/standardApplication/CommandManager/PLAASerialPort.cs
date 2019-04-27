@@ -73,7 +73,7 @@ namespace CommandManager
             Thread.Sleep(CommandUnits.CommandDelay);
             CommandUnits.IsCommandding = false;
 
-            string str = "W   " + CommandUnits.ByteToHexStr(wdata);
+            string str = "T   " + CommandUnits.ByteToHexStr(wdata);
             Console.WriteLine(str);
         }
 
@@ -153,7 +153,7 @@ namespace CommandManager
             CommandUnits.IsCommandding = true;
 
             serialport.Write(pdata, 0, pdata.Length);
-            string strw = "W   " + CommandUnits.ByteToHexStr(pdata);
+            string strw = "T   " + CommandUnits.ByteToHexStr(pdata);
             Console.WriteLine(strw);
 
             byte[] FB = new byte[2];

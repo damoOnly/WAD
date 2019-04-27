@@ -68,6 +68,7 @@
             this.spinEdit12 = new DevExpress.XtraEditors.SpinEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit10.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit9.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit7.Properties)).BeginInit();
@@ -389,7 +390,7 @@
             0,
             0,
             0});
-            this.spinEdit3.Size = new System.Drawing.Size(100, 20);
+            this.spinEdit3.Size = new System.Drawing.Size(89, 20);
             this.spinEdit3.TabIndex = 86;
             // 
             // spinEdit4
@@ -597,10 +598,19 @@
             this.labelControl2.TabIndex = 97;
             this.labelControl2.Text = "分钟";
             // 
+            // labelControl3
+            // 
+            this.labelControl3.Location = new System.Drawing.Point(180, 10);
+            this.labelControl3.Name = "labelControl3";
+            this.labelControl3.Size = new System.Drawing.Size(12, 14);
+            this.labelControl3.TabIndex = 98;
+            this.labelControl3.Text = "秒";
+            // 
             // UserControlNormal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.labelControl3);
             this.Controls.Add(this.labelControl2);
             this.Controls.Add(this.labelControl1);
             this.Controls.Add(this.spinEdit12);
@@ -709,5 +719,6 @@
         private DevExpress.XtraEditors.SpinEdit spinEdit12;
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.LabelControl labelControl2;
+        private DevExpress.XtraEditors.LabelControl labelControl3;
     }
 }

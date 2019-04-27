@@ -8,41 +8,41 @@ namespace Entity
 {
     public class CommonConfig
     {
-        public Dictionary<string, byte> GasName { get; set; }
+        public List<DictionaryFieldValue> GasName { get; set; }
 
-        public Dictionary<string, byte> GasUnit { get; set; }
-
-        public Dictionary<string, byte> Point { get; set; }
-
-        public Dictionary<string, byte> BaudRate { get; set; }
-
-        public Dictionary<string, byte> AlertModel { get; set; }
-        public Dictionary<string, byte> AlertStatus { get; set; }
-
-        public Dictionary<string, byte> WeatherName { get; set; }
-
-        public Dictionary<string, byte> WeatherUnit { get; set; }
-
-        public Dictionary<string, byte> RelayModel { get; set; }
-
-        public Dictionary<string, byte> RelayModelA { get; set; }
-
-        public Dictionary<string, byte> SerialPortModel { get; set; }
+        public List<DictionaryFieldValue> GasUnit { get; set; }
+               
+        public List<DictionaryFieldValue> Point { get; set; }
+               
+        public List<DictionaryFieldValue> BaudRate { get; set; }
+               
+        public List<DictionaryFieldValue> AlertModel { get; set; }
+        public List<DictionaryFieldValue> AlertStatus { get; set; }
+               
+        public List<DictionaryFieldValue> WeatherName { get; set; }
+               
+        public List<DictionaryFieldValue> WeatherUnit { get; set; }
+               
+        public List<DictionaryFieldValue> RelayModel { get; set; }
+               
+        public List<DictionaryFieldValue> RelayModelA { get; set; }
+               
+        public List<DictionaryFieldValue> SerialPortModel { get; set; }
 
         public int TimeInterval { get; set; }
 
         public CommonConfig()
         {
-            GasName = new Dictionary<string, byte>();
-            GasUnit = new Dictionary<string, byte>();
-            Point = new Dictionary<string, byte>();
-            BaudRate = new Dictionary<string, byte>();
-            AlertModel = new Dictionary<string, byte>();
-            WeatherName = new Dictionary<string, byte>();
-            WeatherUnit = new Dictionary<string, byte>();
-            RelayModel = new Dictionary<string, byte>();
-            RelayModelA = new Dictionary<string, byte>();
-            SerialPortModel = new Dictionary<string, byte>();
+            GasName = new List<DictionaryFieldValue>();
+            GasUnit = new List<DictionaryFieldValue>();
+            Point = new List<DictionaryFieldValue>();
+            BaudRate = new List<DictionaryFieldValue>();
+            AlertModel = new List<DictionaryFieldValue>();
+            WeatherName = new List<DictionaryFieldValue>();
+            WeatherUnit = new List<DictionaryFieldValue>();
+            RelayModel = new List<DictionaryFieldValue>();
+            RelayModelA = new List<DictionaryFieldValue>();
+            SerialPortModel = new List<DictionaryFieldValue>();
             TimeInterval = 60;
         }
 

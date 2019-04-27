@@ -47,11 +47,11 @@ namespace standardApplication
             Gas.GasA1 = (float)this.spinEdit10.Value;
             Gas.GasA2 = (float)this.spinEdit13.Value;
             Gas.GasID = this.GasID;
-            Gas.AlertModel = new FieldValue() { Name = comboBoxEdit2.Text, Value = Gloab.Config.AlertModel[comboBoxEdit2.Text] };
-            Gas.GasName = new FieldValue() { Name = this.textEdit1.Text, Value = Gloab.Config.GasName[this.textEdit1.Text] };
-            Gas.GasPoint = new FieldValue() { Name = comboBoxEdit1.Text, Value = Gloab.Config.Point[comboBoxEdit1.Text] };
+            Gas.AlertModel = new FieldValue() { Name = comboBoxEdit2.Text, Value = Gloab.Config.AlertModel.First(c=>c.Key == comboBoxEdit2.Text).Value };
+            Gas.GasName = new FieldValue() { Name = this.textEdit1.Text, Value = Gloab.Config.GasName.First(c=>c.Key == this.textEdit1.Text).Value };
+            Gas.GasPoint = new FieldValue() { Name = comboBoxEdit1.Text, Value = Gloab.Config.Point.First(c=>c.Key == comboBoxEdit1.Text).Value };
             Gas.GasRang = (float)this.spinEdit14.Value;
-            Gas.GasUnit = new FieldValue() { Name = comboBoxEdit3.Text, Value = Gloab.Config.GasUnit[comboBoxEdit3.Text] };
+            Gas.GasUnit = new FieldValue() { Name = comboBoxEdit3.Text, Value = Gloab.Config.GasUnit.First(c=>c.Key == comboBoxEdit3.Text).Value };
             Gas.IfGasAlarm = this.checkEdit1.Checked;
             Gas.OneAD = (int)this.spinEdit6.Value;
             Gas.OneChroma = (float)this.spinEdit3.Value;
@@ -72,29 +72,29 @@ namespace standardApplication
             {
                 return;
             }
-            this.spinEdit16.Value = (decimal)Gas.Compensation;
+            this.spinEdit16.Value = Gas.Compensation <= decimal.ToSingle(decimal.MinValue) || Gas.Compensation >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.Compensation;
             this.spinEdit8.Value = Gas.CurrentAD;
-            this.spinEdit1.Value = (decimal)Gas.CurrentChroma;
+            this.spinEdit1.Value = Gas.CurrentChroma <= decimal.ToSingle(decimal.MinValue) || Gas.CurrentChroma >= decimal.ToSingle( decimal.MaxValue) ? 0:(decimal)Gas.CurrentChroma;
             this.textEdit8.Text = Gas.Factor;
-            this.spinEdit10.Value = (decimal)Gas.GasA1;
-            this.spinEdit13.Value = (decimal)Gas.GasA2;
+            this.spinEdit10.Value = Gas.GasA1 <= decimal.ToSingle(decimal.MinValue) || Gas.GasA1 >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.GasA1;
+            this.spinEdit13.Value = Gas.GasA2 <= decimal.ToSingle(decimal.MinValue) || Gas.GasA2 >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.GasA2;
             this.GasID = Gas.GasID;
             this.comboBoxEdit2.Text = Gas.AlertModel.Name;
             this.textEdit1.Text = Gas.GasName.Name;
             this.comboBoxEdit1.Text = Gas.GasPoint.Name;
-            this.spinEdit14.Value =(decimal) Gas.GasRang;
+            this.spinEdit14.Value = Gas.GasRang <= decimal.ToSingle(decimal.MinValue) || Gas.GasRang >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.GasRang;
             this.comboBoxEdit3.Text = Gas.GasUnit.Name;
             this.checkEdit1.Checked = Gas.IfGasAlarm;
             this.spinEdit6.Value = Gas.OneAD;
-            this.spinEdit3.Value = (decimal)Gas.OneChroma;
-            this.spinEdit9.Value = (decimal)Gas.Show;
+            this.spinEdit3.Value = Gas.OneChroma <= decimal.ToSingle(decimal.MinValue) || Gas.OneChroma >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.OneChroma;
+            this.spinEdit9.Value = Gas.Show <= decimal.ToSingle(decimal.MinValue) || Gas.Show >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.Show;
             this.spinEdit11.Value = Gas.ThreeAD;
-            this.spinEdit5.Value = (decimal)Gas.ThreeChroma;
+            this.spinEdit5.Value = Gas.ThreeChroma <= decimal.ToSingle(decimal.MinValue) || Gas.ThreeChroma >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.ThreeChroma;
             this.spinEdit12.Value = Gas.TwoAD;
-            this.spinEdit4.Value = (decimal)Gas.TwoChroma;
+            this.spinEdit4.Value = Gas.TwoChroma <= decimal.ToSingle(decimal.MinValue) || Gas.TwoChroma >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.TwoChroma;
             this.checkEdit3.Checked = Gas.IfThree;
             this.checkEdit2.Checked = Gas.IfTwo;
-            this.spinEdit2.Value = (decimal)Gas.ZeroChroma;
+            this.spinEdit2.Value = Gas.ZeroChroma <= decimal.ToSingle(decimal.MinValue) || Gas.ZeroChroma >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.ZeroChroma;
             this.spinEdit7.Value = Gas.ZeroAD;
         }
 
@@ -155,13 +155,13 @@ namespace standardApplication
                 return;
             }
             comboBoxEdit3.Properties.Items.Clear();
-            comboBoxEdit3.Properties.Items.AddRange(Gloab.Config.GasUnit.Keys);
+            comboBoxEdit3.Properties.Items.AddRange(Gloab.Config.GasUnit.Select(c=>c.Key).ToArray());
 
             comboBoxEdit1.Properties.Items.Clear();
-            comboBoxEdit1.Properties.Items.AddRange(Gloab.Config.Point.Keys);
+            comboBoxEdit1.Properties.Items.AddRange(Gloab.Config.Point.Select(c=>c.Key).ToArray());
 
             comboBoxEdit2.Properties.Items.Clear();
-            comboBoxEdit2.Properties.Items.AddRange(Gloab.Config.AlertModel.Keys);
+            comboBoxEdit2.Properties.Items.AddRange(Gloab.Config.AlertModel.Select(c=>c.Key).ToArray());
 
             if (Gloab.AllData == null)
             {

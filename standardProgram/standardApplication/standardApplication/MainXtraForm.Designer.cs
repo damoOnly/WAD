@@ -48,13 +48,14 @@
             this.WeatherUnit = new DevExpress.XtraGrid.Columns.GridColumn();
             this.WeatherPoint = new DevExpress.XtraGrid.Columns.GridColumn();
             this.WeatherFactor = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.WeatherCompensation = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridControl2 = new DevExpress.XtraGrid.GridControl();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.GasID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.GasName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.GasRang = new DevExpress.XtraGrid.Columns.GridColumn();
             this.GasUnit = new DevExpress.XtraGrid.Columns.GridColumn();
             this.GasPoint = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.GasRang = new DevExpress.XtraGrid.Columns.GridColumn();
             this.GasModel = new DevExpress.XtraGrid.Columns.GridColumn();
             this.GasA1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.GasA2 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -95,6 +96,7 @@
             this.gridColumn_WeatherPoint = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemLookUpEdit3 = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.gridColumn_WeatherFactor = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn_WeatherCompensation = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.repositoryItemComboBox2 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.repositoryItemComboBox3 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
@@ -145,6 +147,7 @@
             this.simpleButton20 = new DevExpress.XtraEditors.SimpleButton();
             this.listBoxControl1 = new DevExpress.XtraEditors.ListBoxControl();
             this.splitContainerControl2 = new DevExpress.XtraEditors.SplitContainerControl();
+            this.simpleButton16 = new DevExpress.XtraEditors.SimpleButton();
             this.spinEdit8 = new DevExpress.XtraEditors.SpinEdit();
             this.simpleButtonCommunication = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
@@ -177,7 +180,6 @@
             this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.WeatherCompensation = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             this.splitContainerControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl4)).BeginInit();
@@ -486,6 +488,18 @@
             this.WeatherFactor.Visible = true;
             this.WeatherFactor.VisibleIndex = 4;
             // 
+            // WeatherCompensation
+            // 
+            this.WeatherCompensation.Caption = "补偿值";
+            this.WeatherCompensation.FieldName = "WeatherCompensation";
+            this.WeatherCompensation.Name = "WeatherCompensation";
+            this.WeatherCompensation.OptionsColumn.AllowEdit = false;
+            this.WeatherCompensation.OptionsColumn.AllowFocus = false;
+            this.WeatherCompensation.OptionsColumn.AllowMove = false;
+            this.WeatherCompensation.OptionsColumn.ReadOnly = true;
+            this.WeatherCompensation.Visible = true;
+            this.WeatherCompensation.VisibleIndex = 5;
+            // 
             // gridControl2
             // 
             this.gridControl2.Dock = System.Windows.Forms.DockStyle.Top;
@@ -502,9 +516,9 @@
             this.gridView2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.GasID,
             this.GasName,
+            this.GasRang,
             this.GasUnit,
             this.GasPoint,
-            this.GasRang,
             this.GasModel,
             this.GasA1,
             this.GasA2,
@@ -539,6 +553,18 @@
             this.GasName.Visible = true;
             this.GasName.VisibleIndex = 1;
             // 
+            // GasRang
+            // 
+            this.GasRang.Caption = "测量范围";
+            this.GasRang.FieldName = "GasRang";
+            this.GasRang.Name = "GasRang";
+            this.GasRang.OptionsColumn.AllowEdit = false;
+            this.GasRang.OptionsColumn.AllowFocus = false;
+            this.GasRang.OptionsColumn.AllowMove = false;
+            this.GasRang.OptionsColumn.ReadOnly = true;
+            this.GasRang.Visible = true;
+            this.GasRang.VisibleIndex = 2;
+            // 
             // GasUnit
             // 
             this.GasUnit.Caption = "单位";
@@ -549,7 +575,7 @@
             this.GasUnit.OptionsColumn.AllowMove = false;
             this.GasUnit.OptionsColumn.ReadOnly = true;
             this.GasUnit.Visible = true;
-            this.GasUnit.VisibleIndex = 2;
+            this.GasUnit.VisibleIndex = 3;
             // 
             // GasPoint
             // 
@@ -561,17 +587,7 @@
             this.GasPoint.OptionsColumn.AllowMove = false;
             this.GasPoint.OptionsColumn.ReadOnly = true;
             this.GasPoint.Visible = true;
-            this.GasPoint.VisibleIndex = 3;
-            // 
-            // GasRang
-            // 
-            this.GasRang.Caption = "测量范围";
-            this.GasRang.FieldName = "GasRang";
-            this.GasRang.Name = "GasRang";
-            this.GasRang.OptionsColumn.AllowEdit = false;
-            this.GasRang.OptionsColumn.AllowFocus = false;
-            this.GasRang.OptionsColumn.AllowMove = false;
-            this.GasRang.OptionsColumn.ReadOnly = true;
+            this.GasPoint.VisibleIndex = 4;
             // 
             // GasModel
             // 
@@ -583,7 +599,7 @@
             this.GasModel.OptionsColumn.AllowMove = false;
             this.GasModel.OptionsColumn.ReadOnly = true;
             this.GasModel.Visible = true;
-            this.GasModel.VisibleIndex = 6;
+            this.GasModel.VisibleIndex = 5;
             // 
             // GasA1
             // 
@@ -595,7 +611,7 @@
             this.GasA1.OptionsColumn.AllowMove = false;
             this.GasA1.OptionsColumn.ReadOnly = true;
             this.GasA1.Visible = true;
-            this.GasA1.VisibleIndex = 4;
+            this.GasA1.VisibleIndex = 6;
             // 
             // GasA2
             // 
@@ -607,7 +623,7 @@
             this.GasA2.OptionsColumn.AllowMove = false;
             this.GasA2.OptionsColumn.ReadOnly = true;
             this.GasA2.Visible = true;
-            this.GasA2.VisibleIndex = 5;
+            this.GasA2.VisibleIndex = 7;
             // 
             // Factor
             // 
@@ -619,7 +635,7 @@
             this.Factor.OptionsColumn.AllowMove = false;
             this.Factor.OptionsColumn.ReadOnly = true;
             this.Factor.Visible = true;
-            this.Factor.VisibleIndex = 7;
+            this.Factor.VisibleIndex = 8;
             // 
             // Show
             // 
@@ -631,7 +647,7 @@
             this.Show.OptionsColumn.AllowMove = false;
             this.Show.OptionsColumn.ReadOnly = true;
             this.Show.Visible = true;
-            this.Show.VisibleIndex = 8;
+            this.Show.VisibleIndex = 9;
             // 
             // Compensation
             // 
@@ -642,7 +658,7 @@
             this.Compensation.OptionsColumn.AllowFocus = false;
             this.Compensation.OptionsColumn.ReadOnly = true;
             this.Compensation.Visible = true;
-            this.Compensation.VisibleIndex = 9;
+            this.Compensation.VisibleIndex = 10;
             // 
             // gridControl1
             // 
@@ -873,6 +889,7 @@
             this.splitContainerControl7.Name = "splitContainerControl7";
             this.splitContainerControl7.Panel1.Controls.Add(this.spinEdit2);
             this.splitContainerControl7.Panel1.Controls.Add(this.labelControl11);
+            this.splitContainerControl7.Panel1.Controls.Add(this.simpleButton17);
             this.splitContainerControl7.Panel1.Controls.Add(this.simpleButton13);
             this.splitContainerControl7.Panel1.Text = "Panel1";
             this.splitContainerControl7.Panel2.Controls.Add(this.splitContainerControl8);
@@ -930,7 +947,6 @@
             this.splitContainerControl8.Panel1.Text = "Panel1";
             this.splitContainerControl8.Panel2.Controls.Add(this.simpleButton19);
             this.splitContainerControl8.Panel2.Controls.Add(this.simpleButton18);
-            this.splitContainerControl8.Panel2.Controls.Add(this.simpleButton17);
             this.splitContainerControl8.Panel2.Text = "Panel2";
             this.splitContainerControl8.Size = new System.Drawing.Size(677, 367);
             this.splitContainerControl8.SplitterPosition = 303;
@@ -962,7 +978,8 @@
             this.gridColumn_WeatherName,
             this.gridColumn_WeatherUnit,
             this.gridColumn_WeatherPoint,
-            this.gridColumn_WeatherFactor});
+            this.gridColumn_WeatherFactor,
+            this.gridColumn_WeatherCompensation});
             this.gridView4.GridControl = this.gridControl4;
             this.gridView4.Name = "gridView4";
             this.gridView4.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
@@ -1054,6 +1071,14 @@
             this.gridColumn_WeatherFactor.Visible = true;
             this.gridColumn_WeatherFactor.VisibleIndex = 4;
             // 
+            // gridColumn_WeatherCompensation
+            // 
+            this.gridColumn_WeatherCompensation.Caption = "补偿值";
+            this.gridColumn_WeatherCompensation.FieldName = "WeatherCompensation";
+            this.gridColumn_WeatherCompensation.Name = "gridColumn_WeatherCompensation";
+            this.gridColumn_WeatherCompensation.Visible = true;
+            this.gridColumn_WeatherCompensation.VisibleIndex = 5;
+            // 
             // repositoryItemComboBox1
             // 
             this.repositoryItemComboBox1.AutoHeight = false;
@@ -1097,7 +1122,7 @@
             // 
             // simpleButton18
             // 
-            this.simpleButton18.Location = new System.Drawing.Point(265, 12);
+            this.simpleButton18.Location = new System.Drawing.Point(107, 12);
             this.simpleButton18.Name = "simpleButton18";
             this.simpleButton18.Size = new System.Drawing.Size(105, 23);
             this.simpleButton18.TabIndex = 2;
@@ -1106,9 +1131,9 @@
             // 
             // simpleButton17
             // 
-            this.simpleButton17.Location = new System.Drawing.Point(86, 12);
+            this.simpleButton17.Location = new System.Drawing.Point(379, 17);
             this.simpleButton17.Name = "simpleButton17";
-            this.simpleButton17.Size = new System.Drawing.Size(105, 23);
+            this.simpleButton17.Size = new System.Drawing.Size(75, 23);
             this.simpleButton17.TabIndex = 1;
             this.simpleButton17.Text = "读取";
             this.simpleButton17.Click += new System.EventHandler(this.simpleButton17_Click);
@@ -1573,6 +1598,7 @@
             this.splitContainerControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainerControl2.Location = new System.Drawing.Point(0, 0);
             this.splitContainerControl2.Name = "splitContainerControl2";
+            this.splitContainerControl2.Panel1.Controls.Add(this.simpleButton16);
             this.splitContainerControl2.Panel1.Controls.Add(this.spinEdit8);
             this.splitContainerControl2.Panel1.Controls.Add(this.simpleButtonCommunication);
             this.splitContainerControl2.Panel1.Controls.Add(this.labelControl6);
@@ -1586,6 +1612,15 @@
             this.splitContainerControl2.SplitterPosition = 218;
             this.splitContainerControl2.TabIndex = 0;
             this.splitContainerControl2.Text = "splitContainerControl2";
+            // 
+            // simpleButton16
+            // 
+            this.simpleButton16.Location = new System.Drawing.Point(123, 142);
+            this.simpleButton16.Name = "simpleButton16";
+            this.simpleButton16.Size = new System.Drawing.Size(78, 23);
+            this.simpleButton16.TabIndex = 21;
+            this.simpleButton16.Text = "刷新串口";
+            this.simpleButton16.Click += new System.EventHandler(this.simpleButton16_Click);
             // 
             // spinEdit8
             // 
@@ -1611,9 +1646,9 @@
             // 
             // simpleButtonCommunication
             // 
-            this.simpleButtonCommunication.Location = new System.Drawing.Point(48, 142);
+            this.simpleButtonCommunication.Location = new System.Drawing.Point(15, 142);
             this.simpleButtonCommunication.Name = "simpleButtonCommunication";
-            this.simpleButtonCommunication.Size = new System.Drawing.Size(105, 23);
+            this.simpleButtonCommunication.Size = new System.Drawing.Size(78, 23);
             this.simpleButtonCommunication.TabIndex = 5;
             this.simpleButtonCommunication.Text = "连接";
             this.simpleButtonCommunication.Click += new System.EventHandler(this.simpleButtonCommunication_Click);
@@ -1952,18 +1987,6 @@
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
-            // WeatherCompensation
-            // 
-            this.WeatherCompensation.Caption = "补偿值";
-            this.WeatherCompensation.FieldName = "WeatherCompensation";
-            this.WeatherCompensation.Name = "WeatherCompensation";
-            this.WeatherCompensation.OptionsColumn.AllowEdit = false;
-            this.WeatherCompensation.OptionsColumn.AllowFocus = false;
-            this.WeatherCompensation.OptionsColumn.AllowMove = false;
-            this.WeatherCompensation.OptionsColumn.ReadOnly = true;
-            this.WeatherCompensation.Visible = true;
-            this.WeatherCompensation.VisibleIndex = 5;
-            // 
             // MainXtraForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -2219,6 +2242,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn Show;
         private DevExpress.XtraGrid.Columns.GridColumn Compensation;
         private DevExpress.XtraGrid.Columns.GridColumn WeatherCompensation;
+        private DevExpress.XtraEditors.SimpleButton simpleButton16;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn_WeatherCompensation;
 
     }
 }

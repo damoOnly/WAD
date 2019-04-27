@@ -17,4 +17,20 @@ namespace Entity
             return Name;
         }
     }
+
+    public class DictionaryFieldValue
+    {
+        public DictionaryFieldValue()
+        {
+            Key = string.Empty;
+            Value = 0;
+        }
+        public DictionaryFieldValue(string key, byte value)
+        {
+            Key = key;
+            Value = value;
+        }
+        public string Key { get; set; }
+        public byte Value { get; set; }
+    }
 }

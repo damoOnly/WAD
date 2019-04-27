@@ -48,6 +48,9 @@ namespace standardApplication
             List<GasEntity> gasList = new List<GasEntity>();
 
             GasEntity gas1 = new GasEntity();
+            gas1.CurrentAD = 385918393;
+            gas1.CurrentChroma = -3.984375f;
+
 
             GasEntity gas2 = new GasEntity() { GasID = 2 };
 
@@ -73,61 +76,61 @@ namespace standardApplication
         {
             #region testcode
             //CommonConfig config = new CommonConfig();
-            //config.AlertModel.Add("高报模式", 0);
-            //config.AlertModel.Add("区间模式", 1);
-            //config.AlertModel.Add("低报模式", 2);
+            //config.AlertModel.Add(new DictionaryFieldValue("高报模式",0));
+            //config.AlertModel.Add(new DictionaryFieldValue("区间模式", 1));
+            //config.AlertModel.Add(new DictionaryFieldValue("低报模式", 2));
 
-            //config.BaudRate.Add("4800", 0);
-            //config.BaudRate.Add("9600", 1);
-            //config.BaudRate.Add("38400", 2);
-            //config.BaudRate.Add("115200", 3);
+            //config.BaudRate.Add(new DictionaryFieldValue("4800", 0));
+            //config.BaudRate.Add(new DictionaryFieldValue("9600", 1));
+            //config.BaudRate.Add(new DictionaryFieldValue("38400", 2));
+            //config.BaudRate.Add(new DictionaryFieldValue("115200", 3));
 
-            //config.GasName.Add("可燃气体", 0);
-            //config.GasName.Add("二氧化碳", 1);
-            //config.GasName.Add("一氧化碳", 3);
-            //config.GasName.Add("氧气", 4);
-            //config.GasName.Add("硫化氢", 5);
+            //config.GasName.Add(new DictionaryFieldValue("可燃气体", 0));
+            //config.GasName.Add(new DictionaryFieldValue("二氧化碳", 1));
+            //config.GasName.Add(new DictionaryFieldValue("一氧化碳", 3));
+            //config.GasName.Add(new DictionaryFieldValue("氧气", 4));
+            //config.GasName.Add(new DictionaryFieldValue("硫化氢", 5));
 
-            //config.GasUnit.Add("ppm", 0);
-            //config.GasUnit.Add("mg/m3", 1);
-            //config.GasUnit.Add("ppb", 2);
-            //config.GasUnit.Add("ug/m3", 3);
-            //config.GasUnit.Add("%Vol", 4);
-            //config.GasUnit.Add("g/m3", 5);
-            //config.GasUnit.Add("%LEL", 6);
+            //config.GasUnit.Add(new DictionaryFieldValue("ppm", 0));
+            //config.GasUnit.Add(new DictionaryFieldValue("mg/m3", 1));
+            //config.GasUnit.Add(new DictionaryFieldValue("ppb", 2));
+            //config.GasUnit.Add(new DictionaryFieldValue("ug/m3", 3));
+            //config.GasUnit.Add(new DictionaryFieldValue("%Vol", 4));
+            //config.GasUnit.Add(new DictionaryFieldValue("g/m3", 5));
+            //config.GasUnit.Add(new DictionaryFieldValue("%LEL", 6));
 
-            //config.Point.Add("整形", 0);
-            //config.Point.Add("一位小数", 1);
-            //config.Point.Add("两位小数", 2);
-            //config.Point.Add("三位小数", 3);
+            //config.Point.Add(new DictionaryFieldValue("整形", 0));
+            //config.Point.Add(new DictionaryFieldValue("一位小数", 1));
+            //config.Point.Add(new DictionaryFieldValue("两位小数", 2));
+            //config.Point.Add(new DictionaryFieldValue("三位小数", 3));
 
-            //config.RelayModel.Add("时间模式", 0);
-            //config.RelayModel.Add("单通道模式", 1);
-            //config.RelayModel.Add("A1模式", 2);
-            //config.RelayModel.Add("A2模式", 3);
-            //config.RelayModel.Add("关闭模式", 4);
+            //config.RelayModel.Add(new DictionaryFieldValue("时间模式", 0));
+            //config.RelayModel.Add(new DictionaryFieldValue("单通道模式", 1));
+            //config.RelayModel.Add(new DictionaryFieldValue("A1模式", 2));
+            //config.RelayModel.Add(new DictionaryFieldValue("A2模式", 3));
+            //config.RelayModel.Add(new DictionaryFieldValue("关闭模式", 4));
 
-            //config.RelayModelA.Add("独立模式", 0);
-            //config.RelayModelA.Add("联动模式", 1);
-            //config.RelayModelA.Add("关闭模式", 2);
+            //config.RelayModelA.Add(new DictionaryFieldValue("独立模式", 0));
+            //config.RelayModelA.Add(new DictionaryFieldValue("联动模式", 1));
+            //config.RelayModelA.Add(new DictionaryFieldValue("关闭模式", 2));
 
-            //config.SerialPortModel.Add("Modbus主发模式", 0);
-            //config.SerialPortModel.Add("Modbus被动模式", 1);
-            //config.SerialPortModel.Add("H212协议模式", 2);
+            //config.SerialPortModel.Add(new DictionaryFieldValue("Modbus主发模式", 0));
+            //config.SerialPortModel.Add(new DictionaryFieldValue("Modbus被动模式", 1));
+            //config.SerialPortModel.Add(new DictionaryFieldValue("H212协议模式", 2));
 
-            //config.WeatherName.Add("温度", 0);
-            //config.WeatherName.Add("湿度", 1);
-            //config.WeatherName.Add("风速", 2);
-            //config.WeatherName.Add("风向", 3);
-            //config.WeatherName.Add("大气压", 4);
-            //config.WeatherName.Add("光照", 5);
-            //config.WeatherName.Add("降雨量", 6);
+            //config.WeatherName.Add(new DictionaryFieldValue("温度", 0));
+            //config.WeatherName.Add(new DictionaryFieldValue("湿度", 1));
+            //config.WeatherName.Add(new DictionaryFieldValue("风速", 2));
+            //config.WeatherName.Add(new DictionaryFieldValue("风向", 3));
+            //config.WeatherName.Add(new DictionaryFieldValue("大气压", 4));
+            //config.WeatherName.Add(new DictionaryFieldValue("光照", 5));
+            //config.WeatherName.Add(new DictionaryFieldValue("降雨量", 6));
 
-            //config.WeatherUnit.Add("℃", 0);
-            //config.WeatherUnit.Add("%RH", 1);
-            //config.WeatherUnit.Add("m/s", 2);
-            //config.WeatherUnit.Add("aa", 3);
-            //config.WeatherUnit.Add("Kpa", 4);
+            //config.WeatherUnit.Add(new DictionaryFieldValue("℃", 0));
+            //config.WeatherUnit.Add(new DictionaryFieldValue("%RH", 1));
+            //config.WeatherUnit.Add(new DictionaryFieldValue("m/s", 2));
+            //config.WeatherUnit.Add(new DictionaryFieldValue("aa", 3));
+            //config.WeatherUnit.Add(new DictionaryFieldValue("Kpa", 4));
 
             //XmlSerializerProvider.Serialize<CommonConfig>(config, AppDomain.CurrentDomain.BaseDirectory + "CommonConfig.xml");
             #endregion          
@@ -146,9 +149,10 @@ namespace standardApplication
             listMenu.Items.Add(deleteItem);
             //listBoxControl1.ContextMenuStrip = listMenu;   
 
-            timer_Elapsed(null, null);
+            simpleButton16_Click(null, null);
             comboBoxEdit6.Properties.Items.Clear();
-            comboBoxEdit6.Properties.Items.AddRange(Gloab.Config.BaudRate.Keys);
+
+            comboBoxEdit6.Properties.Items.AddRange(Gloab.Config.BaudRate.Select(c => c.Key).ToArray());
             comboBoxEdit6.Text = "115200";
 
             CommandUnits.CommandDelay = (int)spinEdit8.Value;
@@ -160,9 +164,9 @@ namespace standardApplication
 
             ReadModelFileName(ModelType.All);
 
-            AdjustGridMinHeight(gridControl1);
-            AdjustGridMinHeight(gridControl2);
-            AdjustGridMinHeight(gridControl3);
+            //AdjustGridMinHeight(gridControl1);
+            //AdjustGridMinHeight(gridControl2);
+            //AdjustGridMinHeight(gridControl3);
 
             timer.Enabled = true;
             timer.Interval = Gloab.Config.TimeInterval*1000;
@@ -173,25 +177,25 @@ namespace standardApplication
         void timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             this.Invoke(new Action(() => {
-                int index = comboBoxEdit5.SelectedIndex;
-                comboBoxEdit5.Properties.Items.Clear();
-                foreach (string port in System.IO.Ports.SerialPort.GetPortNames())
-                {
-                    comboBoxEdit5.Properties.Items.Add(port);
-                }
+                //int index = comboBoxEdit5.SelectedIndex;
+                //comboBoxEdit5.Properties.Items.Clear();
+                //foreach (string port in System.IO.Ports.SerialPort.GetPortNames())
+                //{
+                //    comboBoxEdit5.Properties.Items.Add(port);
+                //}
 
-                if (comboBoxEdit5.Properties.Items.Count == 0)
-                {
-                    comboBoxEdit5.SelectedIndex = -1;
-                }
-                else if (index < 0 && comboBoxEdit5.Properties.Items.Count > 0)
-                {
-                    comboBoxEdit5.SelectedIndex = 0;
-                }
-                else if (index > comboBoxEdit5.Properties.Items.Count)
-                {
-                    comboBoxEdit5.SelectedIndex = comboBoxEdit5.Properties.Items.Count-1;
-                }
+                //if (comboBoxEdit5.Properties.Items.Count == 0)
+                //{
+                //    comboBoxEdit5.SelectedIndex = -1;
+                //}
+                //else if (index < 0 && comboBoxEdit5.Properties.Items.Count > 0)
+                //{
+                //    comboBoxEdit5.SelectedIndex = 0;
+                //}
+                //else if (index > comboBoxEdit5.Properties.Items.Count)
+                //{
+                //    comboBoxEdit5.SelectedIndex = comboBoxEdit5.Properties.Items.Count-1;
+                //}
 
                 dateEdit2.EditValue = DateTime.Now;
                 dateEdit1.EditValue = DateTime.Now;
@@ -401,13 +405,13 @@ namespace standardApplication
         private void InitSerialPage()
         {
             comboBoxEdit1.Properties.Items.Clear();
-            comboBoxEdit1.Properties.Items.AddRange(Gloab.Config.BaudRate.Keys);
+            comboBoxEdit1.Properties.Items.AddRange(Gloab.Config.BaudRate.Select(c=>c.Key).ToArray());
             comboBoxEdit2.Properties.Items.Clear();
-            comboBoxEdit2.Properties.Items.AddRange(Gloab.Config.SerialPortModel.Keys);
+            comboBoxEdit2.Properties.Items.AddRange(Gloab.Config.SerialPortModel.Select(c=>c.Key).ToArray());
             comboBoxEdit3.Properties.Items.Clear();
-            comboBoxEdit3.Properties.Items.AddRange(Gloab.Config.BaudRate.Keys);
+            comboBoxEdit3.Properties.Items.AddRange(Gloab.Config.BaudRate.Select(c=>c.Key).ToArray());
             comboBoxEdit4.Properties.Items.Clear();
-            comboBoxEdit4.Properties.Items.AddRange(Gloab.Config.SerialPortModel.Keys);
+            comboBoxEdit4.Properties.Items.AddRange(Gloab.Config.SerialPortModel.Select(c=>c.Key).ToArray());
         }
 
         private void SetSerialParamToPage(SerialEntity serial)
@@ -436,9 +440,9 @@ namespace standardApplication
         {
             SerialEntity serial = new SerialEntity();
             serial.SerialOneBaudRate.Name = comboBoxEdit1.Text;
-            serial.SerialOneBaudRate.Value = Gloab.Config.BaudRate[comboBoxEdit1.Text];
+            serial.SerialOneBaudRate.Value = Gloab.Config.BaudRate.First(c=>c.Key == comboBoxEdit1.Text).Value;
             serial.SerialOnePortModel.Name = comboBoxEdit2.Text;
-            serial.SerialOnePortModel.Value = Gloab.Config.SerialPortModel[comboBoxEdit2.Text];
+            serial.SerialOnePortModel.Value = Gloab.Config.SerialPortModel.First(c=>c.Key == comboBoxEdit2.Text).Value;
             serial.SerialOneAddress = (short)spinEdit3.Value;
             serial.SerialOneInterval = (int)spinEdit4.Value;
             serial.SerialOneMN = textEdit29.Text;
@@ -447,9 +451,9 @@ namespace standardApplication
             serial.SerialOneST = textEdit31.Text;
 
             serial.SerialTwoBaudRate.Name = comboBoxEdit3.Text;
-            serial.SerialTwoBaudRate.Value = Gloab.Config.BaudRate[comboBoxEdit3.Text];
+            serial.SerialTwoBaudRate.Value = Gloab.Config.BaudRate.First(c=>c.Key == comboBoxEdit3.Text).Value;
             serial.SerialTwoPortModel.Name = comboBoxEdit4.Text;
-            serial.SerialTwoPortModel.Value = Gloab.Config.SerialPortModel[comboBoxEdit4.Text];
+            serial.SerialTwoPortModel.Value = Gloab.Config.SerialPortModel.First(c=>c.Key == comboBoxEdit4.Text).Value;
             serial.SerialTwoAddress = (short)spinEdit5.Value;
             serial.SerialTwoInterval = (int)spinEdit6.Value;
             serial.SerialTwoMN = textEdit36.Text;
@@ -483,11 +487,11 @@ namespace standardApplication
             repositoryItemLookUpEdit3.DataSource = listPoint;
 
             repositoryItemComboBox1.Items.Clear();
-            repositoryItemComboBox1.Items.AddRange(Gloab.Config.WeatherName.Keys);
+            repositoryItemComboBox1.Items.AddRange(Gloab.Config.WeatherName.Select(c=>c.Key).ToArray());
             repositoryItemComboBox2.Items.Clear();
-            repositoryItemComboBox2.Items.AddRange(Gloab.Config.WeatherUnit.Keys);
+            repositoryItemComboBox2.Items.AddRange(Gloab.Config.WeatherUnit.Select(c=>c.Key).ToArray());
             repositoryItemComboBox3.Items.Clear();
-            repositoryItemComboBox3.Items.AddRange(Gloab.Config.Point.Keys);
+            repositoryItemComboBox3.Items.AddRange(Gloab.Config.Point.Select(c=>c.Key).ToArray());
         }
 
         private void simpleButton20_Click(object sender, EventArgs e)
@@ -649,6 +653,7 @@ namespace standardApplication
             gridControl2.DataSource = Gloab.AllData.GasList;
             gridControl2.RefreshDataSource();
             showGasControl();
+            AdjustGridMinHeight(gridControl2);
         }
         private void SetWeatherToControl()
         {
@@ -657,6 +662,7 @@ namespace standardApplication
             gridControl4.RefreshDataSource();
             gridControl3.DataSource = Gloab.AllData.WeatherList;
             gridControl3.RefreshDataSource();
+            AdjustGridMinHeight(gridControl3);
         }
         private void SetNormalToControl()
         {
@@ -664,6 +670,7 @@ namespace standardApplication
             gridControl1.DataSource = Gloab.AllData.NormalList;
             gridControl1.RefreshDataSource();
             gridView1.BestFitColumns();
+            AdjustGridMinHeight(gridControl1);
         }
         private void SetRealTimeToControl()
         {
@@ -957,7 +964,7 @@ namespace standardApplication
                     int index = Gloab.AllData.GasList.FindIndex(c => c.GasID == u1.GasID);
                     Gloab.AllData.GasList[index] = ModelFile.ReadModel<GasEntity>(fileName, ModelType.Gas);
                     u1.BindGas();
-                    gridControl2.DataSource = Gloab.AllData.GasList;
+                    //gridControl2.DataSource = Gloab.AllData.GasList;
                     gridControl2.RefreshDataSource();
                     break;
                 //case ModelType.Weather:
@@ -1017,6 +1024,29 @@ namespace standardApplication
         {
             grid.Height += GetInvisibleRowsHeight(grid.MainView as GridView);
             grid.Height -= GetEmptyHeight(grid.MainView as GridView);
+        }
+
+        private void simpleButton16_Click(object sender, EventArgs e)
+        {
+            int index = comboBoxEdit5.SelectedIndex;
+            comboBoxEdit5.Properties.Items.Clear();
+            foreach (string port in System.IO.Ports.SerialPort.GetPortNames())
+            {
+                comboBoxEdit5.Properties.Items.Add(port);
+            }
+
+            if (comboBoxEdit5.Properties.Items.Count == 0)
+            {
+                comboBoxEdit5.SelectedIndex = -1;
+            }
+            else if (index < 0 && comboBoxEdit5.Properties.Items.Count > 0)
+            {
+                comboBoxEdit5.SelectedIndex = 0;
+            }
+            else if (index > comboBoxEdit5.Properties.Items.Count)
+            {
+                comboBoxEdit5.SelectedIndex = comboBoxEdit5.Properties.Items.Count - 1;
+            }
         }
     }
 }
