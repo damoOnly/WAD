@@ -83,6 +83,7 @@
             this.splitContainerControl7 = new DevExpress.XtraEditors.SplitContainerControl();
             this.spinEdit2 = new DevExpress.XtraEditors.SpinEdit();
             this.labelControl11 = new DevExpress.XtraEditors.LabelControl();
+            this.simpleButton17 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton13 = new DevExpress.XtraEditors.SimpleButton();
             this.splitContainerControl8 = new DevExpress.XtraEditors.SplitContainerControl();
             this.gridControl4 = new DevExpress.XtraGrid.GridControl();
@@ -102,7 +103,6 @@
             this.repositoryItemComboBox3 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.simpleButton19 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton18 = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton17 = new DevExpress.XtraEditors.SimpleButton();
             this.xtraTabPage6 = new DevExpress.XtraTab.XtraTabPage();
             this.userControlNormal1 = new standardApplication.UserControlNormal();
             this.xtraTabPage7 = new DevExpress.XtraTab.XtraTabPage();
@@ -431,7 +431,7 @@
             // WeatherID
             // 
             this.WeatherID.Caption = "气象通道";
-            this.WeatherID.FieldName = "WeatherID";
+            this.WeatherID.FieldName = "WeatherIDD";
             this.WeatherID.Name = "WeatherID";
             this.WeatherID.OptionsColumn.AllowEdit = false;
             this.WeatherID.OptionsColumn.AllowFocus = false;
@@ -928,6 +928,15 @@
             this.labelControl11.TabIndex = 2;
             this.labelControl11.Text = "气象通道总数：";
             // 
+            // simpleButton17
+            // 
+            this.simpleButton17.Location = new System.Drawing.Point(379, 17);
+            this.simpleButton17.Name = "simpleButton17";
+            this.simpleButton17.Size = new System.Drawing.Size(75, 23);
+            this.simpleButton17.TabIndex = 1;
+            this.simpleButton17.Text = "读取";
+            this.simpleButton17.Click += new System.EventHandler(this.simpleButton17_Click);
+            // 
             // simpleButton13
             // 
             this.simpleButton13.Location = new System.Drawing.Point(265, 17);
@@ -1128,15 +1137,6 @@
             this.simpleButton18.TabIndex = 2;
             this.simpleButton18.Text = "设置";
             this.simpleButton18.Click += new System.EventHandler(this.simpleButton18_Click);
-            // 
-            // simpleButton17
-            // 
-            this.simpleButton17.Location = new System.Drawing.Point(379, 17);
-            this.simpleButton17.Name = "simpleButton17";
-            this.simpleButton17.Size = new System.Drawing.Size(75, 23);
-            this.simpleButton17.TabIndex = 1;
-            this.simpleButton17.Text = "读取";
-            this.simpleButton17.Click += new System.EventHandler(this.simpleButton17_Click);
             // 
             // xtraTabPage6
             // 

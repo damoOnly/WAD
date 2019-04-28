@@ -35,7 +35,7 @@ namespace CommandManager
                 weather.WeatherName.Name = config.WeatherName.FirstOrDefault(c => c.Value == weather.WeatherName.Value).Key;
                 Array.Reverse(rbytes, 5, 2);
                 weather.WeatherUnit.Value = BitConverter.ToInt16(rbytes, 5);
-                weather.WeatherUnit.Name = config.GasUnit.FirstOrDefault(c => c.Value == weather.WeatherUnit.Value).Key;
+                weather.WeatherUnit.Name = config.WeatherUnit.FirstOrDefault(c => c.Value == weather.WeatherUnit.Value).Key;
                 Array.Reverse(rbytes, 7, 2);
                 weather.WeatherPoint.Value = BitConverter.ToInt16(rbytes, 7);
                 weather.WeatherPoint.Name = config.Point.FirstOrDefault(c => c.Value == weather.WeatherPoint.Value).Key;

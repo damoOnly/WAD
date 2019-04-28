@@ -25,7 +25,7 @@ namespace standardApplication
         System.Timers.Timer timer = new System.Timers.Timer();
         public MainXtraForm()
         {
-            Gloab.Config = XmlSerializerProvider.DeSerialize<CommonConfig>(AppDomain.CurrentDomain.BaseDirectory + "CommonConfig.xml");
+            Gloab.Config = (new XmlSerializerProvider()).Deserialize<CommonConfig>(AppDomain.CurrentDomain.BaseDirectory + "CommonConfig.xml");
             Gloab.AllData = new AllEntity();
             TestData();
             InitializeComponent();
@@ -76,7 +76,7 @@ namespace standardApplication
         {
             #region testcode
             //CommonConfig config = new CommonConfig();
-            //config.AlertModel.Add(new DictionaryFieldValue("高报模式",0));
+            //config.AlertModel.Add(new DictionaryFieldValue("高报模式", 0));
             //config.AlertModel.Add(new DictionaryFieldValue("区间模式", 1));
             //config.AlertModel.Add(new DictionaryFieldValue("低报模式", 2));
 
@@ -132,7 +132,14 @@ namespace standardApplication
             //config.WeatherUnit.Add(new DictionaryFieldValue("aa", 3));
             //config.WeatherUnit.Add(new DictionaryFieldValue("Kpa", 4));
 
-            //XmlSerializerProvider.Serialize<CommonConfig>(config, AppDomain.CurrentDomain.BaseDirectory + "CommonConfig.xml");
+            //config.AlertStatus.Add(new DictionaryFieldValue("正常", 0));
+            //config.AlertStatus.Add(new DictionaryFieldValue("故障", 1));
+            //config.AlertStatus.Add(new DictionaryFieldValue("超量程", 2));
+            //config.AlertStatus.Add(new DictionaryFieldValue("A2报警", 3));
+            //config.AlertStatus.Add(new DictionaryFieldValue("A1报警", 4));
+
+            //XmlSerializerProvider xml = new XmlSerializerProvider();
+            //xml.Serialize(AppDomain.CurrentDomain.BaseDirectory + "CommonConfig.xml", config);
             #endregion          
                         
             userControlNormal1.Callback = SetDebugStr;
@@ -169,7 +176,7 @@ namespace standardApplication
             //AdjustGridMinHeight(gridControl3);
 
             timer.Enabled = true;
-            timer.Interval = Gloab.Config.TimeInterval*1000;
+            timer.Interval = Gloab.Config.TimeInterval * 1000;
             timer.Elapsed += timer_Elapsed;
             timer.Start();
         }

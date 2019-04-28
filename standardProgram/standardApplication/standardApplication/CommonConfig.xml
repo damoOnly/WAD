@@ -1,58 +1,5 @@
-﻿<CommonConfig xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.datacontract.org/2004/07/Entity">
-  <AlertModel>
-    <DictionaryFieldValue>
-      <Key>高报模式</Key>
-      <Value>0</Value>
-    </DictionaryFieldValue>
-    <DictionaryFieldValue>
-      <Key>区间模式</Key>
-      <Value>1</Value>
-    </DictionaryFieldValue>
-    <DictionaryFieldValue>
-      <Key>低报模式</Key>
-      <Value>2</Value>
-    </DictionaryFieldValue>
-  </AlertModel>
-  <AlertStatus>
-    <DictionaryFieldValue>
-      <Key>正常</Key>
-      <Value>0</Value>
-    </DictionaryFieldValue>
-    <DictionaryFieldValue>
-      <Key>故障</Key>
-      <Value>1</Value>
-    </DictionaryFieldValue>
-    <DictionaryFieldValue>
-      <Key>超量程</Key>
-      <Value>2</Value>
-    </DictionaryFieldValue>
-    <DictionaryFieldValue>
-      <Key>A2报警</Key>
-      <Value>3</Value>
-    </DictionaryFieldValue>
-    <DictionaryFieldValue>
-      <Key>A1报警</Key>
-      <Value>4</Value>
-    </DictionaryFieldValue>
-  </AlertStatus>
-  <BaudRate>
-    <DictionaryFieldValue>
-      <Key>4800</Key>
-      <Value>0</Value>
-    </DictionaryFieldValue>
-    <DictionaryFieldValue>
-      <Key>9600</Key>
-      <Value>1</Value>
-    </DictionaryFieldValue>
-    <DictionaryFieldValue>
-      <Key>38400</Key>
-      <Value>2</Value>
-    </DictionaryFieldValue>
-    <DictionaryFieldValue>
-      <Key>115200</Key>
-      <Value>3</Value>
-    </DictionaryFieldValue>
-  </BaudRate>
+﻿<?xml version="1.0"?>
+<CommonConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="CommonConfig">
   <GasName>
     <DictionaryFieldValue>
       <Key>可燃气体</Key>
@@ -123,56 +70,60 @@
       <Value>3</Value>
     </DictionaryFieldValue>
   </Point>
-  <RelayModel>
+  <BaudRate>
     <DictionaryFieldValue>
-      <Key>时间模式</Key>
+      <Key>4800</Key>
       <Value>0</Value>
     </DictionaryFieldValue>
     <DictionaryFieldValue>
-      <Key>单通道模式</Key>
+      <Key>9600</Key>
       <Value>1</Value>
     </DictionaryFieldValue>
     <DictionaryFieldValue>
-      <Key>A1模式</Key>
+      <Key>38400</Key>
       <Value>2</Value>
     </DictionaryFieldValue>
     <DictionaryFieldValue>
-      <Key>A2模式</Key>
+      <Key>115200</Key>
+      <Value>3</Value>
+    </DictionaryFieldValue>
+  </BaudRate>
+  <AlertModel>
+    <DictionaryFieldValue>
+      <Key>高报模式</Key>
+      <Value>0</Value>
+    </DictionaryFieldValue>
+    <DictionaryFieldValue>
+      <Key>区间模式</Key>
+      <Value>1</Value>
+    </DictionaryFieldValue>
+    <DictionaryFieldValue>
+      <Key>低报模式</Key>
+      <Value>2</Value>
+    </DictionaryFieldValue>
+  </AlertModel>
+  <AlertStatus>
+    <DictionaryFieldValue>
+      <Key>正常</Key>
+      <Value>0</Value>
+    </DictionaryFieldValue>
+    <DictionaryFieldValue>
+      <Key>故障</Key>
+      <Value>1</Value>
+    </DictionaryFieldValue>
+    <DictionaryFieldValue>
+      <Key>超量程</Key>
+      <Value>2</Value>
+    </DictionaryFieldValue>
+    <DictionaryFieldValue>
+      <Key>A2报警</Key>
       <Value>3</Value>
     </DictionaryFieldValue>
     <DictionaryFieldValue>
-      <Key>关闭模式</Key>
+      <Key>A1报警</Key>
       <Value>4</Value>
     </DictionaryFieldValue>
-  </RelayModel>
-  <RelayModelA>
-    <DictionaryFieldValue>
-      <Key>独立模式</Key>
-      <Value>0</Value>
-    </DictionaryFieldValue>
-    <DictionaryFieldValue>
-      <Key>联动模式</Key>
-      <Value>1</Value>
-    </DictionaryFieldValue>
-    <DictionaryFieldValue>
-      <Key>关闭模式</Key>
-      <Value>2</Value>
-    </DictionaryFieldValue>
-  </RelayModelA>
-  <SerialPortModel>
-    <DictionaryFieldValue>
-      <Key>Modbus主发模式</Key>
-      <Value>0</Value>
-    </DictionaryFieldValue>
-    <DictionaryFieldValue>
-      <Key>Modbus被动模式</Key>
-      <Value>1</Value>
-    </DictionaryFieldValue>
-    <DictionaryFieldValue>
-      <Key>H212协议模式</Key>
-      <Value>2</Value>
-    </DictionaryFieldValue>
-  </SerialPortModel>
+  </AlertStatus>
   <WeatherName>
     <DictionaryFieldValue>
       <Key>温度</Key>
@@ -225,5 +176,55 @@
       <Value>4</Value>
     </DictionaryFieldValue>
   </WeatherUnit>
-  <TimeInterval>60</TimeInterval>
+  <RelayModel>
+    <DictionaryFieldValue>
+      <Key>时间模式</Key>
+      <Value>0</Value>
+    </DictionaryFieldValue>
+    <DictionaryFieldValue>
+      <Key>单通道模式</Key>
+      <Value>1</Value>
+    </DictionaryFieldValue>
+    <DictionaryFieldValue>
+      <Key>A1模式</Key>
+      <Value>2</Value>
+    </DictionaryFieldValue>
+    <DictionaryFieldValue>
+      <Key>A2模式</Key>
+      <Value>3</Value>
+    </DictionaryFieldValue>
+    <DictionaryFieldValue>
+      <Key>关闭模式</Key>
+      <Value>4</Value>
+    </DictionaryFieldValue>
+  </RelayModel>
+  <RelayModelA>
+    <DictionaryFieldValue>
+      <Key>独立模式</Key>
+      <Value>0</Value>
+    </DictionaryFieldValue>
+    <DictionaryFieldValue>
+      <Key>联动模式</Key>
+      <Value>1</Value>
+    </DictionaryFieldValue>
+    <DictionaryFieldValue>
+      <Key>关闭模式</Key>
+      <Value>2</Value>
+    </DictionaryFieldValue>
+  </RelayModelA>
+  <SerialPortModel>
+    <DictionaryFieldValue>
+      <Key>Modbus主发模式</Key>
+      <Value>0</Value>
+    </DictionaryFieldValue>
+    <DictionaryFieldValue>
+      <Key>Modbus被动模式</Key>
+      <Value>1</Value>
+    </DictionaryFieldValue>
+    <DictionaryFieldValue>
+      <Key>H212协议模式</Key>
+      <Value>2</Value>
+    </DictionaryFieldValue>
+  </SerialPortModel>
+  <TimeInterval>1</TimeInterval>
 </CommonConfig>

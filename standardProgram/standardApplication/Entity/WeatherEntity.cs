@@ -18,6 +18,7 @@ namespace Entity
             WeatherAlertStatus = new FieldValue() { Name = "正常", Value = 0 };
         }
         public int WeatherID { get; set; }
+        public int WeatherIDD { get { return WeatherID; } }
         public FieldValue WeatherName { get; set; }
         public FieldValue WeatherUnit { get; set; }
         public FieldValue WeatherPoint { get; set; }

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization;
+using System.Xml;
+using System.Collections;
 
 namespace Entity
 {
@@ -43,6 +46,7 @@ namespace Entity
             RelayModel = new List<DictionaryFieldValue>();
             RelayModelA = new List<DictionaryFieldValue>();
             SerialPortModel = new List<DictionaryFieldValue>();
+            AlertStatus = new List<DictionaryFieldValue>();
             TimeInterval = 60;
         }
 
