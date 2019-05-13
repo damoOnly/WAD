@@ -314,7 +314,7 @@
             this.checkEdit3.Properties.Caption = "三级浓度：";
             this.checkEdit3.Size = new System.Drawing.Size(82, 19);
             this.checkEdit3.TabIndex = 44;
-            this.checkEdit3.CheckedChanged += new System.EventHandler(this.checkEdit1_CheckedChanged);
+            this.checkEdit3.CheckedChanged += new System.EventHandler(this.checkEdit3_CheckedChanged);
             // 
             // simpleButton3
             // 

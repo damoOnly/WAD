@@ -970,6 +970,7 @@ namespace standardApplication
                     UserControl1 u1 = xtraTabControl2.SelectedTabPage.Controls[0] as UserControl1;
                     int index = Gloab.AllData.GasList.FindIndex(c => c.GasID == u1.GasID);
                     Gloab.AllData.GasList[index] = ModelFile.ReadModel<GasEntity>(fileName, ModelType.Gas);
+                    Gloab.AllData.GasList[index].GasID = u1.GasID;
                     u1.BindGas();
                     //gridControl2.DataSource = Gloab.AllData.GasList;
                     gridControl2.RefreshDataSource();

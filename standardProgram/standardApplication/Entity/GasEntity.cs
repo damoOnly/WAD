@@ -33,8 +33,8 @@ namespace Entity
             TwoChroma = 1.1f;
             ZeroAD = 13;
             ZeroChroma = 1.3f;
-            IfTwo = true;
-            IfThree = true;
+            IfTwo = false;
+            IfThree = false;
             CheckNum = 0x02;
         }
         public int GasID { get; set; }

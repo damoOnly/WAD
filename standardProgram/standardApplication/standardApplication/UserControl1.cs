@@ -92,10 +92,15 @@ namespace standardApplication
             this.spinEdit5.Value = Gas.ThreeChroma <= decimal.ToSingle(decimal.MinValue) || Gas.ThreeChroma >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.ThreeChroma;
             this.spinEdit12.Value = Gas.TwoAD;
             this.spinEdit4.Value = Gas.TwoChroma <= decimal.ToSingle(decimal.MinValue) || Gas.TwoChroma >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.TwoChroma;
-            this.checkEdit3.Checked = Gas.IfThree;
+            Gas.IfTwo = Gas.CheckNum >= 3;
+            Gas.IfThree = Gas.CheckNum >= 4;            
             this.checkEdit2.Checked = Gas.IfTwo;
+            this.checkEdit3.Checked = Gas.IfThree;
             this.spinEdit2.Value = Gas.ZeroChroma <= decimal.ToSingle(decimal.MinValue) || Gas.ZeroChroma >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.ZeroChroma;
             this.spinEdit7.Value = Gas.ZeroAD;
+
+            checkEdit1_CheckedChanged(null, null);
+            checkEdit3_CheckedChanged(null, null);
         }
 
         //public Dictionary<string, int> Unit
@@ -187,6 +192,8 @@ namespace standardApplication
                 simpleButton7.Enabled = false;
                 spinEdit4.Enabled = false;
                 spinEdit12.Enabled = false;
+
+                checkEdit3.Checked = false;
             }
             else
             {
@@ -197,6 +204,11 @@ namespace standardApplication
                 spinEdit12.Enabled = true;
             }
 
+            
+        }
+
+        private void checkEdit3_CheckedChanged(object sender, EventArgs e)
+        {
             if (!checkEdit3.Checked)
             {
                 simpleButton8.Enabled = false;
@@ -212,6 +224,8 @@ namespace standardApplication
                 simpleButton10.Enabled = true;
                 spinEdit5.Enabled = true;
                 spinEdit11.Enabled = true;
+
+                checkEdit2.Checked = true;
             }
         }
 
@@ -663,8 +677,8 @@ namespace standardApplication
             try
             {
                 GasEntity ge = GasInstruction.ReadChromaAndAD(GasID, EnumChromaLevel.Zero, Gloab.AllData.Address, CommandCallback);
-                Gas.OneChroma = ge.ZeroChroma;
-                Gas.OneAD = ge.ZeroAD;
+                Gas.ZeroChroma = ge.ZeroChroma;
+                Gas.ZeroAD = ge.ZeroAD;
                 SetGasToControl();
                 Callback("读取零点成功");
             }
@@ -708,5 +722,7 @@ namespace standardApplication
                 wdf.Close();
             }
         }
+
+        
     }
 }

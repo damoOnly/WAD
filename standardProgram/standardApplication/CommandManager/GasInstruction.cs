@@ -48,7 +48,19 @@ namespace CommandManager
             Array.Reverse(byteTemp, 0, 2);
             Array.Reverse(byteTemp, 2, 2);
             content.AddRange(byteTemp);
-            content.AddRange(new byte[2]{0x00, gas.CheckNum});
+            if (gas.IfThree)
+            {
+                gas.CheckNum = 0x04;
+            }
+            else if (gas.IfTwo)
+            {
+                gas.CheckNum = 0x03;
+            }
+            else
+            {
+                gas.CheckNum = 0x02;
+            }
+            content.AddRange(new byte[2] { 0x00, gas.CheckNum });
             byteTemp = BitConverter.GetBytes(gas.ZeroAD);
             Array.Reverse(byteTemp, 0, 2);
             Array.Reverse(byteTemp, 2, 2);
@@ -131,15 +143,15 @@ namespace CommandManager
             Array.Reverse(rbytes, 7, 2);
             gas.GasPoint.Value = BitConverter.ToInt16(rbytes, 7);
             gas.GasPoint.Name = config.Point.FirstOrDefault(c => c.Value == gas.GasPoint.Value).Key;
-            Array.Reverse(rbytes, 9, 2); 
+            Array.Reverse(rbytes, 9, 2);
             Array.Reverse(rbytes, 11, 2);
             gas.GasRang = BitConverter.ToSingle(rbytes, 9);
             List<byte> byteTemp = new List<byte>();
             for (int i = 13; i < 13 + 12; )
             {
-                if (rbytes[i+1] != 0x00)
+                if (rbytes[i + 1] != 0x00)
                 {
-                    byteTemp.Add(rbytes[i+1]);
+                    byteTemp.Add(rbytes[i + 1]);
                 }
                 i += 2;
             }
@@ -161,7 +173,9 @@ namespace CommandManager
             Array.Reverse(rbytes, 49, 2);
             Array.Reverse(rbytes, 51, 2);
             gas.Show = BitConverter.ToSingle(rbytes, 49);
-            gas.CheckNum = rbytes[53];
+            gas.CheckNum = (byte)(rbytes[54] < 2 ? 2 : (rbytes[54] > 4 ? 4 : rbytes[54]));
+            gas.IfTwo = gas.CheckNum >= 3;
+            gas.IfThree = gas.CheckNum >= 4;
             Array.Reverse(rbytes, 55, 2);
             Array.Reverse(rbytes, 57, 2);
             gas.ZeroAD = BitConverter.ToInt32(rbytes, 55);
@@ -187,7 +201,7 @@ namespace CommandManager
             Array.Reverse(rbytes, 85, 2);
             gas.ThreeChroma = BitConverter.ToSingle(rbytes, 83);
 
-            GasEntity current = ReadCurrent(gasId, address, config,callback);
+            GasEntity current = ReadCurrent(gasId, address, config, callback);
             gas.CurrentAD = current.CurrentAD;
             gas.CurrentChroma = current.CurrentChroma;
             gas.AlertStatus = current.AlertStatus;
@@ -216,7 +230,7 @@ namespace CommandManager
                 EnumChromaLevel level = (EnumChromaLevel)list[2];
                 Action<EnumChromaLevel, GasEntity> callback = list[3] as Action<EnumChromaLevel, GasEntity>;
                 Action<string> commandCallback = list[4] as Action<string>;
-                GasEntity gas = ReadCurrent(gasId, address,null, commandCallback);
+                GasEntity gas = ReadCurrent(gasId, address, null, commandCallback);
                 callback(level, gas);
             }
             //catch (CommandException exp)
@@ -242,7 +256,7 @@ namespace CommandManager
                     EnumChromaLevel level = (EnumChromaLevel)list[2];
                     Action<EnumChromaLevel, GasEntity> callback = list[3] as Action<EnumChromaLevel, GasEntity>;
                     Action<string> commandCallback = list[4] as Action<string>;
-                    GasEntity gas = ReadCurrent(gasId, address,null, commandCallback);
+                    GasEntity gas = ReadCurrent(gasId, address, null, commandCallback);
                     switch (level)
                     {
                         case EnumChromaLevel.Zero:
@@ -270,8 +284,8 @@ namespace CommandManager
                 {
                     log.Error(ex);
                 }
-            }         
-           
+            }
+
         }
 
         public static void StopSample()
@@ -304,10 +318,10 @@ namespace CommandManager
             byte[] rbytes = PLAASerialPort.Read(sendb);
             callback(string.Format("R: {0}", CommandUnits.ByteToHexStr(rbytes)));
 
-            Array.Reverse(rbytes,3,2);
-            Array.Reverse(rbytes,5,2);
-            Array.Reverse(rbytes,7,2);
-            Array.Reverse(rbytes,9,2);
+            Array.Reverse(rbytes, 3, 2);
+            Array.Reverse(rbytes, 5, 2);
+            Array.Reverse(rbytes, 7, 2);
+            Array.Reverse(rbytes, 9, 2);
 
             GasEntity gas = new GasEntity();
             switch (level)
@@ -334,7 +348,7 @@ namespace CommandManager
             return gas;
         }
 
-        public static void WriteChromaAndAD(GasEntity gas, EnumChromaLevel level, byte address,Action<string> callback)
+        public static void WriteChromaAndAD(GasEntity gas, EnumChromaLevel level, byte address, Action<string> callback)
         {
             byte low = 0x2a;
             List<byte> content = new List<byte>();
@@ -373,7 +387,7 @@ namespace CommandManager
             PLAASerialPort.Write(sendb);
         }
 
-        public static GasEntity ReadCurrent(int gasId, byte address,CommonConfig config,Action<string> callback)
+        public static GasEntity ReadCurrent(int gasId, byte address, CommonConfig config, Action<string> callback)
         {
             byte[] sendb = Command.GetReadSendByte(address, (byte)gasId, 0x50, 5);
             callback(string.Format("W: {0}", CommandUnits.ByteToHexStr(sendb)));
@@ -391,7 +405,7 @@ namespace CommandManager
                 gas.AlertStatus.Value = rbytes[12];
                 gas.AlertStatus.Name = config.AlertStatus.FirstOrDefault(c => c.Value == gas.AlertStatus.Value).Key;
             }
-            
+
             return gas;
         }
 
