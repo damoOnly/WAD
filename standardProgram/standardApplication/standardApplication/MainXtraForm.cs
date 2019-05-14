@@ -183,30 +183,39 @@ namespace standardApplication
 
         void timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            this.Invoke(new Action(() => {
-                //int index = comboBoxEdit5.SelectedIndex;
-                //comboBoxEdit5.Properties.Items.Clear();
-                //foreach (string port in System.IO.Ports.SerialPort.GetPortNames())
-                //{
-                //    comboBoxEdit5.Properties.Items.Add(port);
-                //}
+            try
+            {
+                this.Invoke(new Action(() =>
+                {
+                    //int index = comboBoxEdit5.SelectedIndex;
+                    //comboBoxEdit5.Properties.Items.Clear();
+                    //foreach (string port in System.IO.Ports.SerialPort.GetPortNames())
+                    //{
+                    //    comboBoxEdit5.Properties.Items.Add(port);
+                    //}
 
-                //if (comboBoxEdit5.Properties.Items.Count == 0)
-                //{
-                //    comboBoxEdit5.SelectedIndex = -1;
-                //}
-                //else if (index < 0 && comboBoxEdit5.Properties.Items.Count > 0)
-                //{
-                //    comboBoxEdit5.SelectedIndex = 0;
-                //}
-                //else if (index > comboBoxEdit5.Properties.Items.Count)
-                //{
-                //    comboBoxEdit5.SelectedIndex = comboBoxEdit5.Properties.Items.Count-1;
-                //}
+                    //if (comboBoxEdit5.Properties.Items.Count == 0)
+                    //{
+                    //    comboBoxEdit5.SelectedIndex = -1;
+                    //}
+                    //else if (index < 0 && comboBoxEdit5.Properties.Items.Count > 0)
+                    //{
+                    //    comboBoxEdit5.SelectedIndex = 0;
+                    //}
+                    //else if (index > comboBoxEdit5.Properties.Items.Count)
+                    //{
+                    //    comboBoxEdit5.SelectedIndex = comboBoxEdit5.Properties.Items.Count-1;
+                    //}
 
-                dateEdit2.EditValue = DateTime.Now;
-                dateEdit1.EditValue = DateTime.Now;
-            }));
+                    dateEdit2.EditValue = DateTime.Now;
+                    dateEdit1.EditValue = DateTime.Now;
+                }));
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+            }
+            
             
         }
 
@@ -907,18 +916,19 @@ namespace standardApplication
             Gloab.AllData.EquipmentDataTime = (DateTime)dateEdit2.EditValue;
             Gloab.AllData.OutDate = (DateTime)dateEdit1.EditValue;
 
+            List<GasEntity> gasList = new List<GasEntity>();
             foreach (XtraTabPage gaspage in xtraTabControl2.TabPages)
             {
                 if (gaspage.PageVisible)
                 {
                     UserControl1 uc = gaspage.Controls[0] as UserControl1;
-                    uc.GetGasFromControl();
-                    Gloab.AllData.GasList.Add(uc.Gas);
+                    gasList.Add(uc.GetGasFromControl());
                 }
             }
 
-            userControlNormal1.GetNormalFromControl();
-            Gloab.AllData.Normal = userControlNormal1.normalParam;
+            Gloab.AllData.GasList = gasList;
+
+            Gloab.AllData.Normal = userControlNormal1.GetNormalFromControl();
 
             Gloab.AllData.Serial = GetSerialParamFromPage();
 

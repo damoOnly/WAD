@@ -34,11 +34,11 @@ namespace standardApplication
 
         //}
 
-        public void GetGasFromControl()
+        public GasEntity GetGasFromControl()
         {
             if (Gas == null)
             {
-                return;
+                return new GasEntity();
             }
             Gas.Compensation = (float)this.spinEdit16.Value;
             Gas.CurrentAD = (int)this.spinEdit8.Value;
@@ -64,6 +64,8 @@ namespace standardApplication
             Gas.IfTwo = this.checkEdit2.Checked;
             Gas.ZeroAD = (int)this.spinEdit7.Value;
             Gas.ZeroChroma = (float)this.spinEdit2.Value;
+
+            return Gas;
         }
 
         private void SetGasToControl()

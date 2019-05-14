@@ -25,11 +25,11 @@ namespace standardApplication
             InitializeComponent();
         }
 
-        public void GetNormalFromControl()
+        public NormalParamEntity GetNormalFromControl()
         {
             if (normalParam == null)
             {
-                return;
+                return new NormalParamEntity();
             }
 
             //normalParam.AlertDelay = 
@@ -56,6 +56,7 @@ namespace standardApplication
             normalParam.RelayModelA1.Value = Gloab.Config.RelayModelA.First(c=>c.Key == comboBoxEdit5.Text).Value;
             normalParam.RelayModelA2.Name = comboBoxEdit6.Text;
             normalParam.RelayModelA2.Value = Gloab.Config.RelayModelA.First(c => c.Key == comboBoxEdit6.Text).Value;
+            return normalParam;
 
         }
 
