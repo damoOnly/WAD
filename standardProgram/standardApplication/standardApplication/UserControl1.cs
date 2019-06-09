@@ -40,30 +40,30 @@ namespace standardApplication
             {
                 return new GasEntity();
             }
-            Gas.Compensation = (float)this.spinEdit16.Value;
+            Gas.Compensation = float.Parse(this.textEdit2.Text);
             Gas.CurrentAD = (int)this.spinEdit8.Value;
-            Gas.CurrentChroma = (float)this.spinEdit1.Value;
+            Gas.CurrentChroma = float.Parse(textEdit3.Text);
             Gas.Factor = this.textEdit8.Text;
-            Gas.GasA1 = (float)this.spinEdit10.Value;
-            Gas.GasA2 = (float)this.spinEdit13.Value;
+            Gas.GasA1 = float.Parse(textEdit9.Text);
+            Gas.GasA2 = float.Parse(textEdit10.Text);
             Gas.GasID = this.GasID;
             Gas.AlertModel = new FieldValue() { Name = comboBoxEdit2.Text, Value = Gloab.Config.AlertModel.First(c=>c.Key == comboBoxEdit2.Text).Value };
             Gas.GasName = new FieldValue() { Name = this.textEdit1.Text, Value = Gloab.Config.GasName.First(c=>c.Key == this.textEdit1.Text).Value };
             Gas.GasPoint = new FieldValue() { Name = comboBoxEdit1.Text, Value = Gloab.Config.Point.First(c=>c.Key == comboBoxEdit1.Text).Value };
-            Gas.GasRang = (float)this.spinEdit14.Value;
+            Gas.GasRang = float.Parse(textEdit12.Text);
             Gas.GasUnit = new FieldValue() { Name = comboBoxEdit3.Text, Value = Gloab.Config.GasUnit.First(c=>c.Key == comboBoxEdit3.Text).Value };
             Gas.IfGasAlarm = this.checkEdit1.Checked;
             Gas.OneAD = (int)this.spinEdit6.Value;
-            Gas.OneChroma = (float)this.spinEdit3.Value;
-            Gas.Show = (float)this.spinEdit9.Value;
+            Gas.OneChroma = float.Parse(textEdit5.Text);
+            Gas.Show = float.Parse(textEdit11.Text);
             Gas.ThreeAD = (int)this.spinEdit11.Value;
-            Gas.ThreeChroma = (float)this.spinEdit5.Value;
+            Gas.ThreeChroma = float.Parse(textEdit7.Text);
             Gas.TwoAD = (int)this.spinEdit12.Value;
-            Gas.TwoChroma = (float)this.spinEdit4.Value;
+            Gas.TwoChroma = float.Parse(textEdit6.Text);
             Gas.IfThree = this.checkEdit3.Checked;
             Gas.IfTwo = this.checkEdit2.Checked;
             Gas.ZeroAD = (int)this.spinEdit7.Value;
-            Gas.ZeroChroma = (float)this.spinEdit2.Value;
+            Gas.ZeroChroma = float.Parse(textEdit4.Text);
 
             return Gas;
         }
@@ -74,31 +74,41 @@ namespace standardApplication
             {
                 return;
             }
-            this.spinEdit16.Value = Gas.Compensation <= decimal.ToSingle(decimal.MinValue) || Gas.Compensation >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.Compensation;
+            this.textEdit2.Text = Gas.Compensation.ToString();
+                //Gas.Compensation <= decimal.ToSingle(decimal.MinValue) || Gas.Compensation >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.Compensation;
             this.spinEdit8.Value = Gas.CurrentAD;
-            this.spinEdit1.Value = Gas.CurrentChroma <= decimal.ToSingle(decimal.MinValue) || Gas.CurrentChroma >= decimal.ToSingle( decimal.MaxValue) ? 0:(decimal)Gas.CurrentChroma;
+            this.textEdit3.Text = Gas.CurrentChroma.ToString();
+                //Gas.CurrentChroma <= decimal.ToSingle(decimal.MinValue) || Gas.CurrentChroma >= decimal.ToSingle( decimal.MaxValue) ? 0:(decimal)Gas.CurrentChroma;
             this.textEdit8.Text = Gas.Factor;
-            this.spinEdit10.Value = Gas.GasA1 <= decimal.ToSingle(decimal.MinValue) || Gas.GasA1 >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.GasA1;
-            this.spinEdit13.Value = Gas.GasA2 <= decimal.ToSingle(decimal.MinValue) || Gas.GasA2 >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.GasA2;
+            this.textEdit9.Text = Gas.GasA1.ToString();
+                //Gas.GasA1 <= decimal.ToSingle(decimal.MinValue) || Gas.GasA1 >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.GasA1;
+            this.textEdit10.Text = Gas.GasA2.ToString();
+                //Gas.GasA2 <= decimal.ToSingle(decimal.MinValue) || Gas.GasA2 >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.GasA2;
             this.GasID = Gas.GasID;
             this.comboBoxEdit2.Text = Gas.AlertModel.Name;
             this.textEdit1.Text = Gas.GasName.Name;
             this.comboBoxEdit1.Text = Gas.GasPoint.Name;
-            this.spinEdit14.Value = Gas.GasRang <= decimal.ToSingle(decimal.MinValue) || Gas.GasRang >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.GasRang;
+            this.textEdit12.Text = Gas.GasRang.ToString();
+                //Gas.GasRang <= decimal.ToSingle(decimal.MinValue) || Gas.GasRang >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.GasRang;
             this.comboBoxEdit3.Text = Gas.GasUnit.Name;
             this.checkEdit1.Checked = Gas.IfGasAlarm;
             this.spinEdit6.Value = Gas.OneAD;
-            this.spinEdit3.Value = Gas.OneChroma <= decimal.ToSingle(decimal.MinValue) || Gas.OneChroma >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.OneChroma;
-            this.spinEdit9.Value = Gas.Show <= decimal.ToSingle(decimal.MinValue) || Gas.Show >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.Show;
+            this.textEdit5.Text = Gas.OneChroma.ToString();
+                //Gas.OneChroma <= decimal.ToSingle(decimal.MinValue) || Gas.OneChroma >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.OneChroma;
+            this.textEdit11.Text = Gas.Show.ToString();
+                //Gas.Show <= decimal.ToSingle(decimal.MinValue) || Gas.Show >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.Show;
             this.spinEdit11.Value = Gas.ThreeAD;
-            this.spinEdit5.Value = Gas.ThreeChroma <= decimal.ToSingle(decimal.MinValue) || Gas.ThreeChroma >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.ThreeChroma;
+            this.textEdit7.Text = Gas.TwoChroma.ToString();
+                //Gas.ThreeChroma <= decimal.ToSingle(decimal.MinValue) || Gas.ThreeChroma >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.ThreeChroma;
             this.spinEdit12.Value = Gas.TwoAD;
-            this.spinEdit4.Value = Gas.TwoChroma <= decimal.ToSingle(decimal.MinValue) || Gas.TwoChroma >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.TwoChroma;
+            this.textEdit6.Text = Gas.TwoChroma.ToString();
+                //Gas.TwoChroma <= decimal.ToSingle(decimal.MinValue) || Gas.TwoChroma >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.TwoChroma;
             Gas.IfTwo = Gas.CheckNum >= 3;
             Gas.IfThree = Gas.CheckNum >= 4;            
             this.checkEdit2.Checked = Gas.IfTwo;
             this.checkEdit3.Checked = Gas.IfThree;
-            this.spinEdit2.Value = Gas.ZeroChroma <= decimal.ToSingle(decimal.MinValue) || Gas.ZeroChroma >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.ZeroChroma;
+            this.textEdit4.Text = Gas.ZeroChroma.ToString();
+                //Gas.ZeroChroma <= decimal.ToSingle(decimal.MinValue) || Gas.ZeroChroma >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.ZeroChroma;
             this.spinEdit7.Value = Gas.ZeroAD;
 
             checkEdit1_CheckedChanged(null, null);
@@ -192,7 +202,7 @@ namespace standardApplication
                 simpleButton5.Enabled = false;
                 simpleButton6.Enabled = false;
                 simpleButton7.Enabled = false;
-                spinEdit4.Enabled = false;
+                textEdit6.Enabled = false;
                 spinEdit12.Enabled = false;
 
                 checkEdit3.Checked = false;
@@ -202,7 +212,7 @@ namespace standardApplication
                 simpleButton5.Enabled = true;
                 simpleButton6.Enabled = true;
                 simpleButton7.Enabled = true;
-                spinEdit4.Enabled = true;
+                textEdit6.Enabled = true;
                 spinEdit12.Enabled = true;
             }
 
@@ -216,7 +226,7 @@ namespace standardApplication
                 simpleButton8.Enabled = false;
                 simpleButton9.Enabled = false;
                 simpleButton10.Enabled = false;
-                spinEdit5.Enabled = false;
+                textEdit7.Enabled = false;
                 spinEdit11.Enabled = false;
             }
             else
@@ -224,7 +234,7 @@ namespace standardApplication
                 simpleButton8.Enabled = true;
                 simpleButton9.Enabled = true;
                 simpleButton10.Enabled = true;
-                spinEdit5.Enabled = true;
+                textEdit7.Enabled = true;
                 spinEdit11.Enabled = true;
 
                 checkEdit2.Checked = true;

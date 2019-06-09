@@ -187,7 +187,7 @@
             this.labelControl25.Name = "labelControl25";
             this.labelControl25.Size = new System.Drawing.Size(60, 14);
             this.labelControl25.TabIndex = 72;
-            this.labelControl25.Text = "间隔时间：";
+            this.labelControl25.Text = "动作时间：";
             // 
             // labelControl26
             // 
@@ -195,7 +195,7 @@
             this.labelControl26.Name = "labelControl26";
             this.labelControl26.Size = new System.Drawing.Size(60, 14);
             this.labelControl26.TabIndex = 70;
-            this.labelControl26.Text = "动作时间：";
+            this.labelControl26.Text = "间隔时间：";
             // 
             // labelControl27
             // 
@@ -219,7 +219,7 @@
             this.labelControl21.Name = "labelControl21";
             this.labelControl21.Size = new System.Drawing.Size(60, 14);
             this.labelControl21.TabIndex = 66;
-            this.labelControl21.Text = "间隔时间：";
+            this.labelControl21.Text = "动作时间：";
             // 
             // labelControl22
             // 
@@ -227,7 +227,7 @@
             this.labelControl22.Name = "labelControl22";
             this.labelControl22.Size = new System.Drawing.Size(60, 14);
             this.labelControl22.TabIndex = 64;
-            this.labelControl22.Text = "动作时间：";
+            this.labelControl22.Text = "间隔时间：";
             // 
             // labelControl23
             // 
@@ -251,7 +251,7 @@
             this.labelControl20.Name = "labelControl20";
             this.labelControl20.Size = new System.Drawing.Size(60, 14);
             this.labelControl20.TabIndex = 60;
-            this.labelControl20.Text = "间隔时间：";
+            this.labelControl20.Text = "动作时间：";
             // 
             // labelControl19
             // 
@@ -259,7 +259,7 @@
             this.labelControl19.Name = "labelControl19";
             this.labelControl19.Size = new System.Drawing.Size(60, 14);
             this.labelControl19.TabIndex = 58;
-            this.labelControl19.Text = "动作时间：";
+            this.labelControl19.Text = "间隔时间：";
             // 
             // labelControl18
             // 
@@ -339,7 +339,7 @@
             this.spinEdit1.Properties.IsFloatValue = false;
             this.spinEdit1.Properties.Mask.EditMask = "N00";
             this.spinEdit1.Properties.MaxValue = new decimal(new int[] {
-            100,
+            65536,
             0,
             0,
             0});
@@ -365,7 +365,7 @@
             this.spinEdit2.Properties.IsFloatValue = false;
             this.spinEdit2.Properties.Mask.EditMask = "N00";
             this.spinEdit2.Properties.MaxValue = new decimal(new int[] {
-            32768,
+            65536,
             0,
             0,
             0});
@@ -407,7 +407,7 @@
             this.spinEdit4.Properties.IsFloatValue = false;
             this.spinEdit4.Properties.Mask.EditMask = "N00";
             this.spinEdit4.Properties.MaxValue = new decimal(new int[] {
-            32768,
+            65536,
             0,
             0,
             0});
@@ -428,7 +428,7 @@
             this.spinEdit5.Properties.IsFloatValue = false;
             this.spinEdit5.Properties.Mask.EditMask = "N00";
             this.spinEdit5.Properties.MaxValue = new decimal(new int[] {
-            32768,
+            65536,
             0,
             0,
             0});
@@ -449,7 +449,7 @@
             this.spinEdit6.Properties.IsFloatValue = false;
             this.spinEdit6.Properties.Mask.EditMask = "N00";
             this.spinEdit6.Properties.MaxValue = new decimal(new int[] {
-            32768,
+            65536,
             0,
             0,
             0});
@@ -470,7 +470,7 @@
             this.spinEdit7.Properties.IsFloatValue = false;
             this.spinEdit7.Properties.Mask.EditMask = "N00";
             this.spinEdit7.Properties.MaxValue = new decimal(new int[] {
-            32768,
+            65536,
             0,
             0,
             0});
@@ -491,7 +491,7 @@
             this.spinEdit8.Properties.IsFloatValue = false;
             this.spinEdit8.Properties.Mask.EditMask = "N00";
             this.spinEdit8.Properties.MaxValue = new decimal(new int[] {
-            32768,
+            65536,
             0,
             0,
             0});
@@ -512,7 +512,7 @@
             this.spinEdit9.Properties.IsFloatValue = false;
             this.spinEdit9.Properties.Mask.EditMask = "N00";
             this.spinEdit9.Properties.MaxValue = new decimal(new int[] {
-            32768,
+            65536,
             0,
             0,
             0});

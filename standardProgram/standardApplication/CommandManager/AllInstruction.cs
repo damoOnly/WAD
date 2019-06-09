@@ -67,13 +67,23 @@ namespace CommandManager
             try
             {
                 all.EquipmentDataTime = ReadRealTime(address,commandCallback);
-                all.OutDate = ReadOutDate(address,commandCallback);
-                callback("读取时间日期成功");
+                callback("读取时间成功");
             }
             catch (Exception ex)
             {
                 log.Error(ex);
-                callback("读取时间日期失败");
+                callback("读取时间失败");
+            }
+
+            try
+            {
+                all.OutDate = ReadOutDate(address, commandCallback);
+                callback("读取出厂日期成功");
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+                callback("读取出厂日期失败");
             }
             
             return all;
