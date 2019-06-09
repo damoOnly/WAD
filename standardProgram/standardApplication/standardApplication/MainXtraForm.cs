@@ -164,7 +164,6 @@ namespace standardApplication
 
             CommandUnits.CommandDelay = (int)spinEdit8.Value;
 
-            InitWeatherPage();
             InitSerialPage(); 
         
             setAllDataToControl();
@@ -240,11 +239,6 @@ namespace standardApplication
         private void simpleButton2_Click(object sender, EventArgs e)
         {
             xtraTabControl1.SelectedTabPage = xtraTabPage2;
-        }
-
-        private void simpleButton3_Click(object sender, EventArgs e)
-        {
-            xtraTabControl1.SelectedTabPage = xtraTabPage5;
         }
 
         private void simpleButton4_Click(object sender, EventArgs e)
@@ -330,64 +324,7 @@ namespace standardApplication
                 xtraTabControl2.SelectedTabPageIndex = 0;
             }
         }
-
-        private void simpleButton13_Click(object sender, EventArgs e)
-        {
-            WaitDialogForm wdf = new WaitDialogForm("命令执行中，请稍候......");
-
-            try
-            {
-                Gloab.AllData.WeatherList = NormalInstruction.WriteWeatherCount((short)spinEdit2.Value, Gloab.AllData.Address, Gloab.Config,CommandCallback);
-                Gloab.AllData.Normal.WeatherCount = (short)Gloab.AllData.WeatherList.Count;
-                Gloab.AllData.NormalList = Gloab.AllData.Normal.ConvertToNormalList();
-                SetWeatherToControl();
-                SetNormalToControl();
-                
-                gridControl4.RefreshDataSource();
-                SetDebugStr("写入气象个数成功");
-            }
-            catch (CommandException ex)
-            {
-                SetDebugStr("写入气象个数失败");
-                XtraMessageBox.Show(ex.Message);
-            }
-            catch (Exception exp)
-            {
-                SetDebugStr("写入气象个数失败");
-                log.Error(exp);
-            }
-            finally
-            {
-                wdf.Close();
-            }
-        }
-
-        private void simpleButton17_Click(object sender, EventArgs e)
-        {
-            WaitDialogForm wdf = new WaitDialogForm("命令执行中，请稍候......");
-            try
-            {
-                Gloab.AllData.WeatherList = WeatherInstruction.ReadWeather(Gloab.AllData.Address,Gloab.Config,CommandCallback);
-                Gloab.AllData.Normal.WeatherCount = (short)Gloab.AllData.WeatherList.Count;
-                SetWeatherToControl();
-                SetDebugStr("读取气象参数成功");
-            }
-            catch (CommandException ex)
-            {
-                SetDebugStr("读取气象参数失败");
-                XtraMessageBox.Show(ex.Message);
-            }
-            catch (Exception exp)
-            {
-                SetDebugStr("读取气象参数失败");
-                log.Error(exp);
-            }
-            finally
-            {
-                wdf.Close();
-            }
-        }
-
+        
         private void simpleButton18_Click(object sender, EventArgs e)
         {
             WaitDialogForm wdf = new WaitDialogForm("命令执行中，请稍候......");
@@ -477,37 +414,6 @@ namespace standardApplication
             serial.SerialTwoCN = textEdit34.Text;
             serial.SerialTwoST = textEdit28.Text;
             return serial;
-        }
-
-        private void InitWeatherPage()
-        {
-            List<FieldValue> list = new List<FieldValue>();
-            foreach (var item in Gloab.Config.WeatherName)
-            {
-                list.Add(new FieldValue() { Name = item.Key, Value= item.Value });
-            }
-            repositoryItemLookUpEdit1.DataSource = list;
-
-            List<FieldValue> listUnit = new List<FieldValue>();
-            foreach (var item in Gloab.Config.WeatherUnit)
-            {
-                listUnit.Add(new FieldValue() { Name = item.Key, Value = item.Value });
-            }
-            repositoryItemLookUpEdit2.DataSource = listUnit;
-
-            List<FieldValue> listPoint = new List<FieldValue>();
-            foreach (var item in Gloab.Config.Point)
-            {
-                listPoint.Add(new FieldValue() { Name = item.Key, Value = item.Value });
-            }
-            repositoryItemLookUpEdit3.DataSource = listPoint;
-
-            repositoryItemComboBox1.Items.Clear();
-            repositoryItemComboBox1.Items.AddRange(Gloab.Config.WeatherName.Select(c=>c.Key).ToArray());
-            repositoryItemComboBox2.Items.Clear();
-            repositoryItemComboBox2.Items.AddRange(Gloab.Config.WeatherUnit.Select(c=>c.Key).ToArray());
-            repositoryItemComboBox3.Items.Clear();
-            repositoryItemComboBox3.Items.AddRange(Gloab.Config.Point.Select(c=>c.Key).ToArray());
         }
 
         private void simpleButton20_Click(object sender, EventArgs e)
@@ -655,7 +561,6 @@ namespace standardApplication
         private void setAllDataToControl()
         {
             SetGasToControl();
-            SetWeatherToControl();
             SetNormalToControl();
             SetSerialParamToPage(Gloab.AllData.Serial);
             SetRealTimeToControl();
@@ -670,15 +575,6 @@ namespace standardApplication
             gridControl2.RefreshDataSource();
             showGasControl();
             AdjustGridMinHeight(gridControl2);
-        }
-        private void SetWeatherToControl()
-        {
-            spinEdit2.Value = Gloab.AllData.Normal.WeatherCount;
-            gridControl4.DataSource = Gloab.AllData.WeatherList;
-            gridControl4.RefreshDataSource();
-            gridControl3.DataSource = Gloab.AllData.WeatherList;
-            gridControl3.RefreshDataSource();
-            AdjustGridMinHeight(gridControl3);
         }
         private void SetNormalToControl()
         {

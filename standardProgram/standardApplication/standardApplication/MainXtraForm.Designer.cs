@@ -31,13 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
             this.splitContainerControl4 = new DevExpress.XtraEditors.SplitContainerControl();
-            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.simpleButton5 = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton4 = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
-            this.splitContainerControl5 = new DevExpress.XtraEditors.SplitContainerControl();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
             this.xtraScrollableControl1 = new DevExpress.XtraEditors.XtraScrollableControl();
@@ -79,28 +72,6 @@
             this.simpleButton12 = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl10 = new DevExpress.XtraEditors.LabelControl();
             this.xtraTabControl2 = new DevExpress.XtraTab.XtraTabControl();
-            this.xtraTabPage5 = new DevExpress.XtraTab.XtraTabPage();
-            this.splitContainerControl7 = new DevExpress.XtraEditors.SplitContainerControl();
-            this.spinEdit2 = new DevExpress.XtraEditors.SpinEdit();
-            this.labelControl11 = new DevExpress.XtraEditors.LabelControl();
-            this.simpleButton17 = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton13 = new DevExpress.XtraEditors.SimpleButton();
-            this.gridControl4 = new DevExpress.XtraGrid.GridControl();
-            this.gridView4 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn_WeatherID = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn_WeatherName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.repositoryItemLookUpEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
-            this.fieldValueBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.gridColumn_WeatherUnit = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.repositoryItemLookUpEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
-            this.gridColumn_WeatherPoint = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.repositoryItemLookUpEdit3 = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
-            this.gridColumn_WeatherFactor = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn_WeatherCompensation = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
-            this.repositoryItemComboBox2 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
-            this.repositoryItemComboBox3 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
-            this.simpleButton18 = new DevExpress.XtraEditors.SimpleButton();
             this.xtraTabPage6 = new DevExpress.XtraTab.XtraTabPage();
             this.userControlNormal1 = new standardApplication.UserControlNormal();
             this.xtraTabPage7 = new DevExpress.XtraTab.XtraTabPage();
@@ -178,14 +149,11 @@
             this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.fieldValueBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             this.splitContainerControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl4)).BeginInit();
             this.splitContainerControl4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
-            this.panelControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl5)).BeginInit();
-            this.splitContainerControl5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             this.xtraTabPage1.SuspendLayout();
@@ -201,19 +169,6 @@
             this.splitContainerControl6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl2)).BeginInit();
-            this.xtraTabPage5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl7)).BeginInit();
-            this.splitContainerControl7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.spinEdit2.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fieldValueBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox3)).BeginInit();
             this.xtraTabPage6.SuspendLayout();
             this.xtraTabPage7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl9)).BeginInit();
@@ -260,6 +215,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit7.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fieldValueBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainerControl1
@@ -283,86 +239,14 @@
             this.splitContainerControl4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainerControl4.Location = new System.Drawing.Point(0, 0);
             this.splitContainerControl4.Name = "splitContainerControl4";
-            this.splitContainerControl4.Panel1.Controls.Add(this.panelControl1);
+            this.splitContainerControl4.Panel1.Controls.Add(this.xtraTabControl1);
             this.splitContainerControl4.Panel1.Text = "Panel1";
-            this.splitContainerControl4.Panel2.Controls.Add(this.splitContainerControl5);
+            this.splitContainerControl4.Panel2.Controls.Add(this.listBoxControl1);
             this.splitContainerControl4.Panel2.Text = "Panel2";
             this.splitContainerControl4.Size = new System.Drawing.Size(1121, 453);
-            this.splitContainerControl4.SplitterPosition = 198;
+            this.splitContainerControl4.SplitterPosition = 917;
             this.splitContainerControl4.TabIndex = 0;
             this.splitContainerControl4.Text = "splitContainerControl4";
-            // 
-            // panelControl1
-            // 
-            this.panelControl1.Controls.Add(this.simpleButton5);
-            this.panelControl1.Controls.Add(this.simpleButton4);
-            this.panelControl1.Controls.Add(this.simpleButton3);
-            this.panelControl1.Controls.Add(this.simpleButton2);
-            this.panelControl1.Controls.Add(this.simpleButton1);
-            this.panelControl1.Location = new System.Drawing.Point(12, 12);
-            this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(176, 354);
-            this.panelControl1.TabIndex = 0;
-            // 
-            // simpleButton5
-            // 
-            this.simpleButton5.Location = new System.Drawing.Point(36, 224);
-            this.simpleButton5.Name = "simpleButton5";
-            this.simpleButton5.Size = new System.Drawing.Size(105, 23);
-            this.simpleButton5.TabIndex = 4;
-            this.simpleButton5.Text = "串口设置";
-            this.simpleButton5.Click += new System.EventHandler(this.simpleButton5_Click);
-            // 
-            // simpleButton4
-            // 
-            this.simpleButton4.Location = new System.Drawing.Point(36, 174);
-            this.simpleButton4.Name = "simpleButton4";
-            this.simpleButton4.Size = new System.Drawing.Size(105, 23);
-            this.simpleButton4.TabIndex = 3;
-            this.simpleButton4.Text = "通用参数设置";
-            this.simpleButton4.Click += new System.EventHandler(this.simpleButton4_Click);
-            // 
-            // simpleButton3
-            // 
-            this.simpleButton3.Location = new System.Drawing.Point(36, 124);
-            this.simpleButton3.Name = "simpleButton3";
-            this.simpleButton3.Size = new System.Drawing.Size(105, 23);
-            this.simpleButton3.TabIndex = 2;
-            this.simpleButton3.Text = "气象参数设置";
-            this.simpleButton3.Click += new System.EventHandler(this.simpleButton3_Click);
-            // 
-            // simpleButton2
-            // 
-            this.simpleButton2.Location = new System.Drawing.Point(36, 74);
-            this.simpleButton2.Name = "simpleButton2";
-            this.simpleButton2.Size = new System.Drawing.Size(105, 23);
-            this.simpleButton2.TabIndex = 1;
-            this.simpleButton2.Text = "气体参数设置";
-            this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
-            // 
-            // simpleButton1
-            // 
-            this.simpleButton1.Location = new System.Drawing.Point(36, 24);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(105, 23);
-            this.simpleButton1.TabIndex = 0;
-            this.simpleButton1.Text = "全部参数";
-            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
-            // 
-            // splitContainerControl5
-            // 
-            this.splitContainerControl5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerControl5.FixedPanel = DevExpress.XtraEditors.SplitFixedPanel.Panel2;
-            this.splitContainerControl5.Location = new System.Drawing.Point(0, 0);
-            this.splitContainerControl5.Name = "splitContainerControl5";
-            this.splitContainerControl5.Panel1.Controls.Add(this.xtraTabControl1);
-            this.splitContainerControl5.Panel1.Text = "Panel1";
-            this.splitContainerControl5.Panel2.Controls.Add(this.listBoxControl1);
-            this.splitContainerControl5.Panel2.Text = "Panel2";
-            this.splitContainerControl5.Size = new System.Drawing.Size(918, 453);
-            this.splitContainerControl5.SplitterPosition = 230;
-            this.splitContainerControl5.TabIndex = 0;
-            this.splitContainerControl5.Text = "splitContainerControl5";
             // 
             // xtraTabControl1
             // 
@@ -370,12 +254,11 @@
             this.xtraTabControl1.Location = new System.Drawing.Point(0, 0);
             this.xtraTabControl1.Name = "xtraTabControl1";
             this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
-            this.xtraTabControl1.Size = new System.Drawing.Size(683, 453);
+            this.xtraTabControl1.Size = new System.Drawing.Size(917, 453);
             this.xtraTabControl1.TabIndex = 0;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPage1,
             this.xtraTabPage2,
-            this.xtraTabPage5,
             this.xtraTabPage6,
             this.xtraTabPage7});
             this.xtraTabControl1.SelectedPageChanged += new DevExpress.XtraTab.TabPageChangedEventHandler(this.xtraTabControl1_SelectedPageChanged);
@@ -386,7 +269,7 @@
             this.xtraTabPage1.AutoScroll = true;
             this.xtraTabPage1.Controls.Add(this.xtraScrollableControl1);
             this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(677, 424);
+            this.xtraTabPage1.Size = new System.Drawing.Size(911, 424);
             this.xtraTabPage1.Text = "xtraTabPage1";
             // 
             // xtraScrollableControl1
@@ -397,7 +280,7 @@
             this.xtraScrollableControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.xtraScrollableControl1.Location = new System.Drawing.Point(0, 0);
             this.xtraScrollableControl1.Name = "xtraScrollableControl1";
-            this.xtraScrollableControl1.Size = new System.Drawing.Size(677, 424);
+            this.xtraScrollableControl1.Size = new System.Drawing.Size(911, 424);
             this.xtraScrollableControl1.TabIndex = 4;
             // 
             // gridControl3
@@ -406,7 +289,7 @@
             this.gridControl3.Location = new System.Drawing.Point(0, 397);
             this.gridControl3.MainView = this.gridView3;
             this.gridControl3.Name = "gridControl3";
-            this.gridControl3.Size = new System.Drawing.Size(660, 150);
+            this.gridControl3.Size = new System.Drawing.Size(894, 150);
             this.gridControl3.TabIndex = 3;
             this.gridControl3.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView3});
@@ -502,7 +385,7 @@
             this.gridControl2.Location = new System.Drawing.Point(0, 217);
             this.gridControl2.MainView = this.gridView2;
             this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(660, 180);
+            this.gridControl2.Size = new System.Drawing.Size(894, 180);
             this.gridControl2.TabIndex = 2;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
@@ -663,7 +546,7 @@
             this.gridControl1.Location = new System.Drawing.Point(0, 0);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(660, 217);
+            this.gridControl1.Size = new System.Drawing.Size(894, 217);
             this.gridControl1.TabIndex = 1;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -794,7 +677,7 @@
             // 
             this.xtraTabPage2.Controls.Add(this.splitContainerControl6);
             this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(677, 424);
+            this.xtraTabPage2.Size = new System.Drawing.Size(444, 295);
             this.xtraTabPage2.Text = "xtraTabPage2";
             // 
             // splitContainerControl6
@@ -810,7 +693,7 @@
             this.splitContainerControl6.Panel1.Text = "Panel1";
             this.splitContainerControl6.Panel2.Controls.Add(this.xtraTabControl2);
             this.splitContainerControl6.Panel2.Text = "Panel2";
-            this.splitContainerControl6.Size = new System.Drawing.Size(677, 424);
+            this.splitContainerControl6.Size = new System.Drawing.Size(444, 295);
             this.splitContainerControl6.SplitterPosition = 38;
             this.splitContainerControl6.TabIndex = 0;
             this.splitContainerControl6.Text = "splitContainerControl6";
@@ -867,255 +750,15 @@
             this.xtraTabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.xtraTabControl2.Location = new System.Drawing.Point(0, 0);
             this.xtraTabControl2.Name = "xtraTabControl2";
-            this.xtraTabControl2.Size = new System.Drawing.Size(677, 381);
+            this.xtraTabControl2.Size = new System.Drawing.Size(444, 252);
             this.xtraTabControl2.TabIndex = 0;
             this.xtraTabControl2.SelectedPageChanging += new DevExpress.XtraTab.TabPageChangingEventHandler(this.xtraTabControl2_SelectedPageChanging);
-            // 
-            // xtraTabPage5
-            // 
-            this.xtraTabPage5.Controls.Add(this.splitContainerControl7);
-            this.xtraTabPage5.Name = "xtraTabPage5";
-            this.xtraTabPage5.Size = new System.Drawing.Size(677, 424);
-            this.xtraTabPage5.Text = "xtraTabPage5";
-            // 
-            // splitContainerControl7
-            // 
-            this.splitContainerControl7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerControl7.Horizontal = false;
-            this.splitContainerControl7.Location = new System.Drawing.Point(0, 0);
-            this.splitContainerControl7.Name = "splitContainerControl7";
-            this.splitContainerControl7.Panel1.Controls.Add(this.spinEdit2);
-            this.splitContainerControl7.Panel1.Controls.Add(this.simpleButton18);
-            this.splitContainerControl7.Panel1.Controls.Add(this.labelControl11);
-            this.splitContainerControl7.Panel1.Controls.Add(this.simpleButton17);
-            this.splitContainerControl7.Panel1.Controls.Add(this.simpleButton13);
-            this.splitContainerControl7.Panel1.Text = "Panel1";
-            this.splitContainerControl7.Panel2.Controls.Add(this.gridControl4);
-            this.splitContainerControl7.Panel2.Text = "Panel2";
-            this.splitContainerControl7.Size = new System.Drawing.Size(677, 424);
-            this.splitContainerControl7.SplitterPosition = 52;
-            this.splitContainerControl7.TabIndex = 0;
-            this.splitContainerControl7.Text = "splitContainerControl7";
-            // 
-            // spinEdit2
-            // 
-            this.spinEdit2.EditValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.spinEdit2.Location = new System.Drawing.Point(132, 18);
-            this.spinEdit2.Name = "spinEdit2";
-            this.spinEdit2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.spinEdit2.Properties.IsFloatValue = false;
-            this.spinEdit2.Properties.Mask.EditMask = "N00";
-            this.spinEdit2.Properties.MaxValue = new decimal(new int[] {
-            12,
-            0,
-            0,
-            0});
-            this.spinEdit2.Size = new System.Drawing.Size(100, 20);
-            this.spinEdit2.TabIndex = 3;
-            // 
-            // labelControl11
-            // 
-            this.labelControl11.Location = new System.Drawing.Point(42, 21);
-            this.labelControl11.Name = "labelControl11";
-            this.labelControl11.Size = new System.Drawing.Size(84, 14);
-            this.labelControl11.TabIndex = 2;
-            this.labelControl11.Text = "气象通道总数：";
-            // 
-            // simpleButton17
-            // 
-            this.simpleButton17.Location = new System.Drawing.Point(403, 17);
-            this.simpleButton17.Name = "simpleButton17";
-            this.simpleButton17.Size = new System.Drawing.Size(105, 23);
-            this.simpleButton17.TabIndex = 1;
-            this.simpleButton17.Text = "读取";
-            this.simpleButton17.Click += new System.EventHandler(this.simpleButton17_Click);
-            // 
-            // simpleButton13
-            // 
-            this.simpleButton13.Location = new System.Drawing.Point(265, 17);
-            this.simpleButton13.Name = "simpleButton13";
-            this.simpleButton13.Size = new System.Drawing.Size(105, 23);
-            this.simpleButton13.TabIndex = 1;
-            this.simpleButton13.Text = "写气象个数";
-            this.simpleButton13.Click += new System.EventHandler(this.simpleButton13_Click);
-            // 
-            // gridControl4
-            // 
-            this.gridControl4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl4.Location = new System.Drawing.Point(0, 0);
-            this.gridControl4.MainView = this.gridView4;
-            this.gridControl4.Name = "gridControl4";
-            this.gridControl4.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.repositoryItemComboBox1,
-            this.repositoryItemComboBox2,
-            this.repositoryItemComboBox3,
-            this.repositoryItemLookUpEdit1,
-            this.repositoryItemLookUpEdit2,
-            this.repositoryItemLookUpEdit3});
-            this.gridControl4.Size = new System.Drawing.Size(677, 367);
-            this.gridControl4.TabIndex = 0;
-            this.gridControl4.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView4});
-            // 
-            // gridView4
-            // 
-            this.gridView4.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn_WeatherID,
-            this.gridColumn_WeatherName,
-            this.gridColumn_WeatherUnit,
-            this.gridColumn_WeatherPoint,
-            this.gridColumn_WeatherFactor,
-            this.gridColumn_WeatherCompensation});
-            this.gridView4.GridControl = this.gridControl4;
-            this.gridView4.Name = "gridView4";
-            this.gridView4.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
-            this.gridView4.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
-            this.gridView4.OptionsMenu.EnableColumnMenu = false;
-            this.gridView4.OptionsMenu.EnableFooterMenu = false;
-            this.gridView4.OptionsView.ShowGroupPanel = false;
-            // 
-            // gridColumn_WeatherID
-            // 
-            this.gridColumn_WeatherID.Caption = "通道编号";
-            this.gridColumn_WeatherID.FieldName = "WeatherID";
-            this.gridColumn_WeatherID.Name = "gridColumn_WeatherID";
-            this.gridColumn_WeatherID.Visible = true;
-            this.gridColumn_WeatherID.VisibleIndex = 0;
-            // 
-            // gridColumn_WeatherName
-            // 
-            this.gridColumn_WeatherName.Caption = "气象名称";
-            this.gridColumn_WeatherName.ColumnEdit = this.repositoryItemLookUpEdit1;
-            this.gridColumn_WeatherName.FieldName = "WeatherName.Value";
-            this.gridColumn_WeatherName.Name = "gridColumn_WeatherName";
-            this.gridColumn_WeatherName.Visible = true;
-            this.gridColumn_WeatherName.VisibleIndex = 1;
-            // 
-            // repositoryItemLookUpEdit1
-            // 
-            this.repositoryItemLookUpEdit1.AutoHeight = false;
-            this.repositoryItemLookUpEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemLookUpEdit1.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Name", 54, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near)});
-            this.repositoryItemLookUpEdit1.DataSource = this.fieldValueBindingSource;
-            this.repositoryItemLookUpEdit1.DisplayMember = "Name";
-            this.repositoryItemLookUpEdit1.Name = "repositoryItemLookUpEdit1";
-            this.repositoryItemLookUpEdit1.ValueMember = "Value";
-            // 
-            // fieldValueBindingSource
-            // 
-            this.fieldValueBindingSource.DataSource = typeof(Entity.FieldValue);
-            // 
-            // gridColumn_WeatherUnit
-            // 
-            this.gridColumn_WeatherUnit.Caption = "单位";
-            this.gridColumn_WeatherUnit.ColumnEdit = this.repositoryItemLookUpEdit2;
-            this.gridColumn_WeatherUnit.FieldName = "WeatherUnit.Value";
-            this.gridColumn_WeatherUnit.Name = "gridColumn_WeatherUnit";
-            this.gridColumn_WeatherUnit.Visible = true;
-            this.gridColumn_WeatherUnit.VisibleIndex = 2;
-            // 
-            // repositoryItemLookUpEdit2
-            // 
-            this.repositoryItemLookUpEdit2.AutoHeight = false;
-            this.repositoryItemLookUpEdit2.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemLookUpEdit2.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Name", 54, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near)});
-            this.repositoryItemLookUpEdit2.DataSource = this.fieldValueBindingSource;
-            this.repositoryItemLookUpEdit2.DisplayMember = "Name";
-            this.repositoryItemLookUpEdit2.Name = "repositoryItemLookUpEdit2";
-            this.repositoryItemLookUpEdit2.ValueMember = "Value";
-            // 
-            // gridColumn_WeatherPoint
-            // 
-            this.gridColumn_WeatherPoint.Caption = "小数点";
-            this.gridColumn_WeatherPoint.ColumnEdit = this.repositoryItemLookUpEdit3;
-            this.gridColumn_WeatherPoint.FieldName = "WeatherPoint.Value";
-            this.gridColumn_WeatherPoint.Name = "gridColumn_WeatherPoint";
-            this.gridColumn_WeatherPoint.Visible = true;
-            this.gridColumn_WeatherPoint.VisibleIndex = 3;
-            // 
-            // repositoryItemLookUpEdit3
-            // 
-            this.repositoryItemLookUpEdit3.AutoHeight = false;
-            this.repositoryItemLookUpEdit3.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemLookUpEdit3.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Name", 54, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near)});
-            this.repositoryItemLookUpEdit3.DataSource = this.fieldValueBindingSource;
-            this.repositoryItemLookUpEdit3.DisplayMember = "Name";
-            this.repositoryItemLookUpEdit3.Name = "repositoryItemLookUpEdit3";
-            this.repositoryItemLookUpEdit3.ValueMember = "Value";
-            // 
-            // gridColumn_WeatherFactor
-            // 
-            this.gridColumn_WeatherFactor.Caption = "因子编码";
-            this.gridColumn_WeatherFactor.FieldName = "WeatherFactor";
-            this.gridColumn_WeatherFactor.Name = "gridColumn_WeatherFactor";
-            this.gridColumn_WeatherFactor.Visible = true;
-            this.gridColumn_WeatherFactor.VisibleIndex = 4;
-            // 
-            // gridColumn_WeatherCompensation
-            // 
-            this.gridColumn_WeatherCompensation.Caption = "补偿值";
-            this.gridColumn_WeatherCompensation.FieldName = "WeatherCompensation";
-            this.gridColumn_WeatherCompensation.Name = "gridColumn_WeatherCompensation";
-            this.gridColumn_WeatherCompensation.Visible = true;
-            this.gridColumn_WeatherCompensation.VisibleIndex = 5;
-            // 
-            // repositoryItemComboBox1
-            // 
-            this.repositoryItemComboBox1.AutoHeight = false;
-            this.repositoryItemComboBox1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemComboBox1.Items.AddRange(new object[] {
-            "温度"});
-            this.repositoryItemComboBox1.Name = "repositoryItemComboBox1";
-            this.repositoryItemComboBox1.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            // 
-            // repositoryItemComboBox2
-            // 
-            this.repositoryItemComboBox2.AutoHeight = false;
-            this.repositoryItemComboBox2.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemComboBox2.Items.AddRange(new object[] {
-            "ppm"});
-            this.repositoryItemComboBox2.Name = "repositoryItemComboBox2";
-            this.repositoryItemComboBox2.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            // 
-            // repositoryItemComboBox3
-            // 
-            this.repositoryItemComboBox3.AutoHeight = false;
-            this.repositoryItemComboBox3.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemComboBox3.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3"});
-            this.repositoryItemComboBox3.Name = "repositoryItemComboBox3";
-            this.repositoryItemComboBox3.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            // 
-            // simpleButton18
-            // 
-            this.simpleButton18.Location = new System.Drawing.Point(541, 17);
-            this.simpleButton18.Name = "simpleButton18";
-            this.simpleButton18.Size = new System.Drawing.Size(105, 23);
-            this.simpleButton18.TabIndex = 2;
-            this.simpleButton18.Text = "写气象参数";
-            this.simpleButton18.Click += new System.EventHandler(this.simpleButton18_Click);
             // 
             // xtraTabPage6
             // 
             this.xtraTabPage6.Controls.Add(this.userControlNormal1);
             this.xtraTabPage6.Name = "xtraTabPage6";
-            this.xtraTabPage6.Size = new System.Drawing.Size(677, 424);
+            this.xtraTabPage6.Size = new System.Drawing.Size(444, 295);
             this.xtraTabPage6.Text = "xtraTabPage6";
             // 
             // userControlNormal1
@@ -1124,7 +767,7 @@
             this.userControlNormal1.Location = new System.Drawing.Point(0, 0);
             this.userControlNormal1.Name = "userControlNormal1";
             this.userControlNormal1.normalParam = null;
-            this.userControlNormal1.Size = new System.Drawing.Size(677, 424);
+            this.userControlNormal1.Size = new System.Drawing.Size(444, 295);
             this.userControlNormal1.TabIndex = 0;
             this.userControlNormal1.ChangeNormalEvent += new standardApplication.UserControlNormal.ChangeNormalEventHandler(this.userControlNormal1_ChangeNormalEvent);
             this.userControlNormal1.SaveModelFileEvent += new standardApplication.UserControlNormal.SaveModelFileEventHandler(this.userControlNormal1_SaveModelFileEvent);
@@ -1133,7 +776,7 @@
             // 
             this.xtraTabPage7.Controls.Add(this.splitContainerControl9);
             this.xtraTabPage7.Name = "xtraTabPage7";
-            this.xtraTabPage7.Size = new System.Drawing.Size(677, 424);
+            this.xtraTabPage7.Size = new System.Drawing.Size(444, 295);
             this.xtraTabPage7.Text = "xtraTabPage7";
             // 
             // splitContainerControl9
@@ -1146,7 +789,7 @@
             this.splitContainerControl9.Panel1.Text = "Panel1";
             this.splitContainerControl9.Panel2.Controls.Add(this.splitContainerControl10);
             this.splitContainerControl9.Panel2.Text = "Panel2";
-            this.splitContainerControl9.Size = new System.Drawing.Size(677, 424);
+            this.splitContainerControl9.Size = new System.Drawing.Size(444, 295);
             this.splitContainerControl9.SplitterPosition = 157;
             this.splitContainerControl9.TabIndex = 0;
             this.splitContainerControl9.Text = "splitContainerControl9";
@@ -1172,7 +815,7 @@
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(677, 157);
+            this.groupControl1.Size = new System.Drawing.Size(444, 157);
             this.groupControl1.TabIndex = 0;
             this.groupControl1.Text = "串口1设置";
             // 
@@ -1338,7 +981,7 @@
             this.splitContainerControl10.Panel2.Controls.Add(this.simpleButton21);
             this.splitContainerControl10.Panel2.Controls.Add(this.simpleButton20);
             this.splitContainerControl10.Panel2.Text = "Panel2";
-            this.splitContainerControl10.Size = new System.Drawing.Size(677, 262);
+            this.splitContainerControl10.Size = new System.Drawing.Size(444, 133);
             this.splitContainerControl10.SplitterPosition = 196;
             this.splitContainerControl10.TabIndex = 0;
             this.splitContainerControl10.Text = "splitContainerControl10";
@@ -1364,7 +1007,7 @@
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl2.Location = new System.Drawing.Point(0, 0);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(677, 196);
+            this.groupControl2.Size = new System.Drawing.Size(444, 128);
             this.groupControl2.TabIndex = 1;
             this.groupControl2.Text = "串口2设置";
             // 
@@ -1560,7 +1203,7 @@
             this.listBoxControl1.Location = new System.Drawing.Point(0, 0);
             this.listBoxControl1.MaximumSize = new System.Drawing.Size(230, 0);
             this.listBoxControl1.Name = "listBoxControl1";
-            this.listBoxControl1.Size = new System.Drawing.Size(230, 453);
+            this.listBoxControl1.Size = new System.Drawing.Size(199, 453);
             this.listBoxControl1.TabIndex = 0;
             this.listBoxControl1.DoubleClick += new System.EventHandler(this.listBoxControl1_DoubleClick);
             this.listBoxControl1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listBoxControl1_MouseDown);
@@ -1960,6 +1603,10 @@
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
+            // fieldValueBindingSource
+            // 
+            this.fieldValueBindingSource.DataSource = typeof(Entity.FieldValue);
+            // 
             // MainXtraForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -1976,10 +1623,6 @@
             this.splitContainerControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl4)).EndInit();
             this.splitContainerControl4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
-            this.panelControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl5)).EndInit();
-            this.splitContainerControl5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
             this.xtraTabControl1.ResumeLayout(false);
             this.xtraTabPage1.ResumeLayout(false);
@@ -1995,19 +1638,6 @@
             this.splitContainerControl6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl2)).EndInit();
-            this.xtraTabPage5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl7)).EndInit();
-            this.splitContainerControl7.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.spinEdit2.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fieldValueBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox3)).EndInit();
             this.xtraTabPage6.ResumeLayout(false);
             this.xtraTabPage7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl9)).EndInit();
@@ -2058,6 +1688,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit7.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fieldValueBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2066,15 +1697,8 @@
 
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl1;
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl4;
-        private DevExpress.XtraEditors.SplitContainerControl splitContainerControl5;
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl2;
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl3;
-        private DevExpress.XtraEditors.PanelControl panelControl1;
-        private DevExpress.XtraEditors.SimpleButton simpleButton5;
-        private DevExpress.XtraEditors.SimpleButton simpleButton4;
-        private DevExpress.XtraEditors.SimpleButton simpleButton3;
-        private DevExpress.XtraEditors.SimpleButton simpleButton2;
-        private DevExpress.XtraEditors.SimpleButton simpleButton1;
         private DevExpress.XtraEditors.ComboBoxEdit comboBoxEditCommunication;
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraTab.XtraTabPage serialCommunicationPage;
@@ -2127,21 +1751,8 @@
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl6;
         private DevExpress.XtraEditors.SimpleButton simpleButton12;
         private DevExpress.XtraEditors.LabelControl labelControl10;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPage5;
-        private DevExpress.XtraEditors.SplitContainerControl splitContainerControl7;
-        private DevExpress.XtraEditors.LabelControl labelControl11;
-        private DevExpress.XtraEditors.SimpleButton simpleButton13;
-        private DevExpress.XtraGrid.GridControl gridControl4;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView4;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn_WeatherID;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn_WeatherName;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn_WeatherUnit;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn_WeatherPoint;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn_WeatherFactor;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage6;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage7;
-        private DevExpress.XtraEditors.SimpleButton simpleButton18;
-        private DevExpress.XtraEditors.SimpleButton simpleButton17;
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl9;
         private DevExpress.XtraEditors.GroupControl groupControl1;
         private DevExpress.XtraEditors.LabelControl labelControl35;
@@ -2177,11 +1788,7 @@
         private DevExpress.XtraEditors.ComboBoxEdit comboBoxEdit1;
         private DevExpress.XtraEditors.ComboBoxEdit comboBoxEdit4;
         private DevExpress.XtraEditors.ComboBoxEdit comboBoxEdit3;
-        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox1;
-        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox2;
-        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox3;
         private DevExpress.XtraEditors.SpinEdit spinEdit1;
-        private DevExpress.XtraEditors.SpinEdit spinEdit2;
         private DevExpress.XtraEditors.SimpleButton simpleButton23;
         private UserControlNormal userControlNormal1;
         private DevExpress.XtraEditors.SpinEdit spinEdit4;
@@ -2197,10 +1804,7 @@
         private DevExpress.XtraEditors.SimpleButton simpleButton15;
         private DevExpress.XtraEditors.SimpleButton simpleButton14;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEdit1;
         private System.Windows.Forms.BindingSource fieldValueBindingSource;
-        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEdit2;
-        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEdit3;
         private DevExpress.XtraEditors.XtraScrollableControl xtraScrollableControl1;
         private DevExpress.XtraTab.XtraTabControl xtraTabControl2;
         private DevExpress.XtraGrid.Columns.GridColumn Name3;
@@ -2212,7 +1816,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn Compensation;
         private DevExpress.XtraGrid.Columns.GridColumn WeatherCompensation;
         private DevExpress.XtraEditors.SimpleButton simpleButton16;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn_WeatherCompensation;
 
     }
 }
