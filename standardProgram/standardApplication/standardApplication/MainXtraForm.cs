@@ -256,16 +256,6 @@ namespace standardApplication
             ReadModelFileName(ModelType.Gas);
         }
 
-        private void xtraTabControl2_SelectedPageChanging(object sender, DevExpress.XtraTab.TabPageChangingEventArgs e)
-        {
-            if (xtraTabControl2.TabPages.Count <= 0 || xtraTabControl2.SelectedTabPageIndex < 0)
-            {
-                return;
-            }
-            UserControl1 uc = this.xtraTabControl2.TabPages[xtraTabControl2.SelectedTabPageIndex].Controls[0] as UserControl1;
-            e.Cancel = uc.CheckIsSampling();
-        }
-
         private void simpleButton12_Click(object sender, EventArgs e)
         {
             WaitDialogForm wdf = new WaitDialogForm("命令执行中，请稍候......");
@@ -298,31 +288,14 @@ namespace standardApplication
 
         private void showGasControl()
         {
-            xtraTabControl2.TabPages.Clear();
-
-            foreach (var gas in Gloab.AllData.GasList)
+            ListItem item = listBoxControl2.SelectedItem as ListItem;
+            if (item == null)
             {
-                UserControl1 userControl = new UserControl1();
-                userControl.GasID = gas.GasID;
-                userControl.BindGas();
-                userControl.SaveModelFileEvent += userControl11_SaveModelFileEvent;
-                userControl.ChangeGasEvent += userControl11_ChangeGasEvent;
-                userControl.Callback = SetDebugStr;
-                userControl.CommandCallback = CommandCallback;
-
-                XtraTabPage tabPage = new XtraTabPage();
-                tabPage.Text = "通道" + gas.GasID;
-                tabPage.Controls.Add(userControl);
-
-                xtraTabControl2.TabPages.Add(tabPage);
-
-                userControl.Dock = DockStyle.Fill;
+                return;
             }
 
-            if (Gloab.AllData.GasList.Count > 0)
-            {
-                xtraTabControl2.SelectedTabPageIndex = 0;
-            }
+            userControl11.GasID = item.Number;
+            userControl11.BindGas();
         }
         
         private void simpleButton18_Click(object sender, EventArgs e)
@@ -570,10 +543,13 @@ namespace standardApplication
 
         private void SetGasToControl()
         {
+            Gloab.AllData.GasTree = Gloab.AllData.GasList.Select(c => new ListItem() { Name = c.GasName.Name, Number = c.GasName.Value }).ToList();
+            listBoxControl2.DataSource = Gloab.AllData.GasTree;
+            listBoxControl2.SelectedIndex = 0;
             spinEdit1.Value = Gloab.AllData.Normal.GasCount;
             gridControl2.DataSource = Gloab.AllData.GasList;
             gridControl2.RefreshDataSource();
-            showGasControl();
+            //showGasControl();
             AdjustGridMinHeight(gridControl2);
         }
         private void SetNormalToControl()
@@ -812,18 +788,6 @@ namespace standardApplication
             Gloab.AllData.EquipmentDataTime = (DateTime)dateEdit2.EditValue;
             Gloab.AllData.OutDate = (DateTime)dateEdit1.EditValue;
 
-            List<GasEntity> gasList = new List<GasEntity>();
-            foreach (XtraTabPage gaspage in xtraTabControl2.TabPages)
-            {
-                if (gaspage.PageVisible)
-                {
-                    UserControl1 uc = gaspage.Controls[0] as UserControl1;
-                    gasList.Add(uc.GetGasFromControl());
-                }
-            }
-
-            Gloab.AllData.GasList = gasList;
-
             Gloab.AllData.Normal = userControlNormal1.GetNormalFromControl();
 
             Gloab.AllData.Serial = GetSerialParamFromPage();
@@ -873,16 +837,13 @@ namespace standardApplication
                     setAllDataToControl();
                     break;
                 case ModelType.Gas:
-                    UserControl1 u1 = xtraTabControl2.SelectedTabPage.Controls[0] as UserControl1;
-                    int index = Gloab.AllData.GasList.FindIndex(c => c.GasID == u1.GasID);
+                    int gasID = userControl11.GasID;
+                    int index = Gloab.AllData.GasList.FindIndex(c => c.GasID == gasID);
                     Gloab.AllData.GasList[index] = ModelFile.ReadModel<GasEntity>(fileName, ModelType.Gas);
-                    Gloab.AllData.GasList[index].GasID = u1.GasID;
-                    u1.BindGas();
-                    //gridControl2.DataSource = Gloab.AllData.GasList;
+                    Gloab.AllData.GasList[index].GasID = gasID;
+                    userControl11.BindGas();
                     gridControl2.RefreshDataSource();
                     break;
-                //case ModelType.Weather:
-                //    break;
                 case ModelType.Normal:
                     Gloab.AllData.Normal = ModelFile.ReadModel<NormalParamEntity>(fileName, ModelType.Normal);
                     Gloab.AllData.NormalList = Gloab.AllData.Normal.ConvertToNormalList();
@@ -961,6 +922,11 @@ namespace standardApplication
             {
                 comboBoxEdit5.SelectedIndex = comboBoxEdit5.Properties.Items.Count - 1;
             }
+        }
+
+        private void listBoxControl2_SelectedIndexChanged(object sender, EventArgs e)
+        {            
+            showGasControl();
         }
     }
 }

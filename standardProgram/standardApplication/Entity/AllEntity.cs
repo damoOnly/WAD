@@ -15,6 +15,7 @@ namespace Entity
             WeatherList = new List<WeatherEntity>();
             Normal = new NormalParamEntity();
             Serial = new SerialEntity();
+            GasTree = new List<ListItem>();
             Address = 0;
 
             EquipmentDataTime = DateTime.Now;
@@ -29,5 +30,7 @@ namespace Entity
 
         public DateTime EquipmentDataTime { get; set; }
         public DateTime OutDate { get; set; }
+
+        public List<ListItem> GasTree { get; set; }
     }
 }
