@@ -1,7 +1,7 @@
 ; 该脚本使用 HM VNISEdit 脚本编辑器向导产生
 
 ; 安装程序初始定义常量
-!define PRODUCT_NAME "我的安装程序"
+!define PRODUCT_NAME "新在线配置安装程序"
 !define PRODUCT_VERSION "1.0"
 !define PRODUCT_PUBLISHER "WAD"
 !define PRODUCT_WEB_SITE "http://www.mycompany.com"
@@ -16,7 +16,7 @@ SetCompressor lzma
 
 ; MUI 预定义常量
 !define MUI_ABORTWARNING
-!define MUI_ICON "${NSISDIR}\Contrib\Graphics\Icons\modern-install.ico"
+!define MUI_ICON "..\wad_favicon_32.ico"
 !define MUI_UNICON "${NSISDIR}\Contrib\Graphics\Icons\modern-uninstall.ico"
 
 ; 欢迎页面
@@ -24,7 +24,7 @@ SetCompressor lzma
 ; 许可协议页面
 
 ; 组件选择页面
-!insertmacro MUI_PAGE_COMPONENTS
+; !insertmacro MUI_PAGE_COMPONENTS
 ; 安装目录选择页面
 !insertmacro MUI_PAGE_DIRECTORY
 ; 安装过程页面
@@ -44,7 +44,7 @@ SetCompressor lzma
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
 OutFile "WADStandardSetup.exe"
-InstallDir "$PROGRAMFILES\万安迪气体检测软件安装程序"
+InstallDir "$PROGRAMFILES\万安迪在线配置软件"
 InstallDirRegKey HKLM "${PRODUCT_UNINST_KEY}" "UninstallString"
 ShowInstDetails show
 ShowUnInstDetails show
@@ -53,8 +53,11 @@ BrandingText " "
 Section "MainSection" SEC01
   SetOutPath "$INSTDIR"
   SetOverwrite ifnewer
-  File "standardApplication\bin\Debug\standardApplication.exe"
   File "standardApplication\bin\Debug\CommandManager.dll"
+  File "standardApplication\bin\Debug\Entity.dll"
+  File "standardApplication\bin\Debug\log4net.dll"
+  File "standardApplication\bin\Debug\LogLib.dll"
+  File "standardApplication\bin\Debug\standardApplication.exe"
   File "standardApplication\bin\Debug\DevExpress.Dashboard.v14.2.Core.dll"
   File "standardApplication\bin\Debug\DevExpress.Data.v14.2.dll"
   File "standardApplication\bin\Debug\DevExpress.DataAccess.v14.2.dll"
@@ -71,30 +74,90 @@ Section "MainSection" SEC01
   File "standardApplication\bin\Debug\DevExpress.XtraRichEdit.v14.2.dll"
   File "standardApplication\bin\Debug\DevExpress.XtraTreeList.v14.2.dll"
   File "standardApplication\bin\Debug\DevExpress.XtraVerticalGrid.v14.2.dll"
-  File "standardApplication\bin\Debug\Entity.dll"
-  File "standardApplication\bin\Debug\log4net.dll"
-  File "standardApplication\bin\Debug\LogLib.dll"
-  CreateDirectory "$SMPROGRAMS\万安迪气体检测软件"
-  CreateShortCut "$SMPROGRAMS\万安迪气体检测软件\气体浓度监测软件.lnk" "$INSTDIR\WADApplication.exe"
-  CreateShortCut "$DESKTOP\气体浓度监测软件.lnk" "$INSTDIR\WADApplication.exe"
+  File "standardApplication\CommonConfig.xml"
+  CreateDirectory "$SMPROGRAMS\万安迪在线配置软件"
+  CreateShortCut "$SMPROGRAMS\万安迪在线配置软件\在线配置软件.lnk" "$INSTDIR\standardApplication.exe"
+  CreateShortCut "$DESKTOP\在线配置软件.lnk" "$INSTDIR\standardApplication.exe"
 SectionEnd
 
 Section -AdditionalIcons
   WriteIniStr "$INSTDIR\${PRODUCT_NAME}.url" "InternetShortcut" "URL" "${PRODUCT_WEB_SITE}"
-  CreateShortCut "$SMPROGRAMS\万安迪气体检测软件\Website.lnk" "$INSTDIR\${PRODUCT_NAME}.url"
-  CreateShortCut "$SMPROGRAMS\万安迪气体检测软件\Uninstall.lnk" "$INSTDIR\uninst.exe"
+  CreateShortCut "$SMPROGRAMS\万安迪在线配置软件\Website.lnk" "$INSTDIR\${PRODUCT_NAME}.url"
+  CreateShortCut "$SMPROGRAMS\万安迪在线配置软件\Uninstall.lnk" "$INSTDIR\uninst.exe"
 SectionEnd
 
 Section -Post
   WriteUninstaller "$INSTDIR\uninst.exe"
-  WriteRegStr HKLM "${PRODUCT_DIR_REGKEY}" "" "$INSTDIR\WADApplication.exe"
+  WriteRegStr HKLM "${PRODUCT_DIR_REGKEY}" "" "$INSTDIR\standardApplication.exe"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayName" "$(^Name)"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "UninstallString" "$INSTDIR\uninst.exe"
-  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayIcon" "$INSTDIR\WADApplication.exe"
+  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayIcon" "$INSTDIR\standardApplication.exe"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayVersion" "${PRODUCT_VERSION}"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "URLInfoAbout" "${PRODUCT_WEB_SITE}"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Publisher" "${PRODUCT_PUBLISHER}"
 SectionEnd
+
+; 区段组件描述
+!insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
+  !insertmacro MUI_DESCRIPTION_TEXT ${SEC01} ""
+!insertmacro MUI_FUNCTION_DESCRIPTION_END
+
+/******************************
+ *  以下是安装程序的卸载部分  *
+ ******************************/
+
+Section Uninstall
+  Delete "$INSTDIR\${PRODUCT_NAME}.url"
+  Delete "$INSTDIR\uninst.exe"
+  Delete "$INSTDIR\standardApplication.exe"
+  Delete "$INSTDIR\CommandManager.dll"
+  Delete "$INSTDIR\Entity.dll"
+  Delete "$INSTDIR\log4net.dll"
+  Delete "$INSTDIR\LogLib.dll"
+  Delete "$INSTDIR\DevExpress.Dashboard.v14.2.Core.dll"
+  Delete "$INSTDIR\DevExpress.Data.v14.2.dll"
+  Delete "$INSTDIR\DevExpress.DataAccess.v14.2.dll"
+  Delete "$INSTDIR\DevExpress.Office.v14.2.Core.dll"
+  Delete "$INSTDIR\DevExpress.Printing.v14.2.Core.dll"
+  Delete "$INSTDIR\DevExpress.RichEdit.v14.2.Core.dll"
+  Delete "$INSTDIR\DevExpress.Utils.v14.2.dll"
+  Delete "$INSTDIR\DevExpress.XtraBars.v14.2.dll"
+  Delete "$INSTDIR\DevExpress.XtraEditors.v14.2.dll"
+  Delete "$INSTDIR\DevExpress.XtraGrid.v14.2.dll"
+  Delete "$INSTDIR\DevExpress.XtraLayout.v14.2.dll"
+  Delete "$INSTDIR\DevExpress.XtraNavBar.v14.2.dll"
+  Delete "$INSTDIR\DevExpress.XtraPrinting.v14.2.dll"
+  Delete "$INSTDIR\DevExpress.XtraRichEdit.v14.2.dll"
+  Delete "$INSTDIR\DevExpress.XtraTreeList.v14.2.dll"
+  Delete "$INSTDIR\DevExpress.XtraVerticalGrid.v14.2.dll"
+  Delete "$INSTDIR\CommonConfig.xml"
+
+  Delete "$SMPROGRAMS\万安迪在线配置软件\Uninstall.lnk"
+  Delete "$SMPROGRAMS\万安迪在线配置软件\Website.lnk"
+  Delete "$DESKTOP\在线配置软件.lnk"
+  Delete "$SMPROGRAMS\万安迪在线配置软件\在线配置软件.lnk"
+
+  RMDir "$SMPROGRAMS\万安迪在线配置软件"
+
+  RMDir "$INSTDIR"
+
+  DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
+  DeleteRegKey HKLM "${PRODUCT_DIR_REGKEY}"
+  SetAutoClose true
+SectionEnd
+
+#-- 根据 NSIS 脚本编辑规则，所有 Function 区段必须放置在 Section 区段之后编写，以避免安装程序出现未可预知的问题。--#
+
+Function un.onInit
+  MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 "您确定要完全移除 $(^Name) ，及其所有的组件？" IDYES +2
+  Abort
+FunctionEnd
+
+Function un.onUninstSuccess
+  HideWindow
+  MessageBox MB_ICONINFORMATION|MB_OK "$(^Name) 已成功地从您的计算机移除。"
+FunctionEnd
+
 
 #-- 根据 NSIS 脚本编辑规则，所有 Function 区段必须放置在 Section 区段之后编写，以避免安装程序出现未可预知的问题。--#
 Function GetNetFrameworkVersion
@@ -129,64 +192,4 @@ StrCpy $1 "not .NetFramework"
 KnowNetFrameworkVersion:
 Pop $0
 Exch $1
-FunctionEnd
-
-; 区段组件描述
-!insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
-  !insertmacro MUI_DESCRIPTION_TEXT ${SEC01} ""
-!insertmacro MUI_FUNCTION_DESCRIPTION_END
-
-/******************************
- *  以下是安装程序的卸载部分  *
- ******************************/
-
-Section Uninstall
-  Delete "$INSTDIR\${PRODUCT_NAME}.url"
-  Delete "$INSTDIR\uninst.exe"
-  Delete "$INSTDIR\standardApplication.exe"
-  Delete "$INSTDIR\CommandManager.dll"
-  Delete "$INSTDIR\DevExpress.Dashboard.v14.2.Core.dll"
-  Delete "$INSTDIR\DevExpress.Data.v14.2.dll"
-  Delete "$INSTDIR\DevExpress.DataAccess.v14.2.dll"
-  Delete "$INSTDIR\DevExpress.Office.v14.2.Core.dll"
-  Delete "$INSTDIR\DevExpress.Printing.v14.2.Core.dll"
-  Delete "$INSTDIR\DevExpress.RichEdit.v14.2.Core.dll"
-  Delete "$INSTDIR\DevExpress.Utils.v14.2.dll"
-  Delete "$INSTDIR\DevExpress.XtraBars.v14.2.dll"
-  Delete "$INSTDIR\DevExpress.XtraEditors.v14.2.dll"
-  Delete "$INSTDIR\DevExpress.XtraGrid.v14.2.dll"
-  Delete "$INSTDIR\DevExpress.XtraLayout.v14.2.dll"
-  Delete "$INSTDIR\DevExpress.XtraNavBar.v14.2.dll"
-  Delete "$INSTDIR\DevExpress.XtraPrinting.v14.2.dll"
-  Delete "$INSTDIR\DevExpress.XtraRichEdit.v14.2.dll"
-  Delete "$INSTDIR\DevExpress.XtraTreeList.v14.2.dll"
-  Delete "$INSTDIR\DevExpress.XtraVerticalGrid.v14.2.dll"
-  Delete "$INSTDIR\Entity.dll"
-  Delete "$INSTDIR\log4net.dll"
-  Delete "$INSTDIR\LogLib.dll"
-
-  Delete "$SMPROGRAMS\万安迪气体检测软件\Uninstall.lnk"
-  Delete "$SMPROGRAMS\万安迪气体检测软件\Website.lnk"
-  Delete "$DESKTOP\气体浓度监测软件.lnk"
-  Delete "$SMPROGRAMS\万安迪气体检测软件\气体浓度监测软件.lnk"
-
-  RMDir "$SMPROGRAMS\万安迪气体检测软件"
-
-  RMDir "$INSTDIR"
-
-  DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
-  DeleteRegKey HKLM "${PRODUCT_DIR_REGKEY}"
-  SetAutoClose true
-SectionEnd
-
-#-- 根据 NSIS 脚本编辑规则，所有 Function 区段必须放置在 Section 区段之后编写，以避免安装程序出现未可预知的问题。--#
-
-Function un.onInit
-  MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 "您确实要完全移除 $(^Name) ，及其所有的组件？" IDYES +2
-  Abort
-FunctionEnd
-
-Function un.onUninstSuccess
-  HideWindow
-  MessageBox MB_ICONINFORMATION|MB_OK "$(^Name) 已成功地从您的计算机移除。"
 FunctionEnd
