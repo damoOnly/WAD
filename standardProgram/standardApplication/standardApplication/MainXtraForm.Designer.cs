@@ -361,7 +361,7 @@
             this.splitContainerControl5.Panel2.Controls.Add(this.listBoxControl1);
             this.splitContainerControl5.Panel2.Text = "Panel2";
             this.splitContainerControl5.Size = new System.Drawing.Size(764, 411);
-            this.splitContainerControl5.SplitterPosition = 222;
+            this.splitContainerControl5.SplitterPosition = 191;
             this.splitContainerControl5.TabIndex = 0;
             this.splitContainerControl5.Text = "splitContainerControl5";
             // 
@@ -372,7 +372,7 @@
             this.xtraTabControl1.Name = "xtraTabControl1";
             this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
             this.xtraTabControl1.ShowTabHeader = DevExpress.Utils.DefaultBoolean.False;
-            this.xtraTabControl1.Size = new System.Drawing.Size(537, 411);
+            this.xtraTabControl1.Size = new System.Drawing.Size(568, 411);
             this.xtraTabControl1.TabIndex = 0;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPage1,
@@ -803,6 +803,7 @@
             // 
             this.splitContainerControl6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainerControl6.Horizontal = false;
+            this.splitContainerControl6.IsSplitterFixed = true;
             this.splitContainerControl6.Location = new System.Drawing.Point(0, 0);
             this.splitContainerControl6.Name = "splitContainerControl6";
             this.splitContainerControl6.Panel1.Controls.Add(this.simpleButton23);
@@ -877,13 +878,14 @@
             // 
             this.xtraTabPage5.Controls.Add(this.splitContainerControl7);
             this.xtraTabPage5.Name = "xtraTabPage5";
-            this.xtraTabPage5.Size = new System.Drawing.Size(531, 405);
+            this.xtraTabPage5.Size = new System.Drawing.Size(562, 405);
             this.xtraTabPage5.Text = "xtraTabPage5";
             // 
             // splitContainerControl7
             // 
             this.splitContainerControl7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainerControl7.Horizontal = false;
+            this.splitContainerControl7.IsSplitterFixed = true;
             this.splitContainerControl7.Location = new System.Drawing.Point(0, 0);
             this.splitContainerControl7.Name = "splitContainerControl7";
             this.splitContainerControl7.Panel1.Controls.Add(this.spinEdit2);
@@ -894,7 +896,7 @@
             this.splitContainerControl7.Panel1.Text = "Panel1";
             this.splitContainerControl7.Panel2.Controls.Add(this.gridControl4);
             this.splitContainerControl7.Panel2.Text = "Panel2";
-            this.splitContainerControl7.Size = new System.Drawing.Size(531, 405);
+            this.splitContainerControl7.Size = new System.Drawing.Size(562, 405);
             this.splitContainerControl7.SplitterPosition = 51;
             this.splitContainerControl7.TabIndex = 0;
             this.splitContainerControl7.Text = "splitContainerControl7";
@@ -922,7 +924,7 @@
             // 
             // simpleButton18
             // 
-            this.simpleButton18.Location = new System.Drawing.Point(464, 16);
+            this.simpleButton18.Location = new System.Drawing.Point(457, 16);
             this.simpleButton18.Name = "simpleButton18";
             this.simpleButton18.Size = new System.Drawing.Size(90, 21);
             this.simpleButton18.TabIndex = 2;
@@ -939,7 +941,7 @@
             // 
             // simpleButton17
             // 
-            this.simpleButton17.Location = new System.Drawing.Point(345, 16);
+            this.simpleButton17.Location = new System.Drawing.Point(343, 16);
             this.simpleButton17.Name = "simpleButton17";
             this.simpleButton17.Size = new System.Drawing.Size(90, 21);
             this.simpleButton17.TabIndex = 1;
@@ -968,7 +970,7 @@
             this.repositoryItemLookUpEdit1,
             this.repositoryItemLookUpEdit2,
             this.repositoryItemLookUpEdit3});
-            this.gridControl4.Size = new System.Drawing.Size(531, 349);
+            this.gridControl4.Size = new System.Drawing.Size(562, 349);
             this.gridControl4.TabIndex = 0;
             this.gridControl4.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView4});
@@ -1562,7 +1564,7 @@
             this.listBoxControl1.Location = new System.Drawing.Point(0, 0);
             this.listBoxControl1.MaximumSize = new System.Drawing.Size(197, 0);
             this.listBoxControl1.Name = "listBoxControl1";
-            this.listBoxControl1.Size = new System.Drawing.Size(197, 411);
+            this.listBoxControl1.Size = new System.Drawing.Size(191, 411);
             this.listBoxControl1.TabIndex = 0;
             this.listBoxControl1.DoubleClick += new System.EventHandler(this.listBoxControl1_DoubleClick);
             this.listBoxControl1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listBoxControl1_MouseDown);

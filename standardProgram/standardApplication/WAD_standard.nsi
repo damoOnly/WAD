@@ -1,9 +1,9 @@
 ; 该脚本使用 HM VNISEdit 脚本编辑器向导产生
 
 ; 安装程序初始定义常量
-!define PRODUCT_NAME "我的安装程序"
+!define PRODUCT_NAME "新在线配置安装程序"
 !define PRODUCT_VERSION "1.0"
-!define PRODUCT_PUBLISHER "liutao"
+!define PRODUCT_PUBLISHER "WAD"
 !define PRODUCT_WEB_SITE "http://www.mycompany.com"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\standardApplication.exe"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
@@ -16,7 +16,7 @@ SetCompressor lzma
 
 ; MUI 预定义常量
 !define MUI_ABORTWARNING
-!define MUI_ICON "${NSISDIR}\Contrib\Graphics\Icons\modern-install.ico"
+!define MUI_ICON "..\wad_favicon_32.ico"
 !define MUI_UNICON "${NSISDIR}\Contrib\Graphics\Icons\modern-uninstall.ico"
 
 ; 欢迎页面
@@ -24,7 +24,7 @@ SetCompressor lzma
 ; 许可协议页面
 
 ; 组件选择页面
-!insertmacro MUI_PAGE_COMPONENTS
+; !insertmacro MUI_PAGE_COMPONENTS
 ; 安装目录选择页面
 !insertmacro MUI_PAGE_DIRECTORY
 ; 安装过程页面
@@ -44,7 +44,7 @@ SetCompressor lzma
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
 OutFile "WADStandardSetup.exe"
-InstallDir "$PROGRAMFILES\万安迪在线配置软件安装程序"
+InstallDir "$PROGRAMFILES\万安迪在线配置软件"
 InstallDirRegKey HKLM "${PRODUCT_UNINST_KEY}" "UninstallString"
 ShowInstDetails show
 ShowUnInstDetails show
