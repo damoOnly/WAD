@@ -1,26 +1,100 @@
 ﻿<?xml version="1.0"?>
 <CommonConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="CommonConfig">
   <GasName>
-    <DictionaryFieldValue>
-      <Key>可燃气体</Key>
-      <Value>0</Value>
-    </DictionaryFieldValue>
-    <DictionaryFieldValue>
-      <Key>二氧化碳</Key>
-      <Value>1</Value>
-    </DictionaryFieldValue>
-    <DictionaryFieldValue>
-      <Key>一氧化碳</Key>
-      <Value>3</Value>
-    </DictionaryFieldValue>
-    <DictionaryFieldValue>
-      <Key>氧气</Key>
-      <Value>4</Value>
-    </DictionaryFieldValue>
-    <DictionaryFieldValue>
-      <Key>硫化氢</Key>
-      <Value>5</Value>
-    </DictionaryFieldValue>
+<DictionaryFieldValue><Key></Key><Value>0</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>可燃气体</Key><Value>1</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>二氧化碳</Key><Value>2</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>一氧化碳</Key><Value>3</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>氧气</Key><Value>4</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>硫化氢</Key><Value>5</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>氨气</Key><Value>6</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>氢气</Key><Value>7</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>甲醛</Key><Value>8</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>臭氧</Key><Value>9</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>氯气</Key><Value>10</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>氮气</Key><Value>11</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>二氧化硫</Key><Value>12</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>甲烷</Key><Value>13</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>TVOC</Key><Value>14</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>VOC</Key><Value>15</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>VOCs</Key><Value>16</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>PID</Key><Value>17</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>一氧化氮</Key><Value>18</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>二氧化氮</Key><Value>19</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>氮氧化物</Key><Value>20</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>环氧乙烷</Key><Value>21</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>磷化氢</Key><Value>22</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>二氧化氯</Key><Value>23</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>氯化氢</Key><Value>24</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>溴化氢</Key><Value>25</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>氰化氢</Key><Value>26</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>光气</Key><Value>27</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>溴甲烷</Key><Value>28</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>硫酰氟</Key><Value>29</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>苯</Key><Value>30</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>甲苯</Key><Value>31</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>二甲苯</Key><Value>32</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>丙烷</Key><Value>33</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>硅烷</Key><Value>34</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>氟气</Key><Value>35</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>氟化氢</Key><Value>36</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>氦气</Key><Value>37</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>氩气</Key><Value>38</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>乙硼烷</Key><Value>39</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>锗烷</Key><Value>40</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>四氢噻吩</Key><Value>41</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>肼/联氨</Key><Value>42</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>乙烯</Key><Value>43</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>乙烷</Key><Value>44</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>砷化氢</Key><Value>45</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>溴气</Key><Value>46</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>乙炔</Key><Value>47</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>一氧化二氮</Key><Value>48</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>六氟化硫</Key><Value>49</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>三氯化硼</Key><Value>50</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>二硫化碳</Key><Value>51</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>乙醛</Key><Value>52</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>丙烯腈</Key><Value>53</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>丁二烯</Key><Value>54</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>甲醇</Key><Value>55</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>甲胺</Key><Value>56</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>甲硫醇</Key><Value>57</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>甲硫醚</Key><Value>58</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>二甲二硫醚</Key><Value>59</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>氯乙烯</Key><Value>60</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>异丙醇</Key><Value>61</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>乙醇</Key><Value>62</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>丙酮</Key><Value>63</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>丁酮</Key><Value>64</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>氯甲烷</Key><Value>65</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>氯化苄</Key><Value>66</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>二甲胺</Key><Value>67</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>苯乙烯</Key><Value>68</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>丁烷</Key><Value>69</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>碳氢</Key><Value>70</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>乙酸乙酯</Key><Value>71</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>丙烯酸</Key><Value>72</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>乙酸</Key><Value>73</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>过氧化氢</Key><Value>74</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>氧化乙烯</Key><Value>75</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>甲酸苯酯</Key><Value>76</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>二甲基甲酰胺</Key><Value>77</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>二甲基乙酰胺</Key><Value>78</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>硒化氢</Key><Value>79</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>三氯硝基甲烷</Key><Value>80</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>二溴氯甲烷</Key><Value>81</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>正己烷</Key><Value>82</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>异戊烷</Key><Value>83</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>甲基醚</Key><Value>84</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>异氰酸甲酯</Key><Value>85</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>碳酸丙烯酯</Key><Value>86</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>非甲烷总烃</Key><Value>87</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>臭气</Key><Value>88</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>粉尘</Key><Value>89</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>油烟</Key><Value>90</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>烟气</Key><Value>91</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>PM2.5</Key><Value>92</Value></DictionaryFieldValue>
+<DictionaryFieldValue><Key>PM10</Key><Value>93</Value></DictionaryFieldValue>
   </GasName>
   <GasUnit>
     <DictionaryFieldValue>
@@ -44,12 +118,16 @@
       <Value>4</Value>
     </DictionaryFieldValue>
     <DictionaryFieldValue>
-      <Key>g/m3</Key>
+      <Key>%LEL</Key>
       <Value>5</Value>
     </DictionaryFieldValue>
     <DictionaryFieldValue>
-      <Key>%LEL</Key>
+      <Key>umol/mol</Key>
       <Value>6</Value>
+    </DictionaryFieldValue>
+    <DictionaryFieldValue>
+      <Key>nmol/mol</Key>
+      <Value>7</Value>
     </DictionaryFieldValue>
   </GasUnit>
   <Point>
@@ -150,7 +228,7 @@
       <Value>5</Value>
     </DictionaryFieldValue>
     <DictionaryFieldValue>
-      <Key>降雨量</Key>
+      <Key>噪音</Key>
       <Value>6</Value>
     </DictionaryFieldValue>
   </WeatherName>
@@ -172,8 +250,16 @@
       <Value>3</Value>
     </DictionaryFieldValue>
     <DictionaryFieldValue>
-      <Key>Kpa</Key>
+      <Key>kPa</Key>
       <Value>4</Value>
+    </DictionaryFieldValue>
+    <DictionaryFieldValue>
+      <Key>Lux</Key>
+      <Value>5</Value>
+    </DictionaryFieldValue>
+    <DictionaryFieldValue>
+      <Key>dB</Key>
+      <Value>6</Value>
     </DictionaryFieldValue>
   </WeatherUnit>
   <RelayModel>
@@ -224,6 +310,10 @@
     <DictionaryFieldValue>
       <Key>H212协议模式</Key>
       <Value>2</Value>
+    </DictionaryFieldValue>
+    <DictionaryFieldValue>
+      <Key>打印模式</Key>
+      <Value>3</Value>
     </DictionaryFieldValue>
   </SerialPortModel>
   <TimeInterval>1</TimeInterval>
