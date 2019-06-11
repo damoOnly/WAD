@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
             this.splitContainerControl4 = new DevExpress.XtraEditors.SplitContainerControl();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
@@ -145,7 +144,7 @@
             this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.fieldValueBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.fieldValueBindingSource = new System.Windows.Forms.BindingSource();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             this.splitContainerControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl4)).BeginInit();
@@ -604,9 +603,9 @@
             // 
             this.simpleButton23.Location = new System.Drawing.Point(509, 7);
             this.simpleButton23.Name = "simpleButton23";
-            this.simpleButton23.Size = new System.Drawing.Size(64, 21);
+            this.simpleButton23.Size = new System.Drawing.Size(98, 21);
             this.simpleButton23.TabIndex = 4;
-            this.simpleButton23.Text = "读取";
+            this.simpleButton23.Text = "读取全部气体";
             this.simpleButton23.Click += new System.EventHandler(this.simpleButton23_Click);
             // 
             // spinEdit1
@@ -623,7 +622,7 @@
             this.spinEdit1.Properties.IsFloatValue = false;
             this.spinEdit1.Properties.Mask.EditMask = "N00";
             this.spinEdit1.Properties.MaxValue = new decimal(new int[] {
-            12,
+            255,
             0,
             0,
             0});
@@ -634,9 +633,9 @@
             // 
             this.simpleButton12.Location = new System.Drawing.Point(383, 7);
             this.simpleButton12.Name = "simpleButton12";
-            this.simpleButton12.Size = new System.Drawing.Size(64, 21);
+            this.simpleButton12.Size = new System.Drawing.Size(97, 21);
             this.simpleButton12.TabIndex = 1;
-            this.simpleButton12.Text = "设置";
+            this.simpleButton12.Text = "设置气体个数";
             this.simpleButton12.Click += new System.EventHandler(this.simpleButton12_Click);
             // 
             // labelControl10
@@ -687,6 +686,7 @@
             new DevExpress.XtraEditors.Repository.SearchButton()});
             this.searchControl1.Size = new System.Drawing.Size(109, 20);
             this.searchControl1.TabIndex = 0;
+            this.searchControl1.TextChanged += new System.EventHandler(this.searchControl1_TextChanged);
             // 
             // listBoxControl2
             // 

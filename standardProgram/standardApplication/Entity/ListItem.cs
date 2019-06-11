@@ -13,7 +13,7 @@ namespace Entity
 
         public override string ToString()
         {
-            return Name + ". " + Number;
+            return Number + ". " + Name;
         }
     }
 }

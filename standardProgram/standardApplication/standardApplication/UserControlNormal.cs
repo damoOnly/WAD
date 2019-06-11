@@ -37,25 +37,6 @@ namespace standardApplication
             normalParam.DataStorageInterval = (int)spinEdit2.Value;
             normalParam.HotTimeSpan = (ushort)spinEdit3.Value;
             normalParam.IfSoundAlert = checkEdit1.Checked;
-            normalParam.RelayActionTimeSpan1 = (ushort)spinEdit4.Value;
-            normalParam.RelayActionTimeSpan2 = (ushort)spinEdit5.Value;
-            normalParam.RelayActionTimeSpan3 = (ushort)spinEdit6.Value;
-            normalParam.RelayInterval1 = (ushort)spinEdit9.Value;
-            normalParam.RelayInterval2 = (ushort)spinEdit8.Value;
-            normalParam.RelayInterval3 = (ushort)spinEdit7.Value;
-            normalParam.RelayMatchChannel1 = (short)spinEdit10.Value;
-            normalParam.RelayMatchChannel2 = (short)spinEdit11.Value;
-            normalParam.RelayMatchChannel3 = (short)spinEdit12.Value;
-            normalParam.RelayModel1.Name = comboBoxEdit7.Text;
-            normalParam.RelayModel1.Value = Gloab.Config.RelayModel.First(c=>c.Key == comboBoxEdit7.Text).Value;
-            normalParam.RelayModel2.Name = comboBoxEdit9.Text;
-            normalParam.RelayModel2.Value = Gloab.Config.RelayModel.First(c => c.Key == comboBoxEdit9.Text).Value; ;
-            normalParam.RelayModel3.Name = comboBoxEdit10.Text;
-            normalParam.RelayModel3.Value = Gloab.Config.RelayModel.First(c => c.Key == comboBoxEdit10.Text).Value;
-            normalParam.RelayModelA1.Name = comboBoxEdit5.Text;
-            normalParam.RelayModelA1.Value = Gloab.Config.RelayModelA.First(c=>c.Key == comboBoxEdit5.Text).Value;
-            normalParam.RelayModelA2.Name = comboBoxEdit6.Text;
-            normalParam.RelayModelA2.Value = Gloab.Config.RelayModelA.First(c => c.Key == comboBoxEdit6.Text).Value;
             return normalParam;
 
         }
@@ -70,20 +51,6 @@ namespace standardApplication
             spinEdit2.Value = normalParam.DataStorageInterval;
             spinEdit3.Value = normalParam.HotTimeSpan;
             checkEdit1.Checked = normalParam.IfSoundAlert;
-            spinEdit4.Value = normalParam.RelayActionTimeSpan1;
-            spinEdit5.Value = normalParam.RelayActionTimeSpan2;
-            spinEdit6.Value = normalParam.RelayActionTimeSpan3;
-            spinEdit9.Value = normalParam.RelayInterval1;
-            spinEdit8.Value = normalParam.RelayInterval2;
-            spinEdit7.Value = normalParam.RelayInterval3;
-            spinEdit10.Value = normalParam.RelayMatchChannel1;
-            spinEdit11.Value = normalParam.RelayMatchChannel2;
-            spinEdit12.Value = normalParam.RelayMatchChannel3;
-            comboBoxEdit7.Text = normalParam.RelayModel1.Name;
-            comboBoxEdit9.Text = normalParam.RelayModel2.Name;
-            comboBoxEdit10.Text = normalParam.RelayModel3.Name;
-            comboBoxEdit5.Text = normalParam.RelayModelA1.Name;
-            comboBoxEdit6.Text = normalParam.RelayModelA2.Name;
         }
 
         private void UserControlNormal_Load(object sender, EventArgs e)
@@ -92,20 +59,6 @@ namespace standardApplication
             {
                 return;
             }
-            comboBoxEdit5.Properties.Items.Clear();
-            comboBoxEdit5.Properties.Items.AddRange(Gloab.Config.RelayModelA.Select(c=>c.Key).ToArray());
-
-            comboBoxEdit6.Properties.Items.Clear();
-            comboBoxEdit6.Properties.Items.AddRange(Gloab.Config.RelayModelA.Select(c => c.Key).ToArray());
-
-            comboBoxEdit7.Properties.Items.Clear();
-            comboBoxEdit7.Properties.Items.AddRange(Gloab.Config.RelayModel.Select(c => c.Key).ToArray());
-
-            comboBoxEdit9.Properties.Items.Clear();
-            comboBoxEdit9.Properties.Items.AddRange(Gloab.Config.RelayModel.Select(c => c.Key).ToArray());
-
-            comboBoxEdit10.Properties.Items.Clear();
-            comboBoxEdit10.Properties.Items.AddRange(Gloab.Config.RelayModel.Select(c => c.Key).ToArray());
             
             if (Gloab.AllData == null)
             {

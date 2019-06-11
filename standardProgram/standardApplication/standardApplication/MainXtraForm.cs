@@ -544,13 +544,11 @@ namespace standardApplication
         private void SetGasToControl()
         {
             Gloab.AllData.GasTree = Gloab.AllData.GasList.Select(c => new ListItem() { Name = c.GasName.Name, Number = c.GasName.Value }).ToList();
-            listBoxControl2.DataSource = Gloab.AllData.GasTree;
-            listBoxControl2.SelectedIndex = 0;
             spinEdit1.Value = Gloab.AllData.Normal.GasCount;
             gridControl2.DataSource = Gloab.AllData.GasList;
             gridControl2.RefreshDataSource();
-            //showGasControl();
             AdjustGridMinHeight(gridControl2);
+            searchControl1_TextChanged(null, null);
         }
         private void SetNormalToControl()
         {
@@ -926,6 +924,23 @@ namespace standardApplication
 
         private void listBoxControl2_SelectedIndexChanged(object sender, EventArgs e)
         {            
+            showGasControl();
+        }
+
+        private void searchControl1_TextChanged(object sender, EventArgs e)
+        {
+            List<ListItem> show = new List<ListItem>();
+            string txt = searchControl1.Text.Trim();
+            if (string.IsNullOrWhiteSpace(txt))
+            {
+                show.AddRange(Gloab.AllData.GasTree);
+            }
+            else
+            {
+                show = Gloab.AllData.GasTree.Where(c => (c.Name + c.Number).Contains(txt)).ToList();
+            }
+            listBoxControl2.DataSource = show;
+            listBoxControl2.SelectedIndex = 0;
             showGasControl();
         }
     }

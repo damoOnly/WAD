@@ -32,5 +32,6 @@ namespace Entity
         public DateTime OutDate { get; set; }
 
         public List<ListItem> GasTree { get; set; }
+        public List<ListItem> ShowGasTree { get; set; }
     }
 }

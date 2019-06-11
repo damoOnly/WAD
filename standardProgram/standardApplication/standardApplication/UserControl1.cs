@@ -52,16 +52,12 @@ namespace standardApplication
             Gas.GasPoint = new FieldValue() { Name = comboBoxEdit1.Text, Value = Gloab.Config.Point.First(c=>c.Key == comboBoxEdit1.Text).Value };
             Gas.GasRang = float.Parse(textEdit12.Text);
             Gas.GasUnit = new FieldValue() { Name = comboBoxEdit3.Text, Value = Gloab.Config.GasUnit.First(c=>c.Key == comboBoxEdit3.Text).Value };
-            Gas.IfGasAlarm = this.checkEdit1.Checked;
             Gas.OneAD = (int)this.spinEdit6.Value;
             Gas.OneChroma = float.Parse(textEdit5.Text);
             Gas.Show = float.Parse(textEdit11.Text);
-            Gas.ThreeAD = (int)this.spinEdit11.Value;
             Gas.ThreeChroma = float.Parse(textEdit7.Text);
             Gas.TwoAD = (int)this.spinEdit12.Value;
             Gas.TwoChroma = float.Parse(textEdit6.Text);
-            Gas.IfThree = this.checkEdit3.Checked;
-            Gas.IfTwo = this.checkEdit2.Checked;
             Gas.ZeroAD = (int)this.spinEdit7.Value;
             Gas.ZeroChroma = float.Parse(textEdit4.Text);
 
@@ -91,57 +87,22 @@ namespace standardApplication
             this.textEdit12.Text = Gas.GasRang.ToString();
                 //Gas.GasRang <= decimal.ToSingle(decimal.MinValue) || Gas.GasRang >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.GasRang;
             this.comboBoxEdit3.Text = Gas.GasUnit.Name;
-            this.checkEdit1.Checked = Gas.IfGasAlarm;
             this.spinEdit6.Value = Gas.OneAD;
             this.textEdit5.Text = Gas.OneChroma.ToString();
                 //Gas.OneChroma <= decimal.ToSingle(decimal.MinValue) || Gas.OneChroma >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.OneChroma;
             this.textEdit11.Text = Gas.Show.ToString();
                 //Gas.Show <= decimal.ToSingle(decimal.MinValue) || Gas.Show >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.Show;
-            this.spinEdit11.Value = Gas.ThreeAD;
             this.textEdit7.Text = Gas.TwoChroma.ToString();
                 //Gas.ThreeChroma <= decimal.ToSingle(decimal.MinValue) || Gas.ThreeChroma >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.ThreeChroma;
             this.spinEdit12.Value = Gas.TwoAD;
             this.textEdit6.Text = Gas.TwoChroma.ToString();
                 //Gas.TwoChroma <= decimal.ToSingle(decimal.MinValue) || Gas.TwoChroma >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.TwoChroma;
             Gas.IfTwo = Gas.CheckNum >= 3;
-            Gas.IfThree = Gas.CheckNum >= 4;            
-            this.checkEdit2.Checked = Gas.IfTwo;
-            this.checkEdit3.Checked = Gas.IfThree;
+            Gas.IfThree = Gas.CheckNum >= 4;  
             this.textEdit4.Text = Gas.ZeroChroma.ToString();
                 //Gas.ZeroChroma <= decimal.ToSingle(decimal.MinValue) || Gas.ZeroChroma >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.ZeroChroma;
             this.spinEdit7.Value = Gas.ZeroAD;
-
-            checkEdit1_CheckedChanged(null, null);
-            checkEdit3_CheckedChanged(null, null);
         }
-
-        //public Dictionary<string, int> Unit
-        //{
-        //    set 
-        //    {
-        //        comboBoxEdit3.Properties.Items.Clear();
-        //        comboBoxEdit3.Properties.Items.AddRange(value.Keys);
-        //    }
-        //}
-
-        //public Dictionary<string, int> Point
-        //{
-        //    set
-        //    {
-        //        comboBoxEdit1.Properties.Items.Clear();
-        //        comboBoxEdit1.Properties.Items.AddRange(value.Keys);
-        //    }
-        //}
-
-        //public Dictionary<string, int> AlertModel
-        //{
-        //    set
-        //    {
-        //        comboBoxEdit2.Properties.Items.Clear();
-        //        comboBoxEdit2.Properties.Items.AddRange(value.Keys);
-        //    }
-        //}
-
 
         public UserControl1()
         {
@@ -193,54 +154,7 @@ namespace standardApplication
         {
             //GetGas();
         }
-
-        private void checkEdit1_CheckedChanged(object sender, EventArgs e)
-        {
-            //GetGas();
-            if (!checkEdit2.Checked)
-            {
-                simpleButton5.Enabled = false;
-                simpleButton6.Enabled = false;
-                simpleButton7.Enabled = false;
-                textEdit6.Enabled = false;
-                spinEdit12.Enabled = false;
-
-                checkEdit3.Checked = false;
-            }
-            else
-            {
-                simpleButton5.Enabled = true;
-                simpleButton6.Enabled = true;
-                simpleButton7.Enabled = true;
-                textEdit6.Enabled = true;
-                spinEdit12.Enabled = true;
-            }
-
-            
-        }
-
-        private void checkEdit3_CheckedChanged(object sender, EventArgs e)
-        {
-            if (!checkEdit3.Checked)
-            {
-                simpleButton8.Enabled = false;
-                simpleButton9.Enabled = false;
-                simpleButton10.Enabled = false;
-                textEdit7.Enabled = false;
-                spinEdit11.Enabled = false;
-            }
-            else
-            {
-                simpleButton8.Enabled = true;
-                simpleButton9.Enabled = true;
-                simpleButton10.Enabled = true;
-                textEdit7.Enabled = true;
-                spinEdit11.Enabled = true;
-
-                checkEdit2.Checked = true;
-            }
-        }
-
+        
         private void simpleButton11_Click(object sender, EventArgs e)
         {
             WaitDialogForm wdf = new WaitDialogForm("命令执行中，请稍候......");
@@ -303,7 +217,7 @@ namespace standardApplication
 
         public bool CheckIsSampling()
         {
-            if (simpleButton2.Text == "停止" || simpleButton7.Text == "停止" || simpleButton10.Text == "停止" || simpleButton16.Text == "停止")
+            if (simpleButton2.Text == "停止" || simpleButton7.Text == "停止" || simpleButton16.Text == "停止")
             {
                 XtraMessageBox.Show("请先停止采样");
                 return true;
@@ -417,41 +331,6 @@ namespace standardApplication
             {
                 GasInstruction.StopSample();
                 simpleButton7.Text = "采样";
-                Callback("停止采样");
-            }
-        }
-
-        private void simpleButton10_Click(object sender, EventArgs e)
-        {
-            if (simpleButton10.Text == "采样")
-            {
-                if (CheckIsSampling())
-                {
-                    return;
-                }
-                simpleButton10.Text = "停止";
-                try
-                {
-                    GasInstruction.StartSample(Gloab.AllData.Address, GasID, EnumChromaLevel.Three, Sampling, CommandCallback);
-                    Callback("开始采样");
-                }
-                catch (CommandException ex)
-                {
-                    Callback("采样失败");
-                    XtraMessageBox.Show(ex.Message);
-                    simpleButton10.Text = "采样";
-                }
-                catch (Exception ecp)
-                {
-                    log.Error(ecp);
-                    simpleButton10.Text = "采样";
-                    Callback("采样失败");
-                }
-            }
-            else
-            {
-                GasInstruction.StopSample();
-                simpleButton10.Text = "采样";
                 Callback("停止采样");
             }
         }
