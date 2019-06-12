@@ -33,7 +33,7 @@ namespace standardApplication
         public void SetRelayToControl(RelayEntity relay)
         {
             number = relay.Number;
-            labelControl17.Text = "继电器" + relay.Number + "模式";
+            labelControl17.Text = "继电器：" + relay.Number + "模式";
             comboBoxEdit7.Text = relay.RelayModel.Name;
             spinEdit10.Value = relay.RelayMatchChannel;
             spinEdit4.Value = relay.RelayInterval;

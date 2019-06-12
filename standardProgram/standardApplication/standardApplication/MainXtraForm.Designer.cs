@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
             this.splitContainerControl4 = new DevExpress.XtraEditors.SplitContainerControl();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
@@ -144,7 +145,7 @@
             this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.fieldValueBindingSource = new System.Windows.Forms.BindingSource();
+            this.fieldValueBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             this.splitContainerControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl4)).BeginInit();
@@ -584,24 +585,21 @@
             // splitContainerControl6
             // 
             this.splitContainerControl6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerControl6.Horizontal = false;
+            this.splitContainerControl6.IsSplitterFixed = true;
             this.splitContainerControl6.Location = new System.Drawing.Point(0, 0);
             this.splitContainerControl6.Name = "splitContainerControl6";
-            this.splitContainerControl6.Panel1.Controls.Add(this.simpleButton23);
-            this.splitContainerControl6.Panel1.Controls.Add(this.spinEdit1);
-            this.splitContainerControl6.Panel1.Controls.Add(this.simpleButton12);
-            this.splitContainerControl6.Panel1.Controls.Add(this.labelControl10);
+            this.splitContainerControl6.Panel1.Controls.Add(this.splitContainerControl7);
             this.splitContainerControl6.Panel1.Text = "Panel1";
             this.splitContainerControl6.Panel2.Controls.Add(this.splitContainerControl5);
             this.splitContainerControl6.Panel2.Text = "Panel2";
             this.splitContainerControl6.Size = new System.Drawing.Size(764, 383);
-            this.splitContainerControl6.SplitterPosition = 37;
+            this.splitContainerControl6.SplitterPosition = 150;
             this.splitContainerControl6.TabIndex = 0;
             this.splitContainerControl6.Text = "splitContainerControl6";
             // 
             // simpleButton23
             // 
-            this.simpleButton23.Location = new System.Drawing.Point(509, 7);
+            this.simpleButton23.Location = new System.Drawing.Point(419, 11);
             this.simpleButton23.Name = "simpleButton23";
             this.simpleButton23.Size = new System.Drawing.Size(98, 21);
             this.simpleButton23.TabIndex = 4;
@@ -615,7 +613,7 @@
             0,
             0,
             0});
-            this.spinEdit1.Location = new System.Drawing.Point(269, 8);
+            this.spinEdit1.Location = new System.Drawing.Point(179, 12);
             this.spinEdit1.Name = "spinEdit1";
             this.spinEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -631,7 +629,7 @@
             // 
             // simpleButton12
             // 
-            this.simpleButton12.Location = new System.Drawing.Point(383, 7);
+            this.simpleButton12.Location = new System.Drawing.Point(293, 11);
             this.simpleButton12.Name = "simpleButton12";
             this.simpleButton12.Size = new System.Drawing.Size(97, 21);
             this.simpleButton12.TabIndex = 1;
@@ -640,7 +638,7 @@
             // 
             // labelControl10
             // 
-            this.labelControl10.Location = new System.Drawing.Point(181, 11);
+            this.labelControl10.Location = new System.Drawing.Point(91, 15);
             this.labelControl10.Name = "labelControl10";
             this.labelControl10.Size = new System.Drawing.Size(84, 13);
             this.labelControl10.TabIndex = 0;
@@ -649,14 +647,19 @@
             // splitContainerControl5
             // 
             this.splitContainerControl5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerControl5.Horizontal = false;
+            this.splitContainerControl5.IsSplitterFixed = true;
             this.splitContainerControl5.Location = new System.Drawing.Point(0, 0);
             this.splitContainerControl5.Name = "splitContainerControl5";
-            this.splitContainerControl5.Panel1.Controls.Add(this.splitContainerControl7);
+            this.splitContainerControl5.Panel1.Controls.Add(this.simpleButton23);
+            this.splitContainerControl5.Panel1.Controls.Add(this.labelControl10);
+            this.splitContainerControl5.Panel1.Controls.Add(this.spinEdit1);
+            this.splitContainerControl5.Panel1.Controls.Add(this.simpleButton12);
             this.splitContainerControl5.Panel1.Text = "Panel1";
             this.splitContainerControl5.Panel2.Controls.Add(this.userControl11);
             this.splitContainerControl5.Panel2.Text = "Panel2";
-            this.splitContainerControl5.Size = new System.Drawing.Size(764, 341);
-            this.splitContainerControl5.SplitterPosition = 109;
+            this.splitContainerControl5.Size = new System.Drawing.Size(609, 383);
+            this.splitContainerControl5.SplitterPosition = 43;
             this.splitContainerControl5.TabIndex = 0;
             this.splitContainerControl5.Text = "splitContainerControl5";
             // 
@@ -671,20 +674,22 @@
             this.splitContainerControl7.Panel1.Text = "Panel1";
             this.splitContainerControl7.Panel2.Controls.Add(this.listBoxControl2);
             this.splitContainerControl7.Panel2.Text = "Panel2";
-            this.splitContainerControl7.Size = new System.Drawing.Size(109, 341);
-            this.splitContainerControl7.SplitterPosition = 22;
+            this.splitContainerControl7.Size = new System.Drawing.Size(150, 383);
+            this.splitContainerControl7.SplitterPosition = 28;
             this.splitContainerControl7.TabIndex = 0;
             this.splitContainerControl7.Text = "splitContainerControl7";
             // 
             // searchControl1
             // 
-            this.searchControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.searchControl1.Location = new System.Drawing.Point(0, 0);
+            this.searchControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.searchControl1.Location = new System.Drawing.Point(0, 4);
             this.searchControl1.Name = "searchControl1";
+            this.searchControl1.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11F);
+            this.searchControl1.Properties.Appearance.Options.UseFont = true;
             this.searchControl1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Repository.ClearButton(),
             new DevExpress.XtraEditors.Repository.SearchButton()});
-            this.searchControl1.Size = new System.Drawing.Size(109, 20);
+            this.searchControl1.Size = new System.Drawing.Size(150, 24);
             this.searchControl1.TabIndex = 0;
             this.searchControl1.TextChanged += new System.EventHandler(this.searchControl1_TextChanged);
             // 
@@ -693,7 +698,7 @@
             this.listBoxControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBoxControl2.Location = new System.Drawing.Point(0, 0);
             this.listBoxControl2.Name = "listBoxControl2";
-            this.listBoxControl2.Size = new System.Drawing.Size(109, 314);
+            this.listBoxControl2.Size = new System.Drawing.Size(150, 350);
             this.listBoxControl2.TabIndex = 0;
             this.listBoxControl2.SelectedIndexChanged += new System.EventHandler(this.listBoxControl2_SelectedIndexChanged);
             // 
@@ -704,7 +709,7 @@
             this.userControl11.GasID = 0;
             this.userControl11.Location = new System.Drawing.Point(0, 0);
             this.userControl11.Name = "userControl11";
-            this.userControl11.Size = new System.Drawing.Size(650, 341);
+            this.userControl11.Size = new System.Drawing.Size(609, 335);
             this.userControl11.TabIndex = 0;
             // 
             // xtraTabPage6

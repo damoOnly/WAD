@@ -48,6 +48,7 @@
     <Compile Include="NormalParamEntity.cs" />
     <Compile Include="NormalParamEntityForList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RelayEntity.cs" />
     <Compile Include="SerialEntity.cs" />
     <Compile Include="WeatherEntity.cs" />
   </ItemGroup>

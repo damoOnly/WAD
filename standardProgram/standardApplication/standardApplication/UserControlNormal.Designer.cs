@@ -28,9 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.simpleButton16 = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton15 = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton14 = new DevExpress.XtraEditors.SimpleButton();
             this.checkEdit1 = new DevExpress.XtraEditors.CheckEdit();
             this.labelControl14 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl13 = new DevExpress.XtraEditors.LabelControl();
@@ -41,42 +38,24 @@
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
+            this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
+            this.splitContainerControl2 = new DevExpress.XtraEditors.SplitContainerControl();
+            this.simpleButton16 = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButton15 = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButton14 = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit3.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
+            this.splitContainerControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2)).BeginInit();
+            this.splitContainerControl2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // simpleButton16
-            // 
-            this.simpleButton16.Location = new System.Drawing.Point(446, 374);
-            this.simpleButton16.Name = "simpleButton16";
-            this.simpleButton16.Size = new System.Drawing.Size(105, 25);
-            this.simpleButton16.TabIndex = 75;
-            this.simpleButton16.Text = "保存配置";
-            this.simpleButton16.Click += new System.EventHandler(this.simpleButton16_Click);
-            // 
-            // simpleButton15
-            // 
-            this.simpleButton15.Location = new System.Drawing.Point(245, 374);
-            this.simpleButton15.Name = "simpleButton15";
-            this.simpleButton15.Size = new System.Drawing.Size(105, 25);
-            this.simpleButton15.TabIndex = 74;
-            this.simpleButton15.Text = "设置";
-            this.simpleButton15.Click += new System.EventHandler(this.simpleButton15_Click);
-            // 
-            // simpleButton14
-            // 
-            this.simpleButton14.Location = new System.Drawing.Point(52, 374);
-            this.simpleButton14.Name = "simpleButton14";
-            this.simpleButton14.Size = new System.Drawing.Size(105, 25);
-            this.simpleButton14.TabIndex = 73;
-            this.simpleButton14.Text = "读取";
-            this.simpleButton14.Click += new System.EventHandler(this.simpleButton14_Click);
             // 
             // checkEdit1
             // 
-            this.checkEdit1.Location = new System.Drawing.Point(89, 46);
+            this.checkEdit1.Location = new System.Drawing.Point(605, 21);
             this.checkEdit1.Name = "checkEdit1";
             this.checkEdit1.Properties.Caption = " 声光报警开关";
             this.checkEdit1.Size = new System.Drawing.Size(106, 19);
@@ -84,7 +63,7 @@
             // 
             // labelControl14
             // 
-            this.labelControl14.Location = new System.Drawing.Point(199, 11);
+            this.labelControl14.Location = new System.Drawing.Point(205, 23);
             this.labelControl14.Name = "labelControl14";
             this.labelControl14.Size = new System.Drawing.Size(84, 13);
             this.labelControl14.TabIndex = 51;
@@ -92,7 +71,7 @@
             // 
             // labelControl13
             // 
-            this.labelControl13.Location = new System.Drawing.Point(424, 11);
+            this.labelControl13.Location = new System.Drawing.Point(430, 23);
             this.labelControl13.Name = "labelControl13";
             this.labelControl13.Size = new System.Drawing.Size(60, 13);
             this.labelControl13.TabIndex = 49;
@@ -100,7 +79,7 @@
             // 
             // labelControl12
             // 
-            this.labelControl12.Location = new System.Drawing.Point(5, 11);
+            this.labelControl12.Location = new System.Drawing.Point(11, 23);
             this.labelControl12.Name = "labelControl12";
             this.labelControl12.Size = new System.Drawing.Size(84, 13);
             this.labelControl12.TabIndex = 47;
@@ -113,7 +92,7 @@
             0,
             0,
             0});
-            this.spinEdit1.Location = new System.Drawing.Point(482, 8);
+            this.spinEdit1.Location = new System.Drawing.Point(488, 20);
             this.spinEdit1.Name = "spinEdit1";
             this.spinEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -139,7 +118,7 @@
             0,
             0,
             0});
-            this.spinEdit2.Location = new System.Drawing.Point(283, 8);
+            this.spinEdit2.Location = new System.Drawing.Point(289, 20);
             this.spinEdit2.Name = "spinEdit2";
             this.spinEdit2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -160,7 +139,7 @@
             0,
             0,
             0});
-            this.spinEdit3.Location = new System.Drawing.Point(89, 8);
+            this.spinEdit3.Location = new System.Drawing.Point(95, 20);
             this.spinEdit3.Name = "spinEdit3";
             this.spinEdit3.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -176,7 +155,7 @@
             // 
             // labelControl1
             // 
-            this.labelControl1.Location = new System.Drawing.Point(390, 11);
+            this.labelControl1.Location = new System.Drawing.Point(396, 23);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(12, 13);
             this.labelControl1.TabIndex = 96;
@@ -184,7 +163,7 @@
             // 
             // labelControl2
             // 
-            this.labelControl2.Location = new System.Drawing.Point(557, 11);
+            this.labelControl2.Location = new System.Drawing.Point(563, 23);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(24, 13);
             this.labelControl2.TabIndex = 97;
@@ -192,46 +171,105 @@
             // 
             // labelControl3
             // 
-            this.labelControl3.Location = new System.Drawing.Point(180, 11);
+            this.labelControl3.Location = new System.Drawing.Point(186, 23);
             this.labelControl3.Name = "labelControl3";
             this.labelControl3.Size = new System.Drawing.Size(12, 13);
             this.labelControl3.TabIndex = 98;
             this.labelControl3.Text = "秒";
             // 
+            // splitContainerControl1
+            // 
+            this.splitContainerControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerControl1.FixedPanel = DevExpress.XtraEditors.SplitFixedPanel.Panel2;
+            this.splitContainerControl1.Horizontal = false;
+            this.splitContainerControl1.IsSplitterFixed = true;
+            this.splitContainerControl1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerControl1.Name = "splitContainerControl1";
+            this.splitContainerControl1.Panel1.Controls.Add(this.splitContainerControl2);
+            this.splitContainerControl1.Panel1.Text = "Panel1";
+            this.splitContainerControl1.Panel2.Controls.Add(this.simpleButton16);
+            this.splitContainerControl1.Panel2.Controls.Add(this.simpleButton15);
+            this.splitContainerControl1.Panel2.Controls.Add(this.simpleButton14);
+            this.splitContainerControl1.Panel2.Text = "Panel2";
+            this.splitContainerControl1.Size = new System.Drawing.Size(706, 420);
+            this.splitContainerControl1.SplitterPosition = 51;
+            this.splitContainerControl1.TabIndex = 100;
+            this.splitContainerControl1.Text = "splitContainerControl1";
+            // 
+            // splitContainerControl2
+            // 
+            this.splitContainerControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerControl2.Horizontal = false;
+            this.splitContainerControl2.IsSplitterFixed = true;
+            this.splitContainerControl2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerControl2.Name = "splitContainerControl2";
+            this.splitContainerControl2.Panel1.Controls.Add(this.labelControl14);
+            this.splitContainerControl2.Panel1.Controls.Add(this.spinEdit1);
+            this.splitContainerControl2.Panel1.Controls.Add(this.labelControl3);
+            this.splitContainerControl2.Panel1.Controls.Add(this.checkEdit1);
+            this.splitContainerControl2.Panel1.Controls.Add(this.spinEdit2);
+            this.splitContainerControl2.Panel1.Controls.Add(this.spinEdit3);
+            this.splitContainerControl2.Panel1.Controls.Add(this.labelControl2);
+            this.splitContainerControl2.Panel1.Controls.Add(this.labelControl13);
+            this.splitContainerControl2.Panel1.Controls.Add(this.labelControl12);
+            this.splitContainerControl2.Panel1.Controls.Add(this.labelControl1);
+            this.splitContainerControl2.Panel1.Text = "Panel1";
+            this.splitContainerControl2.Panel2.AutoScroll = true;
+            this.splitContainerControl2.Panel2.Text = "Panel2";
+            this.splitContainerControl2.Size = new System.Drawing.Size(706, 364);
+            this.splitContainerControl2.SplitterPosition = 40;
+            this.splitContainerControl2.TabIndex = 100;
+            this.splitContainerControl2.Text = "splitContainerControl2";
+            // 
+            // simpleButton16
+            // 
+            this.simpleButton16.Location = new System.Drawing.Point(462, 13);
+            this.simpleButton16.Name = "simpleButton16";
+            this.simpleButton16.Size = new System.Drawing.Size(105, 25);
+            this.simpleButton16.TabIndex = 78;
+            this.simpleButton16.Text = "保存配置";
+            this.simpleButton16.Click += new System.EventHandler(this.simpleButton16_Click);
+            // 
+            // simpleButton15
+            // 
+            this.simpleButton15.Location = new System.Drawing.Point(261, 13);
+            this.simpleButton15.Name = "simpleButton15";
+            this.simpleButton15.Size = new System.Drawing.Size(105, 25);
+            this.simpleButton15.TabIndex = 77;
+            this.simpleButton15.Text = "设置";
+            this.simpleButton15.Click += new System.EventHandler(this.simpleButton15_Click);
+            // 
+            // simpleButton14
+            // 
+            this.simpleButton14.Location = new System.Drawing.Point(68, 13);
+            this.simpleButton14.Name = "simpleButton14";
+            this.simpleButton14.Size = new System.Drawing.Size(105, 25);
+            this.simpleButton14.TabIndex = 76;
+            this.simpleButton14.Text = "读取";
+            this.simpleButton14.Click += new System.EventHandler(this.simpleButton14_Click);
+            // 
             // UserControlNormal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.labelControl3);
-            this.Controls.Add(this.labelControl2);
-            this.Controls.Add(this.labelControl1);
-            this.Controls.Add(this.spinEdit3);
-            this.Controls.Add(this.spinEdit2);
-            this.Controls.Add(this.spinEdit1);
-            this.Controls.Add(this.simpleButton16);
-            this.Controls.Add(this.simpleButton15);
-            this.Controls.Add(this.simpleButton14);
-            this.Controls.Add(this.checkEdit1);
-            this.Controls.Add(this.labelControl14);
-            this.Controls.Add(this.labelControl13);
-            this.Controls.Add(this.labelControl12);
+            this.Controls.Add(this.splitContainerControl1);
             this.Name = "UserControlNormal";
-            this.Size = new System.Drawing.Size(635, 420);
+            this.Size = new System.Drawing.Size(706, 420);
             this.Load += new System.EventHandler(this.UserControlNormal_Load);
             ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit3.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();
+            this.splitContainerControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2)).EndInit();
+            this.splitContainerControl2.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private DevExpress.XtraEditors.SimpleButton simpleButton16;
-        private DevExpress.XtraEditors.SimpleButton simpleButton15;
-        private DevExpress.XtraEditors.SimpleButton simpleButton14;
         private DevExpress.XtraEditors.CheckEdit checkEdit1;
         private DevExpress.XtraEditors.LabelControl labelControl14;
         private DevExpress.XtraEditors.LabelControl labelControl13;
@@ -242,5 +280,10 @@
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.LabelControl labelControl3;
+        private DevExpress.XtraEditors.SplitContainerControl splitContainerControl1;
+        private DevExpress.XtraEditors.SimpleButton simpleButton16;
+        private DevExpress.XtraEditors.SimpleButton simpleButton15;
+        private DevExpress.XtraEditors.SimpleButton simpleButton14;
+        private DevExpress.XtraEditors.SplitContainerControl splitContainerControl2;
     }
 }

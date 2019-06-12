@@ -37,6 +37,16 @@ namespace standardApplication
             normalParam.DataStorageInterval = (int)spinEdit2.Value;
             normalParam.HotTimeSpan = (ushort)spinEdit3.Value;
             normalParam.IfSoundAlert = checkEdit1.Checked;
+            for (int i = 0; i < normalParam.Relays.Count; i++)
+            {
+                var item = normalParam.Relays[i];
+                Control[] rs = splitContainerControl2.Panel2.Controls.Find("UserControlRelay" + item.Number, true);
+                if (rs != null && rs.Length > 0)
+                {
+                    UserControlRelay r = rs[0] as UserControlRelay;
+                    item = r.GetRelayFromControl();
+                }
+            }
             return normalParam;
 
         }
@@ -51,6 +61,17 @@ namespace standardApplication
             spinEdit2.Value = normalParam.DataStorageInterval;
             spinEdit3.Value = normalParam.HotTimeSpan;
             checkEdit1.Checked = normalParam.IfSoundAlert;
+
+            foreach (var item in normalParam.Relays)
+            {
+                Control[] rs = splitContainerControl2.Panel2.Controls.Find("UserControlRelay" + item.Number, true);
+                if (rs != null && rs.Length > 0)
+                {
+                    UserControlRelay r = rs[0] as UserControlRelay;
+                    r.SetRelayToControl(item);
+                }
+                
+            }
         }
 
         private void UserControlNormal_Load(object sender, EventArgs e)
@@ -65,6 +86,15 @@ namespace standardApplication
                 return;
             }
             normalParam = Gloab.AllData.Normal;
+
+            for (int i = normalParam.Relays.Count-1; i >= 0; i--)
+            {
+                UserControlRelay r = new UserControlRelay();
+                r.Dock = DockStyle.Top;
+                r.Name = "UserControlRelay" + normalParam.Relays[i].Number;
+
+                splitContainerControl2.Panel2.Controls.Add(r);
+            }
 
             SetNormalToControl();
         }
@@ -155,8 +185,7 @@ namespace standardApplication
                 SaveModelFileEvent(this, new EventArgs());
             }
         }
-
-
+        
 
     }
 }

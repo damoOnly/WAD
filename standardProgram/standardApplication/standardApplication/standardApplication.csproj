@@ -141,6 +141,12 @@
     <Compile Include="UserControlNormal.Designer.cs">
       <DependentUpon>UserControlNormal.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControlRelay.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlRelay.Designer.cs">
+      <DependentUpon>UserControlRelay.cs</DependentUpon>
+    </Compile>
     <Compile Include="XmlSerializerProvider.cs" />
     <EmbeddedResource Include="ChangeAdderss.resx">
       <DependentUpon>ChangeAdderss.cs</DependentUpon>
@@ -166,6 +172,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControlNormal.resx">
       <DependentUpon>UserControlNormal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlRelay.resx">
+      <DependentUpon>UserControlRelay.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\DataSources\Entity.FieldValue.datasource" />
     <None Include="Properties\Settings.settings">

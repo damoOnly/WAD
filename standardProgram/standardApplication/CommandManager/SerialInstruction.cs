@@ -91,14 +91,14 @@ namespace CommandManager
             }
             content.AddRange(bytePW2);
 
-            byte[] sendb = Command.GetWiteSendByte(address, 0x00, 0x36, content.ToArray());
+            byte[] sendb = Command.GetWiteSendByte(address, 0x00, 0x1b, content.ToArray());
             callback(string.Format("T: {0}", CommandUnits.ByteToHexStr(sendb)));
             PLAASerialPort.Write(sendb);
         }
 
         public static SerialEntity ReadSerialParam(byte address, CommonConfig config, Action<string> callback)
         {
-            byte[] sendb = Command.GetReadSendByte(address, 0x00, 0x36, 82);
+            byte[] sendb = Command.GetReadSendByte(address, 0x00, 0x1b, 82);
             callback(string.Format("T: {0}", CommandUnits.ByteToHexStr(sendb)));
             byte[] rbytes = PLAASerialPort.Read(sendb);
             callback(string.Format("R: {0}", CommandUnits.ByteToHexStr(rbytes)));

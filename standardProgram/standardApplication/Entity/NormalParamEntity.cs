@@ -11,12 +11,9 @@ namespace Entity
         public NormalParamEntity()
         {
             GasCount = 1;
-            WeatherCount = 1;
             HotTimeSpan = 10;
             DataStorageInterval = 20;
-            CurveTimeSpan = 30;
             IfSoundAlert = true;
-            AlertDelay = 10;
             Relays = new List<RelayEntity>();
             for (int i = 1; i <= 10; i++)
             {
@@ -31,12 +28,9 @@ namespace Entity
             }
         }
         public short GasCount { get; set; }
-        public short WeatherCount { get; set; }
         public ushort HotTimeSpan { get; set; }
         public int DataStorageInterval { get; set; }
-        public ushort CurveTimeSpan { get; set; }
         public bool IfSoundAlert { get; set; }
-        public ushort AlertDelay { get; set; }
         public List<RelayEntity> Relays { get; set; }
 
 
@@ -44,9 +38,7 @@ namespace Entity
         {
             List<NormalParamEntityForList> normalList = new List<NormalParamEntityForList>() { };
 
-            normalList.Add(new NormalParamEntityForList() { Name1 = "气体通道数：", Value1 = this.GasCount.ToString(), Name2 = "气象通道数：", Value2 = this.WeatherCount.ToString(), Name3 = "声光报警开关:", Value3 = this.IfSoundAlert ? "打开" : "关闭", Name4 = "报警延时(秒):", Value4 = this.AlertDelay.ToString() });
-
-            normalList.Add(new NormalParamEntityForList() { Name1 = "预热时间(秒):", Value1 = this.HotTimeSpan.ToString(), Name2 = "数据存储间隔(秒):", Value2 = this.DataStorageInterval.ToString(), Name3 = "曲线时长(分):", Value3 = this.CurveTimeSpan.ToString() });
+            normalList.Add(new NormalParamEntityForList() { Name1 = "气体通道数：", Value1 = this.GasCount.ToString(), Name2 = "声光报警开关:", Value2 = this.IfSoundAlert ? "打开" : "关闭", Name3 = "预热时间(秒):", Value3 = this.HotTimeSpan.ToString(), Name4 = "数据存储间隔(秒):", Value4 = this.DataStorageInterval.ToString() });
 
             foreach (var item in this.Relays)
             {
