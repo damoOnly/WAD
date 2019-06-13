@@ -29,7 +29,7 @@ namespace CommandManager
             }
             content.AddRange(byteFactor);
             content.Add(0);
-            content.AddRange(BitConverter.GetBytes(gas.IfGasAlarm));
+            content.Add(0);
             content.AddRange(BitConverter.GetBytes(gas.AlertModel.Value).Reverse());
             byteTemp = BitConverter.GetBytes(gas.GasA1);
             Array.Reverse(byteTemp, 0, 2);
@@ -39,36 +39,66 @@ namespace CommandManager
             Array.Reverse(byteTemp, 0, 2);
             Array.Reverse(byteTemp, 2, 2);
             content.AddRange(byteTemp);
-            content.AddRange(new byte[8]);
-            byteTemp = BitConverter.GetBytes(gas.Compensation);
-            Array.Reverse(byteTemp, 0, 2);
-            Array.Reverse(byteTemp, 2, 2);
-            content.AddRange(byteTemp);
-            byteTemp = BitConverter.GetBytes(gas.Show);
-            Array.Reverse(byteTemp, 0, 2);
-            Array.Reverse(byteTemp, 2, 2);
-            content.AddRange(byteTemp);
-            if (gas.IfThree)
+            content.AddRange(new byte[9]);
+            content.Add(gas.ProbeAddress);
+            content.Add(0);
+            content.Add(gas.ProbeChannel);
+            byteTemp = ASCIIEncoding.ASCII.GetBytes(gas.qu.Trim());
+            if (byteTemp.Length == 2)
             {
-                gas.CheckNum = 0x04;
+                content.AddRange(byteTemp.Reverse());
             }
-            else if (gas.IfTwo)
+            else if (byteTemp.Length ==1)
             {
-                gas.CheckNum = 0x03;
+                content.Add(0);
+                content.AddRange(byteTemp);
             }
             else
             {
-                gas.CheckNum = 0x02;
+                content.AddRange(new byte[2]);
             }
-            content.AddRange(new byte[2] { 0x00, gas.CheckNum });
-            byteTemp = BitConverter.GetBytes(gas.ZeroAD);
-            Array.Reverse(byteTemp, 0, 2);
-            Array.Reverse(byteTemp, 2, 2);
-            content.AddRange(byteTemp);
-            byteTemp = BitConverter.GetBytes(gas.ZeroChroma);
-            Array.Reverse(byteTemp, 0, 2);
-            Array.Reverse(byteTemp, 2, 2);
-            content.AddRange(byteTemp);
+            byteTemp = ASCIIEncoding.ASCII.GetBytes(gas.dong.Trim());
+            if (byteTemp.Length == 2)
+            {
+                content.AddRange(byteTemp.Reverse());
+            }
+            else if (byteTemp.Length == 1)
+            {
+                content.Add(0);
+                content.AddRange(byteTemp);
+            }
+            else
+            {
+                content.AddRange(new byte[2]);
+            }
+            byteTemp = ASCIIEncoding.ASCII.GetBytes(gas.ceng.Trim());
+            if (byteTemp.Length == 2)
+            {
+                content.AddRange(byteTemp.Reverse());
+            }
+            else if (byteTemp.Length == 1)
+            {
+                content.Add(0);
+                content.AddRange(byteTemp);
+            }
+            else
+            {
+                content.AddRange(new byte[2]);
+            }
+            byteTemp = ASCIIEncoding.ASCII.GetBytes(gas.hao.Trim());
+            if (byteTemp.Length == 2)
+            {
+                content.AddRange(byteTemp.Reverse());
+            }
+            else if (byteTemp.Length == 1)
+            {
+                content.Add(0);
+                content.AddRange(byteTemp);
+            }
+            else
+            {
+                content.AddRange(new byte[2]);
+            }
             byteTemp = BitConverter.GetBytes(gas.OneAD);
             Array.Reverse(byteTemp, 0, 2);
             Array.Reverse(byteTemp, 2, 2);
@@ -93,22 +123,10 @@ namespace CommandManager
             Array.Reverse(byteTemp, 0, 2);
             Array.Reverse(byteTemp, 2, 2);
             content.AddRange(byteTemp);
-            //content.AddRange(new byte[22]);
-            //byteTemp = BitConverter.GetBytes(gas.CurrentAD);
-            //Array.Reverse(byteTemp, 0, 2);
-            //Array.Reverse(byteTemp, 2, 2);
-            //content.AddRange(byteTemp);
-            //byteTemp = BitConverter.GetBytes(gas.CurrentChroma);
-            //Array.Reverse(byteTemp, 0, 2);
-            //Array.Reverse(byteTemp, 2, 2);
-            //content.AddRange(byteTemp);
-            //content.AddRange(BitConverter.GetBytes(gas.AlertStatus.Value).Reverse());
 
             byte[] sendb = Command.GetWiteSendByte(address, (byte)gas.GasID, 0x10, content.ToArray());
             callback(string.Format("W: {0}", CommandUnits.ByteToHexStr(sendb)));
             PLAASerialPort.Write(sendb);
-
-            //WriteCurrent(gas.GasID, address, gas);
         }
 
         public static List<GasEntity> ReadGasList(byte address, CommonConfig config, Action<string> callback)
@@ -128,7 +146,7 @@ namespace CommandManager
 
         public static GasEntity ReadGas(int gasId, byte address, CommonConfig config, Action<string> callback)
         {
-            byte[] sendb = Command.GetReadSendByte(address, (byte)gasId, 0x10, 42);
+            byte[] sendb = Command.GetReadSendByte(address, (byte)gasId, 0x10, 39);
             callback(string.Format("W: {0}", CommandUnits.ByteToHexStr(sendb)));
             byte[] rbytes = PLAASerialPort.Read(sendb);
             callback(string.Format("R: {0}", CommandUnits.ByteToHexStr(rbytes)));
@@ -157,7 +175,7 @@ namespace CommandManager
             }
             // to do test
             gas.Factor = ASCIIEncoding.ASCII.GetString(byteTemp.ToArray());
-            gas.IfGasAlarm = BitConverter.ToBoolean(rbytes, 26);
+            
             Array.Reverse(rbytes, 27, 2);
             gas.AlertModel.Value = BitConverter.ToInt16(rbytes, 27);
             gas.AlertModel.Name = config.AlertModel.FirstOrDefault(c => c.Value == gas.AlertModel.Value).Key;
@@ -167,39 +185,30 @@ namespace CommandManager
             Array.Reverse(rbytes, 33, 2);
             Array.Reverse(rbytes, 35, 2);
             gas.GasA2 = BitConverter.ToSingle(rbytes, 33);
-            Array.Reverse(rbytes, 45, 2);
-            Array.Reverse(rbytes, 47, 2);
-            gas.Compensation = BitConverter.ToSingle(rbytes, 45);
-            Array.Reverse(rbytes, 49, 2);
-            Array.Reverse(rbytes, 51, 2);
-            gas.Show = BitConverter.ToSingle(rbytes, 49);
-            gas.CheckNum = (byte)(rbytes[54] < 2 ? 2 : (rbytes[54] > 4 ? 4 : rbytes[54]));
-            gas.IfTwo = gas.CheckNum >= 3;
-            gas.IfThree = gas.CheckNum >= 4;
-            Array.Reverse(rbytes, 55, 2);
+            gas.ProbeAddress = rbytes[46];
+            gas.ProbeChannel = rbytes[48];
+            gas.qu = ASCIIEncoding.ASCII.GetString(rbytes, 49, 2);
+            gas.dong = ASCIIEncoding.ASCII.GetString(rbytes, 51, 2);
+            gas.ceng = ASCIIEncoding.ASCII.GetString(rbytes, 53, 2);
+            gas.hao = ASCIIEncoding.ASCII.GetString(rbytes, 55, 2);
             Array.Reverse(rbytes, 57, 2);
-            gas.ZeroAD = BitConverter.ToInt32(rbytes, 55);
             Array.Reverse(rbytes, 59, 2);
+            gas.OneAD = BitConverter.ToInt32(rbytes, 57);
             Array.Reverse(rbytes, 61, 2);
-            gas.ZeroChroma = BitConverter.ToSingle(rbytes, 59);
             Array.Reverse(rbytes, 63, 2);
+            gas.OneChroma = BitConverter.ToSingle(rbytes, 61);
             Array.Reverse(rbytes, 65, 2);
-            gas.OneAD = BitConverter.ToInt32(rbytes, 63);
             Array.Reverse(rbytes, 67, 2);
+            gas.TwoAD = BitConverter.ToInt32(rbytes, 65);
             Array.Reverse(rbytes, 69, 2);
-            gas.OneChroma = BitConverter.ToSingle(rbytes, 67);
             Array.Reverse(rbytes, 71, 2);
+            gas.TwoChroma = BitConverter.ToSingle(rbytes, 69);
             Array.Reverse(rbytes, 73, 2);
-            gas.TwoAD = BitConverter.ToInt32(rbytes, 71);
             Array.Reverse(rbytes, 75, 2);
+            gas.ThreeAD = BitConverter.ToInt32(rbytes, 73);
             Array.Reverse(rbytes, 77, 2);
-            gas.TwoChroma = BitConverter.ToSingle(rbytes, 75);
             Array.Reverse(rbytes, 79, 2);
-            Array.Reverse(rbytes, 81, 2);
-            gas.ThreeAD = BitConverter.ToInt32(rbytes, 79);
-            Array.Reverse(rbytes, 83, 2);
-            Array.Reverse(rbytes, 85, 2);
-            gas.ThreeChroma = BitConverter.ToSingle(rbytes, 83);
+            gas.ThreeChroma = BitConverter.ToSingle(rbytes, 77);
 
             GasEntity current = ReadCurrent(gasId, address, config, callback);
             gas.CurrentAD = current.CurrentAD;
@@ -259,9 +268,6 @@ namespace CommandManager
                     GasEntity gas = ReadCurrent(gasId, address, null, commandCallback);
                     switch (level)
                     {
-                        case EnumChromaLevel.Zero:
-                            gas.ZeroAD = gas.CurrentAD;
-                            break;
                         case EnumChromaLevel.One:
                             gas.OneAD = gas.CurrentAD;
                             break;
@@ -326,10 +332,6 @@ namespace CommandManager
             GasEntity gas = new GasEntity();
             switch (level)
             {
-                case EnumChromaLevel.Zero:
-                    gas.ZeroAD = BitConverter.ToInt32(rbytes, 3);
-                    gas.ZeroChroma = BitConverter.ToSingle(rbytes, 7);
-                    break;
                 case EnumChromaLevel.One:
                     gas.OneAD = BitConverter.ToInt32(rbytes, 3);
                     gas.OneChroma = BitConverter.ToSingle(rbytes, 7);
@@ -354,11 +356,6 @@ namespace CommandManager
             List<byte> content = new List<byte>();
             switch (level)
             {
-                case EnumChromaLevel.Zero:
-                    low = 0x2a;
-                    content.AddRange(BitConverter.GetBytes(gas.ZeroAD));
-                    content.AddRange(BitConverter.GetBytes(gas.ZeroChroma));
-                    break;
                 case EnumChromaLevel.One:
                     low = 0x2e;
                     content.AddRange(BitConverter.GetBytes(gas.OneAD));
@@ -389,7 +386,7 @@ namespace CommandManager
 
         public static GasEntity ReadCurrent(int gasId, byte address, CommonConfig config, Action<string> callback)
         {
-            byte[] sendb = Command.GetReadSendByte(address, (byte)gasId, 0x50, 5);
+            byte[] sendb = Command.GetReadSendByte(address, (byte)gasId, 0x37, 5);
             callback(string.Format("W: {0}", CommandUnits.ByteToHexStr(sendb)));
             byte[] rbytes = PLAASerialPort.Read(sendb);
             callback(string.Format("R: {0}", CommandUnits.ByteToHexStr(rbytes)));

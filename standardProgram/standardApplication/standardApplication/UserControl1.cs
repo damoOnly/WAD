@@ -40,7 +40,10 @@ namespace standardApplication
             {
                 return new GasEntity();
             }
-            Gas.Compensation = float.Parse(this.textEdit2.Text);
+            Gas.qu = this.textEdit7.Text.Trim();
+            Gas.dong = this.textEdit13.Text.Trim();
+            Gas.ceng = this.textEdit14.Text.Trim();
+            Gas.hao = this.textEdit15.Text.Trim();
             Gas.CurrentAD = (int)this.spinEdit8.Value;
             Gas.CurrentChroma = float.Parse(textEdit3.Text);
             Gas.Factor = this.textEdit8.Text;
@@ -52,14 +55,15 @@ namespace standardApplication
             Gas.GasPoint = new FieldValue() { Name = comboBoxEdit1.Text, Value = Gloab.Config.Point.First(c=>c.Key == comboBoxEdit1.Text).Value };
             Gas.GasRang = float.Parse(textEdit12.Text);
             Gas.GasUnit = new FieldValue() { Name = comboBoxEdit3.Text, Value = Gloab.Config.GasUnit.First(c=>c.Key == comboBoxEdit3.Text).Value };
-            Gas.OneAD = (int)this.spinEdit6.Value;
-            Gas.OneChroma = float.Parse(textEdit5.Text);
-            Gas.Show = float.Parse(textEdit11.Text);
-            Gas.ThreeChroma = float.Parse(textEdit7.Text);
-            Gas.TwoAD = (int)this.spinEdit12.Value;
-            Gas.TwoChroma = float.Parse(textEdit6.Text);
-            Gas.ZeroAD = (int)this.spinEdit7.Value;
-            Gas.ZeroChroma = float.Parse(textEdit4.Text);
+            Gas.OneAD = (int)this.spinEdit7.Value;
+            Gas.OneChroma = float.Parse(textEdit4.Text);
+            Gas.TwoAD = (int)this.spinEdit6.Value;
+            Gas.TwoChroma = float.Parse(textEdit5.Text);
+            Gas.ThreeAD = (int)this.spinEdit12.Value;
+            Gas.ThreeChroma = float.Parse(textEdit6.Text);
+
+            Gas.ProbeChannel = (byte)this.spinEdit1.Value;
+            Gas.ProbeAddress = (byte)this.spinEdit2.Value;
 
             return Gas;
         }

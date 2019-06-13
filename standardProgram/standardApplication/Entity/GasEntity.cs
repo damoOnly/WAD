@@ -14,7 +14,6 @@ namespace Entity
             GasName = new FieldValue() { Name = "可燃气体", Value = 1 };
             GasA1 = 2.2f;
             GasA2 = 3.3f;
-            Compensation = 4.4f;
             CurrentAD = 22;
             CurrentChroma = 3.3f;
             Factor = "abc";
@@ -23,19 +22,12 @@ namespace Entity
             GasPoint = new FieldValue() { Name = "整形", Value=0 };
             GasRang = 5.5f;
             GasUnit = new FieldValue() { Name = "ppm", Value = 0 };
-            IfGasAlarm = true;
             OneAD = 66;
             OneChroma = 6.6f;
-            Show = 8.8f;
             ThreeAD = 99;
             ThreeChroma = 9.9f;
             TwoAD = 11;
             TwoChroma = 1.1f;
-            ZeroAD = 13;
-            ZeroChroma = 1.3f;
-            IfTwo = false;
-            IfThree = false;
-            CheckNum = 0x02;
         }
         public int GasID { get; set; }
         public FieldValue GasName { get; set; }
@@ -46,22 +38,20 @@ namespace Entity
         public float GasA2 { get; set; }
         public FieldValue AlertModel { get; set; }
         public FieldValue AlertStatus { get; set; }
-        public bool IfGasAlarm { get; set; }
         public string Factor { get; set; }
-        public float Show { get; set; }
-        public float Compensation { get; set; }
         public float CurrentChroma { get; set; }
         public int CurrentAD { get; set; }
-        public float ZeroChroma { get; set; }
-        public int ZeroAD { get; set; }
         public float OneChroma { get; set; }
         public int OneAD { get; set; }
         public float TwoChroma { get; set; }
         public int TwoAD { get; set; }
         public float ThreeChroma { get; set; }
         public int ThreeAD { get; set; }
-        public bool IfTwo { get; set; }
-        public bool IfThree { get; set; }
-        public byte CheckNum { get; set; }
+        public byte ProbeAddress { get; set; }
+        public byte ProbeChannel { get; set; }
+        public string qu { get; set; }
+        public string dong { get; set; }
+        public string ceng { get; set; }
+        public string hao { get; set; }
     }
 }

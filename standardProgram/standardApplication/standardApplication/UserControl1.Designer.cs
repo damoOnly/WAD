@@ -67,14 +67,12 @@
             this.simpleButton14 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton15 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton16 = new DevExpress.XtraEditors.SimpleButton();
-            this.textEdit2 = new DevExpress.XtraEditors.TextEdit();
             this.textEdit3 = new DevExpress.XtraEditors.TextEdit();
             this.textEdit4 = new DevExpress.XtraEditors.TextEdit();
             this.textEdit5 = new DevExpress.XtraEditors.TextEdit();
             this.textEdit6 = new DevExpress.XtraEditors.TextEdit();
             this.textEdit9 = new DevExpress.XtraEditors.TextEdit();
             this.textEdit10 = new DevExpress.XtraEditors.TextEdit();
-            this.textEdit11 = new DevExpress.XtraEditors.TextEdit();
             this.textEdit12 = new DevExpress.XtraEditors.TextEdit();
             this.labelControl11 = new DevExpress.XtraEditors.LabelControl();
             this.textEdit7 = new DevExpress.XtraEditors.TextEdit();
@@ -86,6 +84,8 @@
             this.labelControl22 = new DevExpress.XtraEditors.LabelControl();
             this.textEdit15 = new DevExpress.XtraEditors.TextEdit();
             this.labelControl23 = new DevExpress.XtraEditors.LabelControl();
+            this.spinEdit1 = new DevExpress.XtraEditors.SpinEdit();
+            this.spinEdit2 = new DevExpress.XtraEditors.SpinEdit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit8.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).BeginInit();
@@ -95,19 +95,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit7.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit8.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit12.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit3.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit4.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit5.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit6.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit9.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit10.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit11.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit12.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit7.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit13.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit14.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit15.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinEdit2.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // labelControl1
@@ -481,13 +481,6 @@
             this.simpleButton16.Text = "采样";
             this.simpleButton16.Click += new System.EventHandler(this.simpleButton16_Click);
             // 
-            // textEdit2
-            // 
-            this.textEdit2.Location = new System.Drawing.Point(457, 136);
-            this.textEdit2.Name = "textEdit2";
-            this.textEdit2.Size = new System.Drawing.Size(100, 20);
-            this.textEdit2.TabIndex = 77;
-            // 
             // textEdit3
             // 
             this.textEdit3.Location = new System.Drawing.Point(88, 163);
@@ -530,13 +523,6 @@
             this.textEdit10.Name = "textEdit10";
             this.textEdit10.Size = new System.Drawing.Size(100, 20);
             this.textEdit10.TabIndex = 84;
-            // 
-            // textEdit11
-            // 
-            this.textEdit11.Location = new System.Drawing.Point(275, 136);
-            this.textEdit11.Name = "textEdit11";
-            this.textEdit11.Size = new System.Drawing.Size(100, 20);
-            this.textEdit11.TabIndex = 85;
             // 
             // textEdit12
             // 
@@ -621,10 +607,54 @@
             this.labelControl23.TabIndex = 96;
             this.labelControl23.Text = "20mA浓度：";
             // 
+            // spinEdit1
+            // 
+            this.spinEdit1.EditValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.spinEdit1.Location = new System.Drawing.Point(275, 133);
+            this.spinEdit1.Name = "spinEdit1";
+            this.spinEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.spinEdit1.Properties.IsFloatValue = false;
+            this.spinEdit1.Properties.Mask.EditMask = "N00";
+            this.spinEdit1.Properties.MaxValue = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.spinEdit1.Size = new System.Drawing.Size(100, 20);
+            this.spinEdit1.TabIndex = 97;
+            // 
+            // spinEdit2
+            // 
+            this.spinEdit2.EditValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.spinEdit2.Location = new System.Drawing.Point(457, 136);
+            this.spinEdit2.Name = "spinEdit2";
+            this.spinEdit2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.spinEdit2.Properties.IsFloatValue = false;
+            this.spinEdit2.Properties.Mask.EditMask = "N00";
+            this.spinEdit2.Properties.MaxValue = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.spinEdit2.Size = new System.Drawing.Size(100, 20);
+            this.spinEdit2.TabIndex = 98;
+            // 
             // UserControl1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.spinEdit2);
+            this.Controls.Add(this.spinEdit1);
             this.Controls.Add(this.labelControl23);
             this.Controls.Add(this.labelControl22);
             this.Controls.Add(this.textEdit15);
@@ -636,14 +666,12 @@
             this.Controls.Add(this.textEdit7);
             this.Controls.Add(this.labelControl11);
             this.Controls.Add(this.textEdit12);
-            this.Controls.Add(this.textEdit11);
             this.Controls.Add(this.textEdit10);
             this.Controls.Add(this.textEdit9);
             this.Controls.Add(this.textEdit6);
             this.Controls.Add(this.textEdit5);
             this.Controls.Add(this.textEdit4);
             this.Controls.Add(this.textEdit3);
-            this.Controls.Add(this.textEdit2);
             this.Controls.Add(this.simpleButton14);
             this.Controls.Add(this.simpleButton15);
             this.Controls.Add(this.simpleButton16);
@@ -697,19 +725,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit7.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit8.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit12.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit3.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit4.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit5.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit6.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit9.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit10.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit11.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit12.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit7.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit13.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit14.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit15.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinEdit2.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -756,14 +784,12 @@
         private DevExpress.XtraEditors.SimpleButton simpleButton14;
         private DevExpress.XtraEditors.SimpleButton simpleButton15;
         private DevExpress.XtraEditors.SimpleButton simpleButton16;
-        private DevExpress.XtraEditors.TextEdit textEdit2;
         private DevExpress.XtraEditors.TextEdit textEdit3;
         private DevExpress.XtraEditors.TextEdit textEdit4;
         private DevExpress.XtraEditors.TextEdit textEdit5;
         private DevExpress.XtraEditors.TextEdit textEdit6;
         private DevExpress.XtraEditors.TextEdit textEdit9;
         private DevExpress.XtraEditors.TextEdit textEdit10;
-        private DevExpress.XtraEditors.TextEdit textEdit11;
         private DevExpress.XtraEditors.TextEdit textEdit12;
         private DevExpress.XtraEditors.LabelControl labelControl11;
         private DevExpress.XtraEditors.TextEdit textEdit7;
@@ -775,5 +801,7 @@
         private DevExpress.XtraEditors.LabelControl labelControl22;
         private DevExpress.XtraEditors.TextEdit textEdit15;
         private DevExpress.XtraEditors.LabelControl labelControl23;
+        private DevExpress.XtraEditors.SpinEdit spinEdit1;
+        private DevExpress.XtraEditors.SpinEdit spinEdit2;
     }
 }
