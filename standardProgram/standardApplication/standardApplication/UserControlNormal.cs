@@ -32,8 +32,6 @@ namespace standardApplication
                 return new NormalParamEntity();
             }
 
-            //normalParam.AlertDelay = 
-            normalParam.CurveTimeSpan = (ushort)spinEdit1.Value;
             normalParam.DataStorageInterval = (int)spinEdit2.Value;
             normalParam.HotTimeSpan = (ushort)spinEdit3.Value;
             normalParam.IfSoundAlert = checkEdit1.Checked;
@@ -57,7 +55,6 @@ namespace standardApplication
             {
                 return;
             }
-            spinEdit1.Value = normalParam.CurveTimeSpan;
             spinEdit2.Value = normalParam.DataStorageInterval;
             spinEdit3.Value = normalParam.HotTimeSpan;
             checkEdit1.Checked = normalParam.IfSoundAlert;

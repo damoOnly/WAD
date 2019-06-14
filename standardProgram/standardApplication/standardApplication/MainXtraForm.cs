@@ -298,36 +298,6 @@ namespace standardApplication
             userControl11.BindGas();
         }
         
-        private void simpleButton18_Click(object sender, EventArgs e)
-        {
-            WaitDialogForm wdf = new WaitDialogForm("命令执行中，请稍候......");
-
-            try
-            {
-                WeatherInstruction.WriteWeather(Gloab.AllData.WeatherList, Gloab.AllData.Address,CommandCallback);
-                SetDebugStr("写入气象参数成功");
-            }
-            catch (CommandException ex)
-            {
-                SetDebugStr("写入气象参数失败");
-                XtraMessageBox.Show(ex.Message);
-            }
-            catch (Exception exp)
-            {
-                SetDebugStr("写入气象参数失败");
-                log.Error(exp);
-            }
-            finally
-            {
-                wdf.Close();
-            }
-        }
-
-        private void simpleButton19_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void InitSerialPage()
         {
             comboBoxEdit1.Properties.Items.Clear();

@@ -39,19 +39,7 @@ namespace CommandManager
                 }
                 
 			}
-
-            try
-            {
-                all.WeatherList = WeatherInstruction.ReadWeather(address, config,commandCallback);
-                callback("读取气象成功");
-            }
-            catch (Exception ex)
-            {
-                log.Error(ex);
-                callback("读取气象失败");
-
-            }
-
+            
             try
             {
                 all.Serial = SerialInstruction.ReadSerialParam(address, config,commandCallback);
@@ -137,19 +125,7 @@ namespace CommandManager
                 log.Error(ex);
                 callback("写入气体个数失败");
             }                      
-
-            try
-            {
-                NormalInstruction.WriteWeatherCount((short)all.WeatherList.Count,all.Address, config,commandCallback);
-                WeatherInstruction.WriteWeather(all.WeatherList, all.Address, commandCallback);
-                callback("写入气象参数成功");
-            }
-            catch (Exception ex)
-            {
-                log.Error(ex);
-                callback("写入气象参数失败");
-            }
-
+            
             try
             {
                 NormalInstruction.WriteNormal(all.Normal, all.Address, commandCallback);

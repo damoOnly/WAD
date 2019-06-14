@@ -74,38 +74,29 @@ namespace standardApplication
             {
                 return;
             }
-            this.textEdit2.Text = Gas.Compensation.ToString();
-                //Gas.Compensation <= decimal.ToSingle(decimal.MinValue) || Gas.Compensation >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.Compensation;
+            this.textEdit7.Text = Gas.qu;
+            this.textEdit13.Text = Gas.dong;
+            this.textEdit14.Text = Gas.ceng;
+            this.textEdit12.Text = Gas.hao;
             this.spinEdit8.Value = Gas.CurrentAD;
             this.textEdit3.Text = Gas.CurrentChroma.ToString();
-                //Gas.CurrentChroma <= decimal.ToSingle(decimal.MinValue) || Gas.CurrentChroma >= decimal.ToSingle( decimal.MaxValue) ? 0:(decimal)Gas.CurrentChroma;
             this.textEdit8.Text = Gas.Factor;
             this.textEdit9.Text = Gas.GasA1.ToString();
-                //Gas.GasA1 <= decimal.ToSingle(decimal.MinValue) || Gas.GasA1 >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.GasA1;
             this.textEdit10.Text = Gas.GasA2.ToString();
-                //Gas.GasA2 <= decimal.ToSingle(decimal.MinValue) || Gas.GasA2 >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.GasA2;
             this.GasID = Gas.GasID;
             this.comboBoxEdit2.Text = Gas.AlertModel.Name;
             this.textEdit1.Text = Gas.GasName.Name;
             this.comboBoxEdit1.Text = Gas.GasPoint.Name;
             this.textEdit12.Text = Gas.GasRang.ToString();
-                //Gas.GasRang <= decimal.ToSingle(decimal.MinValue) || Gas.GasRang >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.GasRang;
             this.comboBoxEdit3.Text = Gas.GasUnit.Name;
-            this.spinEdit6.Value = Gas.OneAD;
-            this.textEdit5.Text = Gas.OneChroma.ToString();
-                //Gas.OneChroma <= decimal.ToSingle(decimal.MinValue) || Gas.OneChroma >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.OneChroma;
-            this.textEdit11.Text = Gas.Show.ToString();
-                //Gas.Show <= decimal.ToSingle(decimal.MinValue) || Gas.Show >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.Show;
-            this.textEdit7.Text = Gas.TwoChroma.ToString();
-                //Gas.ThreeChroma <= decimal.ToSingle(decimal.MinValue) || Gas.ThreeChroma >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.ThreeChroma;
-            this.spinEdit12.Value = Gas.TwoAD;
-            this.textEdit6.Text = Gas.TwoChroma.ToString();
-                //Gas.TwoChroma <= decimal.ToSingle(decimal.MinValue) || Gas.TwoChroma >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.TwoChroma;
-            Gas.IfTwo = Gas.CheckNum >= 3;
-            Gas.IfThree = Gas.CheckNum >= 4;  
-            this.textEdit4.Text = Gas.ZeroChroma.ToString();
-                //Gas.ZeroChroma <= decimal.ToSingle(decimal.MinValue) || Gas.ZeroChroma >= decimal.ToSingle(decimal.MaxValue) ? 0 : (decimal)Gas.ZeroChroma;
-            this.spinEdit7.Value = Gas.ZeroAD;
+            this.spinEdit7.Value = Gas.OneAD;
+            this.textEdit4.Text = Gas.OneChroma.ToString();
+            this.spinEdit6.Value = Gas.TwoAD;
+            this.textEdit5.Text = Gas.TwoChroma.ToString();
+            this.spinEdit12.Value = Gas.ThreeAD;
+            this.textEdit6.Text = Gas.ThreeChroma.ToString();
+            this.spinEdit1.Value = Gas.ProbeChannel;
+            this.spinEdit2.Value = Gas.ProbeAddress;
         }
 
         public UserControl1()
@@ -241,7 +232,7 @@ namespace standardApplication
                 simpleButton2.Text = "停止";
                 try
                 {
-                    GasInstruction.StartSample(Gloab.AllData.Address, GasID, EnumChromaLevel.One, Sampling, CommandCallback);
+                    GasInstruction.StartSample(Gloab.AllData.Address, GasID, EnumChromaLevel.Two, Sampling, CommandCallback);
                     Callback("开始采样");
                 }
                 catch (CommandException ex)
@@ -275,9 +266,6 @@ namespace standardApplication
                 EnumChromaLevel cl = level;
                 switch (cl)
                 {
-                    case EnumChromaLevel.Zero:
-                        Gas.ZeroAD = ge.CurrentAD;
-                        break;
                     case EnumChromaLevel.One:
                         Gas.OneAD = ge.CurrentAD;
                         break;
@@ -315,7 +303,7 @@ namespace standardApplication
                 simpleButton7.Text = "停止";
                 try
                 {
-                    GasInstruction.StartSample(Gloab.AllData.Address, GasID, EnumChromaLevel.Two, Sampling, CommandCallback);
+                    GasInstruction.StartSample(Gloab.AllData.Address, GasID, EnumChromaLevel.Three, Sampling, CommandCallback);
                     Callback("开始采样");
                 }
                 catch (CommandException ex)
@@ -344,20 +332,20 @@ namespace standardApplication
             WaitDialogForm wdf = new WaitDialogForm("命令执行中，请稍候......");
             try
             {
-                GasEntity ge = GasInstruction.ReadChromaAndAD(GasID, EnumChromaLevel.One, Gloab.AllData.Address,CommandCallback);
+                GasEntity ge = GasInstruction.ReadChromaAndAD(GasID, EnumChromaLevel.Two, Gloab.AllData.Address,CommandCallback);
                 Gas.OneChroma = ge.OneChroma;
                 Gas.OneAD = ge.OneAD;
                 SetGasToControl();
-                Callback("读取一级成功");
+                Callback("读取12mA成功");
             }
             catch (CommandException ex)
             {
-                Callback("读取一级失败");
+                Callback("读取12mA失败");
                 XtraMessageBox.Show(ex.Message);
             }
             catch (Exception ecp)
             {
-                Callback("读取一级失败");
+                Callback("读取12mA失败");
                 log.Error(ecp);
             }
             finally
@@ -375,16 +363,16 @@ namespace standardApplication
                 Gas.TwoChroma = ge.TwoChroma;
                 Gas.TwoAD = ge.TwoAD;
                 SetGasToControl();
-                Callback("读取二级成功");
+                Callback("读取20mA成功");
             }
             catch (CommandException ex)
             {
-                Callback("读取二级失败");
+                Callback("读取20mA失败");
                 XtraMessageBox.Show(ex.Message);
             }
             catch (Exception ecp)
             {
-                Callback("读取二级失败");
+                Callback("读取20mA失败");
                 log.Error(ecp);
             }
             finally
@@ -392,51 +380,24 @@ namespace standardApplication
                 wdf.Close();
             }
         }
-
-        private void simpleButton9_Click(object sender, EventArgs e)
-        {
-            WaitDialogForm wdf = new WaitDialogForm("命令执行中，请稍候......");
-            try
-            {
-                GasEntity ge = GasInstruction.ReadChromaAndAD(GasID, EnumChromaLevel.Three, Gloab.AllData.Address,CommandCallback);
-                Gas.ThreeChroma = ge.ThreeChroma;
-                Gas.ThreeAD = ge.ThreeAD;
-                SetGasToControl();
-                Callback("读取三级成功");
-            }
-            catch (CommandException ex)
-            {
-                Callback("读取三级失败");
-                XtraMessageBox.Show(ex.Message);
-            }
-            catch (Exception ecp)
-            {
-                Callback("读取三级失败");
-                log.Error(ecp);
-            }
-            finally
-            {
-                wdf.Close();
-            }
-        }
-
+        
         private void simpleButton4_Click(object sender, EventArgs e)
         {
             WaitDialogForm wdf = new WaitDialogForm("命令执行中，请稍候......");
             try
             {
                 GetGasFromControl();
-                GasInstruction.WriteChromaAndAD(Gas, EnumChromaLevel.One, Gloab.AllData.Address,CommandCallback);
-                Callback("写入一级成功");
+                GasInstruction.WriteChromaAndAD(Gas, EnumChromaLevel.Two, Gloab.AllData.Address,CommandCallback);
+                Callback("写入12mA成功");
             }
             catch (CommandException ex)
             {
-                Callback("写入一级失败");
+                Callback("写入12mA失败");
                 XtraMessageBox.Show(ex.Message);
             }
             catch (Exception ecp)
             {
-                Callback("写入一级失败");
+                Callback("写入12mA失败");
                 log.Error(ecp);
             }
             finally
@@ -451,42 +412,17 @@ namespace standardApplication
             try
             {
                 GetGasFromControl();
-                GasInstruction.WriteChromaAndAD(Gas, EnumChromaLevel.Two, Gloab.AllData.Address,CommandCallback);
-                Callback("写入二级成功");
-            }
-            catch (CommandException ex)
-            {
-                Callback("写入二级失败");
-                XtraMessageBox.Show(ex.Message);
-            }
-            catch (Exception ecp)
-            {
-                Callback("写入二级失败");
-                log.Error(ecp);
-            }
-            finally
-            {
-                wdf.Close();
-            }
-        }
-
-        private void simpleButton8_Click(object sender, EventArgs e)
-        {
-            WaitDialogForm wdf = new WaitDialogForm("命令执行中，请稍候......");
-            try
-            {
-                GetGasFromControl();
                 GasInstruction.WriteChromaAndAD(Gas, EnumChromaLevel.Three, Gloab.AllData.Address,CommandCallback);
-                Callback("写入三级成功");
+                Callback("写入20mA成功");
             }
             catch (CommandException ex)
             {
-                Callback("写入三级失败");
+                Callback("写入20mA失败");
                 XtraMessageBox.Show(ex.Message);
             }
             catch (Exception ecp)
             {
-                Callback("写入三级失败");
+                Callback("写入20mA失败");
                 log.Error(ecp);
             }
             finally
@@ -542,7 +478,7 @@ namespace standardApplication
                 simpleButton16.Text = "停止";
                 try
                 {
-                    GasInstruction.StartSample(Gloab.AllData.Address, GasID, EnumChromaLevel.Zero, Sampling, CommandCallback);
+                    GasInstruction.StartSample(Gloab.AllData.Address, GasID, EnumChromaLevel.One, Sampling, CommandCallback);
                     Callback("开始采样");
                 }
                 catch (CommandException ex)
@@ -571,20 +507,20 @@ namespace standardApplication
             WaitDialogForm wdf = new WaitDialogForm("命令执行中，请稍候......");
             try
             {
-                GasEntity ge = GasInstruction.ReadChromaAndAD(GasID, EnumChromaLevel.Zero, Gloab.AllData.Address, CommandCallback);
-                Gas.ZeroChroma = ge.ZeroChroma;
-                Gas.ZeroAD = ge.ZeroAD;
+                GasEntity ge = GasInstruction.ReadChromaAndAD(GasID, EnumChromaLevel.One, Gloab.AllData.Address, CommandCallback);
+                Gas.OneChroma = ge.OneChroma;
+                Gas.OneAD = ge.OneAD;
                 SetGasToControl();
-                Callback("读取零点成功");
+                Callback("读取4aA成功");
             }
             catch (CommandException ex)
             {
-                Callback("读取零点失败");
+                Callback("读取4aA失败");
                 XtraMessageBox.Show(ex.Message);
             }
             catch (Exception ecp)
             {
-                Callback("读取零点失败");
+                Callback("读取4aA失败");
                 log.Error(ecp);
             }
             finally
@@ -599,17 +535,17 @@ namespace standardApplication
             try
             {
                 GetGasFromControl();
-                GasInstruction.WriteChromaAndAD(Gas, EnumChromaLevel.Zero, Gloab.AllData.Address, CommandCallback);
-                Callback("写入零点成功");
+                GasInstruction.WriteChromaAndAD(Gas, EnumChromaLevel.One, Gloab.AllData.Address, CommandCallback);
+                Callback("写入4aA成功");
             }
             catch (CommandException ex)
             {
-                Callback("写入零点失败");
+                Callback("写入4aA失败");
                 XtraMessageBox.Show(ex.Message);
             }
             catch (Exception ecp)
             {
-                Callback("写入零点失败");
+                Callback("写入4aA失败");
                 log.Error(ecp);
             }
             finally
