@@ -44,6 +44,7 @@
     <Compile Include="CommandException.cs" />
     <Compile Include="CommandUnits.cs" />
     <Compile Include="CRC.cs" />
+    <Compile Include="DataCenter.cs" />
     <Compile Include="GasInstruction.cs" />
     <Compile Include="PLAASerialPort.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
