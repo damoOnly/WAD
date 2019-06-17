@@ -126,7 +126,7 @@ namespace CommandManager
 
             byte[] sendb = Command.GetWiteSendByte(address, (byte)gas.GasID, 0x10, content.ToArray());
             callback(string.Format("W: {0}", CommandUnits.ByteToHexStr(sendb)));
-            PLAASerialPort.Write(sendb);
+            CommandUnits.DataCenter.Write(sendb);
         }
 
         public static List<GasEntity> ReadGasList(byte address, CommonConfig config, Action<string> callback)
@@ -134,7 +134,7 @@ namespace CommandManager
             List<GasEntity> list = new List<GasEntity>();
             byte[] sendb1 = Command.GetReadSendByte(address, 0x00, 0x20, 1);
             callback(string.Format("W: {0}", CommandUnits.ByteToHexStr(sendb1)));
-            byte[] rbytes1 = PLAASerialPort.Read(sendb1);
+            byte[] rbytes1 = CommandUnits.DataCenter.Read(sendb1);
             callback(string.Format("R: {0}", CommandUnits.ByteToHexStr(rbytes1)));
             byte count = rbytes1[4];
             for (byte i = 1; i <= count; i++)
@@ -148,7 +148,7 @@ namespace CommandManager
         {
             byte[] sendb = Command.GetReadSendByte(address, (byte)gasId, 0x10, 39);
             callback(string.Format("W: {0}", CommandUnits.ByteToHexStr(sendb)));
-            byte[] rbytes = PLAASerialPort.Read(sendb);
+            byte[] rbytes = CommandUnits.DataCenter.Read(sendb);
             callback(string.Format("R: {0}", CommandUnits.ByteToHexStr(rbytes)));
             GasEntity gas = new GasEntity();
             gas.GasID = gasId;
@@ -321,7 +321,7 @@ namespace CommandManager
             }
             byte[] sendb = Command.GetReadSendByte(address, (byte)gasId, low, 4);
             callback(string.Format("W: {0}", CommandUnits.ByteToHexStr(sendb)));
-            byte[] rbytes = PLAASerialPort.Read(sendb);
+            byte[] rbytes = CommandUnits.DataCenter.Read(sendb);
             callback(string.Format("R: {0}", CommandUnits.ByteToHexStr(rbytes)));
 
             Array.Reverse(rbytes, 3, 2);
@@ -381,14 +381,14 @@ namespace CommandManager
             byte[] sendb = Command.GetWiteSendByte(address, (byte)gas.GasID, low, content.ToArray());
             callback(string.Format("W: {0}", CommandUnits.ByteToHexStr(sendb)));
 
-            PLAASerialPort.Write(sendb);
+            CommandUnits.DataCenter.Write(sendb);
         }
 
         public static GasEntity ReadCurrent(int gasId, byte address, CommonConfig config, Action<string> callback)
         {
             byte[] sendb = Command.GetReadSendByte(address, (byte)gasId, 0x37, 5);
             callback(string.Format("W: {0}", CommandUnits.ByteToHexStr(sendb)));
-            byte[] rbytes = PLAASerialPort.Read(sendb);
+            byte[] rbytes = CommandUnits.DataCenter.Read(sendb);
             callback(string.Format("R: {0}", CommandUnits.ByteToHexStr(rbytes)));
             Array.Reverse(rbytes, 3, 2);
             Array.Reverse(rbytes, 5, 2);
@@ -419,7 +419,7 @@ namespace CommandManager
             content.Add((byte)gas.AlertStatus.Value);
             byte[] sendb = Command.GetWiteSendByte(address, (byte)gas.GasID, 0x50, content.ToArray());
             callback(string.Format("W: {0}", CommandUnits.ByteToHexStr(sendb)));
-            PLAASerialPort.Write(sendb);
+            CommandUnits.DataCenter.Write(sendb);
         }
     }
 }

@@ -156,14 +156,14 @@ namespace CommandManager
             content[1] = newAddress;
             byte[] sendb = Command.GetWiteSendByte(oldAddress, 0x00, 0x10, content);
             callBack(string.Format("W: {0}", CommandUnits.ByteToHexStr(sendb)));
-            PLAASerialPort.Write(sendb);
+            CommandUnits.DataCenter.Write(sendb);
         }
 
         public static DateTime ReadRealTime(byte address, Action<string> callBack)
         {
             byte[] sendb = Command.GetReadSendByte(address, 0x00, 0x90, 6);
             callBack(string.Format("W: {0}", CommandUnits.ByteToHexStr(sendb)));
-            byte[] rbytes = PLAASerialPort.Read(sendb);
+            byte[] rbytes = CommandUnits.DataCenter.Read(sendb);
             callBack(string.Format("R: {0}", CommandUnits.ByteToHexStr(rbytes)));
 
             DateTime dt = new DateTime(2000 + rbytes[4], rbytes[6], rbytes[8], rbytes[10], rbytes[12], rbytes[14]);
@@ -188,14 +188,14 @@ namespace CommandManager
 
             byte[] sendb = Command.GetWiteSendByte(address, 0x00, 0x90, content);
             callBack(string.Format("W: {0}", CommandUnits.ByteToHexStr(sendb)));
-            PLAASerialPort.Write(sendb);
+            CommandUnits.DataCenter.Write(sendb);
         }
 
         public static DateTime ReadOutDate(byte address, Action<string> callBack)
         {
             byte[] sendb = Command.GetReadSendByte(address, 0x00, 0x96, 3);
             callBack(string.Format("W: {0}", CommandUnits.ByteToHexStr(sendb)));
-            byte[] rbytes = PLAASerialPort.Read(sendb);
+            byte[] rbytes = CommandUnits.DataCenter.Read(sendb);
             callBack(string.Format("R: {0}", CommandUnits.ByteToHexStr(rbytes)));
 
             DateTime dt = new DateTime(2000 + rbytes[4], rbytes[6], rbytes[8]);
@@ -214,7 +214,7 @@ namespace CommandManager
 
             byte[] sendb = Command.GetWiteSendByte(address, 0x00, 0x96, content);
             callBack(string.Format("W: {0}", CommandUnits.ByteToHexStr(sendb)));
-            PLAASerialPort.Write(sendb);
+            CommandUnits.DataCenter.Write(sendb);
         }
     }
 }

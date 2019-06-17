@@ -14,11 +14,11 @@ namespace CommandManager
     {
         public LogLib.Log log = LogLib.Log.GetLogger("DataCenter");
         private bool isSerialPort = true;
-        public virtual bool Open(string portName, int baudRate);
+        public virtual bool Open(string portName, int baudRate) { return false; }
 
-        public virtual bool Close();
-        public virtual void Write(byte[] wdata);
-        public virtual byte[] Read(byte[] pdata);
+        public virtual bool Close() { return false; }
+        public virtual void Write(byte[] wdata) { }
+        public virtual byte[] Read(byte[] pdata) { return new byte[0]; }
     }
 
     public class MySerialPort : DataCenter

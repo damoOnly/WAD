@@ -13,7 +13,7 @@ namespace CommandManager
         {
             byte[] sendb = Command.GetWiteSendByte(address, 0x00, 0x12, BitConverter.GetBytes(count).Reverse().ToArray());
             callback(string.Format("W: {0}", CommandUnits.ByteToHexStr(sendb)));
-            PLAASerialPort.Write(sendb);
+            CommandUnits.DataCenter.Write(sendb);
             List<GasEntity> list = new List<GasEntity>();
             for (short i = 1; i <= count; i++)
             {
@@ -27,7 +27,7 @@ namespace CommandManager
         {
             byte[] sendb = Command.GetReadSendByte(address, 0x00, 0x12, 7);
             callback(string.Format("W: {0}", CommandUnits.ByteToHexStr(sendb)));
-            byte[] rbytes = PLAASerialPort.Read(sendb);
+            byte[] rbytes = CommandUnits.DataCenter.Read(sendb);
             callback(string.Format("R: {0}", CommandUnits.ByteToHexStr(rbytes)));
             NormalParamEntity normal = new NormalParamEntity();
             Array.Reverse(rbytes, 3, 2);
@@ -41,7 +41,7 @@ namespace CommandManager
 
             byte[] relaySendb = Command.GetReadSendByte(address, 0x00, 0xa0, 40);
             callback(string.Format("W: {0}", CommandUnits.ByteToHexStr(relaySendb)));
-            byte[] relayRbytes = PLAASerialPort.Read(relaySendb);
+            byte[] relayRbytes = CommandUnits.DataCenter.Read(relaySendb);
             callback(string.Format("R: {0}", CommandUnits.ByteToHexStr(relayRbytes)));
 
             int index = 3;
@@ -77,7 +77,7 @@ namespace CommandManager
 
             byte[] sendb = Command.GetWiteSendByte(address, 0x00, 0x13, content.ToArray());
             callback(string.Format("W: {0}", CommandUnits.ByteToHexStr(sendb)));
-            PLAASerialPort.Write(sendb);
+            CommandUnits.DataCenter.Write(sendb);
 
             content = new List<byte>();
             foreach (var item in normal.Relays)
@@ -90,7 +90,7 @@ namespace CommandManager
 
             sendb = Command.GetWiteSendByte(address, 0x00, 0xa0, content.ToArray());
             callback(string.Format("W: {0}", CommandUnits.ByteToHexStr(sendb)));
-            PLAASerialPort.Write(sendb);
+            CommandUnits.DataCenter.Write(sendb);
             
         }
 

@@ -226,5 +226,7 @@ b[3] = 11111111(0xff) & 00000000
 
 
         }
+
+        public static DataCenter DataCenter;
     }
 }

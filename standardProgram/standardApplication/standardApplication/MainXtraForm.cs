@@ -420,7 +420,16 @@ namespace standardApplication
                 comboBoxEditCommunication.Enabled = false;
                 comboBoxEdit5.Enabled = false;
                 comboBoxEdit6.Enabled = false;
-                PLAASerialPort.Open(comboBoxEdit5.Text, int.Parse(comboBoxEdit6.Text));
+                if (comboBoxEditCommunication.Text == "串口通信")
+                {
+                    CommandUnits.DataCenter = new MySerialPort();
+                    CommandUnits.DataCenter.Open(comboBoxEdit5.Text, int.Parse(comboBoxEdit6.Text));
+                }
+                else
+                {
+                    CommandUnits.DataCenter = new MySockClent();
+                    CommandUnits.DataCenter.Open(textEditCommunicationTCPip.Text, int.Parse(textEditCommunicationTCPport.Text));
+                }
             }
             else
             {
@@ -428,14 +437,18 @@ namespace standardApplication
                 comboBoxEditCommunication.Enabled = true;
                 comboBoxEdit5.Enabled = true;
                 comboBoxEdit6.Enabled = true;
-                PLAASerialPort.Close();
+                CommandUnits.DataCenter.Close();
             }
             
         }
 
         private void MainXtraForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            PLAASerialPort.Close();
+            if (CommandUnits.DataCenter != null)
+            {
+                CommandUnits.DataCenter.Close();
+            }
+            
         }
 
         private void spinEdit7_EditValueChanged(object sender, EventArgs e)
