@@ -116,10 +116,17 @@
             this.spinEdit8 = new DevExpress.XtraEditors.SpinEdit();
             this.simpleButtonCommunication = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
+            this.xtraTabControlCommunication = new DevExpress.XtraTab.XtraTabControl();
+            this.serialCommunicationPage = new DevExpress.XtraTab.XtraTabPage();
             this.comboBoxEdit6 = new DevExpress.XtraEditors.ComboBoxEdit();
             this.comboBoxEdit5 = new DevExpress.XtraEditors.ComboBoxEdit();
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
+            this.tcpCommunicationPage = new DevExpress.XtraTab.XtraTabPage();
+            this.textEditCommunicationTCPport = new DevExpress.XtraEditors.TextEdit();
+            this.textEditCommunicationTCPip = new DevExpress.XtraEditors.TextEdit();
+            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.comboBoxEditCommunication = new DevExpress.XtraEditors.ComboBoxEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.splitContainerControl3 = new DevExpress.XtraEditors.SplitContainerControl();
@@ -139,13 +146,6 @@
             this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.fieldValueBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.tcpCommunicationPage = new DevExpress.XtraTab.XtraTabPage();
-            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
-            this.textEditCommunicationTCPip = new DevExpress.XtraEditors.TextEdit();
-            this.textEditCommunicationTCPport = new DevExpress.XtraEditors.TextEdit();
-            this.xtraTabControlCommunication = new DevExpress.XtraTab.XtraTabControl();
-            this.serialCommunicationPage = new DevExpress.XtraTab.XtraTabPage();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             this.splitContainerControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl4)).BeginInit();
@@ -198,8 +198,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2)).BeginInit();
             this.splitContainerControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit8.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControlCommunication)).BeginInit();
+            this.xtraTabControlCommunication.SuspendLayout();
+            this.serialCommunicationPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit6.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit5.Properties)).BeginInit();
+            this.tcpCommunicationPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditCommunicationTCPport.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditCommunicationTCPip.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditCommunication.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl3)).BeginInit();
             this.splitContainerControl3.SuspendLayout();
@@ -209,12 +215,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit7.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fieldValueBindingSource)).BeginInit();
-            this.tcpCommunicationPage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.textEditCommunicationTCPip.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEditCommunicationTCPport.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControlCommunication)).BeginInit();
-            this.xtraTabControlCommunication.SuspendLayout();
-            this.serialCommunicationPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainerControl1
@@ -1235,6 +1235,46 @@
             this.labelControl6.TabIndex = 7;
             this.labelControl6.Text = "命令延迟：";
             // 
+            // xtraTabControlCommunication
+            // 
+            this.xtraTabControlCommunication.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.xtraTabControlCommunication.Appearance.Options.UseBackColor = true;
+            this.xtraTabControlCommunication.AppearancePage.PageClient.BackColor = System.Drawing.Color.Transparent;
+            this.xtraTabControlCommunication.AppearancePage.PageClient.Options.UseBackColor = true;
+            this.xtraTabControlCommunication.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.xtraTabControlCommunication.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.xtraTabControlCommunication.BorderStylePage = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.xtraTabControlCommunication.HeaderAutoFill = DevExpress.Utils.DefaultBoolean.True;
+            this.xtraTabControlCommunication.HeaderButtons = DevExpress.XtraTab.TabButtons.None;
+            this.xtraTabControlCommunication.HeaderButtonsShowMode = DevExpress.XtraTab.TabButtonShowMode.Never;
+            this.xtraTabControlCommunication.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.xtraTabControlCommunication.Location = new System.Drawing.Point(12, 42);
+            this.xtraTabControlCommunication.Margin = new System.Windows.Forms.Padding(0);
+            this.xtraTabControlCommunication.Name = "xtraTabControlCommunication";
+            this.xtraTabControlCommunication.SelectedTabPage = this.serialCommunicationPage;
+            this.xtraTabControlCommunication.ShowHeaderFocus = DevExpress.Utils.DefaultBoolean.False;
+            this.xtraTabControlCommunication.ShowTabHeader = DevExpress.Utils.DefaultBoolean.False;
+            this.xtraTabControlCommunication.ShowToolTips = DevExpress.Utils.DefaultBoolean.False;
+            this.xtraTabControlCommunication.Size = new System.Drawing.Size(167, 60);
+            this.xtraTabControlCommunication.TabIndex = 0;
+            this.xtraTabControlCommunication.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
+            this.serialCommunicationPage,
+            this.tcpCommunicationPage});
+            // 
+            // serialCommunicationPage
+            // 
+            this.serialCommunicationPage.Appearance.PageClient.BackColor = System.Drawing.Color.Black;
+            this.serialCommunicationPage.Appearance.PageClient.Options.UseBackColor = true;
+            this.serialCommunicationPage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.serialCommunicationPage.Controls.Add(this.comboBoxEdit6);
+            this.serialCommunicationPage.Controls.Add(this.comboBoxEdit5);
+            this.serialCommunicationPage.Controls.Add(this.labelControl4);
+            this.serialCommunicationPage.Controls.Add(this.labelControl5);
+            this.serialCommunicationPage.Margin = new System.Windows.Forms.Padding(0);
+            this.serialCommunicationPage.Name = "serialCommunicationPage";
+            this.serialCommunicationPage.Size = new System.Drawing.Size(161, 54);
+            this.serialCommunicationPage.Text = "serialCommunicationPage";
+            // 
             // comboBoxEdit6
             // 
             this.comboBoxEdit6.EditValue = "";
@@ -1272,6 +1312,48 @@
             this.labelControl5.Size = new System.Drawing.Size(48, 13);
             this.labelControl5.TabIndex = 4;
             this.labelControl5.Text = "串口号：";
+            // 
+            // tcpCommunicationPage
+            // 
+            this.tcpCommunicationPage.Controls.Add(this.textEditCommunicationTCPport);
+            this.tcpCommunicationPage.Controls.Add(this.textEditCommunicationTCPip);
+            this.tcpCommunicationPage.Controls.Add(this.labelControl3);
+            this.tcpCommunicationPage.Controls.Add(this.labelControl2);
+            this.tcpCommunicationPage.Name = "tcpCommunicationPage";
+            this.tcpCommunicationPage.Size = new System.Drawing.Size(161, 54);
+            this.tcpCommunicationPage.Text = "tcpCommunicationPage";
+            // 
+            // textEditCommunicationTCPport
+            // 
+            this.textEditCommunicationTCPport.EditValue = "8888";
+            this.textEditCommunicationTCPport.Location = new System.Drawing.Point(71, 34);
+            this.textEditCommunicationTCPport.Name = "textEditCommunicationTCPport";
+            this.textEditCommunicationTCPport.Size = new System.Drawing.Size(86, 20);
+            this.textEditCommunicationTCPport.TabIndex = 3;
+            // 
+            // textEditCommunicationTCPip
+            // 
+            this.textEditCommunicationTCPip.EditValue = "47.95.252.86";
+            this.textEditCommunicationTCPip.Location = new System.Drawing.Point(71, 3);
+            this.textEditCommunicationTCPip.Name = "textEditCommunicationTCPip";
+            this.textEditCommunicationTCPip.Size = new System.Drawing.Size(86, 20);
+            this.textEditCommunicationTCPip.TabIndex = 2;
+            // 
+            // labelControl3
+            // 
+            this.labelControl3.Location = new System.Drawing.Point(6, 37);
+            this.labelControl3.Name = "labelControl3";
+            this.labelControl3.Size = new System.Drawing.Size(48, 13);
+            this.labelControl3.TabIndex = 1;
+            this.labelControl3.Text = "端口号：";
+            // 
+            // labelControl2
+            // 
+            this.labelControl2.Location = new System.Drawing.Point(6, 6);
+            this.labelControl2.Name = "labelControl2";
+            this.labelControl2.Size = new System.Drawing.Size(22, 13);
+            this.labelControl2.TabIndex = 0;
+            this.labelControl2.Text = "IP：";
             // 
             // comboBoxEditCommunication
             // 
@@ -1485,86 +1567,6 @@
             // 
             this.fieldValueBindingSource.DataSource = typeof(Entity.FieldValue);
             // 
-            // tcpCommunicationPage
-            // 
-            this.tcpCommunicationPage.Controls.Add(this.textEditCommunicationTCPport);
-            this.tcpCommunicationPage.Controls.Add(this.textEditCommunicationTCPip);
-            this.tcpCommunicationPage.Controls.Add(this.labelControl3);
-            this.tcpCommunicationPage.Controls.Add(this.labelControl2);
-            this.tcpCommunicationPage.Name = "tcpCommunicationPage";
-            this.tcpCommunicationPage.Size = new System.Drawing.Size(161, 54);
-            this.tcpCommunicationPage.Text = "tcpCommunicationPage";
-            // 
-            // labelControl2
-            // 
-            this.labelControl2.Location = new System.Drawing.Point(6, 6);
-            this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(22, 13);
-            this.labelControl2.TabIndex = 0;
-            this.labelControl2.Text = "IP：";
-            // 
-            // labelControl3
-            // 
-            this.labelControl3.Location = new System.Drawing.Point(6, 37);
-            this.labelControl3.Name = "labelControl3";
-            this.labelControl3.Size = new System.Drawing.Size(48, 13);
-            this.labelControl3.TabIndex = 1;
-            this.labelControl3.Text = "端口号：";
-            // 
-            // textEditCommunicationTCPip
-            // 
-            this.textEditCommunicationTCPip.Location = new System.Drawing.Point(71, 3);
-            this.textEditCommunicationTCPip.Name = "textEditCommunicationTCPip";
-            this.textEditCommunicationTCPip.Size = new System.Drawing.Size(86, 20);
-            this.textEditCommunicationTCPip.TabIndex = 2;
-            // 
-            // textEditCommunicationTCPport
-            // 
-            this.textEditCommunicationTCPport.Location = new System.Drawing.Point(71, 34);
-            this.textEditCommunicationTCPport.Name = "textEditCommunicationTCPport";
-            this.textEditCommunicationTCPport.Size = new System.Drawing.Size(86, 20);
-            this.textEditCommunicationTCPport.TabIndex = 3;
-            // 
-            // xtraTabControlCommunication
-            // 
-            this.xtraTabControlCommunication.Appearance.BackColor = System.Drawing.Color.Transparent;
-            this.xtraTabControlCommunication.Appearance.Options.UseBackColor = true;
-            this.xtraTabControlCommunication.AppearancePage.PageClient.BackColor = System.Drawing.Color.Transparent;
-            this.xtraTabControlCommunication.AppearancePage.PageClient.Options.UseBackColor = true;
-            this.xtraTabControlCommunication.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.xtraTabControlCommunication.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.xtraTabControlCommunication.BorderStylePage = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.xtraTabControlCommunication.HeaderAutoFill = DevExpress.Utils.DefaultBoolean.True;
-            this.xtraTabControlCommunication.HeaderButtons = DevExpress.XtraTab.TabButtons.None;
-            this.xtraTabControlCommunication.HeaderButtonsShowMode = DevExpress.XtraTab.TabButtonShowMode.Never;
-            this.xtraTabControlCommunication.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.xtraTabControlCommunication.Location = new System.Drawing.Point(12, 42);
-            this.xtraTabControlCommunication.Margin = new System.Windows.Forms.Padding(0);
-            this.xtraTabControlCommunication.Name = "xtraTabControlCommunication";
-            this.xtraTabControlCommunication.SelectedTabPage = this.serialCommunicationPage;
-            this.xtraTabControlCommunication.ShowHeaderFocus = DevExpress.Utils.DefaultBoolean.False;
-            this.xtraTabControlCommunication.ShowTabHeader = DevExpress.Utils.DefaultBoolean.False;
-            this.xtraTabControlCommunication.ShowToolTips = DevExpress.Utils.DefaultBoolean.False;
-            this.xtraTabControlCommunication.Size = new System.Drawing.Size(167, 60);
-            this.xtraTabControlCommunication.TabIndex = 0;
-            this.xtraTabControlCommunication.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
-            this.serialCommunicationPage,
-            this.tcpCommunicationPage});
-            // 
-            // serialCommunicationPage
-            // 
-            this.serialCommunicationPage.Appearance.PageClient.BackColor = System.Drawing.Color.Black;
-            this.serialCommunicationPage.Appearance.PageClient.Options.UseBackColor = true;
-            this.serialCommunicationPage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.serialCommunicationPage.Controls.Add(this.comboBoxEdit6);
-            this.serialCommunicationPage.Controls.Add(this.comboBoxEdit5);
-            this.serialCommunicationPage.Controls.Add(this.labelControl4);
-            this.serialCommunicationPage.Controls.Add(this.labelControl5);
-            this.serialCommunicationPage.Margin = new System.Windows.Forms.Padding(0);
-            this.serialCommunicationPage.Name = "serialCommunicationPage";
-            this.serialCommunicationPage.Size = new System.Drawing.Size(161, 54);
-            this.serialCommunicationPage.Text = "serialCommunicationPage";
-            // 
             // MainXtraForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1631,8 +1633,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2)).EndInit();
             this.splitContainerControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit8.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControlCommunication)).EndInit();
+            this.xtraTabControlCommunication.ResumeLayout(false);
+            this.serialCommunicationPage.ResumeLayout(false);
+            this.serialCommunicationPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit6.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit5.Properties)).EndInit();
+            this.tcpCommunicationPage.ResumeLayout(false);
+            this.tcpCommunicationPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditCommunicationTCPport.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditCommunicationTCPip.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditCommunication.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl3)).EndInit();
             this.splitContainerControl3.ResumeLayout(false);
@@ -1642,14 +1652,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit7.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fieldValueBindingSource)).EndInit();
-            this.tcpCommunicationPage.ResumeLayout(false);
-            this.tcpCommunicationPage.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.textEditCommunicationTCPip.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEditCommunicationTCPport.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControlCommunication)).EndInit();
-            this.xtraTabControlCommunication.ResumeLayout(false);
-            this.serialCommunicationPage.ResumeLayout(false);
-            this.serialCommunicationPage.PerformLayout();
             this.ResumeLayout(false);
 
         }

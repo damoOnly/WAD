@@ -423,12 +423,12 @@ namespace standardApplication
                 if (comboBoxEditCommunication.Text == "串口通信")
                 {
                     CommandUnits.DataCenter = new MySerialPort();
-                    CommandUnits.DataCenter.Open(comboBoxEdit5.Text, int.Parse(comboBoxEdit6.Text));
+                    CommandUnits.DataCenter.Open(comboBoxEdit5.Text, int.Parse(comboBoxEdit6.Text), Gloab.AllData.Address);
                 }
                 else
                 {
                     CommandUnits.DataCenter = new MySockClent();
-                    CommandUnits.DataCenter.Open(textEditCommunicationTCPip.Text, int.Parse(textEditCommunicationTCPport.Text));
+                    CommandUnits.DataCenter.Open(textEditCommunicationTCPip.Text, int.Parse(textEditCommunicationTCPport.Text), Gloab.AllData.Address);
                 }
             }
             else

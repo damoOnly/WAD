@@ -13,18 +13,18 @@ namespace CommandManager
     public class DataCenter
     {
         public LogLib.Log log = LogLib.Log.GetLogger("DataCenter");
-        private bool isSerialPort = true;
-        public virtual bool Open(string portName, int baudRate) { return false; }
+        public virtual bool Open(string portName, int baudRate, byte address) { return false; }
 
         public virtual bool Close() { return false; }
         public virtual void Write(byte[] wdata) { }
         public virtual byte[] Read(byte[] pdata) { return new byte[0]; }
+
     }
 
     public class MySerialPort : DataCenter
     {
         public SerialPort serialport = new SerialPort();
-        public override bool Open(string portName, int baudRate)
+        public override bool Open(string portName, int baudRate, byte address)
         {
             try
             {
@@ -74,7 +74,7 @@ namespace CommandManager
 
         private int delay = 2000;
 
-        public void Write(byte[] wdata)
+        public override void Write(byte[] wdata)
         {
             CheckSerialPort();
             CommandUnits.IsCommandding = true;
@@ -159,7 +159,7 @@ namespace CommandManager
             return result.ToArray();
         }
 
-        public byte[] Read(byte[] pdata)
+        public override byte[] Read(byte[] pdata)
         {
             CheckSerialPort();
             CommandUnits.IsCommandding = true;
@@ -186,14 +186,25 @@ namespace CommandManager
     {
         public TcpClient client = new TcpClient();
         NetworkStream stream;
-        public override bool Open(string portName, int baudRate)
+        public override bool Open(string portName, int baudRate, byte address)
         {
             try
             {
                 if (!client.Connected)
                 {
                     client.Connect(IPAddress.Parse(portName), baudRate);
+                    client.ReceiveTimeout = 5 * 1000;
                     stream = client.GetStream();
+                    string start = $"HB={address}";
+                    stream.Write(UTF8Encoding.UTF8.GetBytes(start),0, UTF8Encoding.UTF8.GetBytes(start).Length);
+                    byte[] rb = new byte[8];
+                    stream.Read(rb, 0, 0);
+                    string rbs = UTF8Encoding.UTF8.GetString(rb);
+                    if (!rbs.Equals(address.ToString()))
+                    {
+                        log.Error("can't find equipment");
+                        return false;
+                    }
                 }
                 return true;
             }
@@ -230,11 +241,12 @@ namespace CommandManager
             {
                 throw new CommandException("请等待上一个命令完成后重试");
             }
+
         }
 
         //private int delay = 2000;
 
-        public void Write(byte[] wdata)
+        public override void Write(byte[] wdata)
         {
             string str = "T   " + CommandUnits.ByteToHexStr(wdata);
             Console.WriteLine(str);
@@ -267,7 +279,7 @@ namespace CommandManager
             
         }
 
-        public byte[] Read(byte[] pdata)
+        public override byte[] Read(byte[] pdata)
         {
             CheckConnected();
             CommandUnits.IsCommandding = true;
@@ -314,8 +326,17 @@ namespace CommandManager
             //    Thread.Sleep(50);
 
             int count = client.ReceiveBufferSize;
-            byte[] rbytes = new byte[count];
-            stream.Read(rbytes, 0, count);
+            byte[] rbytes = new byte[backCount];
+            try
+            {
+                stream.Read(rbytes, 0, backCount);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            
 
             //result.AddRange(rbytes);
 
