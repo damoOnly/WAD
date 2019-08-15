@@ -37,12 +37,12 @@ namespace standardApplication
             normalParam.IfSoundAlert = checkEdit1.Checked;
             for (int i = 0; i < normalParam.Relays.Count; i++)
             {
-                var item = normalParam.Relays[i];
-                Control[] rs = splitContainerControl2.Panel2.Controls.Find("UserControlRelay" + item.Number, true);
+                //var item = normalParam.Relays[i];
+                Control[] rs = splitContainerControl2.Panel2.Controls.Find("UserControlRelay" + normalParam.Relays[i].Number, true);
                 if (rs != null && rs.Length > 0)
                 {
                     UserControlRelay r = rs[0] as UserControlRelay;
-                    item = r.GetRelayFromControl();
+                    normalParam.Relays[i] = r.GetRelayFromControl();
                 }
             }
             return normalParam;
@@ -147,6 +147,7 @@ namespace standardApplication
             {
                 GetNormalFromControl();
                 NormalInstruction.WriteNormal(normalParam, Gloab.AllData.Address,CommandCallback);
+                Gloab.AllData.Normal = normalParam;
                 Gloab.AllData.NormalList = Gloab.AllData.Normal.ConvertToNormalList();
                 if (ChangeNormalEvent != null)
                 {

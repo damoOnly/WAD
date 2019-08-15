@@ -195,7 +195,7 @@ namespace CommandManager
                     client.Connect(IPAddress.Parse(portName), baudRate);
                     client.ReceiveTimeout = 5 * 1000;
                     stream = client.GetStream();
-                    string start = $"HB={address}";
+                    string start = string.Format("HB={0}",address);
                     stream.Write(UTF8Encoding.UTF8.GetBytes(start),0, UTF8Encoding.UTF8.GetBytes(start).Length);
                     byte[] rb = new byte[8];
                     stream.Read(rb, 0, 0);

@@ -333,8 +333,8 @@ namespace standardApplication
             try
             {
                 GasEntity ge = GasInstruction.ReadChromaAndAD(GasID, EnumChromaLevel.Two, Gloab.AllData.Address,CommandCallback);
-                Gas.OneChroma = ge.OneChroma;
-                Gas.OneAD = ge.OneAD;
+                Gas.OneChroma = ge.TwoChroma;
+                Gas.OneAD = ge.TwoAD;
                 SetGasToControl();
                 Callback("读取12mA成功");
             }
@@ -359,9 +359,9 @@ namespace standardApplication
             WaitDialogForm wdf = new WaitDialogForm("命令执行中，请稍候......");
             try
             {
-                GasEntity ge = GasInstruction.ReadChromaAndAD(GasID, EnumChromaLevel.Two, Gloab.AllData.Address, CommandCallback);
-                Gas.TwoChroma = ge.TwoChroma;
-                Gas.TwoAD = ge.TwoAD;
+                GasEntity ge = GasInstruction.ReadChromaAndAD(GasID, EnumChromaLevel.Three, Gloab.AllData.Address, CommandCallback);
+                Gas.TwoChroma = ge.ThreeChroma;
+                Gas.TwoAD = ge.ThreeAD;
                 SetGasToControl();
                 Callback("读取20mA成功");
             }

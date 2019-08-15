@@ -25,7 +25,7 @@ namespace standardApplication
                 return;
             }
             comboBoxEdit7.Properties.Items.Clear();
-            comboBoxEdit7.Properties.Items.AddRange(Gloab.Config.RelayModelA.Select(c => c.Key).ToArray());
+            comboBoxEdit7.Properties.Items.AddRange(Gloab.Config.RelayModel.Select(c => c.Key).ToArray());
         }
 
         private int number { get; set; }

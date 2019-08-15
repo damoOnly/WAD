@@ -145,6 +145,9 @@ namespace standardApplication
             userControlNormal1.Callback = SetDebugStr;
             userControlNormal1.CommandCallback = CommandCallback;
 
+            userControl11.Callback = SetDebugStr;
+            userControl11.CommandCallback = CommandCallback;
+
             ContextMenuStrip richMenu = new ContextMenuStrip();
             ToolStripMenuItem CMclear = new ToolStripMenuItem("清空");
             CMclear.Click += CMclear_Click;
