@@ -147,6 +147,7 @@ namespace standardApplication
 
             userControl11.Callback = SetDebugStr;
             userControl11.CommandCallback = CommandCallback;
+            userControl11.SaveModelFileEvent +=userControl11_SaveModelFileEvent;
 
             ContextMenuStrip richMenu = new ContextMenuStrip();
             ToolStripMenuItem CMclear = new ToolStripMenuItem("清空");
@@ -731,10 +732,7 @@ namespace standardApplication
         private void ReadModelFileName(ModelType type)
         {
             listBoxControl1.Items.Clear();
-            if (type != ModelType.Weather)
-            {
-                listBoxControl1.Items.AddRange(ModelFile.ReadFileNameList(type).ToArray());
-            }            
+            listBoxControl1.Items.AddRange(ModelFile.ReadFileNameList(type).ToArray());          
         }
 
         private void xtraTabControl1_SelectedPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)

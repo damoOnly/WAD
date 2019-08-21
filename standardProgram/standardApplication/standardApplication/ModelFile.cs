@@ -121,7 +121,6 @@ namespace standardApplication
     {
         All,
         Gas,
-        Weather,
         Normal,
         Serial
     }

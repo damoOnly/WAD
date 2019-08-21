@@ -23,7 +23,7 @@ namespace Entity
                     RelayActionTimeSpan = 20,
                     RelayInterval = 30,
                     RelayMatchChannel = 40,
-                    RelayModel = new FieldValue() { Name = "独立模式", Value = 0 }
+                    RelayModel = new FieldValue() { Name = "时间模式", Value = 0 }
                 });
             }
         }

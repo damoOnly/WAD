@@ -49,7 +49,7 @@
             0,
             0,
             0});
-            this.spinEdit10.Location = new System.Drawing.Point(262, 11);
+            this.spinEdit10.Location = new System.Drawing.Point(262, 10);
             this.spinEdit10.Name = "spinEdit10";
             this.spinEdit10.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -70,7 +70,7 @@
             0,
             0,
             0});
-            this.spinEdit9.Location = new System.Drawing.Point(530, 11);
+            this.spinEdit9.Location = new System.Drawing.Point(530, 10);
             this.spinEdit9.Name = "spinEdit9";
             this.spinEdit9.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -91,7 +91,7 @@
             0,
             0,
             0});
-            this.spinEdit4.Location = new System.Drawing.Point(399, 11);
+            this.spinEdit4.Location = new System.Drawing.Point(399, 10);
             this.spinEdit4.Name = "spinEdit4";
             this.spinEdit4.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -108,51 +108,49 @@
             // comboBoxEdit7
             // 
             this.comboBoxEdit7.EditValue = "时间模式";
-            this.comboBoxEdit7.Location = new System.Drawing.Point(84, 11);
+            this.comboBoxEdit7.Location = new System.Drawing.Point(84, 10);
             this.comboBoxEdit7.Name = "comboBoxEdit7";
             this.comboBoxEdit7.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.comboBoxEdit7.Properties.Items.AddRange(new object[] {
-            "独立模式"});
             this.comboBoxEdit7.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.comboBoxEdit7.Size = new System.Drawing.Size(100, 20);
             this.comboBoxEdit7.TabIndex = 98;
             // 
             // labelControl20
             // 
-            this.labelControl20.Location = new System.Drawing.Point(470, 15);
+            this.labelControl20.Location = new System.Drawing.Point(470, 14);
             this.labelControl20.Name = "labelControl20";
-            this.labelControl20.Size = new System.Drawing.Size(60, 13);
+            this.labelControl20.Size = new System.Drawing.Size(60, 14);
             this.labelControl20.TabIndex = 97;
             this.labelControl20.Text = "动作时间：";
             // 
             // labelControl19
             // 
-            this.labelControl19.Location = new System.Drawing.Point(333, 14);
+            this.labelControl19.Location = new System.Drawing.Point(333, 13);
             this.labelControl19.Name = "labelControl19";
-            this.labelControl19.Size = new System.Drawing.Size(60, 13);
+            this.labelControl19.Size = new System.Drawing.Size(60, 14);
             this.labelControl19.TabIndex = 96;
             this.labelControl19.Text = "间隔时间：";
             // 
             // labelControl18
             // 
-            this.labelControl18.Location = new System.Drawing.Point(202, 14);
+            this.labelControl18.Location = new System.Drawing.Point(202, 13);
             this.labelControl18.Name = "labelControl18";
-            this.labelControl18.Size = new System.Drawing.Size(60, 13);
+            this.labelControl18.Size = new System.Drawing.Size(60, 14);
             this.labelControl18.TabIndex = 95;
             this.labelControl18.Text = "对应通道：";
             // 
             // labelControl17
             // 
-            this.labelControl17.Location = new System.Drawing.Point(5, 14);
+            this.labelControl17.Location = new System.Drawing.Point(5, 13);
             this.labelControl17.Name = "labelControl17";
-            this.labelControl17.Size = new System.Drawing.Size(78, 13);
+            this.labelControl17.Size = new System.Drawing.Size(79, 14);
             this.labelControl17.TabIndex = 94;
             this.labelControl17.Text = "继电器1模式：";
             // 
             // UserControlRelay
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.spinEdit10);
             this.Controls.Add(this.spinEdit9);
@@ -163,7 +161,7 @@
             this.Controls.Add(this.labelControl18);
             this.Controls.Add(this.labelControl17);
             this.Name = "UserControlRelay";
-            this.Size = new System.Drawing.Size(590, 40);
+            this.Size = new System.Drawing.Size(590, 37);
             this.Load += new System.EventHandler(this.UserControlRelay_Load);
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit10.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit9.Properties)).EndInit();
