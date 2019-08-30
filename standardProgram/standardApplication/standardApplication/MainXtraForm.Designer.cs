@@ -601,7 +601,6 @@
             // 
             this.splitContainerControl7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainerControl7.Horizontal = false;
-            this.splitContainerControl7.IsSplitterFixed = true;
             this.splitContainerControl7.Location = new System.Drawing.Point(0, 0);
             this.splitContainerControl7.Name = "splitContainerControl7";
             this.splitContainerControl7.Panel1.Controls.Add(this.searchControl1);
@@ -640,7 +639,6 @@
             // 
             this.splitContainerControl5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainerControl5.Horizontal = false;
-            this.splitContainerControl5.IsSplitterFixed = true;
             this.splitContainerControl5.Location = new System.Drawing.Point(0, 0);
             this.splitContainerControl5.Name = "splitContainerControl5";
             this.splitContainerControl5.Panel1.Controls.Add(this.simpleButton23);
@@ -940,7 +938,7 @@
             this.splitContainerControl10.Panel2.Controls.Add(this.simpleButton20);
             this.splitContainerControl10.Panel2.Text = "Panel2";
             this.splitContainerControl10.Size = new System.Drawing.Size(764, 222);
-            this.splitContainerControl10.SplitterPosition = 195;
+            this.splitContainerControl10.SplitterPosition = 153;
             this.splitContainerControl10.TabIndex = 0;
             this.splitContainerControl10.Text = "splitContainerControl10";
             // 
@@ -965,7 +963,7 @@
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl2.Location = new System.Drawing.Point(0, 0);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(764, 195);
+            this.groupControl2.Size = new System.Drawing.Size(764, 153);
             this.groupControl2.TabIndex = 1;
             this.groupControl2.Text = "串口2设置";
             // 
@@ -1121,7 +1119,7 @@
             // 
             // simpleButton22
             // 
-            this.simpleButton22.Location = new System.Drawing.Point(405, 17);
+            this.simpleButton22.Location = new System.Drawing.Point(499, 16);
             this.simpleButton22.Name = "simpleButton22";
             this.simpleButton22.Size = new System.Drawing.Size(90, 21);
             this.simpleButton22.TabIndex = 3;
@@ -1130,7 +1128,7 @@
             // 
             // simpleButton21
             // 
-            this.simpleButton21.Location = new System.Drawing.Point(241, 17);
+            this.simpleButton21.Location = new System.Drawing.Point(335, 16);
             this.simpleButton21.Name = "simpleButton21";
             this.simpleButton21.Size = new System.Drawing.Size(90, 21);
             this.simpleButton21.TabIndex = 2;
@@ -1139,7 +1137,7 @@
             // 
             // simpleButton20
             // 
-            this.simpleButton20.Location = new System.Drawing.Point(82, 17);
+            this.simpleButton20.Location = new System.Drawing.Point(176, 16);
             this.simpleButton20.Name = "simpleButton20";
             this.simpleButton20.Size = new System.Drawing.Size(90, 21);
             this.simpleButton20.TabIndex = 1;

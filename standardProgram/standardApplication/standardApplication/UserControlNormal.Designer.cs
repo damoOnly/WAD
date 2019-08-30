@@ -182,7 +182,6 @@
             this.splitContainerControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainerControl1.FixedPanel = DevExpress.XtraEditors.SplitFixedPanel.Panel2;
             this.splitContainerControl1.Horizontal = false;
-            this.splitContainerControl1.IsSplitterFixed = true;
             this.splitContainerControl1.Location = new System.Drawing.Point(0, 0);
             this.splitContainerControl1.Name = "splitContainerControl1";
             this.splitContainerControl1.Panel1.Controls.Add(this.splitContainerControl2);
@@ -200,7 +199,6 @@
             // 
             this.splitContainerControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainerControl2.Horizontal = false;
-            this.splitContainerControl2.IsSplitterFixed = true;
             this.splitContainerControl2.Location = new System.Drawing.Point(0, 0);
             this.splitContainerControl2.Name = "splitContainerControl2";
             this.splitContainerControl2.Panel1.Controls.Add(this.labelControl14);
@@ -223,7 +221,7 @@
             // 
             // simpleButton16
             // 
-            this.simpleButton16.Location = new System.Drawing.Point(462, 13);
+            this.simpleButton16.Location = new System.Drawing.Point(498, 13);
             this.simpleButton16.Name = "simpleButton16";
             this.simpleButton16.Size = new System.Drawing.Size(105, 25);
             this.simpleButton16.TabIndex = 78;
@@ -232,7 +230,7 @@
             // 
             // simpleButton15
             // 
-            this.simpleButton15.Location = new System.Drawing.Point(261, 13);
+            this.simpleButton15.Location = new System.Drawing.Point(297, 13);
             this.simpleButton15.Name = "simpleButton15";
             this.simpleButton15.Size = new System.Drawing.Size(105, 25);
             this.simpleButton15.TabIndex = 77;
@@ -241,7 +239,7 @@
             // 
             // simpleButton14
             // 
-            this.simpleButton14.Location = new System.Drawing.Point(68, 13);
+            this.simpleButton14.Location = new System.Drawing.Point(104, 13);
             this.simpleButton14.Name = "simpleButton14";
             this.simpleButton14.Size = new System.Drawing.Size(105, 25);
             this.simpleButton14.TabIndex = 76;

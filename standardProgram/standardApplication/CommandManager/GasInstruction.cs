@@ -132,7 +132,7 @@ namespace CommandManager
         public static List<GasEntity> ReadGasList(byte address, CommonConfig config, Action<string> callback)
         {
             List<GasEntity> list = new List<GasEntity>();
-            byte[] sendb1 = Command.GetReadSendByte(address, 0x00, 0x20, 1);
+            byte[] sendb1 = Command.GetReadSendByte(address, 0x00, 0x12, 1);
             callback(string.Format("W: {0}", CommandUnits.ByteToHexStr(sendb1)));
             byte[] rbytes1 = CommandUnits.DataCenter.Read(sendb1);
             callback(string.Format("R: {0}", CommandUnits.ByteToHexStr(rbytes1)));
