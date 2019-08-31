@@ -543,6 +543,7 @@
             // 
             this.textEdit7.Location = new System.Drawing.Point(88, 45);
             this.textEdit7.Name = "textEdit7";
+            this.textEdit7.Properties.EditValueChanging += new DevExpress.XtraEditors.Controls.ChangingEventHandler(this.textEdit7_Properties_EditValueChanging);
             this.textEdit7.Size = new System.Drawing.Size(40, 20);
             this.textEdit7.TabIndex = 88;
             // 
@@ -566,6 +567,7 @@
             // 
             this.textEdit13.Location = new System.Drawing.Point(167, 45);
             this.textEdit13.Name = "textEdit13";
+            this.textEdit13.Properties.EditValueChanging += new DevExpress.XtraEditors.Controls.ChangingEventHandler(this.textEdit13_Properties_EditValueChanging);
             this.textEdit13.Size = new System.Drawing.Size(40, 20);
             this.textEdit13.TabIndex = 90;
             // 
@@ -581,6 +583,7 @@
             // 
             this.textEdit14.Location = new System.Drawing.Point(241, 45);
             this.textEdit14.Name = "textEdit14";
+            this.textEdit14.Properties.EditValueChanging += new DevExpress.XtraEditors.Controls.ChangingEventHandler(this.textEdit13_Properties_EditValueChanging);
             this.textEdit14.Size = new System.Drawing.Size(40, 20);
             this.textEdit14.TabIndex = 92;
             // 
@@ -596,6 +599,7 @@
             // 
             this.textEdit15.Location = new System.Drawing.Point(320, 45);
             this.textEdit15.Name = "textEdit15";
+            this.textEdit15.Properties.EditValueChanging += new DevExpress.XtraEditors.Controls.ChangingEventHandler(this.textEdit13_Properties_EditValueChanging);
             this.textEdit15.Size = new System.Drawing.Size(40, 20);
             this.textEdit15.TabIndex = 94;
             // 

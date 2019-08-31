@@ -530,7 +530,7 @@ namespace standardApplication
 
         private void SetGasToControl()
         {
-            Gloab.AllData.GasTree = Gloab.AllData.GasList.Select(c => new ListItem() { Name = c.GasName.Name, Number = c.GasName.Value }).ToList();
+            Gloab.AllData.GasTree = Gloab.AllData.GasList.Select(c => new ListItem() { Name = c.GasName.Name, Number = c.GasID }).ToList();
             spinEdit1.Value = Gloab.AllData.Normal.GasCount;
             gridControl2.DataSource = Gloab.AllData.GasList;
             gridControl2.RefreshDataSource();
