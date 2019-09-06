@@ -557,7 +557,7 @@ namespace standardApplication
 
         private void textEdit7_Properties_EditValueChanging(object sender, DevExpress.XtraEditors.Controls.ChangingEventArgs e)
         {
-            string pattern = @"^(\d{1,3}|[a-zA-Z]?)$";
+            string pattern = @"^(\d{1,2}|[a-zA-Z]?)$";
             if (Regex.IsMatch(e.NewValue.ToString(), pattern, RegexOptions.IgnoreCase) || string.IsNullOrWhiteSpace(e.NewValue.ToString()))
             {
                 e.Cancel = false;

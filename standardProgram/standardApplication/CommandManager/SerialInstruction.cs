@@ -102,11 +102,18 @@ namespace CommandManager
             callback(string.Format("T: {0}", CommandUnits.ByteToHexStr(sendb)));
             byte[] rbytes = CommandUnits.DataCenter.Read(sendb);
             callback(string.Format("R: {0}", CommandUnits.ByteToHexStr(rbytes)));
+            SerialEntity serial = ParseSerial(config, rbytes);
+
+            return serial;
+        }
+
+        public static SerialEntity ParseSerial(CommonConfig config, byte[] rbytes)
+        {
             SerialEntity serial = new SerialEntity();
-            Array.Reverse(rbytes,3,2);
+            Array.Reverse(rbytes, 3, 2);
             serial.SerialOneBaudRate.Value = BitConverter.ToInt16(rbytes, 3);
             serial.SerialOneBaudRate.Name = config.BaudRate.FirstOrDefault(c => c.Value == serial.SerialOneBaudRate.Value).Key;
-            Array.Reverse(rbytes, 5,2);
+            Array.Reverse(rbytes, 5, 2);
             serial.SerialOnePortModel.Value = BitConverter.ToInt16(rbytes, 5);
             serial.SerialOnePortModel.Name = config.SerialPortModel.FirstOrDefault(c => c.Value == serial.SerialOnePortModel.Value).Key;
             Array.Reverse(rbytes, 7, 2);
@@ -114,50 +121,29 @@ namespace CommandManager
             Array.Reverse(rbytes, 9, 2);
             Array.Reverse(rbytes, 11, 2);
             serial.SerialOneInterval = BitConverter.ToInt32(rbytes, 9);
-            List<byte> byteTemp = new List<byte>();
-            for (int i = 13; i < 13+48;)
+            for (int i = 13; i < 13 + 48;)
             {
-                if (rbytes[i + 1] != 0x00)
-                {
-                    byteTemp.Add(rbytes[i + 1]);
-                }
+                serial.SerialOneMN += CommandUnits.ASCIIbyteToString(rbytes[i + 1]);
                 i += 2;
             }
 
-            serial.SerialOneMN = ASCIIEncoding.ASCII.GetString(byteTemp.ToArray());
-
-            byteTemp = new List<byte>();
-            for (int i = 61; i < 61 + 4; )
+            for (int i = 61; i < 61 + 4;)
             {
-                if (rbytes[i + 1] != 0x00)
-                {
-                    byteTemp.Add(rbytes[i + 1]);
-                }
+                serial.SerialOneST += CommandUnits.ASCIIbyteToString(rbytes[i + 1]);
                 i += 2;
             }
-            serial.SerialOneST = ASCIIEncoding.ASCII.GetString(byteTemp.ToArray());
 
-            byteTemp = new List<byte>();
-            for (int i = 65; i < 65 + 8; )
+            for (int i = 65; i < 65 + 8;)
             {
-                if (rbytes[i + 1] != 0x00)
-                {
-                    byteTemp.Add(rbytes[i + 1]);
-                }
+                serial.SerialOneCN += CommandUnits.ASCIIbyteToString(rbytes[i + 1]);
                 i += 2;
             }
-            serial.SerialOneCN = ASCIIEncoding.ASCII.GetString(byteTemp.ToArray());
 
-            byteTemp = new List<byte>();
-            for (int i = 73; i < 73 + 12; )
+            for (int i = 73; i < 73 + 12;)
             {
-                if (rbytes[i + 1] != 0x00)
-                {
-                    byteTemp.Add(rbytes[i + 1]);
-                }
+                serial.SerialOnePW += CommandUnits.ASCIIbyteToString(rbytes[i + 1]);
                 i += 2;
             }
-            serial.SerialOnePW = ASCIIEncoding.ASCII.GetString(byteTemp.ToArray());
 
             Array.Reverse(rbytes, 85, 2);
             serial.SerialTwoBaudRate.Value = BitConverter.ToInt16(rbytes, 85);
@@ -171,51 +157,32 @@ namespace CommandManager
             Array.Reverse(rbytes, 93, 2);
             serial.SerialTwoInterval = BitConverter.ToInt32(rbytes, 91);
 
-            byteTemp = new List<byte>();
-            for (int i = 95; i < 95 + 48; )
+            for (int i = 95; i < 95 + 48;)
             {
-                if (rbytes[i + 1] != 0x00)
-                {
-                    byteTemp.Add(rbytes[i + 1]);
-                }
+                serial.SerialTwoMN += CommandUnits.ASCIIbyteToString(rbytes[i + 1]);
                 i += 2;
             }
-            serial.SerialTwoMN = ASCIIEncoding.ASCII.GetString(byteTemp.ToArray());
 
-            byteTemp = new List<byte>();
-            for (int i = 143; i < 143 + 4; )
+            for (int i = 143; i < 143 + 4;)
             {
-                if (rbytes[i + 1] != 0x00)
-                {
-                    byteTemp.Add(rbytes[i + 1]);
-                }
+                serial.SerialTwoST += CommandUnits.ASCIIbyteToString(rbytes[i + 1]);
                 i += 2;
             }
-            serial.SerialTwoST = ASCIIEncoding.ASCII.GetString(byteTemp.ToArray());
 
-            byteTemp = new List<byte>();
-            for (int i = 147; i < 147 + 8; )
+            for (int i = 147; i < 147 + 8;)
             {
-                if (rbytes[i + 1] != 0x00)
-                {
-                    byteTemp.Add(rbytes[i + 1]);
-                }
+                serial.SerialTwoCN += CommandUnits.ASCIIbyteToString(rbytes[i + 1]);
                 i += 2;
             }
-            serial.SerialTwoCN = ASCIIEncoding.ASCII.GetString(byteTemp.ToArray());
 
-            byteTemp = new List<byte>();
-            for (int i = 155; i < 155 + 12; )
+            for (int i = 155; i < 155 + 12;)
             {
-                if (rbytes[i + 1] != 0x00)
-                {
-                    byteTemp.Add(rbytes[i + 1]);
-                }
+                serial.SerialTwoPW += CommandUnits.ASCIIbyteToString(rbytes[i + 1]);
                 i += 2;
             }
-            serial.SerialTwoPW = ASCIIEncoding.ASCII.GetString(byteTemp.ToArray());
 
             return serial;
         }
+
     }
 }

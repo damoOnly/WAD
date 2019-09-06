@@ -226,6 +226,17 @@ b[3] = 11111111(0xff) & 00000000
 
 
         }
+        public static string ASCIIbyteToString(byte b)
+        {
+            if (b > 31 && b < 127)
+            {
+                return ((char)b).ToString();
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
 
         public static DataCenter DataCenter;
     }

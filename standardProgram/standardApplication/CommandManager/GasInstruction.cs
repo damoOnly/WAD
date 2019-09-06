@@ -57,48 +57,12 @@ namespace CommandManager
             {
                 content.AddRange(new byte[2]);
             }
-            byteTemp = ASCIIEncoding.ASCII.GetBytes(gas.dong.Trim());
-            if (byteTemp.Length == 2)
-            {
-                content.AddRange(byteTemp.Reverse());
-            }
-            else if (byteTemp.Length == 1)
-            {
-                content.Add(0);
-                content.AddRange(byteTemp);
-            }
-            else
-            {
-                content.AddRange(new byte[2]);
-            }
-            byteTemp = ASCIIEncoding.ASCII.GetBytes(gas.ceng.Trim());
-            if (byteTemp.Length == 2)
-            {
-                content.AddRange(byteTemp.Reverse());
-            }
-            else if (byteTemp.Length == 1)
-            {
-                content.Add(0);
-                content.AddRange(byteTemp);
-            }
-            else
-            {
-                content.AddRange(new byte[2]);
-            }
-            byteTemp = ASCIIEncoding.ASCII.GetBytes(gas.hao.Trim());
-            if (byteTemp.Length == 2)
-            {
-                content.AddRange(byteTemp.Reverse());
-            }
-            else if (byteTemp.Length == 1)
-            {
-                content.Add(0);
-                content.AddRange(byteTemp);
-            }
-            else
-            {
-                content.AddRange(new byte[2]);
-            }
+            content.Add(0);
+            content.Add(Convert.ToByte(gas.dong.Trim()));
+            content.Add(0);
+            content.Add(Convert.ToByte(gas.ceng.Trim()));
+            content.Add(0);
+            content.Add(Convert.ToByte(gas.hao.Trim()));
             byteTemp = BitConverter.GetBytes(gas.OneAD);
             Array.Reverse(byteTemp, 0, 2);
             Array.Reverse(byteTemp, 2, 2);
@@ -150,6 +114,18 @@ namespace CommandManager
             callback(string.Format("W: {0}", CommandUnits.ByteToHexStr(sendb)));
             byte[] rbytes = CommandUnits.DataCenter.Read(sendb);
             callback(string.Format("R: {0}", CommandUnits.ByteToHexStr(rbytes)));
+            GasEntity gas = ParseGas(gasId, config, rbytes);            
+
+            GasEntity current = ReadCurrent(gasId, address, config, callback);
+            gas.CurrentAD = current.CurrentAD;
+            gas.CurrentChroma = current.CurrentChroma;
+            gas.AlertStatus = current.AlertStatus;
+
+            return gas;
+        }
+
+        public static GasEntity ParseGas(int gasId, CommonConfig config, byte[] rbytes)
+        {
             GasEntity gas = new GasEntity();
             gas.GasID = gasId;
             Array.Reverse(rbytes, 3, 2);
@@ -165,7 +141,7 @@ namespace CommandManager
             Array.Reverse(rbytes, 11, 2);
             gas.GasRang = BitConverter.ToSingle(rbytes, 9);
             List<byte> byteTemp = new List<byte>();
-            for (int i = 13; i < 13 + 12; )
+            for (int i = 13; i < 13 + 12;)
             {
                 if (rbytes[i + 1] != 0x00)
                 {
@@ -175,7 +151,7 @@ namespace CommandManager
             }
             // to do test
             gas.Factor = ASCIIEncoding.ASCII.GetString(byteTemp.ToArray());
-            
+
             Array.Reverse(rbytes, 27, 2);
             gas.AlertModel.Value = BitConverter.ToInt16(rbytes, 27);
             gas.AlertModel.Name = config.AlertModel.FirstOrDefault(c => c.Value == gas.AlertModel.Value).Key;
@@ -187,10 +163,17 @@ namespace CommandManager
             gas.GasA2 = BitConverter.ToSingle(rbytes, 33);
             gas.ProbeAddress = rbytes[46];
             gas.ProbeChannel = rbytes[48];
-            gas.qu = ASCIIEncoding.ASCII.GetString(rbytes, 49, 2);
-            gas.dong = ASCIIEncoding.ASCII.GetString(rbytes, 51, 2);
-            gas.ceng = ASCIIEncoding.ASCII.GetString(rbytes, 53, 2);
-            gas.hao = ASCIIEncoding.ASCII.GetString(rbytes, 55, 2);
+            if (rbytes[50] > 31 && rbytes[50] < 127)
+            {
+                gas.qu = ASCIIEncoding.ASCII.GetString(rbytes, 50, 1);
+            }
+            if (rbytes[49] > 31 && rbytes[49] < 127)
+            {
+                gas.qu = gas.qu + ASCIIEncoding.ASCII.GetString(rbytes, 49, 1);
+            }
+            gas.dong = rbytes[52].ToString();
+            gas.ceng = rbytes[54].ToString();
+            gas.hao = rbytes[56].ToString();
             Array.Reverse(rbytes, 57, 2);
             Array.Reverse(rbytes, 59, 2);
             gas.OneAD = BitConverter.ToInt32(rbytes, 57);
@@ -209,12 +192,6 @@ namespace CommandManager
             Array.Reverse(rbytes, 77, 2);
             Array.Reverse(rbytes, 79, 2);
             gas.ThreeChroma = BitConverter.ToSingle(rbytes, 77);
-
-            GasEntity current = ReadCurrent(gasId, address, config, callback);
-            gas.CurrentAD = current.CurrentAD;
-            gas.CurrentChroma = current.CurrentChroma;
-            gas.AlertStatus = current.AlertStatus;
-
             return gas;
         }
 
