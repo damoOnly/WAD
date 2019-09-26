@@ -78,7 +78,7 @@ namespace standardApplication
             this.textEdit7.Text = Gas.qu;
             this.textEdit13.Text = Gas.dong;
             this.textEdit14.Text = Gas.ceng;
-            this.textEdit12.Text = Gas.hao;
+            this.textEdit15.Text = Gas.hao;
             this.spinEdit8.Value = Gas.CurrentAD;
             this.textEdit3.Text = Gas.CurrentChroma.ToString();
             this.textEdit8.Text = Gas.Factor;

@@ -278,20 +278,17 @@ namespace CommandManager
 
         public static GasEntity ReadChromaAndAD(int gasId, EnumChromaLevel level, byte address, Action<string> callback)
         {
-            byte low = 0x2a;
+            byte low = 0x2b;
             switch (level)
             {
-                case EnumChromaLevel.Zero:
-                    low = 0x2a;
-                    break;
                 case EnumChromaLevel.One:
-                    low = 0x2e;
+                    low = 0x2b;
                     break;
                 case EnumChromaLevel.Two:
-                    low = 0x32;
+                    low = 0x2f;
                     break;
                 case EnumChromaLevel.Three:
-                    low = 0x36;
+                    low = 0x33;
                     break;
                 default:
                     break;
@@ -329,22 +326,22 @@ namespace CommandManager
 
         public static void WriteChromaAndAD(GasEntity gas, EnumChromaLevel level, byte address, Action<string> callback)
         {
-            byte low = 0x2a;
+            byte low = 0x2b;
             List<byte> content = new List<byte>();
             switch (level)
             {
                 case EnumChromaLevel.One:
-                    low = 0x2e;
+                    low = 0x2b;
                     content.AddRange(BitConverter.GetBytes(gas.OneAD));
                     content.AddRange(BitConverter.GetBytes(gas.OneChroma));
                     break;
                 case EnumChromaLevel.Two:
-                    low = 0x32;
+                    low = 0x2f;
                     content.AddRange(BitConverter.GetBytes(gas.TwoAD));
                     content.AddRange(BitConverter.GetBytes(gas.TwoChroma));
                     break;
                 case EnumChromaLevel.Three:
-                    low = 0x36;
+                    low = 0x33;
                     content.AddRange(BitConverter.GetBytes(gas.ThreeAD));
                     content.AddRange(BitConverter.GetBytes(gas.ThreeChroma));
                     break;
@@ -394,7 +391,7 @@ namespace CommandManager
             content.Reverse(5, 2);
             content.Add(0);
             content.Add((byte)gas.AlertStatus.Value);
-            byte[] sendb = Command.GetWiteSendByte(address, (byte)gas.GasID, 0x50, content.ToArray());
+            byte[] sendb = Command.GetWiteSendByte(address, (byte)gas.GasID, 0x37, content.ToArray());
             callback(string.Format("W: {0}", CommandUnits.ByteToHexStr(sendb)));
             CommandUnits.DataCenter.Write(sendb);
         }
