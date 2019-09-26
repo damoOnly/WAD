@@ -325,14 +325,14 @@ namespace standardApplication
             textEdit32.Text = serial.SerialOneCN;
             textEdit31.Text = serial.SerialOneST;
 
-            comboBoxEdit3.Text = serial.SerialTwoBaudRate.Name;
-            comboBoxEdit4.Text = serial.SerialTwoPortModel.Name;
-            spinEdit5.Value = serial.SerialTwoAddress;
-            spinEdit6.Value = serial.SerialTwoInterval;
-            textEdit36.Text = serial.SerialTwoMN;
-            textEdit35.Text = serial.SerialTwoPW;
-            textEdit34.Text = serial.SerialTwoCN;
-            textEdit28.Text = serial.SerialTwoST;
+            //comboBoxEdit3.Text = serial.SerialTwoBaudRate.Name;
+            //comboBoxEdit4.Text = serial.SerialTwoPortModel.Name;
+            //spinEdit5.Value = serial.SerialTwoAddress;
+            //spinEdit6.Value = serial.SerialTwoInterval;
+            //textEdit36.Text = serial.SerialTwoMN;
+            //textEdit35.Text = serial.SerialTwoPW;
+            //textEdit34.Text = serial.SerialTwoCN;
+            //textEdit28.Text = serial.SerialTwoST;
 
         }
 
@@ -350,16 +350,16 @@ namespace standardApplication
             serial.SerialOneCN = textEdit32.Text;
             serial.SerialOneST = textEdit31.Text;
 
-            serial.SerialTwoBaudRate.Name = comboBoxEdit3.Text;
-            serial.SerialTwoBaudRate.Value = Gloab.Config.BaudRate.First(c=>c.Key == comboBoxEdit3.Text).Value;
-            serial.SerialTwoPortModel.Name = comboBoxEdit4.Text;
-            serial.SerialTwoPortModel.Value = Gloab.Config.SerialPortModel.First(c=>c.Key == comboBoxEdit4.Text).Value;
-            serial.SerialTwoAddress = (short)spinEdit5.Value;
-            serial.SerialTwoInterval = (int)spinEdit6.Value;
-            serial.SerialTwoMN = textEdit36.Text;
-            serial.SerialTwoPW = textEdit35.Text;
-            serial.SerialTwoCN = textEdit34.Text;
-            serial.SerialTwoST = textEdit28.Text;
+            //serial.SerialTwoBaudRate.Name = comboBoxEdit3.Text;
+            //serial.SerialTwoBaudRate.Value = Gloab.Config.BaudRate.First(c=>c.Key == comboBoxEdit3.Text).Value;
+            //serial.SerialTwoPortModel.Name = comboBoxEdit4.Text;
+            //serial.SerialTwoPortModel.Value = Gloab.Config.SerialPortModel.First(c=>c.Key == comboBoxEdit4.Text).Value;
+            //serial.SerialTwoAddress = (short)spinEdit5.Value;
+            //serial.SerialTwoInterval = (int)spinEdit6.Value;
+            //serial.SerialTwoMN = textEdit36.Text;
+            //serial.SerialTwoPW = textEdit35.Text;
+            //serial.SerialTwoCN = textEdit34.Text;
+            //serial.SerialTwoST = textEdit28.Text;
             return serial;
         }
 

@@ -966,6 +966,7 @@
             this.groupControl2.Size = new System.Drawing.Size(764, 153);
             this.groupControl2.TabIndex = 1;
             this.groupControl2.Text = "串口2设置";
+            this.groupControl2.Visible = false;
             // 
             // spinEdit6
             // 

@@ -35,6 +35,10 @@ namespace standardApplication
             normalParam.DataStorageInterval = (int)spinEdit2.Value;
             normalParam.HotTimeSpan = (ushort)spinEdit3.Value;
             normalParam.IfSoundAlert = checkEdit1.Checked;
+            normalParam.RelayModelA1.Name = comboBoxEdit1.Text;
+            normalParam.RelayModelA1.Value = Gloab.Config.RelayModelA.FirstOrDefault(c => c.Key == comboBoxEdit1.Text).Value;
+            normalParam.RelayModelA2.Name = comboBoxEdit2.Text;
+            normalParam.RelayModelA2.Value = Gloab.Config.RelayModelA.FirstOrDefault(c => c.Key == comboBoxEdit2.Text).Value;
             for (int i = 0; i < normalParam.Relays.Count; i++)
             {
                 //var item = normalParam.Relays[i];
@@ -58,6 +62,8 @@ namespace standardApplication
             spinEdit2.Value = normalParam.DataStorageInterval;
             spinEdit3.Value = normalParam.HotTimeSpan;
             checkEdit1.Checked = normalParam.IfSoundAlert;
+            comboBoxEdit1.Text = normalParam.RelayModelA1.Name;
+            comboBoxEdit2.Text = normalParam.RelayModelA2.Name;
 
             foreach (var item in normalParam.Relays)
             {
@@ -82,6 +88,11 @@ namespace standardApplication
             {
                 return;
             }
+            comboBoxEdit1.Properties.Items.Clear();
+            comboBoxEdit1.Properties.Items.AddRange(Gloab.Config.RelayModelA.Select(c => c.Key).ToArray());
+
+            comboBoxEdit2.Properties.Items.Clear();
+            comboBoxEdit2.Properties.Items.AddRange(Gloab.Config.RelayModelA.Select(c => c.Key).ToArray());
             normalParam = Gloab.AllData.Normal;
 
             for (int i = normalParam.Relays.Count-1; i >= 0; i--)

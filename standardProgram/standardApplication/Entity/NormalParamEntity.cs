@@ -14,6 +14,8 @@ namespace Entity
             HotTimeSpan = 10;
             DataStorageInterval = 20;
             IfSoundAlert = true;
+            RelayModelA1 = new FieldValue() { Name = "独立模式", Value = 0 };
+            RelayModelA2 = new FieldValue() { Name = "独立模式", Value = 0 };
             Relays = new List<RelayEntity>();
             for (int i = 1; i <= 10; i++)
             {
@@ -31,6 +33,8 @@ namespace Entity
         public ushort HotTimeSpan { get; set; }
         public int DataStorageInterval { get; set; }
         public bool IfSoundAlert { get; set; }
+        public FieldValue RelayModelA1 { get; set; }
+        public FieldValue RelayModelA2 { get; set; }
         public List<RelayEntity> Relays { get; set; }
 
 
@@ -38,7 +42,9 @@ namespace Entity
         {
             List<NormalParamEntityForList> normalList = new List<NormalParamEntityForList>() { };
 
-            normalList.Add(new NormalParamEntityForList() { Name1 = "气体通道数：", Value1 = this.GasCount.ToString(), Name2 = "声光报警开关:", Value2 = this.IfSoundAlert ? "打开" : "关闭", Name3 = "预热时间(秒):", Value3 = this.HotTimeSpan.ToString(), Name4 = "数据存储间隔(秒):", Value4 = this.DataStorageInterval.ToString() });
+            normalList.Add(new NormalParamEntityForList() { Name1 = "气体通道数：", Value1 = this.GasCount.ToString(), Name2 = "声光报警开关: ", Value2 = this.IfSoundAlert ? "打开" : "关闭", Name3 = "预热时间(秒):", Value3 = this.HotTimeSpan.ToString(), Name4 = "数据存储间隔(秒):", Value4 = this.DataStorageInterval.ToString() });
+
+            normalList.Add(new NormalParamEntityForList() { Name1 = "A1继电器模式：", Value1 = this.RelayModelA1.Name, Name2 = "A2继电器模式: ", Value2 = this.RelayModelA2.Name });
 
             foreach (var item in this.Relays)
             {

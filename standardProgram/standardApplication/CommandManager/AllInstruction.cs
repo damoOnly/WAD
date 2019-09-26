@@ -161,7 +161,7 @@ namespace CommandManager
 
         public static DateTime ReadRealTime(byte address, Action<string> callBack)
         {
-            byte[] sendb = Command.GetReadSendByte(address, 0x00, 0x90, 6);
+            byte[] sendb = Command.GetReadSendByte(address, 0x00, 0x42, 6);
             callBack(string.Format("W: {0}", CommandUnits.ByteToHexStr(sendb)));
             byte[] rbytes = CommandUnits.DataCenter.Read(sendb);
             callBack(string.Format("R: {0}", CommandUnits.ByteToHexStr(rbytes)));
@@ -186,14 +186,14 @@ namespace CommandManager
             content[10] = 0x00;
             content[11] = (byte)dt.Second;
 
-            byte[] sendb = Command.GetWiteSendByte(address, 0x00, 0x90, content);
+            byte[] sendb = Command.GetWiteSendByte(address, 0x00, 0x42, content);
             callBack(string.Format("W: {0}", CommandUnits.ByteToHexStr(sendb)));
             CommandUnits.DataCenter.Write(sendb);
         }
 
         public static DateTime ReadOutDate(byte address, Action<string> callBack)
         {
-            byte[] sendb = Command.GetReadSendByte(address, 0x00, 0x96, 3);
+            byte[] sendb = Command.GetReadSendByte(address, 0x00, 0x48, 3);
             callBack(string.Format("W: {0}", CommandUnits.ByteToHexStr(sendb)));
             byte[] rbytes = CommandUnits.DataCenter.Read(sendb);
             callBack(string.Format("R: {0}", CommandUnits.ByteToHexStr(rbytes)));
@@ -212,7 +212,7 @@ namespace CommandManager
             content[4] = 0x00;
             content[5] = (byte)dt.Day;
 
-            byte[] sendb = Command.GetWiteSendByte(address, 0x00, 0x96, content);
+            byte[] sendb = Command.GetWiteSendByte(address, 0x00, 0x48, content);
             callBack(string.Format("W: {0}", CommandUnits.ByteToHexStr(sendb)));
             CommandUnits.DataCenter.Write(sendb);
         }

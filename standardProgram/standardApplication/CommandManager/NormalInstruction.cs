@@ -37,7 +37,20 @@ namespace CommandManager
             Array.Reverse(rbytes, 7, 2);
             Array.Reverse(rbytes, 9, 2);
             normal.DataStorageInterval = BitConverter.ToInt32(rbytes, 7);
-            normal.IfSoundAlert = BitConverter.ToBoolean(rbytes, 16);
+            normal.IfSoundAlert = BitConverter.ToBoolean(rbytes, 12);
+            DictionaryFieldValue fieldValue = config.RelayModelA.FirstOrDefault(c => c.Value == rbytes[14]);
+            if (fieldValue != null)
+            {
+                normal.RelayModelA1.Value = rbytes[14];
+                normal.RelayModelA1.Name = fieldValue.Key;
+            }
+            fieldValue = config.RelayModelA.FirstOrDefault(c => c.Value == rbytes[16]);
+            if (fieldValue != null)
+            {
+                normal.RelayModelA2.Value = rbytes[16];
+                normal.RelayModelA2.Name = fieldValue.Key;
+            }
+
 
             byte[] relaySendb = Command.GetReadSendByte(address, 0x00, 0xa0, 40);
             callback(string.Format("W: {0}", CommandUnits.ByteToHexStr(relaySendb)));
@@ -72,8 +85,12 @@ namespace CommandManager
             Array.Reverse(byteTemp, 0, 2);
             Array.Reverse(byteTemp, 2, 2);
             content.AddRange(byteTemp);
-            content.AddRange(new byte[5]);   
+            content.Add(0x00);   
             content.AddRange(BitConverter.GetBytes(normal.IfSoundAlert));
+            content.Add(0x00);
+            content.Add(Convert.ToByte(normal.RelayModelA1.Value));
+            content.Add(0x00);
+            content.Add(Convert.ToByte(normal.RelayModelA2.Value));
 
             byte[] sendb = Command.GetWiteSendByte(address, 0x00, 0x13, content.ToArray());
             callback(string.Format("W: {0}", CommandUnits.ByteToHexStr(sendb)));
