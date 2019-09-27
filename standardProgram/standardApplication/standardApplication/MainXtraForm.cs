@@ -927,5 +927,30 @@ namespace standardApplication
             listBoxControl2.SelectedIndex = 0;
             showGasControl();
         }
+
+        private void simpleButton1_Click_1(object sender, EventArgs e)
+        {
+            WaitDialogForm wdf = new WaitDialogForm("命令执行中，请稍候......");
+
+            try
+            {
+                AllInstruction.WriteSave(Gloab.AllData.Address, CommandCallback);
+                SetDebugStr("参数保存成功");
+            }
+            catch (CommandException ex)
+            {
+                SetDebugStr("参数保存失败");
+                XtraMessageBox.Show(ex.Message);
+            }
+            catch (Exception exp)
+            {
+                SetDebugStr("参数保存失败");
+                log.Error(exp);
+            }
+            finally
+            {
+                wdf.Close();
+            }
+        }
     }
 }

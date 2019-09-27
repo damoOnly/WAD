@@ -216,5 +216,16 @@ namespace CommandManager
             callBack(string.Format("W: {0}", CommandUnits.ByteToHexStr(sendb)));
             CommandUnits.DataCenter.Write(sendb);
         }
+
+        public static void WriteSave(byte address, Action<string> callBack)
+        {
+            byte[] content = new byte[2];
+            content[0] = 0x00;
+            content[1] = 0x01;
+
+            byte[] sendb = Command.GetWiteSendByte(address, 0x00, 0x4c, content);
+            callBack(string.Format("W: {0}", CommandUnits.ByteToHexStr(sendb)));
+            CommandUnits.DataCenter.Write(sendb);
+        }
     }
 }

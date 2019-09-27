@@ -146,6 +146,7 @@
             this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.fieldValueBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             this.splitContainerControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl4)).BeginInit();
@@ -1382,6 +1383,7 @@
             this.splitContainerControl3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainerControl3.Location = new System.Drawing.Point(0, 0);
             this.splitContainerControl3.Name = "splitContainerControl3";
+            this.splitContainerControl3.Panel1.Controls.Add(this.simpleButton1);
             this.splitContainerControl3.Panel1.Controls.Add(this.simpleButton15);
             this.splitContainerControl3.Panel1.Controls.Add(this.simpleButton14);
             this.splitContainerControl3.Panel1.Controls.Add(this.dateEdit2);
@@ -1477,7 +1479,7 @@
             // 
             // simpleButton11
             // 
-            this.simpleButton11.Location = new System.Drawing.Point(454, 118);
+            this.simpleButton11.Location = new System.Drawing.Point(332, 118);
             this.simpleButton11.Name = "simpleButton11";
             this.simpleButton11.Size = new System.Drawing.Size(105, 23);
             this.simpleButton11.TabIndex = 18;
@@ -1486,7 +1488,7 @@
             // 
             // simpleButton10
             // 
-            this.simpleButton10.Location = new System.Drawing.Point(246, 118);
+            this.simpleButton10.Location = new System.Drawing.Point(188, 118);
             this.simpleButton10.Name = "simpleButton10";
             this.simpleButton10.Size = new System.Drawing.Size(105, 23);
             this.simpleButton10.TabIndex = 17;
@@ -1565,6 +1567,15 @@
             // fieldValueBindingSource
             // 
             this.fieldValueBindingSource.DataSource = typeof(Entity.FieldValue);
+            // 
+            // simpleButton1
+            // 
+            this.simpleButton1.Location = new System.Drawing.Point(478, 118);
+            this.simpleButton1.Name = "simpleButton1";
+            this.simpleButton1.Size = new System.Drawing.Size(105, 23);
+            this.simpleButton1.TabIndex = 25;
+            this.simpleButton1.Text = "参数保存";
+            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click_1);
             // 
             // MainXtraForm
             // 
@@ -1774,6 +1785,7 @@
         private DevExpress.XtraEditors.TextEdit textEditCommunicationTCPip;
         private DevExpress.XtraEditors.LabelControl labelControl3;
         private DevExpress.XtraEditors.LabelControl labelControl2;
+        private DevExpress.XtraEditors.SimpleButton simpleButton1;
 
     }
 }
