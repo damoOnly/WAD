@@ -142,7 +142,7 @@ namespace CommandManager
             }
 
             byte[] rrr = result.ToArray();
-            if (result.Count < 5)
+            if (result.Count != backCount)
             {
                 CommandUnits.IsCommandding = false;
                 throw new CommandException("命令超时");
@@ -374,7 +374,7 @@ namespace CommandManager
                     }
                 }
             }
-            else if (rbytes.Length < 5)
+            else if (rbytes.Length != backCount)
             {
                 CommandUnits.IsCommandding = false;
                 throw new CommandException("命令超时");
