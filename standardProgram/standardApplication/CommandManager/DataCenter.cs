@@ -72,7 +72,7 @@ namespace CommandManager
             }
         }
 
-        private int delay = 2000;
+        private int delay = 3000;
 
         public override void Write(byte[] wdata)
         {
