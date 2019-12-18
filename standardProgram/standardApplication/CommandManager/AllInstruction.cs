@@ -42,7 +42,10 @@ namespace CommandManager
             
             try
             {
-                all.Serial = SerialInstruction.ReadSerialParam(address, config,commandCallback);
+                FieldValue communication = SerialInstruction.ReadCommunicationBaudRate(address, config, commandCallback);
+                FieldValue standard = SerialInstruction.ReadStandardBaudRate(address, config, commandCallback);
+                all.Serial.CommunicationBaudRate = communication;
+                all.Serial.StandardBaudRate = standard;
                 callback("读取串口参数成功");
             }
             catch (Exception ex)
@@ -137,16 +140,16 @@ namespace CommandManager
                 callback("写入通用参数失败");
             }
 
-            try
-            {
-                SerialInstruction.WriteSerialParam(all.Serial, all.Address, commandCallback);
-                callback("写入串口参数成功");
-            }
-            catch (Exception ex)
-            {
-                log.Error(ex);
-                callback("写入串口参数失败");
-            }
+            //try
+            //{
+            //    SerialInstruction.WriteSerialParam(all.Serial, all.Address, commandCallback);
+            //    callback("写入串口参数成功");
+            //}
+            //catch (Exception ex)
+            //{
+            //    log.Error(ex);
+            //    callback("写入串口参数失败");
+            //}
         }
 
         public static void WriteAddress(byte oldAddress, byte newAddress, Action<string> callBack)

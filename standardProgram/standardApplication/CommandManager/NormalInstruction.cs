@@ -15,11 +15,11 @@ namespace CommandManager
             callback(string.Format("W: {0}", CommandUnits.ByteToHexStr(sendb)));
             CommandUnits.DataCenter.Write(sendb);
             List<GasEntity> list = new List<GasEntity>();
-            for (short i = 1; i <= count; i++)
-            {
-                GasEntity gas = GasInstruction.ReadGas(i, address, config, callback);
-                list.Add(gas);
-            }
+            //for (short i = 1; i <= count; i++)
+            //{
+            //    GasEntity gas = GasInstruction.ReadGas(i, address, config, callback);
+            //    list.Add(gas);
+            //}
             return list;
         }
 
@@ -38,18 +38,18 @@ namespace CommandManager
             Array.Reverse(rbytes, 9, 2);
             normal.DataStorageInterval = BitConverter.ToInt32(rbytes, 7);
             normal.IfSoundAlert = BitConverter.ToBoolean(rbytes, 12);
-            DictionaryFieldValue fieldValue = config.RelayModelA.FirstOrDefault(c => c.Value == rbytes[14]);
-            if (fieldValue != null)
-            {
-                normal.RelayModelA1.Value = rbytes[14];
-                normal.RelayModelA1.Name = fieldValue.Key;
-            }
-            fieldValue = config.RelayModelA.FirstOrDefault(c => c.Value == rbytes[16]);
-            if (fieldValue != null)
-            {
-                normal.RelayModelA2.Value = rbytes[16];
-                normal.RelayModelA2.Name = fieldValue.Key;
-            }
+            //DictionaryFieldValue fieldValue = config.RelayModelA.FirstOrDefault(c => c.Value == rbytes[14]);
+            //if (fieldValue != null)
+            //{
+            //    normal.RelayModelA1.Value = rbytes[14];
+            //    normal.RelayModelA1.Name = fieldValue.Key;
+            //}
+            //fieldValue = config.RelayModelA.FirstOrDefault(c => c.Value == rbytes[16]);
+            //if (fieldValue != null)
+            //{
+            //    normal.RelayModelA2.Value = rbytes[16];
+            //    normal.RelayModelA2.Name = fieldValue.Key;
+            //}
 
 
             byte[] relaySendb = Command.GetReadSendByte(address, 0x00, 0xa0, 40);
@@ -87,10 +87,7 @@ namespace CommandManager
             content.AddRange(byteTemp);
             content.Add(0x00);   
             content.AddRange(BitConverter.GetBytes(normal.IfSoundAlert));
-            content.Add(0x00);
-            content.Add(Convert.ToByte(normal.RelayModelA1.Value));
-            content.Add(0x00);
-            content.Add(Convert.ToByte(normal.RelayModelA2.Value));
+            content.AddRange(new byte[4] { 0x00, 0x00, 0x00, 0x00 });
 
             byte[] sendb = Command.GetWiteSendByte(address, 0x00, 0x13, content.ToArray());
             callback(string.Format("W: {0}", CommandUnits.ByteToHexStr(sendb)));

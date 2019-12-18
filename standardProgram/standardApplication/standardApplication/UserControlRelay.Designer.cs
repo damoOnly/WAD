@@ -36,6 +36,8 @@
             this.labelControl19 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl18 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl17 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit10.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit9.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit4.Properties)).BeginInit();
@@ -49,7 +51,7 @@
             0,
             0,
             0});
-            this.spinEdit10.Location = new System.Drawing.Point(262, 10);
+            this.spinEdit10.Location = new System.Drawing.Point(255, 10);
             this.spinEdit10.Name = "spinEdit10";
             this.spinEdit10.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -70,7 +72,7 @@
             0,
             0,
             0});
-            this.spinEdit9.Location = new System.Drawing.Point(530, 10);
+            this.spinEdit9.Location = new System.Drawing.Point(517, 10);
             this.spinEdit9.Name = "spinEdit9";
             this.spinEdit9.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -91,7 +93,7 @@
             0,
             0,
             0});
-            this.spinEdit4.Location = new System.Drawing.Point(399, 10);
+            this.spinEdit4.Location = new System.Drawing.Point(382, 10);
             this.spinEdit4.Name = "spinEdit4";
             this.spinEdit4.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -118,7 +120,7 @@
             // 
             // labelControl20
             // 
-            this.labelControl20.Location = new System.Drawing.Point(470, 14);
+            this.labelControl20.Location = new System.Drawing.Point(457, 14);
             this.labelControl20.Name = "labelControl20";
             this.labelControl20.Size = new System.Drawing.Size(60, 14);
             this.labelControl20.TabIndex = 97;
@@ -126,7 +128,7 @@
             // 
             // labelControl19
             // 
-            this.labelControl19.Location = new System.Drawing.Point(333, 13);
+            this.labelControl19.Location = new System.Drawing.Point(322, 13);
             this.labelControl19.Name = "labelControl19";
             this.labelControl19.Size = new System.Drawing.Size(60, 14);
             this.labelControl19.TabIndex = 96;
@@ -134,7 +136,7 @@
             // 
             // labelControl18
             // 
-            this.labelControl18.Location = new System.Drawing.Point(202, 13);
+            this.labelControl18.Location = new System.Drawing.Point(195, 13);
             this.labelControl18.Name = "labelControl18";
             this.labelControl18.Size = new System.Drawing.Size(60, 14);
             this.labelControl18.TabIndex = 95;
@@ -148,10 +150,28 @@
             this.labelControl17.TabIndex = 94;
             this.labelControl17.Text = "继电器1模式：";
             // 
+            // labelControl1
+            // 
+            this.labelControl1.Location = new System.Drawing.Point(441, 14);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(12, 14);
+            this.labelControl1.TabIndex = 102;
+            this.labelControl1.Text = "秒";
+            // 
+            // labelControl2
+            // 
+            this.labelControl2.Location = new System.Drawing.Point(575, 14);
+            this.labelControl2.Name = "labelControl2";
+            this.labelControl2.Size = new System.Drawing.Size(12, 14);
+            this.labelControl2.TabIndex = 103;
+            this.labelControl2.Text = "秒";
+            // 
             // UserControlRelay
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.labelControl2);
+            this.Controls.Add(this.labelControl1);
             this.Controls.Add(this.spinEdit10);
             this.Controls.Add(this.spinEdit9);
             this.Controls.Add(this.spinEdit4);
@@ -182,5 +202,7 @@
         private DevExpress.XtraEditors.LabelControl labelControl19;
         private DevExpress.XtraEditors.LabelControl labelControl18;
         private DevExpress.XtraEditors.LabelControl labelControl17;
+        private DevExpress.XtraEditors.LabelControl labelControl1;
+        private DevExpress.XtraEditors.LabelControl labelControl2;
     }
 }

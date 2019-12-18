@@ -16,7 +16,7 @@ namespace Entity
             Normal = new NormalParamEntity();
             Serial = new SerialEntity();
             GasTree = new List<ListItem>();
-            Address = 0;
+            Address = 5;
 
             EquipmentDataTime = DateTime.Now;
             OutDate = DateTime.Now;

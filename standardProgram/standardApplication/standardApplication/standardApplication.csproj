@@ -99,6 +99,18 @@
     <Compile Include="ChangeAdderss.Designer.cs">
       <DependentUpon>ChangeAdderss.cs</DependentUpon>
     </Compile>
+    <Compile Include="ChangeCommunicationBaudRate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangeCommunicationBaudRate.Designer.cs">
+      <DependentUpon>ChangeCommunicationBaudRate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="changeStandardBaudRate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="changeStandardBaudRate.Designer.cs">
+      <DependentUpon>changeStandardBaudRate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Component1.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -150,6 +162,12 @@
     <Compile Include="XmlSerializerProvider.cs" />
     <EmbeddedResource Include="ChangeAdderss.resx">
       <DependentUpon>ChangeAdderss.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangeCommunicationBaudRate.resx">
+      <DependentUpon>ChangeCommunicationBaudRate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="changeStandardBaudRate.resx">
+      <DependentUpon>changeStandardBaudRate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_SelectConfig.resx">
       <DependentUpon>Form_SelectConfig.cs</DependentUpon>

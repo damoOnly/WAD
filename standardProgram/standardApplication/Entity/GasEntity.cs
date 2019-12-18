@@ -19,15 +19,15 @@ namespace Entity
             Factor = "abc";
             AlertModel = new FieldValue() { Name = "高报模式", Value = 0 };
             AlertStatus = new FieldValue() { Name = "正常", Value = 0 };
-            GasPoint = new FieldValue() { Name = "整形", Value=0 };
+            GasPoint = new FieldValue() { Name = "整形", Value = 0 };
             GasRang = 5.5f;
             GasUnit = new FieldValue() { Name = "ppm", Value = 0 };
             OneAD = 66;
-            OneChroma = 6.6f;
+            //OneChroma = 6.6f;
             ThreeAD = 99;
-            ThreeChroma = 9.9f;
+            //ThreeChroma = 9.9f;
             TwoAD = 11;
-            TwoChroma = 1.1f;
+            //TwoChroma = 1.1f;
         }
         public int GasID { get; set; }
         public FieldValue GasName { get; set; }
@@ -41,11 +41,17 @@ namespace Entity
         public string Factor { get; set; }
         public float CurrentChroma { get; set; }
         public int CurrentAD { get; set; }
-        public float OneChroma { get; set; }
+        public float OneChroma
+        {
+            get
+            {
+                return 0;
+            }
+        }
         public int OneAD { get; set; }
-        public float TwoChroma { get; set; }
+        public float TwoChroma { get { return GasRang / 2; } }
         public int TwoAD { get; set; }
-        public float ThreeChroma { get; set; }
+        public float ThreeChroma { get { return GasRang; } }
         public int ThreeAD { get; set; }
         public byte ProbeAddress { get; set; }
         public byte ProbeChannel { get; set; }

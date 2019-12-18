@@ -266,10 +266,10 @@ namespace standardApplication
             try
             {
                 short count = (short)spinEdit1.Value;
-                Gloab.AllData.GasList = NormalInstruction.WriteGasCount(count, Gloab.AllData.Address, Gloab.Config,CommandCallback);
+                NormalInstruction.WriteGasCount(count, Gloab.AllData.Address, Gloab.Config,CommandCallback);
                 Gloab.AllData.Normal.GasCount = count;
                 Gloab.AllData.NormalList = Gloab.AllData.Normal.ConvertToNormalList();
-                SetGasToControl();
+                //SetGasToControl();
                 SetNormalToControl();
                 SetDebugStr("写入气体个数成功");
             }
@@ -314,106 +314,106 @@ namespace standardApplication
             comboBoxEdit4.Properties.Items.AddRange(Gloab.Config.SerialPortModel.Select(c=>c.Key).ToArray());
         }
 
-        private void SetSerialParamToPage(SerialEntity serial)
-        {
-            comboBoxEdit1.Text = serial.SerialOneBaudRate.Name;
-            comboBoxEdit2.Text = serial.SerialOnePortModel.Name;
-            spinEdit3.Value = serial.SerialOneAddress;
-            spinEdit4.Value = serial.SerialOneInterval;
-            textEdit29.Text = serial.SerialOneMN;
-            textEdit33.Text = serial.SerialOnePW;
-            textEdit32.Text = serial.SerialOneCN;
-            textEdit31.Text = serial.SerialOneST;
+        //private void SetSerialParamToPage(SerialEntity serial)
+        //{
+        //    comboBoxEdit1.Text = serial.SerialOneBaudRate.Name;
+        //    comboBoxEdit2.Text = serial.SerialOnePortModel.Name;
+        //    spinEdit3.Value = serial.SerialOneAddress;
+        //    spinEdit4.Value = serial.SerialOneInterval;
+        //    textEdit29.Text = serial.SerialOneMN;
+        //    textEdit33.Text = serial.SerialOnePW;
+        //    textEdit32.Text = serial.SerialOneCN;
+        //    textEdit31.Text = serial.SerialOneST;
 
-            //comboBoxEdit3.Text = serial.SerialTwoBaudRate.Name;
-            //comboBoxEdit4.Text = serial.SerialTwoPortModel.Name;
-            //spinEdit5.Value = serial.SerialTwoAddress;
-            //spinEdit6.Value = serial.SerialTwoInterval;
-            //textEdit36.Text = serial.SerialTwoMN;
-            //textEdit35.Text = serial.SerialTwoPW;
-            //textEdit34.Text = serial.SerialTwoCN;
-            //textEdit28.Text = serial.SerialTwoST;
+        //    //comboBoxEdit3.Text = serial.SerialTwoBaudRate.Name;
+        //    //comboBoxEdit4.Text = serial.SerialTwoPortModel.Name;
+        //    //spinEdit5.Value = serial.SerialTwoAddress;
+        //    //spinEdit6.Value = serial.SerialTwoInterval;
+        //    //textEdit36.Text = serial.SerialTwoMN;
+        //    //textEdit35.Text = serial.SerialTwoPW;
+        //    //textEdit34.Text = serial.SerialTwoCN;
+        //    //textEdit28.Text = serial.SerialTwoST;
 
-        }
+        //}
 
-        private SerialEntity GetSerialParamFromPage()
-        {
-            SerialEntity serial = new SerialEntity();
-            serial.SerialOneBaudRate.Name = comboBoxEdit1.Text;
-            serial.SerialOneBaudRate.Value = Gloab.Config.BaudRate.First(c=>c.Key == comboBoxEdit1.Text).Value;
-            serial.SerialOnePortModel.Name = comboBoxEdit2.Text;
-            serial.SerialOnePortModel.Value = Gloab.Config.SerialPortModel.First(c=>c.Key == comboBoxEdit2.Text).Value;
-            serial.SerialOneAddress = (short)spinEdit3.Value;
-            serial.SerialOneInterval = (int)spinEdit4.Value;
-            serial.SerialOneMN = textEdit29.Text;
-            serial.SerialOnePW = textEdit33.Text;
-            serial.SerialOneCN = textEdit32.Text;
-            serial.SerialOneST = textEdit31.Text;
+        //private SerialEntity GetSerialParamFromPage()
+        //{
+        //    SerialEntity serial = new SerialEntity();
+        //    serial.SerialOneBaudRate.Name = comboBoxEdit1.Text;
+        //    serial.SerialOneBaudRate.Value = Gloab.Config.BaudRate.First(c=>c.Key == comboBoxEdit1.Text).Value;
+        //    serial.SerialOnePortModel.Name = comboBoxEdit2.Text;
+        //    serial.SerialOnePortModel.Value = Gloab.Config.SerialPortModel.First(c=>c.Key == comboBoxEdit2.Text).Value;
+        //    serial.SerialOneAddress = (short)spinEdit3.Value;
+        //    serial.SerialOneInterval = (int)spinEdit4.Value;
+        //    serial.SerialOneMN = textEdit29.Text;
+        //    serial.SerialOnePW = textEdit33.Text;
+        //    serial.SerialOneCN = textEdit32.Text;
+        //    serial.SerialOneST = textEdit31.Text;
 
-            //serial.SerialTwoBaudRate.Name = comboBoxEdit3.Text;
-            //serial.SerialTwoBaudRate.Value = Gloab.Config.BaudRate.First(c=>c.Key == comboBoxEdit3.Text).Value;
-            //serial.SerialTwoPortModel.Name = comboBoxEdit4.Text;
-            //serial.SerialTwoPortModel.Value = Gloab.Config.SerialPortModel.First(c=>c.Key == comboBoxEdit4.Text).Value;
-            //serial.SerialTwoAddress = (short)spinEdit5.Value;
-            //serial.SerialTwoInterval = (int)spinEdit6.Value;
-            //serial.SerialTwoMN = textEdit36.Text;
-            //serial.SerialTwoPW = textEdit35.Text;
-            //serial.SerialTwoCN = textEdit34.Text;
-            //serial.SerialTwoST = textEdit28.Text;
-            return serial;
-        }
+        //    //serial.SerialTwoBaudRate.Name = comboBoxEdit3.Text;
+        //    //serial.SerialTwoBaudRate.Value = Gloab.Config.BaudRate.First(c=>c.Key == comboBoxEdit3.Text).Value;
+        //    //serial.SerialTwoPortModel.Name = comboBoxEdit4.Text;
+        //    //serial.SerialTwoPortModel.Value = Gloab.Config.SerialPortModel.First(c=>c.Key == comboBoxEdit4.Text).Value;
+        //    //serial.SerialTwoAddress = (short)spinEdit5.Value;
+        //    //serial.SerialTwoInterval = (int)spinEdit6.Value;
+        //    //serial.SerialTwoMN = textEdit36.Text;
+        //    //serial.SerialTwoPW = textEdit35.Text;
+        //    //serial.SerialTwoCN = textEdit34.Text;
+        //    //serial.SerialTwoST = textEdit28.Text;
+        //    return serial;
+        //}
 
         private void simpleButton20_Click(object sender, EventArgs e)
         {
-            WaitDialogForm wdf = new WaitDialogForm("命令执行中，请稍候......");
+            //WaitDialogForm wdf = new WaitDialogForm("命令执行中，请稍候......");
 
-            try
-            {
-                Gloab.AllData.Serial = SerialInstruction.ReadSerialParam(Gloab.AllData.Address, Gloab.Config,CommandCallback);
-                SetSerialParamToPage(Gloab.AllData.Serial);
-                SetDebugStr("读取串口参数成功");
-            }
-            catch (CommandException ex)
-            {
-                SetDebugStr("读取串口参数失败");
-                XtraMessageBox.Show(ex.Message);
-            }
-            catch (Exception exp)
-            {
-                SetDebugStr("读取串口参数失败");
-                log.Error(exp);
-            }
-            finally
-            {
-                wdf.Close();
-            }
+            //try
+            //{
+            //    Gloab.AllData.Serial = SerialInstruction.ReadSerialParam(Gloab.AllData.Address, Gloab.Config,CommandCallback);
+            //    SetSerialParamToPage(Gloab.AllData.Serial);
+            //    SetDebugStr("读取串口参数成功");
+            //}
+            //catch (CommandException ex)
+            //{
+            //    SetDebugStr("读取串口参数失败");
+            //    XtraMessageBox.Show(ex.Message);
+            //}
+            //catch (Exception exp)
+            //{
+            //    SetDebugStr("读取串口参数失败");
+            //    log.Error(exp);
+            //}
+            //finally
+            //{
+            //    wdf.Close();
+            //}
         }
 
         private void simpleButton21_Click(object sender, EventArgs e)
         {
-            WaitDialogForm wdf = new WaitDialogForm("命令执行中，请稍候......");
+            //WaitDialogForm wdf = new WaitDialogForm("命令执行中，请稍候......");
 
-            try
-            {
-                SerialEntity s = GetSerialParamFromPage();
-                SerialInstruction.WriteSerialParam(s, Gloab.AllData.Address,CommandCallback);
-                Gloab.AllData.Serial = s;
-                SetDebugStr("写入串口参数成功");
-            }
-            catch (CommandException ex)
-            {
-                SetDebugStr("写入串口参数失败");
-                XtraMessageBox.Show(ex.Message);
-            }
-            catch (Exception exp)
-            {
-                SetDebugStr("写入串口参数失败");
-                log.Error(exp);
-            }
-            finally
-            {
-                wdf.Close();
-            }
+            //try
+            //{
+            //    SerialEntity s = GetSerialParamFromPage();
+            //    SerialInstruction.WriteSerialParam(s, Gloab.AllData.Address,CommandCallback);
+            //    Gloab.AllData.Serial = s;
+            //    SetDebugStr("写入串口参数成功");
+            //}
+            //catch (CommandException ex)
+            //{
+            //    SetDebugStr("写入串口参数失败");
+            //    XtraMessageBox.Show(ex.Message);
+            //}
+            //catch (Exception exp)
+            //{
+            //    SetDebugStr("写入串口参数失败");
+            //    log.Error(exp);
+            //}
+            //finally
+            //{
+            //    wdf.Close();
+            //}
         }
 
         private void simpleButtonCommunication_Click(object sender, EventArgs e)
@@ -522,10 +522,12 @@ namespace standardApplication
         {
             SetGasToControl();
             SetNormalToControl();
-            SetSerialParamToPage(Gloab.AllData.Serial);
+            //SetSerialParamToPage(Gloab.AllData.Serial);
             SetRealTimeToControl();
             SetOutDateToControl();
             spinEdit7.Value = Gloab.AllData.Address;
+            textEdit1.Text = Gloab.AllData.Serial.StandardBaudRate.Name;
+            textEdit2.Text = Gloab.AllData.Serial.CommunicationBaudRate.Name;
         }
 
         private void SetGasToControl()
@@ -772,7 +774,7 @@ namespace standardApplication
 
             Gloab.AllData.Normal = userControlNormal1.GetNormalFromControl();
 
-            Gloab.AllData.Serial = GetSerialParamFromPage();
+            //Gloab.AllData.Serial = GetSerialParamFromPage();
 
             AllInstruction.WriteAll(Gloab.AllData, Gloab.Config, SetDebugStr, CommandCallback);
         }
@@ -831,10 +833,10 @@ namespace standardApplication
                     Gloab.AllData.NormalList = Gloab.AllData.Normal.ConvertToNormalList();
                     SetNormalToControl();
                     break;
-                case ModelType.Serial:
-                    Gloab.AllData.Serial = ModelFile.ReadModel<SerialEntity>(fileName, ModelType.Serial);
-                    SetSerialParamToPage(Gloab.AllData.Serial);
-                    break;
+                //case ModelType.Serial:
+                //    Gloab.AllData.Serial = ModelFile.ReadModel<SerialEntity>(fileName, ModelType.Serial);
+                //    SetSerialParamToPage(Gloab.AllData.Serial);
+                //    break;
                 default:
                     break;
             }
@@ -951,6 +953,20 @@ namespace standardApplication
             {
                 wdf.Close();
             }
+        }
+
+        private void simpleButton2_Click_1(object sender, EventArgs e)
+        {
+            changeStandardBaudRate change = new changeStandardBaudRate(SetDebugStr, CommandCallback, Gloab.AllData.Serial.StandardBaudRate);
+            change.ShowDialog();
+            textEdit1.Text = Gloab.AllData.Serial.StandardBaudRate.Name;
+        }
+
+        private void simpleButton3_Click(object sender, EventArgs e)
+        {
+            ChangeCommunicationBaudRate change = new ChangeCommunicationBaudRate(SetDebugStr, CommandCallback, Gloab.AllData.Serial.CommunicationBaudRate);
+            change.ShowDialog();
+            textEdit1.Text = Gloab.AllData.Serial.CommunicationBaudRate.Name;
         }
     }
 }

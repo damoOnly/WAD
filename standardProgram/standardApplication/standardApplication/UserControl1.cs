@@ -57,11 +57,11 @@ namespace standardApplication
             Gas.GasRang = float.Parse(textEdit12.Text);
             Gas.GasUnit = new FieldValue() { Name = comboBoxEdit3.Text, Value = Gloab.Config.GasUnit.First(c=>c.Key == comboBoxEdit3.Text).Value };
             Gas.OneAD = (int)this.spinEdit7.Value;
-            Gas.OneChroma = float.Parse(textEdit4.Text);
+            //Gas.OneChroma = float.Parse(textEdit4.Text);
             Gas.TwoAD = (int)this.spinEdit6.Value;
-            Gas.TwoChroma = float.Parse(textEdit5.Text);
+            //Gas.TwoChroma = float.Parse(textEdit5.Text);
             Gas.ThreeAD = (int)this.spinEdit12.Value;
-            Gas.ThreeChroma = float.Parse(textEdit6.Text);
+            //Gas.ThreeChroma = float.Parse(textEdit6.Text);
 
             Gas.ProbeChannel = (byte)this.spinEdit1.Value;
             Gas.ProbeAddress = (byte)this.spinEdit2.Value;
@@ -334,8 +334,8 @@ namespace standardApplication
             try
             {
                 GasEntity ge = GasInstruction.ReadChromaAndAD(GasID, EnumChromaLevel.Two, Gloab.AllData.Address,CommandCallback);
-                Gas.OneChroma = ge.TwoChroma;
-                Gas.OneAD = ge.TwoAD;
+                //Gas.OneChroma = ge.TwoChroma;
+                Gas.TwoAD = ge.TwoAD;
                 SetGasToControl();
                 Callback("读取12mA成功");
             }
@@ -361,8 +361,8 @@ namespace standardApplication
             try
             {
                 GasEntity ge = GasInstruction.ReadChromaAndAD(GasID, EnumChromaLevel.Three, Gloab.AllData.Address, CommandCallback);
-                Gas.TwoChroma = ge.ThreeChroma;
-                Gas.TwoAD = ge.ThreeAD;
+                //Gas.TwoChroma = ge.ThreeChroma;
+                Gas.ThreeAD = ge.ThreeAD;
                 SetGasToControl();
                 Callback("读取20mA成功");
             }
@@ -509,7 +509,7 @@ namespace standardApplication
             try
             {
                 GasEntity ge = GasInstruction.ReadChromaAndAD(GasID, EnumChromaLevel.One, Gloab.AllData.Address, CommandCallback);
-                Gas.OneChroma = ge.OneChroma;
+                //Gas.OneChroma = ge.OneChroma;
                 Gas.OneAD = ge.OneAD;
                 SetGasToControl();
                 Callback("读取4aA成功");

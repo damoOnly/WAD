@@ -8,7 +8,7 @@ namespace Entity
 {
     public enum EnumChromaLevel
     {
-        Zero,
+        //Zero,
         One,
         Two,
         Three

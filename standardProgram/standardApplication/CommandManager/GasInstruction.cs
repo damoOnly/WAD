@@ -179,19 +179,19 @@ namespace CommandManager
             gas.OneAD = BitConverter.ToInt32(rbytes, 57);
             Array.Reverse(rbytes, 61, 2);
             Array.Reverse(rbytes, 63, 2);
-            gas.OneChroma = BitConverter.ToSingle(rbytes, 61);
+            //gas.OneChroma = BitConverter.ToSingle(rbytes, 61);
             Array.Reverse(rbytes, 65, 2);
             Array.Reverse(rbytes, 67, 2);
             gas.TwoAD = BitConverter.ToInt32(rbytes, 65);
             Array.Reverse(rbytes, 69, 2);
             Array.Reverse(rbytes, 71, 2);
-            gas.TwoChroma = BitConverter.ToSingle(rbytes, 69);
+            //gas.TwoChroma = BitConverter.ToSingle(rbytes, 69);
             Array.Reverse(rbytes, 73, 2);
             Array.Reverse(rbytes, 75, 2);
             gas.ThreeAD = BitConverter.ToInt32(rbytes, 73);
             Array.Reverse(rbytes, 77, 2);
             Array.Reverse(rbytes, 79, 2);
-            gas.ThreeChroma = BitConverter.ToSingle(rbytes, 77);
+            //gas.ThreeChroma = BitConverter.ToSingle(rbytes, 77);
             return gas;
         }
 
@@ -308,15 +308,15 @@ namespace CommandManager
             {
                 case EnumChromaLevel.One:
                     gas.OneAD = BitConverter.ToInt32(rbytes, 3);
-                    gas.OneChroma = BitConverter.ToSingle(rbytes, 7);
+                    //gas.OneChroma = BitConverter.ToSingle(rbytes, 7);
                     break;
                 case EnumChromaLevel.Two:
                     gas.TwoAD = BitConverter.ToInt32(rbytes, 3);
-                    gas.TwoChroma = BitConverter.ToSingle(rbytes, 7);
+                    //gas.TwoChroma = BitConverter.ToSingle(rbytes, 7);
                     break;
                 case EnumChromaLevel.Three:
                     gas.ThreeAD = BitConverter.ToInt32(rbytes, 3);
-                    gas.ThreeChroma = BitConverter.ToSingle(rbytes, 7);
+                    //gas.ThreeChroma = BitConverter.ToSingle(rbytes, 7);
                     break;
                 default:
                     break;
