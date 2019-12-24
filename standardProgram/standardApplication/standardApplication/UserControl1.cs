@@ -580,5 +580,14 @@ namespace standardApplication
                 e.Cancel = true;
             }
         }
+        public delegate void SetGasListEventHandler(object sender, EventArgs e);
+        public event SetGasListEventHandler SetGasListEvent;
+        private void simpleButton8_Click(object sender, EventArgs e)
+        {
+            if (SetGasListEvent != null)
+            {
+                SetGasListEvent(null, null);
+            }            
+        }
     }
 }

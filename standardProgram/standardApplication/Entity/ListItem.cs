@@ -8,12 +8,10 @@ namespace Entity
 {
     public class ListItem
     {
-        public string Name { get; set; }
+        public string NameAndNumber { get; set; }
+
         public int Number { get; set; }
 
-        public override string ToString()
-        {
-            return Number + ". " + Name;
-        }
+        //public bool IsChecked { get; set; }
     }
 }

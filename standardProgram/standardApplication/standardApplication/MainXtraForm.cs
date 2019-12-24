@@ -46,16 +46,12 @@ namespace standardApplication
         private void TestData()
         {
             List<GasEntity> gasList = new List<GasEntity>();
-
-            GasEntity gas1 = new GasEntity();
-            gas1.CurrentAD = 385918393;
-            gas1.CurrentChroma = -3.984375f;
-
-
-            GasEntity gas2 = new GasEntity() { GasID = 2 };
-
-            gasList.Add(gas1);
-            gasList.Add(gas2);
+            for (int i = 1; i < 100; i++)
+            {
+                GasEntity gas = new GasEntity();
+                gas.GasID = i;
+                gasList.Add(gas);
+            }
 
             List<WeatherEntity> weatherList = new List<WeatherEntity>()
             {
@@ -148,6 +144,7 @@ namespace standardApplication
             userControl11.Callback = SetDebugStr;
             userControl11.CommandCallback = CommandCallback;
             userControl11.SaveModelFileEvent +=userControl11_SaveModelFileEvent;
+            userControl11.SetGasListEvent += userControl11_SetGasListEvent;
 
             ContextMenuStrip richMenu = new ContextMenuStrip();
             ToolStripMenuItem CMclear = new ToolStripMenuItem("清空");
@@ -182,6 +179,47 @@ namespace standardApplication
             timer.Interval = Gloab.Config.TimeInterval * 1000;
             timer.Elapsed += timer_Elapsed;
             timer.Start();
+        }
+
+        void userControl11_SetGasListEvent(object sender, EventArgs e)
+        {
+            WaitDialogForm wdf = new WaitDialogForm("命令执行中，请稍候......");
+            try
+            {
+                int i = 0;
+                List<GasEntity> selectedGasList = new List<GasEntity>();
+                while (checkedListBoxControl1.GetItem(i) != null)
+                {
+                    if (checkedListBoxControl1.GetItemChecked(i))
+                    {
+                        int id = Convert.ToInt32(checkedListBoxControl1.GetItemValue(i));
+                        selectedGasList.Add(Gloab.AllData.GasList.FirstOrDefault(c => c.GasID == id));
+                    }
+                    i++;
+                }
+                Task t1 = new Task(GasInstruction.WriteGasList, new List<object>() { selectedGasList, Gloab.AllData.Address, new Action<string>(CommandCallback), new Action(() => {
+                    wdf.Invoke(new Action(wdf.Close));
+                } ) });
+                t1.Start();
+                SetDebugStr(string.Format("批量写入气体成功"));
+                userControl11_ChangeGasEvent(null, null);
+            }
+            catch (CommandException ex)
+            {
+                SetDebugStr(string.Format("批量写入气体失败"));
+                XtraMessageBox.Show(ex.Message);
+                wdf.Close();
+            }
+            catch (Exception ecp)
+            {
+                SetDebugStr(string.Format("批量写入气体失败"));
+                log.Error(ecp);
+                wdf.Close();
+            }
+            finally
+            {
+                //wdf.Close();
+            }
         }
 
         void timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -292,7 +330,8 @@ namespace standardApplication
 
         private void showGasControl()
         {
-            ListItem item = listBoxControl2.SelectedItem as ListItem;
+            ListItem item = checkedListBoxControl1.SelectedItem as ListItem;
+            //Console.WriteLine(item.NameAndNumber);
             if (item == null)
             {
                 return;
@@ -532,7 +571,7 @@ namespace standardApplication
 
         private void SetGasToControl()
         {
-            Gloab.AllData.GasTree = Gloab.AllData.GasList.Select(c => new ListItem() { Name = c.GasName.Name, Number = c.GasID }).ToList();
+            Gloab.AllData.GasTree = Gloab.AllData.GasList.Select(c => new ListItem() { NameAndNumber = c.GasID + "." + c.GasName.Name, Number = c.GasID }).ToList();
             spinEdit1.Value = Gloab.AllData.Normal.GasCount;
             gridControl2.DataSource = Gloab.AllData.GasList;
             gridControl2.RefreshDataSource();
@@ -908,25 +947,25 @@ namespace standardApplication
             }
         }
 
-        private void listBoxControl2_SelectedIndexChanged(object sender, EventArgs e)
-        {            
-            showGasControl();
-        }
 
         private void searchControl1_TextChanged(object sender, EventArgs e)
         {
-            List<ListItem> show = new List<ListItem>();
+            Gloab.AllData.ShowGasTree = new List<ListItem>();
             string txt = searchControl1.Text.Trim();
             if (string.IsNullOrWhiteSpace(txt))
             {
-                show.AddRange(Gloab.AllData.GasTree);
+                Gloab.AllData.ShowGasTree.AddRange(Gloab.AllData.GasTree);
             }
             else
             {
-                show = Gloab.AllData.GasTree.Where(c => (c.Name + c.Number).Contains(txt)).ToList();
+                Gloab.AllData.ShowGasTree.AddRange(Gloab.AllData.GasTree.Where(c => c.NameAndNumber.Contains(txt)));
             }
-            listBoxControl2.DataSource = show;
-            listBoxControl2.SelectedIndex = 0;
+
+            checkedListBoxControl1.DataSource = Gloab.AllData.ShowGasTree;
+            checkedListBoxControl1.DisplayMember = "NameAndNumber";
+            checkedListBoxControl1.ValueMember = "Number";
+            // to do selected one
+            //listBoxControl2.SelectedIndex = 0;
             showGasControl();
         }
 
@@ -966,7 +1005,22 @@ namespace standardApplication
         {
             ChangeCommunicationBaudRate change = new ChangeCommunicationBaudRate(SetDebugStr, CommandCallback, Gloab.AllData.Serial.CommunicationBaudRate);
             change.ShowDialog();
-            textEdit1.Text = Gloab.AllData.Serial.CommunicationBaudRate.Name;
+            textEdit2.Text = Gloab.AllData.Serial.CommunicationBaudRate.Name;
+        }
+
+        private void checkedListBoxControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            showGasControl();
+        }
+
+        private void checkEdit1_CheckedChanged(object sender, EventArgs e)
+        {
+            int i = 0;
+            while (checkedListBoxControl1.GetItem(i) != null)
+            {
+                checkedListBoxControl1.SetItemChecked(i, checkEdit1.Checked);
+                i++;
+            }
         }
     }
 }

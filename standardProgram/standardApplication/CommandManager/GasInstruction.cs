@@ -48,7 +48,7 @@ namespace CommandManager
             {
                 content.AddRange(byteTemp.Reverse());
             }
-            else if (byteTemp.Length ==1)
+            else if (byteTemp.Length == 1)
             {
                 content.Add(0);
                 content.AddRange(byteTemp);
@@ -93,6 +93,51 @@ namespace CommandManager
             CommandUnits.DataCenter.Write(sendb);
         }
 
+        public static void WriteGasList(object param)
+        {
+            List<object> list = param as List<object>;
+            List<GasEntity> gasList = list[0] as List<GasEntity>;
+            byte address = (byte)list[1];
+            Action<string> commandCallback = list[2] as Action<string>;
+            Action close = list[3] as Action;
+            foreach (var gas in gasList)
+            {
+                List<byte> content = new List<byte>();
+                content.AddRange(BitConverter.GetBytes(gas.GasName.Value).Reverse());
+                content.AddRange(BitConverter.GetBytes(gas.GasUnit.Value).Reverse());
+                content.AddRange(BitConverter.GetBytes(gas.GasPoint.Value).Reverse());
+                byte[] byteTemp = BitConverter.GetBytes(gas.GasRang);
+                Array.Reverse(byteTemp, 0, 2);
+                Array.Reverse(byteTemp, 2, 2);
+                content.AddRange(byteTemp);
+                byte[] byteFactor = new byte[12];
+                byteTemp = ASCIIEncoding.ASCII.GetBytes(gas.Factor);
+                for (int i = 0; i < byteTemp.Length; i++)
+                {
+                    byteFactor[i * 2 + 1] = byteTemp[i];
+                }
+                content.AddRange(byteFactor);
+                content.Add(0);
+                content.Add(0);
+                content.AddRange(BitConverter.GetBytes(gas.AlertModel.Value).Reverse());
+                byteTemp = BitConverter.GetBytes(gas.GasA1);
+                Array.Reverse(byteTemp, 0, 2);
+                Array.Reverse(byteTemp, 2, 2);
+                content.AddRange(byteTemp);
+                byteTemp = BitConverter.GetBytes(gas.GasA2);
+                Array.Reverse(byteTemp, 0, 2);
+                Array.Reverse(byteTemp, 2, 2);
+                content.AddRange(byteTemp);
+
+                byte[] sendb = Command.GetWiteSendByte(address, (byte)gas.GasID, 0x10, content.ToArray());
+                commandCallback(string.Format("设置气体 {0}: {1}", gas.GasID + "." + gas.GasName.Name, CommandUnits.ByteToHexStr(sendb)));
+                CommandUnits.DataCenter.Write(sendb);
+                Thread.Sleep(1000);
+            }
+            close();
+        }
+
+
         public static List<GasEntity> ReadGasList(byte address, CommonConfig config, Action<string> callback)
         {
             List<GasEntity> list = new List<GasEntity>();
@@ -114,7 +159,7 @@ namespace CommandManager
             callback(string.Format("W: {0}", CommandUnits.ByteToHexStr(sendb)));
             byte[] rbytes = CommandUnits.DataCenter.Read(sendb);
             callback(string.Format("R: {0}", CommandUnits.ByteToHexStr(rbytes)));
-            GasEntity gas = ParseGas(gasId, config, rbytes);            
+            GasEntity gas = ParseGas(gasId, config, rbytes);
 
             GasEntity current = ReadCurrent(gasId, address, config, callback);
             gas.CurrentAD = current.CurrentAD;
@@ -141,7 +186,7 @@ namespace CommandManager
             Array.Reverse(rbytes, 11, 2);
             gas.GasRang = BitConverter.ToSingle(rbytes, 9);
             List<byte> byteTemp = new List<byte>();
-            for (int i = 13; i < 13 + 12;)
+            for (int i = 13; i < 13 + 12; )
             {
                 if (rbytes[i + 1] != 0x00)
                 {

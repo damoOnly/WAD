@@ -86,6 +86,7 @@
             this.labelControl23 = new DevExpress.XtraEditors.LabelControl();
             this.spinEdit1 = new DevExpress.XtraEditors.SpinEdit();
             this.spinEdit2 = new DevExpress.XtraEditors.SpinEdit();
+            this.simpleButton8 = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit8.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).BeginInit();
@@ -328,7 +329,7 @@
             // 
             // simpleButton11
             // 
-            this.simpleButton11.Location = new System.Drawing.Point(117, 260);
+            this.simpleButton11.Location = new System.Drawing.Point(66, 260);
             this.simpleButton11.Name = "simpleButton11";
             this.simpleButton11.Size = new System.Drawing.Size(62, 23);
             this.simpleButton11.TabIndex = 53;
@@ -337,7 +338,7 @@
             // 
             // simpleButton12
             // 
-            this.simpleButton12.Location = new System.Drawing.Point(253, 260);
+            this.simpleButton12.Location = new System.Drawing.Point(191, 260);
             this.simpleButton12.Name = "simpleButton12";
             this.simpleButton12.Size = new System.Drawing.Size(62, 23);
             this.simpleButton12.TabIndex = 54;
@@ -346,7 +347,7 @@
             // 
             // simpleButton13
             // 
-            this.simpleButton13.Location = new System.Drawing.Point(389, 260);
+            this.simpleButton13.Location = new System.Drawing.Point(441, 260);
             this.simpleButton13.Name = "simpleButton13";
             this.simpleButton13.Size = new System.Drawing.Size(62, 23);
             this.simpleButton13.TabIndex = 55;
@@ -653,10 +654,20 @@
             this.spinEdit2.Size = new System.Drawing.Size(100, 20);
             this.spinEdit2.TabIndex = 98;
             // 
+            // simpleButton8
+            // 
+            this.simpleButton8.Location = new System.Drawing.Point(316, 260);
+            this.simpleButton8.Name = "simpleButton8";
+            this.simpleButton8.Size = new System.Drawing.Size(62, 23);
+            this.simpleButton8.TabIndex = 99;
+            this.simpleButton8.Text = "批量设置";
+            this.simpleButton8.Click += new System.EventHandler(this.simpleButton8_Click);
+            // 
             // UserControl1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.simpleButton8);
             this.Controls.Add(this.spinEdit2);
             this.Controls.Add(this.spinEdit1);
             this.Controls.Add(this.labelControl23);
@@ -807,5 +818,6 @@
         private DevExpress.XtraEditors.LabelControl labelControl23;
         private DevExpress.XtraEditors.SpinEdit spinEdit1;
         private DevExpress.XtraEditors.SpinEdit spinEdit2;
+        private DevExpress.XtraEditors.SimpleButton simpleButton8;
     }
 }
