@@ -197,9 +197,10 @@ namespace standardApplication
                     }
                     i++;
                 }
+                GasEntity one = userControl11.GetGasFromControl();
                 Task t1 = new Task(GasInstruction.WriteGasList, new List<object>() { selectedGasList, Gloab.AllData.Address, new Action<string>(CommandCallback), new Action(() => {
                     wdf.Invoke(new Action(wdf.Close));
-                } ) });
+                } ), one });
                 t1.Start();
                 SetDebugStr(string.Format("批量写入气体成功"));
                 userControl11_ChangeGasEvent(null, null);
