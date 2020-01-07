@@ -60,6 +60,7 @@
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
             this.splitContainerControl6 = new DevExpress.XtraEditors.SplitContainerControl();
             this.splitContainerControl7 = new DevExpress.XtraEditors.SplitContainerControl();
+            this.checkEdit1 = new DevExpress.XtraEditors.CheckEdit();
             this.searchControl1 = new DevExpress.XtraEditors.SearchControl();
             this.checkedListBoxControl1 = new DevExpress.XtraEditors.CheckedListBoxControl();
             this.splitContainerControl5 = new DevExpress.XtraEditors.SplitContainerControl();
@@ -153,7 +154,6 @@
             this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.fieldValueBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.checkEdit1 = new DevExpress.XtraEditors.CheckEdit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             this.splitContainerControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl4)).BeginInit();
@@ -171,6 +171,7 @@
             this.splitContainerControl6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl7)).BeginInit();
             this.splitContainerControl7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl5)).BeginInit();
@@ -225,7 +226,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit7.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fieldValueBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainerControl1
@@ -623,6 +623,16 @@
             this.splitContainerControl7.SplitterPosition = 48;
             this.splitContainerControl7.TabIndex = 0;
             this.splitContainerControl7.Text = "splitContainerControl7";
+            // 
+            // checkEdit1
+            // 
+            this.checkEdit1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkEdit1.Location = new System.Drawing.Point(0, 24);
+            this.checkEdit1.Name = "checkEdit1";
+            this.checkEdit1.Properties.Caption = "全选";
+            this.checkEdit1.Size = new System.Drawing.Size(140, 19);
+            this.checkEdit1.TabIndex = 1;
+            this.checkEdit1.CheckedChanged += new System.EventHandler(this.checkEdit1_CheckedChanged);
             // 
             // searchControl1
             // 
@@ -1213,7 +1223,7 @@
             // spinEdit8
             // 
             this.spinEdit8.EditValue = new decimal(new int[] {
-            100,
+            200,
             0,
             0,
             0});
@@ -1650,16 +1660,6 @@
             // 
             this.fieldValueBindingSource.DataSource = typeof(Entity.FieldValue);
             // 
-            // checkEdit1
-            // 
-            this.checkEdit1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkEdit1.Location = new System.Drawing.Point(0, 24);
-            this.checkEdit1.Name = "checkEdit1";
-            this.checkEdit1.Properties.Caption = "全选";
-            this.checkEdit1.Size = new System.Drawing.Size(140, 19);
-            this.checkEdit1.TabIndex = 1;
-            this.checkEdit1.CheckedChanged += new System.EventHandler(this.checkEdit1_CheckedChanged);
-            // 
             // MainXtraForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -1689,6 +1689,7 @@
             this.splitContainerControl6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl7)).EndInit();
             this.splitContainerControl7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl5)).EndInit();
@@ -1747,7 +1748,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit7.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fieldValueBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
