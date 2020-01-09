@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainXtraForm));
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
             this.splitContainerControl4 = new DevExpress.XtraEditors.SplitContainerControl();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
@@ -45,8 +46,8 @@
             this.GasA1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.GasA2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Factor = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.Show = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.Compensation = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.ProbeAddress = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.ProbeChannel = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.Name1 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -315,8 +316,8 @@
             this.GasA1,
             this.GasA2,
             this.Factor,
-            this.Show,
-            this.Compensation});
+            this.ProbeAddress,
+            this.ProbeChannel});
             this.gridView2.GridControl = this.gridControl2;
             this.gridView2.Name = "gridView2";
             this.gridView2.OptionsView.ShowGroupPanel = false;
@@ -430,28 +431,28 @@
             this.Factor.Visible = true;
             this.Factor.VisibleIndex = 8;
             // 
-            // Show
+            // ProbeAddress
             // 
-            this.Show.Caption = "显示系数";
-            this.Show.FieldName = "Show";
-            this.Show.Name = "Show";
-            this.Show.OptionsColumn.AllowEdit = false;
-            this.Show.OptionsColumn.AllowFocus = false;
-            this.Show.OptionsColumn.AllowMove = false;
-            this.Show.OptionsColumn.ReadOnly = true;
-            this.Show.Visible = true;
-            this.Show.VisibleIndex = 9;
+            this.ProbeAddress.Caption = "探头地址";
+            this.ProbeAddress.FieldName = "ProbeAddress";
+            this.ProbeAddress.Name = "ProbeAddress";
+            this.ProbeAddress.OptionsColumn.AllowEdit = false;
+            this.ProbeAddress.OptionsColumn.AllowFocus = false;
+            this.ProbeAddress.OptionsColumn.AllowMove = false;
+            this.ProbeAddress.OptionsColumn.ReadOnly = true;
+            this.ProbeAddress.Visible = true;
+            this.ProbeAddress.VisibleIndex = 9;
             // 
-            // Compensation
+            // ProbeChannel
             // 
-            this.Compensation.Caption = "补偿值";
-            this.Compensation.FieldName = "Compensation";
-            this.Compensation.Name = "Compensation";
-            this.Compensation.OptionsColumn.AllowEdit = false;
-            this.Compensation.OptionsColumn.AllowFocus = false;
-            this.Compensation.OptionsColumn.ReadOnly = true;
-            this.Compensation.Visible = true;
-            this.Compensation.VisibleIndex = 10;
+            this.ProbeChannel.Caption = "探头通道";
+            this.ProbeChannel.FieldName = "ProbeChannel";
+            this.ProbeChannel.Name = "ProbeChannel";
+            this.ProbeChannel.OptionsColumn.AllowEdit = false;
+            this.ProbeChannel.OptionsColumn.AllowFocus = false;
+            this.ProbeChannel.OptionsColumn.ReadOnly = true;
+            this.ProbeChannel.Visible = true;
+            this.ProbeChannel.VisibleIndex = 10;
             // 
             // gridControl1
             // 
@@ -1666,6 +1667,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1121, 630);
             this.Controls.Add(this.splitContainerControl1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainXtraForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "控制器标定软件V2.0";
@@ -1856,8 +1858,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn Name4;
         private DevExpress.XtraGrid.Columns.GridColumn Value4;
         private DevExpress.XtraGrid.Columns.GridColumn Factor;
-        private DevExpress.XtraGrid.Columns.GridColumn Show;
-        private DevExpress.XtraGrid.Columns.GridColumn Compensation;
+        private DevExpress.XtraGrid.Columns.GridColumn ProbeAddress;
+        private DevExpress.XtraGrid.Columns.GridColumn ProbeChannel;
         private DevExpress.XtraEditors.SimpleButton simpleButton16;
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl5;
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl7;

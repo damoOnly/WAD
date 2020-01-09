@@ -1,8 +1,8 @@
 ; 该脚本使用 HM VNISEdit 脚本编辑器向导产生
 
 ; 安装程序初始定义常量
-!define PRODUCT_NAME "新在线配置安装程序"
-!define PRODUCT_VERSION "1.0"
+!define PRODUCT_NAME "控制器标定软件"
+!define PRODUCT_VERSION "v2.0"
 !define PRODUCT_PUBLISHER "WAD"
 !define PRODUCT_WEB_SITE "http://www.mycompany.com"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\standardApplication.exe"
@@ -44,7 +44,7 @@ SetCompressor lzma
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
 OutFile "WADStandardSetup.exe"
-InstallDir "$PROGRAMFILES\万安迪在线配置软件"
+InstallDir "d:\控制器标定软件"
 InstallDirRegKey HKLM "${PRODUCT_UNINST_KEY}" "UninstallString"
 ShowInstDetails show
 ShowUnInstDetails show
@@ -58,6 +58,10 @@ Section "MainSection" SEC01
   File "standardApplication\bin\Debug\log4net.dll"
   File "standardApplication\bin\Debug\LogLib.dll"
   File "standardApplication\bin\Debug\standardApplication.exe"
+  File "standardApplication\bin\Debug\standardApplication.pdb"
+  File "standardApplication\bin\Debug\CommandManager.pdb"
+  File "standardApplication\bin\Debug\Entity.pdb"
+  File "standardApplication\bin\Debug\LogLib.pdb"
   File "standardApplication\bin\Debug\DevExpress.Dashboard.v14.2.Core.dll"
   File "standardApplication\bin\Debug\DevExpress.Data.v14.2.dll"
   File "standardApplication\bin\Debug\DevExpress.DataAccess.v14.2.dll"
@@ -75,15 +79,15 @@ Section "MainSection" SEC01
   File "standardApplication\bin\Debug\DevExpress.XtraTreeList.v14.2.dll"
   File "standardApplication\bin\Debug\DevExpress.XtraVerticalGrid.v14.2.dll"
   File "standardApplication\CommonConfig.xml"
-  CreateDirectory "$SMPROGRAMS\万安迪在线配置软件"
-  CreateShortCut "$SMPROGRAMS\万安迪在线配置软件\在线配置软件.lnk" "$INSTDIR\standardApplication.exe"
-  CreateShortCut "$DESKTOP\在线配置软件.lnk" "$INSTDIR\standardApplication.exe"
+  CreateDirectory "$SMPROGRAMS\控制器标定软件"
+  CreateShortCut "$SMPROGRAMS\控制器标定软件\控制器标定软件.lnk" "$INSTDIR\standardApplication.exe"
+  CreateShortCut "$DESKTOP\控制器标定软件.lnk" "$INSTDIR\standardApplication.exe"
 SectionEnd
 
 Section -AdditionalIcons
   WriteIniStr "$INSTDIR\${PRODUCT_NAME}.url" "InternetShortcut" "URL" "${PRODUCT_WEB_SITE}"
-  CreateShortCut "$SMPROGRAMS\万安迪在线配置软件\Website.lnk" "$INSTDIR\${PRODUCT_NAME}.url"
-  CreateShortCut "$SMPROGRAMS\万安迪在线配置软件\Uninstall.lnk" "$INSTDIR\uninst.exe"
+  CreateShortCut "$SMPROGRAMS\控制器标定软件\Website.lnk" "$INSTDIR\${PRODUCT_NAME}.url"
+  CreateShortCut "$SMPROGRAMS\控制器标定软件\Uninstall.lnk" "$INSTDIR\uninst.exe"
 SectionEnd
 
 Section -Post
@@ -132,12 +136,12 @@ Section Uninstall
   Delete "$INSTDIR\DevExpress.XtraVerticalGrid.v14.2.dll"
   Delete "$INSTDIR\CommonConfig.xml"
 
-  Delete "$SMPROGRAMS\万安迪在线配置软件\Uninstall.lnk"
-  Delete "$SMPROGRAMS\万安迪在线配置软件\Website.lnk"
-  Delete "$DESKTOP\在线配置软件.lnk"
-  Delete "$SMPROGRAMS\万安迪在线配置软件\在线配置软件.lnk"
+  Delete "$SMPROGRAMS\控制器标定软件\Uninstall.lnk"
+  Delete "$SMPROGRAMS\控制器标定软件\Website.lnk"
+  Delete "$DESKTOP\控制器标定软件.lnk"
+  Delete "$SMPROGRAMS\控制器标定软件\控制器标定软件.lnk"
 
-  RMDir "$SMPROGRAMS\万安迪在线配置软件"
+  RMDir "$SMPROGRAMS\控制器标定软件"
 
   RMDir "$INSTDIR"
 
