@@ -9,7 +9,7 @@ using DevExpress.XtraEditors;
 using System.Linq;
 
 using Entity;
-using Dal;
+using Business;
 using CommandManager;
 using System.Diagnostics;
 using WADApplication.Properties;

@@ -41,7 +41,7 @@ namespace Entity
         /// </summary>
         public byte Address { get; set; }
 
-        public UInt16 biNnum { get; set; }
+        public int biNnum { get; set; }
         /// <summary>
         /// 放大倍数
         /// </summary>
@@ -411,9 +411,7 @@ namespace Entity
         public bool IsLow { get; set; }
         public bool IsTWA { get; set; }
         public bool IsSTEL { get; set; }
-        /// 最大量程
-        /// </summary> 
-        public UInt32 Max { get; set; }
+        public int Max { get; set; }
         public string MaxStr
         {
             get
@@ -425,7 +423,7 @@ namespace Entity
         /// <summary>
         /// 单位类型
         /// </summary>
-        public UInt16 UnitType { get; set; }
+        public int UnitType { get; set; }
 
         private string unit;
         /// <summary>

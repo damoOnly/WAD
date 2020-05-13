@@ -3,97 +3,84 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Entity;
-using Dal;
+using Business;
 
 namespace WADApplication.Process
 {
     public class DataProcess
     {
-        public static void AddAlert(Equipment newData,Equipment originalData)
+        private const string highStr = "高报警";
+        private const string lowStr = "低报警";
+        private const string noStr = "无报警";
+        public static void AddAlert(Equipment newData, Equipment originalData)
         {
             if (newData.Chroma >= originalData.A2)
             {
-                newData.ChromaAlertStr = "高报警";
+                newData.ChromaAlertStr = highStr;
             }
             else if (newData.Chroma >= originalData.A1 && newData.Chroma < originalData.A2)
             {
-                newData.ChromaAlertStr = "低报警";
+                newData.ChromaAlertStr = lowStr;
             }
             else
             {
-                newData.ChromaAlertStr = "无报警";
+                newData.ChromaAlertStr = noStr;
             }
 
-            if (originalData.ChromaAlertStr != newData.ChromaAlertStr)
+            switch (newData.ChromaAlertStr)
             {
-                if (originalData.ChromaAlertStr == "无报警" || string.IsNullOrWhiteSpace(originalData.ChromaAlertStr))
+                case highStr:
+                case lowStr:
+                    HasAlert(newData, ref originalData);
+                    break;
+                case noStr:
+                    NoAlert(ref originalData);
+                    break;
+                default:
+                    break;
+            }
+            originalData.ChromaAlertStr = newData.ChromaAlertStr;
+        }
+
+        private static void HasAlert(Equipment newData, ref Equipment originalData)
+        {
+            // update
+            if (newData.ChromaAlertStr.Equals(originalData.ChromaAlertStr))
+            {
+                originalData.AlertObject.EndTime = DateTime.Now;
+                AlertDal.UpdateOne(originalData.AlertObject);
+            }
+            else
+            {
+                // 前一个状态没有报警，则新增
+                if (originalData.ChromaAlertStr == noStr || originalData.ChromaAlertStr == string.Empty)
                 {
                     Alert art = new Alert();
                     art.AlertName = newData.ChromaAlertStr;
                     art.EquipmentID = originalData.ID;
-                    originalData.AlertObject = AlertDal.AddOneR(art);
+                    art.StratTime = DateTime.Now;
+                    art.EndTime = DateTime.Now;
+                    AlertDal.AddOneR(ref art);
+                    originalData.AlertObject = art;
                 }
                 else
                 {
+                    // 前一个状态有报警，则说明是低报或者高报
                     originalData.AlertObject.EndTime = DateTime.Now;
                     AlertDal.UpdateOne(originalData.AlertObject);
-                    if (!string.IsNullOrWhiteSpace(newData.ChromaAlertStr))
-                    {
-                        Alert art = new Alert();
-                        art.AlertName = newData.ChromaAlertStr;
-                        art.EquipmentID = originalData.ID;
-                        originalData.AlertObject = AlertDal.AddOneR(art);
-                    }
                 }
-                originalData.ChromaAlertStr = newData.ChromaAlertStr;
+                
             }
-            else
-            {
-                if (!string.IsNullOrWhiteSpace(originalData.ChromaAlertStr))
-                {
-                    originalData.AlertObject.EndTime = DateTime.Now;
-                    if (!AlertDal.UpdateOne(originalData.AlertObject))
-                    {
-                        Alert art = new Alert();
-                        art.AlertName = newData.ChromaAlertStr;
-                        art.EquipmentID = originalData.ID;
-                        originalData.AlertObject = AlertDal.AddOneR(art);
-                    }
-                }
-                //Trace.WriteLine(string.Format("[{1}]  {0}：相同报警", eq.SensorType, DateTime.Now.ToLongTimeString()));
-            }
+        }
 
-            //if (eq.THAlertStr != data.THAlertStr)
-            //{
-            //    if (!string.IsNullOrWhiteSpace(eq.THAlertStr))
-            //    {
-            //        eq.THAlertObject.EndTime = DateTime.Now;
-            //        AlertDal.UpdateOne(eq.THAlertObject);
-            //        if (!string.IsNullOrWhiteSpace(data.THAlertStr))
-            //        {
-            //            Alert art = new Alert();
-            //            art.AlertName = data.THAlertStr;
-            //            art.EquipmentID = eq.ID;
-            //            eq.THAlertObject = AlertDal.AddOneR(art);
-            //        }
-            //    }
-            //    else
-            //    {
-            //        Alert art = new Alert();
-            //        art.AlertName = data.THAlertStr;
-            //        art.EquipmentID = eq.ID;
-            //        eq.THAlertObject = AlertDal.AddOneR(art);
-            //    }
-            //    eq.THAlertStr = data.THAlertStr;
-            //}
-            //else
-            //{
-            //    if (!string.IsNullOrWhiteSpace(eq.THAlertStr))
-            //    {
-            //        eq.THAlertObject.EndTime = DateTime.Now;
-            //        AlertDal.UpdateOne(eq.THAlertObject);
-            //    }
-            //}
+        private static void NoAlert(ref Equipment originalData)
+        {
+            if (originalData.ChromaAlertStr.Equals(highStr) || originalData.ChromaAlertStr.Equals(lowStr))
+            {
+                originalData.AlertObject.EndTime = DateTime.Now;
+                AlertDal.UpdateOne(originalData.AlertObject);
+                originalData.AlertObject = null;
+            }
         }
     }
 }

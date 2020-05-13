@@ -9,7 +9,7 @@ using DevExpress.XtraEditors;
 using System.Linq;
 
 using Entity;
-using Dal;
+using Business;
 using CommandManager;
 using System.Diagnostics;
 namespace WADApplication
@@ -155,7 +155,7 @@ namespace WADApplication
             {
                 LogLib.Log.GetLogger(this).Warn("获取主窗口失败");
             }
-            list = EquipmentDal.GetAllList();
+            list = EquipmentDal.GetAllListNotDelete();
             gridControl1.DataSource = list;
             if (list == null || list.Count < 1)
             {

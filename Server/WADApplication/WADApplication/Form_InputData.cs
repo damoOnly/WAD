@@ -7,7 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using CommandManager;
-using Dal;
+using Business;
 using Entity;
 using System.Linq;
 using System.Threading;
@@ -20,7 +20,6 @@ namespace WADApplication
         private List<Equipment> mainList = new List<Equipment>();
         Equipment eqq;
         PLAASerialPort port;
-        private Thread myThread;
         public Form_InputData()
         {
             InitializeComponent();
@@ -133,7 +132,7 @@ namespace WADApplication
 
         private void Form_InputData_Load(object sender, EventArgs e)
         {
-            mainList = EquipmentDal.GetAllList();
+            mainList = EquipmentDal.GetAllListNotDelete();
             var sql = from a in mainList
                       group a by a.Name into g
                       select new

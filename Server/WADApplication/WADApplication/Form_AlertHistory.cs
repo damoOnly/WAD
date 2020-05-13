@@ -8,13 +8,14 @@ using System.Windows.Forms;
 using System.Linq;
 using DevExpress.XtraEditors;
 using Entity;
-using Dal;
+using Business;
 using System.Configuration;
 
 namespace WADApplication
 {
     public partial class Form_AlertHistory : DevExpress.XtraEditors.XtraForm
     {
+        LogLib.Log log = LogLib.Log.GetLogger("Form_AlertHistory");
         #region 变量
         /// <summary>
         /// 最后一次连接的设备
@@ -42,7 +43,7 @@ namespace WADApplication
         {
             lastSensor = ConfigurationManager.AppSettings["lastSensor"].ToString();
             lastGas = ConfigurationManager.AppSettings["lastGas"].ToString();
-            mainList = EquipmentDal.GetListIn();
+            mainList = EquipmentDal.GetListIncludeDelete();
 
             List<IGrouping<string, Equipment>> list1 = mainList.GroupBy(c => c.Name).ToList();
             comboBoxEdit_SensorName.Properties.Items.Clear();
@@ -91,11 +92,11 @@ namespace WADApplication
                 }
                 Equipment eq = mainList.Find(c => c.Name == comboBoxEdit_SensorName.Text.Trim() && c.GasName == comboBoxEdit_GasName.Text.Trim() && c.Address == Convert.ToByte(comboBoxEdit_Address.Text.Trim()));
 
-                List<Alert> data = AlertDal.GetListByTime(eq.ID, dateEdit_Start.DateTime, dateEdit_end.DateTime);
+                List<Alert> data = AlertDal.GetListByTime(dateEdit_Start.DateTime, dateEdit_end.DateTime, eq.ID, eq.Name, eq.GasName, eq.Address);
                 if (data == null || data.Count < 1)
                 {
                     gridControl3.DataSource = null;
-                    LogLib.Log.GetLogger(this).Warn("数据库中没有记录");
+                    log.Warn("数据库中没有记录");
                     return;
                 }
                 selectEq = eq;
@@ -104,7 +105,7 @@ namespace WADApplication
             }
             catch (Exception ex)
             {
-                LogLib.Log.GetLogger(this).Warn(ex);
+                log.Error(ex.Message, ex);
             }
             
         }
@@ -148,10 +149,10 @@ namespace WADApplication
                     return;
                 }
 
-                int count = AlertDal.DeleteByTime(selectEq.ID, dateEdit_Start.DateTime, dateEdit_end.DateTime);
+                AlertDal.DeleteByTime(selectEq.ID, dateEdit_Start.DateTime, dateEdit_end.DateTime);
                 gridControl3.DataSource = null;
                 selectEq = null;
-                XtraMessageBox.Show(string.Format("本次删除{0}条数据", count));
+                XtraMessageBox.Show("删除成功");
             }
             catch (Exception ex)
             {

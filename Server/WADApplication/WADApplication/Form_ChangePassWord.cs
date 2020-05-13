@@ -7,13 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using Dal;
+using Business;
 using Entity;
 using DevExpress.XtraEditors;
 namespace WADApplication
 {
     public partial class Form_ChangePassWord : Form
     {
+        LogLib.Log log = LogLib.Log.GetLogger("Form_ChangePassWord");
         public Form_ChangePassWord()
         {
             InitializeComponent();
@@ -44,13 +45,15 @@ namespace WADApplication
 
             uf.PassWord = textEdit2.Text.Trim();
             labelControl4.Visible = true;
-            if (UserInfoDal.UpdateOne(uf))
+            try
             {
+                UserInfoDal.UpdateOne(uf);
                 labelControl4.ForeColor = Color.Green;
                 labelControl4.Text = "修改成功";
             }
-            else
+            catch (Exception ex)
             {
+                log.Error(ex.Message, ex);
                 labelControl4.ForeColor = Color.Red;
                 labelControl4.Text = "修改失败";
             }

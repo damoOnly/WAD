@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Entity;
-using Dal;
+using Business;
 using DevExpress.XtraEditors;
 
 namespace WADApplication
@@ -79,12 +79,12 @@ namespace WADApplication
                 XtraMessageBox.Show("地址必须为正整数");
                 return;
             }
-            if (EquipmentDal.GetNames().Contains(SensorName))
+            if (EquipmentDal.GetNamesIncludeDelete().Contains(SensorName))
             {
                 XtraMessageBox.Show("设备存在重名");
                 return;
             }
-            if (EquipmentDal.GetAddress().Contains(add))
+            if (EquipmentDal.GetAddressNotDelete().Contains(add))
             {
                 XtraMessageBox.Show("地址已存在,请先删除设备");
                 return;
@@ -97,7 +97,7 @@ namespace WADApplication
             mEquipment.A2 = Convert.ToSingle(textEdit5.Text);
             mEquipment.A1 = Convert.ToSingle(textEdit6.Text);
             mEquipment.Point = Convert.ToByte(textEdit7.Text);
-            mEquipment.Max = Convert.ToUInt32(textEdit8.Text);
+            mEquipment.Max = Convert.ToInt32(textEdit8.Text);
             mEquipment.UnitType = Convert.ToUInt16(textEdit9.Text);
             mEquipment.biNnum = Convert.ToUInt16(textEdit10.Text);
 

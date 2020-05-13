@@ -7,7 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using Entity;
-using Dal;
+using Business;
 using DevExpress.XtraCharts;
 using System.Linq;
 using System.Configuration;
@@ -42,103 +42,50 @@ namespace WADApplication
 
                 if (ts.TotalMinutes < 1)
                 {
-                    spd.AxisX.DateTimeGridAlignment = DateTimeMeasurementUnit.Second;
-                    spd.AxisX.DateTimeMeasureUnit = DateTimeMeasurementUnit.Second;
-                    spd.AxisX.DateTimeOptions.Format = DateTimeFormat.LongTime;
-                    spd.AxisX.Range.SetMinMaxValues(dt1, dt2);
-                    spd.AxisX.Range.ScrollingRange.SetMinMaxValues(dt1, dt2);
+                    spd.AxisX.DateTimeScaleOptions.MeasureUnit = DateTimeMeasureUnit.Second;
+                    spd.AxisX.DateTimeScaleOptions.GridAlignment = DateTimeGridAlignment.Minute;
+                    spd.AxisX.Label.TextPattern = "{A:HH:mm:ss}";
+                    spd.AxisX.WholeRange.SetMinMaxValues(dt1, dt2);
+                    spd.AxisX.VisualRange.SetMinMaxValues(dt1, dt2);
                 }
                 // 时间范围在1小时以内
                 else if (ts.TotalHours < 1)
                 {
-                    spd.AxisX.DateTimeGridAlignment = DateTimeMeasurementUnit.Minute;
-                    spd.AxisX.DateTimeMeasureUnit = DateTimeMeasurementUnit.Second;
-                    spd.AxisX.DateTimeOptions.Format = DateTimeFormat.LongTime;
-                    if (dt1.AddHours(1) > dt2)
-                    {
-                        spd.AxisX.Range.SetMinMaxValues(dt1, dt2);
-                    }
-                    else
-                    {
-                        spd.AxisX.Range.SetMinMaxValues(dt1, dt1.AddHours(1));
-                    }
-                    spd.AxisX.Range.ScrollingRange.MinValue = dt1;
-                    spd.AxisX.Range.ScrollingRange.MaxValue = dt2;
+                    spd.AxisX.DateTimeScaleOptions.MeasureUnit = DateTimeMeasureUnit.Minute;
+                    spd.AxisX.DateTimeScaleOptions.GridAlignment = DateTimeGridAlignment.Minute;
+                    spd.AxisX.Label.TextPattern = "{A:HH:mm}";
 
                 }
                 // 1天以内
                 else if (ts.TotalDays <= 1)
                 {
-                    spd.AxisX.DateTimeGridAlignment = DateTimeMeasurementUnit.Minute;
-                    spd.AxisX.DateTimeMeasureUnit = DateTimeMeasurementUnit.Second;
-                    spd.AxisX.DateTimeOptions.Format = DateTimeFormat.LongTime;
-                    if (dt1.AddHours(12) > dt2)
-                    {
-                        spd.AxisX.Range.SetMinMaxValues(dt1, dt2);
-                    }
-                    else
-                    {
-                        spd.AxisX.Range.SetMinMaxValues(dt1, dt1.AddHours(12));
-                    }
-                    spd.AxisX.Range.ScrollingRange.MinValue = dt1;
-                    spd.AxisX.Range.ScrollingRange.MaxValue = dt2;
+                    spd.AxisX.DateTimeScaleOptions.MeasureUnit = DateTimeMeasureUnit.Minute;
+                    spd.AxisX.DateTimeScaleOptions.GridAlignment = DateTimeGridAlignment.Minute;
+                    spd.AxisX.Label.TextPattern = "{A:HH:mm}";
                 }
                 // 1个星期以内
                 else if (ts.TotalDays < 7)
                 {
-                    spd.AxisX.DateTimeGridAlignment = DateTimeMeasurementUnit.Hour;
-                    spd.AxisX.DateTimeMeasureUnit = DateTimeMeasurementUnit.Second;
-                    spd.AxisX.DateTimeOptions.Format = DateTimeFormat.Custom;
-                    spd.AxisX.DateTimeOptions.FormatString = "dd HH:mm";
-                    if (dt1.AddDays(3) > dt2)
-                    {
-                        spd.AxisX.Range.SetMinMaxValues(dt1, dt2);
-                    }
-                    else
-                    {
-                        spd.AxisX.Range.SetMinMaxValues(dt1, dt1.AddDays(3));
-                    }
-                    spd.AxisX.Range.ScrollingRange.MinValue = dt1;
-                    spd.AxisX.Range.ScrollingRange.MaxValue = dt2;
+                    spd.AxisX.DateTimeScaleOptions.MeasureUnit = DateTimeMeasureUnit.Hour;
+                    spd.AxisX.DateTimeScaleOptions.GridAlignment = DateTimeGridAlignment.Hour;
+                    spd.AxisX.Label.TextPattern = "{A:dd HH:mm}";
 
 
                 }
                 // 1个月以内
                 else if (ts.TotalDays < 30)
                 {
-                    spd.AxisX.DateTimeGridAlignment = DateTimeMeasurementUnit.Hour;
-                    spd.AxisX.DateTimeMeasureUnit = DateTimeMeasurementUnit.Second;
-                    spd.AxisX.DateTimeOptions.Format = DateTimeFormat.Custom;
-                    spd.AxisX.DateTimeOptions.FormatString = "yyyy-MM-dd HH:mm";
-                    if (dt1.AddDays(15) > dt2)
-                    {
-                        spd.AxisX.Range.SetMinMaxValues(dt1, dt2);
-                    }
-                    else
-                    {
-                        spd.AxisX.Range.SetMinMaxValues(dt1, dt1.AddDays(15));
-                    }
-                    spd.AxisX.Range.ScrollingRange.MinValue = dt1;
-                    spd.AxisX.Range.ScrollingRange.MaxValue = dt2;
+                    spd.AxisX.DateTimeScaleOptions.MeasureUnit = DateTimeMeasureUnit.Hour;
+                    spd.AxisX.DateTimeScaleOptions.GridAlignment = DateTimeGridAlignment.Hour;
+                    spd.AxisX.Label.TextPattern = "{A:yyyy-MM-dd HH:mm}";
 
                 }
                 // 1年以内
                 else
                 {
-                    spd.AxisX.DateTimeGridAlignment = DateTimeMeasurementUnit.Month;
-                    spd.AxisX.DateTimeMeasureUnit = DateTimeMeasurementUnit.Day;
-                    spd.AxisX.DateTimeOptions.Format = DateTimeFormat.LongDate;
-                    if (dt1.AddDays(30) > dt2)
-                    {
-                        spd.AxisX.Range.SetMinMaxValues(dt1, dt2);
-                    }
-                    else
-                    {
-                        spd.AxisX.Range.SetMinMaxValues(dt1, dt1.AddDays(30));
-                    }
-
-                    spd.AxisX.Range.ScrollingRange.MinValue = dt1;
-                    spd.AxisX.Range.ScrollingRange.MaxValue = dt2;
+                    spd.AxisX.DateTimeScaleOptions.MeasureUnit = DateTimeMeasureUnit.Day;
+                    spd.AxisX.DateTimeScaleOptions.GridAlignment = DateTimeGridAlignment.Month;
+                    spd.AxisX.Label.TextPattern = "{A:yyyy-MM-dd}";
                 }
             }
             catch (Exception e)
@@ -174,20 +121,20 @@ namespace WADApplication
                 {
                     return;
                 }
-                int total = 0;
+                //int total = 0;
                 foreach (CheckedListBoxItem item in checkedComboBoxEdit1.Properties.Items)
                 {
                     if (item.CheckState == CheckState.Checked)
                     {
                         Equipment eq = mainList.Find(c => c.ID == Convert.ToInt32(item.Value));
 
-                        total += EquipmentDataDal.DeleteByTime(eq.ID, dateEdit1.DateTime, dateEdit2.DateTime);
+                        EquipmentDataBusiness.DeleteByTime(dateEdit1.DateTime, dateEdit2.DateTime, eq.ID);
                     }
                 }
 
                 gridControl2.DataSource = null;
                 chartControl2.Series.Clear();
-                XtraMessageBox.Show(string.Format("本次删除{0}条数据", total));
+                XtraMessageBox.Show("删除成功");
             }
             catch (Exception ex)
             {
@@ -231,7 +178,7 @@ namespace WADApplication
                     {
                         continue;
                     }
-                    List<EquipmentData> data = EquipmentDataDal.GetListByTime(Convert.ToInt32(item.Value), dateEdit1.DateTime, dateEdit2.DateTime);
+                    List<EquipmentData> data = EquipmentDataBusiness.GetList(dateEdit1.DateTime, dateEdit2.DateTime, Convert.ToInt32(item.Value));
                     if (data == null || data.Count < 1)
                     {
                         continue;
@@ -424,7 +371,11 @@ namespace WADApplication
 
             Stopwatch watch = new Stopwatch();
             watch.Start();
-            List<EquipmentData> data = EquipmentDataDal.GetListByTime2(String.Join(",", listeqid), dateEdit1.DateTime, dateEdit2.DateTime);
+            List<EquipmentData> data = new List<EquipmentData>();
+            listeqid.ForEach(c => {
+                var tl = EquipmentDataBusiness.GetList(dateEdit1.DateTime, dateEdit2.DateTime, c);
+                data.AddRange(tl);
+            });
             Trace.WriteLine("get database: " + watch.Elapsed);
             watch.Restart();
             IEnumerable<IGrouping<string, EquipmentData>> gridTable = data.GroupBy(c => c.AddTimeStr);
@@ -529,7 +480,7 @@ namespace WADApplication
                     List<Equipment> eq = mainList.FindAll(c => c.ID == Convert.ToInt32(item.Value));
                     foreach (Equipment equipment in eq)
                     {
-                        EquipmentDataDal.DeleteByEquipmentID(equipment.ID);
+                        EquipmentDataBusiness.DeleteById(equipment.ID);
                         // dang qian jian ce she bei bu shan chu
                         if (equipment.IsDel)
                         {
@@ -626,7 +577,7 @@ namespace WADApplication
 
         private void loadData()
         {
-            mainList = EquipmentDal.GetListIn();
+            mainList = EquipmentDal.GetListIncludeDelete();
             mainList = mainList.OrderBy(c => c.ID).ToList();
             checkedComboBoxEdit1.Properties.Items.Clear();
             mainList.ForEach(c => { checkedComboBoxEdit1.Properties.Items.Add(c.ID, c.Name + "," + c.Address + "," + c.SensorTypeB + "," + c.GasName); });
@@ -663,7 +614,8 @@ namespace WADApplication
                 {
                     return;
                 }
-                EquipmentDataDal.DeleteAll();
+                // to do
+                //EquipmentDataDal.DeleteAll();
                 gridControl2.DataSource = null;
                 chartControl2.Series[0].Points.Clear();
                 XtraMessageBox.Show("数据已清空");

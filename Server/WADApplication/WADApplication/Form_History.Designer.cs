@@ -229,11 +229,11 @@
             this.chartControl2.BackImage.Image = ((System.Drawing.Image)(resources.GetObject("chartControl2.BackImage.Image")));
             this.chartControl2.BackImage.Stretch = true;
             this.chartControl2.CacheToMemory = true;
-            swiftPlotDiagram1.AxisX.Range.ScrollingRange.SideMarginsEnabled = true;
-            swiftPlotDiagram1.AxisX.Range.SideMarginsEnabled = true;
+            swiftPlotDiagram1.AxisX.VisualRange.AutoSideMargins = true;
+            swiftPlotDiagram1.AxisX.WholeRange.AutoSideMargins = true;
             swiftPlotDiagram1.AxisX.VisibleInPanesSerializable = "-1";
-            swiftPlotDiagram1.AxisY.Range.ScrollingRange.SideMarginsEnabled = true;
-            swiftPlotDiagram1.AxisY.Range.SideMarginsEnabled = true;
+            swiftPlotDiagram1.AxisY.VisualRange.AutoSideMargins = true;
+            swiftPlotDiagram1.AxisY.WholeRange.AutoSideMargins = true;
             swiftPlotDiagram1.AxisY.VisibleInPanesSerializable = "-1";
             swiftPlotDiagram1.DefaultPane.EnableAxisXScrolling = DevExpress.Utils.DefaultBoolean.True;
             swiftPlotDiagram1.DefaultPane.EnableAxisXZooming = DevExpress.Utils.DefaultBoolean.True;

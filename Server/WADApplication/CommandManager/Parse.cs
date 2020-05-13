@@ -295,7 +295,7 @@ namespace CommandManager
             eq.UnitType = data[4];
             Array.Reverse(data, 11, 2);
             Array.Reverse(data, 13, 2);
-            eq.Max = BitConverter.ToUInt32(data, 11);
+            eq.Max = BitConverter.ToInt32(data, 11);
             if (eq.Max < 0)
             {
                 eq.Max = 0;
@@ -320,7 +320,7 @@ namespace CommandManager
             eq.UnitType = data[4];
             Array.Reverse(data, 11, 2);
             Array.Reverse(data, 13, 2);
-            eq.Max = BitConverter.ToUInt32(data, 11);
+            eq.Max = BitConverter.ToInt32(data, 11);
             if (eq.Max < 0)
             {
                 eq.Max = 0;

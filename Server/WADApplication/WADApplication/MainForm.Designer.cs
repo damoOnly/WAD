@@ -1309,11 +1309,7 @@
             // 
             this.chartControl1.BackImage.Image = ((System.Drawing.Image)(resources.GetObject("chartControl1.BackImage.Image")));
             this.chartControl1.BackImage.Stretch = true;
-            swiftPlotDiagram1.AxisX.Range.ScrollingRange.SideMarginsEnabled = true;
-            swiftPlotDiagram1.AxisX.Range.SideMarginsEnabled = true;
             swiftPlotDiagram1.AxisX.VisibleInPanesSerializable = "-1";
-            swiftPlotDiagram1.AxisY.Range.ScrollingRange.SideMarginsEnabled = true;
-            swiftPlotDiagram1.AxisY.Range.SideMarginsEnabled = true;
             swiftPlotDiagram1.AxisY.VisibleInPanesSerializable = "-1";
             this.chartControl1.Diagram = swiftPlotDiagram1;
             this.chartControl1.Dock = System.Windows.Forms.DockStyle.Fill;

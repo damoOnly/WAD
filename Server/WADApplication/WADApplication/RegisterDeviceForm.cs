@@ -8,7 +8,7 @@ using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using Entity;
-using Dal;
+using Business;
 using CommandManager;
 using System.Diagnostics;
 using System.Threading;
@@ -17,6 +17,7 @@ namespace WADApplication
 {
     public partial class RegisterDeviceForm : DevExpress.XtraEditors.XtraForm
     {
+        LogLib.Log log = LogLib.Log.GetLogger("RegisterDeviceForm");
         //定义delegate
         public delegate void EventHandler();
         //用event 关键字声明事件对象
@@ -35,14 +36,16 @@ namespace WADApplication
             AddDeviceForm addfff = new AddDeviceForm(addr);
             if (addfff.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                if (!EquipmentDal.AddOne(addfff.mEquipment))
+                try
                 {
-                    LogLib.Log.GetLogger(this).Warn("插入失败");
-                    XtraMessageBox.Show("添加设备失败");
-                }
-                else
-                {
+                    Equipment eq = addfff.mEquipment;
+                    EquipmentDal.AddOneR(ref eq);
                     InitList();
+                }
+                catch (Exception ex)
+                {
+                    log.Error("添加设备失败", ex);
+                    XtraMessageBox.Show("添加设备失败");
                 }
             }
         }
@@ -54,7 +57,7 @@ namespace WADApplication
 
         private void InitList()
         {
-            list = EquipmentDal.GetAllList();
+            list = EquipmentDal.GetAllListNotDelete();
             gridControl1.DataSource = list;
             gridControl1.RefreshDataSource();
             gridView1.BestFitColumns();
@@ -63,15 +66,17 @@ namespace WADApplication
         // 删除
         private void simpleButton2_Click(object sender, EventArgs e)
         {
-            Equipment eq1 = gridView1.GetFocusedRow() as Equipment;
-
-            if (EquipmentDal.DeleteListByName(eq1.Name))
+            try
             {
-                XtraMessageBox.Show("删除设备成功");
+                Equipment eq1 = gridView1.GetFocusedRow() as Equipment;
+                EquipmentDal.DeleteListByName(eq1.Name);
                 InitList();
+                XtraMessageBox.Show("删除设备成功");
+
             }
-            else
+            catch (Exception ex)
             {
+                log.Error("删除设备失败",ex);
                 XtraMessageBox.Show("删除设备失败");
             }
         }
@@ -79,19 +84,22 @@ namespace WADApplication
         // 更新
         private void simpleButton3_Click(object sender, EventArgs e)
         {
-            Equipment eq = gridView1.GetFocusedRow() as Equipment;
-            AddDeviceForm addform = new AddDeviceForm(eq);
-            if (addform.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            try
             {
-                if (!EquipmentDal.UpdateOne(addform.mEquipment))
+                Equipment eq = gridView1.GetFocusedRow() as Equipment;
+                AddDeviceForm addform = new AddDeviceForm(eq);
+                if (addform.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    XtraMessageBox.Show("更新设备失败");
-                }
-                else
-                {
+                    EquipmentDal.UpdateOne(addform.mEquipment);
                     InitList();
                 }
             }
+            catch (Exception ex)
+            {
+                log.Error("更新设备失败", ex);
+                XtraMessageBox.Show("更新设备失败");
+            }
+            
         }
 
         // 添加默认设备
@@ -115,42 +123,39 @@ namespace WADApplication
                         ept.Max = 30;
                         ept.Point = 2;
                         ept.IsRegister = true;
-
-                        if (!EquipmentDal.AddOne(ept))
-                        {
-                            LogLib.Log.GetLogger(this).Warn("插入失败");
-                            continue;
-                        }
+                        EquipmentDal.AddOneR(ref ept);
                     }
                     InitList();
                 }
             }
             catch (Exception ex)
             {
-                LogLib.Log.GetLogger(this).Warn(ex);
+                log.Error("添加失败", ex);
                 XtraMessageBox.Show("添加失败");
-                return;
             }
         }
 
         private void gridView1_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
         {
-            if (e.Button == System.Windows.Forms.MouseButtons.Left && e.Clicks == 2)
+            try
             {
-                Equipment eq = gridView1.GetFocusedRow() as Equipment;
-                AddDeviceForm addform = new AddDeviceForm(eq);
-                if (addform.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                if (e.Button == System.Windows.Forms.MouseButtons.Left && e.Clicks == 2)
                 {
-                    if (!EquipmentDal.UpdateOne(addform.mEquipment))
+                    Equipment eq = gridView1.GetFocusedRow() as Equipment;
+                    AddDeviceForm addform = new AddDeviceForm(eq);
+                    if (addform.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                     {
-                        XtraMessageBox.Show("更新设备失败");
-                    }
-                    else
-                    {
+                        EquipmentDal.UpdateOne(addform.mEquipment);
                         InitList();
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                log.Error("更新设备失败", ex);
+                XtraMessageBox.Show("更新设备失败");
+            }
+            
         }
 
         private void simpleButton4_Click(object sender, EventArgs e)

@@ -1,4 +1,4 @@
-﻿using Dal;
+﻿using Business;
 using Entity;
 using System;
 using System.Collections.Generic;
@@ -14,21 +14,18 @@ namespace SQLiteTest
     {
         static void Main(string[] args)
         {
-            SqliteHelper.ConnectionString = string.Format(@"Data Source={0}\WAD.db3;Version=3;", AppDomain.CurrentDomain.BaseDirectory);
-            //for (int i = 0; i < 1; i++)
-            //{
-            //    EquipmentDal.CreateTable(i);
-            //}
-            //Console.WriteLine(EquipmentDal.CreateTable(1));
+            CreateDbFile.InitDb();
+            TestEquipmentData t1 = new TestEquipmentData();
+            //t1.test();
 
-            Stopwatch sw = new Stopwatch();
-            sw.Start();
+            TestUserInfo t2 = new TestUserInfo();
+            //t2.test();
 
-            //AddData();
-            GetData();
+            TestEquipment t3 = new TestEquipment();
+            //t3.test();
 
-            sw.Stop();
-            Console.WriteLine(sw.Elapsed);
+            TestAlert t4 = new TestAlert();
+            t4.test();
             Console.ReadLine();
         }
 
@@ -48,7 +45,7 @@ namespace SQLiteTest
                     });
                 }
 
-                EquipmentDataDal.AddList(1, list);
+                //EquipmentDataDal.AddList(1, list);
 
                 Thread.Sleep(200);
             }
@@ -59,8 +56,8 @@ namespace SQLiteTest
         {
             DateTime start = new DateTime(2018, 12, 6);
             DateTime end = new DateTime(2018, 12, 7);
-            List<EquipmentData> result = EquipmentDataDal.GetListByTime(1, start, end);
-            Console.WriteLine(result.Count);
+            //List<EquipmentData> result = EquipmentDataDal.GetListByTime(1, start, end);
+            //Console.WriteLine(result.Count);
         }
 
         public static DateTime GetRandomTime(DateTime time1, DateTime time2)

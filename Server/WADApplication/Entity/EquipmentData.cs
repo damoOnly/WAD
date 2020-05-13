@@ -13,21 +13,17 @@ namespace Entity
             Temperature = string.Empty;
             Humidity = string.Empty;
         }
-        /// <summary>
-        /// 自身ID
-        /// </summary>
-        
-        public ulong ID{get;set;}
 
-        /// <summary>
-        /// 设备ID
-        /// </summary>
+        #region 数据库字段
+        public ulong ID { get; set; }
+        
+        public float Chroma { get; set; }
+
+        public DateTime AddTime { get; set; }
+        #endregion
+
         public int EquipmentID { get; set; }
 
-        /// <summary>
-        /// 浓度
-        /// </summary>
-        public float Chroma { get; set; }
         public float HighChroma { get; set; }
 
         public float LowChromadata { get; set; }
@@ -76,16 +72,7 @@ namespace Entity
                 return unit;
             }
         }
-
-        /// <summary>
-        /// 添加时间
-        /// </summary>
-        public DateTime AddTime { get; set; }
+                
         public string AddTimeStr { get; set; }
-
-        /// <summary>
-        /// 小数点
-        /// </summary>
-        public byte Point { get; set; }
     }
 }

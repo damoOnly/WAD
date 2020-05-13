@@ -10,7 +10,7 @@ using DevExpress.XtraBars;
 using CommandManager;
 using DevExpress.XtraEditors;
 using System.Threading;
-using Dal;
+using Business;
 using Entity;
 using WADApplication.Properties;
 using System.Diagnostics;
@@ -68,7 +68,6 @@ namespace WADApplication
         //private const int Port = 6666;//51388;
         private TcpListener tcpLister = null;
         //    private TcpClient tcpClient = null;
-        IPAddress ipaddress;
         //    private NetworkStream networkStream = null;
         //private BinaryReader reader;
         //private BinaryWriter writer;
@@ -120,12 +119,7 @@ namespace WADApplication
         /// 心跳线程
         /// </summary>
         private Thread ConnectThread;
-
-        /// <summary>
-        /// 保存数据txt线程
-        /// </summary>
-        private Thread saveThread;
-
+        
         /// <summary>
         /// 读取数据线程开关
         /// </summary>
@@ -149,17 +143,17 @@ namespace WADApplication
         /// <summary>
         /// 设备列表（保存数据遍历）
         /// </summary>
-        private List<Equipment> mainList2;
+        // private List<Equipment> mainList2;
 
         /// <summary>
         /// 读取频率（秒）
         /// </summary>
         private int readHz = 5;
 
-        /// <summary>
-        /// 保存周期（秒）
-        /// </summary>
-        private int saveHz = 5;
+        ///// <summary>
+        ///// 保存周期（秒）
+        ///// </summary>
+        //private int saveHz = 5;
 
         // 列表控件选中的对象
         private Equipment selecteq = new Equipment();
@@ -177,12 +171,7 @@ namespace WADApplication
         /// X轴的偏差值
         /// </summary>
         private double halfX;
-
-        /// <summary>
-        /// 报警列表
-        /// </summary>
-        private Dictionary<int, List<Alert>> alertList;
-
+        
         /// <summary>
         /// 是否初始化参数
         /// </summary>
@@ -217,12 +206,7 @@ namespace WADApplication
         /// 关闭声音播放
         /// </summary>
         private bool IsClosePlay = false;
-
-        /// <summary>
-        /// 时间校验是否完成
-        /// </summary>
-        private bool IsCheckTimeOver = true;
-
+        
         /// <summary>
         /// 是否读取设备连接状态
         /// </summary>
@@ -376,7 +360,7 @@ namespace WADApplication
                     this.Invoke(new Action(gridView_nowData2.BestFitColumns));
                     Thread.Sleep(readHz * 1000);
                 }
-                catch (Exception ex)
+                catch
                 {
 
 
@@ -462,7 +446,7 @@ namespace WADApplication
             ed.LowChromadata = eq.LowChromadata;
             //ed.Point = eq.Point;
             // 添加数据库
-            EquipmentDataDal.AddOne(ed);
+            //EquipmentDataDal.AddOne(ed);
             // 绘制曲线
             addPoint(ed);
             if (set.Visible)
@@ -566,25 +550,24 @@ namespace WADApplication
 
             diagram_Tem.Margins.Right = 15;
             //diagram_Tem.AxisX.
-            diagram_Tem.AxisX.DateTimeGridAlignment = DateTimeMeasurementUnit.Minute;
-            diagram_Tem.AxisX.DateTimeMeasureUnit = DateTimeMeasurementUnit.Second;
-            diagram_Tem.AxisX.DateTimeOptions.Format = DateTimeFormat.Custom;
-            diagram_Tem.AxisX.DateTimeOptions.FormatString = "HH:mm:ss";
+            diagram_Tem.AxisX.DateTimeScaleOptions.GridAlignment = DateTimeGridAlignment.Minute;
+            diagram_Tem.AxisX.DateTimeScaleOptions.MeasureUnit = DateTimeMeasureUnit.Second;
+            diagram_Tem.AxisX.Label.TextPattern = "A:HH:mm:ss";
             //diagram_Tem.AxisX.GridLines.Visible = true;
-            diagram_Tem.AxisX.Range.SideMarginsEnabled = false;
-            diagram_Tem.AxisX.Range.ScrollingRange.SideMarginsEnabled = true;
+            diagram_Tem.AxisX.VisualRange.AutoSideMargins = false;
+            diagram_Tem.AxisX.WholeRange.AutoSideMargins = true;
             diagram_Tem.AxisX.Title.Text = "时间";
-            diagram_Tem.AxisX.Title.Visible = true;
+            diagram_Tem.AxisX.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
             diagram_Tem.AxisX.Title.Alignment = StringAlignment.Far;
             diagram_Tem.AxisX.Title.Antialiasing = false;
             diagram_Tem.AxisX.Title.Font = new System.Drawing.Font("Tahoma", 8);
 
-            diagram_Tem.AxisY.Range.AlwaysShowZeroLevel = false;
+            diagram_Tem.AxisY.WholeRange.AlwaysShowZeroLevel = false;
             //diagram_Tem.EnableAxisYZooming = true;
             //diagram_Tem.EnableAxisYScrolling = true;
             diagram_Tem.AxisY.Interlaced = true;
-            diagram_Tem.AxisY.Range.SideMarginsEnabled = true;
-            diagram_Tem.AxisY.Range.ScrollingRange.SideMarginsEnabled = true;
+            diagram_Tem.AxisY.VisualRange.AutoSideMargins = true;
+            diagram_Tem.AxisY.WholeRange.AutoSideMargins = true;
             if (mainList.First() != null)
             {
                 diagram_Tem.AxisY.Title.Text = string.Format("浓度({0})", mainList.First().Unit);
@@ -593,7 +576,7 @@ namespace WADApplication
             {
                 diagram_Tem.AxisY.Title.Text = string.Format("浓度");
             }
-            diagram_Tem.AxisY.Title.Visible = true;
+            diagram_Tem.AxisY.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
             diagram_Tem.AxisY.Title.Alignment = StringAlignment.Far;
             diagram_Tem.AxisY.Title.Antialiasing = false;
             diagram_Tem.AxisY.Title.Font = new System.Drawing.Font("Tahoma", 8);
@@ -631,7 +614,7 @@ namespace WADApplication
                     spsv1.LineStyle.Thickness = 2;
                     series.View = spsv1;
                     chartControl1.Series.Add(series);
-                    List<EquipmentData> datalist = EquipmentDataDal.GetListByTime(item.ID, minTime, maxTime);
+                    List<EquipmentData> datalist = EquipmentDataBusiness.GetList(minTime, maxTime, item.ID);
                     if (datalist == null)
                     {
                         continue;
@@ -678,13 +661,13 @@ namespace WADApplication
                 textEdit4.Text = ((ed.HighChroma + ed.LowChromadata) / 2).ToString();
             }
             // 切换横坐标时间显示
-            if (ed.AddTime > maxTime)
-            {
-                minTime = DateTime.Now;
-                maxTime = minTime.AddMinutes(halfX);
-                SwiftPlotDiagram diagram_Tem = chartControl1.Diagram as SwiftPlotDiagram;
-                diagram_Tem.AxisX.Range.SetMinMaxValues(minTime, maxTime);
-            }
+            //if (ed.AddTime > maxTime)
+            //{
+            //    minTime = DateTime.Now;
+            //    maxTime = minTime.AddMinutes(halfX);
+            //    SwiftPlotDiagram diagram_Tem = chartControl1.Diagram as SwiftPlotDiagram;
+            //    diagram_Tem.AxisX.Range.SetMinMaxValues(minTime, maxTime);
+            //}
             SwiftPlotDiagram diagram_Tem1 = chartControl1.Diagram as SwiftPlotDiagram;
             // 找到曲线增加点
             foreach (Series series in chartControl1.Series)
@@ -712,7 +695,7 @@ namespace WADApplication
                 //}
             }
 
-            mainList = EquipmentDal.GetAllList();
+            mainList = EquipmentDal.GetAllListNotDelete();
             gridControl_nowData2.DataSource = mainList;
             gridView_nowData2.BestFitColumns();
             gridControl_Status.DataSource = mainList;
@@ -889,7 +872,7 @@ namespace WADApplication
         private void updatalist()
         {
             List<Equipment> eql = mainList;
-            mainList = EquipmentDal.GetAllList();
+            mainList = EquipmentDal.GetAllListNotDelete();
             foreach (Equipment item in mainList)
             {
                 item.IsConnect = true;
@@ -1585,8 +1568,8 @@ namespace WADApplication
                 Form_ChangeAdmin fc = new Form_ChangeAdmin();
                 if (fc.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    UserInfo ui = UserInfoDal.GetOneByID(2);
-                    if (ui.PassWord != fc.ValueStr)
+                    UserInfo ui = UserInfoDal.GetOneByUser("admin", fc.ValueStr);
+                    if (ui == null)
                     {
                         XtraMessageBox.Show("密码不正确");
                     }
@@ -1673,7 +1656,7 @@ namespace WADApplication
                 maxTime = minTime.AddMinutes(halfX);
             }
             SwiftPlotDiagram diagram_Tem = chartControl1.Diagram as SwiftPlotDiagram;
-            diagram_Tem.AxisX.Range.SetMinMaxValues(minTime, maxTime);
+            //diagram_Tem.AxisX.Range.SetMinMaxValues(minTime, maxTime);
 
             XtraMessageBox.Show("设置成功");
             rangtime = comboBoxEdit_VTime.Text;
@@ -1803,69 +1786,69 @@ namespace WADApplication
                 LogLib.Log.GetLogger(this).Warn(ex);
             }
         }
-        private void SaveData()
-        {
-            while (true)
-            {
-                Thread.Sleep(saveHz * 1000);
-                startTime = startTime.AddSeconds(saveHz);
-                foreach (Equipment item in mainList2)
-                {
-                    Thread.Sleep(500);
-                    for (int i = 0; i < 10; i++)
-                    {
-                        Command cd = new Command(item.Address, (byte)EM_AdrType.气体浓度, 3);
-                        if (!CommandResult.GetResult(cd))
-                        {
-                            // item.IsConnect = false;
-                            Trace.WriteLine("读取要保存的浓度错误");
-                            Thread.Sleep(500);
-                            continue;
-                        }
-                        Equipment eq = new Equipment();
-                        byte[] cb = new byte[4];
-                        cb[0] = cd.ResultByte[4];
-                        cb[1] = cd.ResultByte[3];
-                        cb[2] = cd.ResultByte[6];
-                        cb[3] = cd.ResultByte[5];
-                        eq.Chroma = BitConverter.ToSingle(cb, 0);
-                        //    eq.THAlertStr = Parse.GetTHAlertStr(cd.ResultByte[7]);
-                        // 
-                        //Array.Reverse(cd.ResultByte, 7, 2);
-                        //ushort alart = BitConverter.ToUInt16(cd.ResultByte, 7);
-                        //switch (alart)
-                        //{
-                        //    case 0x00:
-                        //        eq.ChromaAlertStr = "无报警";
-                        //        break;
-                        //    case 0x01:
-                        //        eq.ChromaAlertStr = "低报警";
-                        //        break;
-                        //    case 0x02:
-                        //        eq.ChromaAlertStr = "高报警";
-                        //        break;
-                        //}
-                        //eq.ChromaAlertStr = Parse.GetChromaAlertStr(cd.ResultByte[8]);
-                        //if (!string.IsNullOrEmpty(eq.ChromaAlertStr))
-                        //    item.ChromaAlertStr = eq.ChromaAlertStr;
-                        //else
-                        //    item.ChromaAlertStr = "正常";
-                        //if (!string.IsNullOrEmpty(eq.THAlertStr))
-                        //    item.THAlertStr = eq.THAlertStr;
-                        //else
-                        //    item.THAlertStr = "正常";                        
-                        if (!Directory.Exists(@"D:\万安迪气体检测数据\\"))
-                            Directory.CreateDirectory(@"D:\万安迪气体检测数据\\");
-                        StreamWriter sw = new StreamWriter(@"D:\万安迪气体检测数据\\" + "万安迪气体检测数据.txt", true, Encoding.Default);
-                        string msg = string.Format("仪器地址:'{0}',通道名称:'{1}',气体名称:'{2}',单位:'{3}',测量范围:'{4}',浓度:'{5}',浓度报警状态:'{6}',时间:'{7}'", item.Address, item.SensorTypeB, item.GasName, item.Unit, item.Max, item.ChromaStr, item.ChromaAlertStr, startTime);
-                        sw.WriteLine(msg);
-                        sw.Flush();
-                        sw.Close();
-                        break;
-                    }
-                }
-            }
-        }
+        //private void SaveData()
+        //{
+        //    while (true)
+        //    {
+        //        Thread.Sleep(saveHz * 1000);
+        //        startTime = startTime.AddSeconds(saveHz);
+        //        foreach (Equipment item in mainList2)
+        //        {
+        //            Thread.Sleep(500);
+        //            for (int i = 0; i < 10; i++)
+        //            {
+        //                Command cd = new Command(item.Address, (byte)EM_AdrType.气体浓度, 3);
+        //                if (!CommandResult.GetResult(cd))
+        //                {
+        //                    // item.IsConnect = false;
+        //                    Trace.WriteLine("读取要保存的浓度错误");
+        //                    Thread.Sleep(500);
+        //                    continue;
+        //                }
+        //                Equipment eq = new Equipment();
+        //                byte[] cb = new byte[4];
+        //                cb[0] = cd.ResultByte[4];
+        //                cb[1] = cd.ResultByte[3];
+        //                cb[2] = cd.ResultByte[6];
+        //                cb[3] = cd.ResultByte[5];
+        //                eq.Chroma = BitConverter.ToSingle(cb, 0);
+        //                //    eq.THAlertStr = Parse.GetTHAlertStr(cd.ResultByte[7]);
+        //                // 
+        //                //Array.Reverse(cd.ResultByte, 7, 2);
+        //                //ushort alart = BitConverter.ToUInt16(cd.ResultByte, 7);
+        //                //switch (alart)
+        //                //{
+        //                //    case 0x00:
+        //                //        eq.ChromaAlertStr = "无报警";
+        //                //        break;
+        //                //    case 0x01:
+        //                //        eq.ChromaAlertStr = "低报警";
+        //                //        break;
+        //                //    case 0x02:
+        //                //        eq.ChromaAlertStr = "高报警";
+        //                //        break;
+        //                //}
+        //                //eq.ChromaAlertStr = Parse.GetChromaAlertStr(cd.ResultByte[8]);
+        //                //if (!string.IsNullOrEmpty(eq.ChromaAlertStr))
+        //                //    item.ChromaAlertStr = eq.ChromaAlertStr;
+        //                //else
+        //                //    item.ChromaAlertStr = "正常";
+        //                //if (!string.IsNullOrEmpty(eq.THAlertStr))
+        //                //    item.THAlertStr = eq.THAlertStr;
+        //                //else
+        //                //    item.THAlertStr = "正常";                        
+        //                if (!Directory.Exists(@"D:\万安迪气体检测数据\\"))
+        //                    Directory.CreateDirectory(@"D:\万安迪气体检测数据\\");
+        //                StreamWriter sw = new StreamWriter(@"D:\万安迪气体检测数据\\" + "万安迪气体检测数据.txt", true, Encoding.Default);
+        //                string msg = string.Format("仪器地址:'{0}',通道名称:'{1}',气体名称:'{2}',单位:'{3}',测量范围:'{4}',浓度:'{5}',浓度报警状态:'{6}',时间:'{7}'", item.Address, item.SensorTypeB, item.GasName, item.Unit, item.Max, item.ChromaStr, item.ChromaAlertStr, startTime);
+        //                sw.WriteLine(msg);
+        //                sw.Flush();
+        //                sw.Close();
+        //                break;
+        //            }
+        //        }
+        //    }
+        //}
 
         private void btnStart_Click(object sender, EventArgs e)
         {
@@ -2084,7 +2067,7 @@ namespace WADApplication
                 Form_OneParmSet ops = new Form_OneParmSet(eq);
                 ops.ShowDialog();
 
-                mainList = EquipmentDal.GetAllList();
+                mainList = EquipmentDal.GetAllListNotDelete();
                 gridControl_nowData2.DataSource = mainList;
                 gridControl_Status.DataSource = mainList;
                 gridControl_Status.RefreshDataSource();
@@ -2128,4 +2111,3 @@ namespace WADApplication
         }
     }
 }
-            #endregion

@@ -8,11 +8,12 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 
 using Entity;
-using Dal;
+using Business;
 namespace WADApplication
 {
     public partial class Form_OneParmSet : DevExpress.XtraEditors.XtraForm
     {
+        LogLib.Log log = LogLib.Log.GetLogger("Form_OneParmSet");
         Equipment eqOne;
         public Form_OneParmSet(Equipment eq)
         {
@@ -33,16 +34,17 @@ namespace WADApplication
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            bool flag = false;
-            if (eqOne != null)
+            try
             {
-                flag = EquipmentDal.UpdateOneParm(eqOne, txt_SensorName.Text);
-            }
-            if (flag)
+                eqOne.SensorTypeB = txt_SensorName.Text;
+                EquipmentDal.UpdateSensorTypeB(eqOne);
                 XtraMessageBox.Show("设置成功！");
-            else
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message, ex);
                 XtraMessageBox.Show("设置失败！");
-
+            }
         }
 
         private void simpleButton2_Click(object sender, EventArgs e)

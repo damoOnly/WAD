@@ -12,7 +12,7 @@ namespace Entity
     {
         public Alert()
         {
-            AddTime = StratTime = EndTime = DateTime.Now;
+            StratTime = EndTime = DateTime.Now;
         }
         /// <summary>
         /// 自身ID
@@ -33,12 +33,7 @@ namespace Entity
         /// 报警结束时间
         /// </summary>
         public DateTime EndTime { get; set; }
-
-        /// <summary>
-        /// 增加时间
-        /// </summary>
-        public DateTime AddTime { get; set; }
-
+        
         /// <summary>
         /// 报警类别
         /// </summary>
