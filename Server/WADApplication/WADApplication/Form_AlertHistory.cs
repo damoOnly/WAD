@@ -43,7 +43,7 @@ namespace WADApplication
         {
             lastSensor = ConfigurationManager.AppSettings["lastSensor"].ToString();
             lastGas = ConfigurationManager.AppSettings["lastGas"].ToString();
-            mainList = EquipmentDal.GetListIncludeDelete();
+            mainList = EquipmentBusiness.GetListIncludeDelete();
 
             List<IGrouping<string, Equipment>> list1 = mainList.GroupBy(c => c.Name).ToList();
             comboBoxEdit_SensorName.Properties.Items.Clear();

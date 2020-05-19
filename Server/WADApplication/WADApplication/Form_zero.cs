@@ -10,6 +10,7 @@ using Entity;
 using Business;
 using CommandManager;
 using WADApplication.Properties;
+using GlobalMemory;
 
 namespace WADApplication
 {
@@ -23,7 +24,7 @@ namespace WADApplication
 
         private void initList()
         {
-            list = EquipmentDal.GetAllListNotDelete();
+            list = EquipmentBusiness.GetAllListNotDelete();
             if (list == null || list.Count < 1)
             {
                 return;

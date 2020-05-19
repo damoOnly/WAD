@@ -35,19 +35,17 @@ namespace Business
             string sql = string.Format(@"create table tb_Equipment (
                                                            Name TEXT NOT NULL,
                                                            Address INT NOT NULL,
-                                                           GasName TEXT NOT NULL,
-                                                           SensorTypeB TEXT NOT NULL,
+                                                           GasType INT NOT NULL,
+                                                           SensorNum INT NOT NULL,
+                                                           UnitType INT NOT NULL,
+                                                           Point INT NOT NULL,
+                                                           Magnification INT NOT NULL,
                                                            Low REAL NOT NULL,
                                                            High REAL NOT NULL,
-                                                           Max INT NOT NULL,
-                                                           UnitType INT NOT NULL,
+                                                           Max REAL NOT NULL,
+                                                           IsGas INT NOT NULL,  
                                                            IsDel INT NOT NULL,
-                                                           Point INT NOT NULL,
-                                                           LowChroma REAL NOT NULL,
-                                                           biNnum INT NOT NULL,
-                                                           IfShowSeries INT NOT NULL,
-                                                           CreateTime INTEGER NOT NULL,
-                                                           UpDateTime INTEGER NOT NULL
+                                                           CreateTime INTEGER NOT NULL
                 )");
             SQLiteCommand command = new SQLiteCommand(sql, conn);
             command.ExecuteNonQuery();
@@ -59,31 +57,29 @@ namespace Business
             SQLiteCommand command = new SQLiteCommand(sql, conn);
             return Convert.ToInt32(command.ExecuteScalar()) > 0;
         }
-        public static void AddOneR(ref Equipment data)
+        public static void AddOneR(ref StructEquipment data)
         {
-            string sql = @"insert into tb_Equipment (Name,Address,GasName,SensorTypeB,Low,High,Max,UnitType,IsDel,CreateTime,UpDateTime,Point,LowChroma,biNnum,IfShowSeries) 
-values (@name,@address, @gasName,@sensorTypeB,@low,@high,@max,@unitType,@isDel,@createTime,@upDateTime,@point,@lowChroma,@biNnum,@ifShowSeries);
+            string sql = @"insert into tb_Equipment (Name,Address,GasType,SensorNum,UnitType,Point,Magnification,Low,High,Max,IsGas,IsDel,CreateTime) 
+values (@Name,@Address,@GasType,@SensorNum,@UnitType,@Point,@Magnification,@Low,@High,@Max,@IsGas,@IsDel,@CreateTime);
 select last_insert_rowid();";
             using (SQLiteConnection conn = new SQLiteConnection(connstr))
             {
                 conn.Open();
                 using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
                 {
-                    cmd.Parameters.AddWithValue("@name",data.Name);
-                    cmd.Parameters.AddWithValue("@address",data.Address);
-                    cmd.Parameters.AddWithValue("@gasName",data.GasName);
-                    cmd.Parameters.AddWithValue("@sensorTypeB",data.SensorTypeB);
-                    cmd.Parameters.AddWithValue("@low",data.A1);
-                    cmd.Parameters.AddWithValue("@high",data.A2);
-                    cmd.Parameters.AddWithValue("@max",data.Max);
-                    cmd.Parameters.AddWithValue("@unitType",data.UnitType);
-                    cmd.Parameters.AddWithValue("@isDel",data.IsDel);
-                    cmd.Parameters.AddWithValue("@createTime",DateTime.Now);
-                    cmd.Parameters.AddWithValue("@upDateTime",DateTime.Now);
-                    cmd.Parameters.AddWithValue("@point",data.Point);
-                    cmd.Parameters.AddWithValue("@lowChroma",data.LowChroma);
-                    cmd.Parameters.AddWithValue("@biNnum",data.biNnum);
-                    cmd.Parameters.AddWithValue("@ifShowSeries",data.IfShowSeries);
+                    cmd.Parameters.AddWithValue("@Name", data.Name);
+                    cmd.Parameters.AddWithValue("@Address", data.Address);
+                    cmd.Parameters.AddWithValue("@GasType", data.GasType);
+                    cmd.Parameters.AddWithValue("@SensorNum", data.SensorNum);
+                    cmd.Parameters.AddWithValue("@UnitType", data.UnitType);
+                    cmd.Parameters.AddWithValue("@Point", data.Point);
+                    cmd.Parameters.AddWithValue("@Magnification", data.Magnification);
+                    cmd.Parameters.AddWithValue("@Low", data.A1);
+                    cmd.Parameters.AddWithValue("@High", data.A2);
+                    cmd.Parameters.AddWithValue("@Max", data.Max);
+                    cmd.Parameters.AddWithValue("@IsGas", data.IsGas);
+                    cmd.Parameters.AddWithValue("@IsDel", data.IsDel);
+                    cmd.Parameters.AddWithValue("@CreateTime", DateTime.Now);
                     int rowid = Convert.ToInt32(cmd.ExecuteScalar());
                     data.ID = rowid;
                 }
@@ -92,53 +88,39 @@ select last_insert_rowid();";
             EquipmentDataBusiness.CreateDb(data.ID);
         }
 
-        public static void UpdateOne(Equipment data)
+        public static void UpdateOne(StructEquipment data)
         {
-            string sql = @"UPDATE tb_Equipment SET Name=@name,Address=@address,SensorTypeB=@sensorTypeB,Low=@low,High=@high,Max=@max,UnitType=@unitType,IsDel=@isDel,UpDateTime=@upDateTime,Point=@point,LowChroma=@lowChroma,IfShowSeries=@ifShowSeries WHERE rowid=@id";
+            string sql = @"UPDATE tb_Equipment SET Name=@Name,Address=@Address,GasType=@GasType,SensorNum=@SensorNum,UnitType=@UnitType,
+                                Point=@Point,Magnification=@Magnification,Low=@Low,High=@High,Max=@Max,IsGas=@IsGas,IsDel=@IsDel,CreateTime=@CreateTime 
+                          WHERE rowid=@id";
             using (SQLiteConnection conn = new SQLiteConnection(connstr))
             {
                 conn.Open();
                 using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
                 {
-                    cmd.Parameters.AddWithValue("@name", data.Name);
-                    cmd.Parameters.AddWithValue("@address", data.Address);
-                    //cmd.Parameters.AddWithValue("@gasName", data.GasName);
-                    cmd.Parameters.AddWithValue("@sensorTypeB", data.SensorTypeB);
-                    cmd.Parameters.AddWithValue("@low", data.A1);
-                    cmd.Parameters.AddWithValue("@high", data.A2);
-                    cmd.Parameters.AddWithValue("@max", data.Max);
-                    cmd.Parameters.AddWithValue("@unitType", data.UnitType);
-                    cmd.Parameters.AddWithValue("@isDel", data.IsDel);
-                    cmd.Parameters.AddWithValue("@upDateTime", DateTime.Now);
-                    cmd.Parameters.AddWithValue("@point", data.Point);
-                    cmd.Parameters.AddWithValue("@lowChroma", data.LowChroma);
-                    //cmd.Parameters.AddWithValue("@biNnum", data.biNnum);
-                    cmd.Parameters.AddWithValue("@ifShowSeries", data.IfShowSeries);
+                    cmd.Parameters.AddWithValue("@Name", data.Name);
+                    cmd.Parameters.AddWithValue("@Address", data.Address);
+                    cmd.Parameters.AddWithValue("@GasType", data.GasType);
+                    cmd.Parameters.AddWithValue("@SensorNum", data.SensorNum);
+                    cmd.Parameters.AddWithValue("@UnitType", data.UnitType);
+                    cmd.Parameters.AddWithValue("@Point", data.Point);
+                    cmd.Parameters.AddWithValue("@Magnification", data.Magnification);
+                    cmd.Parameters.AddWithValue("@Low", data.A1);
+                    cmd.Parameters.AddWithValue("@High", data.A2);
+                    cmd.Parameters.AddWithValue("@Max", data.Max);
+                    cmd.Parameters.AddWithValue("@IsGas", data.IsGas);
+                    cmd.Parameters.AddWithValue("@IsDel", data.IsDel);
+                    cmd.Parameters.AddWithValue("@CreateTime", DateTime.Now);
                     cmd.Parameters.AddWithValue("@id", data.ID);
                     cmd.ExecuteNonQuery();
                 }
             }
         }
 
-        public static void UpdateSensorTypeB(Equipment data)
+        public static List<StructEquipment> GetAllListNotDelete()
         {
-            string sql = @"UPDATE tb_Equipment SET SensorTypeB=@sensorTypeB WHERE rowid=@id";
-            using (SQLiteConnection conn = new SQLiteConnection(connstr))
-            {
-                conn.Open();
-                using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
-                {
-                    cmd.Parameters.AddWithValue("@sensorTypeB", data.SensorTypeB);
-                    cmd.Parameters.AddWithValue("@id", data.ID);
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }
-        
-        public static List<Equipment> GetAllListNotDelete()
-        {
-            List<Equipment> list = new List<Equipment>();
-            string sql = "select rowid,Name,Address,GasName,SensorTypeB,Low,High,Max,UnitType,CreateTime,UpDateTime,Point,LowChroma,biNnum,IfShowSeries from tb_Equipment where IsDel=0";
+            List<StructEquipment> list = new List<StructEquipment>();
+            string sql = "select rowid,Name,Address,GasType,SensorNum,UnitType,Point,Magnification,Low,High,Max,IsGas,CreateTime from tb_Equipment where IsDel=0";
             using (SQLiteConnection conn = new SQLiteConnection(connstr))
             {
                 conn.Open();
@@ -148,23 +130,21 @@ select last_insert_rowid();";
                     {
                         while (reader.Read())
                         {
-                            Equipment eq = new Equipment();
+                            StructEquipment eq = new StructEquipment();
                             eq.ID = reader.GetInt32(0);
                             eq.Name = reader.GetString(1);
                             eq.Address = reader.GetByte(2);
-                            eq.GasName = reader.GetString(3);
-                            eq.SensorTypeB = reader.GetString(4);
-                            eq.A1 = reader.GetFloat(5);
-                            eq.A2 = reader.GetFloat(6);
-                            eq.Max = reader.GetInt32(7);
-                            eq.UnitType = reader.GetInt32(8);
-                            eq.CreateTime = reader.GetDateTime(9);
-                            eq.UpDateTime = reader.GetDateTime(10);
-                            eq.Point = reader.GetByte(11);
-                            eq.LowChroma = reader.GetFloat(12);
-                            eq.biNnum = reader.GetInt32(13);
-                            eq.IfShowSeries = reader.GetBoolean(14);
+                            eq.GasType = reader.GetByte(3);
+                            eq.SensorNum = reader.GetByte(4);
+                            eq.UnitType = reader.GetByte(5);
+                            eq.Point = reader.GetByte(6);
+                            eq.Magnification = reader.GetInt32(7);
+                            eq.A1 = reader.GetFloat(8);
+                            eq.A2 = reader.GetFloat(9);
+                            eq.Max = reader.GetFloat(10);
+                            eq.IsGas = reader.GetBoolean(11);
                             eq.IsDel = false;
+                            eq.CreateTime = reader.GetDateTime(12);
                             list.Add(eq);
                         }
                     }
@@ -177,10 +157,10 @@ select last_insert_rowid();";
         /// 获取所有列表，包括已删除的
         /// </summary>
         /// <returns></returns>
-        public static List<Equipment> GetListIncludeDelete()
+        public static List<StructEquipment> GetListIncludeDelete()
         {
-            List<Equipment> list = new List<Equipment>();
-            string sql = "select rowid,Name,Address,GasName,SensorTypeB,Low,High,Max,UnitType,CreateTime,UpDateTime,Point,LowChroma,biNnum,IfShowSeries, IsDel from tb_Equipment";
+            List<StructEquipment> list = new List<StructEquipment>();
+            string sql = "select rowid,Name,Address,GasType,SensorNum,UnitType,Point,Magnification,Low,High,Max,IsGas,IsDel,CreateTime from tb_Equipment";
             using (SQLiteConnection conn = new SQLiteConnection(connstr))
             {
                 conn.Open();
@@ -190,23 +170,21 @@ select last_insert_rowid();";
                     {
                         while (reader.Read())
                         {
-                            Equipment eq = new Equipment();
+                            StructEquipment eq = new StructEquipment();
                             eq.ID = reader.GetInt32(0);
                             eq.Name = reader.GetString(1);
                             eq.Address = reader.GetByte(2);
-                            eq.GasName = reader.GetString(3);
-                            eq.SensorTypeB = reader.GetString(4);
-                            eq.A1 = reader.GetFloat(5);
-                            eq.A2 = reader.GetFloat(6);
-                            eq.Max = reader.GetInt32(7);
-                            eq.UnitType = reader.GetInt32(8);
-                            eq.CreateTime = reader.GetDateTime(9);
-                            eq.UpDateTime = reader.GetDateTime(10);
-                            eq.Point = reader.GetByte(11);
-                            eq.LowChroma = reader.GetFloat(12);
-                            eq.biNnum = reader.GetInt32(13);
-                            eq.IfShowSeries = reader.GetBoolean(14);
-                            eq.IsDel = reader.GetBoolean(15);
+                            eq.GasType = reader.GetByte(3);
+                            eq.SensorNum = reader.GetByte(4);
+                            eq.UnitType = reader.GetByte(5);
+                            eq.Point = reader.GetByte(6);
+                            eq.Magnification = reader.GetInt32(7);
+                            eq.A1 = reader.GetFloat(8);
+                            eq.A2 = reader.GetFloat(9);
+                            eq.Max = reader.GetFloat(10);
+                            eq.IsGas = reader.GetBoolean(11);
+                            eq.IsDel = reader.GetBoolean(12);
+                            eq.CreateTime = reader.GetDateTime(13);
                             list.Add(eq);
                         }
                     }
@@ -270,21 +248,21 @@ select last_insert_rowid();";
         /// </summary>
         /// <param name="Name">设备名称</param>
         /// <returns></returns>
-        public static void DeleteListByName(string name)
-        {
-            string sql = "update tb_Equipment set IsDel = 1 where Name = @name";
-            using (SQLiteConnection conn = new SQLiteConnection(connstr))
-            {
-                conn.Open();
-                using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
-                {
-                    cmd.Parameters.AddWithValue("@name", name);
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }
+        //public static void DeleteListByName(string name)
+        //{
+        //    string sql = "update tb_Equipment set IsDel = 1 where Name = @name";
+        //    using (SQLiteConnection conn = new SQLiteConnection(connstr))
+        //    {
+        //        conn.Open();
+        //        using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
+        //        {
+        //            cmd.Parameters.AddWithValue("@name", name);
+        //            cmd.ExecuteNonQuery();
+        //        }
+        //    }
+        //}
 
-        public static void DeleteOne(Equipment one)
+        public static void DeleteOne(StructEquipment one)
         {
             string sql = "delete from tb_Equipment where rowid = @id";
             using (SQLiteConnection conn = new SQLiteConnection(connstr))

@@ -14,21 +14,21 @@ namespace CommandManager
         /// <param name="highAdr">寄存器起始地址高位</param>
         /// <param name="lowAdr">寄存器起始地址地位</param>
         /// <param name="num">寄存器个数</param>
-        //public Command(byte address, byte highAdr, byte lowAdr, short num)        
-        //{
-        //    byte[] sendb = new byte[8];
-        //    sendb[0] = address;
-        //    sendb[1] = 0x03;
-        //    sendb[2] = highAdr;
-        //    sendb[3] = lowAdr;
-        //    byte[] bb2 = BitConverter.GetBytes(num);
-        //    Array.Reverse(bb2);
-        //    Array.Copy(bb2, 0, sendb, 4, 2);
-        //    Array.Copy(CRC.GetCRC(sendb), 0, sendb, 6, 2);
+        public Command(byte address, byte highAdr, byte lowAdr, short num)
+        {
+            byte[] sendb = new byte[8];
+            sendb[0] = address;
+            sendb[1] = 0x03;
+            sendb[2] = highAdr;
+            sendb[3] = lowAdr;
+            byte[] bb2 = BitConverter.GetBytes(num);
+            Array.Reverse(bb2);
+            Array.Copy(bb2, 0, sendb, 4, 2);
+            Array.Copy(CRC.GetCRC(sendb), 0, sendb, 6, 2);
 
-        //    ResultLength = 5 + 2 * num;
-        //    SendByte = sendb;
-        //}
+            ResultLength = 5 + 2 * num;
+            SendByte = sendb;
+        }
         //public Command(byte address, byte highAdr, byte lowAdr,byte[] content)
         //{
 
@@ -49,46 +49,23 @@ namespace CommandManager
         //    SendByte = sendb;
         //}
      //   byte relayNum = 4;
-        public Command(byte address, short Adr, short num)
-        {
-            byte[] sendb = new byte[10];
-            sendb[0] = 0xaa;
-            if (address == 6 | address == 7 | address == 9 | address == 10 | address == 12)
-            {
-                sendb[1] = 0x04;
-            }
-            else if (address == 3 )
-            {
-                sendb[1] = 0x02;
-            }
-            else if( address == 8)
-            {
-                sendb[1] = 0x03;
-            }
-            else if (address == 1 | address == 2 | address == 4 | address == 5 | address == 11)
-            {
-                sendb[1] = 0x01;
-            }
-            else if (address >= 13 && address <= 29)
-            {
-                sendb[1] = 0x06;
-            }
-            byte[] sendb2 = new byte[8];        
-            sendb2[0] = address;
-            sendb2[1] = 0x03;
-            byte[] bb1 = BitConverter.GetBytes(Adr);
-            Array.Reverse(bb1);
-            Array.Copy(bb1, 0, sendb2, 2, 2);
+        //public Command(byte address, short Adr, short num)
+        //{
+        //    byte[] sendb = new byte[8];        
+        //    sendb[0] = address;
+        //    sendb[1] = 0x03;
+        //    byte[] bb1 = BitConverter.GetBytes(Adr);
+        //    Array.Reverse(bb1);
+        //    Array.Copy(bb1, 0, sendb, 2, 2);
 
-            byte[] bb2 = BitConverter.GetBytes(num);
-            Array.Reverse(bb2);
-            Array.Copy(bb2, 0, sendb2, 4, 2);
-            Array.Copy(CRC.GetCRC(sendb2), 0, sendb2, 6, 2);
+        //    byte[] bb2 = BitConverter.GetBytes(num);
+        //    Array.Reverse(bb2);
+        //    Array.Copy(bb2, 0, sendb, 4, 2);
+        //    Array.Copy(CRC.GetCRC(sendb), 0, sendb, 6, 2);
 
-            Array.Copy(sendb2, 0, sendb, 2, 8);
-            ResultLength = 5 + 2 * num;
-            SendByte = sendb;
-        }
+        //    ResultLength = 5 + 2 * num;
+        //    SendByte = sendb;
+        //}
         public Command(byte address, short Adr, byte[] content)
         {
 

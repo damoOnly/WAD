@@ -363,10 +363,11 @@ namespace Entity
 
     public enum EM_AlertType : byte
     {
-        超量程 = 1,
-        低报警 = 2,
-        A2报警 = 3,
-        A1报警 = 4
+        normal = 0,
+        fault = 1,
+        outRange = 2,
+        A2 = 3,
+        A1 = 4
     }
 
     public enum EM_UserType : byte

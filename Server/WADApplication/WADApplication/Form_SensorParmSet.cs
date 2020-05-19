@@ -12,6 +12,7 @@ using Entity;
 using Business;
 using CommandManager;
 using System.Diagnostics;
+using GlobalMemory;
 namespace WADApplication
 {
     public partial class Form_SensorParmSet : DevExpress.XtraEditors.XtraForm
@@ -87,7 +88,7 @@ namespace WADApplication
         // 使能控件
         private void enableControls()
         {
-            switch (Gloabl.Userinfo.Level)
+            switch (CommonMemory.Userinfo.Level)
             {
                 case EM_UserType.User:
                     labelControl13.Visible = false;
@@ -155,7 +156,7 @@ namespace WADApplication
             {
                 LogLib.Log.GetLogger(this).Warn("获取主窗口失败");
             }
-            list = EquipmentDal.GetAllListNotDelete();
+            list = EquipmentBusiness.GetAllListNotDelete();
             gridControl1.DataSource = list;
             if (list == null || list.Count < 1)
             {

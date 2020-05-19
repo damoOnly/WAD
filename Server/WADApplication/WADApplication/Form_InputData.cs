@@ -132,7 +132,7 @@ namespace WADApplication
 
         private void Form_InputData_Load(object sender, EventArgs e)
         {
-            mainList = EquipmentDal.GetAllListNotDelete();
+            mainList = EquipmentBusiness.GetAllListNotDelete();
             var sql = from a in mainList
                       group a by a.Name into g
                       select new

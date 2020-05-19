@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddEqProcess.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="CommandManager.cs" />
     <Compile Include="CRC.cs" />
@@ -56,6 +57,10 @@
     <ProjectReference Include="..\Entity\Entity.csproj">
       <Project>{920662A5-8768-42FB-ACA4-4DF8EB1351F0}</Project>
       <Name>Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GlobalMemory\GlobalMemory.csproj">
+      <Project>{21b0214b-4aaa-4db8-8514-d1adca8c6f09}</Project>
+      <Name>GlobalMemory</Name>
     </ProjectReference>
     <ProjectReference Include="..\LogLib\LogLib.csproj">
       <Project>{664237F0-6F59-477A-9B2E-3879E6128F7E}</Project>

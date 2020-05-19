@@ -37,7 +37,7 @@ namespace WADApplication
             try
             {
                 eqOne.SensorTypeB = txt_SensorName.Text;
-                EquipmentDal.UpdateSensorTypeB(eqOne);
+                //EquipmentDal.UpdateSensorTypeB(eqOne);
                 XtraMessageBox.Show("设置成功！");
             }
             catch (Exception ex)

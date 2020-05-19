@@ -24,9 +24,9 @@ namespace Entity
 
         public int EquipmentID { get; set; }
 
-        public float HighChroma { get; set; }
+        //public float HighChroma { get; set; }
 
-        public float LowChromadata { get; set; }
+        //public float LowChromadata { get; set; }
 
         /// <summary>
         /// 温度

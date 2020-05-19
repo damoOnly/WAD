@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="AlertDal.cs" />
     <Compile Include="CreateDb.cs" />
+    <Compile Include="EquipmentBusiness.cs" />
     <Compile Include="EquipmentDal.cs" />
     <Compile Include="EquipmentDataAccess.cs" />
     <Compile Include="EquipmentDataBusiness.cs" />

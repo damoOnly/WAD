@@ -237,7 +237,6 @@
             // ribbon
             // 
             this.ribbon.ExpandCollapseItem.Id = 0;
-            this.ribbon.ExpandCollapseItem.Name = "";
             this.ribbon.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.ribbon.ExpandCollapseItem,
             this.btn_Start,
@@ -275,7 +274,7 @@
             this.ribbon.ShowExpandCollapseButton = DevExpress.Utils.DefaultBoolean.False;
             this.ribbon.ShowPageHeadersMode = DevExpress.XtraBars.Ribbon.ShowPageHeadersMode.Hide;
             this.ribbon.ShowToolbarCustomizeItem = false;
-            this.ribbon.Size = new System.Drawing.Size(1007, 125);
+            this.ribbon.Size = new System.Drawing.Size(863, 123);
             this.ribbon.StatusBar = this.ribbonStatusBar;
             this.ribbon.Toolbar.ShowCustomizeItem = false;
             this.ribbon.ToolbarLocation = DevExpress.XtraBars.Ribbon.RibbonQuickAccessToolbarLocation.Hidden;
@@ -438,7 +437,6 @@
             // 
             this.repositoryItemTextEdit1.AutoHeight = false;
             this.repositoryItemTextEdit1.Name = "repositoryItemTextEdit1";
-            this.repositoryItemTextEdit1.UseParentBackground = true;
             // 
             // repositoryItemComboBox1
             // 
@@ -451,7 +449,6 @@
             "小时"});
             this.repositoryItemComboBox1.Name = "repositoryItemComboBox1";
             this.repositoryItemComboBox1.NullText = "秒";
-            this.repositoryItemComboBox1.UseParentBackground = true;
             // 
             // repositoryItemSpinEdit1
             // 
@@ -459,7 +456,6 @@
             this.repositoryItemSpinEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.repositoryItemSpinEdit1.Name = "repositoryItemSpinEdit1";
-            this.repositoryItemSpinEdit1.UseParentBackground = true;
             // 
             // repositoryItemPictureEdit2
             // 
@@ -479,20 +475,20 @@
             // ribbonStatusBar
             // 
             this.ribbonStatusBar.ItemLinks.Add(this.barStaticItem_info);
-            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 668);
+            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 618);
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbon;
-            this.ribbonStatusBar.Size = new System.Drawing.Size(1007, 31);
+            this.ribbonStatusBar.Size = new System.Drawing.Size(863, 31);
             this.ribbonStatusBar.Visible = false;
             // 
             // xtraTabControl1
             // 
             this.xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.xtraTabControl1.Location = new System.Drawing.Point(0, 125);
+            this.xtraTabControl1.Location = new System.Drawing.Point(0, 123);
             this.xtraTabControl1.Name = "xtraTabControl1";
             this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
             this.xtraTabControl1.ShowTabHeader = DevExpress.Utils.DefaultBoolean.False;
-            this.xtraTabControl1.Size = new System.Drawing.Size(1007, 543);
+            this.xtraTabControl1.Size = new System.Drawing.Size(863, 495);
             this.xtraTabControl1.TabIndex = 5;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPage1,
@@ -502,7 +498,7 @@
             // 
             this.xtraTabPage1.Controls.Add(this.splitContainerControl8);
             this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(1001, 537);
+            this.xtraTabPage1.Size = new System.Drawing.Size(857, 489);
             this.xtraTabPage1.Text = "xtraTabPage1";
             // 
             // splitContainerControl8
@@ -515,8 +511,8 @@
             this.splitContainerControl8.Panel1.Text = "Panel1";
             this.splitContainerControl8.Panel2.Controls.Add(this.splitContainerControl9);
             this.splitContainerControl8.Panel2.Text = "Panel2";
-            this.splitContainerControl8.Size = new System.Drawing.Size(1001, 537);
-            this.splitContainerControl8.SplitterPosition = 330;
+            this.splitContainerControl8.Size = new System.Drawing.Size(857, 489);
+            this.splitContainerControl8.SplitterPosition = 326;
             this.splitContainerControl8.TabIndex = 1;
             this.splitContainerControl8.Text = "splitContainerControl8";
             // 
@@ -531,11 +527,11 @@
             this.groupControl2.ContentImageAlignment = System.Drawing.ContentAlignment.TopCenter;
             this.groupControl2.Controls.Add(this.gridControl_Status);
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl2.Location = new System.Drawing.Point(0, 199);
+            this.groupControl2.Location = new System.Drawing.Point(0, 185);
             this.groupControl2.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Office2003;
             this.groupControl2.LookAndFeel.UseDefaultLookAndFeel = false;
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(330, 338);
+            this.groupControl2.Size = new System.Drawing.Size(326, 304);
             this.groupControl2.TabIndex = 3;
             this.groupControl2.Text = "         ";
             // 
@@ -549,7 +545,7 @@
             this.gridControl_Status.Name = "gridControl_Status";
             this.gridControl_Status.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEdit1});
-            this.gridControl_Status.Size = new System.Drawing.Size(326, 304);
+            this.gridControl_Status.Size = new System.Drawing.Size(322, 270);
             this.gridControl_Status.TabIndex = 2;
             this.gridControl_Status.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView_Status});
@@ -707,24 +703,24 @@
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
             this.groupControl1.Name = "groupControl1";
             this.groupControl1.ShowCaption = false;
-            this.groupControl1.Size = new System.Drawing.Size(330, 199);
+            this.groupControl1.Size = new System.Drawing.Size(326, 185);
             this.groupControl1.TabIndex = 1;
             this.groupControl1.Text = "通信配置";
             // 
             // btnStopListen
             // 
-            this.btnStopListen.Location = new System.Drawing.Point(243, 131);
+            this.btnStopListen.Location = new System.Drawing.Point(208, 122);
             this.btnStopListen.Name = "btnStopListen";
-            this.btnStopListen.Size = new System.Drawing.Size(62, 23);
+            this.btnStopListen.Size = new System.Drawing.Size(53, 21);
             this.btnStopListen.TabIndex = 44;
             this.btnStopListen.Text = "停止监听";
             this.btnStopListen.Click += new System.EventHandler(this.btnStopListen_Click);
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(162, 131);
+            this.btnStart.Location = new System.Drawing.Point(139, 122);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(62, 23);
+            this.btnStart.Size = new System.Drawing.Size(53, 21);
             this.btnStart.TabIndex = 29;
             this.btnStart.Text = "开始监听";
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
@@ -732,33 +728,33 @@
             // tbxserverIp
             // 
             this.tbxserverIp.EditValue = "127.0.0.1";
-            this.tbxserverIp.Location = new System.Drawing.Point(205, 49);
+            this.tbxserverIp.Location = new System.Drawing.Point(176, 45);
             this.tbxserverIp.MenuManager = this.ribbon;
             this.tbxserverIp.Name = "tbxserverIp";
             this.tbxserverIp.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.tbxserverIp.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.tbxserverIp.Properties.Appearance.Options.UseBackColor = true;
             this.tbxserverIp.Properties.Appearance.Options.UseForeColor = true;
-            this.tbxserverIp.Size = new System.Drawing.Size(100, 20);
+            this.tbxserverIp.Size = new System.Drawing.Size(86, 20);
             this.tbxserverIp.TabIndex = 42;
             // 
             // tbxPort
             // 
             this.tbxPort.EditValue = "6666";
-            this.tbxPort.Location = new System.Drawing.Point(205, 80);
+            this.tbxPort.Location = new System.Drawing.Point(176, 74);
             this.tbxPort.MenuManager = this.ribbon;
             this.tbxPort.Name = "tbxPort";
             this.tbxPort.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.tbxPort.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.tbxPort.Properties.Appearance.Options.UseBackColor = true;
             this.tbxPort.Properties.Appearance.Options.UseForeColor = true;
-            this.tbxPort.Size = new System.Drawing.Size(100, 20);
+            this.tbxPort.Size = new System.Drawing.Size(86, 20);
             this.tbxPort.TabIndex = 41;
             // 
             // pictureEdit_seriaPort
             // 
             this.pictureEdit_seriaPort.EditValue = ((object)(resources.GetObject("pictureEdit_seriaPort.EditValue")));
-            this.pictureEdit_seriaPort.Location = new System.Drawing.Point(34, 103);
+            this.pictureEdit_seriaPort.Location = new System.Drawing.Point(29, 96);
             this.pictureEdit_seriaPort.MenuManager = this.ribbon;
             this.pictureEdit_seriaPort.Name = "pictureEdit_seriaPort";
             this.pictureEdit_seriaPort.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(33)))), ((int)(((byte)(33)))));
@@ -767,23 +763,23 @@
             this.pictureEdit_seriaPort.Properties.ReadOnly = true;
             this.pictureEdit_seriaPort.Properties.ShowMenu = false;
             this.pictureEdit_seriaPort.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.StretchHorizontal;
-            this.pictureEdit_seriaPort.Size = new System.Drawing.Size(107, 22);
+            this.pictureEdit_seriaPort.Size = new System.Drawing.Size(92, 20);
             this.pictureEdit_seriaPort.TabIndex = 40;
             // 
             // btn_Close
             // 
-            this.btn_Close.Location = new System.Drawing.Point(86, 131);
+            this.btn_Close.Location = new System.Drawing.Point(74, 122);
             this.btn_Close.Name = "btn_Close";
-            this.btn_Close.Size = new System.Drawing.Size(56, 23);
+            this.btn_Close.Size = new System.Drawing.Size(48, 21);
             this.btn_Close.TabIndex = 39;
             this.btn_Close.Text = "关闭";
             this.btn_Close.Click += new System.EventHandler(this.btn_Close_Click);
             // 
             // btn_Open
             // 
-            this.btn_Open.Location = new System.Drawing.Point(24, 131);
+            this.btn_Open.Location = new System.Drawing.Point(21, 122);
             this.btn_Open.Name = "btn_Open";
-            this.btn_Open.Size = new System.Drawing.Size(56, 23);
+            this.btn_Open.Size = new System.Drawing.Size(48, 21);
             this.btn_Open.TabIndex = 38;
             this.btn_Open.Text = "打开";
             this.btn_Open.Click += new System.EventHandler(this.btn_Open_Click);
@@ -791,7 +787,7 @@
             // comboBoxEdit3
             // 
             this.comboBoxEdit3.EditValue = "9600";
-            this.comboBoxEdit3.Location = new System.Drawing.Point(70, 80);
+            this.comboBoxEdit3.Location = new System.Drawing.Point(60, 74);
             this.comboBoxEdit3.MenuManager = this.ribbon;
             this.comboBoxEdit3.Name = "comboBoxEdit3";
             this.comboBoxEdit3.Properties.Appearance.BackColor = System.Drawing.Color.White;
@@ -807,13 +803,13 @@
             "38400",
             "57600",
             "115200"});
-            this.comboBoxEdit3.Size = new System.Drawing.Size(71, 20);
+            this.comboBoxEdit3.Size = new System.Drawing.Size(61, 20);
             this.comboBoxEdit3.TabIndex = 37;
             // 
             // comboBoxEdit2
             // 
             this.comboBoxEdit2.EditValue = "COM1";
-            this.comboBoxEdit2.Location = new System.Drawing.Point(70, 49);
+            this.comboBoxEdit2.Location = new System.Drawing.Point(60, 45);
             this.comboBoxEdit2.MenuManager = this.ribbon;
             this.comboBoxEdit2.Name = "comboBoxEdit2";
             this.comboBoxEdit2.Properties.Appearance.BackColor = System.Drawing.Color.White;
@@ -823,47 +819,47 @@
             this.comboBoxEdit2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.comboBoxEdit2.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.comboBoxEdit2.Size = new System.Drawing.Size(71, 20);
+            this.comboBoxEdit2.Size = new System.Drawing.Size(61, 20);
             this.comboBoxEdit2.TabIndex = 36;
             // 
             // labelControl3
             // 
-            this.labelControl3.Location = new System.Drawing.Point(24, 83);
+            this.labelControl3.Location = new System.Drawing.Point(21, 77);
             this.labelControl3.Name = "labelControl3";
-            this.labelControl3.Size = new System.Drawing.Size(40, 14);
+            this.labelControl3.Size = new System.Drawing.Size(40, 13);
             this.labelControl3.TabIndex = 35;
             this.labelControl3.Text = "波特率:";
             // 
             // labelControl2
             // 
-            this.labelControl2.Location = new System.Drawing.Point(36, 52);
+            this.labelControl2.Location = new System.Drawing.Point(31, 48);
             this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(28, 14);
+            this.labelControl2.Size = new System.Drawing.Size(28, 13);
             this.labelControl2.TabIndex = 34;
             this.labelControl2.Text = "串口:";
             // 
             // lblport
             // 
-            this.lblport.Location = new System.Drawing.Point(161, 83);
+            this.lblport.Location = new System.Drawing.Point(138, 77);
             this.lblport.Name = "lblport";
-            this.lblport.Size = new System.Drawing.Size(48, 14);
+            this.lblport.Size = new System.Drawing.Size(48, 13);
             this.lblport.TabIndex = 33;
             this.lblport.Text = "端口号：";
             // 
             // lblIp
             // 
-            this.lblIp.Location = new System.Drawing.Point(162, 52);
+            this.lblIp.Location = new System.Drawing.Point(139, 48);
             this.lblIp.Name = "lblIp";
-            this.lblIp.Size = new System.Drawing.Size(47, 14);
+            this.lblIp.Size = new System.Drawing.Size(46, 13);
             this.lblIp.TabIndex = 32;
             this.lblIp.Text = "IP地址：";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(211, 111);
+            this.label1.Location = new System.Drawing.Point(181, 103);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 14);
+            this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 4;
             this.label1.Text = "label1";
             this.label1.Visible = false;
@@ -882,8 +878,8 @@
             this.splitContainerControl9.Panel2.Controls.Add(this.panelControl1);
             this.splitContainerControl9.Panel2.Controls.Add(this.lstbxMessageView);
             this.splitContainerControl9.Panel2.Text = "Panel2";
-            this.splitContainerControl9.Size = new System.Drawing.Size(666, 537);
-            this.splitContainerControl9.SplitterPosition = 307;
+            this.splitContainerControl9.Size = new System.Drawing.Size(526, 489);
+            this.splitContainerControl9.SplitterPosition = 280;
             this.splitContainerControl9.TabIndex = 0;
             this.splitContainerControl9.Text = "splitContainerControl9";
             // 
@@ -891,9 +887,9 @@
             // 
             this.panelControl3.Controls.Add(this.gridControl_nowData2);
             this.panelControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl3.Location = new System.Drawing.Point(0, 26);
+            this.panelControl3.Location = new System.Drawing.Point(0, 24);
             this.panelControl3.Name = "panelControl3";
-            this.panelControl3.Size = new System.Drawing.Size(666, 281);
+            this.panelControl3.Size = new System.Drawing.Size(526, 256);
             this.panelControl3.TabIndex = 4;
             // 
             // gridControl_nowData2
@@ -906,7 +902,7 @@
             this.gridControl_nowData2.Name = "gridControl_nowData2";
             this.gridControl_nowData2.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemCheckEdit1});
-            this.gridControl_nowData2.Size = new System.Drawing.Size(662, 277);
+            this.gridControl_nowData2.Size = new System.Drawing.Size(522, 252);
             this.gridControl_nowData2.TabIndex = 3;
             this.gridControl_nowData2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView_nowData2});
@@ -1166,14 +1162,14 @@
             this.groupControl3.LookAndFeel.UseDefaultLookAndFeel = false;
             this.groupControl3.Name = "groupControl3";
             this.groupControl3.ShowCaption = false;
-            this.groupControl3.Size = new System.Drawing.Size(666, 26);
+            this.groupControl3.Size = new System.Drawing.Size(526, 24);
             this.groupControl3.TabIndex = 1;
             this.groupControl3.Text = "groupControl3";
             // 
             // cmb_SavePeriod
             // 
             this.cmb_SavePeriod.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmb_SavePeriod.Location = new System.Drawing.Point(171, 2);
+            this.cmb_SavePeriod.Location = new System.Drawing.Point(102, 2);
             this.cmb_SavePeriod.MenuManager = this.ribbon;
             this.cmb_SavePeriod.Name = "cmb_SavePeriod";
             this.cmb_SavePeriod.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
@@ -1186,21 +1182,21 @@
             "秒",
             "分钟",
             "小时"});
-            this.cmb_SavePeriod.Size = new System.Drawing.Size(49, 20);
+            this.cmb_SavePeriod.Size = new System.Drawing.Size(42, 20);
             this.cmb_SavePeriod.TabIndex = 12;
             this.cmb_SavePeriod.Visible = false;
             // 
             // txt_SavePeriod
             // 
             this.txt_SavePeriod.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_SavePeriod.Location = new System.Drawing.Point(119, 2);
+            this.txt_SavePeriod.Location = new System.Drawing.Point(57, 2);
             this.txt_SavePeriod.MenuManager = this.ribbon;
             this.txt_SavePeriod.Name = "txt_SavePeriod";
             this.txt_SavePeriod.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txt_SavePeriod.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txt_SavePeriod.Properties.Appearance.Options.UseBackColor = true;
             this.txt_SavePeriod.Properties.Appearance.Options.UseForeColor = true;
-            this.txt_SavePeriod.Size = new System.Drawing.Size(52, 20);
+            this.txt_SavePeriod.Size = new System.Drawing.Size(45, 20);
             this.txt_SavePeriod.TabIndex = 11;
             this.txt_SavePeriod.Visible = false;
             // 
@@ -1208,9 +1204,9 @@
             // 
             this.labelControl15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelControl15.Appearance.ForeColor = System.Drawing.Color.White;
-            this.labelControl15.Location = new System.Drawing.Point(44, 5);
+            this.labelControl15.Location = new System.Drawing.Point(-7, 5);
             this.labelControl15.Name = "labelControl15";
-            this.labelControl15.Size = new System.Drawing.Size(72, 14);
+            this.labelControl15.Size = new System.Drawing.Size(72, 13);
             this.labelControl15.TabIndex = 10;
             this.labelControl15.Text = "数据保存间隔";
             this.labelControl15.Visible = false;
@@ -1219,9 +1215,9 @@
             // 
             this.labelControl14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelControl14.Appearance.ForeColor = System.Drawing.Color.White;
-            this.labelControl14.Location = new System.Drawing.Point(584, 7);
+            this.labelControl14.Location = new System.Drawing.Point(456, 6);
             this.labelControl14.Name = "labelControl14";
-            this.labelControl14.Size = new System.Drawing.Size(24, 14);
+            this.labelControl14.Size = new System.Drawing.Size(24, 13);
             this.labelControl14.TabIndex = 6;
             this.labelControl14.Text = "毫秒";
             // 
@@ -1229,9 +1225,9 @@
             // 
             this.labelControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelControl1.Appearance.ForeColor = System.Drawing.Color.White;
-            this.labelControl1.Location = new System.Drawing.Point(467, 7);
+            this.labelControl1.Location = new System.Drawing.Point(355, 6);
             this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(48, 14);
+            this.labelControl1.Size = new System.Drawing.Size(48, 13);
             this.labelControl1.TabIndex = 5;
             this.labelControl1.Text = "命令延时";
             // 
@@ -1239,22 +1235,22 @@
             // 
             this.textEdit_Delay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.textEdit_Delay.EditValue = "100";
-            this.textEdit_Delay.Location = new System.Drawing.Point(521, 3);
+            this.textEdit_Delay.Location = new System.Drawing.Point(402, 3);
             this.textEdit_Delay.MenuManager = this.ribbon;
             this.textEdit_Delay.Name = "textEdit_Delay";
             this.textEdit_Delay.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.textEdit_Delay.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.textEdit_Delay.Properties.Appearance.Options.UseBackColor = true;
             this.textEdit_Delay.Properties.Appearance.Options.UseForeColor = true;
-            this.textEdit_Delay.Size = new System.Drawing.Size(57, 20);
+            this.textEdit_Delay.Size = new System.Drawing.Size(49, 20);
             this.textEdit_Delay.TabIndex = 4;
             // 
             // btn_period
             // 
             this.btn_period.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_period.Location = new System.Drawing.Point(613, 3);
+            this.btn_period.Location = new System.Drawing.Point(480, 3);
             this.btn_period.Name = "btn_period";
-            this.btn_period.Size = new System.Drawing.Size(50, 20);
+            this.btn_period.Size = new System.Drawing.Size(43, 19);
             this.btn_period.TabIndex = 3;
             this.btn_period.Text = "确定";
             this.btn_period.Click += new System.EventHandler(this.btn_period_Click);
@@ -1262,7 +1258,7 @@
             // comboBoxEdit_period
             // 
             this.comboBoxEdit_period.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBoxEdit_period.Location = new System.Drawing.Point(392, 4);
+            this.comboBoxEdit_period.Location = new System.Drawing.Point(291, 4);
             this.comboBoxEdit_period.MenuManager = this.ribbon;
             this.comboBoxEdit_period.Name = "comboBoxEdit_period";
             this.comboBoxEdit_period.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
@@ -1277,7 +1273,7 @@
             "分钟",
             "小时"});
             this.comboBoxEdit_period.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.comboBoxEdit_period.Size = new System.Drawing.Size(49, 18);
+            this.comboBoxEdit_period.Size = new System.Drawing.Size(42, 18);
             this.comboBoxEdit_period.TabIndex = 2;
             this.comboBoxEdit_period.SelectedIndexChanged += new System.EventHandler(this.comboBoxEdit_period_SelectedIndexChanged);
             // 
@@ -1285,23 +1281,23 @@
             // 
             this.labelControl22.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelControl22.Appearance.ForeColor = System.Drawing.Color.White;
-            this.labelControl22.Location = new System.Drawing.Point(261, 7);
+            this.labelControl22.Location = new System.Drawing.Point(179, 6);
             this.labelControl22.Name = "labelControl22";
-            this.labelControl22.Size = new System.Drawing.Size(48, 14);
+            this.labelControl22.Size = new System.Drawing.Size(48, 13);
             this.labelControl22.TabIndex = 1;
             this.labelControl22.Text = "采样周期";
             // 
             // textEdit_period
             // 
             this.textEdit_period.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textEdit_period.Location = new System.Drawing.Point(315, 3);
+            this.textEdit_period.Location = new System.Drawing.Point(225, 3);
             this.textEdit_period.MenuManager = this.ribbon;
             this.textEdit_period.Name = "textEdit_period";
             this.textEdit_period.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.textEdit_period.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.textEdit_period.Properties.Appearance.Options.UseBackColor = true;
             this.textEdit_period.Properties.Appearance.Options.UseForeColor = true;
-            this.textEdit_period.Size = new System.Drawing.Size(75, 20);
+            this.textEdit_period.Size = new System.Drawing.Size(64, 20);
             this.textEdit_period.TabIndex = 0;
             this.textEdit_period.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textEdit_period_KeyPress);
             // 
@@ -1323,16 +1319,16 @@
         series1,
         series2};
             this.chartControl1.SeriesTemplate.View = swiftPlotSeriesView3;
-            this.chartControl1.Size = new System.Drawing.Size(421, 225);
+            this.chartControl1.Size = new System.Drawing.Size(316, 204);
             this.chartControl1.TabIndex = 0;
             // 
             // panelControl1
             // 
             this.panelControl1.Controls.Add(this.layoutControl1);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelControl1.Location = new System.Drawing.Point(421, 0);
+            this.panelControl1.Location = new System.Drawing.Point(316, 0);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(245, 225);
+            this.panelControl1.Size = new System.Drawing.Size(210, 204);
             this.panelControl1.TabIndex = 2;
             // 
             // layoutControl1
@@ -1349,7 +1345,7 @@
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(241, 224);
+            this.layoutControl1.Size = new System.Drawing.Size(207, 203);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -1361,7 +1357,7 @@
             this.panel2.Controls.Add(this.labelControl5);
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(241, 24);
+            this.panel2.Size = new System.Drawing.Size(207, 22);
             this.panel2.TabIndex = 11;
             // 
             // labelControl4
@@ -1403,9 +1399,9 @@
             this.panel3.Controls.Add(this.labelControl7);
             this.panel3.Controls.Add(this.textEdit2);
             this.panel3.Controls.Add(this.labelControl6);
-            this.panel3.Location = new System.Drawing.Point(0, 24);
+            this.panel3.Location = new System.Drawing.Point(0, 22);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(241, 24);
+            this.panel3.Size = new System.Drawing.Size(207, 22);
             this.panel3.TabIndex = 11;
             // 
             // labelControl7
@@ -1447,9 +1443,9 @@
             this.panel4.Controls.Add(this.labelControl9);
             this.panel4.Controls.Add(this.textEdit3);
             this.panel4.Controls.Add(this.labelControl8);
-            this.panel4.Location = new System.Drawing.Point(0, 48);
+            this.panel4.Location = new System.Drawing.Point(0, 44);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(241, 24);
+            this.panel4.Size = new System.Drawing.Size(207, 22);
             this.panel4.TabIndex = 11;
             // 
             // labelControl9
@@ -1491,9 +1487,9 @@
             this.panel5.Controls.Add(this.labelControl11);
             this.panel5.Controls.Add(this.textEdit4);
             this.panel5.Controls.Add(this.labelControl10);
-            this.panel5.Location = new System.Drawing.Point(0, 72);
+            this.panel5.Location = new System.Drawing.Point(0, 66);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(241, 24);
+            this.panel5.Size = new System.Drawing.Size(207, 22);
             this.panel5.TabIndex = 23;
             // 
             // labelControl11
@@ -1536,9 +1532,9 @@
             this.panel6.Controls.Add(this.labelControl13);
             this.panel6.Controls.Add(this.comboBoxEdit_VTime);
             this.panel6.Controls.Add(this.labelControl12);
-            this.panel6.Location = new System.Drawing.Point(0, 96);
+            this.panel6.Location = new System.Drawing.Point(0, 88);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(241, 24);
+            this.panel6.Size = new System.Drawing.Size(207, 22);
             this.panel6.TabIndex = 24;
             // 
             // btn_setVTime
@@ -1607,30 +1603,30 @@
             this.panel8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(40)))), ((int)(((byte)(62)))));
             this.panel8.Controls.Add(this.labelControl16);
             this.panel8.Controls.Add(this.lbOnline);
-            this.panel8.Location = new System.Drawing.Point(0, 120);
+            this.panel8.Location = new System.Drawing.Point(0, 110);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(241, 104);
+            this.panel8.Size = new System.Drawing.Size(207, 93);
             this.panel8.TabIndex = 26;
             // 
             // labelControl16
             // 
             this.labelControl16.Location = new System.Drawing.Point(72, 6);
             this.labelControl16.Name = "labelControl16";
-            this.labelControl16.Size = new System.Drawing.Size(72, 14);
+            this.labelControl16.Size = new System.Drawing.Size(72, 13);
             this.labelControl16.TabIndex = 44;
             this.labelControl16.Text = "已连接的电脑";
             // 
             // lbOnline
             // 
-            this.lbOnline.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbOnline.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lbOnline.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(40)))), ((int)(((byte)(62)))));
             this.lbOnline.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
             this.lbOnline.Appearance.Options.UseBackColor = true;
             this.lbOnline.Appearance.Options.UseForeColor = true;
             this.lbOnline.Location = new System.Drawing.Point(3, 20);
             this.lbOnline.Name = "lbOnline";
-            this.lbOnline.Size = new System.Drawing.Size(235, 80);
+            this.lbOnline.Size = new System.Drawing.Size(235, 75);
             this.lbOnline.TabIndex = 43;
             // 
             // layoutControlGroup1
@@ -1648,8 +1644,7 @@
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
             this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlGroup1.Size = new System.Drawing.Size(241, 224);
-            this.layoutControlGroup1.Text = "layoutControlGroup1";
+            this.layoutControlGroup1.Size = new System.Drawing.Size(207, 203);
             this.layoutControlGroup1.TextVisible = false;
             // 
             // layoutControlItem2
@@ -1657,13 +1652,11 @@
             this.layoutControlItem2.Control = this.panel8;
             this.layoutControlItem2.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.layoutControlItem2.CustomizationFormText = "layoutControlItem2";
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 120);
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 110);
             this.layoutControlItem2.Name = "layoutControlItem2";
             this.layoutControlItem2.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlItem2.Size = new System.Drawing.Size(241, 104);
-            this.layoutControlItem2.Text = "layoutControlItem2";
+            this.layoutControlItem2.Size = new System.Drawing.Size(207, 93);
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem2.TextToControlDistance = 0;
             this.layoutControlItem2.TextVisible = false;
             // 
             // layoutControlItem4
@@ -1671,13 +1664,11 @@
             this.layoutControlItem4.Control = this.panel6;
             this.layoutControlItem4.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.layoutControlItem4.CustomizationFormText = "layoutControlItem4";
-            this.layoutControlItem4.Location = new System.Drawing.Point(0, 96);
+            this.layoutControlItem4.Location = new System.Drawing.Point(0, 88);
             this.layoutControlItem4.Name = "layoutControlItem4";
             this.layoutControlItem4.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlItem4.Size = new System.Drawing.Size(241, 24);
-            this.layoutControlItem4.Text = "layoutControlItem4";
+            this.layoutControlItem4.Size = new System.Drawing.Size(207, 22);
             this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem4.TextToControlDistance = 0;
             this.layoutControlItem4.TextVisible = false;
             // 
             // layoutControlItem5
@@ -1685,13 +1676,11 @@
             this.layoutControlItem5.Control = this.panel5;
             this.layoutControlItem5.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.layoutControlItem5.CustomizationFormText = "layoutControlItem5";
-            this.layoutControlItem5.Location = new System.Drawing.Point(0, 72);
+            this.layoutControlItem5.Location = new System.Drawing.Point(0, 66);
             this.layoutControlItem5.Name = "layoutControlItem5";
             this.layoutControlItem5.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlItem5.Size = new System.Drawing.Size(241, 24);
-            this.layoutControlItem5.Text = "layoutControlItem5";
+            this.layoutControlItem5.Size = new System.Drawing.Size(207, 22);
             this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem5.TextToControlDistance = 0;
             this.layoutControlItem5.TextVisible = false;
             // 
             // layoutControlItem6
@@ -1699,13 +1688,11 @@
             this.layoutControlItem6.Control = this.panel4;
             this.layoutControlItem6.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.layoutControlItem6.CustomizationFormText = "layoutControlItem6";
-            this.layoutControlItem6.Location = new System.Drawing.Point(0, 48);
+            this.layoutControlItem6.Location = new System.Drawing.Point(0, 44);
             this.layoutControlItem6.Name = "layoutControlItem6";
             this.layoutControlItem6.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlItem6.Size = new System.Drawing.Size(241, 24);
-            this.layoutControlItem6.Text = "layoutControlItem6";
+            this.layoutControlItem6.Size = new System.Drawing.Size(207, 22);
             this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem6.TextToControlDistance = 0;
             this.layoutControlItem6.TextVisible = false;
             // 
             // layoutControlItem7
@@ -1713,13 +1700,11 @@
             this.layoutControlItem7.Control = this.panel3;
             this.layoutControlItem7.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.layoutControlItem7.CustomizationFormText = "layoutControlItem7";
-            this.layoutControlItem7.Location = new System.Drawing.Point(0, 24);
+            this.layoutControlItem7.Location = new System.Drawing.Point(0, 22);
             this.layoutControlItem7.Name = "layoutControlItem7";
             this.layoutControlItem7.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlItem7.Size = new System.Drawing.Size(241, 24);
-            this.layoutControlItem7.Text = "layoutControlItem7";
+            this.layoutControlItem7.Size = new System.Drawing.Size(207, 22);
             this.layoutControlItem7.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem7.TextToControlDistance = 0;
             this.layoutControlItem7.TextVisible = false;
             // 
             // layoutControlItem8
@@ -1730,26 +1715,23 @@
             this.layoutControlItem8.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem8.Name = "layoutControlItem8";
             this.layoutControlItem8.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlItem8.Size = new System.Drawing.Size(241, 24);
-            this.layoutControlItem8.Text = "layoutControlItem8";
+            this.layoutControlItem8.Size = new System.Drawing.Size(207, 22);
             this.layoutControlItem8.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem8.TextToControlDistance = 0;
             this.layoutControlItem8.TextVisible = false;
             // 
             // lstbxMessageView
             // 
             this.lstbxMessageView.FormattingEnabled = true;
-            this.lstbxMessageView.ItemHeight = 14;
-            this.lstbxMessageView.Location = new System.Drawing.Point(14, 27);
+            this.lstbxMessageView.Location = new System.Drawing.Point(12, 25);
             this.lstbxMessageView.Name = "lstbxMessageView";
-            this.lstbxMessageView.Size = new System.Drawing.Size(137, 172);
+            this.lstbxMessageView.Size = new System.Drawing.Size(118, 160);
             this.lstbxMessageView.TabIndex = 22;
             this.lstbxMessageView.Visible = false;
             // 
             // xtraTabPage2
             // 
             this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(1001, 537);
+            this.xtraTabPage2.Size = new System.Drawing.Size(857, 489);
             this.xtraTabPage2.Text = "xtraTabPage2";
             // 
             // defaultLookAndFeel1
@@ -1758,13 +1740,13 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(528, 28);
+            this.pictureBox1.Location = new System.Drawing.Point(812, 26);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(479, 73);
+            this.pictureBox1.Size = new System.Drawing.Size(52, 68);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 11;
             this.pictureBox1.TabStop = false;
@@ -1779,9 +1761,9 @@
             // MainForm
             // 
             this.AllowFormGlass = DevExpress.Utils.DefaultBoolean.False;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1007, 699);
+            this.ClientSize = new System.Drawing.Size(863, 649);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.xtraTabControl1);
             this.Controls.Add(this.ribbonStatusBar);
@@ -1875,6 +1857,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

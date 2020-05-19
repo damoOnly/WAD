@@ -13,6 +13,7 @@ using CommandManager;
 using System.Diagnostics;
 using System.Threading;
 using DevExpress.Utils;
+using GlobalMemory;
 namespace WADApplication
 {
     public partial class RegisterDeviceForm : DevExpress.XtraEditors.XtraForm
@@ -29,35 +30,55 @@ namespace WADApplication
             InitializeComponent();
         }
 
-        // 添加
+        // 添加气体
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            byte addr = list == null ? (byte)0 : list.LastOrDefault().Address;
-            AddDeviceForm addfff = new AddDeviceForm(addr);
+            byte addr = (list == null || list.Count <=0) ? (byte)0 : list.LastOrDefault().Address;
+            byte sensorNum = (list == null || list.Count <= 0) ? (byte)0 : (byte)(list.LastOrDefault().SensorNum + 1);
+            AddDeviceForm addfff = new AddDeviceForm(addr, sensorNum, true);
             if (addfff.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 try
                 {
-                    Equipment eq = addfff.mEquipment;
+                    StructEquipment eq = addfff.mEquipment;
+                    if (CommonMemory.IsOldVersion)
+                    {
+                        AddEqProcess.AddOldGas(ref eq);
+                    }
+                    else
+                    {
+                        AddEqProcess.AddNewGas(ref eq);
+                    }
+
                     EquipmentDal.AddOneR(ref eq);
                     InitList();
                 }
                 catch (Exception ex)
                 {
-                    log.Error("添加设备失败", ex);
-                    XtraMessageBox.Show("添加设备失败");
+                    log.Error("添加气体失败", ex);
+                    XtraMessageBox.Show("添加气体失败");
                 }
             }
         }
 
         private void RegisterDeviceForm_Load(object sender, EventArgs e)
         {
+            if (CommonMemory.IsOldVersion)
+            {
+                simpleButton5.Visible = false;
+
+            }
             InitList();
         }
 
         private void InitList()
         {
-            list = EquipmentDal.GetAllListNotDelete();
+            var sl = EquipmentDal.GetAllListNotDelete();
+            list = new List<Equipment>();
+            foreach (var item in sl)
+            {
+                list.Add(Utility.ConvertToEq(item));
+            }
             gridControl1.DataSource = list;
             gridControl1.RefreshDataSource();
             gridView1.BestFitColumns();
@@ -69,7 +90,7 @@ namespace WADApplication
             try
             {
                 Equipment eq1 = gridView1.GetFocusedRow() as Equipment;
-                EquipmentDal.DeleteListByName(eq1.Name);
+                EquipmentDal.DeleteOne(eq1);
                 InitList();
                 XtraMessageBox.Show("删除设备成功");
 
@@ -90,14 +111,30 @@ namespace WADApplication
                 AddDeviceForm addform = new AddDeviceForm(eq);
                 if (addform.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    EquipmentDal.UpdateOne(addform.mEquipment);
+                    StructEquipment update = addform.mEquipment;
+                    if (update.IsGas)
+                    {
+                        if (CommonMemory.IsOldVersion)
+                        {
+                            AddEqProcess.AddOldGas(ref update);
+                        }
+                        else
+                        {
+                            AddEqProcess.AddNewGas(ref update);
+                        }
+                    }
+                    else
+                    {
+                        AddEqProcess.AddWeather(ref update);
+                    }
+                    EquipmentDal.UpdateOne(update);
                     InitList();
                 }
             }
             catch (Exception ex)
             {
-                log.Error("更新设备失败", ex);
-                XtraMessageBox.Show("更新设备失败");
+                log.Error("更新气体失败", ex);
+                XtraMessageBox.Show("更新气体失败");
             }
             
         }
@@ -111,18 +148,16 @@ namespace WADApplication
                 {
                     for (byte i = 1; i <= 29; i++)
                     {
-                        Equipment ept = new Equipment();
+                        StructEquipment ept = new StructEquipment();
                         ept.Name = "VOC监控系统";
                         ept.Address = i;
-                        ept.SensorTypeB = "通道" + i;
-                        ept.GasName = "VOC";
-                        ept.biNnum = 1;
+                        ept.GasType = 1;
+                        ept.Magnification = 1;
                         ept.UnitType = 0;
                         ept.A1 = 200;
                         ept.A2 = 500;
                         ept.Max = 30;
                         ept.Point = 2;
-                        ept.IsRegister = true;
                         EquipmentDal.AddOneR(ref ept);
                     }
                     InitList();
@@ -145,7 +180,23 @@ namespace WADApplication
                     AddDeviceForm addform = new AddDeviceForm(eq);
                     if (addform.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                     {
-                        EquipmentDal.UpdateOne(addform.mEquipment);
+                        StructEquipment update = addform.mEquipment;
+                        if (update.IsGas)
+                        {
+                            if (CommonMemory.IsOldVersion)
+                            {
+                                AddEqProcess.AddOldGas(ref update);
+                            }
+                            else
+                            {
+                                AddEqProcess.AddNewGas(ref update);
+                            }
+                        }
+                        else
+                        {
+                            AddEqProcess.AddWeather(ref update);
+                        }
+                        EquipmentDal.UpdateOne(update);
                         InitList();
                     }
                 }
@@ -168,6 +219,34 @@ namespace WADApplication
             if (AddEvent != null)
             {
                 AddEvent();
+            }
+        }
+
+        /// <summary>
+        /// 添加气象
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void simpleButton5_Click(object sender, EventArgs e)
+        {
+            byte addr = list == null ? (byte)0 : list.LastOrDefault().Address;
+            byte sensorNum = list == null ? (byte)0 : (byte)(list.LastOrDefault().SensorNum + 1);
+            AddDeviceForm addfff = new AddDeviceForm(addr, sensorNum, false);
+            if (addfff.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                try
+                {
+                    StructEquipment eq = addfff.mEquipment;
+                    AddEqProcess.AddWeather(ref eq);
+
+                    EquipmentDal.AddOneR(ref eq);
+                    InitList();
+                }
+                catch (Exception ex)
+                {
+                    log.Error("添加气象失败", ex);
+                    XtraMessageBox.Show("添加气象失败");
+                }
             }
         }
 

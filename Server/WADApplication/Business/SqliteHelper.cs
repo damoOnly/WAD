@@ -18,7 +18,7 @@ namespace Business
     /// 数据访问基础类(基于OleDb)
     /// 可以用户可以修改满足自己项目的需要。
     /// </summary>
-    public class SqliteHelper
+    class SqliteHelper
     {
         public static string ConnectionString = string.Empty;
         private static SQLiteConnection connection = null;

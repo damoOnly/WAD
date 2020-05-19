@@ -11,6 +11,7 @@ using Business;
 using DevExpress.XtraCharts;
 using System.Linq;
 using System.Configuration;
+using GlobalMemory;
 
 namespace WADApplication
 {
@@ -98,7 +99,7 @@ namespace WADApplication
 
         private void simpleButton2_Click(object sender, EventArgs e)
         {
-            if (Gloabl.Userinfo.Level != EM_UserType.Admin)
+            if (CommonMemory.Userinfo.Level != EM_UserType.Admin)
             {
                 XtraMessageBox.Show("只有管理员才能删除数据");
                 return;
@@ -225,7 +226,7 @@ namespace WADApplication
         {
             string SensorName = comboBoxEdit1.Text;
             List<Equipment> eq = mainList.FindAll(c => c.Name == SensorName);
-            if (Gloabl.Userinfo.Level != EM_UserType.Admin)
+            if (CommonMemory.Userinfo.Level != EM_UserType.Admin)
             {
                 XtraMessageBox.Show("只有管理员才能删除数据");
                 return;
@@ -315,7 +316,7 @@ namespace WADApplication
         {
             lastSensor = ConfigurationManager.AppSettings["lastSensor"].ToString();
             lastGas = ConfigurationManager.AppSettings["lastGas"].ToString();
-            mainList = EquipmentDal.GetListIncludeDelete();
+            mainList = EquipmentBusiness.GetListIncludeDelete();
             var sql = from a in mainList
                       group a by a.Name into g
                       select new
@@ -354,7 +355,7 @@ namespace WADApplication
 
         private void btn_ClearDB_Click(object sender, EventArgs e)
         {
-            if (Gloabl.Userinfo.Level != EM_UserType.Admin)
+            if (CommonMemory.Userinfo.Level != EM_UserType.Admin)
             {
                 XtraMessageBox.Show("只有管理员才能删除数据");
                 return;

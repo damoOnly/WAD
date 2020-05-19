@@ -232,60 +232,21 @@ namespace CommandManager
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public static Equipment GetRealData(byte[] data)
+        public static void GetRealData(byte[] data, out float chrome, out EM_AlertType alertStatus)
         {
-            Equipment eq = new Equipment();
-            byte[] cb = new byte[4];
-            cb[0] = data[3];
-            cb[1] = data[4];
-            cb[2] = data[5];
-            cb[3] = data[6];
-            //限制实时浓度值，最大不超过传感器量程2015.9.9
-            //eq.Chroma = eq.Chroma > eq.Max ? eq.Max : BitConverter.ToSingle(cb,0);
-            eq.Chroma =(float)((cb[0] << 24) | (cb[1] << 16) | (cb[2] << 8) | cb[3]);
-
-            // 修改报警值为上位机判断并设置
-            //Array.Reverse(data, 7, 2);
-            //ushort alart = BitConverter.ToUInt16(data, 7);
-            //switch (alart)
-            //{ 
-            //    case 0x00:
-            //        eq.ChromaAlertStr = "无报警";
-            //        break;
-            //    case 0x01:
-            //        eq.ChromaAlertStr = "低报警";
-            //        break;
-            //    case 0x02:
-            //        eq.ChromaAlertStr = "高报警";
-            //        break;
-            //}
-
-           /*
-            eq.THAlertStr = Parse.GetTHAlertStr(data[7]);
-            eq.ChromaAlertStr = Parse.GetChromaAlertStr(data[8]);
+            Array.Reverse(data, 3, 2);
+            Array.Reverse(data, 5, 2);
+            chrome = BitConverter.ToSingle(data, 3);
+            alertStatus = (EM_AlertType)data[8];
+            //Equipment eq = new Equipment();
+            //byte[] cb = new byte[4];
+            //cb[0] = data[3];
+            //cb[1] = data[4];
+            //cb[2] = data[5];
+            //cb[3] = data[6];
             
-            cb[0] = data[10];
-            cb[1] = data[9];
-            cb[2] = data[12];
-            cb[3] = data[11];
-            eq.Temperature = string.Format("{0}℃", BitConverter.ToSingle(cb, 0).ToString("f1"));
-
-            cb[0] = data[14];
-            cb[1] = data[13];
-            cb[2] = data[16];
-            cb[3] = data[15];
-            eq.Humidity = string.Format("{0}%", BitConverter.ToSingle(cb, 0).ToString("f0"));
-
-            if (data[18] == 0x01)
-            {
-                eq.IsConnect = true;
-            }
-            else
-            {
-                eq.IsConnect = false;
-            }
-            * */
-            return eq;
+            //eq.Chroma =(float)((cb[0] << 24) | (cb[1] << 16) | (cb[2] << 8) | cb[3]);
+            //return eq;
         }
 
         public static Equipment GetSetData(byte[] data)

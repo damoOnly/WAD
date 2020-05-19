@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Business;
 using Entity;
 using DevExpress.XtraEditors;
+using GlobalMemory;
 namespace WADApplication
 {
     public partial class Form_ChangePassWord : Form
@@ -30,7 +31,7 @@ namespace WADApplication
                 return;
             }
 
-            UserInfo uf = UserInfoDal.GetOneByUser(Gloabl.Userinfo.Account, textEdit1.Text.Trim());
+            UserInfo uf = UserInfoDal.GetOneByUser(CommonMemory.Userinfo.Account, textEdit1.Text.Trim());
             if (uf == null)
             {
                 XtraMessageBox.Show("密码不正确");

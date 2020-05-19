@@ -127,7 +127,7 @@ namespace WADApplication
 
         private void Initlist()
         {
-            List<Equipment> list = EquipmentDal.GetAllListNotDelete();
+            List<Equipment> list = EquipmentBusiness.GetAllListNotDelete();
             if (list == null || list.Count < 1)
             {
                 UnEnabled();

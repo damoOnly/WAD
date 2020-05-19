@@ -76,7 +76,7 @@ namespace WADApplication
                 if(eq.ID == item.ID)
                 {
                     item.Chroma = eq.Chroma;
-                    item.ChromaAlertStr = eq.ChromaAlertStr;
+                    item.AlertStatus = eq.AlertStatus;
                     item.GasType = eq.GasType;
                     item.A2 = eq.A2;
                     item.TWA = eq.TWA;            //2015.8.27
@@ -191,13 +191,13 @@ namespace WADApplication
         private void setControlText(Equipment equi)
         {
             textEdit_address.Text = equi.Address.ToString();
-            if (string.IsNullOrWhiteSpace(equi.ChromaAlertStr))
+            if (string.IsNullOrWhiteSpace(equi.AlertStr))
             {
                 textEdit_choramAlert.Text = "无";
             }
             else
             {
-                textEdit_choramAlert.Text = equi.ChromaAlertStr;
+                textEdit_choramAlert.Text = equi.AlertStr;
             }
 
             if (string.IsNullOrWhiteSpace(equi.THAlertStr))
@@ -210,7 +210,7 @@ namespace WADApplication
             }
             textEdit_chrom.Text = equi.ChromaStr;
             textEdit_gasname.Text = equi.GasName;
-            textEdit_gasUnit.Text = equi.Unit;
+            textEdit_gasUnit.Text = equi.UnitName;
             textEdit_hit.Text = equi.Humidity;
             textEdit_low.Text = equi.LowChromaStr;
             textEdit_name.Text = equi.Name;

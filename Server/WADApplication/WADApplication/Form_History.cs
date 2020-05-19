@@ -577,7 +577,7 @@ namespace WADApplication
 
         private void loadData()
         {
-            mainList = EquipmentDal.GetListIncludeDelete();
+            mainList = EquipmentBusiness.GetListIncludeDelete();
             mainList = mainList.OrderBy(c => c.ID).ToList();
             checkedComboBoxEdit1.Properties.Items.Clear();
             mainList.ForEach(c => { checkedComboBoxEdit1.Properties.Items.Add(c.ID, c.Name + "," + c.Address + "," + c.SensorTypeB + "," + c.GasName); });

@@ -124,6 +124,7 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Speech" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -229,7 +230,6 @@
     <Compile Include="Form_zero.Designer.cs">
       <DependentUpon>Form_zero.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gloabl.cs" />
     <Compile Include="LocalizationCHS.cs" />
     <Compile Include="MDIParent1.cs">
       <SubType>Form</SubType>
@@ -237,7 +237,9 @@
     <Compile Include="MDIParent1.Designer.cs">
       <DependentUpon>MDIParent1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Process\DataProcess.cs" />
+    <Compile Include="Process\AlertProcess.cs" />
+    <Compile Include="Process\AppConfigProcess.cs" />
+    <Compile Include="Process\MainProcess.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MainForm.cs">
@@ -306,6 +308,7 @@
     <EmbeddedResource Include="MDIParent1.resx">
       <DependentUpon>MDIParent1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -354,6 +357,10 @@
     <ProjectReference Include="..\Entity\Entity.csproj">
       <Project>{920662A5-8768-42FB-ACA4-4DF8EB1351F0}</Project>
       <Name>Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GlobalMemory\GlobalMemory.csproj">
+      <Project>{21b0214b-4aaa-4db8-8514-d1adca8c6f09}</Project>
+      <Name>GlobalMemory</Name>
     </ProjectReference>
     <ProjectReference Include="..\LibMessageHelper\LibMessageHelper.csproj">
       <Project>{76EB986A-7BDF-4C54-A759-12A6DF83B82E}</Project>

@@ -14,27 +14,28 @@ namespace WADApplication
 {
     public partial class AddDeviceForm : DevExpress.XtraEditors.XtraForm
     {
-        public Equipment mEquipment;
+        public StructEquipment mEquipment;
         public byte Address;
         public string SensorName;
-        public AddDeviceForm(byte i)
+        public AddDeviceForm(byte i, byte sensorNum, bool isGas)
         {
             InitializeComponent();
             mEquipment = new Equipment();
             mEquipment.Name = "VOC监控系统";
             mEquipment.Address = i;
-            mEquipment.SensorTypeB = "通道" + i;
-            mEquipment.GasName = "VOC";
-            mEquipment.biNnum = 1;
+            mEquipment.SensorNum = sensorNum;
+            mEquipment.GasType = 1;
+            mEquipment.Magnification = 1;
             mEquipment.UnitType = 0;
             mEquipment.A1 = 200;
             mEquipment.A2 = 500;
             mEquipment.Max = 30;
             mEquipment.Point = 2;
-            mEquipment.IsRegister = true;
+            //mEquipment.IsRegister = true;
+            mEquipment.IsGas = isGas;
         }
 
-        public AddDeviceForm(Equipment equip)
+        public AddDeviceForm(StructEquipment equip)
         {
             InitializeComponent();
             mEquipment = equip;
@@ -45,15 +46,15 @@ namespace WADApplication
             if (mEquipment != null)
             {
                 textEdit1.Text = mEquipment.Name;
-                textEdit2.Text = mEquipment.GasName;
-                textEdit3.Text = mEquipment.SensorTypeB;
+                //textEdit2.Text = mEquipment.GasName;
+                textEdit3.Text = mEquipment.SensorNum.ToString();
                 textEdit4.Text = mEquipment.Address.ToString();
-                textEdit5.Text = mEquipment.A2.ToString();
-                textEdit6.Text = mEquipment.A1.ToString();
+                //textEdit5.Text = mEquipment.A2.ToString();
+                //textEdit6.Text = mEquipment.A1.ToString();
                 textEdit7.Text = mEquipment.Point.ToString();
-                textEdit8.Text = mEquipment.Max.ToString();
+                //textEdit8.Text = mEquipment.Max.ToString();
                 textEdit9.Text = mEquipment.UnitType.ToString();
-                textEdit10.Text = mEquipment.biNnum.ToString();
+                textEdit10.Text = mEquipment.Magnification.ToString();
             }
         }
 
@@ -91,15 +92,15 @@ namespace WADApplication
             }
 
             mEquipment.Name = textEdit1.Text;
-            mEquipment.GasName = textEdit2.Text;
-            mEquipment.SensorTypeB = textEdit3.Text;
+            //mEquipment.GasName = textEdit2.Text;
+            mEquipment.SensorNum = Convert.ToByte(textEdit3.Text);
             mEquipment.Address = Convert.ToByte(textEdit4.Text);
-            mEquipment.A2 = Convert.ToSingle(textEdit5.Text);
-            mEquipment.A1 = Convert.ToSingle(textEdit6.Text);
+            //mEquipment.A2 = Convert.ToSingle(textEdit5.Text);
+            //mEquipment.A1 = Convert.ToSingle(textEdit6.Text);
             mEquipment.Point = Convert.ToByte(textEdit7.Text);
-            mEquipment.Max = Convert.ToInt32(textEdit8.Text);
-            mEquipment.UnitType = Convert.ToUInt16(textEdit9.Text);
-            mEquipment.biNnum = Convert.ToUInt16(textEdit10.Text);
+            //mEquipment.Max = Convert.ToInt32(textEdit8.Text);
+            mEquipment.UnitType = Convert.ToByte(textEdit9.Text);
+            mEquipment.Magnification = Convert.ToInt32(textEdit10.Text);
 
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
