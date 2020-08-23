@@ -40,6 +40,8 @@ namespace GlobalMemory
         /// </summary>
         public static bool IsReadConnect = false;
 
+        public static bool IsOlden = false;
+
         public static CommonConfig Config = new CommonConfig();
 
         public static void Init()
@@ -48,6 +50,7 @@ namespace GlobalMemory
             CommonMemory.player = new SoundPlayer();
             CommonMemory.player.SoundLocation = AppDomain.CurrentDomain.BaseDirectory + "\\" + ConfigurationManager.AppSettings["SoundPath"].ToString();
             CommonMemory.player.Load();
+            bool.TryParse(ConfigurationManager.AppSettings["IsOlden"].ToString(), out IsOlden);
         }
     }
 

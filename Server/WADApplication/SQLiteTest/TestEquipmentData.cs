@@ -12,15 +12,15 @@ namespace SQLiteTest
     {
         public void test()
         {
-            testCreate();
-            TestAdd();
-            TestAdd2();
-            TestAddList();
-            TestAddList2();
+            //testCreate();
+            //TestAdd();
+            //TestAdd2();
+            //TestAddList();
+            //TestAddList2();
             TestGets();
-            TestGets2();
-            TestDelete();
-            TestDelete2();
+            //TestGets2();
+            //TestDelete();
+            //TestDelete2();
         }
 
         private void testCreate()
@@ -136,7 +136,7 @@ namespace SQLiteTest
             {
                 List<EquipmentData> list = EquipmentDataBusiness.GetList(DateTime.Now.AddMonths(-1), DateTime.Now.AddMonths(2), 1);
                 Console.WriteLine("TestGets: OK " + list.Count);
-                Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(list));
+                Console.WriteLine(list.Count);
             }
             catch (Exception e)
             {

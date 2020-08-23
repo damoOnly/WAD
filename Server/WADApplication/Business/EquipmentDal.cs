@@ -28,6 +28,14 @@ namespace Business
                     CreateTable(conn);
                 }
             }
+
+            var list = GetListIncludeDelete();
+            if (list != null && list.Count >0)
+            {
+                list.ForEach(c => {
+                    EquipmentDataBusiness.CreateDb(c.ID);
+                });
+            }
         }
 
         private static void CreateTable(SQLiteConnection conn)

@@ -1,4 +1,5 @@
-﻿using CommandManager;
+﻿using Business;
+using CommandManager;
 using DevExpress.XtraCharts;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
@@ -9,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -109,7 +111,7 @@ namespace WADApplication.Process
             //ed.LowChromadata = eq.LowChromadata;
             //ed.Point = eq.Point;
             // 添加数据库
-            //EquipmentDataDal.AddOne(ed);
+            EquipmentDataBusiness.Add(ed);
             // 绘制曲线
             addPoint(ed, selectedEqId, t1,t2,t3,t4, chart);
             if (set.Visible)
@@ -211,6 +213,115 @@ namespace WADApplication.Process
             }
         }
 
-       
+        public static void ManageSeries(ChartControl chartControl, List<Equipment> mainList, DateTime minTime, DateTime maxTime)
+        {
+            // 这里要添加多线程信号量来控制曲线的增加和删除
+            chartControl.Series.BeginUpdate();
+
+            chartControl.Legend.AlignmentHorizontal = LegendAlignmentHorizontal.Right;
+            //chartControl.Series.Clear();
+            if (mainList.Count < 1)
+            {
+                return;
+            }
+
+            foreach (Equipment item in mainList)
+            {
+                if (item.IfShowSeries && !IsCondionsSeries(item.ID,chartControl))
+                {
+                    Series series = new Series(item.GasName, ViewType.SwiftPlot);
+                    series.Tag = item.ID;
+                    series.ArgumentScaleType = ScaleType.DateTime;
+                    SwiftPlotSeriesView spsv1 = new SwiftPlotSeriesView();
+                    spsv1.LineStyle.Thickness = 2;
+                    series.View = spsv1;
+                    chartControl.Series.Add(series);
+                    List<EquipmentData> datalist = EquipmentDataBusiness.GetList(minTime, maxTime, item.ID);
+                    if (datalist == null || datalist.Count <=0)
+                    {
+                        continue;
+                    }
+                    datalist.ForEach(c =>
+                    {
+                        SeriesPoint sp = new SeriesPoint(c.AddTime, c.Chroma);
+                        series.Points.Add(sp);
+                    });
+                }
+                else if (!item.IfShowSeries && IsCondionsSeries(item.ID, chartControl))
+                {
+                    int index = 0;
+                    for (int i = 0; i < chartControl.Series.Count; i++)
+                    {
+                        if (item.ID == Convert.ToInt32(chartControl.Series[i].Tag))
+                        {
+                            index = i;
+                            break;
+                        }
+                    }
+                    chartControl.Series.RemoveAt(index);
+                }
+            }
+
+            if (chartControl.Series.Count == 0)
+            {
+                return;
+            }
+
+            chartControl.Series.EndUpdate();
+
+
+            SwiftPlotDiagram diagram_Tem = chartControl.Diagram as SwiftPlotDiagram;
+            diagram_Tem.AxisX.WholeRange.Auto = true;
+            diagram_Tem.AxisX.WholeRange.AutoSideMargins = true;
+            diagram_Tem.AxisX.VisualRange.Auto = true;
+            diagram_Tem.AxisX.VisualRange.AutoSideMargins = true;
+            diagram_Tem.Margins.Right = 15;
+            //diagram_Tem.AxisX.
+
+            //diagram_Tem.AxisX.DateTimeScaleOptions.MeasureUnit = DateTimeMeasureUnit.Second;
+            //diagram_Tem.AxisX.DateTimeScaleOptions.GridAlignment = DateTimeGridAlignment.Minute;
+            //diagram_Tem.AxisX.Label.TextPattern = "A:HH:mm:ss";
+            ////diagram_Tem.AxisX.GridLines.Visible = true;
+            //diagram_Tem.AxisX.VisualRange.AutoSideMargins = false;
+            //diagram_Tem.AxisX.WholeRange.AutoSideMargins = true;
+            diagram_Tem.AxisX.Title.Text = "时间";
+            diagram_Tem.AxisX.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
+            diagram_Tem.AxisX.Title.Alignment = StringAlignment.Far;
+            diagram_Tem.AxisX.Title.Antialiasing = false;
+            diagram_Tem.AxisX.Title.Font = new System.Drawing.Font("Tahoma", 8);
+
+            diagram_Tem.AxisY.WholeRange.AlwaysShowZeroLevel = false;
+            //diagram_Tem.EnableAxisYZooming = true;
+            //diagram_Tem.EnableAxisYScrolling = true;
+            diagram_Tem.AxisY.Interlaced = true;
+            diagram_Tem.AxisY.VisualRange.AutoSideMargins = true;
+            diagram_Tem.AxisY.WholeRange.AutoSideMargins = true;
+            if (mainList.First() != null)
+            {
+                diagram_Tem.AxisY.Title.Text = string.Format("浓度({0})", mainList.First().UnitName);
+            }
+            else
+            {
+                diagram_Tem.AxisY.Title.Text = string.Format("浓度");
+            }
+            diagram_Tem.AxisY.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
+            diagram_Tem.AxisY.Title.Alignment = StringAlignment.Far;
+            diagram_Tem.AxisY.Title.Antialiasing = false;
+            diagram_Tem.AxisY.Title.Font = new System.Drawing.Font("Tahoma", 8);
+        }
+
+        private static bool IsCondionsSeries(int id, ChartControl chartControl)
+        {
+            bool isCondion = false;
+            foreach (Series item in chartControl.Series)
+            {
+                if (id == Convert.ToInt32(item.Tag))
+                {
+                    isCondion = true;
+                    break;
+                }
+            }
+            return isCondion;
+        }
     }
 }

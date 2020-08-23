@@ -57,7 +57,7 @@ namespace Business
             return cmd.ExecuteNonQuery() == 1;
         }
         
-        public static List<EquipmentData> GetListByTime(SQLiteConnection conn, DateTime dt1, DateTime dt2)
+        public static List<EquipmentData> GetListByTime(SQLiteConnection conn, DateTime dt1, DateTime dt2, int eqid)
         {
             string sql = string.Format("select a.Chroma, a.AddTime from tb_EquipmentData a where AddTime >= @dt1 and AddTime <= @dt2");
 
@@ -73,6 +73,7 @@ namespace Business
                     EquipmentData eq = new EquipmentData();
                     eq.Chroma = reader.GetFloat(0);
                     eq.AddTime = reader.GetDateTime(1);
+                    eq.EquipmentID = eqid;
                     list.Add(eq);
                 }
             }

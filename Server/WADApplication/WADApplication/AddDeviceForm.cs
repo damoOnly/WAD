@@ -51,9 +51,9 @@ namespace WADApplication
                 textEdit4.Text = mEquipment.Address.ToString();
                 //textEdit5.Text = mEquipment.A2.ToString();
                 //textEdit6.Text = mEquipment.A1.ToString();
-                textEdit7.Text = mEquipment.Point.ToString();
+                //textEdit7.Text = mEquipment.Point.ToString();
                 //textEdit8.Text = mEquipment.Max.ToString();
-                textEdit9.Text = mEquipment.UnitType.ToString();
+                //textEdit9.Text = mEquipment.UnitType.ToString();
                 textEdit10.Text = mEquipment.Magnification.ToString();
             }
         }
@@ -80,11 +80,11 @@ namespace WADApplication
                 XtraMessageBox.Show("地址必须为正整数");
                 return;
             }
-            if (EquipmentDal.GetNamesIncludeDelete().Contains(SensorName))
-            {
-                XtraMessageBox.Show("设备存在重名");
-                return;
-            }
+            //if (EquipmentDal.GetNamesIncludeDelete().Contains(SensorName))
+            //{
+            //    XtraMessageBox.Show("设备存在重名");
+            //    return;
+            //}
             if (EquipmentDal.GetAddressNotDelete().Contains(add))
             {
                 XtraMessageBox.Show("地址已存在,请先删除设备");
@@ -97,9 +97,9 @@ namespace WADApplication
             mEquipment.Address = Convert.ToByte(textEdit4.Text);
             //mEquipment.A2 = Convert.ToSingle(textEdit5.Text);
             //mEquipment.A1 = Convert.ToSingle(textEdit6.Text);
-            mEquipment.Point = Convert.ToByte(textEdit7.Text);
+            //mEquipment.Point = Convert.ToByte(textEdit7.Text);
             //mEquipment.Max = Convert.ToInt32(textEdit8.Text);
-            mEquipment.UnitType = Convert.ToByte(textEdit9.Text);
+            //mEquipment.UnitType = Convert.ToByte(textEdit9.Text);
             mEquipment.Magnification = Convert.ToInt32(textEdit10.Text);
 
             this.DialogResult = System.Windows.Forms.DialogResult.OK;

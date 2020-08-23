@@ -72,7 +72,7 @@ namespace Entity
                 return unit;
             }
         }
-                
-        public string AddTimeStr { get; set; }
+
+        public long AddTimeGroup { get { return AddTime.Ticks/(10000000*60); } }
     }
 }

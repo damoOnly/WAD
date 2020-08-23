@@ -22,7 +22,7 @@ namespace SQLiteTest
             //t2.test();
 
             TestEquipment t3 = new TestEquipment();
-            t3.test();
+            //t3.test();
 
             TestAlert t4 = new TestAlert();
             //t4.test();

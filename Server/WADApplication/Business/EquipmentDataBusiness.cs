@@ -122,7 +122,7 @@ namespace Business
                 using (SQLiteConnection conn = new SQLiteConnection(connStr))
                 {
                     conn.Open();
-                    List<EquipmentData> list2 = EquipmentDataAccess.GetListByTime(conn, dt1, dt2);
+                    List<EquipmentData> list2 = EquipmentDataAccess.GetListByTime(conn, dt1, dt2, equipmentId);
                     list.AddRange(list2);
                 }
             }

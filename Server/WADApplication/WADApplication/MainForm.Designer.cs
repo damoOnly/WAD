@@ -30,12 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            DevExpress.XtraCharts.SwiftPlotDiagram swiftPlotDiagram1 = new DevExpress.XtraCharts.SwiftPlotDiagram();
-            DevExpress.XtraCharts.Series series1 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.SwiftPlotSeriesView swiftPlotSeriesView1 = new DevExpress.XtraCharts.SwiftPlotSeriesView();
-            DevExpress.XtraCharts.Series series2 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.SwiftPlotSeriesView swiftPlotSeriesView2 = new DevExpress.XtraCharts.SwiftPlotSeriesView();
-            DevExpress.XtraCharts.SwiftPlotSeriesView swiftPlotSeriesView3 = new DevExpress.XtraCharts.SwiftPlotSeriesView();
+            DevExpress.XtraCharts.SwiftPlotDiagram swiftPlotDiagram3 = new DevExpress.XtraCharts.SwiftPlotDiagram();
+            DevExpress.XtraCharts.Series series5 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.SwiftPlotSeriesView swiftPlotSeriesView7 = new DevExpress.XtraCharts.SwiftPlotSeriesView();
+            DevExpress.XtraCharts.Series series6 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.SwiftPlotSeriesView swiftPlotSeriesView8 = new DevExpress.XtraCharts.SwiftPlotSeriesView();
+            DevExpress.XtraCharts.SwiftPlotSeriesView swiftPlotSeriesView9 = new DevExpress.XtraCharts.SwiftPlotSeriesView();
             this.ribbon = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.btn_Start = new DevExpress.XtraBars.BarButtonItem();
             this.btn_Stop = new DevExpress.XtraBars.BarButtonItem();
@@ -201,12 +201,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit_period.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit_period.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(swiftPlotDiagram1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(swiftPlotSeriesView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(swiftPlotSeriesView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(swiftPlotSeriesView3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(swiftPlotDiagram3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(swiftPlotSeriesView7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(swiftPlotSeriesView8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(swiftPlotSeriesView9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
@@ -999,32 +999,26 @@
             this.gridColumn10.MinWidth = 80;
             this.gridColumn10.Name = "gridColumn10";
             this.gridColumn10.OptionsColumn.AllowEdit = false;
-            this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 1;
             this.gridColumn10.Width = 80;
             // 
             // gridColumn11
             // 
             this.gridColumn11.Caption = "地址";
-            this.gridColumn11.FieldName = "Address";
+            this.gridColumn11.FieldName = "ID";
             this.gridColumn11.MaxWidth = 150;
             this.gridColumn11.MinWidth = 60;
             this.gridColumn11.Name = "gridColumn11";
             this.gridColumn11.OptionsColumn.AllowEdit = false;
-            this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 2;
             this.gridColumn11.Width = 61;
             // 
             // gridColumn2
             // 
             this.gridColumn2.Caption = "通道名称";
-            this.gridColumn2.FieldName = "SensorTypeB";
+            this.gridColumn2.FieldName = "GasName";
             this.gridColumn2.MaxWidth = 100;
             this.gridColumn2.MinWidth = 55;
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.OptionsColumn.AllowEdit = false;
-            this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 3;
             this.gridColumn2.Width = 55;
             // 
             // gridColumn12
@@ -1106,13 +1100,13 @@
             // gridColumn18
             // 
             this.gridColumn18.Caption = "浓度报警";
-            this.gridColumn18.FieldName = "ChromaAlertStr";
+            this.gridColumn18.FieldName = "AlertStr";
             this.gridColumn18.MaxWidth = 150;
             this.gridColumn18.MinWidth = 60;
             this.gridColumn18.Name = "gridColumn18";
             this.gridColumn18.OptionsColumn.AllowEdit = false;
             this.gridColumn18.Visible = true;
-            this.gridColumn18.VisibleIndex = 9;
+            this.gridColumn18.VisibleIndex = 6;
             this.gridColumn18.Width = 70;
             // 
             // gridColumn19
@@ -1305,20 +1299,20 @@
             // 
             this.chartControl1.BackImage.Image = ((System.Drawing.Image)(resources.GetObject("chartControl1.BackImage.Image")));
             this.chartControl1.BackImage.Stretch = true;
-            swiftPlotDiagram1.AxisX.VisibleInPanesSerializable = "-1";
-            swiftPlotDiagram1.AxisY.VisibleInPanesSerializable = "-1";
-            this.chartControl1.Diagram = swiftPlotDiagram1;
+            swiftPlotDiagram3.AxisX.VisibleInPanesSerializable = "-1";
+            swiftPlotDiagram3.AxisY.VisibleInPanesSerializable = "-1";
+            this.chartControl1.Diagram = swiftPlotDiagram3;
             this.chartControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chartControl1.Location = new System.Drawing.Point(0, 0);
             this.chartControl1.Name = "chartControl1";
-            series1.Name = "Series 1";
-            series1.View = swiftPlotSeriesView1;
-            series2.Name = "Series 2";
-            series2.View = swiftPlotSeriesView2;
+            series5.Name = "Series 1";
+            series5.View = swiftPlotSeriesView7;
+            series6.Name = "Series 2";
+            series6.View = swiftPlotSeriesView8;
             this.chartControl1.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
-        series1,
-        series2};
-            this.chartControl1.SeriesTemplate.View = swiftPlotSeriesView3;
+        series5,
+        series6};
+            this.chartControl1.SeriesTemplate.View = swiftPlotSeriesView9;
             this.chartControl1.Size = new System.Drawing.Size(316, 204);
             this.chartControl1.TabIndex = 0;
             // 
@@ -1818,12 +1812,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.textEdit_Delay.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit_period.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit_period.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(swiftPlotDiagram1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(swiftPlotSeriesView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(swiftPlotSeriesView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(swiftPlotSeriesView3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(swiftPlotDiagram3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(swiftPlotSeriesView7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(swiftPlotSeriesView8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(swiftPlotSeriesView9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);

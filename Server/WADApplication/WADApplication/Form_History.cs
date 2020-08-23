@@ -36,57 +36,60 @@ namespace WADApplication
         {
             try
             {
-                TimeSpan ts = dt2 - dt1;
+                //TimeSpan ts = dt2 - dt1;
 
                 SwiftPlotDiagram spd = chartControl2.Diagram as SwiftPlotDiagram;
+                spd.AxisX.WholeRange.Auto = true;
+                spd.AxisX.VisualRange.Auto = true;
+                //if (ts.TotalMinutes < 1)
+                //{
+                //    spd.AxisX.DateTimeScaleOptions.MeasureUnit = DateTimeMeasureUnit.Second;
+                //    spd.AxisX.DateTimeScaleOptions.GridAlignment = DateTimeGridAlignment.Minute;
+                //    spd.AxisX.Label.TextPattern = "{A:HH:mm:ss}";
+                //    spd.AxisX.WholeRange.SetMinMaxValues(dt1, dt2);
+                //    spd.AxisX.VisualRange.SetMinMaxValues(dt1, dt2);
+                //}
+                //// 时间范围在1小时以内
+                //else if (ts.TotalHours < 1)
+                //{
+                //    spd.AxisX.DateTimeScaleOptions.MeasureUnit = DateTimeMeasureUnit.Minute;
+                //    spd.AxisX.DateTimeScaleOptions.GridAlignment = DateTimeGridAlignment.Minute;
+                //    spd.AxisX.Label.TextPattern = "{A:HH:mm}";
+                    
+                //}
+                //// 1天以内
+                //else if (ts.TotalDays <= 1)
+                //{
+                //    spd.AxisX.DateTimeScaleOptions.MeasureUnit = DateTimeMeasureUnit.Minute;
+                //    spd.AxisX.DateTimeScaleOptions.GridAlignment = DateTimeGridAlignment.Minute;
+                //    spd.AxisX.Label.TextPattern = "{A:HH:mm}";
+                //}
+                //// 1个星期以内
+                //else if (ts.TotalDays <= 7)
+                //{
+                //    spd.AxisX.DateTimeScaleOptions.MeasureUnit = DateTimeMeasureUnit.Hour;
+                //    spd.AxisX.DateTimeScaleOptions.GridAlignment = DateTimeGridAlignment.Hour;
+                //    spd.AxisX.Label.TextPattern = "{A:dd HH:mm}";
 
-                if (ts.TotalMinutes < 1)
-                {
-                    spd.AxisX.DateTimeScaleOptions.MeasureUnit = DateTimeMeasureUnit.Second;
-                    spd.AxisX.DateTimeScaleOptions.GridAlignment = DateTimeGridAlignment.Minute;
-                    spd.AxisX.Label.TextPattern = "{A:HH:mm:ss}";
-                    spd.AxisX.WholeRange.SetMinMaxValues(dt1, dt2);
-                    spd.AxisX.VisualRange.SetMinMaxValues(dt1, dt2);
-                }
-                // 时间范围在1小时以内
-                else if (ts.TotalHours < 1)
-                {
-                    spd.AxisX.DateTimeScaleOptions.MeasureUnit = DateTimeMeasureUnit.Minute;
-                    spd.AxisX.DateTimeScaleOptions.GridAlignment = DateTimeGridAlignment.Minute;
-                    spd.AxisX.Label.TextPattern = "{A:HH:mm}";
 
-                }
-                // 1天以内
-                else if (ts.TotalDays <= 1)
-                {
-                    spd.AxisX.DateTimeScaleOptions.MeasureUnit = DateTimeMeasureUnit.Minute;
-                    spd.AxisX.DateTimeScaleOptions.GridAlignment = DateTimeGridAlignment.Minute;
-                    spd.AxisX.Label.TextPattern = "{A:HH:mm}";
-                }
-                // 1个星期以内
-                else if (ts.TotalDays < 7)
-                {
-                    spd.AxisX.DateTimeScaleOptions.MeasureUnit = DateTimeMeasureUnit.Hour;
-                    spd.AxisX.DateTimeScaleOptions.GridAlignment = DateTimeGridAlignment.Hour;
-                    spd.AxisX.Label.TextPattern = "{A:dd HH:mm}";
+                //}
+                //// 1个月以内
+                //else if (ts.TotalDays <= 30)
+                //{
+                //    //spd.AxisX.DateTimeScaleOptions.MeasureUnit = DateTimeMeasureUnit.Hour;
+                //    //spd.AxisX.DateTimeScaleOptions.GridAlignment = DateTimeGridAlignment.Hour;
+                //    //spd.AxisX.Label.TextPattern = "{A:dd.HH}";
+                //    //spd.AxisX.WholeRange.SetMinMaxValues(dt1, dt2);
+                //    //spd.AxisX.VisualRange.SetMinMaxValues(dt1, dt1.AddDays(1));
 
-
-                }
-                // 1个月以内
-                else if (ts.TotalDays < 30)
-                {
-                    spd.AxisX.DateTimeScaleOptions.MeasureUnit = DateTimeMeasureUnit.Hour;
-                    spd.AxisX.DateTimeScaleOptions.GridAlignment = DateTimeGridAlignment.Hour;
-                    spd.AxisX.Label.TextPattern = "{A:yyyy-MM-dd HH:mm}";
-
-                }
-                // 1年以内
-                else
-                {
-                    spd.AxisX.DateTimeScaleOptions.MeasureUnit = DateTimeMeasureUnit.Day;
-                    spd.AxisX.DateTimeScaleOptions.GridAlignment = DateTimeGridAlignment.Month;
-                    spd.AxisX.Label.TextPattern = "{A:yyyy-MM-dd}";
-                }
+                //}
+                //// 1年以内
+                //else
+                //{
+                //    spd.AxisX.DateTimeScaleOptions.MeasureUnit = DateTimeMeasureUnit.Day;
+                //    spd.AxisX.DateTimeScaleOptions.GridAlignment = DateTimeGridAlignment.Month;
+                //    spd.AxisX.Label.TextPattern = "{A:yyyy-MM-dd}";
+                //}
             }
             catch (Exception e)
             {
@@ -324,8 +327,6 @@ namespace WADApplication
                     return;
                 }
 
-                DateTime dt1 = DateTime.MinValue;
-                DateTime dt2 = DateTime.MaxValue;
                 DataTable dataTable = new DataTable();
                 dataTable.Columns.Add("时间");
                 dataTable.Columns.Add("单位");
@@ -353,7 +354,7 @@ namespace WADApplication
                 listobj.Add(dataTable);
                 listobj.Add(listSeries);
                 listobj.Add(listeqid);
-                ThreadPool.QueueUserWorkItem(new WaitCallback(Gethistorydata),listobj);                
+                ThreadPool.QueueUserWorkItem(new WaitCallback(GethistorydataNew), listobj);                
                 
             }
             catch (Exception ex)
@@ -363,7 +364,7 @@ namespace WADApplication
 
         }
 
-        private void Gethistorydata(object parm) 
+        private void Gethistorydata(object parm)
         {
             DataTable dataTable = (parm as List<object>)[0] as DataTable;
             Series[] listSeries = (parm as List<object>)[1] as Series[];
@@ -372,13 +373,14 @@ namespace WADApplication
             Stopwatch watch = new Stopwatch();
             watch.Start();
             List<EquipmentData> data = new List<EquipmentData>();
-            listeqid.ForEach(c => {
+            listeqid.ForEach(c =>
+            {
                 var tl = EquipmentDataBusiness.GetList(dateEdit1.DateTime, dateEdit2.DateTime, c);
                 data.AddRange(tl);
             });
             Trace.WriteLine("get database: " + watch.Elapsed);
             watch.Restart();
-            IEnumerable<IGrouping<string, EquipmentData>> gridTable = data.GroupBy(c => c.AddTimeStr);
+            IEnumerable<IGrouping<long, EquipmentData>> gridTable = data.GroupBy(c => c.AddTimeGroup);
             foreach (var item in gridTable)
             {
                 DataRow row = dataTable.NewRow();
@@ -400,7 +402,7 @@ namespace WADApplication
                 Series series = listSeries.FirstOrDefault(c => ((int)c.Tag) == item.Key);
                 foreach (var item2 in item)
                 {
-                    series.Points.Add(new SeriesPoint(item2.AddTimeStr, item2.Chroma));
+                    series.Points.Add(new SeriesPoint(item2.AddTime, item2.Chroma));
                 }
             }
 
@@ -426,7 +428,124 @@ namespace WADApplication
                 diagram_Tem.AxisY.Title.Text = "浓度";
 
                 setX(DateTime.Parse(gridtable.FirstOrDefault().Key), DateTime.Parse(gridtable.LastOrDefault().Key));
-            }), listSeries,gridTable);            
+            }), listSeries, gridTable);
+        }
+
+        private void GethistorydataNew(object parm)
+        {
+            DataTable dataTable = (parm as List<object>)[0] as DataTable;
+            Series[] listSeries = (parm as List<object>)[1] as Series[];
+            List<int> listeqid = (parm as List<object>)[2] as List<int>;
+
+            Stopwatch watch = new Stopwatch();
+            watch.Start();
+            List<EquipmentReportData> reportData = new List<EquipmentReportData>();
+            listeqid.ForEach(c =>
+            {
+                EquipmentReportData rd = new EquipmentReportData();
+                rd.ID = c;
+                rd.GasName = mainList.Find(m => m.ID == c).GasName;
+                rd.UnitName = mainList.Find(m => m.ID == c).UnitName;
+                rd.DataList = EquipmentDataBusiness.GetList(dateEdit1.DateTime, dateEdit2.DateTime, c);
+                reportData.Add(rd);
+            });
+
+            watch.Stop();
+            Trace.WriteLine("get database: " + watch.Elapsed);
+
+            RenderSeries(listSeries, reportData);
+
+            RenderGrid(dataTable, reportData, listeqid);
+            
+        }
+
+        private void RenderGrid(DataTable dataTable,List<EquipmentReportData> reportData,  List<int> listeqid)
+        {
+            Stopwatch watch = new Stopwatch();
+            watch.Start();
+
+            if (reportData == null || reportData.Count <= 0)
+            {
+                return;
+            }
+            List<EquipmentData> data = new List<EquipmentData>();
+            foreach (var item in reportData)
+            {
+                data.AddRange(item.DataList);
+            }
+
+            if (data.Count <=0)
+            {
+                return;
+            }
+
+            string unitStr = mainList.Find(c => c.ID == listeqid.First()).UnitName;
+
+            IEnumerable<IGrouping<long, EquipmentData>> gridTable = data.GroupBy(c => c.AddTimeGroup);
+            foreach (var item in gridTable)
+            {
+                IEnumerable<IGrouping<int, EquipmentData>> one = item.GroupBy(g => g.EquipmentID);
+                DataRow row = dataTable.NewRow();
+                row[0] = new DateTime(item.Key*10000000*60);
+                row[1] = unitStr;
+                for (int i = 0; i < listeqid.Count; i++)
+                {
+                    var io = one.FirstOrDefault(c=>c.Key == listeqid[i]);
+                    if (io == null)
+                    {
+                        continue;
+                    }
+                    var ch = io.Average(c=>c.Chroma);
+                    row[i + 2] = ch;
+                }
+                dataTable.Rows.Add(row);
+            }
+            Trace.WriteLine("table foreach: " + watch.Elapsed);
+            watch.Restart();
+
+            this.Invoke(new Action<DataTable>((datatable) => this.gridControl2.DataSource = datatable), dataTable);
+            watch.Stop();
+            Trace.WriteLine("banding table: " + watch.Elapsed);
+        }
+
+        private void RenderSeries(Series[] listSeries, List<EquipmentReportData> reportData)
+        {
+            Stopwatch watch = new Stopwatch();
+            watch.Start();
+            if (reportData ==null || reportData.Count <=0 || listSeries == null || listSeries.Length <=0)
+            {
+                return;
+            }
+
+            for (int i = 0, length = listSeries.Length; i < length; i++)
+            {
+                Series sp = listSeries[i];
+                var rd = reportData.Find(c => c.ID == (int)sp.Tag);
+                if (rd == null || rd.DataList == null || rd.DataList.Count <=0)
+                {
+                    continue;
+                }
+                sp.Points.AddRange(rd.DataList.Select(c => new SeriesPoint(c.AddTime, c.Chroma)).ToArray());
+            }
+            Trace.WriteLine("series foreach: " + watch.Elapsed);
+            watch.Restart();
+
+            this.Invoke(new Action<Series[],string>((listseries,a) =>
+            {
+                this.chartControl2.Series.AddRange(listseries);
+                if (this.chartControl2.Series.Count <= 0)
+                {
+                    this.chartControl2.Series.Add(new Series("曲线", ViewType.SwiftPlot));
+                }
+                 //更改曲线纵坐标描述
+                SwiftPlotDiagram diagram_Tem = this.chartControl2.Diagram as SwiftPlotDiagram;
+                diagram_Tem.EnableAxisXScrolling = true;
+                diagram_Tem.AxisY.Title.Text = "浓度";
+                setX(dateEdit1.DateTime, dateEdit2.DateTime);
+            }), listSeries, string.Empty);
+
+            watch.Stop();
+            Trace.WriteLine("series binding: " + watch.Elapsed);
         }
 
         private void simpleButton4_Click(object sender, EventArgs e)
@@ -571,8 +690,8 @@ namespace WADApplication
         {
             loadData();
             DateTime time = DateTime.Now;
-            dateEdit1.DateTime = time.AddDays(-36);
-            dateEdit2.DateTime = time.AddDays(-29);
+            dateEdit1.DateTime = time.AddDays(-30);
+            dateEdit2.DateTime = time;
         }
 
         private void loadData()

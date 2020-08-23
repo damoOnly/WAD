@@ -233,146 +233,6 @@ namespace WADApplication
 
             this.Invoke(new Action<bool>(c => btn_Start.Enabled = c), true);
         }
-        
-        // 初始化曲线
-        private void InitSeries()
-        {
-            chartControl1.Legend.AlignmentHorizontal = LegendAlignmentHorizontal.Right;
-            chartControl1.Series.Clear();
-            if (mainList.Count < 1)
-            {
-                return;
-            }
-            List<Series> listSeries = new List<Series>();
-
-            foreach (Equipment item in mainList)
-            {
-                if (!item.IfShowSeries)
-                {
-                    continue;
-                }
-                Series series = new Series(string.Format("{0},{1}", item.Address, item.SensorTypeB), ViewType.SwiftPlot);
-                series.Tag = item.ID;
-                series.ArgumentScaleType = ScaleType.DateTime;
-                SwiftPlotSeriesView spsv1 = new SwiftPlotSeriesView();
-                spsv1.LineStyle.Thickness = 2;
-                series.View = spsv1;
-                listSeries.Add(series);
-            }
-            //if (listSeries.Count <= 0)
-            //{
-            //    listSeries.Add(new Series("曲线", ViewType.SwiftPlot));
-            //}
-            if (listSeries.Count == 0)
-            {
-                return;
-            }
-            chartControl1.Series.AddRange(listSeries.ToArray());
-
-
-            SwiftPlotDiagram diagram_Tem = chartControl1.Diagram as SwiftPlotDiagram;
-
-            diagram_Tem.Margins.Right = 15;
-            //diagram_Tem.AxisX.
-            diagram_Tem.AxisX.DateTimeScaleOptions.GridAlignment = DateTimeGridAlignment.Minute;
-            diagram_Tem.AxisX.DateTimeScaleOptions.MeasureUnit = DateTimeMeasureUnit.Second;
-            diagram_Tem.AxisX.Label.TextPattern = "A:HH:mm:ss";
-            //diagram_Tem.AxisX.GridLines.Visible = true;
-            diagram_Tem.AxisX.VisualRange.AutoSideMargins = false;
-            diagram_Tem.AxisX.WholeRange.AutoSideMargins = true;
-            diagram_Tem.AxisX.Title.Text = "时间";
-            diagram_Tem.AxisX.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
-            diagram_Tem.AxisX.Title.Alignment = StringAlignment.Far;
-            diagram_Tem.AxisX.Title.Antialiasing = false;
-            diagram_Tem.AxisX.Title.Font = new System.Drawing.Font("Tahoma", 8);
-
-            diagram_Tem.AxisY.WholeRange.AlwaysShowZeroLevel = false;
-            //diagram_Tem.EnableAxisYZooming = true;
-            //diagram_Tem.EnableAxisYScrolling = true;
-            diagram_Tem.AxisY.Interlaced = true;
-            diagram_Tem.AxisY.VisualRange.AutoSideMargins = true;
-            diagram_Tem.AxisY.WholeRange.AutoSideMargins = true;
-            if (mainList.First() != null)
-            {
-                diagram_Tem.AxisY.Title.Text = string.Format("浓度({0})", mainList.First().UnitName);
-            }
-            else
-            {
-                diagram_Tem.AxisY.Title.Text = string.Format("浓度");
-            }
-            diagram_Tem.AxisY.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
-            diagram_Tem.AxisY.Title.Alignment = StringAlignment.Far;
-            diagram_Tem.AxisY.Title.Antialiasing = false;
-            diagram_Tem.AxisY.Title.Font = new System.Drawing.Font("Tahoma", 8);
-            //if (diagram_Tem != null && diagram_Tem.AxisX.DateTimeMeasureUnit == DateTimeMeasurementUnit.Millisecond)
-            //    diagram_Tem.AxisX.Range.SetMinMaxValues(minDate, argument);            
-        }
-
-        private bool IfCondionsSeries(int id)
-        {
-            foreach (Series item in chartControl1.Series)
-            {
-                if (id == Convert.ToInt32(item.Tag))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-        // 勾选曲线
-        private void changeSeries()
-        {
-            if (chartControl1.Series.Count == 0)
-            {
-                InitSeries();
-            }
-            chartControl1.Series.BeginUpdate();
-            foreach (Equipment item in mainList)
-            {
-                if (item.IfShowSeries && !IfCondionsSeries(item.ID))
-                {
-                    Series series = new Series(string.Format("{0},{1}", item.Address, item.SensorTypeB), ViewType.SwiftPlot);
-                    series.Tag = item.ID;
-                    series.ArgumentScaleType = ScaleType.DateTime;
-                    SwiftPlotSeriesView spsv1 = new SwiftPlotSeriesView();
-                    spsv1.LineStyle.Thickness = 2;
-                    series.View = spsv1;
-                    chartControl1.Series.Add(series);
-                    List<EquipmentData> datalist = EquipmentDataBusiness.GetList(minTime, maxTime, item.ID);
-                    if (datalist == null)
-                    {
-                        continue;
-                    }
-                    datalist.ForEach(c =>
-                    {
-                        SeriesPoint sp = new SeriesPoint(c.AddTime, c.Chroma);
-                        series.Points.Add(sp);
-                    });
-                }
-                else if (!item.IfShowSeries && IfCondionsSeries(item.ID))
-                {
-                    int index = 0;
-                    for (int i = 0; i < chartControl1.Series.Count; i++)
-                    {
-                        if (item.ID == Convert.ToInt32(chartControl1.Series[i].Tag))
-                        {
-                            index = i;
-                            break;
-                        }
-                    }
-                    chartControl1.Series.RemoveAt(index);
-                }
-            }
-            chartControl1.Series.EndUpdate();
-
-
-            //if (ep.Max > 0)
-            //{
-            //    diagram_Tem.AxisY.Range.SetMinMaxValues(0, ep.Max);
-            //}
-        }
-
-
         // 初始化Form
         private void InitializeForm()
         {
@@ -399,7 +259,7 @@ namespace WADApplication
             //{
             //    alertList.Add(c.ID, new List<Alert>());
             //});
-            InitSeries();
+            
             InitControls();
             InitParm();
 
@@ -408,6 +268,7 @@ namespace WADApplication
             // 置位初始化标志
 
             AlertProcess.Connect(ip, port);//连接报警声音设备
+            MainProcess.ManageSeries(chartControl1, mainList, minTime, maxTime);
             IsInit = false;
         }
 
@@ -427,9 +288,10 @@ namespace WADApplication
             //txt_SavePeriod.EditValue = ConfigurationManager.AppSettings["SavePeriod"].ToString();
             //cmb_SavePeriod.EditValue = ConfigurationManager.AppSettings["SaveUnit"].ToString();   
             CommandResult.delay = Convert.ToInt32(ConfigurationManager.AppSettings["delay"]);
-            CommandResult.delay2 = Convert.ToInt32(ConfigurationManager.AppSettings["delay2"]);
+            //CommandResult.delay2 = Convert.ToInt32(ConfigurationManager.AppSettings["delay2"]);
             peroStr = textEdit_period.Text;
             rangtime = comboBoxEdit_VTime.Text;
+            chartControl1.Series.Clear();
         }
 
         // 使能控件
@@ -549,7 +411,6 @@ namespace WADApplication
             gridControl_Status.RefreshDataSource();
             gridView_Status.BestFitColumns();
             selecteq = mainList.FirstOrDefault();
-            InitSeries();
         }
 
         /// <summary>
@@ -686,7 +547,7 @@ namespace WADApplication
                 CommonMemory.IsOpen = true;
                 pictureEdit_seriaPort.Image = Resources.串口已打开;
                 CommonMemory.IsReadConnect = true;
-                XtraMessageBox.Show("串口打开成功");
+                //XtraMessageBox.Show("串口打开成功");
                 setinfo("打开串口");
 
                 // to do
@@ -717,7 +578,7 @@ namespace WADApplication
                 }
                 gridControl_Status.RefreshDataSource();
                 gridView_Status.BestFitColumns();
-                XtraMessageBox.Show("串口已关闭");
+                //XtraMessageBox.Show("串口已关闭");
                 setinfo("关闭串口");
             }
         }
@@ -1446,14 +1307,15 @@ namespace WADApplication
         private void repositoryItemCheckEdit1_CheckedChanged(object sender, EventArgs e)
         {
             DevExpress.XtraEditors.CheckEdit checkedit = sender as DevExpress.XtraEditors.CheckEdit;
-            int addr = Convert.ToInt32(gridView_nowData2.GetFocusedRowCellValue("Address"));
+            int id = Convert.ToInt32(gridView_nowData2.GetFocusedRowCellValue("ID"));
 
-            int idexeq = mainList.FindIndex(c => c.Address == addr);
+            int idexeq = mainList.FindIndex(c => c.ID == id);
 
+            // to do 
             mainList[idexeq].IfShowSeries = checkedit.Checked;
             EquipmentDal.UpdateOne(mainList[idexeq]);
 
-            changeSeries();
+            MainProcess.ManageSeries(chartControl1, mainList, minTime, maxTime);
         }
     }
 }
