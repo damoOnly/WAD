@@ -6,6 +6,7 @@ using Entity;
 using System.Data;
 using System.Data.SQLite;
 using System.IO;
+using GlobalMemory;
 
 namespace Business
 {
@@ -87,7 +88,7 @@ select last_insert_rowid();";
                     cmd.Parameters.AddWithValue("@Max", data.Max);
                     cmd.Parameters.AddWithValue("@IsGas", data.IsGas);
                     cmd.Parameters.AddWithValue("@IsDel", data.IsDel);
-                    cmd.Parameters.AddWithValue("@CreateTime", DateTime.Now);
+                    cmd.Parameters.AddWithValue("@CreateTime", Utility.CutOffMillisecond(DateTime.Now));
                     int rowid = Convert.ToInt32(cmd.ExecuteScalar());
                     data.ID = rowid;
                 }
@@ -118,7 +119,7 @@ select last_insert_rowid();";
                     cmd.Parameters.AddWithValue("@Max", data.Max);
                     cmd.Parameters.AddWithValue("@IsGas", data.IsGas);
                     cmd.Parameters.AddWithValue("@IsDel", data.IsDel);
-                    cmd.Parameters.AddWithValue("@CreateTime", DateTime.Now);
+                    cmd.Parameters.AddWithValue("@CreateTime", Utility.CutOffMillisecond(DateTime.Now));
                     cmd.Parameters.AddWithValue("@id", data.ID);
                     cmd.ExecuteNonQuery();
                 }

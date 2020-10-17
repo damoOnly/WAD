@@ -6,13 +6,14 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
+using GlobalMemory;
 
 
 namespace WADApplication
 {
     public partial class Form_setTime : DevExpress.XtraEditors.XtraForm
     {
-        public DateTime DT = DateTime.Now;
+        public DateTime DT = Utility.CutOffMillisecond(DateTime.Now);
         public Form_setTime()
         {
             
@@ -42,7 +43,7 @@ namespace WADApplication
         private void Form_setTime_Load(object sender, EventArgs e)
         {
             InitiateDevExpressSkins();
-            dateEdit1.DateTime = DateTime.Now;
+            dateEdit1.DateTime = Utility.CutOffMillisecond(DateTime.Now);
         }
     }
 }

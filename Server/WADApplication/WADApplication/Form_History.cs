@@ -525,7 +525,7 @@ namespace WADApplication
                 {
                     continue;
                 }
-                sp.Points.AddRange(rd.DataList.Select(c => new SeriesPoint(c.AddTime, c.Chroma)).ToArray());
+                sp.Points.AddRange(rd.DataList.Select(c => new SeriesPoint(c.AddTime, Math.Round(c.Chroma, 2))).ToArray());
             }
             Trace.WriteLine("series foreach: " + watch.Elapsed);
             watch.Restart();

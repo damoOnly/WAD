@@ -307,7 +307,7 @@ namespace WADApplication
         private void Form_History_Load(object sender, EventArgs e)
         {
             loadData();
-            DateTime time = DateTime.Now;
+            DateTime time = Utility.CutOffMillisecond(DateTime.Now);
             dateEdit1.DateTime = time.AddDays(-7);
             dateEdit2.DateTime = time;
         }

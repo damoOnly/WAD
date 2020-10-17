@@ -20,6 +20,7 @@ namespace WADApplication.Process
 {
     class MainProcess
     {
+        public static DateTime lastRemoteTime = Utility.CutOffMillisecond(DateTime.Now);
         public static void readMain(Equipment eq, bool isReadBasic, int selectedEqId, TextEdit t1, TextEdit t2, TextEdit t3, TextEdit t4, ChartControl chart,Form_map set)    //浓度读取处理函数
         {
             byte low = 0x52;
@@ -102,7 +103,7 @@ namespace WADApplication.Process
             //}
 
             EquipmentData ed = new EquipmentData();
-            ed.AddTime = DateTime.Now;
+            ed.AddTime = Utility.CutOffMillisecond(DateTime.Now);
             ed.EquipmentID = eq.ID;
             ed.Chroma = eq.Chroma;
             //ed.Temperature = eq.Temperature.Remove(eq.Temperature.Length - 1);
@@ -125,34 +126,54 @@ namespace WADApplication.Process
 
         private static void addPoint(EquipmentData ed, int selectedEqId, TextEdit t1,TextEdit t2,TextEdit t3,TextEdit t4, ChartControl chart)
         {
-
+            if (chart.Series == null)
+            {
+                return;
+            }
             // 如果是当前选择的曲线
             if (selectedEqId == ed.EquipmentID)
             {
                 t1.Text = ed.Chroma.ToString();
-                // to do 曲线的显示用内存中的数据，缓存起来
-                //t2.Text = ed.HighChroma.ToString();
-                //t3.Text = ed.LowChromadata.ToString();
-                //t4.Text = ((ed.HighChroma + ed.LowChromadata) / 2).ToString();
             }
-            // 切换横坐标时间显示
-            //if (ed.AddTime > maxTime)
-            //{
-            //    minTime = DateTime.Now;
-            //    maxTime = minTime.AddMinutes(halfX);
-            //    SwiftPlotDiagram diagram_Tem = chartControl1.Diagram as SwiftPlotDiagram;
-            //    diagram_Tem.AxisX.Range.SetMinMaxValues(minTime, maxTime);
-            //}
-            SwiftPlotDiagram diagram_Tem1 = chart.Diagram as SwiftPlotDiagram;
             // 找到曲线增加点
             foreach (Series series in chart.Series)
             {
-                if (ed.EquipmentID == Convert.ToInt32(series.Tag))
+                if (ed.EquipmentID == Convert.ToInt32(series.Tag) && series.View is SwiftPlotSeriesViewBase)
                 {
                     Trace.WriteLine(ed.EquipmentID);
                     series.Points.Add(new SeriesPoint(ed.AddTime, ed.Chroma));
                 }
             }
+        }
+
+        public static void remotePoint(ChartControl chart, double realTimeRangeX)
+        {
+            if (chart.Series == null)
+            {
+                return;
+            }
+            // 移除最小时间以前的点
+            DateTime minTime = Utility.CutOffMillisecond(DateTime.Now).AddMinutes(-realTimeRangeX);
+            
+            foreach (Series series in chart.Series)
+            {
+                int pointsToRemoveCount = 0;
+                foreach (SeriesPoint point in series.Points)
+                {
+                    if (point.DateTimeArgument < minTime)
+                        pointsToRemoveCount++;
+                }
+                    
+                if (pointsToRemoveCount > series.Points.Count)
+                {
+                    pointsToRemoveCount = series.Points.Count - 1;
+                }
+                if (pointsToRemoveCount > 0)
+                {
+                    series.Points.RemoveRange(0, pointsToRemoveCount);
+                }
+            }
+            lastRemoteTime = Utility.CutOffMillisecond(DateTime.Now);
         }
 
         /// <summary>
@@ -235,17 +256,19 @@ namespace WADApplication.Process
                     SwiftPlotSeriesView spsv1 = new SwiftPlotSeriesView();
                     spsv1.LineStyle.Thickness = 2;
                     series.View = spsv1;
-                    chartControl.Series.Add(series);
+                    // 新勾选的曲线需要查出历史数据，补充前面时间的空白
                     List<EquipmentData> datalist = EquipmentDataBusiness.GetList(minTime, maxTime, item.ID);
-                    if (datalist == null || datalist.Count <=0)
+                    if (datalist == null || datalist.Count <= 0)
                     {
                         continue;
                     }
-                    datalist.ForEach(c =>
+                    // 控制最多点个数 to do 实时add 的时候需要做间隔
+                    cutListDate(datalist).ForEach(c =>
                     {
                         SeriesPoint sp = new SeriesPoint(c.AddTime, c.Chroma);
                         series.Points.Add(sp);
                     });
+                    chartControl.Series.Add(series);                    
                 }
                 else if (!item.IfShowSeries && IsCondionsSeries(item.ID, chartControl))
                 {
@@ -323,5 +346,24 @@ namespace WADApplication.Process
             }
             return isCondion;
         }
+
+        // 每条线显示的点不能大于1w
+        private static List<EquipmentData> cutListDate(List<EquipmentData> datalist)
+        {
+            List<EquipmentData> result = new List<EquipmentData>();
+            int multiple = (int)Math.Ceiling(datalist.Count / 10000.00);
+            if (multiple > 1)
+            {
+                for (int i = 0, count = datalist.Count; i < count;)
+                {
+                    result.Add(datalist[i]);
+                    i += multiple;
+                }
+                return result;
+            }
+
+            return datalist;
+        }
+
     }
 }

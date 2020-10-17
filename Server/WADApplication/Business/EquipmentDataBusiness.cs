@@ -34,13 +34,13 @@ namespace Business
                 }
                 for (int i = 0; i < 6; i++)
                 {
-                    string ds = DateTime.Now.AddMonths(i).ToString("yyyyMM");
+                    string ds = Utility.CutOffMillisecond(DateTime.Now).AddMonths(i).ToString("yyyyMM");
                     string fileName = string.Format(fileNameTemp, ds);
 
                     if (!File.Exists(dbPath + fileName))
                     {
                         EquipmentDataAccess.CreateDb(dbPath + fileName);
-                        string connStr = GetConnStr(equipmentId, DateTime.Now.AddMonths(i));
+                        string connStr = GetConnStr(equipmentId, Utility.CutOffMillisecond(DateTime.Now).AddMonths(i));
                         using (SQLiteConnection conn = new SQLiteConnection(connStr))
                         {
                             conn.Open();
@@ -50,7 +50,7 @@ namespace Business
                     else
                     {
 
-                        string connStr = GetConnStr(equipmentId, DateTime.Now.AddMonths(i));
+                        string connStr = GetConnStr(equipmentId, Utility.CutOffMillisecond(DateTime.Now).AddMonths(i));
                         using (SQLiteConnection conn = new SQLiteConnection(connStr))
                         {
                             conn.Open();

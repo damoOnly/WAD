@@ -55,7 +55,7 @@ namespace WADApplication.Process
             // update
             if (alertStatus == originalData.AlertStatus)
             {
-                originalData.AlertObject.EndTime = DateTime.Now;
+                originalData.AlertObject.EndTime = Utility.CutOffMillisecond(DateTime.Now);
                 AlertDal.UpdateOne(originalData.AlertObject);
             }
             else
@@ -63,7 +63,7 @@ namespace WADApplication.Process
                 // 前一个状态有报警，要先更新前一个状态为结束状态
                 if (originalData.AlertStatus != EM_AlertType.normal)
                 {
-                    originalData.AlertObject.EndTime = DateTime.Now;
+                    originalData.AlertObject.EndTime = Utility.CutOffMillisecond(DateTime.Now);
                     AlertDal.UpdateOne(originalData.AlertObject);
                 }
 
@@ -72,8 +72,8 @@ namespace WADApplication.Process
                 Alert art = new Alert();
                 art.AlertName = originalData.AlertStr;
                 art.EquipmentID = originalData.ID;
-                art.StratTime = DateTime.Now;
-                art.EndTime = DateTime.Now;
+                art.StratTime = Utility.CutOffMillisecond(DateTime.Now);
+                art.EndTime = Utility.CutOffMillisecond(DateTime.Now);
                 AlertDal.AddOneR(ref art);
                 originalData.AlertObject = art;                                
             }
@@ -83,7 +83,7 @@ namespace WADApplication.Process
         {
             if (originalData.AlertStatus != EM_AlertType.normal)
             {
-                originalData.AlertObject.EndTime = DateTime.Now;
+                originalData.AlertObject.EndTime = Utility.CutOffMillisecond(DateTime.Now);
                 AlertDal.UpdateOne(originalData.AlertObject);
                 originalData.AlertObject = null;
             }

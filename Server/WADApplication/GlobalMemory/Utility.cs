@@ -73,5 +73,10 @@ namespace GlobalMemory
 
             return result;
         }
+
+        public static DateTime CutOffMillisecond(DateTime dt)
+        {
+            return new DateTime(dt.Ticks - (dt.Ticks % TimeSpan.TicksPerSecond), dt.Kind);
+        }
     }
 }

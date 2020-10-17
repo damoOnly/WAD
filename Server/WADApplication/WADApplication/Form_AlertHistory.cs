@@ -10,6 +10,7 @@ using DevExpress.XtraEditors;
 using Entity;
 using Business;
 using System.Configuration;
+using GlobalMemory;
 
 namespace WADApplication
 {
@@ -113,7 +114,7 @@ namespace WADApplication
         private void Form_AlertHistory_Load(object sender, EventArgs e)
         {
             loadData();
-            DateTime time = DateTime.Now;
+            DateTime time = Utility.CutOffMillisecond(DateTime.Now);
             dateEdit_Start.DateTime = time.AddDays(-7);
             dateEdit_end.DateTime = time;
         }

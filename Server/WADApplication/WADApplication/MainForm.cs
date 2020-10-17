@@ -151,19 +151,19 @@ namespace WADApplication
         // 列表控件选中的对象
         private Equipment selecteq = new Equipment();
         /// <summary>
-        /// 实时曲线X轴最小值
+        /// 实时曲线X轴最小值,这2个时间不是实时的，只是用于获取历史数据
         /// </summary>
-        private DateTime minTime = DateTime.Now;
+        private DateTime minTime = Utility.CutOffMillisecond(DateTime.Now);
 
         /// <summary>
         /// 实时曲线X轴最大值
         /// </summary>
-        private DateTime maxTime = DateTime.Now.AddMinutes(30);
+        private DateTime maxTime = Utility.CutOffMillisecond(DateTime.Now.AddMinutes(30));
 
         /// <summary>
-        /// X轴的偏差值
+        /// 试试曲线X轴的时间范围（分钟）
         /// </summary>
-        private double halfX;
+        private double realTimeRangeX;
 
         /// <summary>
         /// 是否初始化参数
@@ -181,14 +181,9 @@ namespace WADApplication
         private int CommDelay = 100;
 
         /// <summary>
-        /// 每屏时长
-        /// </summary>
-        private string rangtime;
-
-        /// <summary>
         /// 开始检测时间
         /// </summary>
-        private DateTime startTime = DateTime.Now;
+        private DateTime startTime = Utility.CutOffMillisecond(DateTime.Now);
         #endregion
 
         #region 私有方法
@@ -214,6 +209,11 @@ namespace WADApplication
                             MainProcess.readMain(mainList[i], IsReadBasic, selecteq.ID, textEdit1, textEdit2, textEdit3, textEdit4, chartControl1, set);
                             Thread.Sleep(CommDelay);
                         }
+                    }
+                    // 每30秒清楚一次最小数据(多余的点)
+                    if (Utility.CutOffMillisecond(DateTime.Now.AddSeconds(-30)) > MainProcess.lastRemoteTime)
+                    {
+                        MainProcess.remotePoint(chartControl1, this.realTimeRangeX);
                     }
                     AlertProcess.OperatorAlert(mainList);
                     IsReadBasic = false;
@@ -268,7 +268,7 @@ namespace WADApplication
             // 置位初始化标志
 
             AlertProcess.Connect(ip, port);//连接报警声音设备
-            MainProcess.ManageSeries(chartControl1, mainList, minTime, maxTime);
+            
             IsInit = false;
         }
 
@@ -290,7 +290,6 @@ namespace WADApplication
             CommandResult.delay = Convert.ToInt32(ConfigurationManager.AppSettings["delay"]);
             //CommandResult.delay2 = Convert.ToInt32(ConfigurationManager.AppSettings["delay2"]);
             peroStr = textEdit_period.Text;
-            rangtime = comboBoxEdit_VTime.Text;
             chartControl1.Series.Clear();
         }
 
@@ -344,38 +343,8 @@ namespace WADApplication
                 default:
                     break;
             }
-
-            //switch (cmb_SavePeriod.Text.ToString())
-            //{
-            //    case "秒":
-            //        if (r1 > 0)
-            //        {
-            //            saveHz = r1;
-            //        }
-            //        break;
-            //    case "分钟":
-            //        if (r1 > 0)
-            //        {
-            //            saveHz = r1 * 60;
-            //        }
-            //        break;
-            //    case "小时":
-            //        if (r1 > 0)
-            //        {
-            //            saveHz = r1 * 60 * 60;
-            //        }
-            //        break;
-            //    default:
-            //        break;
-            //}
-            //总通道命令延时时间  20151217
-            int n = mainList.Count;
             CommDelay = r2;
-            //if (CommDelay * n > readHz * 1000)
-            //{
-            //    readHz = CommDelay * n / 1000;
-            //}
-            halfX = Convert.ToDouble(comboBoxEdit_VTime.EditValue);
+            realTimeRangeX = Convert.ToDouble(comboBoxEdit_VTime.EditValue);
             return true;
         }
 
@@ -607,8 +576,10 @@ namespace WADApplication
                 return;
             }
             CommonMemory.IsReadConnect = false;
-            minTime = DateTime.Now;
-            maxTime = minTime.AddMinutes(halfX);
+            maxTime = Utility.CutOffMillisecond(DateTime.Now);
+            minTime = maxTime.AddMinutes(-realTimeRangeX);
+            // 点击开始的时候才初始化实时曲线，打开软件的时候不要初始化实时曲线
+            MainProcess.ManageSeries(chartControl1, mainList, minTime, maxTime);
             mainThread = new Thread(new ThreadStart(ReadData));
             isRead = true;
             IsReadBasic = true;
@@ -619,11 +590,6 @@ namespace WADApplication
             comboBoxEdit_period.Enabled = false;
             cmb_SavePeriod.Enabled = false;
             txt_SavePeriod.Enabled = false;
-
-            //startTime = DateTime.Now;
-            //mainList2 = mainList;
-            //saveThread = new Thread(new ThreadStart(SaveData));
-            //saveThread.Start();
         }
 
         // 停止按钮
@@ -959,21 +925,17 @@ namespace WADApplication
                 XtraMessageBox.Show("时长只能为1~1440之间的数");
                 return;
             }
-            halfX = val;
-            if (minTime.AddMinutes(val) > DateTime.Now)
+            realTimeRangeX = val;
+            // 最大时间为当前时间, 前面时间的数据从数据库里面取
+            maxTime = Utility.CutOffMillisecond(DateTime.Now);
+            minTime = maxTime.AddMinutes(-val);
+            // 这里要重新初始化一次实时曲线，没有开始监听的时候，不需要显示曲线
+            if (isRead)
             {
-                maxTime = minTime.AddMinutes(halfX);
+                MainProcess.ManageSeries(chartControl1, mainList, minTime, maxTime);
             }
-            else
-            {
-                minTime = DateTime.Now;
-                maxTime = minTime.AddMinutes(halfX);
-            }
-            SwiftPlotDiagram diagram_Tem = chartControl1.Diagram as SwiftPlotDiagram;
-            //diagram_Tem.AxisX.Range.SetMinMaxValues(minTime, maxTime);
-
+            
             XtraMessageBox.Show("设置成功");
-            rangtime = comboBoxEdit_VTime.Text;
         }
 
         private void comboBoxEdit5_KeyPress(object sender, KeyPressEventArgs e)
@@ -1311,11 +1273,14 @@ namespace WADApplication
 
             int idexeq = mainList.FindIndex(c => c.ID == id);
 
-            // to do 
             mainList[idexeq].IfShowSeries = checkedit.Checked;
             EquipmentDal.UpdateOne(mainList[idexeq]);
-
-            MainProcess.ManageSeries(chartControl1, mainList, minTime, maxTime);
+            // 只有在开始监听的情况下，才显示曲线，所以这里加条件判断
+            if (isRead)
+            {
+                MainProcess.ManageSeries(chartControl1, mainList, minTime, maxTime);
+            }
+            
         }
     }
 }
