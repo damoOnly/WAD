@@ -202,19 +202,24 @@ namespace WADApplication
                 }
                 try
                 {
+                    bool isAddPont = MainProcess.GetIsAddPoint(this.realTimeRangeX);
                     lock (mainList)
                     {
+                        SwiftPlotDiagram diagram = chartControl1.Diagram as SwiftPlotDiagram;
+                        if (diagram != null)
+                            diagram.AxisX.WholeRange.SetMinMaxValues(minTime, Utility.CutOffMillisecond(DateTime.Now));
+
                         for (int i = 0, length = mainList.Count; i < length; i++)
                         {
-                            MainProcess.readMain(mainList[i], IsReadBasic, selecteq.ID, textEdit1, textEdit2, textEdit3, textEdit4, chartControl1, set);
+                            MainProcess.readMain(mainList[i], IsReadBasic, selecteq.ID, textEdit1, textEdit2, textEdit3, textEdit4, chartControl1, set, isAddPont);
                             Thread.Sleep(CommDelay);
                         }
-                    }
-                    // 每30秒清楚一次最小数据(多余的点)
-                    if (Utility.CutOffMillisecond(DateTime.Now.AddSeconds(-30)) > MainProcess.lastRemoteTime)
-                    {
-                        MainProcess.remotePoint(chartControl1, this.realTimeRangeX);
-                    }
+                        // 每30秒清除一次最小数据(多余的点)
+                        if (Utility.CutOffMillisecond(DateTime.Now.AddSeconds(-30)) > MainProcess.lastRemoteTime)
+                        {
+                            MainProcess.remotePoint(chartControl1, this.realTimeRangeX);
+                        }
+                    }                    
                     AlertProcess.OperatorAlert(mainList);
                     IsReadBasic = false;
                     this.Invoke(new Action(gridControl_Status.RefreshDataSource));
@@ -290,7 +295,7 @@ namespace WADApplication
             CommandResult.delay = Convert.ToInt32(ConfigurationManager.AppSettings["delay"]);
             //CommandResult.delay2 = Convert.ToInt32(ConfigurationManager.AppSettings["delay2"]);
             peroStr = textEdit_period.Text;
-            chartControl1.Series.Clear();
+            //chartControl1.Series.Clear();
         }
 
         // 使能控件
@@ -579,7 +584,11 @@ namespace WADApplication
             maxTime = Utility.CutOffMillisecond(DateTime.Now);
             minTime = maxTime.AddMinutes(-realTimeRangeX);
             // 点击开始的时候才初始化实时曲线，打开软件的时候不要初始化实时曲线
-            MainProcess.ManageSeries(chartControl1, mainList, minTime, maxTime);
+            lock (this.mainList)
+            {
+                MainProcess.ManageSeries(chartControl1, mainList, minTime, maxTime);
+            }
+            
             mainThread = new Thread(new ThreadStart(ReadData));
             isRead = true;
             IsReadBasic = true;
@@ -920,9 +929,9 @@ namespace WADApplication
                 XtraMessageBox.Show("设置错误");
                 return;
             }
-            if (val < 1 || val > 1440)
+            if (val < 1 || val > 14400)
             {
-                XtraMessageBox.Show("时长只能为1~1440之间的数");
+                XtraMessageBox.Show("时长只能为1分钟~10天之间的数");
                 return;
             }
             realTimeRangeX = val;
@@ -932,7 +941,10 @@ namespace WADApplication
             // 这里要重新初始化一次实时曲线，没有开始监听的时候，不需要显示曲线
             if (isRead)
             {
-                MainProcess.ManageSeries(chartControl1, mainList, minTime, maxTime);
+                lock (this.mainList)
+                {
+                    MainProcess.ManageSeries(chartControl1, mainList, minTime, maxTime);
+                }                
             }
             
             XtraMessageBox.Show("设置成功");
@@ -1274,11 +1286,16 @@ namespace WADApplication
             int idexeq = mainList.FindIndex(c => c.ID == id);
 
             mainList[idexeq].IfShowSeries = checkedit.Checked;
+            maxTime = Utility.CutOffMillisecond(DateTime.Now);
+            minTime = maxTime.AddMinutes(-realTimeRangeX);
             EquipmentDal.UpdateOne(mainList[idexeq]);
             // 只有在开始监听的情况下，才显示曲线，所以这里加条件判断
             if (isRead)
             {
-                MainProcess.ManageSeries(chartControl1, mainList, minTime, maxTime);
+                lock (mainList)
+                {
+                    MainProcess.ManageSeries(chartControl1, mainList, minTime, maxTime);
+                }                
             }
             
         }

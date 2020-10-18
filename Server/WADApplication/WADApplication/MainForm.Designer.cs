@@ -30,12 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            DevExpress.XtraCharts.SwiftPlotDiagram swiftPlotDiagram3 = new DevExpress.XtraCharts.SwiftPlotDiagram();
-            DevExpress.XtraCharts.Series series5 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.SwiftPlotSeriesView swiftPlotSeriesView7 = new DevExpress.XtraCharts.SwiftPlotSeriesView();
-            DevExpress.XtraCharts.Series series6 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.SwiftPlotSeriesView swiftPlotSeriesView8 = new DevExpress.XtraCharts.SwiftPlotSeriesView();
-            DevExpress.XtraCharts.SwiftPlotSeriesView swiftPlotSeriesView9 = new DevExpress.XtraCharts.SwiftPlotSeriesView();
+            DevExpress.XtraCharts.SwiftPlotDiagram swiftPlotDiagram1 = new DevExpress.XtraCharts.SwiftPlotDiagram();
+            DevExpress.XtraCharts.Series series1 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.SwiftPlotSeriesView swiftPlotSeriesView1 = new DevExpress.XtraCharts.SwiftPlotSeriesView();
+            DevExpress.XtraCharts.SwiftPlotSeriesView swiftPlotSeriesView2 = new DevExpress.XtraCharts.SwiftPlotSeriesView();
             this.ribbon = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.btn_Start = new DevExpress.XtraBars.BarButtonItem();
             this.btn_Stop = new DevExpress.XtraBars.BarButtonItem();
@@ -201,12 +199,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit_period.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit_period.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(swiftPlotDiagram3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(swiftPlotSeriesView7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(swiftPlotSeriesView8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(swiftPlotSeriesView9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(swiftPlotDiagram1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(swiftPlotSeriesView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(swiftPlotSeriesView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
@@ -274,7 +270,7 @@
             this.ribbon.ShowExpandCollapseButton = DevExpress.Utils.DefaultBoolean.False;
             this.ribbon.ShowPageHeadersMode = DevExpress.XtraBars.Ribbon.ShowPageHeadersMode.Hide;
             this.ribbon.ShowToolbarCustomizeItem = false;
-            this.ribbon.Size = new System.Drawing.Size(863, 123);
+            this.ribbon.Size = new System.Drawing.Size(957, 123);
             this.ribbon.StatusBar = this.ribbonStatusBar;
             this.ribbon.Toolbar.ShowCustomizeItem = false;
             this.ribbon.ToolbarLocation = DevExpress.XtraBars.Ribbon.RibbonQuickAccessToolbarLocation.Hidden;
@@ -478,7 +474,7 @@
             this.ribbonStatusBar.Location = new System.Drawing.Point(0, 618);
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbon;
-            this.ribbonStatusBar.Size = new System.Drawing.Size(863, 31);
+            this.ribbonStatusBar.Size = new System.Drawing.Size(957, 31);
             this.ribbonStatusBar.Visible = false;
             // 
             // xtraTabControl1
@@ -488,7 +484,7 @@
             this.xtraTabControl1.Name = "xtraTabControl1";
             this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
             this.xtraTabControl1.ShowTabHeader = DevExpress.Utils.DefaultBoolean.False;
-            this.xtraTabControl1.Size = new System.Drawing.Size(863, 495);
+            this.xtraTabControl1.Size = new System.Drawing.Size(957, 495);
             this.xtraTabControl1.TabIndex = 5;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPage1,
@@ -498,7 +494,7 @@
             // 
             this.xtraTabPage1.Controls.Add(this.splitContainerControl8);
             this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(857, 489);
+            this.xtraTabPage1.Size = new System.Drawing.Size(951, 489);
             this.xtraTabPage1.Text = "xtraTabPage1";
             // 
             // splitContainerControl8
@@ -511,7 +507,7 @@
             this.splitContainerControl8.Panel1.Text = "Panel1";
             this.splitContainerControl8.Panel2.Controls.Add(this.splitContainerControl9);
             this.splitContainerControl8.Panel2.Text = "Panel2";
-            this.splitContainerControl8.Size = new System.Drawing.Size(857, 489);
+            this.splitContainerControl8.Size = new System.Drawing.Size(951, 489);
             this.splitContainerControl8.SplitterPosition = 326;
             this.splitContainerControl8.TabIndex = 1;
             this.splitContainerControl8.Text = "splitContainerControl8";
@@ -878,7 +874,7 @@
             this.splitContainerControl9.Panel2.Controls.Add(this.panelControl1);
             this.splitContainerControl9.Panel2.Controls.Add(this.lstbxMessageView);
             this.splitContainerControl9.Panel2.Text = "Panel2";
-            this.splitContainerControl9.Size = new System.Drawing.Size(526, 489);
+            this.splitContainerControl9.Size = new System.Drawing.Size(620, 489);
             this.splitContainerControl9.SplitterPosition = 280;
             this.splitContainerControl9.TabIndex = 0;
             this.splitContainerControl9.Text = "splitContainerControl9";
@@ -889,7 +885,7 @@
             this.panelControl3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl3.Location = new System.Drawing.Point(0, 24);
             this.panelControl3.Name = "panelControl3";
-            this.panelControl3.Size = new System.Drawing.Size(526, 256);
+            this.panelControl3.Size = new System.Drawing.Size(620, 256);
             this.panelControl3.TabIndex = 4;
             // 
             // gridControl_nowData2
@@ -902,7 +898,7 @@
             this.gridControl_nowData2.Name = "gridControl_nowData2";
             this.gridControl_nowData2.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemCheckEdit1});
-            this.gridControl_nowData2.Size = new System.Drawing.Size(522, 252);
+            this.gridControl_nowData2.Size = new System.Drawing.Size(616, 252);
             this.gridControl_nowData2.TabIndex = 3;
             this.gridControl_nowData2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView_nowData2});
@@ -1030,7 +1026,7 @@
             this.gridColumn12.Name = "gridColumn12";
             this.gridColumn12.OptionsColumn.AllowEdit = false;
             this.gridColumn12.Visible = true;
-            this.gridColumn12.VisibleIndex = 4;
+            this.gridColumn12.VisibleIndex = 1;
             // 
             // gridColumn17
             // 
@@ -1041,7 +1037,7 @@
             this.gridColumn17.Name = "gridColumn17";
             this.gridColumn17.OptionsColumn.AllowEdit = false;
             this.gridColumn17.Visible = true;
-            this.gridColumn17.VisibleIndex = 5;
+            this.gridColumn17.VisibleIndex = 2;
             // 
             // gridColumn15
             // 
@@ -1063,7 +1059,7 @@
             this.gridColumn13.Name = "gridColumn13";
             this.gridColumn13.OptionsColumn.AllowEdit = false;
             this.gridColumn13.Visible = true;
-            this.gridColumn13.VisibleIndex = 6;
+            this.gridColumn13.VisibleIndex = 3;
             // 
             // gridColumn14
             // 
@@ -1074,7 +1070,7 @@
             this.gridColumn14.Name = "gridColumn14";
             this.gridColumn14.OptionsColumn.AllowEdit = false;
             this.gridColumn14.Visible = true;
-            this.gridColumn14.VisibleIndex = 7;
+            this.gridColumn14.VisibleIndex = 5;
             this.gridColumn14.Width = 76;
             // 
             // gridColumn21
@@ -1094,7 +1090,7 @@
             this.gridColumn16.Name = "gridColumn16";
             this.gridColumn16.OptionsColumn.AllowEdit = false;
             this.gridColumn16.Visible = true;
-            this.gridColumn16.VisibleIndex = 8;
+            this.gridColumn16.VisibleIndex = 6;
             this.gridColumn16.Width = 63;
             // 
             // gridColumn18
@@ -1106,7 +1102,7 @@
             this.gridColumn18.Name = "gridColumn18";
             this.gridColumn18.OptionsColumn.AllowEdit = false;
             this.gridColumn18.Visible = true;
-            this.gridColumn18.VisibleIndex = 6;
+            this.gridColumn18.VisibleIndex = 4;
             this.gridColumn18.Width = 70;
             // 
             // gridColumn19
@@ -1156,14 +1152,14 @@
             this.groupControl3.LookAndFeel.UseDefaultLookAndFeel = false;
             this.groupControl3.Name = "groupControl3";
             this.groupControl3.ShowCaption = false;
-            this.groupControl3.Size = new System.Drawing.Size(526, 24);
+            this.groupControl3.Size = new System.Drawing.Size(620, 24);
             this.groupControl3.TabIndex = 1;
             this.groupControl3.Text = "groupControl3";
             // 
             // cmb_SavePeriod
             // 
             this.cmb_SavePeriod.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmb_SavePeriod.Location = new System.Drawing.Point(102, 2);
+            this.cmb_SavePeriod.Location = new System.Drawing.Point(196, 2);
             this.cmb_SavePeriod.MenuManager = this.ribbon;
             this.cmb_SavePeriod.Name = "cmb_SavePeriod";
             this.cmb_SavePeriod.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
@@ -1183,7 +1179,7 @@
             // txt_SavePeriod
             // 
             this.txt_SavePeriod.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_SavePeriod.Location = new System.Drawing.Point(57, 2);
+            this.txt_SavePeriod.Location = new System.Drawing.Point(151, 2);
             this.txt_SavePeriod.MenuManager = this.ribbon;
             this.txt_SavePeriod.Name = "txt_SavePeriod";
             this.txt_SavePeriod.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
@@ -1198,7 +1194,7 @@
             // 
             this.labelControl15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelControl15.Appearance.ForeColor = System.Drawing.Color.White;
-            this.labelControl15.Location = new System.Drawing.Point(-7, 5);
+            this.labelControl15.Location = new System.Drawing.Point(87, 5);
             this.labelControl15.Name = "labelControl15";
             this.labelControl15.Size = new System.Drawing.Size(72, 13);
             this.labelControl15.TabIndex = 10;
@@ -1209,7 +1205,7 @@
             // 
             this.labelControl14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelControl14.Appearance.ForeColor = System.Drawing.Color.White;
-            this.labelControl14.Location = new System.Drawing.Point(456, 6);
+            this.labelControl14.Location = new System.Drawing.Point(550, 6);
             this.labelControl14.Name = "labelControl14";
             this.labelControl14.Size = new System.Drawing.Size(24, 13);
             this.labelControl14.TabIndex = 6;
@@ -1219,7 +1215,7 @@
             // 
             this.labelControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelControl1.Appearance.ForeColor = System.Drawing.Color.White;
-            this.labelControl1.Location = new System.Drawing.Point(355, 6);
+            this.labelControl1.Location = new System.Drawing.Point(449, 6);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(48, 13);
             this.labelControl1.TabIndex = 5;
@@ -1229,7 +1225,7 @@
             // 
             this.textEdit_Delay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.textEdit_Delay.EditValue = "100";
-            this.textEdit_Delay.Location = new System.Drawing.Point(402, 3);
+            this.textEdit_Delay.Location = new System.Drawing.Point(496, 3);
             this.textEdit_Delay.MenuManager = this.ribbon;
             this.textEdit_Delay.Name = "textEdit_Delay";
             this.textEdit_Delay.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
@@ -1242,7 +1238,7 @@
             // btn_period
             // 
             this.btn_period.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_period.Location = new System.Drawing.Point(480, 3);
+            this.btn_period.Location = new System.Drawing.Point(574, 3);
             this.btn_period.Name = "btn_period";
             this.btn_period.Size = new System.Drawing.Size(43, 19);
             this.btn_period.TabIndex = 3;
@@ -1252,7 +1248,7 @@
             // comboBoxEdit_period
             // 
             this.comboBoxEdit_period.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBoxEdit_period.Location = new System.Drawing.Point(291, 4);
+            this.comboBoxEdit_period.Location = new System.Drawing.Point(385, 4);
             this.comboBoxEdit_period.MenuManager = this.ribbon;
             this.comboBoxEdit_period.Name = "comboBoxEdit_period";
             this.comboBoxEdit_period.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
@@ -1275,7 +1271,7 @@
             // 
             this.labelControl22.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelControl22.Appearance.ForeColor = System.Drawing.Color.White;
-            this.labelControl22.Location = new System.Drawing.Point(179, 6);
+            this.labelControl22.Location = new System.Drawing.Point(273, 6);
             this.labelControl22.Name = "labelControl22";
             this.labelControl22.Size = new System.Drawing.Size(48, 13);
             this.labelControl22.TabIndex = 1;
@@ -1284,7 +1280,7 @@
             // textEdit_period
             // 
             this.textEdit_period.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textEdit_period.Location = new System.Drawing.Point(225, 3);
+            this.textEdit_period.Location = new System.Drawing.Point(319, 3);
             this.textEdit_period.MenuManager = this.ribbon;
             this.textEdit_period.Name = "textEdit_period";
             this.textEdit_period.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
@@ -1299,28 +1295,28 @@
             // 
             this.chartControl1.BackImage.Image = ((System.Drawing.Image)(resources.GetObject("chartControl1.BackImage.Image")));
             this.chartControl1.BackImage.Stretch = true;
-            swiftPlotDiagram3.AxisX.VisibleInPanesSerializable = "-1";
-            swiftPlotDiagram3.AxisY.VisibleInPanesSerializable = "-1";
-            this.chartControl1.Diagram = swiftPlotDiagram3;
+            this.chartControl1.CrosshairEnabled = DevExpress.Utils.DefaultBoolean.False;
+            swiftPlotDiagram1.AxisX.Label.TextAlignment = System.Drawing.StringAlignment.Far;
+            swiftPlotDiagram1.AxisX.VisibleInPanesSerializable = "-1";
+            swiftPlotDiagram1.AxisY.VisibleInPanesSerializable = "-1";
+            this.chartControl1.Diagram = swiftPlotDiagram1;
             this.chartControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chartControl1.Location = new System.Drawing.Point(0, 0);
             this.chartControl1.Name = "chartControl1";
-            series5.Name = "Series 1";
-            series5.View = swiftPlotSeriesView7;
-            series6.Name = "Series 2";
-            series6.View = swiftPlotSeriesView8;
+            series1.ArgumentScaleType = DevExpress.XtraCharts.ScaleType.DateTime;
+            series1.Name = "Series 1";
+            series1.View = swiftPlotSeriesView1;
             this.chartControl1.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
-        series5,
-        series6};
-            this.chartControl1.SeriesTemplate.View = swiftPlotSeriesView9;
-            this.chartControl1.Size = new System.Drawing.Size(316, 204);
+        series1};
+            this.chartControl1.SeriesTemplate.View = swiftPlotSeriesView2;
+            this.chartControl1.Size = new System.Drawing.Size(410, 204);
             this.chartControl1.TabIndex = 0;
             // 
             // panelControl1
             // 
             this.panelControl1.Controls.Add(this.layoutControl1);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelControl1.Location = new System.Drawing.Point(316, 0);
+            this.panelControl1.Location = new System.Drawing.Point(410, 0);
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(210, 204);
             this.panelControl1.TabIndex = 2;
@@ -1357,6 +1353,7 @@
             // labelControl4
             // 
             this.labelControl4.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl4.Appearance.ForeColor = System.Drawing.Color.White;
             this.labelControl4.Location = new System.Drawing.Point(4, 4);
             this.labelControl4.Name = "labelControl4";
             this.labelControl4.Size = new System.Drawing.Size(48, 14);
@@ -1369,10 +1366,12 @@
             this.textEdit1.Location = new System.Drawing.Point(80, 3);
             this.textEdit1.MenuManager = this.ribbon;
             this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(40)))), ((int)(((byte)(62)))));
+            this.textEdit1.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
             this.textEdit1.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textEdit1.Properties.Appearance.ForeColor = System.Drawing.Color.White;
             this.textEdit1.Properties.Appearance.Options.UseBackColor = true;
             this.textEdit1.Properties.Appearance.Options.UseFont = true;
+            this.textEdit1.Properties.Appearance.Options.UseForeColor = true;
             this.textEdit1.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.textEdit1.Properties.ReadOnly = true;
             this.textEdit1.Size = new System.Drawing.Size(77, 18);
@@ -1381,7 +1380,8 @@
             // labelControl5
             // 
             this.labelControl5.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl5.Location = new System.Drawing.Point(182, 5);
+            this.labelControl5.Appearance.ForeColor = System.Drawing.Color.White;
+            this.labelControl5.Location = new System.Drawing.Point(168, 5);
             this.labelControl5.Name = "labelControl5";
             this.labelControl5.Size = new System.Drawing.Size(35, 14);
             this.labelControl5.TabIndex = 2;
@@ -1401,6 +1401,7 @@
             // labelControl7
             // 
             this.labelControl7.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl7.Appearance.ForeColor = System.Drawing.Color.White;
             this.labelControl7.Location = new System.Drawing.Point(4, 3);
             this.labelControl7.Name = "labelControl7";
             this.labelControl7.Size = new System.Drawing.Size(48, 14);
@@ -1415,8 +1416,10 @@
             this.textEdit2.Name = "textEdit2";
             this.textEdit2.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(9)))), ((int)(((byte)(20)))), ((int)(((byte)(31)))));
             this.textEdit2.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textEdit2.Properties.Appearance.ForeColor = System.Drawing.Color.White;
             this.textEdit2.Properties.Appearance.Options.UseBackColor = true;
             this.textEdit2.Properties.Appearance.Options.UseFont = true;
+            this.textEdit2.Properties.Appearance.Options.UseForeColor = true;
             this.textEdit2.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.textEdit2.Properties.ReadOnly = true;
             this.textEdit2.Size = new System.Drawing.Size(77, 18);
@@ -1425,7 +1428,8 @@
             // labelControl6
             // 
             this.labelControl6.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl6.Location = new System.Drawing.Point(182, 5);
+            this.labelControl6.Appearance.ForeColor = System.Drawing.Color.White;
+            this.labelControl6.Location = new System.Drawing.Point(168, 5);
             this.labelControl6.Name = "labelControl6";
             this.labelControl6.Size = new System.Drawing.Size(35, 14);
             this.labelControl6.TabIndex = 5;
@@ -1445,6 +1449,7 @@
             // labelControl9
             // 
             this.labelControl9.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl9.Appearance.ForeColor = System.Drawing.Color.White;
             this.labelControl9.Location = new System.Drawing.Point(4, 4);
             this.labelControl9.Name = "labelControl9";
             this.labelControl9.Size = new System.Drawing.Size(48, 14);
@@ -1459,8 +1464,10 @@
             this.textEdit3.Name = "textEdit3";
             this.textEdit3.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(40)))), ((int)(((byte)(62)))));
             this.textEdit3.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textEdit3.Properties.Appearance.ForeColor = System.Drawing.Color.White;
             this.textEdit3.Properties.Appearance.Options.UseBackColor = true;
             this.textEdit3.Properties.Appearance.Options.UseFont = true;
+            this.textEdit3.Properties.Appearance.Options.UseForeColor = true;
             this.textEdit3.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.textEdit3.Properties.ReadOnly = true;
             this.textEdit3.Size = new System.Drawing.Size(76, 18);
@@ -1469,7 +1476,8 @@
             // labelControl8
             // 
             this.labelControl8.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl8.Location = new System.Drawing.Point(183, 4);
+            this.labelControl8.Appearance.ForeColor = System.Drawing.Color.White;
+            this.labelControl8.Location = new System.Drawing.Point(168, 4);
             this.labelControl8.Name = "labelControl8";
             this.labelControl8.Size = new System.Drawing.Size(35, 14);
             this.labelControl8.TabIndex = 8;
@@ -1489,6 +1497,7 @@
             // labelControl11
             // 
             this.labelControl11.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl11.Appearance.ForeColor = System.Drawing.Color.White;
             this.labelControl11.Location = new System.Drawing.Point(4, 4);
             this.labelControl11.Name = "labelControl11";
             this.labelControl11.Size = new System.Drawing.Size(48, 14);
@@ -1503,8 +1512,10 @@
             this.textEdit4.Name = "textEdit4";
             this.textEdit4.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(9)))), ((int)(((byte)(20)))), ((int)(((byte)(31)))));
             this.textEdit4.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textEdit4.Properties.Appearance.ForeColor = System.Drawing.Color.White;
             this.textEdit4.Properties.Appearance.Options.UseBackColor = true;
             this.textEdit4.Properties.Appearance.Options.UseFont = true;
+            this.textEdit4.Properties.Appearance.Options.UseForeColor = true;
             this.textEdit4.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.textEdit4.Properties.ReadOnly = true;
             this.textEdit4.Size = new System.Drawing.Size(77, 18);
@@ -1513,7 +1524,8 @@
             // labelControl10
             // 
             this.labelControl10.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl10.Location = new System.Drawing.Point(184, 3);
+            this.labelControl10.Appearance.ForeColor = System.Drawing.Color.White;
+            this.labelControl10.Location = new System.Drawing.Point(168, 3);
             this.labelControl10.Name = "labelControl10";
             this.labelControl10.Size = new System.Drawing.Size(35, 14);
             this.labelControl10.TabIndex = 11;
@@ -1533,7 +1545,7 @@
             // 
             // btn_setVTime
             // 
-            this.btn_setVTime.Location = new System.Drawing.Point(182, 3);
+            this.btn_setVTime.Location = new System.Drawing.Point(157, 0);
             this.btn_setVTime.Name = "btn_setVTime";
             this.btn_setVTime.Size = new System.Drawing.Size(50, 23);
             this.btn_setVTime.TabIndex = 22;
@@ -1543,6 +1555,7 @@
             // labelControl13
             // 
             this.labelControl13.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl13.Appearance.ForeColor = System.Drawing.Color.White;
             this.labelControl13.Location = new System.Drawing.Point(133, 5);
             this.labelControl13.Name = "labelControl13";
             this.labelControl13.Size = new System.Drawing.Size(24, 14);
@@ -1554,10 +1567,12 @@
             this.comboBoxEdit_VTime.Location = new System.Drawing.Point(72, 3);
             this.comboBoxEdit_VTime.MenuManager = this.ribbon;
             this.comboBoxEdit_VTime.Name = "comboBoxEdit_VTime";
-            this.comboBoxEdit_VTime.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(40)))), ((int)(((byte)(62)))));
+            this.comboBoxEdit_VTime.Properties.Appearance.BackColor = System.Drawing.Color.SteelBlue;
             this.comboBoxEdit_VTime.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxEdit_VTime.Properties.Appearance.ForeColor = System.Drawing.Color.White;
             this.comboBoxEdit_VTime.Properties.Appearance.Options.UseBackColor = true;
             this.comboBoxEdit_VTime.Properties.Appearance.Options.UseFont = true;
+            this.comboBoxEdit_VTime.Properties.Appearance.Options.UseForeColor = true;
             this.comboBoxEdit_VTime.Properties.AutoComplete = false;
             this.comboBoxEdit_VTime.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.comboBoxEdit_VTime.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -1577,7 +1592,9 @@
             "300",
             "600",
             "900",
-            "1440"});
+            "1440",
+            "7200",
+            "14400"});
             this.comboBoxEdit_VTime.Size = new System.Drawing.Size(55, 18);
             this.comboBoxEdit_VTime.TabIndex = 21;
             this.comboBoxEdit_VTime.SelectedIndexChanged += new System.EventHandler(this.comboBoxEdit_VTime_SelectedIndexChanged);
@@ -1586,6 +1603,7 @@
             // labelControl12
             // 
             this.labelControl12.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl12.Appearance.ForeColor = System.Drawing.Color.White;
             this.labelControl12.Location = new System.Drawing.Point(4, 4);
             this.labelControl12.Name = "labelControl12";
             this.labelControl12.Size = new System.Drawing.Size(48, 14);
@@ -1604,6 +1622,7 @@
             // 
             // labelControl16
             // 
+            this.labelControl16.Appearance.ForeColor = System.Drawing.Color.White;
             this.labelControl16.Location = new System.Drawing.Point(72, 6);
             this.labelControl16.Name = "labelControl16";
             this.labelControl16.Size = new System.Drawing.Size(72, 13);
@@ -1725,7 +1744,7 @@
             // xtraTabPage2
             // 
             this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(857, 489);
+            this.xtraTabPage2.Size = new System.Drawing.Size(951, 489);
             this.xtraTabPage2.Text = "xtraTabPage2";
             // 
             // defaultLookAndFeel1
@@ -1740,7 +1759,7 @@
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(812, 26);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(52, 68);
+            this.pictureBox1.Size = new System.Drawing.Size(146, 68);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 11;
             this.pictureBox1.TabStop = false;
@@ -1757,7 +1776,7 @@
             this.AllowFormGlass = DevExpress.Utils.DefaultBoolean.False;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(863, 649);
+            this.ClientSize = new System.Drawing.Size(957, 649);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.xtraTabControl1);
             this.Controls.Add(this.ribbonStatusBar);
@@ -1812,12 +1831,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.textEdit_Delay.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit_period.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit_period.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(swiftPlotDiagram3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(swiftPlotSeriesView7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(swiftPlotSeriesView8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(swiftPlotSeriesView9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(swiftPlotDiagram1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(swiftPlotSeriesView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(swiftPlotSeriesView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);

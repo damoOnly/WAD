@@ -21,7 +21,9 @@ namespace WADApplication.Process
     class MainProcess
     {
         public static DateTime lastRemoteTime = Utility.CutOffMillisecond(DateTime.Now);
-        public static void readMain(Equipment eq, bool isReadBasic, int selectedEqId, TextEdit t1, TextEdit t2, TextEdit t3, TextEdit t4, ChartControl chart,Form_map set)    //浓度读取处理函数
+        // 用于控制增加点的频率，实时曲线不是每个点都需要显示
+        public static DateTime lastAddTime = Utility.CutOffMillisecond(DateTime.Now);
+        public static void readMain(Equipment eq, bool isReadBasic, int selectedEqId, TextEdit t1, TextEdit t2, TextEdit t3, TextEdit t4, ChartControl chart,Form_map set, bool isAddPont)    //浓度读取处理函数
         {
             byte low = 0x52;
             
@@ -113,8 +115,12 @@ namespace WADApplication.Process
             //ed.Point = eq.Point;
             // 添加数据库
             EquipmentDataBusiness.Add(ed);
-            // 绘制曲线
-            addPoint(ed, selectedEqId, t1,t2,t3,t4, chart);
+            if (isAddPont)
+            {
+                // 绘制曲线
+                addPoint(ed, selectedEqId, t1, t2, t3, t4, chart);
+            }
+            
             if (set.Visible)
             {
                 set.set(eq.SensorTypeB, eq.Address, ed.Chroma.ToString());
@@ -148,7 +154,7 @@ namespace WADApplication.Process
 
         public static void remotePoint(ChartControl chart, double realTimeRangeX)
         {
-            if (chart.Series == null)
+            if (chart.Series == null || chart.Series.Count <= 0)
             {
                 return;
             }
@@ -172,7 +178,8 @@ namespace WADApplication.Process
                 {
                     series.Points.RemoveRange(0, pointsToRemoveCount);
                 }
-            }
+            }            
+
             lastRemoteTime = Utility.CutOffMillisecond(DateTime.Now);
         }
 
@@ -235,12 +242,12 @@ namespace WADApplication.Process
         }
 
         public static void ManageSeries(ChartControl chartControl, List<Equipment> mainList, DateTime minTime, DateTime maxTime)
-        {
+        {            
             // 这里要添加多线程信号量来控制曲线的增加和删除
             chartControl.Series.BeginUpdate();
 
             chartControl.Legend.AlignmentHorizontal = LegendAlignmentHorizontal.Right;
-            //chartControl.Series.Clear();
+            chartControl.Series.Clear();
             if (mainList.Count < 1)
             {
                 return;
@@ -262,10 +269,10 @@ namespace WADApplication.Process
                     {
                         continue;
                     }
-                    // 控制最多点个数 to do 实时add 的时候需要做间隔
+                    // 控制最多点个数 
                     cutListDate(datalist).ForEach(c =>
                     {
-                        SeriesPoint sp = new SeriesPoint(c.AddTime, c.Chroma);
+                        SeriesPoint sp = new SeriesPoint(c.AddTime, Math.Round(c.Chroma, 2));
                         series.Points.Add(sp);
                     });
                     chartControl.Series.Add(series);                    
@@ -287,14 +294,15 @@ namespace WADApplication.Process
 
             if (chartControl.Series.Count == 0)
             {
-                return;
+                chartControl.Series.Add(new Series("曲线", ViewType.SwiftPlot));
             }
 
             chartControl.Series.EndUpdate();
 
-
             SwiftPlotDiagram diagram_Tem = chartControl.Diagram as SwiftPlotDiagram;
-            diagram_Tem.AxisX.WholeRange.Auto = true;
+            diagram_Tem.AxisX.WholeRange.SetMinMaxValues(minTime, maxTime);
+            //diagram_Tem.AxisX.DateTimeScaleOptions.AutoGrid = true;
+            //diagram_Tem.AxisX.WholeRange.Auto = true;
             diagram_Tem.AxisX.WholeRange.AutoSideMargins = true;
             diagram_Tem.AxisX.VisualRange.Auto = true;
             diagram_Tem.AxisX.VisualRange.AutoSideMargins = true;
@@ -331,6 +339,8 @@ namespace WADApplication.Process
             diagram_Tem.AxisY.Title.Alignment = StringAlignment.Far;
             diagram_Tem.AxisY.Title.Antialiasing = false;
             diagram_Tem.AxisY.Title.Font = new System.Drawing.Font("Tahoma", 8);
+
+            chartControl.Refresh();
         }
 
         private static bool IsCondionsSeries(int id, ChartControl chartControl)
@@ -365,5 +375,43 @@ namespace WADApplication.Process
             return datalist;
         }
 
+        // 根据不同的时长获取是否要增加实时曲线的点
+        public static bool GetIsAddPoint(double realTimeRangeX)
+        {
+            bool result = true;
+            if (realTimeRangeX < 60)
+            {
+                return true;
+            }
+
+            if (realTimeRangeX >= 7200) // 5天 
+            {
+                result = Utility.CutOffMillisecond(DateTime.Now).AddSeconds(-60) > MainProcess.lastAddTime;
+            }
+            else if (realTimeRangeX >= 1440) // 1天
+            {
+                result = Utility.CutOffMillisecond(DateTime.Now).AddSeconds(-30) > MainProcess.lastAddTime;
+            }
+            else if (realTimeRangeX >= 720) // 半天
+            {
+                result = Utility.CutOffMillisecond(DateTime.Now).AddSeconds(-15) > MainProcess.lastAddTime;
+            }
+            else if (realTimeRangeX >= 360) // 6个小时
+            {
+                result = Utility.CutOffMillisecond(DateTime.Now).AddSeconds(-10) > MainProcess.lastAddTime;
+            }
+            else if (realTimeRangeX >= 60) // 1个小时
+            {
+                result = Utility.CutOffMillisecond(DateTime.Now).AddSeconds(-5) > MainProcess.lastAddTime;
+            }
+
+            if (result)
+            {
+                MainProcess.lastAddTime = Utility.CutOffMillisecond(DateTime.Now);
+            }
+
+            return result;
+        }
+        
     }
 }
