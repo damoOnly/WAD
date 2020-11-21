@@ -52,6 +52,7 @@
     <Compile Include="EquipmentReportData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StructEquipment.cs" />
+    <Compile Include="SystemConfig.cs" />
     <Compile Include="UserInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

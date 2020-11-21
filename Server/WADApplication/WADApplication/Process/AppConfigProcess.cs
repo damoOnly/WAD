@@ -1,4 +1,5 @@
 ﻿using DevExpress.XtraEditors;
+using Entity;
 using GlobalMemory;
 using System;
 using System.Collections.Generic;
@@ -12,28 +13,33 @@ namespace WADApplication.Process
 {
     class AppConfigProcess
     {
-        public static void Save(string hzNum, string cmmDelay, string hzUnit, string range, string portName, string localPort)
+        public static void Save()
         {
             try
             {
+                StructSystemConfig sysConfig = CommonMemory.SysConfig;
                 // Open App.Config of executable
                 Configuration config =
                     ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                // You need to remove the old settings object before you can replace it
-                //if (isModified)
-                //{
-                //    config.AppSettings.Settings.Remove(newKey);
-                //}
-                // Add an Application Setting.
-                //config.AppSettings.Settings.Add(newKey, newValue);
-                config.AppSettings.Settings["HzNum"].Value = hzNum;
-                config.AppSettings.Settings["CmmDelay"].Value = cmmDelay;
-                config.AppSettings.Settings["HzUnit"].Value = hzUnit;
-                //config.AppSettings.Settings["SavePeriod"].Value = txt_SavePeriod.EditValue.ToString();
-                //config.AppSettings.Settings["SaveUnit"].Value = cmb_SavePeriod.EditValue.ToString();              
-                config.AppSettings.Settings["Range"].Value = range;
-                config.AppSettings.Settings["PortName"].Value = portName;
-                config.AppSettings.Settings["localPort"].Value = localPort;
+                config.AppSettings.Settings["HzNum"].Value = sysConfig.HzNum.ToString();
+                config.AppSettings.Settings["CmmDelay"].Value = sysConfig.CommandDelay.ToString();
+                config.AppSettings.Settings["CommandOutTime"].Value = sysConfig.CommandOutTime.ToString();          
+                config.AppSettings.Settings["Range"].Value = sysConfig.RealTimeRangeX.ToString();
+                config.AppSettings.Settings["PortName"].Value = sysConfig.PortName;
+                config.AppSettings.Settings["PortRate"].Value = sysConfig.PortRate.ToString();
+
+                config.AppSettings.Settings["DataCenterIP1"].Value = sysConfig.DataCenterIP1;
+                config.AppSettings.Settings["DataCenterPort1"].Value = sysConfig.DataCenterPort1.ToString();
+                config.AppSettings.Settings["DataCenterST1"].Value = sysConfig.DataCenterST1;
+                config.AppSettings.Settings["DataCenterCN1"].Value = sysConfig.DataCenterCN1;
+                config.AppSettings.Settings["DataCenterPW1"].Value = sysConfig.DataCenterPW1;
+
+                config.AppSettings.Settings["DataCenterIP2"].Value = sysConfig.DataCenterIP2;
+                config.AppSettings.Settings["DataCenterPort2"].Value = sysConfig.DataCenterPort2.ToString();
+                config.AppSettings.Settings["DataCenterST2"].Value = sysConfig.DataCenterST2;
+                config.AppSettings.Settings["DataCenterCN2"].Value = sysConfig.DataCenterCN2;
+                config.AppSettings.Settings["DataCenterPW2"].Value = sysConfig.DataCenterPW2;
+
                 // Save the changes in App.config file.
                 config.Save(ConfigurationSaveMode.Modified);
 

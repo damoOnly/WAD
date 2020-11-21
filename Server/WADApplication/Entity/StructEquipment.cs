@@ -19,6 +19,9 @@ namespace Entity
 
         public byte GasType { get; set; }        
 
+        /// <summary>
+        /// 通道id如果大于等于0x10，就是气象
+        /// </summary>
         public byte SensorNum { get; set; }
 
         public byte UnitType { get; set; }

@@ -13,7 +13,7 @@ namespace Business
     public class EquipmentDataBusiness
     {
         private static readonly string dbPathTemp = string.Format(@"{0}waddb\data\eq{{0}}\", AppDomain.CurrentDomain.BaseDirectory);
-        private const string fileNameTemp = "wad{0}.db3";        
+        private const string fileNameTemp = "wad{0}.db3";
 
         public static string GetConnStr(int eqid, DateTime dt)
         {
@@ -71,6 +71,59 @@ namespace Business
             }
 
         }
+
+        /// <summary>
+        /// 一半用于批量上传的情况
+        /// </summary>
+        /// <param name="equipmentId"></param>
+        /// <param name="date"></param>
+        public static void CreateDbByMonth(int equipmentId, DateTime date)
+        {
+            try
+            {
+                // 先判断文件夹，每个仪器节点一个单独的文件夹
+                string dbPath = string.Format(dbPathTemp, equipmentId);
+                if (!Directory.Exists(dbPath))
+                {
+                    Directory.CreateDirectory(dbPath);
+                }
+
+                string ds = date.ToString("yyyyMM");
+                string fileName = string.Format(fileNameTemp, ds);
+
+                if (!File.Exists(dbPath + fileName))
+                {
+                    EquipmentDataAccess.CreateDb(dbPath + fileName);
+                    string connStr = GetConnStr(equipmentId, date);
+                    using (SQLiteConnection conn = new SQLiteConnection(connStr))
+                    {
+                        conn.Open();
+                        EquipmentDataAccess.CreateTable(conn);
+                    }
+                }
+                else
+                {
+
+                    string connStr = GetConnStr(equipmentId, date);
+                    using (SQLiteConnection conn = new SQLiteConnection(connStr))
+                    {
+                        conn.Open();
+                        if (!EquipmentDataAccess.IsTableExist(conn))
+                        {
+                            EquipmentDataAccess.CreateTable(conn);
+                        }
+
+                    }
+                }
+
+
+                //CommonMemory.DbList.Add(equipmentId);
+            }
+            catch (Exception e)
+            {
+                LogLib.Log.GetLogger("EquipmentDataBusiness").Error(e.Message, e);
+            }
+        }
         public static void Add(EquipmentData data)
         {
             if (!CommonMemory.DbList.Contains(data.EquipmentID))
@@ -84,16 +137,22 @@ namespace Business
         }
 
         // 有一个特点，只能是同一个id，同一个月的数据, 并且数据库已经存在
-        public static void AddList(List<EquipmentData> list)
-        {            
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="list"></param>
+        /// <param name="eqId">每个节点的id</param>
+        /// 用于计算文件名称的时间
+        public static void AddList(List<EquipmentData> list, int eqId, DateTime date)
+        {
             if (list == null || list.Count <= 0)
             {
                 return;
             }
-            if (!CommonMemory.DbList.Contains(list.First().EquipmentID))
+            if (!CommonMemory.DbList.Contains(eqId))
                 return;
 
-            string connStr = GetConnStr(list.First().EquipmentID, list.First().AddTime);
+            string connStr = GetConnStr(eqId, date);
             using (SQLiteConnection conn = new SQLiteConnection(connStr))
             {
                 conn.Open();
@@ -179,7 +238,7 @@ namespace Business
 
             }
         }
-        
+
         public static void DeleteById(int eqid)
         {
             GC.Collect();

@@ -129,8 +129,8 @@
             this.splitContainerControl1.Panel2.Controls.Add(this.groupControl2);
             this.splitContainerControl1.Panel2.Controls.Add(this.groupControl1);
             this.splitContainerControl1.Panel2.Text = "Panel2";
-            this.splitContainerControl1.Size = new System.Drawing.Size(904, 431);
-            this.splitContainerControl1.SplitterPosition = 283;
+            this.splitContainerControl1.Size = new System.Drawing.Size(775, 400);
+            this.splitContainerControl1.SplitterPosition = 279;
             this.splitContainerControl1.TabIndex = 0;
             this.splitContainerControl1.Text = "splitContainerControl1";
             // 
@@ -142,7 +142,7 @@
             this.gridControl1.Name = "gridControl1";
             this.gridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEdit1});
-            this.gridControl1.Size = new System.Drawing.Size(283, 431);
+            this.gridControl1.Size = new System.Drawing.Size(240, 400);
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -230,17 +230,17 @@
             // 
             this.groupControl2.Controls.Add(this.tableLayoutPanel2);
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl2.Location = new System.Drawing.Point(0, 225);
+            this.groupControl2.Location = new System.Drawing.Point(0, 209);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(616, 206);
+            this.groupControl2.Size = new System.Drawing.Size(530, 191);
             this.groupControl2.TabIndex = 1;
             this.groupControl2.Text = "设置参数";
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel2.AutoSize = true;
             this.tableLayoutPanel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("tableLayoutPanel2.BackgroundImage")));
             this.tableLayoutPanel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -284,139 +284,139 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(616, 206);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(530, 191);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // btn_alrtOpen
             // 
-            this.btn_alrtOpen.Location = new System.Drawing.Point(463, 178);
+            this.btn_alrtOpen.Location = new System.Drawing.Point(400, 164);
             this.btn_alrtOpen.Name = "btn_alrtOpen";
-            this.btn_alrtOpen.Size = new System.Drawing.Size(135, 19);
+            this.btn_alrtOpen.Size = new System.Drawing.Size(115, 18);
             this.btn_alrtOpen.TabIndex = 11;
             this.btn_alrtOpen.Text = "打开";
             this.btn_alrtOpen.Click += new System.EventHandler(this.btn_alrtOpen_Click);
             // 
             // btn_STELTime
             // 
-            this.btn_STELTime.Location = new System.Drawing.Point(463, 153);
+            this.btn_STELTime.Location = new System.Drawing.Point(400, 141);
             this.btn_STELTime.Name = "btn_STELTime";
-            this.btn_STELTime.Size = new System.Drawing.Size(135, 19);
+            this.btn_STELTime.Size = new System.Drawing.Size(115, 17);
             this.btn_STELTime.TabIndex = 20;
             this.btn_STELTime.Text = "设置";
             this.btn_STELTime.Click += new System.EventHandler(this.btn_STELTIME_Click);
             // 
             // textEdit_Two
             // 
-            this.textEdit_Two.Location = new System.Drawing.Point(248, 53);
+            this.textEdit_Two.Location = new System.Drawing.Point(215, 49);
             this.textEdit_Two.Name = "textEdit_Two";
             this.textEdit_Two.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.textEdit_Two.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.textEdit_Two.Properties.Appearance.Options.UseBackColor = true;
             this.textEdit_Two.Properties.Appearance.Options.UseForeColor = true;
             this.textEdit_Two.Properties.ReadOnly = true;
-            this.textEdit_Two.Size = new System.Drawing.Size(96, 20);
+            this.textEdit_Two.Size = new System.Drawing.Size(82, 20);
             this.textEdit_Two.TabIndex = 5;
             // 
             // btn_STEL
             // 
-            this.btn_STEL.Location = new System.Drawing.Point(463, 128);
+            this.btn_STEL.Location = new System.Drawing.Point(400, 118);
             this.btn_STEL.Name = "btn_STEL";
-            this.btn_STEL.Size = new System.Drawing.Size(135, 19);
+            this.btn_STEL.Size = new System.Drawing.Size(115, 17);
             this.btn_STEL.TabIndex = 17;
             this.btn_STEL.Text = "设置";
             this.btn_STEL.Click += new System.EventHandler(this.btn_STEL_Click);
             // 
             // textEdit_One
             // 
-            this.textEdit_One.Location = new System.Drawing.Point(248, 28);
+            this.textEdit_One.Location = new System.Drawing.Point(215, 26);
             this.textEdit_One.Name = "textEdit_One";
             this.textEdit_One.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.textEdit_One.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.textEdit_One.Properties.Appearance.Options.UseBackColor = true;
             this.textEdit_One.Properties.Appearance.Options.UseForeColor = true;
             this.textEdit_One.Properties.ReadOnly = true;
-            this.textEdit_One.Size = new System.Drawing.Size(96, 20);
+            this.textEdit_One.Size = new System.Drawing.Size(82, 20);
             this.textEdit_One.TabIndex = 4;
             // 
             // btn_TWA
             // 
-            this.btn_TWA.Location = new System.Drawing.Point(463, 103);
+            this.btn_TWA.Location = new System.Drawing.Point(400, 95);
             this.btn_TWA.Name = "btn_TWA";
-            this.btn_TWA.Size = new System.Drawing.Size(135, 19);
+            this.btn_TWA.Size = new System.Drawing.Size(115, 17);
             this.btn_TWA.TabIndex = 16;
             this.btn_TWA.Text = "设置";
             this.btn_TWA.Click += new System.EventHandler(this.btn_TWA_Click);
             // 
             // textEdit_STELTime
             // 
-            this.textEdit_STELTime.Location = new System.Drawing.Point(248, 153);
+            this.textEdit_STELTime.Location = new System.Drawing.Point(215, 141);
             this.textEdit_STELTime.Name = "textEdit_STELTime";
             this.textEdit_STELTime.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.textEdit_STELTime.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.textEdit_STELTime.Properties.Appearance.Options.UseBackColor = true;
             this.textEdit_STELTime.Properties.Appearance.Options.UseForeColor = true;
             this.textEdit_STELTime.Properties.ReadOnly = true;
-            this.textEdit_STELTime.Size = new System.Drawing.Size(96, 20);
+            this.textEdit_STELTime.Size = new System.Drawing.Size(82, 20);
             this.textEdit_STELTime.TabIndex = 19;
             // 
             // labelControl11
             // 
-            this.labelControl11.Location = new System.Drawing.Point(64, 28);
+            this.labelControl11.Location = new System.Drawing.Point(56, 26);
             this.labelControl11.Name = "labelControl11";
-            this.labelControl11.Size = new System.Drawing.Size(51, 14);
+            this.labelControl11.Size = new System.Drawing.Size(49, 13);
             this.labelControl11.TabIndex = 0;
             this.labelControl11.Text = "A1报警值";
             // 
             // labelControl12
             // 
-            this.labelControl12.Location = new System.Drawing.Point(64, 53);
+            this.labelControl12.Location = new System.Drawing.Point(56, 49);
             this.labelControl12.Name = "labelControl12";
-            this.labelControl12.Size = new System.Drawing.Size(51, 14);
+            this.labelControl12.Size = new System.Drawing.Size(49, 13);
             this.labelControl12.TabIndex = 1;
             this.labelControl12.Text = "A2报警值";
             // 
             // btn_two
             // 
-            this.btn_two.Location = new System.Drawing.Point(463, 53);
+            this.btn_two.Location = new System.Drawing.Point(400, 49);
             this.btn_two.Name = "btn_two";
-            this.btn_two.Size = new System.Drawing.Size(135, 19);
+            this.btn_two.Size = new System.Drawing.Size(115, 17);
             this.btn_two.TabIndex = 9;
             this.btn_two.Text = "设置";
             this.btn_two.Click += new System.EventHandler(this.btn_two_Click);
             // 
             // labelControl14
             // 
-            this.labelControl14.Location = new System.Drawing.Point(64, 178);
+            this.labelControl14.Location = new System.Drawing.Point(56, 164);
             this.labelControl14.Name = "labelControl14";
-            this.labelControl14.Size = new System.Drawing.Size(72, 14);
+            this.labelControl14.Size = new System.Drawing.Size(72, 13);
             this.labelControl14.TabIndex = 3;
             this.labelControl14.Text = "报警声音开关";
             // 
             // labelControl13
             // 
-            this.labelControl13.Location = new System.Drawing.Point(64, 78);
+            this.labelControl13.Location = new System.Drawing.Point(56, 72);
             this.labelControl13.Name = "labelControl13";
-            this.labelControl13.Size = new System.Drawing.Size(48, 14);
+            this.labelControl13.Size = new System.Drawing.Size(48, 13);
             this.labelControl13.TabIndex = 2;
             this.labelControl13.Text = "低报警值";
             // 
             // textEdit_alrt
             // 
-            this.textEdit_alrt.Location = new System.Drawing.Point(248, 178);
+            this.textEdit_alrt.Location = new System.Drawing.Point(215, 164);
             this.textEdit_alrt.Name = "textEdit_alrt";
             this.textEdit_alrt.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.textEdit_alrt.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.textEdit_alrt.Properties.Appearance.Options.UseBackColor = true;
             this.textEdit_alrt.Properties.Appearance.Options.UseForeColor = true;
             this.textEdit_alrt.Properties.ReadOnly = true;
-            this.textEdit_alrt.Size = new System.Drawing.Size(96, 20);
+            this.textEdit_alrt.Size = new System.Drawing.Size(82, 20);
             this.textEdit_alrt.TabIndex = 7;
             // 
             // labelControl18
             // 
-            this.labelControl18.Location = new System.Drawing.Point(64, 153);
+            this.labelControl18.Location = new System.Drawing.Point(56, 141);
             this.labelControl18.Name = "labelControl18";
-            this.labelControl18.Size = new System.Drawing.Size(76, 14);
+            this.labelControl18.Size = new System.Drawing.Size(71, 13);
             this.labelControl18.TabIndex = 18;
             this.labelControl18.Text = "STEL报警时长";
             // 
@@ -424,76 +424,76 @@
             // 
             this.labelControl20.Location = new System.Drawing.Point(3, 3);
             this.labelControl20.Name = "labelControl20";
-            this.labelControl20.Size = new System.Drawing.Size(48, 14);
+            this.labelControl20.Size = new System.Drawing.Size(48, 13);
             this.labelControl20.TabIndex = 6;
             this.labelControl20.Text = "设置参数";
             // 
             // textEdit_low
             // 
-            this.textEdit_low.Location = new System.Drawing.Point(248, 78);
+            this.textEdit_low.Location = new System.Drawing.Point(215, 72);
             this.textEdit_low.Name = "textEdit_low";
             this.textEdit_low.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.textEdit_low.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.textEdit_low.Properties.Appearance.Options.UseBackColor = true;
             this.textEdit_low.Properties.Appearance.Options.UseForeColor = true;
             this.textEdit_low.Properties.ReadOnly = true;
-            this.textEdit_low.Size = new System.Drawing.Size(96, 20);
+            this.textEdit_low.Size = new System.Drawing.Size(82, 20);
             this.textEdit_low.TabIndex = 6;
             // 
             // labelControl16
             // 
-            this.labelControl16.Location = new System.Drawing.Point(64, 103);
+            this.labelControl16.Location = new System.Drawing.Point(56, 95);
             this.labelControl16.Name = "labelControl16";
-            this.labelControl16.Size = new System.Drawing.Size(52, 14);
+            this.labelControl16.Size = new System.Drawing.Size(47, 13);
             this.labelControl16.TabIndex = 12;
             this.labelControl16.Text = "TWA报警";
             // 
             // textEdit_TWA
             // 
-            this.textEdit_TWA.Location = new System.Drawing.Point(248, 103);
+            this.textEdit_TWA.Location = new System.Drawing.Point(215, 95);
             this.textEdit_TWA.Name = "textEdit_TWA";
             this.textEdit_TWA.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.textEdit_TWA.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.textEdit_TWA.Properties.Appearance.Options.UseBackColor = true;
             this.textEdit_TWA.Properties.Appearance.Options.UseForeColor = true;
             this.textEdit_TWA.Properties.ReadOnly = true;
-            this.textEdit_TWA.Size = new System.Drawing.Size(96, 20);
+            this.textEdit_TWA.Size = new System.Drawing.Size(82, 20);
             this.textEdit_TWA.TabIndex = 14;
             // 
             // textEdit_STEL
             // 
-            this.textEdit_STEL.Location = new System.Drawing.Point(248, 128);
+            this.textEdit_STEL.Location = new System.Drawing.Point(215, 118);
             this.textEdit_STEL.Name = "textEdit_STEL";
             this.textEdit_STEL.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.textEdit_STEL.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.textEdit_STEL.Properties.Appearance.Options.UseBackColor = true;
             this.textEdit_STEL.Properties.Appearance.Options.UseForeColor = true;
             this.textEdit_STEL.Properties.ReadOnly = true;
-            this.textEdit_STEL.Size = new System.Drawing.Size(96, 20);
+            this.textEdit_STEL.Size = new System.Drawing.Size(82, 20);
             this.textEdit_STEL.TabIndex = 15;
             // 
             // labelControl17
             // 
-            this.labelControl17.Location = new System.Drawing.Point(64, 128);
+            this.labelControl17.Location = new System.Drawing.Point(56, 118);
             this.labelControl17.Name = "labelControl17";
-            this.labelControl17.Size = new System.Drawing.Size(52, 14);
+            this.labelControl17.Size = new System.Drawing.Size(47, 13);
             this.labelControl17.TabIndex = 13;
             this.labelControl17.Text = "STEL报警";
             // 
             // btn_one
             // 
-            this.btn_one.Location = new System.Drawing.Point(463, 28);
+            this.btn_one.Location = new System.Drawing.Point(400, 26);
             this.btn_one.Name = "btn_one";
-            this.btn_one.Size = new System.Drawing.Size(135, 19);
+            this.btn_one.Size = new System.Drawing.Size(115, 17);
             this.btn_one.TabIndex = 8;
             this.btn_one.Text = "设置";
             this.btn_one.Click += new System.EventHandler(this.btn_one_Click);
             // 
             // btn_low
             // 
-            this.btn_low.Location = new System.Drawing.Point(463, 78);
+            this.btn_low.Location = new System.Drawing.Point(400, 72);
             this.btn_low.Name = "btn_low";
-            this.btn_low.Size = new System.Drawing.Size(135, 19);
+            this.btn_low.Size = new System.Drawing.Size(115, 17);
             this.btn_low.TabIndex = 10;
             this.btn_low.Text = "设置";
             this.btn_low.Click += new System.EventHandler(this.btn_low_Click);
@@ -506,7 +506,7 @@
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(616, 225);
+            this.groupControl1.Size = new System.Drawing.Size(530, 209);
             this.groupControl1.TabIndex = 0;
             this.groupControl1.Text = "读取参数";
             // 
@@ -519,14 +519,14 @@
             this.panel1.Controls.Add(this.labelControl19);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(616, 25);
+            this.panel1.Size = new System.Drawing.Size(530, 23);
             this.panel1.TabIndex = 1;
             // 
             // labelControl19
             // 
-            this.labelControl19.Location = new System.Drawing.Point(5, 5);
+            this.labelControl19.Location = new System.Drawing.Point(4, 5);
             this.labelControl19.Name = "labelControl19";
-            this.labelControl19.Size = new System.Drawing.Size(48, 14);
+            this.labelControl19.Size = new System.Drawing.Size(48, 13);
             this.labelControl19.TabIndex = 0;
             this.labelControl19.Text = "读取参数";
             // 
@@ -567,241 +567,241 @@
             this.tableLayoutPanel1.Controls.Add(this.textEdit_rang, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.labelControl1, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.textEdit_name, 1, 1);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 25);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 23);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 4;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(616, 200);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(530, 186);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // textEdit_THalert
             // 
-            this.textEdit_THalert.Location = new System.Drawing.Point(311, 153);
+            this.textEdit_THalert.Location = new System.Drawing.Point(267, 141);
             this.textEdit_THalert.Name = "textEdit_THalert";
             this.textEdit_THalert.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.textEdit_THalert.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.textEdit_THalert.Properties.Appearance.Options.UseBackColor = true;
             this.textEdit_THalert.Properties.Appearance.Options.UseForeColor = true;
             this.textEdit_THalert.Properties.ReadOnly = true;
-            this.textEdit_THalert.Size = new System.Drawing.Size(70, 20);
+            this.textEdit_THalert.Size = new System.Drawing.Size(60, 20);
             this.textEdit_THalert.TabIndex = 21;
             // 
             // labelControl15
             // 
-            this.labelControl15.Location = new System.Drawing.Point(234, 153);
+            this.labelControl15.Location = new System.Drawing.Point(201, 141);
             this.labelControl15.Name = "labelControl15";
-            this.labelControl15.Size = new System.Drawing.Size(72, 14);
+            this.labelControl15.Size = new System.Drawing.Size(72, 13);
             this.labelControl15.TabIndex = 20;
             this.labelControl15.Text = "温湿度报警：";
             // 
             // labelControl2
             // 
-            this.labelControl2.Location = new System.Drawing.Point(234, 3);
+            this.labelControl2.Location = new System.Drawing.Point(201, 3);
             this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(36, 14);
+            this.labelControl2.Size = new System.Drawing.Size(36, 13);
             this.labelControl2.TabIndex = 1;
             this.labelControl2.Text = "地址：";
             // 
             // labelControl10
             // 
-            this.labelControl10.Location = new System.Drawing.Point(3, 153);
+            this.labelControl10.Location = new System.Drawing.Point(3, 141);
             this.labelControl10.Name = "labelControl10";
-            this.labelControl10.Size = new System.Drawing.Size(60, 14);
+            this.labelControl10.Size = new System.Drawing.Size(60, 13);
             this.labelControl10.TabIndex = 9;
             this.labelControl10.Text = "浓度报警：";
             // 
             // textEdit_hit
             // 
-            this.textEdit_hit.Location = new System.Drawing.Point(542, 103);
+            this.textEdit_hit.Location = new System.Drawing.Point(465, 95);
             this.textEdit_hit.Name = "textEdit_hit";
             this.textEdit_hit.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.textEdit_hit.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.textEdit_hit.Properties.Appearance.Options.UseBackColor = true;
             this.textEdit_hit.Properties.Appearance.Options.UseForeColor = true;
             this.textEdit_hit.Properties.ReadOnly = true;
-            this.textEdit_hit.Size = new System.Drawing.Size(70, 20);
+            this.textEdit_hit.Size = new System.Drawing.Size(60, 20);
             this.textEdit_hit.TabIndex = 18;
             // 
             // labelControl3
             // 
-            this.labelControl3.Location = new System.Drawing.Point(465, 3);
+            this.labelControl3.Location = new System.Drawing.Point(399, 3);
             this.labelControl3.Name = "labelControl3";
-            this.labelControl3.Size = new System.Drawing.Size(60, 14);
+            this.labelControl3.Size = new System.Drawing.Size(60, 13);
             this.labelControl3.TabIndex = 2;
             this.labelControl3.Text = "气体名称：";
             // 
             // labelControl9
             // 
-            this.labelControl9.Location = new System.Drawing.Point(465, 103);
+            this.labelControl9.Location = new System.Drawing.Point(399, 95);
             this.labelControl9.Name = "labelControl9";
-            this.labelControl9.Size = new System.Drawing.Size(36, 14);
+            this.labelControl9.Size = new System.Drawing.Size(36, 13);
             this.labelControl9.TabIndex = 8;
             this.labelControl9.Text = "湿度：";
             // 
             // textEdit_tem
             // 
-            this.textEdit_tem.Location = new System.Drawing.Point(311, 103);
+            this.textEdit_tem.Location = new System.Drawing.Point(267, 95);
             this.textEdit_tem.Name = "textEdit_tem";
             this.textEdit_tem.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.textEdit_tem.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.textEdit_tem.Properties.Appearance.Options.UseBackColor = true;
             this.textEdit_tem.Properties.Appearance.Options.UseForeColor = true;
             this.textEdit_tem.Properties.ReadOnly = true;
-            this.textEdit_tem.Size = new System.Drawing.Size(70, 20);
+            this.textEdit_tem.Size = new System.Drawing.Size(60, 20);
             this.textEdit_tem.TabIndex = 17;
             // 
             // labelControl8
             // 
-            this.labelControl8.Location = new System.Drawing.Point(234, 103);
+            this.labelControl8.Location = new System.Drawing.Point(201, 95);
             this.labelControl8.Name = "labelControl8";
-            this.labelControl8.Size = new System.Drawing.Size(36, 14);
+            this.labelControl8.Size = new System.Drawing.Size(36, 13);
             this.labelControl8.TabIndex = 7;
             this.labelControl8.Text = "温度：";
             // 
             // textEdit_chrom
             // 
-            this.textEdit_chrom.Location = new System.Drawing.Point(80, 103);
+            this.textEdit_chrom.Location = new System.Drawing.Point(69, 95);
             this.textEdit_chrom.Name = "textEdit_chrom";
             this.textEdit_chrom.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.textEdit_chrom.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.textEdit_chrom.Properties.Appearance.Options.UseBackColor = true;
             this.textEdit_chrom.Properties.Appearance.Options.UseForeColor = true;
             this.textEdit_chrom.Properties.ReadOnly = true;
-            this.textEdit_chrom.Size = new System.Drawing.Size(70, 20);
+            this.textEdit_chrom.Size = new System.Drawing.Size(60, 20);
             this.textEdit_chrom.TabIndex = 16;
             // 
             // textEdit_address
             // 
-            this.textEdit_address.Location = new System.Drawing.Point(311, 3);
+            this.textEdit_address.Location = new System.Drawing.Point(267, 3);
             this.textEdit_address.Name = "textEdit_address";
             this.textEdit_address.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.textEdit_address.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.textEdit_address.Properties.Appearance.Options.UseBackColor = true;
             this.textEdit_address.Properties.Appearance.Options.UseForeColor = true;
             this.textEdit_address.Properties.ReadOnly = true;
-            this.textEdit_address.Size = new System.Drawing.Size(70, 20);
+            this.textEdit_address.Size = new System.Drawing.Size(60, 20);
             this.textEdit_address.TabIndex = 11;
             // 
             // labelControl7
             // 
-            this.labelControl7.Location = new System.Drawing.Point(3, 103);
+            this.labelControl7.Location = new System.Drawing.Point(3, 95);
             this.labelControl7.Name = "labelControl7";
-            this.labelControl7.Size = new System.Drawing.Size(60, 14);
+            this.labelControl7.Size = new System.Drawing.Size(60, 13);
             this.labelControl7.TabIndex = 6;
             this.labelControl7.Text = "实时浓度：";
             // 
             // textEdit_gasUnit
             // 
-            this.textEdit_gasUnit.Location = new System.Drawing.Point(542, 53);
+            this.textEdit_gasUnit.Location = new System.Drawing.Point(465, 49);
             this.textEdit_gasUnit.Name = "textEdit_gasUnit";
             this.textEdit_gasUnit.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.textEdit_gasUnit.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.textEdit_gasUnit.Properties.Appearance.Options.UseBackColor = true;
             this.textEdit_gasUnit.Properties.Appearance.Options.UseForeColor = true;
             this.textEdit_gasUnit.Properties.ReadOnly = true;
-            this.textEdit_gasUnit.Size = new System.Drawing.Size(70, 20);
+            this.textEdit_gasUnit.Size = new System.Drawing.Size(60, 20);
             this.textEdit_gasUnit.TabIndex = 15;
             // 
             // labelControl6
             // 
-            this.labelControl6.Location = new System.Drawing.Point(465, 53);
+            this.labelControl6.Location = new System.Drawing.Point(399, 49);
             this.labelControl6.Name = "labelControl6";
-            this.labelControl6.Size = new System.Drawing.Size(60, 14);
+            this.labelControl6.Size = new System.Drawing.Size(60, 13);
             this.labelControl6.TabIndex = 5;
             this.labelControl6.Text = "气体单位：";
             // 
             // textEdit_gasname
             // 
-            this.textEdit_gasname.Location = new System.Drawing.Point(542, 3);
+            this.textEdit_gasname.Location = new System.Drawing.Point(465, 3);
             this.textEdit_gasname.Name = "textEdit_gasname";
             this.textEdit_gasname.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.textEdit_gasname.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.textEdit_gasname.Properties.Appearance.Options.UseBackColor = true;
             this.textEdit_gasname.Properties.Appearance.Options.UseForeColor = true;
             this.textEdit_gasname.Properties.ReadOnly = true;
-            this.textEdit_gasname.Size = new System.Drawing.Size(70, 20);
+            this.textEdit_gasname.Size = new System.Drawing.Size(60, 20);
             this.textEdit_gasname.TabIndex = 12;
             // 
             // labelControl5
             // 
-            this.labelControl5.Location = new System.Drawing.Point(234, 53);
+            this.labelControl5.Location = new System.Drawing.Point(201, 49);
             this.labelControl5.Name = "labelControl5";
-            this.labelControl5.Size = new System.Drawing.Size(48, 14);
+            this.labelControl5.Size = new System.Drawing.Size(48, 13);
             this.labelControl5.TabIndex = 4;
             this.labelControl5.Text = "分辨率：";
             // 
             // textEdit_point
             // 
-            this.textEdit_point.Location = new System.Drawing.Point(311, 53);
+            this.textEdit_point.Location = new System.Drawing.Point(267, 49);
             this.textEdit_point.Name = "textEdit_point";
             this.textEdit_point.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.textEdit_point.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.textEdit_point.Properties.Appearance.Options.UseBackColor = true;
             this.textEdit_point.Properties.Appearance.Options.UseForeColor = true;
             this.textEdit_point.Properties.ReadOnly = true;
-            this.textEdit_point.Size = new System.Drawing.Size(70, 20);
+            this.textEdit_point.Size = new System.Drawing.Size(60, 20);
             this.textEdit_point.TabIndex = 14;
             // 
             // labelControl4
             // 
             this.labelControl4.Location = new System.Drawing.Point(3, 3);
             this.labelControl4.Name = "labelControl4";
-            this.labelControl4.Size = new System.Drawing.Size(60, 14);
+            this.labelControl4.Size = new System.Drawing.Size(60, 13);
             this.labelControl4.TabIndex = 3;
             this.labelControl4.Text = "测量范围：";
             // 
             // textEdit_choramAlert
             // 
-            this.textEdit_choramAlert.Location = new System.Drawing.Point(80, 153);
+            this.textEdit_choramAlert.Location = new System.Drawing.Point(69, 141);
             this.textEdit_choramAlert.Name = "textEdit_choramAlert";
             this.textEdit_choramAlert.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.textEdit_choramAlert.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.textEdit_choramAlert.Properties.Appearance.Options.UseBackColor = true;
             this.textEdit_choramAlert.Properties.Appearance.Options.UseForeColor = true;
             this.textEdit_choramAlert.Properties.ReadOnly = true;
-            this.textEdit_choramAlert.Size = new System.Drawing.Size(70, 20);
+            this.textEdit_choramAlert.Size = new System.Drawing.Size(60, 20);
             this.textEdit_choramAlert.TabIndex = 19;
             // 
             // textEdit_rang
             // 
-            this.textEdit_rang.Location = new System.Drawing.Point(80, 3);
+            this.textEdit_rang.Location = new System.Drawing.Point(69, 3);
             this.textEdit_rang.Name = "textEdit_rang";
             this.textEdit_rang.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.textEdit_rang.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.textEdit_rang.Properties.Appearance.Options.UseBackColor = true;
             this.textEdit_rang.Properties.Appearance.Options.UseForeColor = true;
             this.textEdit_rang.Properties.ReadOnly = true;
-            this.textEdit_rang.Size = new System.Drawing.Size(70, 20);
+            this.textEdit_rang.Size = new System.Drawing.Size(60, 20);
             this.textEdit_rang.TabIndex = 13;
             // 
             // labelControl1
             // 
-            this.labelControl1.Location = new System.Drawing.Point(3, 53);
+            this.labelControl1.Location = new System.Drawing.Point(3, 49);
             this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(60, 14);
+            this.labelControl1.Size = new System.Drawing.Size(60, 13);
             this.labelControl1.TabIndex = 0;
             this.labelControl1.Text = "当前设备：";
             // 
             // textEdit_name
             // 
-            this.textEdit_name.Location = new System.Drawing.Point(80, 53);
+            this.textEdit_name.Location = new System.Drawing.Point(69, 49);
             this.textEdit_name.Name = "textEdit_name";
             this.textEdit_name.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.textEdit_name.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.textEdit_name.Properties.Appearance.Options.UseBackColor = true;
             this.textEdit_name.Properties.Appearance.Options.UseForeColor = true;
             this.textEdit_name.Properties.ReadOnly = true;
-            this.textEdit_name.Size = new System.Drawing.Size(65, 20);
+            this.textEdit_name.Size = new System.Drawing.Size(56, 20);
             this.textEdit_name.TabIndex = 10;
             // 
             // Form_SensorParmSet2
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(904, 431);
+            this.ClientSize = new System.Drawing.Size(775, 400);
             this.Controls.Add(this.splitContainerControl1);
             this.MinimizeBox = false;
             this.Name = "Form_SensorParmSet2";

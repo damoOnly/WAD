@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Diagnostics;
+using GlobalMemory;
 
 namespace CommandManager
 {
@@ -12,12 +13,11 @@ namespace CommandManager
         /// <summary>
         /// 延迟毫秒
         /// </summary>
-        public static int delay = 3000;
         public static bool GetResult(Command cd)
         {
             bool result = false;
             PLAASerialPort.GetInstance().Write(cd.SendByte);
-            for (int i = 0; i < (delay/50); i++)
+            for (int i = 0; i < (CommonMemory.SysConfig.CommandOutTime/ 50); i++)
             {
                 Thread.Sleep(50);
                 // 错误码

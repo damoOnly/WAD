@@ -9,21 +9,167 @@ using System.Threading.Tasks;
 
 namespace CommandManager
 {
-    public class AddEqProcess
+    public class ReadEqProcess
     {
-        public static void AddOldGas(ref StructEquipment eq)
+        public static List<StructEquipment> readNew(byte address, string name)
         {
-            Command cd = new Command(eq.Address, eq.SensorNum, 0x30, 21);
+            try
+            {
+                Command cd = new Command(address, 0x00, 0x20, 2);
+                int gasCount = 0;
+                int weatherCount = 0;
+                if (CommandResult.GetResult(cd))
+                {
+                    Array.Reverse(cd.ResultByte, 3, 2);
+                    gasCount = BitConverter.ToInt16(cd.ResultByte, 3);
+                    Array.Reverse(cd.ResultByte, 5, 2);
+                    weatherCount = BitConverter.ToUInt16(cd.ResultByte, 5);
+                }
+                else
+                {
+                    LogLib.Log.GetLogger("AddEqProcess").Warn(address + "readNew error");
+                    //throw new Exception(eq.Address + "读取错误！");
+                }
+                List<StructEquipment> gasList = readNewGas(address, gasCount, name);
+                List<StructEquipment> weatherList = readNewWeather(address, weatherCount, name);
+                gasList.AddRange(weatherList);
+                return gasList;
+            }
+            catch (Exception e)
+            {
+                
+                throw e;
+            }
+        }
+        public static List<StructEquipment> readNewGas(byte address, int gasCount, string eqName)
+        {
+            List<StructEquipment> gasList = new List<StructEquipment>();
+            for (int i = 0; i < gasCount; i++)
+            {
+                try
+                {
+                    StructEquipment eq = new StructEquipment();
+                    eq.Name = eqName;
+                    eq.Address = address;
+                    eq.SensorNum = (byte)i;
+                    ReadNewGas(ref eq);
+                    gasList.Add(eq);
+                }
+                catch (Exception ex)
+                {
+                    LogLib.Log.GetLogger("AddEqProcess").Error(ex);
 
-            if (CommandResult.GetResult(cd))
-            {
-                ParseOldGas(ref eq, cd.ResultByte);
+                }
+
             }
-            else
+
+            return gasList;
+        }
+
+        public static List<StructEquipment> readNewWeather(byte address, int weatherCount, string eqName)
+        {
+            List<StructEquipment> gasList = new List<StructEquipment>();
+            for (int i = 0; i < weatherCount; i++)
             {
-                LogLib.Log.GetLogger("AddEqProcess").Warn(eq.Address + "读取老气体配置错误！");
-                throw new Exception(eq.Address + "读取错误！");                
+                try
+                {
+                    StructEquipment eq = new StructEquipment();
+                    eq.Name = eqName;
+                    eq.Address = address;
+                    eq.SensorNum = (byte)(i + 16);
+                    ReadWeather(ref eq);
+                    gasList.Add(eq);
+                }
+                catch (Exception ex)
+                {
+                    LogLib.Log.GetLogger("AddEqProcess").Error(ex);
+
+                }
+
             }
+
+            return gasList;
+        }
+
+        public static List<StructEquipment> readOld(byte address, string name)
+        {
+            try
+            {
+                Command cd = new Command(address, 0x00, 0x1c, 1);
+                List<byte> gases = new List<byte>();
+                if (CommandResult.GetResult(cd))
+                {                    
+                    byte qts = cd.ResultByte[4];
+                    if ((qts & 0x01) == 0x01)
+                    {
+                        gases.Add(0x00);
+                    }
+                    if ((qts & 0x02) == 0x02)
+                    {
+                        gases.Add(0x01);
+                    }
+                    if ((qts & 0x04) == 0x04)
+                    {
+                        gases.Add(0x02);
+                    }
+                    if ((qts & 0x08) == 0x08)
+                    {
+                        gases.Add(0x03);
+                    }
+                    if ((qts & 0x10) == 0x10)
+                    {
+                        gases.Add(0x04);
+                    }
+                    if ((qts & 0x20) == 0x20)
+                    {
+                        gases.Add(0x05);
+                    }
+                }
+                else
+                {
+                    LogLib.Log.GetLogger("AddEqProcess").Warn(address + "readNew error");
+                }
+                List<StructEquipment> gasList = ReadOldGas(gases, address, name);
+                return gasList;
+
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+        }
+
+        public static List<StructEquipment> ReadOldGas(List<byte> gases, byte address, string gasName)
+        {
+            List<StructEquipment> gasList = new List<StructEquipment>();
+            for (int i = 0; i < gases.Count; i++)
+            {
+                StructEquipment se = new StructEquipment();
+                se.Address = address;
+                se.Name = gasName;
+                se.SensorNum = gases[i];
+                try
+                {
+                    Command cd = new Command(address, se.SensorNum, 0x30, 21);
+
+                    if (CommandResult.GetResult(cd))
+                    {
+                        ParseOldGas(ref se, cd.ResultByte);
+                        gasList.Add(se);
+                    }
+                    else
+                    {
+                        LogLib.Log.GetLogger("AddEqProcess").Warn(address + "读取老气体配置错误！");
+                    }
+                }
+                catch (Exception e)
+                {
+                    LogLib.Log.GetLogger("AddEqProcess").Error(e);
+                }
+            }
+            return gasList;
+            
         }
 
         private static void ParseOldGas(ref StructEquipment eq, byte[] resultBytes)
@@ -40,7 +186,7 @@ namespace CommandManager
             eq.A2 = BitConverter.ToSingle(resultBytes, 41);
         }
 
-        public static void AddNewGas(ref StructEquipment eq)
+        public static void ReadNewGas(ref StructEquipment eq)
         {
             Command cd = new Command(eq.Address, eq.SensorNum, 0x10, 17);
 
@@ -71,7 +217,7 @@ namespace CommandManager
             eq.A2 = BitConverter.ToSingle(resultBytes, 33);
         }
 
-        public static void AddWeather(ref StructEquipment eq)
+        public static void ReadWeather(ref StructEquipment eq)
         {
             Command cd = new Command(eq.Address, eq.SensorNum, 0x10, 5);
 

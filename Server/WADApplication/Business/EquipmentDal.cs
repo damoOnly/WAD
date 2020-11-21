@@ -285,5 +285,78 @@ select last_insert_rowid();";
             }
         }
 
+        public static void AddorUpdate(ref StructEquipment eq)
+        {
+            eq.IsDel = true;
+            int rowid = -1;
+            using (SQLiteConnection conn = new SQLiteConnection(connstr))
+            {
+                conn.Open();
+                
+                string sql1 = "select rowid from tb_Equipment where Address=@address and SensorNum=@sensorNum";
+                using (SQLiteCommand cmd = new SQLiteCommand(sql1, conn))
+                {
+                    cmd.Parameters.AddWithValue("@address", eq.Address);
+                    cmd.Parameters.AddWithValue("@sensorNum", eq.SensorNum);
+                    rowid = int.Parse(cmd.ExecuteScalar().ToString() == "" ? "-1" : cmd.ExecuteScalar().ToString());
+                }
+
+                if (rowid > -1)
+                {
+                    eq.ID = rowid;
+                    string sql2 = @"UPDATE tb_Equipment SET Name=@Name,Address=@Address,GasType=@GasType,SensorNum=@SensorNum,UnitType=@UnitType,
+                                Point=@Point,Magnification=@Magnification,Low=@Low,High=@High,Max=@Max,IsGas=@IsGas,IsDel=@IsDel,CreateTime=@CreateTime 
+                          WHERE rowid=@id";
+                    using (SQLiteCommand cmd = new SQLiteCommand(sql2, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@Name", eq.Name);
+                        cmd.Parameters.AddWithValue("@Address", eq.Address);
+                        cmd.Parameters.AddWithValue("@GasType", eq.GasType);
+                        cmd.Parameters.AddWithValue("@SensorNum", eq.SensorNum);
+                        cmd.Parameters.AddWithValue("@UnitType", eq.UnitType);
+                        cmd.Parameters.AddWithValue("@Point", eq.Point);
+                        cmd.Parameters.AddWithValue("@Magnification", eq.Magnification);
+                        cmd.Parameters.AddWithValue("@Low", eq.A1);
+                        cmd.Parameters.AddWithValue("@High", eq.A2);
+                        cmd.Parameters.AddWithValue("@Max", eq.Max);
+                        cmd.Parameters.AddWithValue("@IsGas", eq.IsGas);
+                        cmd.Parameters.AddWithValue("@IsDel", eq.IsDel);
+                        cmd.Parameters.AddWithValue("@CreateTime", Utility.CutOffMillisecond(DateTime.Now));
+                        cmd.Parameters.AddWithValue("@id", eq.ID);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                else
+                {
+                    string sql3 = @"insert into tb_Equipment (Name,Address,GasType,SensorNum,UnitType,Point,Magnification,Low,High,Max,IsGas,IsDel,CreateTime) 
+values (@Name,@Address,@GasType,@SensorNum,@UnitType,@Point,@Magnification,@Low,@High,@Max,@IsGas,@IsDel,@CreateTime);
+select last_insert_rowid();";
+                    using (SQLiteCommand cmd = new SQLiteCommand(sql3, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@Name", eq.Name);
+                        cmd.Parameters.AddWithValue("@Address", eq.Address);
+                        cmd.Parameters.AddWithValue("@GasType", eq.GasType);
+                        cmd.Parameters.AddWithValue("@SensorNum", eq.SensorNum);
+                        cmd.Parameters.AddWithValue("@UnitType", eq.UnitType);
+                        cmd.Parameters.AddWithValue("@Point", eq.Point);
+                        cmd.Parameters.AddWithValue("@Magnification", eq.Magnification);
+                        cmd.Parameters.AddWithValue("@Low", eq.A1);
+                        cmd.Parameters.AddWithValue("@High", eq.A2);
+                        cmd.Parameters.AddWithValue("@Max", eq.Max);
+                        cmd.Parameters.AddWithValue("@IsGas", eq.IsGas);
+                        cmd.Parameters.AddWithValue("@IsDel", eq.IsDel);
+                        cmd.Parameters.AddWithValue("@CreateTime", Utility.CutOffMillisecond(DateTime.Now));
+                        eq.ID = Convert.ToInt32(cmd.ExecuteScalar());
+                    }
+                }
+            }
+
+            if (rowid > -1)
+            {
+                EquipmentDataBusiness.CreateDb(eq.ID);
+            }
+
+        }
+
     }
 }

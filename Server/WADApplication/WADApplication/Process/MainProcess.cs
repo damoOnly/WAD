@@ -152,8 +152,9 @@ namespace WADApplication.Process
             }
         }
 
-        public static void remotePoint(ChartControl chart, double realTimeRangeX)
+        public static void RemovePoint(ChartControl chart)
         {
+            int realTimeRangeX = CommonMemory.SysConfig.RealTimeRangeX;
             if (chart.Series == null || chart.Series.Count <= 0)
             {
                 return;
@@ -376,8 +377,9 @@ namespace WADApplication.Process
         }
 
         // 根据不同的时长获取是否要增加实时曲线的点
-        public static bool GetIsAddPoint(double realTimeRangeX)
+        public static bool GetIsAddPoint()
         {
+            int realTimeRangeX = CommonMemory.SysConfig.RealTimeRangeX;
             bool result = true;
             if (realTimeRangeX < 60)
             {

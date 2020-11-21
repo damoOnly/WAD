@@ -42,19 +42,6 @@ namespace WADApplication
         private Thread acceptThread = null;
         private bool acceptConnect = true;
         private bool sendStat = true;
-        /// <summary>
-        /// 报警声音设备的ip
-        /// </summary>
-        private string ip = "192.168.0.53";
-        /// <summary>
-        ///  报警声音设备的端口号
-        /// </summary>
-        private string port = "5671";
-
-        /// <summary>
-        ///  本机的端口号
-        /// </summary>
-        private string localPort = "6666";
 
         private Thread thMain;
         // 申明变量
@@ -87,12 +74,6 @@ namespace WADApplication
             //  lstbxMessageView.Items.Add(tcpClient.Client.RemoteEndPoint);
             lstbxMessageView.Items.Add(str);
             lstbxMessageView.TopIndex = lstbxMessageView.Items.Count - 1;
-        }
-
-        // 显示状态
-        private void showStatus(string str)
-        {
-            label1.Text = str;
         }
 
         // 清空消息
@@ -161,11 +142,6 @@ namespace WADApplication
         private DateTime maxTime = Utility.CutOffMillisecond(DateTime.Now.AddMinutes(30));
 
         /// <summary>
-        /// 试试曲线X轴的时间范围（分钟）
-        /// </summary>
-        private double realTimeRangeX;
-
-        /// <summary>
         /// 是否初始化参数
         /// </summary>
         private bool IsInit = true;
@@ -202,7 +178,7 @@ namespace WADApplication
                 }
                 try
                 {
-                    bool isAddPont = MainProcess.GetIsAddPoint(this.realTimeRangeX);
+                    bool isAddPont = MainProcess.GetIsAddPoint();
                     lock (mainList)
                     {
                         SwiftPlotDiagram diagram = chartControl1.Diagram as SwiftPlotDiagram;
@@ -217,13 +193,11 @@ namespace WADApplication
                         // 每30秒清除一次最小数据(多余的点)
                         if (Utility.CutOffMillisecond(DateTime.Now.AddSeconds(-30)) > MainProcess.lastRemoteTime)
                         {
-                            MainProcess.remotePoint(chartControl1, this.realTimeRangeX);
+                            MainProcess.RemovePoint(chartControl1);
                         }
                     }                    
                     AlertProcess.OperatorAlert(mainList);
                     IsReadBasic = false;
-                    this.Invoke(new Action(gridControl_Status.RefreshDataSource));
-                    this.Invoke(new Action(gridView_Status.BestFitColumns));
                     this.Invoke(new Action(gridControl_nowData2.RefreshDataSource));
                     this.Invoke(new Action(gridView_nowData2.BestFitColumns));
                     Thread.Sleep(readHz * 1000);
@@ -244,20 +218,10 @@ namespace WADApplication
             AppConfigProcess.CheckVersion();
             CommonMemory.Init();
             CreateDbFile.InitDb();
-            foreach (string portItem in System.IO.Ports.SerialPort.GetPortNames())
-            {
-                comboBoxEdit2.Properties.Items.Add(portItem);
-                //if (port == curCI.Rs232.PortName)
-                //{
-                //    cb_Comports.EditValue = port;
-                //}
-            }
 
             mainList = EquipmentBusiness.GetAllListNotDelete();
             gridControl_nowData2.DataSource = mainList;
             gridView_nowData2.BestFitColumns();
-            gridControl_Status.DataSource = mainList;
-            gridView_Status.BestFitColumns();
             selecteq = mainList.FirstOrDefault();
             //// 初始化报警列表
             //mainList.ForEach(c =>
@@ -266,13 +230,12 @@ namespace WADApplication
             //});
             
             InitControls();
-            InitParm();
 
             //ConnectThread = new Thread(new ThreadStart(readSensorConnect));
             //ConnectThread.Start();
             // 置位初始化标志
 
-            AlertProcess.Connect(ip, port);//连接报警声音设备
+            //AlertProcess.Connect(ip, port);//连接报警声音设备
             
             IsInit = false;
         }
@@ -281,21 +244,8 @@ namespace WADApplication
         private void InitControls()
         {            
             enableControls();
-            textEdit_period.EditValue = ConfigurationManager.AppSettings["HzNum"].ToString();
-            comboBoxEdit_period.EditValue = ConfigurationManager.AppSettings["HzUnit"].ToString();
-            comboBoxEdit_VTime.EditValue = Convert.ToDecimal(ConfigurationManager.AppSettings["Range"]);
-            comboBoxEdit2.EditValue = ConfigurationManager.AppSettings["PortName"].ToString();
-            textEdit_Delay.EditValue = ConfigurationManager.AppSettings["CmmDelay"].ToString();
-
-            ip = ConfigurationManager.AppSettings["ip"].ToString();
-            port = ConfigurationManager.AppSettings["port"].ToString();
-            tbxPort.Text = ConfigurationManager.AppSettings["localPort"].ToString();
-            //txt_SavePeriod.EditValue = ConfigurationManager.AppSettings["SavePeriod"].ToString();
-            //cmb_SavePeriod.EditValue = ConfigurationManager.AppSettings["SaveUnit"].ToString();   
-            CommandResult.delay = Convert.ToInt32(ConfigurationManager.AppSettings["delay"]);
-            //CommandResult.delay2 = Convert.ToInt32(ConfigurationManager.AppSettings["delay2"]);
-            peroStr = textEdit_period.Text;
-            //chartControl1.Series.Clear();
+            comboBoxEdit_VTime.EditValue = CommonMemory.SysConfig.RealTimeRangeX;
+            barButtonItem4_ItemClick(null, null);
         }
 
         // 使能控件
@@ -304,62 +254,13 @@ namespace WADApplication
 
         }
 
-        // 初始化变量
-        private bool InitParm()
-        {
-            int r1;
-            if (!Int32.TryParse(textEdit_period.EditValue.ToString(), out r1))
-            {
-                setinfo("采样周期设置失败");
-                return false;
-            }
-
-            int r2;
-            if (!Int32.TryParse(textEdit_Delay.EditValue.ToString(), out r2))
-            {
-                setinfo("命令延时时间设置失败");
-                return false;
-            }
-
-            if (comboBoxEdit_period.EditValue == null)
-            {
-                return true;
-            }
-            switch (comboBoxEdit_period.EditValue.ToString())
-            {
-                case "秒":
-                    if (r1 > 0)
-                    {
-                        readHz = r1;
-                    }
-                    break;
-                case "分钟":
-                    if (r1 > 0)
-                    {
-                        readHz = r1 * 60;
-                    }
-                    break;
-                case "小时":
-                    if (r1 > 0)
-                    {
-                        readHz = r1 * 60 * 60;
-                    }
-                    break;
-                default:
-                    break;
-            }
-            CommDelay = r2;
-            realTimeRangeX = Convert.ToDouble(comboBoxEdit_VTime.EditValue);
-            return true;
-        }
-
         /// <summary>
         /// 设置状态文字
         /// </summary>
         /// <param name="str"></param>
         private void setinfo(string str)
         {
-            barStaticItem_info.Caption = str;
+            //barStaticItem_info.Caption = str;
         }
 
         /// <summary>
@@ -379,11 +280,8 @@ namespace WADApplication
             //    }
             //}
             gridControl_nowData2.DataSource = mainList;
-            gridControl_Status.DataSource = mainList;
             gridControl_nowData2.RefreshDataSource();
             gridView_nowData2.BestFitColumns();
-            gridControl_Status.RefreshDataSource();
-            gridView_Status.BestFitColumns();
             selecteq = mainList.FirstOrDefault();
         }
 
@@ -437,9 +335,6 @@ namespace WADApplication
             // 显示消息
             showMessageCallback = new ShowMessage(showMessage);
 
-            // 显示状态
-            showStatusCallBack = new ShowStatus(showStatus);
-
             // 重置消息
             resetMessageCallBack = new ResetMessage(resetMessage);
             #endregion
@@ -464,14 +359,12 @@ namespace WADApplication
             //    this.Close();
             //    return;
             //}
-            tbxserverIp.Text = GetLocalIp();
             int i1 = Convert.ToInt32(ConfigurationManager.AppSettings["User"].ToString());
 
             CommonMemory.Userinfo = new UserInfo();
             CommonMemory.Userinfo.Level = EM_UserType.User;
             CommonMemory.IsOpen = false;
             btn_pramSet.Visibility = BarItemVisibility.Never;
-            btn_UpdateTime.Visibility = BarItemVisibility.Never;
             //if (i1 == 0)
             //{
             //    btn_ModifPass.Caption = "切换到管理员";
@@ -495,66 +388,10 @@ namespace WADApplication
 
                 DataStruct.DataStruct_One cds = (DataStruct.DataStruct_One)System.Runtime.InteropServices.Marshal.PtrToStructure(m.LParam, typeof(DataStruct.DataStruct_One));
 
-                barStaticItem_info.Caption = cds.lpData;
+                //barStaticItem_info.Caption = cds.lpData;
 
             }
             base.WndProc(ref m);
-        }
-
-        // 打开串口
-        private void btn_Open_Click(object sender, EventArgs e)
-        {
-            if (PLAASerialPort.serialport.IsOpen)
-            {
-                XtraMessageBox.Show("串口已打开");
-                return;
-            }
-            if (!PLAASerialPort.GetInstance().Open(comboBoxEdit2.Text, Convert.ToInt32(comboBoxEdit3.Text)))
-            {
-                pictureEdit_seriaPort.Image = Resources.串口已关闭;
-                XtraMessageBox.Show("打开串口失败");
-            }
-            else
-            {
-                comboBoxEdit2.Properties.ReadOnly = true;
-                comboBoxEdit3.Properties.ReadOnly = true;
-                CommonMemory.IsOpen = true;
-                pictureEdit_seriaPort.Image = Resources.串口已打开;
-                CommonMemory.IsReadConnect = true;
-                //XtraMessageBox.Show("串口打开成功");
-                setinfo("打开串口");
-
-                // to do
-                //ConnectThread = new Thread(new ThreadStart(readSensorConnect));
-                //ConnectThread.Start();
-            }
-        }
-
-        // 关闭串口
-        private void btn_Close_Click(object sender, EventArgs e)
-        {
-            btn_Stop_ItemClick(null, null);
-            AlertProcess.PlaySound(false);
-            if (!PLAASerialPort.GetInstance().Close())
-            {
-                XtraMessageBox.Show("关闭串口异常");
-            }
-            else
-            {
-                comboBoxEdit2.Properties.ReadOnly = false;
-                comboBoxEdit3.Properties.ReadOnly = false;
-                CommonMemory.IsOpen = false;
-                pictureEdit_seriaPort.Image = Resources.串口已关闭;
-                CommonMemory.IsReadConnect = false;
-                foreach (Equipment item in mainList)
-                {
-                    item.IsConnect = false;
-                }
-                gridControl_Status.RefreshDataSource();
-                gridView_Status.BestFitColumns();
-                //XtraMessageBox.Show("串口已关闭");
-                setinfo("关闭串口");
-            }
         }
 
         private void gridView_Status_CustomUnboundColumnData(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDataEventArgs e)
@@ -582,7 +419,7 @@ namespace WADApplication
             }
             CommonMemory.IsReadConnect = false;
             maxTime = Utility.CutOffMillisecond(DateTime.Now);
-            minTime = maxTime.AddMinutes(-realTimeRangeX);
+            minTime = maxTime.AddMinutes(-CommonMemory.SysConfig.RealTimeRangeX);
             // 点击开始的时候才初始化实时曲线，打开软件的时候不要初始化实时曲线
             lock (this.mainList)
             {
@@ -594,11 +431,6 @@ namespace WADApplication
             IsReadBasic = true;
             mainThread.Start();
             btn_Start.Enabled = false;
-            textEdit_period.Enabled = false;
-            textEdit_Delay.Enabled = false;
-            comboBoxEdit_period.Enabled = false;
-            cmb_SavePeriod.Enabled = false;
-            txt_SavePeriod.Enabled = false;
         }
 
         // 停止按钮
@@ -613,12 +445,6 @@ namespace WADApplication
                 mainThread.Abort();
                 btn_Start.Enabled = true;
             }
-
-            textEdit_period.Enabled = true;
-            textEdit_Delay.Enabled = true;
-            comboBoxEdit_period.Enabled = true;
-            cmb_SavePeriod.Enabled = true;
-            txt_SavePeriod.Enabled = true;
             CommonMemory.IsReadConnect = true;
             // closeLight("red");
             AlertProcess.CloseLight("all");
@@ -675,11 +501,10 @@ namespace WADApplication
                 XtraMessageBox.Show("请先停止检测");
                 return;
             }
-            CommonMemory.IsReadConnect = false;
-            Form_SensorParmSet2 set = new Form_SensorParmSet2();
+            //CommonMemory.IsReadConnect = false;
+            SystemConfig set = new SystemConfig();
             set.ShowDialog();
-            updatalist();
-            CommonMemory.IsReadConnect = true;
+            //CommonMemory.IsReadConnect = true;
             //LogLib.Log.GetLogger(this).Warn("记录日志");
         }
 
@@ -808,7 +633,7 @@ namespace WADApplication
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            AppConfigProcess.Save(textEdit_period.EditValue.ToString(), textEdit_Delay.EditValue.ToString(), comboBoxEdit_period.EditValue.ToString(), comboBoxEdit_VTime.EditValue.ToString(), comboBoxEdit2.Text, localPort);
+            AppConfigProcess.Save();
             AlertProcess.CloseLight("all");
             try
             {
@@ -847,84 +672,43 @@ namespace WADApplication
 
         private void btn_ModifPass_ItemClick(object sender, ItemClickEventArgs e)
         {
-            if (btn_ModifPass.Caption == "切换到普通用户")
-            {
-                //Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                //config.AppSettings.Settings["User"].Value = "0";
-                //config.Save(ConfigurationSaveMode.Modified);
-                btn_pramSet.Visibility = BarItemVisibility.Never;
-                btn_UpdateTime.Visibility = BarItemVisibility.Never;
-                CommonMemory.Userinfo.Level = (EM_UserType)0;
-                btn_ModifPass.Caption = "管理员登入";
-            }
-            else if (btn_ModifPass.Caption == "管理员登入")
-            {
-                Form_ChangeAdmin fc = new Form_ChangeAdmin();
-                if (fc.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                {
-                    UserInfo ui = UserInfoDal.GetOneByUser("admin", fc.ValueStr);
-                    if (ui == null)
-                    {
-                        XtraMessageBox.Show("密码不正确");
-                    }
-                    else
-                    {
-                        //Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                        //config.AppSettings.Settings["User"].Value = "1";
-                        //config.Save(ConfigurationSaveMode.Modified);
-                        btn_pramSet.Visibility = BarItemVisibility.Always;
-                        btn_UpdateTime.Visibility = BarItemVisibility.Always;
-                        CommonMemory.Userinfo.Level = (EM_UserType)1;
-                        btn_ModifPass.Caption = "切换到普通用户";
-                    }
-                }
-            }
+            //if (btn_ModifPass.Caption == "切换到普通用户")
+            //{
+            //    //Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            //    //config.AppSettings.Settings["User"].Value = "0";
+            //    //config.Save(ConfigurationSaveMode.Modified);
+            //    btn_pramSet.Visibility = BarItemVisibility.Never;
+            //    btn_UpdateTime.Visibility = BarItemVisibility.Never;
+            //    CommonMemory.Userinfo.Level = (EM_UserType)0;
+            //    btn_ModifPass.Caption = "管理员登入";
+            //}
+            //else if (btn_ModifPass.Caption == "管理员登入")
+            //{
+            //    Form_ChangeAdmin fc = new Form_ChangeAdmin();
+            //    if (fc.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            //    {
+            //        UserInfo ui = UserInfoDal.GetOneByUser("admin", fc.ValueStr);
+            //        if (ui == null)
+            //        {
+            //            XtraMessageBox.Show("密码不正确");
+            //        }
+            //        else
+            //        {
+            //            //Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            //            //config.AppSettings.Settings["User"].Value = "1";
+            //            //config.Save(ConfigurationSaveMode.Modified);
+            //            btn_pramSet.Visibility = BarItemVisibility.Always;
+            //            btn_UpdateTime.Visibility = BarItemVisibility.Always;
+            //            CommonMemory.Userinfo.Level = (EM_UserType)1;
+            //            btn_ModifPass.Caption = "切换到普通用户";
+            //        }
+            //    }
+            //}
         }
-
-        private void comboBoxEdit_period_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            bool isok = InitParm();
-            if (IsInit)
-            {
-                return;
-            }
-            if (isok)
-            {
-                XtraMessageBox.Show("设置成功");
-            }
-            else
-            {
-                XtraMessageBox.Show("设置失败");
-            }
-        }
-
-        private void textEdit_period_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar != 13)
-            {
-                return;
-            }
-
-            bool isok = InitParm();
-            if (IsInit)
-            {
-                return;
-            }
-            if (isok)
-            {
-                peroStr = textEdit_period.Text;
-                XtraMessageBox.Show("设置成功");
-            }
-            else
-            {
-                XtraMessageBox.Show("设置失败");
-            }
-        }
-
         private void changeXRange()
         {
-            double val;
-            if (!double.TryParse(comboBoxEdit_VTime.EditValue.ToString(), out val))
+            int val;
+            if (!int.TryParse(comboBoxEdit_VTime.EditValue.ToString(), out val))
             {
                 XtraMessageBox.Show("设置错误");
                 return;
@@ -934,7 +718,7 @@ namespace WADApplication
                 XtraMessageBox.Show("时长只能为1分钟~10天之间的数");
                 return;
             }
-            realTimeRangeX = val;
+            CommonMemory.SysConfig.RealTimeRangeX = val;
             // 最大时间为当前时间, 前面时间的数据从数据库里面取
             maxTime = Utility.CutOffMillisecond(DateTime.Now);
             minTime = maxTime.AddMinutes(-val);
@@ -963,8 +747,8 @@ namespace WADApplication
 
         private void MainForm_SizeChanged(object sender, EventArgs e)
         {
-            this.splitContainerControl8.Panel1.MinSize = this.splitContainerControl8.Panel1.Width;
-            this.splitContainerControl8.Panel2.MinSize = this.splitContainerControl8.Panel2.Width;
+            //this.splitContainerControl8.Panel1.MinSize = this.splitContainerControl8.Panel1.Width;
+            //this.splitContainerControl8.Panel2.MinSize = this.splitContainerControl8.Panel2.Width;
             //gridControl_nowData2.Refresh();
 
             //this.splitContainerControl9.Panel1.MinSize = this.splitContainerControl9.Panel1.Height;
@@ -1001,23 +785,6 @@ namespace WADApplication
             }
         }
 
-        private void btn_period_Click(object sender, EventArgs e)
-        {
-            bool isok = InitParm();
-            if (IsInit)
-            {
-                return;
-            }
-            if (isok)
-            {
-                peroStr = textEdit_period.Text;
-                XtraMessageBox.Show("设置成功");
-            }
-            else
-            {
-                XtraMessageBox.Show("设置失败");
-            }
-        }
 
         private void btn_setVTime_Click(object sender, EventArgs e)
         {
@@ -1026,7 +793,7 @@ namespace WADApplication
 
         private void btn_CloseSys_ItemClick(object sender, ItemClickEventArgs e)
         {
-            AppConfigProcess.Save(textEdit_period.EditValue.ToString(), textEdit_Delay.EditValue.ToString(), comboBoxEdit_period.EditValue.ToString(), comboBoxEdit_VTime.EditValue.ToString(), comboBoxEdit2.Text, localPort);
+            AppConfigProcess.Save();
             AlertProcess.CloseLight("all");
             try
             {
@@ -1040,82 +807,82 @@ namespace WADApplication
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            IPAddress ip;
-            if (!IPAddress.TryParse(tbxserverIp.Text, out ip))
-            {
-                XtraMessageBox.Show("请输入正确的IP");
-                return;
-            }
-            try
-            {
-                tcpLister = new TcpListener(new IPEndPoint(IPAddress.Parse(tbxserverIp.Text), Convert.ToInt32(tbxPort.Text)));
-                //  tcpLister = new TcpListener(ipaddress,Port);
-                tcpLister.Start();
-                // 启动一个线程来接受请求
-                acceptConnect = true;
-                acceptThread = new Thread(acceptClientConnect);
-                acceptThread.IsBackground = true;
-                acceptThread.Start();
-                btnStart.Enabled = false;
-                btnStopListen.Enabled = true;
-            }
-            catch
-            {
-                XtraMessageBox.Show("请求监听失败！");
-                LogLib.Log.GetLogger("tcpLister").Warn("请求监听失败！");
-            }
+            //IPAddress ip;
+            //if (!IPAddress.TryParse(tbxserverIp.Text, out ip))
+            //{
+            //    XtraMessageBox.Show("请输入正确的IP");
+            //    return;
+            //}
+            //try
+            //{
+            //    tcpLister = new TcpListener(new IPEndPoint(IPAddress.Parse(tbxserverIp.Text), Convert.ToInt32(tbxPort.Text)));
+            //    //  tcpLister = new TcpListener(ipaddress,Port);
+            //    tcpLister.Start();
+            //    // 启动一个线程来接受请求
+            //    acceptConnect = true;
+            //    acceptThread = new Thread(acceptClientConnect);
+            //    acceptThread.IsBackground = true;
+            //    acceptThread.Start();
+            //    btnStart.Enabled = false;
+            //    btnStopListen.Enabled = true;
+            //}
+            //catch
+            //{
+            //    XtraMessageBox.Show("请求监听失败！");
+            //    LogLib.Log.GetLogger("tcpLister").Warn("请求监听失败！");
+            //}
 
         }
         // 接受请求
         private void acceptClientConnect()
         {
-            label1.Invoke(showStatusCallBack, "正在监听");
-            Thread.Sleep(1000);
-            while (acceptConnect)
-            {
-                try
-                {
-                    //TcpClient tcpClient = null;
+            //label1.Invoke(showStatusCallBack, "正在监听");
+            //Thread.Sleep(1000);
+            //while (acceptConnect)
+            //{
+            //    try
+            //    {
+            //        //TcpClient tcpClient = null;
 
-                    //NetworkStream networkStream = null;
-                    //BinaryReader reader;
-                    //BinaryWriter writer;
+            //        //NetworkStream networkStream = null;
+            //        //BinaryReader reader;
+            //        //BinaryWriter writer;
 
-                    label1.Invoke(showStatusCallBack, "等待连接");
-                    TcpClient tcpClient = tcpLister.AcceptTcpClient();
-                    if (tcpLister != null)
-                    {
+            //        label1.Invoke(showStatusCallBack, "等待连接");
+            //        TcpClient tcpClient = tcpLister.AcceptTcpClient();
+            //        if (tcpLister != null)
+            //        {
 
-                        label1.Invoke(showStatusCallBack, "接受到连接");
+            //            label1.Invoke(showStatusCallBack, "接受到连接");
 
-                        Thread sendThread = new Thread(SendMessage);
-                        sendThread.IsBackground = true;
-                        sendThread.Start(tcpClient);
+            //            Thread sendThread = new Thread(SendMessage);
+            //            sendThread.IsBackground = true;
+            //            sendThread.Start(tcpClient);
 
-                        Thread.Sleep(3000);
-                        lbOnline.Items.Add(tcpClient.Client.RemoteEndPoint.ToString());
-                        // 将与客户端连接的 套接字 对象添加到集合中；
-                        dict.Add(tcpClient.Client.RemoteEndPoint.ToString(), tcpClient);
-                        dictThread.Add(tcpClient.Client.RemoteEndPoint.ToString(), sendThread);  //  将新建的线程 添加 到线程的集合中去。
+            //            Thread.Sleep(3000);
+            //            lbOnline.Items.Add(tcpClient.Client.RemoteEndPoint.ToString());
+            //            // 将与客户端连接的 套接字 对象添加到集合中；
+            //            dict.Add(tcpClient.Client.RemoteEndPoint.ToString(), tcpClient);
+            //            dictThread.Add(tcpClient.Client.RemoteEndPoint.ToString(), sendThread);  //  将新建的线程 添加 到线程的集合中去。
 
-                        if (thMain == null)
-                        {
-                            sendStat = true;
-                            thMain = new Thread(allsend);
-                            thMain.IsBackground = true;
-                            thMain.Start();
-                        }
-                    }
-                }
-                catch
-                {
-                    label1.Invoke(showStatusCallBack, "停止监听");
-                    Thread.Sleep(1000);
-                    //  statusStripInfo.Invoke(showStatusCallBack, "就绪");
-                }
-                Thread.Sleep(100);
+            //            if (thMain == null)
+            //            {
+            //                sendStat = true;
+            //                thMain = new Thread(allsend);
+            //                thMain.IsBackground = true;
+            //                thMain.Start();
+            //            }
+            //        }
+            //    }
+            //    catch
+            //    {
+            //        label1.Invoke(showStatusCallBack, "停止监听");
+            //        Thread.Sleep(1000);
+            //        //  statusStripInfo.Invoke(showStatusCallBack, "就绪");
+            //    }
+            //    Thread.Sleep(100);
 
-            }
+            //}
         }
 
         private void allsend()
@@ -1161,7 +928,7 @@ namespace WADApplication
                                     // 从通信线程集合中删除被中断连接的通信线程对象；
                                     dictThread.Remove(s.Client.RemoteEndPoint.ToString());
                                     // 从列表中移除被中断的连接IP
-                                    lbOnline.Items.Remove(s.Client.RemoteEndPoint.ToString());
+                                    //lbOnline.Items.Remove(s.Client.RemoteEndPoint.ToString());
 
                                     LogLib.Log.GetLogger("SocketException").Warn(se.Message);
                                     continue;
@@ -1182,7 +949,7 @@ namespace WADApplication
         // 发送消息
         private void SendMessage(object client)
         {
-            label1.Invoke(showStatusCallBack, "正在发送");
+            //label1.Invoke(showStatusCallBack, "正在发送");
             TcpClient tcpClient = (TcpClient)client;
             // NetworkStream networkStream = tcpClient.GetStream();          
             try
@@ -1194,7 +961,7 @@ namespace WADApplication
                     byte[] arrMsg = Encoding.Default.GetBytes(send);
                     tcpClient.Client.Send(arrMsg);
                     //   writer.Flush();
-                    label1.Invoke(showStatusCallBack, "完毕");
+                    //label1.Invoke(showStatusCallBack, "完毕");
                     //   tbxMessage.Invoke(resetMessageCallBack, null);
                     lstbxMessageView.Invoke(showMessageCallback, send.ToString());
                 }
@@ -1230,8 +997,8 @@ namespace WADApplication
             {
                 acceptThread.Abort();
             }
-            btnStart.Enabled = true;
-            btnStopListen.Enabled = false;
+            //btnStart.Enabled = true;
+            //btnStopListen.Enabled = false;
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
@@ -1242,25 +1009,25 @@ namespace WADApplication
                 return;
             }
 
-            Equipment eq = gridView_Status.GetFocusedRow() as Equipment;
-            if (eq != null)
-            {
-                Form_OneParmSet ops = new Form_OneParmSet(eq);
-                ops.ShowDialog();
+            //Equipment eq = gridView_Status.GetFocusedRow() as Equipment;
+            //if (eq != null)
+            //{
+            //    Form_OneParmSet ops = new Form_OneParmSet(eq);
+            //    ops.ShowDialog();
 
-                mainList = EquipmentBusiness.GetAllListNotDelete();
-                gridControl_nowData2.DataSource = mainList;
-                gridControl_Status.DataSource = mainList;
-                gridControl_Status.RefreshDataSource();
-                gridView_Status.BestFitColumns();
-                gridControl_nowData2.RefreshDataSource();
-                gridView_nowData2.BestFitColumns();
-                selecteq = mainList.FirstOrDefault();
-            }
-            else
-            {
-                XtraMessageBox.Show("没有选中记录！");
-            }
+            //    mainList = EquipmentBusiness.GetAllListNotDelete();
+            //    gridControl_nowData2.DataSource = mainList;
+            //    gridControl_Status.DataSource = mainList;
+            //    gridControl_Status.RefreshDataSource();
+            //    gridView_Status.BestFitColumns();
+            //    gridControl_nowData2.RefreshDataSource();
+            //    gridView_nowData2.BestFitColumns();
+            //    selecteq = mainList.FirstOrDefault();
+            //}
+            //else
+            //{
+            //    XtraMessageBox.Show("没有选中记录！");
+            //}
 
         }
         Form_map set = new Form_map();
@@ -1287,7 +1054,7 @@ namespace WADApplication
 
             mainList[idexeq].IfShowSeries = checkedit.Checked;
             maxTime = Utility.CutOffMillisecond(DateTime.Now);
-            minTime = maxTime.AddMinutes(-realTimeRangeX);
+            minTime = maxTime.AddMinutes(-CommonMemory.SysConfig.RealTimeRangeX);
             EquipmentDal.UpdateOne(mainList[idexeq]);
             // 只有在开始监听的情况下，才显示曲线，所以这里加条件判断
             if (isRead)
@@ -1298,6 +1065,90 @@ namespace WADApplication
                 }                
             }
             
+        }
+
+        /// <summary>
+        /// 串口的初始化也调用刷新按钮的事件，这时给editvalue赋值用配置文件里的数据
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void barButtonItem4_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (sender == null) // 顺便初始化一下上次选择的波特率吧
+            {
+                barEditItem2.EditValue = CommonMemory.SysConfig.PortRate;
+            }
+            RepositoryItemComboBox box = barEditItem1.Edit as RepositoryItemComboBox;
+            var value = sender == null ? CommonMemory.SysConfig.PortName : barEditItem1.EditValue;
+            box.Items.Clear();
+            foreach (string port in System.IO.Ports.SerialPort.GetPortNames())
+            {
+                box.Items.Add(port);
+            }
+
+            if (value.ToString() != "" && box.Items.Contains(value.ToString()))
+            {
+                barEditItem1.EditValue = value;
+            }
+            else if (value.ToString() != "" && sender == null) // 初始化的时候不管有没有串口都赋值
+            {
+                barEditItem1.EditValue = value;
+            }
+            else if (box.Items.Count == 0)
+            {
+                barEditItem1.EditValue = "";
+            }
+        }
+
+        private void barButtonItem3_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (barButtonItem3.Caption == "打开")
+            {
+                if (PLAASerialPort.serialport.IsOpen)
+                {
+                    XtraMessageBox.Show("串口已打开");
+                    return;
+                }
+                if (!PLAASerialPort.GetInstance().Open(barEditItem1.EditValue.ToString(), Convert.ToInt32(barEditItem2.EditValue.ToString())))
+                {
+                    XtraMessageBox.Show("打开串口失败");
+                }
+                else
+                {
+                    barButtonItem3.Caption = "关闭";
+                    barEditItem1.Enabled = false;
+                    barEditItem2.Enabled = false;
+                    barButtonItem4.Enabled = false;
+                    CommonMemory.IsOpen = true;
+                    CommonMemory.IsReadConnect = true;
+                    setinfo("打开串口");
+                }
+            }
+            else
+            {
+                btn_Stop_ItemClick(null, null);
+                AlertProcess.PlaySound(false);
+                if (!PLAASerialPort.GetInstance().Close())
+                {
+                    XtraMessageBox.Show("关闭串口异常");
+                }
+                else
+                {
+                    barEditItem1.Enabled = true;
+                    barEditItem2.Enabled = true;
+                    barButtonItem4.Enabled = true;
+                    CommonMemory.IsOpen = false;
+                    CommonMemory.IsReadConnect = false;
+                    foreach (Equipment item in mainList)
+                    {
+                        item.IsConnect = false;
+                    }
+                    //gridControl_Status.RefreshDataSource();
+                    //gridView_Status.BestFitColumns();
+                    setinfo("关闭串口");
+                    barButtonItem3.Caption = "打开";
+                }
+            }
         }
     }
 }

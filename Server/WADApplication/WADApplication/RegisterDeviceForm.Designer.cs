@@ -31,7 +31,6 @@
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
             this.simpleButton5 = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton4 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
@@ -46,16 +45,25 @@
             this.gridColumn_IsRegister = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn_Select = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            this.comboBoxEdit1 = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
+            this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
+            this.spinEdit1 = new DevExpress.XtraEditors.SpinEdit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             this.splitContainerControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinEdit1.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // simpleButton1
             // 
-            this.simpleButton1.Location = new System.Drawing.Point(208, 11);
+            this.simpleButton1.Location = new System.Drawing.Point(489, 11);
             this.simpleButton1.Name = "simpleButton1";
             this.simpleButton1.Size = new System.Drawing.Size(64, 21);
             this.simpleButton1.TabIndex = 0;
@@ -68,40 +76,36 @@
             this.splitContainerControl1.Horizontal = false;
             this.splitContainerControl1.Location = new System.Drawing.Point(0, 0);
             this.splitContainerControl1.Name = "splitContainerControl1";
+            this.splitContainerControl1.Panel1.Controls.Add(this.spinEdit1);
+            this.splitContainerControl1.Panel1.Controls.Add(this.textEdit1);
+            this.splitContainerControl1.Panel1.Controls.Add(this.labelControl3);
+            this.splitContainerControl1.Panel1.Controls.Add(this.labelControl2);
+            this.splitContainerControl1.Panel1.Controls.Add(this.labelControl1);
+            this.splitContainerControl1.Panel1.Controls.Add(this.comboBoxEdit1);
             this.splitContainerControl1.Panel1.Controls.Add(this.simpleButton5);
-            this.splitContainerControl1.Panel1.Controls.Add(this.simpleButton4);
             this.splitContainerControl1.Panel1.Controls.Add(this.simpleButton3);
             this.splitContainerControl1.Panel1.Controls.Add(this.simpleButton2);
             this.splitContainerControl1.Panel1.Controls.Add(this.simpleButton1);
             this.splitContainerControl1.Panel1.Text = "Panel1";
             this.splitContainerControl1.Panel2.Controls.Add(this.gridControl1);
             this.splitContainerControl1.Panel2.Text = "Panel2";
-            this.splitContainerControl1.Size = new System.Drawing.Size(775, 396);
-            this.splitContainerControl1.SplitterPosition = 46;
+            this.splitContainerControl1.Size = new System.Drawing.Size(775, 534);
+            this.splitContainerControl1.SplitterPosition = 62;
             this.splitContainerControl1.TabIndex = 1;
             this.splitContainerControl1.Text = "splitContainerControl1";
             // 
             // simpleButton5
             // 
-            this.simpleButton5.Location = new System.Drawing.Point(622, 12);
+            this.simpleButton5.Location = new System.Drawing.Point(699, 12);
             this.simpleButton5.Name = "simpleButton5";
             this.simpleButton5.Size = new System.Drawing.Size(64, 21);
             this.simpleButton5.TabIndex = 4;
             this.simpleButton5.Text = "添加气象";
             this.simpleButton5.Click += new System.EventHandler(this.simpleButton5_Click);
             // 
-            // simpleButton4
-            // 
-            this.simpleButton4.Location = new System.Drawing.Point(70, 11);
-            this.simpleButton4.Name = "simpleButton4";
-            this.simpleButton4.Size = new System.Drawing.Size(64, 21);
-            this.simpleButton4.TabIndex = 3;
-            this.simpleButton4.Text = "添加默认";
-            this.simpleButton4.Click += new System.EventHandler(this.simpleButton4_Click);
-            // 
             // simpleButton3
             // 
-            this.simpleButton3.Location = new System.Drawing.Point(346, 11);
+            this.simpleButton3.Location = new System.Drawing.Point(559, 11);
             this.simpleButton3.Name = "simpleButton3";
             this.simpleButton3.Size = new System.Drawing.Size(64, 21);
             this.simpleButton3.TabIndex = 2;
@@ -111,7 +115,7 @@
             // 
             // simpleButton2
             // 
-            this.simpleButton2.Location = new System.Drawing.Point(484, 11);
+            this.simpleButton2.Location = new System.Drawing.Point(629, 11);
             this.simpleButton2.Name = "simpleButton2";
             this.simpleButton2.Size = new System.Drawing.Size(64, 21);
             this.simpleButton2.TabIndex = 1;
@@ -126,7 +130,7 @@
             this.gridControl1.Name = "gridControl1";
             this.gridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemCheckEdit1});
-            this.gridControl1.Size = new System.Drawing.Size(775, 345);
+            this.gridControl1.Size = new System.Drawing.Size(775, 467);
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -236,11 +240,69 @@
             this.repositoryItemCheckEdit1.AutoHeight = false;
             this.repositoryItemCheckEdit1.Name = "repositoryItemCheckEdit1";
             // 
+            // comboBoxEdit1
+            // 
+            this.comboBoxEdit1.EditValue = "新协议";
+            this.comboBoxEdit1.Location = new System.Drawing.Point(273, 9);
+            this.comboBoxEdit1.Name = "comboBoxEdit1";
+            this.comboBoxEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.comboBoxEdit1.Properties.Items.AddRange(new object[] {
+            "新协议",
+            "老协议"});
+            this.comboBoxEdit1.Size = new System.Drawing.Size(100, 20);
+            this.comboBoxEdit1.TabIndex = 5;
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Location = new System.Drawing.Point(207, 12);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(60, 13);
+            this.labelControl1.TabIndex = 6;
+            this.labelControl1.Text = "设备协议：";
+            // 
+            // labelControl2
+            // 
+            this.labelControl2.Location = new System.Drawing.Point(26, 9);
+            this.labelControl2.Name = "labelControl2";
+            this.labelControl2.Size = new System.Drawing.Size(60, 13);
+            this.labelControl2.TabIndex = 7;
+            this.labelControl2.Text = "设备地址：";
+            // 
+            // labelControl3
+            // 
+            this.labelControl3.Location = new System.Drawing.Point(24, 37);
+            this.labelControl3.Name = "labelControl3";
+            this.labelControl3.Size = new System.Drawing.Size(60, 13);
+            this.labelControl3.TabIndex = 8;
+            this.labelControl3.Text = "设备名称：";
+            // 
+            // textEdit1
+            // 
+            this.textEdit1.Location = new System.Drawing.Point(90, 34);
+            this.textEdit1.Name = "textEdit1";
+            this.textEdit1.Size = new System.Drawing.Size(100, 20);
+            this.textEdit1.TabIndex = 9;
+            // 
+            // spinEdit1
+            // 
+            this.spinEdit1.EditValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.spinEdit1.Location = new System.Drawing.Point(90, 8);
+            this.spinEdit1.Name = "spinEdit1";
+            this.spinEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.spinEdit1.Size = new System.Drawing.Size(100, 20);
+            this.spinEdit1.TabIndex = 10;
+            // 
             // RegisterDeviceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(775, 396);
+            this.ClientSize = new System.Drawing.Size(775, 534);
             this.Controls.Add(this.splitContainerControl1);
             this.MinimizeBox = false;
             this.Name = "RegisterDeviceForm";
@@ -255,6 +317,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinEdit1.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -274,10 +339,15 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn_Select;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn_SensorType;
-        private DevExpress.XtraEditors.SimpleButton simpleButton4;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private DevExpress.XtraEditors.SimpleButton simpleButton5;
+        private DevExpress.XtraEditors.LabelControl labelControl1;
+        private DevExpress.XtraEditors.ComboBoxEdit comboBoxEdit1;
+        private DevExpress.XtraEditors.SpinEdit spinEdit1;
+        private DevExpress.XtraEditors.TextEdit textEdit1;
+        private DevExpress.XtraEditors.LabelControl labelControl3;
+        private DevExpress.XtraEditors.LabelControl labelControl2;
     }
 }

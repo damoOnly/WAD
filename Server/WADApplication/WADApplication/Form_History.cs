@@ -15,6 +15,7 @@ using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Columns;
 using System.Diagnostics;
 using System.Threading;
+using WADApplication.Process;
 
 namespace WADApplication
 {
@@ -699,7 +700,7 @@ namespace WADApplication
             mainList = EquipmentBusiness.GetListIncludeDelete();
             mainList = mainList.OrderBy(c => c.ID).ToList();
             checkedComboBoxEdit1.Properties.Items.Clear();
-            mainList.ForEach(c => { checkedComboBoxEdit1.Properties.Items.Add(c.ID, c.Name + "," + c.Address + "," + c.SensorTypeB + "," + c.GasName); });
+            mainList.ForEach(c => { checkedComboBoxEdit1.Properties.Items.Add(c.ID, c.Address + "," + c.GasName); });
         }
 
         private void comboBoxEdit1_SelectedValueChanged(object sender, EventArgs e)
@@ -757,6 +758,57 @@ namespace WADApplication
             //}
         }
 
+        // 导入excel表格里面的数据
+        private void simpleButton1_Click(object sender, EventArgs e)
+        {
+            ImportExcel ipoexc = new ImportExcel();
+            if (ipoexc.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                int id = ipoexc.ID;
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                //openFileDialog.Filter = "Excel Files (*xls)|*.xls|Excel files (*xlsx)|*.xlsx|csv files (*csv)|*.csv";
+                // 目前只支持csv
+                openFileDialog.Filter = "csv files (*csv)|*.csv";
+                if (openFileDialog.ShowDialog(this) == DialogResult.OK)
+                {
+                    string FileName = openFileDialog.FileName;
+                    if (FileName.ToLower().IndexOf(".csv") > 0)
+                    {
+                        try
+                        {
+                            Dictionary<string, List<EquipmentData>> dic = ExcelHelper.OpenCSVList(FileName);
+                            foreach (var item in dic)
+                            {
+                                DateTime keytime = new DateTime(Convert.ToInt32(item.Key.Substring(0, 4)), Convert.ToInt32(item.Key.Substring(4, 2)), 1);
+                                EquipmentDataBusiness.CreateDbByMonth(id, keytime);
+                                EquipmentDataBusiness.AddList(item.Value, id, keytime);
+                            } 
+                        }
+                        catch (Exception ex)
+                        {
+                            LogLib.Log.GetLogger(this).Warn(ex);
+                            MessageBox.Show(ex.Message);
+                        }
+                    }
+                    //else
+                    //{
+                    //    try
+                    //    {
+                    //        using (ExcelHelper excelHelper = new ExcelHelper(FileName))
+                    //        {
+                    //            DataTable dt = excelHelper.ExcelToDataTable("", true);
+                    //        }
+                    //    }
+                    //    catch (Exception ex)
+                    //    {
+                    //        Console.WriteLine("Exception: " + ex.Message);
+                    //    }
+                    //}
+                    
+                }
+            }
+        }
 
 
 

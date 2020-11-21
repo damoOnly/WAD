@@ -87,6 +87,7 @@
       <SpecificVersion>False</SpecificVersion>
       <Private>True</Private>
     </Reference>
+    <Reference Include="DevExpress.XtraNavBar.v14.2, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraPrinting.v14.2, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <Private>True</Private>
@@ -120,6 +121,15 @@
     </Reference>
     <Reference Include="DevExpress.XtraTreeList.v14.2, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
       <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI">
+      <HintPath>..\Libs\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML">
+      <HintPath>..\Libs\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net">
+      <HintPath>..\Libs\NPOI.OpenXml4Net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -230,6 +240,12 @@
     <Compile Include="Form_zero.Designer.cs">
       <DependentUpon>Form_zero.cs</DependentUpon>
     </Compile>
+    <Compile Include="ImportExcel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImportExcel.Designer.cs">
+      <DependentUpon>ImportExcel.cs</DependentUpon>
+    </Compile>
     <Compile Include="LocalizationCHS.cs" />
     <Compile Include="MDIParent1.cs">
       <SubType>Form</SubType>
@@ -239,6 +255,7 @@
     </Compile>
     <Compile Include="Process\AlertProcess.cs" />
     <Compile Include="Process\AppConfigProcess.cs" />
+    <Compile Include="Process\ExcelHelper.cs" />
     <Compile Include="Process\MainProcess.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -259,6 +276,12 @@
     </Compile>
     <Compile Include="Form_InputHistory.Designer.cs">
       <DependentUpon>Form_InputHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SystemConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SystemConfig.Designer.cs">
+      <DependentUpon>SystemConfig.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="AddDeviceForm.resx">
       <DependentUpon>AddDeviceForm.cs</DependentUpon>
@@ -305,6 +328,9 @@
     <EmbeddedResource Include="Form_zero.resx">
       <DependentUpon>Form_zero.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ImportExcel.resx">
+      <DependentUpon>ImportExcel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MDIParent1.resx">
       <DependentUpon>MDIParent1.cs</DependentUpon>
     </EmbeddedResource>
@@ -327,6 +353,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_InputHistory.resx">
       <DependentUpon>Form_InputHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SystemConfig.resx">
+      <DependentUpon>SystemConfig.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config">
       <SubType>Designer</SubType>

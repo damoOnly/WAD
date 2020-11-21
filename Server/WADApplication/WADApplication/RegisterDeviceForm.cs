@@ -30,35 +30,50 @@ namespace WADApplication
             InitializeComponent();
         }
 
+        //byte addr = (list == null || list.Count <=0) ? (byte)0 : list.LastOrDefault().Address;
+        //    byte sensorNum = (list == null || list.Count <= 0) ? (byte)0 : (byte)(list.LastOrDefault().SensorNum + 1);
+        //    AddDeviceForm addfff = new AddDeviceForm(addr, sensorNum, true);
+        //    if (addfff.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+        //    {
+        //        try
+        //        {
+        //            StructEquipment eq = addfff.mEquipment;
+        //            if (CommonMemory.IsOldVersion)
+        //            {
+        //                AddEqProcess.AddOldGas(ref eq);
+        //            }
+        //            else
+        //            {
+        //                AddEqProcess.AddNewGas(ref eq);
+        //            }
+
+        //            EquipmentDal.AddOneR(ref eq);
+        //            InitList();
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            log.Error("添加气体失败", ex);
+        //            XtraMessageBox.Show("添加气体失败");
+        //        }
+        //    }
+
         // 添加气体
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            byte addr = (list == null || list.Count <=0) ? (byte)0 : list.LastOrDefault().Address;
-            byte sensorNum = (list == null || list.Count <= 0) ? (byte)0 : (byte)(list.LastOrDefault().SensorNum + 1);
-            AddDeviceForm addfff = new AddDeviceForm(addr, sensorNum, true);
-            if (addfff.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            bool isNew = comboBoxEdit1.EditValue.ToString() == "新设备";
+            string name = textEdit1.EditValue.ToString();
+            byte address = byte.Parse(spinEdit1.EditValue.ToString());
+            List<StructEquipment> list = new List<StructEquipment>();
+            if (isNew)
             {
-                try
-                {
-                    StructEquipment eq = addfff.mEquipment;
-                    if (CommonMemory.IsOldVersion)
-                    {
-                        AddEqProcess.AddOldGas(ref eq);
-                    }
-                    else
-                    {
-                        AddEqProcess.AddNewGas(ref eq);
-                    }
-
-                    EquipmentDal.AddOneR(ref eq);
-                    InitList();
-                }
-                catch (Exception ex)
-                {
-                    log.Error("添加气体失败", ex);
-                    XtraMessageBox.Show("添加气体失败");
-                }
+                list = ReadEqProcess.readNew(address, name);
             }
+            else {
+                list = ReadEqProcess.readOld(address, name);
+            }
+
+            EquipmentBusiness.AddOrUpdateOrDeleteList(list);
+            InitList();
         }
 
         private void RegisterDeviceForm_Load(object sender, EventArgs e)
@@ -73,12 +88,7 @@ namespace WADApplication
 
         private void InitList()
         {
-            var sl = EquipmentDal.GetAllListNotDelete();
-            list = new List<Equipment>();
-            foreach (var item in sl)
-            {
-                list.Add(Utility.ConvertToEq(item));
-            }
+            list = EquipmentBusiness.GetAllListNotDelete();
             gridControl1.DataSource = list;
             gridControl1.RefreshDataSource();
             gridView1.BestFitColumns();
@@ -116,16 +126,16 @@ namespace WADApplication
                     {
                         if (CommonMemory.IsOldVersion)
                         {
-                            AddEqProcess.AddOldGas(ref update);
+                            //ReadEqProcess.ReadOldGas(ref update);
                         }
                         else
                         {
-                            AddEqProcess.AddNewGas(ref update);
+                            ReadEqProcess.ReadNewGas(ref update);
                         }
                     }
                     else
                     {
-                        AddEqProcess.AddWeather(ref update);
+                        ReadEqProcess.ReadWeather(ref update);
                     }
                     EquipmentDal.UpdateOne(update);
                     InitList();
@@ -185,16 +195,16 @@ namespace WADApplication
                         {
                             if (CommonMemory.IsOldVersion)
                             {
-                                AddEqProcess.AddOldGas(ref update);
+                                //ReadEqProcess.ReadOldGas(ref update);
                             }
                             else
                             {
-                                AddEqProcess.AddNewGas(ref update);
+                                ReadEqProcess.ReadNewGas(ref update);
                             }
                         }
                         else
                         {
-                            AddEqProcess.AddWeather(ref update);
+                            ReadEqProcess.ReadWeather(ref update);
                         }
                         EquipmentDal.UpdateOne(update);
                         InitList();
@@ -237,7 +247,7 @@ namespace WADApplication
                 try
                 {
                     StructEquipment eq = addfff.mEquipment;
-                    AddEqProcess.AddWeather(ref eq);
+                    ReadEqProcess.ReadWeather(ref eq);
 
                     EquipmentDal.AddOneR(ref eq);
                     InitList();
