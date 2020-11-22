@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="AddEqProcess.cs" />
     <Compile Include="Command.cs" />
+    <Compile Include="CommandException.cs" />
     <Compile Include="CommandManager.cs" />
     <Compile Include="CRC.cs" />
     <Compile Include="Parse.cs" />

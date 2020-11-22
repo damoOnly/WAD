@@ -30,10 +30,17 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule1 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression1 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule2 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression2 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule3 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression3 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
             DevExpress.XtraCharts.SwiftPlotDiagram swiftPlotDiagram1 = new DevExpress.XtraCharts.SwiftPlotDiagram();
             DevExpress.XtraCharts.Series series1 = new DevExpress.XtraCharts.Series();
             DevExpress.XtraCharts.SwiftPlotSeriesView swiftPlotSeriesView1 = new DevExpress.XtraCharts.SwiftPlotSeriesView();
             DevExpress.XtraCharts.SwiftPlotSeriesView swiftPlotSeriesView2 = new DevExpress.XtraCharts.SwiftPlotSeriesView();
+            this.gridColumn18 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.ribbon = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.btn_Start = new DevExpress.XtraBars.BarButtonItem();
             this.btn_Stop = new DevExpress.XtraBars.BarButtonItem();
@@ -69,17 +76,16 @@
             this.gridView_nowData2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
-            this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn21 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn18 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn19 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn20 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn_TH = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -147,6 +153,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // gridColumn18
+            // 
+            this.gridColumn18.Caption = "报警状态";
+            this.gridColumn18.FieldName = "AlertStr";
+            this.gridColumn18.MaxWidth = 150;
+            this.gridColumn18.MinWidth = 60;
+            this.gridColumn18.Name = "gridColumn18";
+            this.gridColumn18.OptionsColumn.AllowEdit = false;
+            this.gridColumn18.UnboundType = DevExpress.Data.UnboundColumnType.String;
+            this.gridColumn18.Visible = true;
+            this.gridColumn18.VisibleIndex = 5;
+            this.gridColumn18.Width = 70;
             // 
             // ribbon
             // 
@@ -466,7 +485,6 @@
             this.gridView_nowData2.Appearance.FixedLine.BackColor = System.Drawing.Color.Black;
             this.gridView_nowData2.Appearance.FixedLine.Options.UseBackColor = true;
             this.gridView_nowData2.Appearance.FocusedCell.BackColor = System.Drawing.Color.MediumPurple;
-            this.gridView_nowData2.Appearance.FocusedCell.Options.UseBackColor = true;
             this.gridView_nowData2.Appearance.FocusedCell.Options.UseFont = true;
             this.gridView_nowData2.Appearance.FocusedRow.BackColor = System.Drawing.Color.MediumPurple;
             this.gridView_nowData2.Appearance.FocusedRow.BackColor2 = System.Drawing.Color.MediumPurple;
@@ -474,6 +492,8 @@
             this.gridView_nowData2.Appearance.HeaderPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(162)))), ((int)(((byte)(169)))));
             this.gridView_nowData2.Appearance.HeaderPanel.BackColor2 = System.Drawing.Color.Black;
             this.gridView_nowData2.Appearance.HeaderPanel.Options.UseBackColor = true;
+            this.gridView_nowData2.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            this.gridView_nowData2.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridView_nowData2.Appearance.HideSelectionRow.BackColor = System.Drawing.Color.MediumPurple;
             this.gridView_nowData2.Appearance.HideSelectionRow.Options.UseBackColor = true;
             this.gridView_nowData2.Appearance.OddRow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(40)))), ((int)(((byte)(62)))));
@@ -484,26 +504,48 @@
             this.gridView_nowData2.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridView_nowData2.Appearance.Row.Options.UseBackColor = true;
             this.gridView_nowData2.Appearance.Row.Options.UseFont = true;
+            this.gridView_nowData2.Appearance.Row.Options.UseTextOptions = true;
+            this.gridView_nowData2.Appearance.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridView_nowData2.Appearance.SelectedRow.BackColor = System.Drawing.Color.MediumPurple;
             this.gridView_nowData2.Appearance.SelectedRow.BackColor2 = System.Drawing.Color.MediumPurple;
             this.gridView_nowData2.Appearance.SelectedRow.Options.UseBackColor = true;
             this.gridView_nowData2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumn3,
-            this.gridColumn10,
             this.gridColumn11,
-            this.gridColumn2,
+            this.gridColumn10,
+            this.gridColumn1,
             this.gridColumn12,
+            this.gridColumn18,
+            this.gridColumn16,
             this.gridColumn17,
-            this.gridColumn15,
             this.gridColumn13,
             this.gridColumn14,
+            this.gridColumn15,
             this.gridColumn21,
-            this.gridColumn16,
-            this.gridColumn18,
             this.gridColumn19,
             this.gridColumn20,
             this.gridColumn_TH});
             this.gridView_nowData2.FixedLineWidth = 1;
+            gridFormatRule1.Column = this.gridColumn18;
+            gridFormatRule1.Name = "Format0";
+            formatConditionRuleExpression1.Expression = "[AlertStr] != \'正常\'";
+            formatConditionRuleExpression1.PredefinedName = "Red Bold Text";
+            gridFormatRule1.Rule = formatConditionRuleExpression1;
+            gridFormatRule2.Column = this.gridColumn1;
+            gridFormatRule2.Name = "Format1";
+            formatConditionRuleExpression2.Appearance.ForeColor = System.Drawing.Color.Lime;
+            formatConditionRuleExpression2.Appearance.Options.UseForeColor = true;
+            formatConditionRuleExpression2.Expression = "[IsConnect] == True";
+            formatConditionRuleExpression2.PredefinedName = "Bold Text";
+            gridFormatRule2.Rule = formatConditionRuleExpression2;
+            gridFormatRule3.Column = this.gridColumn1;
+            gridFormatRule3.Name = "Format2";
+            formatConditionRuleExpression3.Expression = "[IsConnect] == False";
+            formatConditionRuleExpression3.PredefinedName = "Red Bold Text";
+            gridFormatRule3.Rule = formatConditionRuleExpression3;
+            this.gridView_nowData2.FormatRules.Add(gridFormatRule1);
+            this.gridView_nowData2.FormatRules.Add(gridFormatRule2);
+            this.gridView_nowData2.FormatRules.Add(gridFormatRule3);
             this.gridView_nowData2.GridControl = this.gridControl_nowData2;
             this.gridView_nowData2.Name = "gridView_nowData2";
             this.gridView_nowData2.OptionsCustomization.AllowColumnMoving = false;
@@ -526,6 +568,7 @@
             this.gridColumn3.Caption = "是/否";
             this.gridColumn3.ColumnEdit = this.repositoryItemCheckEdit1;
             this.gridColumn3.FieldName = "IfShowSeries";
+            this.gridColumn3.MaxWidth = 75;
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.UnboundType = DevExpress.Data.UnboundColumnType.Boolean;
             this.gridColumn3.Visible = true;
@@ -537,35 +580,39 @@
             this.repositoryItemCheckEdit1.Name = "repositoryItemCheckEdit1";
             this.repositoryItemCheckEdit1.CheckedChanged += new System.EventHandler(this.repositoryItemCheckEdit1_CheckedChanged);
             // 
-            // gridColumn10
-            // 
-            this.gridColumn10.Caption = "设备名称";
-            this.gridColumn10.FieldName = "Name";
-            this.gridColumn10.MaxWidth = 300;
-            this.gridColumn10.MinWidth = 80;
-            this.gridColumn10.Name = "gridColumn10";
-            this.gridColumn10.OptionsColumn.AllowEdit = false;
-            this.gridColumn10.Width = 80;
-            // 
             // gridColumn11
             // 
             this.gridColumn11.Caption = "地址";
-            this.gridColumn11.FieldName = "ID";
+            this.gridColumn11.FieldName = "Address";
             this.gridColumn11.MaxWidth = 150;
             this.gridColumn11.MinWidth = 60;
             this.gridColumn11.Name = "gridColumn11";
             this.gridColumn11.OptionsColumn.AllowEdit = false;
+            this.gridColumn11.Visible = true;
+            this.gridColumn11.VisibleIndex = 1;
             this.gridColumn11.Width = 61;
             // 
-            // gridColumn2
+            // gridColumn10
             // 
-            this.gridColumn2.Caption = "通道名称";
-            this.gridColumn2.FieldName = "GasName";
-            this.gridColumn2.MaxWidth = 100;
-            this.gridColumn2.MinWidth = 55;
-            this.gridColumn2.Name = "gridColumn2";
-            this.gridColumn2.OptionsColumn.AllowEdit = false;
-            this.gridColumn2.Width = 55;
+            this.gridColumn10.Caption = "设备名称";
+            this.gridColumn10.FieldName = "Name";
+            this.gridColumn10.MaxWidth = 150;
+            this.gridColumn10.MinWidth = 80;
+            this.gridColumn10.Name = "gridColumn10";
+            this.gridColumn10.OptionsColumn.AllowEdit = false;
+            this.gridColumn10.Visible = true;
+            this.gridColumn10.VisibleIndex = 2;
+            this.gridColumn10.Width = 80;
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "通道";
+            this.gridColumn1.FieldName = "SensorNum";
+            this.gridColumn1.MaxWidth = 150;
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.OptionsColumn.AllowEdit = false;
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 3;
             // 
             // gridColumn12
             // 
@@ -576,29 +623,30 @@
             this.gridColumn12.Name = "gridColumn12";
             this.gridColumn12.OptionsColumn.AllowEdit = false;
             this.gridColumn12.Visible = true;
-            this.gridColumn12.VisibleIndex = 1;
+            this.gridColumn12.VisibleIndex = 4;
+            // 
+            // gridColumn16
+            // 
+            this.gridColumn16.Caption = "实时值";
+            this.gridColumn16.FieldName = "ChromaStr";
+            this.gridColumn16.MaxWidth = 150;
+            this.gridColumn16.MinWidth = 60;
+            this.gridColumn16.Name = "gridColumn16";
+            this.gridColumn16.OptionsColumn.AllowEdit = false;
+            this.gridColumn16.Visible = true;
+            this.gridColumn16.VisibleIndex = 6;
+            this.gridColumn16.Width = 63;
             // 
             // gridColumn17
             // 
             this.gridColumn17.Caption = "单位";
-            this.gridColumn17.FieldName = "Unit";
+            this.gridColumn17.FieldName = "UnitName";
             this.gridColumn17.MaxWidth = 150;
             this.gridColumn17.MinWidth = 75;
             this.gridColumn17.Name = "gridColumn17";
             this.gridColumn17.OptionsColumn.AllowEdit = false;
             this.gridColumn17.Visible = true;
-            this.gridColumn17.VisibleIndex = 2;
-            // 
-            // gridColumn15
-            // 
-            this.gridColumn15.Caption = "测量范围";
-            this.gridColumn15.FieldName = "MaxStr";
-            this.gridColumn15.MaxWidth = 150;
-            this.gridColumn15.MinWidth = 50;
-            this.gridColumn15.Name = "gridColumn15";
-            this.gridColumn15.OptionsColumn.AllowEdit = false;
-            this.gridColumn15.OptionsColumn.FixedWidth = true;
-            this.gridColumn15.Width = 60;
+            this.gridColumn17.VisibleIndex = 7;
             // 
             // gridColumn13
             // 
@@ -609,7 +657,7 @@
             this.gridColumn13.Name = "gridColumn13";
             this.gridColumn13.OptionsColumn.AllowEdit = false;
             this.gridColumn13.Visible = true;
-            this.gridColumn13.VisibleIndex = 3;
+            this.gridColumn13.VisibleIndex = 8;
             // 
             // gridColumn14
             // 
@@ -620,40 +668,29 @@
             this.gridColumn14.Name = "gridColumn14";
             this.gridColumn14.OptionsColumn.AllowEdit = false;
             this.gridColumn14.Visible = true;
-            this.gridColumn14.VisibleIndex = 5;
+            this.gridColumn14.VisibleIndex = 9;
             this.gridColumn14.Width = 76;
+            // 
+            // gridColumn15
+            // 
+            this.gridColumn15.Caption = "量程";
+            this.gridColumn15.FieldName = "Max";
+            this.gridColumn15.MaxWidth = 150;
+            this.gridColumn15.MinWidth = 50;
+            this.gridColumn15.Name = "gridColumn15";
+            this.gridColumn15.OptionsColumn.AllowEdit = false;
+            this.gridColumn15.OptionsColumn.FixedWidth = true;
+            this.gridColumn15.Visible = true;
+            this.gridColumn15.VisibleIndex = 10;
+            this.gridColumn15.Width = 60;
             // 
             // gridColumn21
             // 
-            this.gridColumn21.Caption = "低报警值";
-            this.gridColumn21.FieldName = "LowChromaStr";
+            this.gridColumn21.Caption = "连接状态";
+            this.gridColumn21.FieldName = "IsConnect";
             this.gridColumn21.Name = "gridColumn21";
             this.gridColumn21.OptionsColumn.AllowEdit = false;
             this.gridColumn21.Width = 20;
-            // 
-            // gridColumn16
-            // 
-            this.gridColumn16.Caption = "实时浓度值";
-            this.gridColumn16.FieldName = "ChromaStr";
-            this.gridColumn16.MaxWidth = 150;
-            this.gridColumn16.MinWidth = 60;
-            this.gridColumn16.Name = "gridColumn16";
-            this.gridColumn16.OptionsColumn.AllowEdit = false;
-            this.gridColumn16.Visible = true;
-            this.gridColumn16.VisibleIndex = 6;
-            this.gridColumn16.Width = 63;
-            // 
-            // gridColumn18
-            // 
-            this.gridColumn18.Caption = "浓度报警";
-            this.gridColumn18.FieldName = "AlertStr";
-            this.gridColumn18.MaxWidth = 150;
-            this.gridColumn18.MinWidth = 60;
-            this.gridColumn18.Name = "gridColumn18";
-            this.gridColumn18.OptionsColumn.AllowEdit = false;
-            this.gridColumn18.Visible = true;
-            this.gridColumn18.VisibleIndex = 4;
-            this.gridColumn18.Width = 70;
             // 
             // gridColumn19
             // 
@@ -1001,6 +1038,7 @@
             this.splitContainerControl1.Collapsed = true;
             this.splitContainerControl1.CollapsePanel = DevExpress.XtraEditors.SplitCollapsePanel.Panel2;
             this.splitContainerControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerControl1.FixedPanel = DevExpress.XtraEditors.SplitFixedPanel.Panel2;
             this.splitContainerControl1.Horizontal = false;
             this.splitContainerControl1.Location = new System.Drawing.Point(0, 102);
             this.splitContainerControl1.Name = "splitContainerControl1";
@@ -1009,13 +1047,15 @@
             this.splitContainerControl1.Panel2.Controls.Add(this.splitContainerControl2);
             this.splitContainerControl1.Panel2.Text = "Panel2";
             this.splitContainerControl1.Size = new System.Drawing.Size(957, 516);
-            this.splitContainerControl1.SplitterPosition = 354;
+            this.splitContainerControl1.SplitterPosition = 232;
             this.splitContainerControl1.TabIndex = 34;
             this.splitContainerControl1.Text = "splitContainerControl1";
             // 
             // splitContainerControl2
             // 
             this.splitContainerControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerControl2.FixedPanel = DevExpress.XtraEditors.SplitFixedPanel.Panel2;
+            this.splitContainerControl2.IsSplitterFixed = true;
             this.splitContainerControl2.Location = new System.Drawing.Point(0, 0);
             this.splitContainerControl2.Name = "splitContainerControl2";
             this.splitContainerControl2.Panel1.Controls.Add(this.chartControl1);
@@ -1023,7 +1063,7 @@
             this.splitContainerControl2.Panel2.Controls.Add(this.panelControl1);
             this.splitContainerControl2.Panel2.Text = "Panel2";
             this.splitContainerControl2.Size = new System.Drawing.Size(0, 0);
-            this.splitContainerControl2.SplitterPosition = 719;
+            this.splitContainerControl2.SplitterPosition = 233;
             this.splitContainerControl2.TabIndex = 1;
             this.splitContainerControl2.Text = "splitContainerControl2";
             // 
@@ -1163,7 +1203,6 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel2;
         private DevExpress.Utils.ImageCollection imageCollection1;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private System.Windows.Forms.ListBox lstbxMessageView;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
@@ -1183,5 +1222,6 @@
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl1;
         private DevExpress.XtraEditors.PanelControl panelControl1;
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl2;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
     }
 }

@@ -18,6 +18,7 @@ namespace Business
             {
                 result.Add(Utility.ConvertToEq(item));
             }
+            result = result.OrderBy((item) => { return item.Address; }).ThenBy((ss) => { return ss.SensorNum; }).ToList();
             return result;
         }
 

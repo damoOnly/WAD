@@ -11,6 +11,8 @@ namespace CommandManager
 {
     public class ReadEqProcess
     {
+        private static LogLib.Log log = LogLib.Log.GetLogger("ReadEqProcess");
+
         public static List<StructEquipment> readNew(byte address, string name)
         {
             try
@@ -27,24 +29,28 @@ namespace CommandManager
                 }
                 else
                 {
-                    LogLib.Log.GetLogger("AddEqProcess").Warn(address + "readNew error");
-                    //throw new Exception(eq.Address + "读取错误！");
+                    throw new CommandException(address + "readNew error");
                 }
                 List<StructEquipment> gasList = readNewGas(address, gasCount, name);
                 List<StructEquipment> weatherList = readNewWeather(address, weatherCount, name);
                 gasList.AddRange(weatherList);
                 return gasList;
             }
+            catch (CommandException ex)
+            {
+                log.Error(ex);
+                throw ex;
+            }
             catch (Exception e)
             {
-                
+                log.Error(e);
                 throw e;
             }
         }
         public static List<StructEquipment> readNewGas(byte address, int gasCount, string eqName)
         {
             List<StructEquipment> gasList = new List<StructEquipment>();
-            for (int i = 0; i < gasCount; i++)
+            for (int i = 1; i <= gasCount; i++)
             {
                 try
                 {
@@ -52,13 +58,13 @@ namespace CommandManager
                     eq.Name = eqName;
                     eq.Address = address;
                     eq.SensorNum = (byte)i;
+                    eq.IsGas = true;
                     ReadNewGas(ref eq);
                     gasList.Add(eq);
                 }
                 catch (Exception ex)
                 {
-                    LogLib.Log.GetLogger("AddEqProcess").Error(ex);
-
+                    log.Error(ex);
                 }
 
             }
@@ -77,15 +83,14 @@ namespace CommandManager
                     eq.Name = eqName;
                     eq.Address = address;
                     eq.SensorNum = (byte)(i + 16);
+                    eq.IsGas = false;
                     ReadWeather(ref eq);
                     gasList.Add(eq);
                 }
                 catch (Exception ex)
                 {
-                    LogLib.Log.GetLogger("AddEqProcess").Error(ex);
-
+                    log.Error(ex);
                 }
-
             }
 
             return gasList;
@@ -127,15 +132,20 @@ namespace CommandManager
                 }
                 else
                 {
-                    LogLib.Log.GetLogger("AddEqProcess").Warn(address + "readNew error");
+                    throw new CommandException(address + "read old error");
                 }
                 List<StructEquipment> gasList = ReadOldGas(gases, address, name);
                 return gasList;
 
             }
+            catch (CommandException ex)
+            {
+                log.Error(ex);
+                throw ex;
+            }
             catch (Exception e)
             {
-
+                log.Error(e);
                 throw e;
             }
         }
@@ -149,6 +159,7 @@ namespace CommandManager
                 se.Address = address;
                 se.Name = gasName;
                 se.SensorNum = gases[i];
+                se.IsGas = true;
                 try
                 {
                     Command cd = new Command(address, se.SensorNum, 0x30, 21);
@@ -160,12 +171,12 @@ namespace CommandManager
                     }
                     else
                     {
-                        LogLib.Log.GetLogger("AddEqProcess").Warn(address + "读取老气体配置错误！");
+                        log.Error(address + "读取老气体配置错误！");
                     }
                 }
                 catch (Exception e)
                 {
-                    LogLib.Log.GetLogger("AddEqProcess").Error(e);
+                    log.Error(e);
                 }
             }
             return gasList;
@@ -184,6 +195,7 @@ namespace CommandManager
             Array.Reverse(resultBytes, 41, 2);
             Array.Reverse(resultBytes, 43, 2);
             eq.A2 = BitConverter.ToSingle(resultBytes, 41);
+            eq.A2 = eq.A2 > eq.Max ? eq.Max : eq.A2;
         }
 
         public static void ReadNewGas(ref StructEquipment eq)
@@ -215,6 +227,7 @@ namespace CommandManager
             Array.Reverse(resultBytes, 33, 2);
             Array.Reverse(resultBytes, 35, 2);
             eq.A2 = BitConverter.ToSingle(resultBytes, 33);
+            eq.A2 = eq.A2 > eq.Max ? eq.Max : eq.A2;
         }
 
         public static void ReadWeather(ref StructEquipment eq)

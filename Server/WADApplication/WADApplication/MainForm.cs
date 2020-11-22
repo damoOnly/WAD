@@ -431,6 +431,8 @@ namespace WADApplication
             IsReadBasic = true;
             mainThread.Start();
             btn_Start.Enabled = false;
+            btn_Add.Enabled = false;
+            barButtonItem3.Enabled = false;
         }
 
         // 停止按钮
@@ -445,6 +447,8 @@ namespace WADApplication
                 mainThread.Abort();
                 btn_Start.Enabled = true;
             }
+            btn_Add.Enabled = true;
+            barButtonItem3.Enabled = true;
             CommonMemory.IsReadConnect = true;
             // closeLight("red");
             AlertProcess.CloseLight("all");
@@ -471,6 +475,11 @@ namespace WADApplication
         // add equipment
         private void btn_Add_ItemClick(object sender, ItemClickEventArgs e)
         {
+            if (CommonMemory.IsOpen == false)
+            {
+                XtraMessageBox.Show("请先打开串口");
+                return;
+            }
             if (btn_Start.Enabled == false)
             {
                 XtraMessageBox.Show("请先停止检测");
@@ -635,6 +644,10 @@ namespace WADApplication
         {
             AppConfigProcess.Save();
             AlertProcess.CloseLight("all");
+            if (PLAASerialPort.serialport.IsOpen)
+            {
+                PLAASerialPort.GetInstance().Close();
+            }
             try
             {
                 System.Environment.Exit(0);

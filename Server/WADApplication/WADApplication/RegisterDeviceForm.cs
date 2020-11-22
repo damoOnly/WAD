@@ -60,20 +60,42 @@ namespace WADApplication
         // 添加气体
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            bool isNew = comboBoxEdit1.EditValue.ToString() == "新设备";
-            string name = textEdit1.EditValue.ToString();
-            byte address = byte.Parse(spinEdit1.EditValue.ToString());
-            List<StructEquipment> list = new List<StructEquipment>();
-            if (isNew)
+            WaitDialogForm wdf = new WaitDialogForm("命令执行中，请稍候......");
+            try
             {
-                list = ReadEqProcess.readNew(address, name);
+                bool isNew = comboBoxEdit1.EditValue.ToString() == "新协议";
+                string name = textEdit1.Text;
+                if (string.IsNullOrWhiteSpace(name))
+                {
+                    throw new CommandException("设备名称不能为空");
+                }
+                byte address = byte.Parse(spinEdit1.EditValue.ToString());
+                List<StructEquipment> list = new List<StructEquipment>();
+                if (isNew)
+                {
+                    list = ReadEqProcess.readNew(address, name);
+                }
+                else
+                {
+                    list = ReadEqProcess.readOld(address, name);
+                }
+
+                EquipmentBusiness.AddOrUpdateOrDeleteList(list);
+                InitList();
             }
-            else {
-                list = ReadEqProcess.readOld(address, name);
+            catch (CommandException ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+            }
+            finally
+            {
+                wdf.Close();
             }
 
-            EquipmentBusiness.AddOrUpdateOrDeleteList(list);
-            InitList();
         }
 
         private void RegisterDeviceForm_Load(object sender, EventArgs e)
@@ -84,6 +106,12 @@ namespace WADApplication
 
             }
             InitList();
+            if (list != null && list.Count > 0)
+            {
+                var first = list.First();
+                textEdit1.EditValue = first.Name;
+                spinEdit1.EditValue = first.Address;
+            }
         }
 
         private void InitList()
@@ -107,7 +135,7 @@ namespace WADApplication
             }
             catch (Exception ex)
             {
-                log.Error("删除设备失败",ex);
+                log.Error("删除设备失败", ex);
                 XtraMessageBox.Show("删除设备失败");
             }
         }
@@ -146,7 +174,7 @@ namespace WADApplication
                 log.Error("更新气体失败", ex);
                 XtraMessageBox.Show("更新气体失败");
             }
-            
+
         }
 
         // 添加默认设备
@@ -210,13 +238,20 @@ namespace WADApplication
                         InitList();
                     }
                 }
+                else
+                {
+                    Equipment eq = gridView1.GetFocusedRow() as Equipment;
+                    spinEdit1.EditValue = eq.Address;
+                    textEdit1.EditValue = eq.Name;
+                }
+
             }
             catch (Exception ex)
             {
                 log.Error("更新设备失败", ex);
                 XtraMessageBox.Show("更新设备失败");
             }
-            
+
         }
 
         private void simpleButton4_Click(object sender, EventArgs e)

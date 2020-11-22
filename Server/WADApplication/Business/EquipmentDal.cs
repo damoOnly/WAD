@@ -287,7 +287,7 @@ select last_insert_rowid();";
 
         public static void AddorUpdate(ref StructEquipment eq)
         {
-            eq.IsDel = true;
+            eq.IsDel = false;
             int rowid = -1;
             using (SQLiteConnection conn = new SQLiteConnection(connstr))
             {
@@ -298,7 +298,8 @@ select last_insert_rowid();";
                 {
                     cmd.Parameters.AddWithValue("@address", eq.Address);
                     cmd.Parameters.AddWithValue("@sensorNum", eq.SensorNum);
-                    rowid = int.Parse(cmd.ExecuteScalar().ToString() == "" ? "-1" : cmd.ExecuteScalar().ToString());
+                    object rr = cmd.ExecuteScalar();
+                    rowid = rr == null ? -1 : int.Parse(rr.ToString());
                 }
 
                 if (rowid > -1)
@@ -351,7 +352,8 @@ select last_insert_rowid();";
                 }
             }
 
-            if (rowid > -1)
+            // 表示新增
+            if (rowid == -1)
             {
                 EquipmentDataBusiness.CreateDb(eq.ID);
             }

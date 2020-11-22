@@ -257,10 +257,10 @@ namespace Entity
                     str = outRange;
                     break;
                 case EM_AlertType.A2:
-                    str = A2Str;
+                    str = highStr;
                     break;
                 case EM_AlertType.A1:
-                    str = A1Str;
+                    str = lowStr;
                     break;
                 default:
                     break;
