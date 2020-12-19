@@ -41,6 +41,7 @@
             DevExpress.XtraCharts.SwiftPlotSeriesView swiftPlotSeriesView1 = new DevExpress.XtraCharts.SwiftPlotSeriesView();
             DevExpress.XtraCharts.SwiftPlotSeriesView swiftPlotSeriesView2 = new DevExpress.XtraCharts.SwiftPlotSeriesView();
             this.gridColumn18 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.ribbon = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.btn_Start = new DevExpress.XtraBars.BarButtonItem();
             this.btn_Stop = new DevExpress.XtraBars.BarButtonItem();
@@ -78,7 +79,6 @@
             this.repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -115,8 +115,23 @@
             this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.imageCollection1 = new DevExpress.Utils.ImageCollection(this.components);
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
+            this.splitContainerControl3 = new DevExpress.XtraEditors.SplitContainerControl();
+            this.simpleButton10 = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButton9 = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButton8 = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButton7 = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButton6 = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButton5 = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButton4 = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
+            this.comboBoxEdit2 = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
+            this.comboBoxEdit1 = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.splitContainerControl2 = new DevExpress.XtraEditors.SplitContainerControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.toolTipController1 = new DevExpress.Utils.ToolTipController(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox3)).BeginInit();
@@ -148,6 +163,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             this.splitContainerControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl3)).BeginInit();
+            this.splitContainerControl3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2)).BeginInit();
             this.splitContainerControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
@@ -166,6 +185,16 @@
             this.gridColumn18.Visible = true;
             this.gridColumn18.VisibleIndex = 5;
             this.gridColumn18.Width = 70;
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "通道";
+            this.gridColumn1.FieldName = "SensorNum";
+            this.gridColumn1.MaxWidth = 150;
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.OptionsColumn.AllowEdit = false;
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 3;
             // 
             // ribbon
             // 
@@ -189,7 +218,7 @@
             this.barButtonItem3,
             this.barButtonItem4});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
-            this.ribbon.MaxItemId = 11;
+            this.ribbon.MaxItemId = 1;
             this.ribbon.MiniToolbars.Add(this.ribbonMiniToolbar1);
             this.ribbon.Name = "ribbon";
             this.ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
@@ -207,10 +236,11 @@
             this.ribbon.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.False;
             this.ribbon.ShowCategoryInCaption = false;
             this.ribbon.ShowExpandCollapseButton = DevExpress.Utils.DefaultBoolean.False;
+            this.ribbon.ShowFullScreenButton = DevExpress.Utils.DefaultBoolean.True;
             this.ribbon.ShowPageHeadersMode = DevExpress.XtraBars.Ribbon.ShowPageHeadersMode.Hide;
             this.ribbon.ShowQatLocationSelector = false;
             this.ribbon.ShowToolbarCustomizeItem = false;
-            this.ribbon.Size = new System.Drawing.Size(957, 102);
+            this.ribbon.Size = new System.Drawing.Size(957, 27);
             this.ribbon.StatusBar = this.ribbonStatusBar;
             this.ribbon.Toolbar.ShowCustomizeItem = false;
             this.ribbon.ToolbarLocation = DevExpress.XtraBars.Ribbon.RibbonQuickAccessToolbarLocation.Hidden;
@@ -296,11 +326,12 @@
             // 
             // barEditItem1
             // 
-            this.barEditItem1.Caption = "    串口";
+            this.barEditItem1.AllowRightClickInMenu = false;
             this.barEditItem1.CategoryGuid = new System.Guid("6ffddb2b-9015-4d97-a4c1-91613e0ef537");
             this.barEditItem1.Edit = this.repositoryItemComboBox2;
             this.barEditItem1.Id = 4;
             this.barEditItem1.Name = "barEditItem1";
+            this.barEditItem1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             this.barEditItem1.Width = 60;
             // 
             // repositoryItemComboBox2
@@ -327,12 +358,10 @@
             this.repositoryItemComboBox3.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.repositoryItemComboBox3.Items.AddRange(new object[] {
-            "2400",
-            "4800",
-            "9600",
+            "115200",
             "38400",
-            "57600",
-            "115200"});
+            "9600",
+            "4800"});
             this.repositoryItemComboBox3.Name = "repositoryItemComboBox3";
             this.repositoryItemComboBox3.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             // 
@@ -369,6 +398,8 @@
             // 
             // ribbonPage1
             // 
+            this.ribbonPage1.Appearance.Options.UseTextOptions = true;
+            this.ribbonPage1.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.ribbonPageGroup2,
             this.ribbonPageGroup1});
@@ -467,48 +498,25 @@
             this.gridControl_nowData2.Name = "gridControl_nowData2";
             this.gridControl_nowData2.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemCheckEdit1});
-            this.gridControl_nowData2.Size = new System.Drawing.Size(957, 511);
+            this.gridControl_nowData2.Size = new System.Drawing.Size(957, 518);
             this.gridControl_nowData2.TabIndex = 3;
+            this.gridControl_nowData2.ToolTipController = this.toolTipController1;
             this.gridControl_nowData2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView_nowData2});
             // 
             // gridView_nowData2
             // 
-            this.gridView_nowData2.Appearance.Empty.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(84)))), ((int)(((byte)(148)))));
-            this.gridView_nowData2.Appearance.Empty.BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(46)))), ((int)(((byte)(58)))));
-            this.gridView_nowData2.Appearance.Empty.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
-            this.gridView_nowData2.Appearance.Empty.Image = ((System.Drawing.Image)(resources.GetObject("gridView_nowData2.Appearance.Empty.Image")));
-            this.gridView_nowData2.Appearance.Empty.Options.UseBackColor = true;
-            this.gridView_nowData2.Appearance.Empty.Options.UseImage = true;
-            this.gridView_nowData2.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(9)))), ((int)(((byte)(20)))), ((int)(((byte)(31)))));
-            this.gridView_nowData2.Appearance.EvenRow.Options.UseBackColor = true;
-            this.gridView_nowData2.Appearance.FixedLine.BackColor = System.Drawing.Color.Black;
-            this.gridView_nowData2.Appearance.FixedLine.Options.UseBackColor = true;
-            this.gridView_nowData2.Appearance.FocusedCell.BackColor = System.Drawing.Color.MediumPurple;
             this.gridView_nowData2.Appearance.FocusedCell.Options.UseFont = true;
-            this.gridView_nowData2.Appearance.FocusedRow.BackColor = System.Drawing.Color.MediumPurple;
-            this.gridView_nowData2.Appearance.FocusedRow.BackColor2 = System.Drawing.Color.MediumPurple;
-            this.gridView_nowData2.Appearance.FocusedRow.Options.UseBackColor = true;
             this.gridView_nowData2.Appearance.HeaderPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(162)))), ((int)(((byte)(169)))));
             this.gridView_nowData2.Appearance.HeaderPanel.BackColor2 = System.Drawing.Color.Black;
             this.gridView_nowData2.Appearance.HeaderPanel.Options.UseBackColor = true;
             this.gridView_nowData2.Appearance.HeaderPanel.Options.UseTextOptions = true;
             this.gridView_nowData2.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridView_nowData2.Appearance.HideSelectionRow.BackColor = System.Drawing.Color.MediumPurple;
-            this.gridView_nowData2.Appearance.HideSelectionRow.Options.UseBackColor = true;
-            this.gridView_nowData2.Appearance.OddRow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(40)))), ((int)(((byte)(62)))));
-            this.gridView_nowData2.Appearance.OddRow.BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(46)))), ((int)(((byte)(58)))));
             this.gridView_nowData2.Appearance.OddRow.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
-            this.gridView_nowData2.Appearance.OddRow.Options.UseBackColor = true;
-            this.gridView_nowData2.Appearance.Row.BackColor = System.Drawing.Color.MediumPurple;
             this.gridView_nowData2.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridView_nowData2.Appearance.Row.Options.UseBackColor = true;
             this.gridView_nowData2.Appearance.Row.Options.UseFont = true;
             this.gridView_nowData2.Appearance.Row.Options.UseTextOptions = true;
             this.gridView_nowData2.Appearance.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridView_nowData2.Appearance.SelectedRow.BackColor = System.Drawing.Color.MediumPurple;
-            this.gridView_nowData2.Appearance.SelectedRow.BackColor2 = System.Drawing.Color.MediumPurple;
-            this.gridView_nowData2.Appearance.SelectedRow.Options.UseBackColor = true;
             this.gridView_nowData2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumn3,
             this.gridColumn11,
@@ -526,22 +534,23 @@
             this.gridColumn20,
             this.gridColumn_TH});
             this.gridView_nowData2.FixedLineWidth = 1;
+            this.gridView_nowData2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.None;
             gridFormatRule1.Column = this.gridColumn18;
             gridFormatRule1.Name = "Format0";
             formatConditionRuleExpression1.Expression = "[AlertStr] != \'正常\'";
-            formatConditionRuleExpression1.PredefinedName = "Red Bold Text";
+            formatConditionRuleExpression1.PredefinedName = "Red Fill";
             gridFormatRule1.Rule = formatConditionRuleExpression1;
             gridFormatRule2.Column = this.gridColumn1;
             gridFormatRule2.Name = "Format1";
-            formatConditionRuleExpression2.Appearance.ForeColor = System.Drawing.Color.Lime;
-            formatConditionRuleExpression2.Appearance.Options.UseForeColor = true;
+            formatConditionRuleExpression2.Appearance.BackColor = System.Drawing.Color.Lime;
+            formatConditionRuleExpression2.Appearance.Options.UseBackColor = true;
             formatConditionRuleExpression2.Expression = "[IsConnect] == True";
             formatConditionRuleExpression2.PredefinedName = "Bold Text";
             gridFormatRule2.Rule = formatConditionRuleExpression2;
             gridFormatRule3.Column = this.gridColumn1;
             gridFormatRule3.Name = "Format2";
             formatConditionRuleExpression3.Expression = "[IsConnect] == False";
-            formatConditionRuleExpression3.PredefinedName = "Red Bold Text";
+            formatConditionRuleExpression3.PredefinedName = "Red Fill";
             gridFormatRule3.Rule = formatConditionRuleExpression3;
             this.gridView_nowData2.FormatRules.Add(gridFormatRule1);
             this.gridView_nowData2.FormatRules.Add(gridFormatRule2);
@@ -556,11 +565,10 @@
             this.gridView_nowData2.OptionsMenu.EnableFooterMenu = false;
             this.gridView_nowData2.OptionsMenu.EnableGroupPanelMenu = false;
             this.gridView_nowData2.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.gridView_nowData2.OptionsView.EnableAppearanceEvenRow = true;
-            this.gridView_nowData2.OptionsView.EnableAppearanceOddRow = true;
+            this.gridView_nowData2.OptionsSelection.EnableAppearanceFocusedRow = false;
+            this.gridView_nowData2.OptionsSelection.EnableAppearanceHideSelection = false;
             this.gridView_nowData2.OptionsView.ShowGroupPanel = false;
             this.gridView_nowData2.OptionsView.ShowVerticalLines = DevExpress.Utils.DefaultBoolean.False;
-            this.gridView_nowData2.VertScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
             this.gridView_nowData2.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(this.gridView1_RowClick);
             // 
             // gridColumn3
@@ -603,16 +611,6 @@
             this.gridColumn10.Visible = true;
             this.gridColumn10.VisibleIndex = 2;
             this.gridColumn10.Width = 80;
-            // 
-            // gridColumn1
-            // 
-            this.gridColumn1.Caption = "通道";
-            this.gridColumn1.FieldName = "SensorNum";
-            this.gridColumn1.MaxWidth = 150;
-            this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.OptionsColumn.AllowEdit = false;
-            this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 3;
             // 
             // gridColumn12
             // 
@@ -1040,16 +1038,193 @@
             this.splitContainerControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainerControl1.FixedPanel = DevExpress.XtraEditors.SplitFixedPanel.Panel2;
             this.splitContainerControl1.Horizontal = false;
-            this.splitContainerControl1.Location = new System.Drawing.Point(0, 102);
+            this.splitContainerControl1.Location = new System.Drawing.Point(0, 27);
             this.splitContainerControl1.Name = "splitContainerControl1";
-            this.splitContainerControl1.Panel1.Controls.Add(this.gridControl_nowData2);
+            this.splitContainerControl1.Panel1.Controls.Add(this.splitContainerControl3);
             this.splitContainerControl1.Panel1.Text = "Panel1";
             this.splitContainerControl1.Panel2.Controls.Add(this.splitContainerControl2);
             this.splitContainerControl1.Panel2.Text = "Panel2";
-            this.splitContainerControl1.Size = new System.Drawing.Size(957, 516);
+            this.splitContainerControl1.Size = new System.Drawing.Size(957, 591);
             this.splitContainerControl1.SplitterPosition = 232;
             this.splitContainerControl1.TabIndex = 34;
             this.splitContainerControl1.Text = "splitContainerControl1";
+            // 
+            // splitContainerControl3
+            // 
+            this.splitContainerControl3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerControl3.Horizontal = false;
+            this.splitContainerControl3.IsSplitterFixed = true;
+            this.splitContainerControl3.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerControl3.Name = "splitContainerControl3";
+            this.splitContainerControl3.Panel1.Controls.Add(this.simpleButton10);
+            this.splitContainerControl3.Panel1.Controls.Add(this.simpleButton9);
+            this.splitContainerControl3.Panel1.Controls.Add(this.simpleButton8);
+            this.splitContainerControl3.Panel1.Controls.Add(this.simpleButton7);
+            this.splitContainerControl3.Panel1.Controls.Add(this.simpleButton6);
+            this.splitContainerControl3.Panel1.Controls.Add(this.simpleButton5);
+            this.splitContainerControl3.Panel1.Controls.Add(this.simpleButton4);
+            this.splitContainerControl3.Panel1.Controls.Add(this.simpleButton3);
+            this.splitContainerControl3.Panel1.Controls.Add(this.comboBoxEdit2);
+            this.splitContainerControl3.Panel1.Controls.Add(this.labelControl1);
+            this.splitContainerControl3.Panel1.Controls.Add(this.simpleButton2);
+            this.splitContainerControl3.Panel1.Controls.Add(this.comboBoxEdit1);
+            this.splitContainerControl3.Panel1.Controls.Add(this.simpleButton1);
+            this.splitContainerControl3.Panel1.Text = "Panel1";
+            this.splitContainerControl3.Panel2.Controls.Add(this.gridControl_nowData2);
+            this.splitContainerControl3.Panel2.Text = "Panel2";
+            this.splitContainerControl3.Size = new System.Drawing.Size(957, 586);
+            this.splitContainerControl3.SplitterPosition = 63;
+            this.splitContainerControl3.TabIndex = 4;
+            this.splitContainerControl3.Text = "splitContainerControl3";
+            // 
+            // simpleButton10
+            // 
+            this.simpleButton10.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton10.Image")));
+            this.simpleButton10.ImageIndex = 1;
+            this.simpleButton10.ImageLocation = DevExpress.XtraEditors.ImageLocation.TopCenter;
+            this.simpleButton10.Location = new System.Drawing.Point(751, 3);
+            this.simpleButton10.Name = "simpleButton10";
+            this.simpleButton10.Size = new System.Drawing.Size(59, 54);
+            this.simpleButton10.TabIndex = 12;
+            this.simpleButton10.Text = "关闭声音";
+            this.simpleButton10.Click += new System.EventHandler(this.simpleButton10_Click);
+            // 
+            // simpleButton9
+            // 
+            this.simpleButton9.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton9.Image")));
+            this.simpleButton9.ImageIndex = 1;
+            this.simpleButton9.ImageLocation = DevExpress.XtraEditors.ImageLocation.TopCenter;
+            this.simpleButton9.Location = new System.Drawing.Point(686, 3);
+            this.simpleButton9.Name = "simpleButton9";
+            this.simpleButton9.Size = new System.Drawing.Size(59, 54);
+            this.simpleButton9.TabIndex = 11;
+            this.simpleButton9.Text = "数据导入";
+            this.simpleButton9.Click += new System.EventHandler(this.simpleButton9_Click);
+            // 
+            // simpleButton8
+            // 
+            this.simpleButton8.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton8.Image")));
+            this.simpleButton8.ImageIndex = 1;
+            this.simpleButton8.ImageLocation = DevExpress.XtraEditors.ImageLocation.TopCenter;
+            this.simpleButton8.Location = new System.Drawing.Point(621, 3);
+            this.simpleButton8.Name = "simpleButton8";
+            this.simpleButton8.Size = new System.Drawing.Size(59, 54);
+            this.simpleButton8.TabIndex = 10;
+            this.simpleButton8.Text = "报警日志";
+            this.simpleButton8.Click += new System.EventHandler(this.simpleButton8_Click);
+            // 
+            // simpleButton7
+            // 
+            this.simpleButton7.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton7.Image")));
+            this.simpleButton7.ImageIndex = 1;
+            this.simpleButton7.ImageLocation = DevExpress.XtraEditors.ImageLocation.TopCenter;
+            this.simpleButton7.Location = new System.Drawing.Point(556, 3);
+            this.simpleButton7.Name = "simpleButton7";
+            this.simpleButton7.Size = new System.Drawing.Size(59, 54);
+            this.simpleButton7.TabIndex = 9;
+            this.simpleButton7.Text = "历史记录";
+            this.simpleButton7.Click += new System.EventHandler(this.simpleButton7_Click);
+            // 
+            // simpleButton6
+            // 
+            this.simpleButton6.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton6.Image")));
+            this.simpleButton6.ImageIndex = 1;
+            this.simpleButton6.ImageLocation = DevExpress.XtraEditors.ImageLocation.TopCenter;
+            this.simpleButton6.Location = new System.Drawing.Point(491, 3);
+            this.simpleButton6.Name = "simpleButton6";
+            this.simpleButton6.Size = new System.Drawing.Size(59, 54);
+            this.simpleButton6.TabIndex = 8;
+            this.simpleButton6.Text = "参数设置";
+            this.simpleButton6.Click += new System.EventHandler(this.simpleButton6_Click);
+            // 
+            // simpleButton5
+            // 
+            this.simpleButton5.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton5.Image")));
+            this.simpleButton5.ImageIndex = 1;
+            this.simpleButton5.ImageLocation = DevExpress.XtraEditors.ImageLocation.TopCenter;
+            this.simpleButton5.Location = new System.Drawing.Point(426, 3);
+            this.simpleButton5.Name = "simpleButton5";
+            this.simpleButton5.Size = new System.Drawing.Size(59, 54);
+            this.simpleButton5.TabIndex = 7;
+            this.simpleButton5.Text = "停止检测";
+            this.simpleButton5.Click += new System.EventHandler(this.simpleButton5_Click);
+            // 
+            // simpleButton4
+            // 
+            this.simpleButton4.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton4.Image")));
+            this.simpleButton4.ImageIndex = 1;
+            this.simpleButton4.ImageLocation = DevExpress.XtraEditors.ImageLocation.TopCenter;
+            this.simpleButton4.Location = new System.Drawing.Point(361, 3);
+            this.simpleButton4.Name = "simpleButton4";
+            this.simpleButton4.Size = new System.Drawing.Size(59, 54);
+            this.simpleButton4.TabIndex = 6;
+            this.simpleButton4.Text = "开始检测";
+            this.simpleButton4.Click += new System.EventHandler(this.simpleButton4_Click);
+            // 
+            // simpleButton3
+            // 
+            this.simpleButton3.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton3.Image")));
+            this.simpleButton3.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.TopCenter;
+            this.simpleButton3.Location = new System.Drawing.Point(296, 3);
+            this.simpleButton3.Name = "simpleButton3";
+            this.simpleButton3.Size = new System.Drawing.Size(59, 54);
+            this.simpleButton3.TabIndex = 5;
+            this.simpleButton3.Text = "设备管理";
+            this.simpleButton3.Click += new System.EventHandler(this.simpleButton3_Click);
+            // 
+            // comboBoxEdit2
+            // 
+            this.comboBoxEdit2.EditValue = "9600";
+            this.comboBoxEdit2.Location = new System.Drawing.Point(183, 10);
+            this.comboBoxEdit2.MenuManager = this.ribbon;
+            this.comboBoxEdit2.Name = "comboBoxEdit2";
+            this.comboBoxEdit2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.comboBoxEdit2.Properties.Items.AddRange(new object[] {
+            "115200",
+            "38400",
+            "9600",
+            "4800"});
+            this.comboBoxEdit2.Size = new System.Drawing.Size(49, 20);
+            this.comboBoxEdit2.TabIndex = 4;
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Location = new System.Drawing.Point(141, 13);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(36, 13);
+            this.labelControl1.TabIndex = 3;
+            this.labelControl1.Text = "波特率";
+            // 
+            // simpleButton2
+            // 
+            this.simpleButton2.Location = new System.Drawing.Point(12, 8);
+            this.simpleButton2.Name = "simpleButton2";
+            this.simpleButton2.Size = new System.Drawing.Size(51, 23);
+            this.simpleButton2.TabIndex = 2;
+            this.simpleButton2.Text = "串口号";
+            this.simpleButton2.ToolTip = "点击刷新串口";
+            this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
+            // 
+            // comboBoxEdit1
+            // 
+            this.comboBoxEdit1.Location = new System.Drawing.Point(69, 10);
+            this.comboBoxEdit1.MenuManager = this.ribbon;
+            this.comboBoxEdit1.Name = "comboBoxEdit1";
+            this.comboBoxEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.comboBoxEdit1.Size = new System.Drawing.Size(60, 20);
+            this.comboBoxEdit1.TabIndex = 1;
+            // 
+            // simpleButton1
+            // 
+            this.simpleButton1.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.TopCenter;
+            this.simpleButton1.Location = new System.Drawing.Point(238, 9);
+            this.simpleButton1.Name = "simpleButton1";
+            this.simpleButton1.Size = new System.Drawing.Size(52, 23);
+            this.simpleButton1.TabIndex = 0;
+            this.simpleButton1.Text = "打开";
+            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
             // splitContainerControl2
             // 
@@ -1080,6 +1255,10 @@
             this.panelControl1.Size = new System.Drawing.Size(236, 0);
             this.panelControl1.TabIndex = 0;
             // 
+            // toolTipController1
+            // 
+            this.toolTipController1.GetActiveObjectInfo += new DevExpress.Utils.ToolTipControllerGetActiveObjectInfoEventHandler(this.toolTipController1_GetActiveObjectInfo);
+            // 
             // MainForm
             // 
             this.AllowFormGlass = DevExpress.Utils.DefaultBoolean.False;
@@ -1093,6 +1272,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.Ribbon = this.ribbon;
+            this.RibbonVisibility = DevExpress.XtraBars.Ribbon.RibbonVisibility.Hidden;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.StatusBar = this.ribbonStatusBar;
             this.Text = "气体监控报警管理系统(Server)    ";
@@ -1135,6 +1315,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();
             this.splitContainerControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl3)).EndInit();
+            this.splitContainerControl3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2)).EndInit();
             this.splitContainerControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
@@ -1146,7 +1330,6 @@
 
         #endregion
 
-        private DevExpress.XtraBars.Ribbon.RibbonControl ribbon;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage1;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
         private DevExpress.XtraBars.Ribbon.RibbonStatusBar ribbonStatusBar;
@@ -1223,5 +1406,21 @@
         private DevExpress.XtraEditors.PanelControl panelControl1;
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private DevExpress.XtraBars.Ribbon.RibbonControl ribbon;
+        private DevExpress.XtraEditors.SplitContainerControl splitContainerControl3;
+        private DevExpress.XtraEditors.SimpleButton simpleButton1;
+        private DevExpress.XtraEditors.ComboBoxEdit comboBoxEdit2;
+        private DevExpress.XtraEditors.LabelControl labelControl1;
+        private DevExpress.XtraEditors.SimpleButton simpleButton2;
+        private DevExpress.XtraEditors.ComboBoxEdit comboBoxEdit1;
+        private DevExpress.XtraEditors.SimpleButton simpleButton4;
+        private DevExpress.XtraEditors.SimpleButton simpleButton3;
+        private DevExpress.XtraEditors.SimpleButton simpleButton10;
+        private DevExpress.XtraEditors.SimpleButton simpleButton9;
+        private DevExpress.XtraEditors.SimpleButton simpleButton8;
+        private DevExpress.XtraEditors.SimpleButton simpleButton7;
+        private DevExpress.XtraEditors.SimpleButton simpleButton6;
+        private DevExpress.XtraEditors.SimpleButton simpleButton5;
+        private DevExpress.Utils.ToolTipController toolTipController1;
     }
 }

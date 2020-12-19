@@ -31,6 +31,7 @@ using System.Net.Sockets;
 using DevExpress.XtraEditors.Repository;
 using WADApplication.Process;
 using GlobalMemory;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 namespace WADApplication
 {
     public partial class MainForm : DevExpress.XtraBars.Ribbon.RibbonForm
@@ -195,11 +196,11 @@ namespace WADApplication
                         {
                             MainProcess.RemovePoint(chartControl1);
                         }
-                    }                    
+                    }
                     AlertProcess.OperatorAlert(mainList);
                     IsReadBasic = false;
                     this.Invoke(new Action(gridControl_nowData2.RefreshDataSource));
-                    this.Invoke(new Action(gridView_nowData2.BestFitColumns));
+                    //this.Invoke(new Action(gridView_nowData2.BestFitColumns));
                     Thread.Sleep(readHz * 1000);
                 }
                 catch
@@ -210,7 +211,7 @@ namespace WADApplication
 
             }
 
-            this.Invoke(new Action<bool>(c => btn_Start.Enabled = c), true);
+            this.Invoke(new Action<bool>(c => simpleButton4.Enabled = c), true);
         }
         // 初始化Form
         private void InitializeForm()
@@ -228,7 +229,7 @@ namespace WADApplication
             //{
             //    alertList.Add(c.ID, new List<Alert>());
             //});
-            
+
             InitControls();
 
             //ConnectThread = new Thread(new ThreadStart(readSensorConnect));
@@ -236,13 +237,13 @@ namespace WADApplication
             // 置位初始化标志
 
             //AlertProcess.Connect(ip, port);//连接报警声音设备
-            
+
             IsInit = false;
         }
 
         // 初始化控件
         private void InitControls()
-        {            
+        {
             enableControls();
             comboBoxEdit_VTime.EditValue = CommonMemory.SysConfig.RealTimeRangeX;
             barButtonItem4_ItemClick(null, null);
@@ -425,14 +426,14 @@ namespace WADApplication
             {
                 MainProcess.ManageSeries(chartControl1, mainList, minTime, maxTime);
             }
-            
+
             mainThread = new Thread(new ThreadStart(ReadData));
             isRead = true;
             IsReadBasic = true;
             mainThread.Start();
-            btn_Start.Enabled = false;
-            btn_Add.Enabled = false;
-            barButtonItem3.Enabled = false;
+            simpleButton4.Enabled = false;
+            simpleButton3.Enabled = false;
+            simpleButton1.Enabled = false;
         }
 
         // 停止按钮
@@ -445,10 +446,10 @@ namespace WADApplication
             if (mainThread != null)
             {
                 mainThread.Abort();
-                btn_Start.Enabled = true;
+                simpleButton4.Enabled = true;
             }
-            btn_Add.Enabled = true;
-            barButtonItem3.Enabled = true;
+            simpleButton3.Enabled = true;
+            simpleButton1.Enabled = true;
             CommonMemory.IsReadConnect = true;
             // closeLight("red");
             AlertProcess.CloseLight("all");
@@ -480,7 +481,7 @@ namespace WADApplication
                 XtraMessageBox.Show("请先打开串口");
                 return;
             }
-            if (btn_Start.Enabled == false)
+            if (simpleButton4.Enabled == false)
             {
                 XtraMessageBox.Show("请先停止检测");
                 return;
@@ -505,7 +506,7 @@ namespace WADApplication
                 return;
             }
 
-            if (btn_Start.Enabled == false)
+            if (simpleButton4.Enabled == false)
             {
                 XtraMessageBox.Show("请先停止检测");
                 return;
@@ -555,7 +556,7 @@ namespace WADApplication
                 return;
             }
 
-            if (btn_Start.Enabled == false)
+            if (simpleButton4.Enabled == false)
             {
                 XtraMessageBox.Show("请先停止检测");
                 return;
@@ -629,7 +630,7 @@ namespace WADApplication
                 return;
             }
 
-            if (btn_Start.Enabled == false)
+            if (simpleButton4.Enabled == false)
             {
                 XtraMessageBox.Show("请先停止检测");
                 return;
@@ -741,9 +742,9 @@ namespace WADApplication
                 lock (this.mainList)
                 {
                     MainProcess.ManageSeries(chartControl1, mainList, minTime, maxTime);
-                }                
+                }
             }
-            
+
             XtraMessageBox.Show("设置成功");
         }
 
@@ -769,17 +770,17 @@ namespace WADApplication
             switch (this.WindowState)
             {
                 case FormWindowState.Maximized:
-                    gridView_nowData2.OptionsView.ColumnAutoWidth = true;
+                    //gridView_nowData2.OptionsView.ColumnAutoWidth = true;
                     break;
                 case FormWindowState.Minimized:
                     break;
                 case FormWindowState.Normal:
-                    gridView_nowData2.OptionsView.ColumnAutoWidth = false;
+                    //gridView_nowData2.OptionsView.ColumnAutoWidth = false;
                     break;
                 default:
                     break;
             }
-            gridView_nowData2.BestFitColumns();
+            //gridView_nowData2.BestFitColumns();
         }
 
         private void btn_CloseSound_ItemClick(object sender, ItemClickEventArgs e)
@@ -1016,7 +1017,7 @@ namespace WADApplication
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            if (btn_Start.Enabled == false)
+            if (simpleButton4.Enabled == false)
             {
                 XtraMessageBox.Show("请先停止检测");
                 return;
@@ -1075,9 +1076,9 @@ namespace WADApplication
                 lock (mainList)
                 {
                     MainProcess.ManageSeries(chartControl1, mainList, minTime, maxTime);
-                }                
+                }
             }
-            
+
         }
 
         /// <summary>
@@ -1089,48 +1090,127 @@ namespace WADApplication
         {
             if (sender == null) // 顺便初始化一下上次选择的波特率吧
             {
-                barEditItem2.EditValue = CommonMemory.SysConfig.PortRate;
+                comboBoxEdit2.EditValue = CommonMemory.SysConfig.PortRate;
             }
-            RepositoryItemComboBox box = barEditItem1.Edit as RepositoryItemComboBox;
-            var value = sender == null ? CommonMemory.SysConfig.PortName : barEditItem1.EditValue;
-            box.Items.Clear();
+            var box = comboBoxEdit1;
+            var value = sender == null ? CommonMemory.SysConfig.PortName : box.EditValue;
+            box.Properties.Items.Clear();
             foreach (string port in System.IO.Ports.SerialPort.GetPortNames())
             {
-                box.Items.Add(port);
+                box.Properties.Items.Add(port);
             }
 
-            if (value.ToString() != "" && box.Items.Contains(value.ToString()))
+            if (value.ToString() != "" && box.Properties.Items.Contains(value.ToString()))
             {
-                barEditItem1.EditValue = value;
+                box.EditValue = value;
             }
             else if (value.ToString() != "" && sender == null) // 初始化的时候不管有没有串口都赋值
             {
-                barEditItem1.EditValue = value;
+                box.EditValue = value;
             }
-            else if (box.Items.Count == 0)
+            else if (box.Properties.Items.Count == 0)
             {
-                barEditItem1.EditValue = "";
+                box.EditValue = "";
             }
         }
 
         private void barButtonItem3_ItemClick(object sender, ItemClickEventArgs e)
         {
-            if (barButtonItem3.Caption == "打开")
+            //if (barButtonItem3.Caption == "打开")
+            //{
+            //    if (PLAASerialPort.serialport.IsOpen)
+            //    {
+            //        XtraMessageBox.Show("串口已打开");
+            //        return;
+            //    }
+            //    if (!PLAASerialPort.GetInstance().Open(comboBoxEdit1.EditValue.ToString(), Convert.ToInt32(comboBoxEdit2.EditValue.ToString())))
+            //    {
+            //        XtraMessageBox.Show("打开串口失败");
+            //    }
+            //    else
+            //    {
+            //        barButtonItem3.Caption = "关闭";
+            //        comboBoxEdit1.Enabled = false;
+            //        comboBoxEdit2.Enabled = false;
+            //        barButtonItem4.Enabled = false;
+            //        CommonMemory.IsOpen = true;
+            //        CommonMemory.IsReadConnect = true;
+            //        setinfo("打开串口");
+            //    }
+            //}
+            //else
+            //{
+            //    btn_Stop_ItemClick(null, null);
+            //    AlertProcess.PlaySound(false);
+            //    if (!PLAASerialPort.GetInstance().Close())
+            //    {
+            //        XtraMessageBox.Show("关闭串口异常");
+            //    }
+            //    else
+            //    {
+            //        comboBoxEdit1.Enabled = true;
+            //        comboBoxEdit2.Enabled = true;
+            //        barButtonItem4.Enabled = true;
+            //        CommonMemory.IsOpen = false;
+            //        CommonMemory.IsReadConnect = false;
+            //        foreach (Equipment item in mainList)
+            //        {
+            //            item.IsConnect = false;
+            //        }
+            //        //gridControl_Status.RefreshDataSource();
+            //        //gridView_Status.BestFitColumns();
+            //        setinfo("关闭串口");
+            //        barButtonItem3.Caption = "打开";
+            //    }
+            //}
+        }
+
+        private void simpleButton2_Click(object sender, EventArgs e)
+        {
+            if (sender == null) // 顺便初始化一下上次选择的波特率吧
+            {
+                comboBoxEdit2.EditValue = CommonMemory.SysConfig.PortRate;
+            }
+            var box = comboBoxEdit1;
+            var value = sender == null ? CommonMemory.SysConfig.PortName : box.EditValue;
+            box.Properties.Items.Clear();
+            foreach (string port in System.IO.Ports.SerialPort.GetPortNames())
+            {
+                box.Properties.Items.Add(port);
+            }
+
+            if (value.ToString() != "" && box.Properties.Items.Contains(value.ToString()))
+            {
+                box.EditValue = value;
+            }
+            else if (value.ToString() != "" && sender == null) // 初始化的时候不管有没有串口都赋值
+            {
+                box.EditValue = value;
+            }
+            else if (box.Properties.Items.Count == 0)
+            {
+                box.EditValue = "";
+            }
+        }
+
+        private void simpleButton1_Click(object sender, EventArgs e)
+        {
+            if (simpleButton1.Text == "打开")
             {
                 if (PLAASerialPort.serialport.IsOpen)
                 {
                     XtraMessageBox.Show("串口已打开");
                     return;
                 }
-                if (!PLAASerialPort.GetInstance().Open(barEditItem1.EditValue.ToString(), Convert.ToInt32(barEditItem2.EditValue.ToString())))
+                if (!PLAASerialPort.GetInstance().Open(comboBoxEdit1.EditValue.ToString(), Convert.ToInt32(comboBoxEdit2.EditValue.ToString())))
                 {
                     XtraMessageBox.Show("打开串口失败");
                 }
                 else
                 {
-                    barButtonItem3.Caption = "关闭";
-                    barEditItem1.Enabled = false;
-                    barEditItem2.Enabled = false;
+                    simpleButton1.Text = "关闭";
+                    comboBoxEdit1.Enabled = false;
+                    comboBoxEdit2.Enabled = false;
                     barButtonItem4.Enabled = false;
                     CommonMemory.IsOpen = true;
                     CommonMemory.IsReadConnect = true;
@@ -1147,8 +1227,8 @@ namespace WADApplication
                 }
                 else
                 {
-                    barEditItem1.Enabled = true;
-                    barEditItem2.Enabled = true;
+                    comboBoxEdit1.Enabled = true;
+                    comboBoxEdit2.Enabled = true;
                     barButtonItem4.Enabled = true;
                     CommonMemory.IsOpen = false;
                     CommonMemory.IsReadConnect = false;
@@ -1159,9 +1239,232 @@ namespace WADApplication
                     //gridControl_Status.RefreshDataSource();
                     //gridView_Status.BestFitColumns();
                     setinfo("关闭串口");
-                    barButtonItem3.Caption = "打开";
+                    simpleButton1.Text = "打开";
                 }
             }
+        }
+
+        private void simpleButton3_Click(object sender, EventArgs e)
+        {
+            if (CommonMemory.IsOpen == false)
+            {
+                XtraMessageBox.Show("请先打开串口");
+                return;
+            }
+            if (simpleButton4.Enabled == false)
+            {
+                XtraMessageBox.Show("请先停止检测");
+                return;
+            }
+            CommonMemory.IsReadConnect = false;
+            RegisterDeviceForm rdf = new RegisterDeviceForm();
+            rdf.AddEvent += new RegisterDeviceForm.EventHandler(rdf_AddEvent);
+            rdf.ShowDialog();
+            CommonMemory.IsReadConnect = true;
+        }
+
+        private void simpleButton4_Click(object sender, EventArgs e)
+        {
+            if (CommonMemory.IsOpen == false)
+            {
+                XtraMessageBox.Show("请先打开串口");
+                return;
+            }
+            CommonMemory.IsReadConnect = false;
+            maxTime = Utility.CutOffMillisecond(DateTime.Now);
+            minTime = maxTime.AddMinutes(-CommonMemory.SysConfig.RealTimeRangeX);
+            // 点击开始的时候才初始化实时曲线，打开软件的时候不要初始化实时曲线
+            lock (this.mainList)
+            {
+                MainProcess.ManageSeries(chartControl1, mainList, minTime, maxTime);
+            }
+
+            mainThread = new Thread(new ThreadStart(ReadData));
+            isRead = true;
+            IsReadBasic = true;
+            mainThread.Start();
+            simpleButton4.Enabled = false;
+            simpleButton3.Enabled = false;
+            simpleButton1.Enabled = false;
+        }
+
+        private void simpleButton5_Click(object sender, EventArgs e)
+        {
+            // 保存最后一次连接的设备
+            getLastSensor();
+            AlertProcess.PlaySound(false);
+            isRead = false;
+            if (mainThread != null)
+            {
+                mainThread.Abort();
+                simpleButton4.Enabled = true;
+            }
+            simpleButton3.Enabled = true;
+            simpleButton1.Enabled = true;
+            CommonMemory.IsReadConnect = true;
+            // closeLight("red");
+            AlertProcess.CloseLight("all");
+            //if (saveThread != null)
+            //{
+            //    saveThread.Abort();
+            //}
+        }
+
+        private void simpleButton6_Click(object sender, EventArgs e)
+        {
+            if (CommonMemory.IsOpen == false)
+            {
+                XtraMessageBox.Show("请先打开串口");
+                return;
+            }
+
+            if (simpleButton4.Enabled == false)
+            {
+                XtraMessageBox.Show("请先停止检测");
+                return;
+            }
+            //CommonMemory.IsReadConnect = false;
+            SystemConfig set = new SystemConfig();
+            set.ShowDialog();
+        }
+
+        private void simpleButton7_Click(object sender, EventArgs e)
+        {
+            Form_History fh = new Form_History();
+            fh.ShowDialog();
+        }
+
+        private void simpleButton8_Click(object sender, EventArgs e)
+        {
+            Form_AlertHistory fa = new Form_AlertHistory();
+            fa.ShowDialog();
+        }
+
+        private void simpleButton9_Click(object sender, EventArgs e)
+        {
+            if (CommonMemory.IsOpen == false)
+            {
+                XtraMessageBox.Show("请先打开串口");
+                return;
+            }
+
+            if (simpleButton4.Enabled == false)
+            {
+                XtraMessageBox.Show("请先停止检测");
+                return;
+            }
+            CommonMemory.IsReadConnect = false;
+            Form_InputData fi = new Form_InputData();
+            fi.ShowDialog();
+            CommonMemory.IsReadConnect = true;
+        }
+
+        private void simpleButton10_Click(object sender, EventArgs e)
+        {
+            if (simpleButton10.Text == "关闭声音")
+            {
+                AlertProcess.CloseLight("sound");
+                CommonMemory.player.Stop();
+                CommonMemory.IsClosePlay = true;
+                simpleButton10.Text = "打开声音";
+            }
+            else if (simpleButton10.Text == "打开声音")
+            {
+                CommonMemory.IsClosePlay = false;
+                simpleButton10.Text = "关闭声音";
+            }
+        }
+
+        private void toolTipController1_GetActiveObjectInfo(object sender, ToolTipControllerGetActiveObjectInfoEventArgs e)
+        {
+            if (e.SelectedControl != gridControl_nowData2)
+                return;
+
+            GridHitInfo hitInfo = gridView_nowData2.CalcHitInfo(e.ControlMousePosition);
+            Console.WriteLine("aaaa");
+
+            if (hitInfo.InRow == false)
+                return;
+
+            if (hitInfo.Column == null)
+                return;
+
+            int rowid = hitInfo.RowHandle;
+            Equipment eq = gridView_nowData2.GetRow(rowid) as Equipment;
+            string toolTip = eq.IsConnect ? "连接" : "断开";
+            Object o = hitInfo.HitTest.ToString() + hitInfo.RowHandle.ToString();
+
+            ToolTipControlInfo info = new ToolTipControlInfo(o, toolTip);
+            if (info != null)
+            {
+                e.Info = info;
+            }
+
+            //    SuperToolTipSetupArgs toolTipArgs = new SuperToolTipSetupArgs();
+            //toolTipArgs.Title.Text = string.Empty;
+
+            ////concern only the following fields
+            //if (hitInfo.Column.FieldName == "Monday" || hitInfo.Column.FieldName == "Tuesday" || hitInfo.Column.FieldName == "Wednesday" || hitInfo.Column.FieldName == "Thursday" || hitInfo.Column.FieldName == "Friday")
+            //    validColumn = true;
+
+            //if (!validColumn)
+            //    return;
+
+
+            //SuperToolTipSetupArgs toolTipArgs = new SuperToolTipSetupArgs();
+            //toolTipArgs.Title.Text = string.Empty;
+
+            ////Get the data from this row
+            //string columnCaption = hitInfo.Column.Caption;
+            //DateTime dateOK = new DateTime(2000,1,1);
+            //if (DateTime.TryParse(columnCaption, out dateOK))
+            //{
+
+            //    DateTime date = DateTime.Parse(columnCaption);
+            //    int row = hitInfo.RowHandle;
+            //    long teacherID = long.Parse(gridView1.GetRowCellValue(row, "TeacherID").ToString());
+
+            //    GuaranteedDay gDay = db.GuaranteedDays.Where(p => p.Date == date && p.TeacherID == teacherID && p.Type == 5).FirstOrDefault();
+            //    if (gDay != null)
+            //    {
+            //        if (gDay.Note != string.Empty)
+            //        {
+            //            //Set description for the tool-tip
+            //            string description = string.Empty;
+            //            int type = gDay.Type;
+            //            switch (type)
+            //            {
+            //                case 1:
+            //                    description = "guarantee offered";
+            //                    break;
+            //                case 2:
+            //                    description = "guaranteed";
+            //                    break;
+            //                case 3:
+            //                    description = "texted";
+            //                    break;
+            //                case 4:
+            //                    description = "available";
+            //                    break;
+            //                case 5:
+            //                    description = "unavailable";
+            //                    break;
+            //            }
+            //            //Add Notes & description for the tool-tip
+            //            toolTip = "Notes : " + gDay.Note + "\nDescription : " + description;
+
+            //            string BodyText = toolTip;
+
+            //            toolTipArgs.Contents.Text = BodyText;
+            //            e.Info = new ToolTipControlInfo();
+            //            e.Info.Object = hitInfo.HitTest.ToString() + hitInfo.RowHandle.ToString(); 
+            //            e.Info.ToolTipType = ToolTipType.SuperTip;
+            //            e.Info.SuperTip = new SuperToolTip();
+            //            e.Info.SuperTip.Setup(toolTipArgs);
+            //        }
+            //    }
+            //}
+            //}
         }
     }
 }

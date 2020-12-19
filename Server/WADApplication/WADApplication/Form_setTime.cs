@@ -33,7 +33,8 @@ namespace WADApplication
         //在开启子线程前，初始化皮肤，传入用户SkinName,否则子按钮样式获取失败   2015.8.28
         public void InitiateDevExpressSkins()
         {
-            DevExpress.Skins.SkinManager.Default.RegisterAssembly(typeof(DevExpress.UserSkins.WADSkinProject).Assembly); //Register!
+            // 去掉皮肤
+            //DevExpress.Skins.SkinManager.Default.RegisterAssembly(typeof(DevExpress.UserSkins.WADSkinProject).Assembly); //Register!
             DevExpress.Skins.SkinManager.EnableFormSkins();
             DevExpress.Skins.SkinManager.EnableFormSkinsIfNotVista();
             DevExpress.XtraEditors.Controls.Localizer.Active = new LocalizationCHS();

@@ -200,8 +200,6 @@
             // 
             // gridView1
             // 
-            this.gridView1.Appearance.Empty.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(45)))), ((int)(((byte)(67)))));
-            this.gridView1.Appearance.Empty.Options.UseBackColor = true;
             this.gridView1.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(9)))), ((int)(((byte)(20)))), ((int)(((byte)(31)))));
             this.gridView1.Appearance.EvenRow.Options.UseBackColor = true;
             this.gridView1.Appearance.HeaderPanel.Options.UseTextOptions = true;

@@ -144,10 +144,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="WAD_SkinProject, Version=11.2.11.0, Culture=neutral, PublicKeyToken=95fc6c5621878f0a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\WAD_SkinProject\WAD_SkinProject.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddDeviceForm.cs">
@@ -415,6 +411,8 @@
   <ItemGroup>
     <None Include="Resources\点位图1.png" />
     <None Include="Resources\点位图2.png" />
+    <None Include="Resources\add_32x32.png" />
+    <None Include="Resources\next_32x32.png" />
     <Content Include="wnd.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
