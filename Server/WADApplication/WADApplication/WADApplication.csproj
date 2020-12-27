@@ -122,6 +122,14 @@
     <Reference Include="DevExpress.XtraTreeList.v14.2, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
       <Private>True</Private>
     </Reference>
+    <Reference Include="MQTTnet, Version=2.1.5.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MQTTnet.2.2.0\lib\net45\MQTTnet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MQTTnet.Core, Version=2.1.5.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MQTTnet.2.2.0\lib\net45\MQTTnet.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="NPOI">
       <HintPath>..\Libs\NPOI.dll</HintPath>
     </Reference>
@@ -356,6 +364,7 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -58,16 +58,20 @@ namespace GlobalMemory
                 Max = eq.Max,
                 IsGas = eq.IsGas,
                 IsDel = eq.IsDel,
+                IsNew = eq.IsNew,
+                AlertModel = eq.AlertModel,
+                MN = eq.MN,
+                AliasGasName = eq.AliasGasName,
                 CreateTime = eq.CreateTime
             };
             if (result.IsGas)
             {
-                result.GasName = GetGasName(result.GasType);
+                result._gasName = GetGasName(result.GasType);
                 result.UnitName = GetGasUnitName(result.UnitType);
             }
             else
             {
-                result.GasName = GetWeatherName(result.GasType) + "(气象)";
+                result._gasName = GetWeatherName(result.GasType) + "(气象)";
                 result.UnitName = GetWeatherUnitName(result.UnitType);
             }
 

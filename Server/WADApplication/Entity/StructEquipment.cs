@@ -11,6 +11,12 @@ namespace Entity
     /// </summary>
     public class StructEquipment
     {
+        public StructEquipment()
+        {
+            MN = string.Empty;
+            AlertModel = 10;
+            AliasGasName = string.Empty;
+        }
         public int ID { get; set; }
 
         public string Name { get; set; }
@@ -42,6 +48,14 @@ namespace Entity
         public bool IsGas { get; set; }
 
         public bool IsDel { get; set; }
+
+        public bool IsNew { get; set; }
+
+        public byte AlertModel { get; set; }
+
+        public string MN { get; set; }
+
+        public string AliasGasName { get; set; }
 
         public DateTime CreateTime { get; set; }
     }

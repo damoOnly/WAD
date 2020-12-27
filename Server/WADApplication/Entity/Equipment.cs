@@ -5,13 +5,13 @@ using System.Text;
 
 namespace Entity
 {
-    public class Equipment: StructEquipment
+    public class Equipment : StructEquipment
     {
         public Equipment()
         {
             CreateTime = DateTime.Now;
             IsDel = false;
-           // LowChroma = 18;
+            // LowChroma = 18;
             LowChroma = 0;
             GasType = 0;
             SensorType = 0;
@@ -53,10 +53,21 @@ namespace Entity
             }
         }
 
+        public string _gasName;
         /// <summary>
         /// 气体名称
         /// </summary>
-        public string GasName { get; set; }
+        public string GasName
+        {
+            get
+            {
+                return string.IsNullOrWhiteSpace(AliasGasName) ? _gasName : AliasGasName;
+            }
+            set
+            {
+                AliasGasName = value;
+            }
+        }
         /// <summary>
         /// 气体名称
         /// </summary>
@@ -73,7 +84,7 @@ namespace Entity
         //        return nstr;
         //    }
         //}
-        
+
 
         /// <summary>
         /// 通道类型（传感器类型）
@@ -110,7 +121,7 @@ namespace Entity
         {
             get
             {
-                return string.Format("{0}",TWA.ToString("f"+ Point));
+                return string.Format("{0}", TWA.ToString("f" + Point));
             }
         }
         ///
@@ -121,7 +132,7 @@ namespace Entity
         {
             get
             {
-                return string.Format("{0}",STEL.ToString("f" + Point));
+                return string.Format("{0}", STEL.ToString("f" + Point));
             }
         }
         ///<summary>
@@ -131,8 +142,8 @@ namespace Entity
         public string STELTimeStr
         {
             get
-            { 
-               return string.Format("{0}",STELTime.ToString("f"+Point));
+            {
+                return string.Format("{0}", STELTime.ToString("f" + Point));
             }
         }
 
@@ -141,7 +152,7 @@ namespace Entity
         ///</summary>
         public byte AlertType { get; set; }
         //public string AletTypeStr
-              
+
         public bool IsA1 { get; set; }
         public bool IsA2 { get; set; }
         public bool IsLow { get; set; }
@@ -154,12 +165,12 @@ namespace Entity
                 return string.Format("{0}", Max);
             }
         }
-        
+
         /// <summary>
         /// 单位名称
         /// </summary>
         public string UnitName { get; set; }
-        
+
         /// <summary>
         /// 是否注册
         /// </summary>
@@ -202,7 +213,7 @@ namespace Entity
         {
             get
             {
-                return string.Format("{0}",HighChroma.ToString("f"+Point));
+                return string.Format("{0}", HighChroma.ToString("f" + Point));
             }
         }
 
@@ -214,7 +225,7 @@ namespace Entity
         {
             get
             {
-                return string.Format("{0}",LowChromadata.ToString("f"+Point));
+                return string.Format("{0}", LowChromadata.ToString("f" + Point));
             }
         }
 
@@ -243,30 +254,34 @@ namespace Entity
         /// <summary>
         /// 浓度报警字符串
         /// </summary>
-        public string AlertStr { get {
-            var str = string.Empty;
-            switch (AlertStatus)
+        public string AlertStr
+        {
+            get
             {
-                case EM_AlertType.normal:
-                    str = noStr;
-                    break;
-                case EM_AlertType.fault:
-                    str = fault;
-                    break;
-                case EM_AlertType.outRange:
-                    str = outRange;
-                    break;
-                case EM_AlertType.A2:
-                    str = highStr;
-                    break;
-                case EM_AlertType.A1:
-                    str = lowStr;
-                    break;
-                default:
-                    break;
+                var str = string.Empty;
+                switch (AlertStatus)
+                {
+                    case EM_AlertType.normal:
+                        str = noStr;
+                        break;
+                    case EM_AlertType.fault:
+                        str = fault;
+                        break;
+                    case EM_AlertType.outRange:
+                        str = outRange;
+                        break;
+                    case EM_AlertType.A2:
+                        str = highStr;
+                        break;
+                    case EM_AlertType.A1:
+                        str = lowStr;
+                        break;
+                    default:
+                        break;
+                }
+                return str;
             }
-            return str;
-        } }
+        }
 
         /// <summary>
         /// 温湿度报警字符串
@@ -329,6 +344,39 @@ namespace Entity
         /// </summary>
         public bool IfShowSeries { get; set; }
 
+        public string AlertModelStr
+        {
+            get
+            {
+                string str = string.Empty;
+                switch (AlertModel)
+                {
+                    case 0:
+                        str = "高报模式";
+                        break;
+                    case 1:
+                        str = "区间模式";
+                        break;
+                    case 2:
+                        str = "低报模式";
+                        break;
+                    default:
+                        str = "";
+                        break;
+                }
+                return str;
+            }
+        }
+
+        public string AgreementType
+        {
+            get
+            {
+                string str = IsNew ? "协议2" : "协议1";
+                return str;
+            }
+        }
+
         public const string noStr = "正常";
         public const string fault = "故障";
         public const string outRange = "超量程";
@@ -340,12 +388,12 @@ namespace Entity
     {
         public bool Equals(Equipment x, Equipment y)
         {
-            return x.Name == y.Name&& x.Address == x.Address;
+            return x.Name == y.Name && x.Address == x.Address;
         }
 
         public int GetHashCode(Equipment obj)
         {
-            return obj.Name.GetHashCode()&obj.Address.GetHashCode();
+            return obj.Name.GetHashCode() & obj.Address.GetHashCode();
         }
     }
 }

@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
+            this.simpleButton4 = new DevExpress.XtraEditors.SimpleButton();
             this.spinEdit1 = new DevExpress.XtraEditors.SpinEdit();
             this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
@@ -46,9 +48,11 @@
             this.gridColumn_SensorType = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn_Gas = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn_IsRegister = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn_Select = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
@@ -62,9 +66,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).BeginInit();
             this.SuspendLayout();
             // 
+            // gridColumn7
+            // 
+            this.gridColumn7.Caption = "协议";
+            this.gridColumn7.FieldName = "AgreementType";
+            this.gridColumn7.Name = "gridColumn7";
+            this.gridColumn7.OptionsColumn.AllowEdit = false;
+            this.gridColumn7.Visible = true;
+            this.gridColumn7.VisibleIndex = 11;
+            // 
             // simpleButton1
             // 
-            this.simpleButton1.Location = new System.Drawing.Point(489, 11);
+            this.simpleButton1.Location = new System.Drawing.Point(403, 7);
             this.simpleButton1.Name = "simpleButton1";
             this.simpleButton1.Size = new System.Drawing.Size(64, 21);
             this.simpleButton1.TabIndex = 0;
@@ -77,6 +90,7 @@
             this.splitContainerControl1.Horizontal = false;
             this.splitContainerControl1.Location = new System.Drawing.Point(0, 0);
             this.splitContainerControl1.Name = "splitContainerControl1";
+            this.splitContainerControl1.Panel1.Controls.Add(this.simpleButton4);
             this.splitContainerControl1.Panel1.Controls.Add(this.spinEdit1);
             this.splitContainerControl1.Panel1.Controls.Add(this.textEdit1);
             this.splitContainerControl1.Panel1.Controls.Add(this.labelControl3);
@@ -95,6 +109,15 @@
             this.splitContainerControl1.TabIndex = 1;
             this.splitContainerControl1.Text = "splitContainerControl1";
             // 
+            // simpleButton4
+            // 
+            this.simpleButton4.Location = new System.Drawing.Point(576, 7);
+            this.simpleButton4.Name = "simpleButton4";
+            this.simpleButton4.Size = new System.Drawing.Size(64, 21);
+            this.simpleButton4.TabIndex = 11;
+            this.simpleButton4.Text = "保存修改";
+            this.simpleButton4.Click += new System.EventHandler(this.simpleButton4_Click_1);
+            // 
             // spinEdit1
             // 
             this.spinEdit1.EditValue = new decimal(new int[] {
@@ -102,12 +125,13 @@
             0,
             0,
             0});
-            this.spinEdit1.Location = new System.Drawing.Point(90, 8);
+            this.spinEdit1.Location = new System.Drawing.Point(279, 8);
             this.spinEdit1.Name = "spinEdit1";
             this.spinEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.spinEdit1.Properties.IsFloatValue = false;
             this.spinEdit1.Properties.Mask.EditMask = "N00";
+            this.spinEdit1.Properties.SpinStyle = DevExpress.XtraEditors.Controls.SpinStyles.Horizontal;
             this.spinEdit1.Size = new System.Drawing.Size(100, 20);
             this.spinEdit1.TabIndex = 10;
             // 
@@ -117,6 +141,7 @@
             this.textEdit1.Name = "textEdit1";
             this.textEdit1.Size = new System.Drawing.Size(100, 20);
             this.textEdit1.TabIndex = 9;
+            this.textEdit1.Visible = false;
             // 
             // labelControl3
             // 
@@ -125,10 +150,11 @@
             this.labelControl3.Size = new System.Drawing.Size(60, 13);
             this.labelControl3.TabIndex = 8;
             this.labelControl3.Text = "设备名称：";
+            this.labelControl3.Visible = false;
             // 
             // labelControl2
             // 
-            this.labelControl2.Location = new System.Drawing.Point(26, 9);
+            this.labelControl2.Location = new System.Drawing.Point(215, 11);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(60, 13);
             this.labelControl2.TabIndex = 7;
@@ -136,25 +162,26 @@
             // 
             // labelControl1
             // 
-            this.labelControl1.Location = new System.Drawing.Point(207, 12);
+            this.labelControl1.Location = new System.Drawing.Point(19, 11);
             this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(60, 13);
+            this.labelControl1.Size = new System.Drawing.Size(84, 13);
             this.labelControl1.TabIndex = 6;
-            this.labelControl1.Text = "设备协议：";
+            this.labelControl1.Text = "新增设备协议：";
             // 
             // comboBoxEdit1
             // 
-            this.comboBoxEdit1.EditValue = "新协议";
-            this.comboBoxEdit1.Location = new System.Drawing.Point(273, 9);
+            this.comboBoxEdit1.EditValue = "协议2";
+            this.comboBoxEdit1.Location = new System.Drawing.Point(106, 8);
             this.comboBoxEdit1.Name = "comboBoxEdit1";
             this.comboBoxEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.comboBoxEdit1.Properties.Items.AddRange(new object[] {
-            "新协议",
-            "老协议"});
+            "协议2",
+            "协议1"});
             this.comboBoxEdit1.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.comboBoxEdit1.Size = new System.Drawing.Size(100, 20);
+            this.comboBoxEdit1.Size = new System.Drawing.Size(59, 20);
             this.comboBoxEdit1.TabIndex = 5;
+            this.comboBoxEdit1.SelectedIndexChanged += new System.EventHandler(this.comboBoxEdit1_SelectedIndexChanged);
             // 
             // simpleButton5
             // 
@@ -178,7 +205,7 @@
             // 
             // simpleButton2
             // 
-            this.simpleButton2.Location = new System.Drawing.Point(629, 11);
+            this.simpleButton2.Location = new System.Drawing.Point(506, 7);
             this.simpleButton2.Name = "simpleButton2";
             this.simpleButton2.Size = new System.Drawing.Size(64, 21);
             this.simpleButton2.TabIndex = 1;
@@ -214,14 +241,16 @@
             this.gridColumn_SensorType,
             this.gridColumn_Gas,
             this.gridColumn3,
+            this.gridColumn5,
             this.gridColumn1,
             this.gridColumn2,
             this.gridColumn4,
+            this.gridColumn6,
+            this.gridColumn7,
             this.gridColumn_IsRegister,
             this.gridColumn_Select});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
-            this.gridView1.OptionsBehavior.Editable = false;
             this.gridView1.OptionsCustomization.AllowColumnMoving = false;
             this.gridView1.OptionsCustomization.AllowFilter = false;
             this.gridView1.OptionsCustomization.AllowGroup = false;
@@ -229,16 +258,20 @@
             this.gridView1.OptionsMenu.EnableFooterMenu = false;
             this.gridView1.OptionsMenu.EnableGroupPanelMenu = false;
             this.gridView1.OptionsSelection.MultiSelect = true;
+            this.gridView1.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
+            this.gridView1.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
             this.gridView1.OptionsView.ShowGroupPanel = false;
             this.gridView1.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(this.gridView1_RowClick);
+            this.gridView1.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView1_CellValueChanged);
             // 
             // gridColumn_Address
             // 
-            this.gridColumn_Address.Caption = "设备地址";
+            this.gridColumn_Address.Caption = "地址";
             this.gridColumn_Address.FieldName = "Address";
             this.gridColumn_Address.Name = "gridColumn_Address";
+            this.gridColumn_Address.OptionsColumn.AllowEdit = false;
             this.gridColumn_Address.Visible = true;
-            this.gridColumn_Address.VisibleIndex = 0;
+            this.gridColumn_Address.VisibleIndex = 1;
             // 
             // gridColumn_Name
             // 
@@ -246,31 +279,42 @@
             this.gridColumn_Name.FieldName = "Name";
             this.gridColumn_Name.Name = "gridColumn_Name";
             this.gridColumn_Name.Visible = true;
-            this.gridColumn_Name.VisibleIndex = 1;
+            this.gridColumn_Name.VisibleIndex = 2;
             // 
             // gridColumn_SensorType
             // 
-            this.gridColumn_SensorType.Caption = "通道编号";
+            this.gridColumn_SensorType.Caption = "通道";
             this.gridColumn_SensorType.FieldName = "SensorNum";
             this.gridColumn_SensorType.Name = "gridColumn_SensorType";
+            this.gridColumn_SensorType.OptionsColumn.AllowEdit = false;
             this.gridColumn_SensorType.Visible = true;
-            this.gridColumn_SensorType.VisibleIndex = 2;
+            this.gridColumn_SensorType.VisibleIndex = 3;
             // 
             // gridColumn_Gas
             // 
-            this.gridColumn_Gas.Caption = "气体名称";
+            this.gridColumn_Gas.Caption = "气体/气象";
             this.gridColumn_Gas.FieldName = "GasName";
             this.gridColumn_Gas.Name = "gridColumn_Gas";
             this.gridColumn_Gas.Visible = true;
-            this.gridColumn_Gas.VisibleIndex = 3;
+            this.gridColumn_Gas.VisibleIndex = 4;
             // 
             // gridColumn3
             // 
             this.gridColumn3.Caption = "单位";
             this.gridColumn3.FieldName = "UnitName";
             this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.OptionsColumn.AllowEdit = false;
             this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 4;
+            this.gridColumn3.VisibleIndex = 5;
+            // 
+            // gridColumn5
+            // 
+            this.gridColumn5.Caption = "报警模式";
+            this.gridColumn5.FieldName = "AlertModelStr";
+            this.gridColumn5.Name = "gridColumn5";
+            this.gridColumn5.OptionsColumn.AllowEdit = false;
+            this.gridColumn5.Visible = true;
+            this.gridColumn5.VisibleIndex = 6;
             // 
             // gridColumn1
             // 
@@ -279,7 +323,7 @@
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.OptionsColumn.AllowEdit = false;
             this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 5;
+            this.gridColumn1.VisibleIndex = 7;
             // 
             // gridColumn2
             // 
@@ -288,15 +332,25 @@
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.OptionsColumn.AllowEdit = false;
             this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 6;
+            this.gridColumn2.VisibleIndex = 8;
             // 
             // gridColumn4
             // 
             this.gridColumn4.Caption = "量程";
             this.gridColumn4.FieldName = "Max";
             this.gridColumn4.Name = "gridColumn4";
+            this.gridColumn4.OptionsColumn.AllowEdit = false;
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 7;
+            this.gridColumn4.VisibleIndex = 9;
+            // 
+            // gridColumn6
+            // 
+            this.gridColumn6.Caption = "MN号";
+            this.gridColumn6.FieldName = "MN";
+            this.gridColumn6.Name = "gridColumn6";
+            this.gridColumn6.OptionsColumn.AllowEdit = false;
+            this.gridColumn6.Visible = true;
+            this.gridColumn6.VisibleIndex = 10;
             // 
             // gridColumn_IsRegister
             // 
@@ -327,7 +381,8 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "添加设备";
+            this.Text = "设备管理";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RegisterDeviceForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.RegisterDeviceForm_FormClosed);
             this.Load += new System.EventHandler(this.RegisterDeviceForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();
@@ -368,5 +423,9 @@
         private DevExpress.XtraEditors.LabelControl labelControl3;
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
+        private DevExpress.XtraEditors.SimpleButton simpleButton4;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
     }
 }

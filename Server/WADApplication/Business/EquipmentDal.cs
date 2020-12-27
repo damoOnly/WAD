@@ -13,7 +13,7 @@ namespace Business
     public static class EquipmentDal
     {
         private static readonly string fileName = string.Format(@"{0}waddb\equipment.db3", AppDomain.CurrentDomain.BaseDirectory);
-        private static readonly string connstr = string.Format(CreateDbFile.connectionStringTemp, fileName);
+        public static readonly string connstr = string.Format(CreateDbFile.connectionStringTemp, fileName);
         public static void CreateDb()
         {
             if (!File.Exists(fileName))
@@ -54,6 +54,10 @@ namespace Business
                                                            Max REAL NOT NULL,
                                                            IsGas INT NOT NULL,  
                                                            IsDel INT NOT NULL,
+                                                           IsNew INT NOT NULL,
+                                                           AlertModel INT NOT NULL,
+                                                           MN TEXT NOT NULL,
+                                                           AliasGasName TEXT NOT NULL,
                                                            CreateTime INTEGER NOT NULL
                 )");
             SQLiteCommand command = new SQLiteCommand(sql, conn);
@@ -68,8 +72,8 @@ namespace Business
         }
         public static void AddOneR(ref StructEquipment data)
         {
-            string sql = @"insert into tb_Equipment (Name,Address,GasType,SensorNum,UnitType,Point,Magnification,Low,High,Max,IsGas,IsDel,CreateTime) 
-values (@Name,@Address,@GasType,@SensorNum,@UnitType,@Point,@Magnification,@Low,@High,@Max,@IsGas,@IsDel,@CreateTime);
+            string sql = @"insert into tb_Equipment (Name,Address,GasType,SensorNum,UnitType,Point,Magnification,Low,High,Max,IsGas,IsDel,IsNew,AlertModel,MN,AliasGasName,CreateTime) 
+values (@Name,@Address,@GasType,@SensorNum,@UnitType,@Point,@Magnification,@Low,@High,@Max,@IsGas,@IsDel,@IsNew,@AlertModel,@MN,@AliasGasName,@CreateTime);
 select last_insert_rowid();";
             using (SQLiteConnection conn = new SQLiteConnection(connstr))
             {
@@ -88,6 +92,10 @@ select last_insert_rowid();";
                     cmd.Parameters.AddWithValue("@Max", data.Max);
                     cmd.Parameters.AddWithValue("@IsGas", data.IsGas);
                     cmd.Parameters.AddWithValue("@IsDel", data.IsDel);
+                    cmd.Parameters.AddWithValue("@IsNew", data.IsNew);
+                    cmd.Parameters.AddWithValue("@AlertModel", data.AlertModel);
+                    cmd.Parameters.AddWithValue("@MN", data.MN);
+                    cmd.Parameters.AddWithValue("@AliasGasName", data.AliasGasName);
                     cmd.Parameters.AddWithValue("@CreateTime", Utility.CutOffMillisecond(DateTime.Now));
                     int rowid = Convert.ToInt32(cmd.ExecuteScalar());
                     data.ID = rowid;
@@ -100,7 +108,7 @@ select last_insert_rowid();";
         public static void UpdateOne(StructEquipment data)
         {
             string sql = @"UPDATE tb_Equipment SET Name=@Name,Address=@Address,GasType=@GasType,SensorNum=@SensorNum,UnitType=@UnitType,
-                                Point=@Point,Magnification=@Magnification,Low=@Low,High=@High,Max=@Max,IsGas=@IsGas,IsDel=@IsDel,CreateTime=@CreateTime 
+                                Point=@Point,Magnification=@Magnification,Low=@Low,High=@High,Max=@Max,IsGas=@IsGas,IsDel=@IsDel,IsNew=@IsNew,AlertModel=@AlertModel,MN=@MN,AliasGasName=@AliasGasName,CreateTime=@CreateTime 
                           WHERE rowid=@id";
             using (SQLiteConnection conn = new SQLiteConnection(connstr))
             {
@@ -119,6 +127,10 @@ select last_insert_rowid();";
                     cmd.Parameters.AddWithValue("@Max", data.Max);
                     cmd.Parameters.AddWithValue("@IsGas", data.IsGas);
                     cmd.Parameters.AddWithValue("@IsDel", data.IsDel);
+                    cmd.Parameters.AddWithValue("@IsNew", data.IsNew);
+                    cmd.Parameters.AddWithValue("@AlertModel", data.AlertModel);
+                    cmd.Parameters.AddWithValue("@MN", data.MN);
+                    cmd.Parameters.AddWithValue("@AliasGasName", data.AliasGasName);
                     cmd.Parameters.AddWithValue("@CreateTime", Utility.CutOffMillisecond(DateTime.Now));
                     cmd.Parameters.AddWithValue("@id", data.ID);
                     cmd.ExecuteNonQuery();
@@ -129,7 +141,7 @@ select last_insert_rowid();";
         public static List<StructEquipment> GetAllListNotDelete()
         {
             List<StructEquipment> list = new List<StructEquipment>();
-            string sql = "select rowid,Name,Address,GasType,SensorNum,UnitType,Point,Magnification,Low,High,Max,IsGas,CreateTime from tb_Equipment where IsDel=0";
+            string sql = "select rowid,Name,Address,GasType,SensorNum,UnitType,Point,Magnification,Low,High,Max,IsGas,IsNew,AlertModel,MN,AliasGasName,CreateTime from tb_Equipment where IsDel=0";
             using (SQLiteConnection conn = new SQLiteConnection(connstr))
             {
                 conn.Open();
@@ -152,8 +164,12 @@ select last_insert_rowid();";
                             eq.A2 = reader.GetFloat(9);
                             eq.Max = reader.GetFloat(10);
                             eq.IsGas = reader.GetBoolean(11);
+                            eq.IsNew = reader.GetBoolean(12);
+                            eq.AlertModel = reader.GetByte(13);
+                            eq.MN = reader.GetString(14);
+                            eq.AliasGasName = reader.GetString(15);
                             eq.IsDel = false;
-                            eq.CreateTime = reader.GetDateTime(12);
+                            eq.CreateTime = reader.GetDateTime(16);
                             list.Add(eq);
                         }
                     }
@@ -169,7 +185,7 @@ select last_insert_rowid();";
         public static List<StructEquipment> GetListIncludeDelete()
         {
             List<StructEquipment> list = new List<StructEquipment>();
-            string sql = "select rowid,Name,Address,GasType,SensorNum,UnitType,Point,Magnification,Low,High,Max,IsGas,IsDel,CreateTime from tb_Equipment";
+            string sql = "select rowid,Name,Address,GasType,SensorNum,UnitType,Point,Magnification,Low,High,Max,IsGas,IsDel,IsNew,AlertModel,MN,AliasGasName,CreateTime from tb_Equipment";
             using (SQLiteConnection conn = new SQLiteConnection(connstr))
             {
                 conn.Open();
@@ -193,7 +209,11 @@ select last_insert_rowid();";
                             eq.Max = reader.GetFloat(10);
                             eq.IsGas = reader.GetBoolean(11);
                             eq.IsDel = reader.GetBoolean(12);
-                            eq.CreateTime = reader.GetDateTime(13);
+                            eq.IsNew = reader.GetBoolean(13);
+                            eq.AlertModel = reader.GetByte(14);
+                            eq.MN = reader.GetString(15);
+                            eq.AliasGasName = reader.GetString(16);
+                            eq.CreateTime = reader.GetDateTime(17);
                             list.Add(eq);
                         }
                     }
@@ -306,7 +326,7 @@ select last_insert_rowid();";
                 {
                     eq.ID = rowid;
                     string sql2 = @"UPDATE tb_Equipment SET Name=@Name,Address=@Address,GasType=@GasType,SensorNum=@SensorNum,UnitType=@UnitType,
-                                Point=@Point,Magnification=@Magnification,Low=@Low,High=@High,Max=@Max,IsGas=@IsGas,IsDel=@IsDel,CreateTime=@CreateTime 
+                                Point=@Point,Magnification=@Magnification,Low=@Low,High=@High,Max=@Max,IsGas=@IsGas,IsDel=@IsDel,IsNew=@IsNew,AlertModel=@AlertModel,MN=@MN,AliasGasName=@AliasGasName,CreateTime=@CreateTime 
                           WHERE rowid=@id";
                     using (SQLiteCommand cmd = new SQLiteCommand(sql2, conn))
                     {
@@ -322,6 +342,10 @@ select last_insert_rowid();";
                         cmd.Parameters.AddWithValue("@Max", eq.Max);
                         cmd.Parameters.AddWithValue("@IsGas", eq.IsGas);
                         cmd.Parameters.AddWithValue("@IsDel", eq.IsDel);
+                        cmd.Parameters.AddWithValue("@IsNew", eq.IsNew);
+                        cmd.Parameters.AddWithValue("@AlertModel", eq.AlertModel);
+                        cmd.Parameters.AddWithValue("@MN", eq.MN);
+                        cmd.Parameters.AddWithValue("@AliasGasName", eq.AliasGasName);
                         cmd.Parameters.AddWithValue("@CreateTime", Utility.CutOffMillisecond(DateTime.Now));
                         cmd.Parameters.AddWithValue("@id", eq.ID);
                         cmd.ExecuteNonQuery();
@@ -329,8 +353,8 @@ select last_insert_rowid();";
                 }
                 else
                 {
-                    string sql3 = @"insert into tb_Equipment (Name,Address,GasType,SensorNum,UnitType,Point,Magnification,Low,High,Max,IsGas,IsDel,CreateTime) 
-values (@Name,@Address,@GasType,@SensorNum,@UnitType,@Point,@Magnification,@Low,@High,@Max,@IsGas,@IsDel,@CreateTime);
+                    string sql3 = @"insert into tb_Equipment (Name,Address,GasType,SensorNum,UnitType,Point,Magnification,Low,High,Max,IsGas,IsDel,IsNew,AlertModel,MN,AliasGasName,CreateTime) 
+values (@Name,@Address,@GasType,@SensorNum,@UnitType,@Point,@Magnification,@Low,@High,@Max,@IsGas,@IsDel,@IsNew,@AlertModel,@MN,@AliasGasName,@CreateTime);
 select last_insert_rowid();";
                     using (SQLiteCommand cmd = new SQLiteCommand(sql3, conn))
                     {
@@ -346,6 +370,10 @@ select last_insert_rowid();";
                         cmd.Parameters.AddWithValue("@Max", eq.Max);
                         cmd.Parameters.AddWithValue("@IsGas", eq.IsGas);
                         cmd.Parameters.AddWithValue("@IsDel", eq.IsDel);
+                        cmd.Parameters.AddWithValue("@IsNew", eq.IsNew);
+                        cmd.Parameters.AddWithValue("@AlertModel", eq.AlertModel);
+                        cmd.Parameters.AddWithValue("@MN", eq.MN);
+                        cmd.Parameters.AddWithValue("@AliasGasName", eq.AliasGasName);
                         cmd.Parameters.AddWithValue("@CreateTime", Utility.CutOffMillisecond(DateTime.Now));
                         eq.ID = Convert.ToInt32(cmd.ExecuteScalar());
                     }
@@ -360,5 +388,18 @@ select last_insert_rowid();";
 
         }
 
+        public static bool UpdateNameOrAliasGasName(SQLiteConnection conn, SQLiteTransaction trans, StructEquipment eq)
+        {
+            string sql = string.Format("UPDATE tb_Equipment SET Name=@Name,AliasGasName=@AliasGasName WHERE rowid=@id");
+
+
+            SQLiteCommand cmd = new SQLiteCommand(sql, conn, trans);
+            cmd.Parameters.AddWithValue("@Name", eq.Name);
+            cmd.Parameters.AddWithValue("@AliasGasName", eq.AliasGasName);
+            cmd.Parameters.AddWithValue("@id", eq.ID);
+
+
+            return cmd.ExecuteNonQuery() == 1;
+        }
     }
 }

@@ -89,6 +89,7 @@
             this.gridColumn19 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn20 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn_TH = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.toolTipController1 = new DevExpress.Utils.ToolTipController(this.components);
             this.chartControl1 = new DevExpress.XtraCharts.ChartControl();
             this.panel2 = new System.Windows.Forms.Panel();
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
@@ -131,7 +132,6 @@
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.splitContainerControl2 = new DevExpress.XtraEditors.SplitContainerControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.toolTipController1 = new DevExpress.Utils.ToolTipController(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox3)).BeginInit();
@@ -183,7 +183,7 @@
             this.gridColumn18.OptionsColumn.AllowEdit = false;
             this.gridColumn18.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.gridColumn18.Visible = true;
-            this.gridColumn18.VisibleIndex = 5;
+            this.gridColumn18.VisibleIndex = 6;
             this.gridColumn18.Width = 70;
             // 
             // gridColumn1
@@ -194,7 +194,7 @@
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.OptionsColumn.AllowEdit = false;
             this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 3;
+            this.gridColumn1.VisibleIndex = 4;
             // 
             // ribbon
             // 
@@ -567,6 +567,9 @@
             this.gridView_nowData2.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gridView_nowData2.OptionsSelection.EnableAppearanceFocusedRow = false;
             this.gridView_nowData2.OptionsSelection.EnableAppearanceHideSelection = false;
+            this.gridView_nowData2.OptionsSelection.MultiSelect = true;
+            this.gridView_nowData2.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
+            this.gridView_nowData2.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
             this.gridView_nowData2.OptionsView.ShowGroupPanel = false;
             this.gridView_nowData2.OptionsView.ShowVerticalLines = DevExpress.Utils.DefaultBoolean.False;
             this.gridView_nowData2.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(this.gridView1_RowClick);
@@ -580,7 +583,7 @@
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.UnboundType = DevExpress.Data.UnboundColumnType.Boolean;
             this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 0;
+            this.gridColumn3.VisibleIndex = 1;
             // 
             // repositoryItemCheckEdit1
             // 
@@ -597,7 +600,7 @@
             this.gridColumn11.Name = "gridColumn11";
             this.gridColumn11.OptionsColumn.AllowEdit = false;
             this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 1;
+            this.gridColumn11.VisibleIndex = 2;
             this.gridColumn11.Width = 61;
             // 
             // gridColumn10
@@ -609,7 +612,7 @@
             this.gridColumn10.Name = "gridColumn10";
             this.gridColumn10.OptionsColumn.AllowEdit = false;
             this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 2;
+            this.gridColumn10.VisibleIndex = 3;
             this.gridColumn10.Width = 80;
             // 
             // gridColumn12
@@ -621,7 +624,7 @@
             this.gridColumn12.Name = "gridColumn12";
             this.gridColumn12.OptionsColumn.AllowEdit = false;
             this.gridColumn12.Visible = true;
-            this.gridColumn12.VisibleIndex = 4;
+            this.gridColumn12.VisibleIndex = 5;
             // 
             // gridColumn16
             // 
@@ -632,7 +635,7 @@
             this.gridColumn16.Name = "gridColumn16";
             this.gridColumn16.OptionsColumn.AllowEdit = false;
             this.gridColumn16.Visible = true;
-            this.gridColumn16.VisibleIndex = 6;
+            this.gridColumn16.VisibleIndex = 7;
             this.gridColumn16.Width = 63;
             // 
             // gridColumn17
@@ -644,7 +647,7 @@
             this.gridColumn17.Name = "gridColumn17";
             this.gridColumn17.OptionsColumn.AllowEdit = false;
             this.gridColumn17.Visible = true;
-            this.gridColumn17.VisibleIndex = 7;
+            this.gridColumn17.VisibleIndex = 8;
             // 
             // gridColumn13
             // 
@@ -655,7 +658,7 @@
             this.gridColumn13.Name = "gridColumn13";
             this.gridColumn13.OptionsColumn.AllowEdit = false;
             this.gridColumn13.Visible = true;
-            this.gridColumn13.VisibleIndex = 8;
+            this.gridColumn13.VisibleIndex = 9;
             // 
             // gridColumn14
             // 
@@ -666,7 +669,7 @@
             this.gridColumn14.Name = "gridColumn14";
             this.gridColumn14.OptionsColumn.AllowEdit = false;
             this.gridColumn14.Visible = true;
-            this.gridColumn14.VisibleIndex = 9;
+            this.gridColumn14.VisibleIndex = 10;
             this.gridColumn14.Width = 76;
             // 
             // gridColumn15
@@ -679,7 +682,7 @@
             this.gridColumn15.OptionsColumn.AllowEdit = false;
             this.gridColumn15.OptionsColumn.FixedWidth = true;
             this.gridColumn15.Visible = true;
-            this.gridColumn15.VisibleIndex = 10;
+            this.gridColumn15.VisibleIndex = 11;
             this.gridColumn15.Width = 60;
             // 
             // gridColumn21
@@ -713,6 +716,10 @@
             this.gridColumn_TH.Name = "gridColumn_TH";
             this.gridColumn_TH.OptionsColumn.AllowEdit = false;
             this.gridColumn_TH.Width = 20;
+            // 
+            // toolTipController1
+            // 
+            this.toolTipController1.GetActiveObjectInfo += new DevExpress.Utils.ToolTipControllerGetActiveObjectInfoEventHandler(this.toolTipController1_GetActiveObjectInfo);
             // 
             // chartControl1
             // 
@@ -1255,10 +1262,6 @@
             this.panelControl1.Size = new System.Drawing.Size(236, 0);
             this.panelControl1.TabIndex = 0;
             // 
-            // toolTipController1
-            // 
-            this.toolTipController1.GetActiveObjectInfo += new DevExpress.Utils.ToolTipControllerGetActiveObjectInfoEventHandler(this.toolTipController1_GetActiveObjectInfo);
-            // 
             // MainForm
             // 
             this.AllowFormGlass = DevExpress.Utils.DefaultBoolean.False;
@@ -1275,7 +1278,7 @@
             this.RibbonVisibility = DevExpress.XtraBars.Ribbon.RibbonVisibility.Hidden;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.StatusBar = this.ribbonStatusBar;
-            this.Text = "气体监控报警管理系统(Server)    ";
+            this.Text = "气体在线监测系统";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);

@@ -50,6 +50,23 @@ namespace WADApplication.Process
             }
         }
 
+        public static void SaveOne(string key, string value)
+        {
+            try
+            {
+                // Open App.Config of executable
+                Configuration config =
+                    ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                config.AppSettings.Settings[key].Value = value;
+                // Save the changes in App.config file.
+                config.Save(ConfigurationSaveMode.Modified);
+            }
+            catch (Exception ex) 
+            {
+                LogLib.Log.GetLogger("AppConfigProcess").Error(ex);
+            }            
+        }
+
         public static void CheckVersion()
         {
             string olds = ConfigurationManager.AppSettings["IsOldVersion"].ToString();

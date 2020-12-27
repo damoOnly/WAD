@@ -31,6 +31,10 @@ namespace CommandManager
                 {
                     throw new CommandException(address + "readNew error");
                 }
+                if (gasCount > 255 || weatherCount > 255)
+                {
+                    throw new CommandException("气体个数超出了范围");
+                }
                 List<StructEquipment> gasList = readNewGas(address, gasCount, name);
                 List<StructEquipment> weatherList = readNewWeather(address, weatherCount, name);
                 gasList.AddRange(weatherList);
@@ -59,6 +63,7 @@ namespace CommandManager
                     eq.Address = address;
                     eq.SensorNum = (byte)i;
                     eq.IsGas = true;
+                    eq.IsNew = true;
                     ReadNewGas(ref eq);
                     gasList.Add(eq);
                 }
@@ -84,6 +89,7 @@ namespace CommandManager
                     eq.Address = address;
                     eq.SensorNum = (byte)(i + 16);
                     eq.IsGas = false;
+                    eq.IsNew = true;
                     ReadWeather(ref eq);
                     gasList.Add(eq);
                 }
@@ -107,27 +113,35 @@ namespace CommandManager
                     byte qts = cd.ResultByte[4];
                     if ((qts & 0x01) == 0x01)
                     {
-                        gases.Add(0x00);
+                        gases.Add(0x01);
                     }
                     if ((qts & 0x02) == 0x02)
                     {
-                        gases.Add(0x01);
+                        gases.Add(0x02);
                     }
                     if ((qts & 0x04) == 0x04)
                     {
-                        gases.Add(0x02);
+                        gases.Add(0x03);
                     }
                     if ((qts & 0x08) == 0x08)
                     {
-                        gases.Add(0x03);
+                        gases.Add(0x04);
                     }
                     if ((qts & 0x10) == 0x10)
                     {
-                        gases.Add(0x04);
+                        gases.Add(0x05);
                     }
                     if ((qts & 0x20) == 0x20)
                     {
-                        gases.Add(0x05);
+                        gases.Add(0x06);
+                    }
+                    if ((qts & 0x20) == 0x40)
+                    {
+                        gases.Add(0x07);
+                    }
+                    if ((qts & 0x20) == 0x80)
+                    {
+                        gases.Add(0x08);
                     }
                 }
                 else
@@ -160,8 +174,21 @@ namespace CommandManager
                 se.Name = gasName;
                 se.SensorNum = gases[i];
                 se.IsGas = true;
+                se.IsNew = true;
                 try
                 {
+                    // 读取报警模式
+                    Command cd2 = new Command(address, se.SensorNum, 0xc3, 1);
+
+                    if (CommandResult.GetResult(cd2))
+                    {
+                        se.AlertModel = cd2.ResultByte[4];
+                    }
+                    else
+                    {
+                        log.Error(address + "读取老气体配置错误！");
+                    }
+
                     Command cd = new Command(address, se.SensorNum, 0x30, 21);
 
                     if (CommandResult.GetResult(cd))
@@ -221,6 +248,17 @@ namespace CommandManager
             Array.Reverse(resultBytes, 9, 2);
             Array.Reverse(resultBytes, 11, 2);
             eq.Max = BitConverter.ToSingle(resultBytes, 9);
+            List<byte> byteTemp = new List<byte>();
+            for (int i = 13; i < 13 + 12; )
+            {
+                if (resultBytes[i + 1] != 0x00)
+                {
+                    byteTemp.Add(resultBytes[i + 1]);
+                }
+                i += 2;
+            }
+            eq.MN = ASCIIEncoding.ASCII.GetString(byteTemp.ToArray());
+            eq.AlertModel = resultBytes[28];
             Array.Reverse(resultBytes, 29, 2);
             Array.Reverse(resultBytes, 31, 2);
             eq.A1 = BitConverter.ToSingle(resultBytes, 29);

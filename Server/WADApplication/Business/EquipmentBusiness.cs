@@ -2,6 +2,7 @@
 using GlobalMemory;
 using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -49,6 +50,24 @@ namespace Business
                 EquipmentDal.DeleteOne(item); // to do delete eq data fold
             }
             return result;
+        }
+
+        public static void UpdateNameOrAliasGasName(List<Equipment> list)
+        {
+            if (list == null || list.Count <= 0)
+            {
+                return;
+            }
+            using (SQLiteConnection conn = new SQLiteConnection(EquipmentDal.connstr))
+            {
+                conn.Open();
+                SQLiteTransaction tran = conn.BeginTransaction();
+                foreach (var item in list)
+                {
+                    EquipmentDal.UpdateNameOrAliasGasName(conn, tran, item);
+                }
+                tran.Commit();
+            }
         }
 
         public class EquipmentEquality : IEqualityComparer<Equipment>

@@ -14,6 +14,8 @@ using System.Diagnostics;
 using System.Threading;
 using DevExpress.Utils;
 using GlobalMemory;
+using WADApplication.Process;
+using System.Configuration;
 namespace WADApplication
 {
     public partial class RegisterDeviceForm : DevExpress.XtraEditors.XtraForm
@@ -63,12 +65,12 @@ namespace WADApplication
             WaitDialogForm wdf = new WaitDialogForm("命令执行中，请稍候......");
             try
             {
-                bool isNew = comboBoxEdit1.EditValue.ToString() == "新协议";
-                string name = textEdit1.Text;
-                if (string.IsNullOrWhiteSpace(name))
-                {
-                    throw new CommandException("设备名称不能为空");
-                }
+                bool isNew = comboBoxEdit1.EditValue.ToString() == "协议2";
+                string name = "设备" + spinEdit1.EditValue.ToString();
+                //if (string.IsNullOrWhiteSpace(name))
+                //{
+                //    throw new CommandException("设备名称不能为空");
+                //}
                 byte address = byte.Parse(spinEdit1.EditValue.ToString());
                 List<StructEquipment> list = new List<StructEquipment>();
                 if (isNew)
@@ -100,15 +102,16 @@ namespace WADApplication
 
         private void RegisterDeviceForm_Load(object sender, EventArgs e)
         {
-            if (CommonMemory.IsOldVersion)
-            {
-                simpleButton5.Visible = false;
+            //if (CommonMemory.IsOldVersion)
+            //{
+            //    simpleButton5.Visible = false;
 
-            }
+            //}
+            comboBoxEdit1.EditValue = ConfigurationManager.AppSettings["AgreementType"];
             InitList();
             if (list != null && list.Count > 0)
             {
-                var first = list.First();
+                var first = list.Last();
                 textEdit1.EditValue = first.Name;
                 spinEdit1.EditValue = first.Address;
             }
@@ -127,10 +130,14 @@ namespace WADApplication
         {
             try
             {
-                Equipment eq1 = gridView1.GetFocusedRow() as Equipment;
-                EquipmentDal.DeleteOne(eq1);
+                int[] rows = gridView1.GetSelectedRows();
+                for (int i = 0; i < rows.Length; i++)
+                {
+                    Equipment eq1 = gridView1.GetRow(i) as Equipment;
+                    EquipmentDal.DeleteOne(eq1);
+                }
                 InitList();
-                XtraMessageBox.Show("删除设备成功");
+                //XtraMessageBox.Show("删除设备成功");
 
             }
             catch (Exception ex)
@@ -212,38 +219,38 @@ namespace WADApplication
         {
             try
             {
-                if (e.Button == System.Windows.Forms.MouseButtons.Left && e.Clicks == 2)
-                {
-                    Equipment eq = gridView1.GetFocusedRow() as Equipment;
-                    AddDeviceForm addform = new AddDeviceForm(eq);
-                    if (addform.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                    {
-                        StructEquipment update = addform.mEquipment;
-                        if (update.IsGas)
-                        {
-                            if (CommonMemory.IsOldVersion)
-                            {
-                                //ReadEqProcess.ReadOldGas(ref update);
-                            }
-                            else
-                            {
-                                ReadEqProcess.ReadNewGas(ref update);
-                            }
-                        }
-                        else
-                        {
-                            ReadEqProcess.ReadWeather(ref update);
-                        }
-                        EquipmentDal.UpdateOne(update);
-                        InitList();
-                    }
-                }
-                else
-                {
-                    Equipment eq = gridView1.GetFocusedRow() as Equipment;
-                    spinEdit1.EditValue = eq.Address;
-                    textEdit1.EditValue = eq.Name;
-                }
+                //if (e.Button == System.Windows.Forms.MouseButtons.Left && e.Clicks == 2)
+                //{
+                //    Equipment eq = gridView1.GetFocusedRow() as Equipment;
+                //    AddDeviceForm addform = new AddDeviceForm(eq);
+                //    if (addform.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                //    {
+                //        StructEquipment update = addform.mEquipment;
+                //        if (update.IsGas)
+                //        {
+                //            if (CommonMemory.IsOldVersion)
+                //            {
+                //                //ReadEqProcess.ReadOldGas(ref update);
+                //            }
+                //            else
+                //            {
+                //                ReadEqProcess.ReadNewGas(ref update);
+                //            }
+                //        }
+                //        else
+                //        {
+                //            ReadEqProcess.ReadWeather(ref update);
+                //        }
+                //        EquipmentDal.UpdateOne(update);
+                //        InitList();
+                //    }
+                //}
+                //else
+                //{
+                //    Equipment eq = gridView1.GetFocusedRow() as Equipment;
+                //    spinEdit1.EditValue = eq.Address;
+                //    textEdit1.EditValue = eq.Name;
+                //}
 
             }
             catch (Exception ex)
@@ -291,6 +298,78 @@ namespace WADApplication
                 {
                     log.Error("添加气象失败", ex);
                     XtraMessageBox.Show("添加气象失败");
+                }
+            }
+        }
+
+        private void comboBoxEdit1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            AppConfigProcess.SaveOne("AgreementType", comboBoxEdit1.EditValue.ToString());
+        }
+
+        private void simpleButton4_Click_1(object sender, EventArgs e)
+        {
+            List<Equipment> oldlist = EquipmentBusiness.GetAllListNotDelete();
+            List<Equipment> modifylist = new List<Equipment>();
+            foreach (var item in list)
+            {
+                var oldone = oldlist.FirstOrDefault(oo => { return oo.ID == item.ID; });
+                if (oldone == null)
+                {
+                    continue;
+                }
+
+                if (item.Name != oldone.Name || item.AliasGasName != oldone.AliasGasName)
+                {
+                    modifylist.Add(item);
+                }
+            }
+
+            if (modifylist.Count > 0)
+            {
+                EquipmentBusiness.UpdateNameOrAliasGasName(modifylist);
+            }
+        }
+
+        private void gridView1_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            if (e.Column.FieldName == "Name")
+            {
+                var row = gridView1.GetRow(e.RowHandle) as Equipment;
+                foreach (var item in list)
+                {
+                    if (item.Address == row.Address)
+                    {
+                        item.Name = e.Value.ToString();
+                    }
+                }
+                gridControl1.RefreshDataSource();
+            }
+        }
+
+        private void RegisterDeviceForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            List<Equipment> oldlist = EquipmentBusiness.GetAllListNotDelete();
+            List<Equipment> modifylist = new List<Equipment>();
+            foreach (var item in list)
+            {
+                var oldone = oldlist.FirstOrDefault(oo => { return oo.ID == item.ID; });
+                if (oldone == null)
+                {
+                    continue;
+                }
+
+                if (item.Name != oldone.Name || item.AliasGasName != oldone.AliasGasName)
+                {
+                    modifylist.Add(item);
+                }
+            }
+
+            if (modifylist.Count > 0)
+            {
+                if (MessageBox.Show("是否保存修改", "", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+                {
+                    EquipmentBusiness.UpdateNameOrAliasGasName(modifylist);
                 }
             }
         }
