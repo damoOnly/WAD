@@ -133,7 +133,7 @@ namespace WADApplication
                 int[] rows = gridView1.GetSelectedRows();
                 for (int i = 0; i < rows.Length; i++)
                 {
-                    Equipment eq1 = gridView1.GetRow(i) as Equipment;
+                    Equipment eq1 = gridView1.GetRow(rows[i]) as Equipment;
                     EquipmentDal.DeleteOne(eq1);
                 }
                 InitList();
@@ -159,14 +159,14 @@ namespace WADApplication
                     StructEquipment update = addform.mEquipment;
                     if (update.IsGas)
                     {
-                        if (CommonMemory.IsOldVersion)
-                        {
-                            //ReadEqProcess.ReadOldGas(ref update);
-                        }
-                        else
-                        {
+                        //if (CommonMemory.IsOldVersion)
+                        //{
+                        //    //ReadEqProcess.ReadOldGas(ref update);
+                        //}
+                        //else
+                        //{
                             ReadEqProcess.ReadNewGas(ref update);
-                        }
+                        //}
                     }
                     else
                     {

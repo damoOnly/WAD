@@ -422,6 +422,11 @@
     <None Include="Resources\点位图2.png" />
     <None Include="Resources\add_32x32.png" />
     <None Include="Resources\next_32x32.png" />
+    <None Include="Resources\remove_32x32.png" />
+    <None Include="Resources\chartsshowlegend_32x32.png" />
+    <None Include="Resources\close_32x32.png" />
+    <None Include="Resources\close_32x321.png" />
+    <None Include="Resources\ignoremasterfilter_32x32.png" />
     <Content Include="wnd.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

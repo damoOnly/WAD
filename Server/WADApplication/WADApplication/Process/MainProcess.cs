@@ -23,11 +23,11 @@ namespace WADApplication.Process
         public static DateTime lastRemoteTime = Utility.CutOffMillisecond(DateTime.Now);
         // 用于控制增加点的频率，实时曲线不是每个点都需要显示
         public static DateTime lastAddTime = Utility.CutOffMillisecond(DateTime.Now);
-        public static void readMain(Equipment eq, bool isReadBasic, int selectedEqId, TextEdit t1, TextEdit t2, TextEdit t3, TextEdit t4, ChartControl chart,Form_map set, bool isAddPont)    //浓度读取处理函数
+        public static void readMain(Equipment eq, bool isReadBasic, int selectedEqId, TextEdit t1, TextEdit t2, TextEdit t3, TextEdit t4, ChartControl chart,Form_map set, bool isAddPont, DateTime dt)    //浓度读取处理函数
         {
             byte low = 0x52;
-            
-            if (CommonMemory.IsOldVersion)
+
+            if (eq.IsNew)
             {
                 low = 0x4e;
             }
@@ -105,7 +105,7 @@ namespace WADApplication.Process
             //}
 
             EquipmentData ed = new EquipmentData();
-            ed.AddTime = Utility.CutOffMillisecond(DateTime.Now);
+            ed.AddTime = dt;
             ed.EquipmentID = eq.ID;
             ed.Chroma = eq.Chroma;
             //ed.Temperature = eq.Temperature.Remove(eq.Temperature.Length - 1);

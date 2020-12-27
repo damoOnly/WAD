@@ -69,16 +69,16 @@ namespace WADApplication.Process
 
         public static void CheckVersion()
         {
-            string olds = ConfigurationManager.AppSettings["IsOldVersion"].ToString();
-            if (string.IsNullOrWhiteSpace(olds))
-            {
-                CommonMemory.IsOldVersion = XtraMessageBox.Show("是否切换为旧版本",string.Empty,MessageBoxButtons.YesNo, DevExpress.Utils.DefaultBoolean.False) == System.Windows.Forms.DialogResult.Yes;
-                SaveVersion(CommonMemory.IsOldVersion);
-            }
-            else
-            {
-                CommonMemory.IsOldVersion = Convert.ToBoolean(olds);
-            }
+            //string olds = ConfigurationManager.AppSettings["IsOldVersion"].ToString();
+            //if (string.IsNullOrWhiteSpace(olds))
+            //{
+            //    CommonMemory.IsOldVersion = XtraMessageBox.Show("是否切换为旧版本",string.Empty,MessageBoxButtons.YesNo, DevExpress.Utils.DefaultBoolean.False) == System.Windows.Forms.DialogResult.Yes;
+            //    SaveVersion(CommonMemory.IsOldVersion);
+            //}
+            //else
+            //{
+            //    CommonMemory.IsOldVersion = Convert.ToBoolean(olds);
+            //}
         }
 
         public static void SaveVersion(bool isOld)

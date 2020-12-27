@@ -9,10 +9,10 @@ namespace GlobalMemory
 {
     public class Utility
     {
-        public static string GetGasName(byte gasType)
+        public static string GetGasName(byte gasType, bool isOld)
         {
             DictionaryFieldValue gas = null;
-            if (CommonMemory.IsOldVersion && CommonMemory.IsOlden)
+            if (isOld)
             {
                 gas = CommonMemory.Config.GasOldenName.Find(c=>c.Value == gasType);
             }
@@ -66,7 +66,7 @@ namespace GlobalMemory
             };
             if (result.IsGas)
             {
-                result._gasName = GetGasName(result.GasType);
+                result._gasName = GetGasName(result.GasType, !eq.IsNew);
                 result.UnitName = GetGasUnitName(result.UnitType);
             }
             else

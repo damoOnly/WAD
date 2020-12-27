@@ -15,8 +15,6 @@ namespace GlobalMemory
         public static ConcurrentBag<int> DbList = new ConcurrentBag<int>();
         public static UserInfo Userinfo { get; set; }
 
-        public static bool IsOldVersion { get; set; } 
-
         public static bool IsOpen { get; set; }
 
         /// <summary>

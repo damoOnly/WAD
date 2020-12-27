@@ -109,7 +109,7 @@ namespace CommandManager
                 Command cd = new Command(address, 0x00, 0x1c, 1);
                 List<byte> gases = new List<byte>();
                 if (CommandResult.GetResult(cd))
-                {                    
+                {
                     byte qts = cd.ResultByte[4];
                     if ((qts & 0x01) == 0x01)
                     {
@@ -207,7 +207,7 @@ namespace CommandManager
                 }
             }
             return gasList;
-            
+
         }
 
         private static void ParseOldGas(ref StructEquipment eq, byte[] resultBytes)
@@ -218,11 +218,11 @@ namespace CommandManager
             eq.Max = BitConverter.ToInt16(resultBytes, 11);
             Array.Reverse(resultBytes, 37, 2);
             Array.Reverse(resultBytes, 39, 2);
-            eq.A1 = BitConverter.ToSingle(resultBytes, 37);
+            eq.A1 = Convert.ToSingle(Math.Round(BitConverter.ToSingle(resultBytes, 37), 3));
             Array.Reverse(resultBytes, 41, 2);
             Array.Reverse(resultBytes, 43, 2);
             eq.A2 = BitConverter.ToSingle(resultBytes, 41);
-            eq.A2 = eq.A2 > eq.Max ? eq.Max : eq.A2;
+            eq.A2 = Convert.ToSingle(Math.Round(eq.A2 > eq.Max ? eq.Max : eq.A2, 3));
         }
 
         public static void ReadNewGas(ref StructEquipment eq)
@@ -261,11 +261,11 @@ namespace CommandManager
             eq.AlertModel = resultBytes[28];
             Array.Reverse(resultBytes, 29, 2);
             Array.Reverse(resultBytes, 31, 2);
-            eq.A1 = BitConverter.ToSingle(resultBytes, 29);
+            eq.A1 = Convert.ToSingle(Math.Round(BitConverter.ToSingle(resultBytes, 29), 3));
             Array.Reverse(resultBytes, 33, 2);
             Array.Reverse(resultBytes, 35, 2);
             eq.A2 = BitConverter.ToSingle(resultBytes, 33);
-            eq.A2 = eq.A2 > eq.Max ? eq.Max : eq.A2;
+            eq.A2 = Convert.ToSingle(Math.Round(eq.A2 > eq.Max ? eq.Max : eq.A2, 3));
         }
 
         public static void ReadWeather(ref StructEquipment eq)

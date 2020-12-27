@@ -183,12 +183,13 @@ namespace WADApplication
                     lock (mainList)
                     {
                         SwiftPlotDiagram diagram = chartControl1.Diagram as SwiftPlotDiagram;
+                        DateTime nowTemp = Utility.CutOffMillisecond(DateTime.Now);
                         if (diagram != null)
-                            diagram.AxisX.WholeRange.SetMinMaxValues(minTime, Utility.CutOffMillisecond(DateTime.Now));
+                            diagram.AxisX.WholeRange.SetMinMaxValues(minTime, nowTemp);
 
                         for (int i = 0, length = mainList.Count; i < length; i++)
                         {
-                            MainProcess.readMain(mainList[i], IsReadBasic, selecteq.ID, textEdit1, textEdit2, textEdit3, textEdit4, chartControl1, set, isAddPont);
+                            MainProcess.readMain(mainList[i], IsReadBasic, selecteq.ID, textEdit1, textEdit2, textEdit3, textEdit4, chartControl1, set, isAddPont, nowTemp);
                             Thread.Sleep(CommDelay);
                         }
                         // 每30秒清除一次最小数据(多余的点)
@@ -1265,27 +1266,49 @@ namespace WADApplication
 
         private void simpleButton4_Click(object sender, EventArgs e)
         {
-            if (CommonMemory.IsOpen == false)
+            if (simpleButton4.Text == "开始监测")
             {
-                XtraMessageBox.Show("请先打开串口");
-                return;
-            }
-            CommonMemory.IsReadConnect = false;
-            maxTime = Utility.CutOffMillisecond(DateTime.Now);
-            minTime = maxTime.AddMinutes(-CommonMemory.SysConfig.RealTimeRangeX);
-            // 点击开始的时候才初始化实时曲线，打开软件的时候不要初始化实时曲线
-            lock (this.mainList)
-            {
-                MainProcess.ManageSeries(chartControl1, mainList, minTime, maxTime);
-            }
+                if (CommonMemory.IsOpen == false)
+                {
+                    XtraMessageBox.Show("请先打开串口");
+                    return;
+                }
+                CommonMemory.IsReadConnect = false;
+                maxTime = Utility.CutOffMillisecond(DateTime.Now);
+                minTime = maxTime.AddMinutes(-CommonMemory.SysConfig.RealTimeRangeX);
+                // 点击开始的时候才初始化实时曲线，打开软件的时候不要初始化实时曲线
+                lock (this.mainList)
+                {
+                    MainProcess.ManageSeries(chartControl1, mainList, minTime, maxTime);
+                }
 
-            mainThread = new Thread(new ThreadStart(ReadData));
-            isRead = true;
-            IsReadBasic = true;
-            mainThread.Start();
-            simpleButton4.Enabled = false;
-            simpleButton3.Enabled = false;
-            simpleButton1.Enabled = false;
+                mainThread = new Thread(new ThreadStart(ReadData));
+                isRead = true;
+                IsReadBasic = true;
+                mainThread.Start();
+                simpleButton4.Text = "停止监测";
+                simpleButton4.Image = Resources.remove_32x32;
+                simpleButton3.Enabled = false;
+                simpleButton1.Enabled = false;
+            }
+            else
+            {
+                // 保存最后一次连接的设备
+                getLastSensor();
+                AlertProcess.PlaySound(false);
+                isRead = false;
+                if (mainThread != null)
+                {
+                    mainThread.Abort();
+                    simpleButton4.Text = "开始监测";
+                    simpleButton4.Image = Resources.next_32x32;
+                }
+                simpleButton3.Enabled = true;
+                simpleButton1.Enabled = true;
+                CommonMemory.IsReadConnect = true;
+                // closeLight("red");
+                AlertProcess.CloseLight("all");
+            }
         }
 
         private void simpleButton5_Click(object sender, EventArgs e)
@@ -1465,6 +1488,77 @@ namespace WADApplication
             //    }
             //}
             //}
+        }
+        private bool isselecting = false;
+        // 上一次选择的最后一个气体或者气象
+        private int lastRow = -1;
+        private void gridView_nowData2_SelectionChanged(object sender, DevExpress.Data.SelectionChangedEventArgs e)
+        {
+            if (isselecting)
+            {
+                return;
+            }
+            isselecting = true;
+            int[] rows = gridView_nowData2.GetSelectedRows();
+
+            List<Equipment> selectionList = new List<Equipment>();
+            Equipment lasteq = null;
+            if (rows.Length == mainList.Count)
+            {
+                if (lastRow > -1)
+                {
+                    lasteq = gridView_nowData2.GetRow(lastRow) as Equipment;
+                }
+                else 
+                {
+                    lasteq = gridView_nowData2.GetRow(0) as Equipment;
+                }
+                selectionList = mainList.FindAll(oo => { return oo.GasType == lasteq.GasType; });
+            }
+            else if (rows.Length > 0)
+            {
+                if (lastRow > -1)
+                {
+                    lasteq = gridView_nowData2.GetRow(lastRow) as Equipment;
+                    for (int i = 0; i < rows.Length; i++)
+                    {
+                        Equipment eq = gridView_nowData2.GetRow(rows[i]) as Equipment;
+                        // 同一时间只能有同一种类型的曲线
+                        if (eq.GasType != lasteq.GasType)
+                        {
+                            selectionList = new List<Equipment>();
+                            selectionList.Add(eq);
+                            break;
+                        }
+                        else
+                        {
+                            selectionList.Add(eq);
+                        }
+                    }
+                }
+                else
+                {
+                    lasteq = gridView_nowData2.GetRow(lastRow) as Equipment;
+                    selectionList.Add(lasteq);
+                }
+            }
+
+            for (int i = 0; i < mainList.Count; i++)
+            {
+                mainList[i].IfShowSeries = selectionList.FirstOrDefault(ss => { return ss.ID == mainList[i].ID; }) != null;
+                int rowhandle = gridView_nowData2.GetRowHandle(i);
+                if (mainList[i].IfShowSeries)
+                {
+                    gridView_nowData2.SelectRow(rowhandle);
+                    lastRow = rowhandle;
+                }
+                else
+                {
+                    gridView_nowData2.UnselectRow(rowhandle);
+                }
+            }
+
+            isselecting = false;
         }
     }
 }
