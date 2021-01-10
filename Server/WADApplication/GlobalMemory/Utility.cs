@@ -60,19 +60,22 @@ namespace GlobalMemory
                 IsDel = eq.IsDel,
                 IsNew = eq.IsNew,
                 AlertModel = eq.AlertModel,
-                MN = eq.MN,
+                Factor = eq.Factor,
                 AliasGasName = eq.AliasGasName,
-                CreateTime = eq.CreateTime
+                AliasUnitName = eq.AliasUnitName,
+                MN = eq.MN,
+                CreateTime = eq.CreateTime,
+                OrderNo = eq.OrderNo
             };
             if (result.IsGas)
             {
                 result._gasName = GetGasName(result.GasType, !eq.IsNew);
-                result.UnitName = GetGasUnitName(result.UnitType);
+                result._unitName = GetGasUnitName(result.UnitType);
             }
             else
             {
                 result._gasName = GetWeatherName(result.GasType) + "(气象)";
-                result.UnitName = GetWeatherUnitName(result.UnitType);
+                result._unitName = GetWeatherUnitName(result.UnitType);
             }
 
             return result;

@@ -56,7 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entity\Entity.csproj">
-      <Project>{920662A5-8768-42FB-ACA4-4DF8EB1351F0}</Project>
+      <Project>{920662a5-8768-42fb-aca4-4df8eb1351f0}</Project>
       <Name>Entity</Name>
     </ProjectReference>
     <ProjectReference Include="..\GlobalMemory\GlobalMemory.csproj">

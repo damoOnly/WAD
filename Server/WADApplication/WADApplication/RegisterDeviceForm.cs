@@ -165,7 +165,7 @@ namespace WADApplication
                         //}
                         //else
                         //{
-                            ReadEqProcess.ReadNewGas(ref update);
+                        ReadEqProcess.ReadNewGas(ref update);
                         //}
                     }
                     else
@@ -319,7 +319,7 @@ namespace WADApplication
                     continue;
                 }
 
-                if (item.Name != oldone.Name || item.AliasGasName != oldone.AliasGasName)
+                if (item.Name != oldone.Name || item.AliasGasName != oldone.AliasGasName || item.AliasUnitName != oldone.AliasUnitName || item.MN != oldone.MN || item.Factor != oldone.Factor)
                 {
                     modifylist.Add(item);
                 }
@@ -345,6 +345,20 @@ namespace WADApplication
                 }
                 gridControl1.RefreshDataSource();
             }
+
+            if (e.Column.FieldName == "MN")
+            {
+                var row = gridView1.GetRow(e.RowHandle) as Equipment;
+                foreach (var item in list)
+                {
+                    if (item.Address == row.Address)
+                    {
+                        item.MN = e.Value.ToString();
+                    }
+                }
+                gridControl1.RefreshDataSource();
+            }
+
         }
 
         private void RegisterDeviceForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -359,7 +373,7 @@ namespace WADApplication
                     continue;
                 }
 
-                if (item.Name != oldone.Name || item.AliasGasName != oldone.AliasGasName)
+                if (item.Name != oldone.Name || item.AliasGasName != oldone.AliasGasName || item.AliasUnitName != oldone.AliasUnitName || item.MN != oldone.MN || item.Factor != oldone.Factor)
                 {
                     modifylist.Add(item);
                 }

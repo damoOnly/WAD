@@ -42,6 +42,7 @@
             DevExpress.XtraCharts.SwiftPlotSeriesView swiftPlotSeriesView2 = new DevExpress.XtraCharts.SwiftPlotSeriesView();
             this.gridColumn18 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.ribbon = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.btn_Start = new DevExpress.XtraBars.BarButtonItem();
             this.btn_Stop = new DevExpress.XtraBars.BarButtonItem();
@@ -82,9 +83,11 @@
             this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn21 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn19 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn20 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -133,8 +136,6 @@
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.splitContainerControl2 = new DevExpress.XtraEditors.SplitContainerControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox3)).BeginInit();
@@ -192,12 +193,23 @@
             // gridColumn1
             // 
             this.gridColumn1.Caption = "通道";
-            this.gridColumn1.FieldName = "SensorNum";
+            this.gridColumn1.FieldName = "OrderNo";
             this.gridColumn1.MaxWidth = 150;
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.OptionsColumn.AllowEdit = false;
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 3;
+            // 
+            // gridColumn13
+            // 
+            this.gridColumn13.Caption = "A1报警值";
+            this.gridColumn13.FieldName = "A1Str";
+            this.gridColumn13.MaxWidth = 150;
+            this.gridColumn13.MinWidth = 75;
+            this.gridColumn13.Name = "gridColumn13";
+            this.gridColumn13.OptionsColumn.AllowEdit = false;
+            this.gridColumn13.Visible = true;
+            this.gridColumn13.VisibleIndex = 9;
             // 
             // ribbon
             // 
@@ -533,6 +545,7 @@
             this.gridColumn13,
             this.gridColumn14,
             this.gridColumn15,
+            this.gridColumn5,
             this.gridColumn4,
             this.gridColumn21,
             this.gridColumn19,
@@ -653,16 +666,13 @@
             this.gridColumn17.Visible = true;
             this.gridColumn17.VisibleIndex = 7;
             // 
-            // gridColumn13
+            // gridColumn2
             // 
-            this.gridColumn13.Caption = "A1报警值";
-            this.gridColumn13.FieldName = "A1Str";
-            this.gridColumn13.MaxWidth = 150;
-            this.gridColumn13.MinWidth = 75;
-            this.gridColumn13.Name = "gridColumn13";
-            this.gridColumn13.OptionsColumn.AllowEdit = false;
-            this.gridColumn13.Visible = true;
-            this.gridColumn13.VisibleIndex = 9;
+            this.gridColumn2.Caption = "报警模式";
+            this.gridColumn2.FieldName = "AlertModelStr";
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 8;
             // 
             // gridColumn14
             // 
@@ -688,6 +698,24 @@
             this.gridColumn15.Visible = true;
             this.gridColumn15.VisibleIndex = 11;
             this.gridColumn15.Width = 60;
+            // 
+            // gridColumn5
+            // 
+            this.gridColumn5.Caption = "因子编码";
+            this.gridColumn5.FieldName = "Factor";
+            this.gridColumn5.Name = "gridColumn5";
+            this.gridColumn5.OptionsColumn.AllowEdit = false;
+            this.gridColumn5.Visible = true;
+            this.gridColumn5.VisibleIndex = 12;
+            // 
+            // gridColumn4
+            // 
+            this.gridColumn4.Caption = "MN号";
+            this.gridColumn4.FieldName = "MN";
+            this.gridColumn4.Name = "gridColumn4";
+            this.gridColumn4.OptionsColumn.AllowEdit = false;
+            this.gridColumn4.Visible = true;
+            this.gridColumn4.VisibleIndex = 13;
             // 
             // gridColumn21
             // 
@@ -1277,22 +1305,6 @@
             this.panelControl1.Size = new System.Drawing.Size(236, 0);
             this.panelControl1.TabIndex = 0;
             // 
-            // gridColumn2
-            // 
-            this.gridColumn2.Caption = "报警模式";
-            this.gridColumn2.FieldName = "AlertModelStr";
-            this.gridColumn2.Name = "gridColumn2";
-            this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 8;
-            // 
-            // gridColumn4
-            // 
-            this.gridColumn4.Caption = "MN号";
-            this.gridColumn4.FieldName = "MN";
-            this.gridColumn4.Name = "gridColumn4";
-            this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 12;
-            // 
             // MainForm
             // 
             this.AllowFormGlass = DevExpress.Utils.DefaultBoolean.False;
@@ -1459,5 +1471,6 @@
         private DevExpress.XtraEditors.SimpleButton simpleButton11;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
     }
 }

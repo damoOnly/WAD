@@ -100,8 +100,7 @@ namespace Entity
         {
             get
             {
-                //return string.Format("{0}",A1.ToString("f"+Point));
-                return string.Format("{0}", A1.ToString());
+                return A1 <= 0 ? string.Empty : A1.ToString();
             }
         }
 
@@ -109,8 +108,7 @@ namespace Entity
         {
             get
             {
-                //return string.Format("{0}", A2.ToString("f" + Point));
-                return string.Format("{0}", A2.ToString());
+                return A2 <= 0 ? string.Empty : A2.ToString();
             }
         }
         ///<summary>
@@ -166,10 +164,21 @@ namespace Entity
             }
         }
 
+        public string _unitName;
         /// <summary>
         /// 单位名称
         /// </summary>
-        public string UnitName { get; set; }
+        public string UnitName
+        {
+            get
+            {
+                return string.IsNullOrWhiteSpace(AliasUnitName) ? _unitName : AliasUnitName;
+            }
+            set
+            {
+                AliasUnitName = value;
+            }
+        }
 
         /// <summary>
         /// 是否注册

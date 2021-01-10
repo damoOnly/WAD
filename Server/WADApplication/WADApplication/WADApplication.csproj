@@ -381,7 +381,7 @@
       <Name>Business</Name>
     </ProjectReference>
     <ProjectReference Include="..\CommandManager\CommandManager.csproj">
-      <Project>{B9FC7165-C65B-4CCC-906D-2ED31BDF07B5}</Project>
+      <Project>{b9fc7165-c65b-4ccc-906d-2ed31bdf07b5}</Project>
       <Name>CommandManager</Name>
     </ProjectReference>
     <ProjectReference Include="..\DataStruct\DataStruct.csproj">
@@ -389,7 +389,7 @@
       <Name>DataStruct</Name>
     </ProjectReference>
     <ProjectReference Include="..\Entity\Entity.csproj">
-      <Project>{920662A5-8768-42FB-ACA4-4DF8EB1351F0}</Project>
+      <Project>{920662a5-8768-42fb-aca4-4df8eb1351f0}</Project>
       <Name>Entity</Name>
     </ProjectReference>
     <ProjectReference Include="..\GlobalMemory\GlobalMemory.csproj">

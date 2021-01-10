@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule1 = new DevExpress.XtraGrid.GridFormatRule();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
@@ -52,6 +53,7 @@
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn_IsRegister = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn_Select = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -73,7 +75,7 @@
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.OptionsColumn.AllowEdit = false;
             this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 11;
+            this.gridColumn7.VisibleIndex = 12;
             // 
             // simpleButton1
             // 
@@ -81,7 +83,7 @@
             this.simpleButton1.Name = "simpleButton1";
             this.simpleButton1.Size = new System.Drawing.Size(64, 21);
             this.simpleButton1.TabIndex = 0;
-            this.simpleButton1.Text = "添加气体";
+            this.simpleButton1.Text = "添加设备";
             this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
             // splitContainerControl1
@@ -129,9 +131,18 @@
             this.spinEdit1.Name = "spinEdit1";
             this.spinEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.spinEdit1.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.spinEdit1.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.spinEdit1.Properties.IsFloatValue = false;
             this.spinEdit1.Properties.Mask.EditMask = "N00";
+            this.spinEdit1.Properties.MaxLength = 3;
+            this.spinEdit1.Properties.MaxValue = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
             this.spinEdit1.Properties.SpinStyle = DevExpress.XtraEditors.Controls.SpinStyles.Horizontal;
+            this.spinEdit1.Properties.ValidateOnEnterKey = true;
             this.spinEdit1.Size = new System.Drawing.Size(100, 20);
             this.spinEdit1.TabIndex = 10;
             // 
@@ -245,10 +256,14 @@
             this.gridColumn1,
             this.gridColumn2,
             this.gridColumn4,
+            this.gridColumn8,
             this.gridColumn6,
             this.gridColumn7,
             this.gridColumn_IsRegister,
             this.gridColumn_Select});
+            gridFormatRule1.Name = "Format0";
+            gridFormatRule1.Rule = null;
+            this.gridView1.FormatRules.Add(gridFormatRule1);
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsCustomization.AllowColumnMoving = false;
@@ -284,7 +299,7 @@
             // gridColumn_SensorType
             // 
             this.gridColumn_SensorType.Caption = "通道";
-            this.gridColumn_SensorType.FieldName = "SensorNum";
+            this.gridColumn_SensorType.FieldName = "OrderNo";
             this.gridColumn_SensorType.Name = "gridColumn_SensorType";
             this.gridColumn_SensorType.OptionsColumn.AllowEdit = false;
             this.gridColumn_SensorType.Visible = true;
@@ -303,7 +318,6 @@
             this.gridColumn3.Caption = "单位";
             this.gridColumn3.FieldName = "UnitName";
             this.gridColumn3.Name = "gridColumn3";
-            this.gridColumn3.OptionsColumn.AllowEdit = false;
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 5;
             // 
@@ -343,14 +357,21 @@
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 9;
             // 
+            // gridColumn8
+            // 
+            this.gridColumn8.Caption = "因子编码";
+            this.gridColumn8.FieldName = "Factor";
+            this.gridColumn8.Name = "gridColumn8";
+            this.gridColumn8.Visible = true;
+            this.gridColumn8.VisibleIndex = 10;
+            // 
             // gridColumn6
             // 
             this.gridColumn6.Caption = "MN号";
             this.gridColumn6.FieldName = "MN";
             this.gridColumn6.Name = "gridColumn6";
-            this.gridColumn6.OptionsColumn.AllowEdit = false;
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 10;
+            this.gridColumn6.VisibleIndex = 11;
             // 
             // gridColumn_IsRegister
             // 
@@ -427,5 +448,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
     }
 }

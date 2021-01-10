@@ -13,9 +13,11 @@ namespace Entity
     {
         public StructEquipment()
         {
-            MN = string.Empty;
+            Factor = string.Empty;
             AlertModel = 10;
             AliasGasName = string.Empty;
+            AliasUnitName = string.Empty;
+            MN = string.Empty;
         }
         public int ID { get; set; }
 
@@ -53,10 +55,16 @@ namespace Entity
 
         public byte AlertModel { get; set; }
 
-        public string MN { get; set; }
+        public string Factor { get; set; }
 
         public string AliasGasName { get; set; }
 
+        public string AliasUnitName { get; set; }
+
+        public string MN { get; set; }
+
         public DateTime CreateTime { get; set; }
+
+        public int OrderNo { get; set; }
     }
 }

@@ -35,8 +35,29 @@ namespace CommandManager
                 {
                     throw new CommandException("气体个数超出了范围");
                 }
-                List<StructEquipment> gasList = readNewGas(address, gasCount, name);
-                List<StructEquipment> weatherList = readNewWeather(address, weatherCount, name);
+
+                string mn = string.Empty;
+                Command cd2 = new Command(address, 0x00, 0x3b, 24);
+                if (CommandResult.GetResult(cd2))
+                {
+                    List<byte> byteTemp = new List<byte>();
+                    for (int i = 3; i < 3 + 48; )
+                    {
+                        if (cd2.ResultByte[i + 1] != 0x00)
+                        {
+                            byteTemp.Add(cd2.ResultByte[i + 1]);
+                        }
+                        i += 2;
+                    }
+                    mn = ASCIIEncoding.ASCII.GetString(byteTemp.ToArray());
+                }
+                else
+                {
+                    throw new CommandException(address + "readNew error");
+                }
+
+                List<StructEquipment> gasList = readNewGas(address, gasCount, name, mn);
+                List<StructEquipment> weatherList = readNewWeather(address, weatherCount, name, mn);
                 gasList.AddRange(weatherList);
                 return gasList;
             }
@@ -51,7 +72,7 @@ namespace CommandManager
                 throw e;
             }
         }
-        public static List<StructEquipment> readNewGas(byte address, int gasCount, string eqName)
+        public static List<StructEquipment> readNewGas(byte address, int gasCount, string eqName, string mn)
         {
             List<StructEquipment> gasList = new List<StructEquipment>();
             for (int i = 1; i <= gasCount; i++)
@@ -64,6 +85,7 @@ namespace CommandManager
                     eq.SensorNum = (byte)i;
                     eq.IsGas = true;
                     eq.IsNew = true;
+                    eq.MN = mn;
                     ReadNewGas(ref eq);
                     gasList.Add(eq);
                 }
@@ -77,7 +99,7 @@ namespace CommandManager
             return gasList;
         }
 
-        public static List<StructEquipment> readNewWeather(byte address, int weatherCount, string eqName)
+        public static List<StructEquipment> readNewWeather(byte address, int weatherCount, string eqName, string mn)
         {
             List<StructEquipment> gasList = new List<StructEquipment>();
             for (int i = 0; i < weatherCount; i++)
@@ -90,6 +112,7 @@ namespace CommandManager
                     eq.SensorNum = (byte)(i + 16);
                     eq.IsGas = false;
                     eq.IsNew = true;
+                    eq.MN = mn;
                     ReadWeather(ref eq);
                     gasList.Add(eq);
                 }
@@ -174,7 +197,7 @@ namespace CommandManager
                 se.Name = gasName;
                 se.SensorNum = gases[i];
                 se.IsGas = true;
-                se.IsNew = true;
+                se.IsNew = false;
                 try
                 {
                     // 读取报警模式
@@ -257,7 +280,7 @@ namespace CommandManager
                 }
                 i += 2;
             }
-            eq.MN = ASCIIEncoding.ASCII.GetString(byteTemp.ToArray());
+            eq.Factor = ASCIIEncoding.ASCII.GetString(byteTemp.ToArray());
             eq.AlertModel = resultBytes[28];
             Array.Reverse(resultBytes, 29, 2);
             Array.Reverse(resultBytes, 31, 2);
@@ -270,7 +293,7 @@ namespace CommandManager
 
         public static void ReadWeather(ref StructEquipment eq)
         {
-            Command cd = new Command(eq.Address, eq.SensorNum, 0x10, 5);
+            Command cd = new Command(eq.Address, eq.SensorNum, 0x10, 11);
 
             if (CommandResult.GetResult(cd))
             {
@@ -291,6 +314,16 @@ namespace CommandManager
             Array.Reverse(resultBytes, 9, 2);
             Array.Reverse(resultBytes, 11, 2);
             eq.Max = BitConverter.ToSingle(resultBytes, 9);
+            List<byte> byteTemp = new List<byte>();
+            for (int i = 13; i < 13 + 12; )
+            {
+                if (resultBytes[i + 1] != 0x00)
+                {
+                    byteTemp.Add(resultBytes[i + 1]);
+                }
+                i += 2;
+            }
+            eq.Factor = ASCIIEncoding.ASCII.GetString(byteTemp.ToArray());
         }
     }
 }
