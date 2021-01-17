@@ -165,10 +165,10 @@ namespace Business
             }
         }
 
-        public static List<EquipmentData> GetList(DateTime dt1, DateTime dt2, int equipmentId)
+        public static List<EquipmentData> GetList(DateTime dt1, DateTime dt2, int equipmentId, byte point)
         {
             List<EquipmentData> list = new List<EquipmentData>();
-            for (DateTime i = dt1.Date; i <= dt2; i = i.AddMonths(1))
+            for (DateTime i = new DateTime(dt1.Year,dt1.Month, 1); i <= dt2; i = i.AddMonths(1))
             {
                 // 先判断文件是否存在
                 string dbPath = string.Format(dbPathTemp, equipmentId);
@@ -181,7 +181,7 @@ namespace Business
                 using (SQLiteConnection conn = new SQLiteConnection(connStr))
                 {
                     conn.Open();
-                    List<EquipmentData> list2 = EquipmentDataAccess.GetListByTime(conn, dt1, dt2, equipmentId);
+                    List<EquipmentData> list2 = EquipmentDataAccess.GetListByTime(conn, dt1, dt2, equipmentId, point);
                     list.AddRange(list2);
                 }
             }
@@ -202,7 +202,7 @@ namespace Business
 
         public static void DeleteByTime(DateTime dt1, DateTime dt2, int eqid)
         {
-            for (DateTime i = dt1.Date; i <= dt2; i = i.AddMonths(1))
+            for (DateTime i = new DateTime(dt1.Year,dt1.Month, 1); i <= dt2; i = i.AddMonths(1))
             {
                 // 先判断文件是否存在
                 string dbPath = string.Format(dbPathTemp, eqid);

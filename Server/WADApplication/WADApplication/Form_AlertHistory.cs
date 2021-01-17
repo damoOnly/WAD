@@ -93,7 +93,7 @@ namespace WADApplication
                 }
                 Equipment eq = mainList.Find(c => c.Name == comboBoxEdit_SensorName.Text.Trim() && c.GasName == comboBoxEdit_GasName.Text.Trim() && c.Address == Convert.ToByte(comboBoxEdit_Address.Text.Trim()));
 
-                List<Alert> data = AlertDal.GetListByTime(dateEdit_Start.DateTime, dateEdit_end.DateTime, eq.ID, eq.Name, eq.GasName, eq.Address);
+                List<Alert> data = AlertDal.GetListByTime(dateEdit_Start.DateTime, dateEdit_end.DateTime, eq);
                 if (data == null || data.Count < 1)
                 {
                     gridControl3.DataSource = null;

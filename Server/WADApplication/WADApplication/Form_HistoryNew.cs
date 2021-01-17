@@ -16,10 +16,11 @@ using DevExpress.XtraGrid.Columns;
 using System.Diagnostics;
 using System.Threading;
 using WADApplication.Process;
+using System.Text.RegularExpressions;
 
 namespace WADApplication
 {
-    public partial class Form_History : DevExpress.XtraEditors.XtraForm
+    public partial class Form_HistoryNew : DevExpress.XtraEditors.XtraForm
     {
         /// <summary>
         /// 最后一次连接的设备
@@ -56,7 +57,7 @@ namespace WADApplication
                 //    spd.AxisX.DateTimeScaleOptions.MeasureUnit = DateTimeMeasureUnit.Minute;
                 //    spd.AxisX.DateTimeScaleOptions.GridAlignment = DateTimeGridAlignment.Minute;
                 //    spd.AxisX.Label.TextPattern = "{A:HH:mm}";
-                    
+
                 //}
                 //// 1天以内
                 //else if (ts.TotalDays <= 1)
@@ -99,7 +100,7 @@ namespace WADApplication
         }
         #endregion
 
-        public Form_History()
+        public Form_HistoryNew()
         {
             InitializeComponent();
         }
@@ -109,7 +110,7 @@ namespace WADApplication
         {
             try
             {
-                if (checkedComboBoxEdit1.Text.Trim() == string.Empty)
+                if (comboBoxEdit1.Text.Trim() == string.Empty)
                 {
                     XtraMessageBox.Show("请先查询数据");
                     return;
@@ -125,15 +126,15 @@ namespace WADApplication
                 {
                     return;
                 }
-                //int total = 0;
-                foreach (CheckedListBoxItem item in checkedComboBoxEdit1.Properties.Items)
-                {
-                    if (item.CheckState == CheckState.Checked)
-                    {
-                        Equipment eq = mainList.Find(c => c.ID == Convert.ToInt32(item.Value));
 
-                        EquipmentDataBusiness.DeleteByTime(dateEdit1.DateTime, dateEdit2.DateTime, eq.ID);
+                byte address = Convert.ToByte(comboBoxEdit1.Text.Split(new string[] { "-" }, StringSplitOptions.None)[0]);
+                foreach (Equipment item in mainList)
+                {
+                    if (item.Address != address)
+                    {
+                        continue;
                     }
+                    EquipmentDataBusiness.DeleteByTime(dateEdit1.DateTime, dateEdit2.DateTime, item.ID);
                 }
 
                 gridControl2.DataSource = null;
@@ -148,165 +149,6 @@ namespace WADApplication
         }
 
         // 查询数据
-        private void simpleButton3_Click_1(object sender, EventArgs e)
-        {
-            try
-            {
-                gridControl2.DataSource = null;
-                chartControl2.Series.Clear();
-                gridView2.Columns.Clear();
-
-                if (checkedComboBoxEdit1.Text.Trim() == string.Empty)
-                {
-                    XtraMessageBox.Show("请选择设备");
-                    return;
-                }
-                TimeSpan ts = dateEdit2.DateTime - dateEdit1.DateTime;
-                TimeSpan ts1 = new TimeSpan(0, 0, 0, 1);
-                if (ts < ts1)
-                {
-                    XtraMessageBox.Show("截止时间必须大于起始时间");
-                    return;
-                }
-
-                DateTime dt1 = DateTime.MinValue;
-                DateTime dt2 = DateTime.MaxValue;
-                DataTable dataTable = new DataTable();
-                // 列计数器
-                int lolumnIndex = 1;
-                // 最大的行值
-                int maxRowNum = -1;
-                foreach (CheckedListBoxItem item in checkedComboBoxEdit1.Properties.Items)
-                {
-                    if (item.CheckState != CheckState.Checked)
-                    {
-                        continue;
-                    }
-                    List<EquipmentData> data = EquipmentDataBusiness.GetList(dateEdit1.DateTime, dateEdit2.DateTime, Convert.ToInt32(item.Value),2);
-                    if (data == null || data.Count < 1)
-                    {
-                        continue;
-                    }
-                    // 还没有数据的时候，增加时间和单位列
-                    if (dataTable.Columns.Count <= 0)
-                    {
-                        dataTable.Columns.Add("时间");
-                        dataTable.Columns.Add("单位");
-                    }
-                    dataTable.Columns.Add(item.Description);
-
-                    lolumnIndex++;
-                    Series series = new Series(item.Description, ViewType.SwiftPlot);
-                    series.ArgumentScaleType = ScaleType.DateTime;
-                    // 行计数器
-                    int rowNum = 0;
-                    data.ForEach(c =>
-                    {
-                        series.Points.Add(new SeriesPoint(c.AddTime, c.Chroma));
-                        DataRow dataRow;
-                        if (rowNum > maxRowNum - 1)
-                        {
-                            dataRow = dataTable.NewRow();
-                            dataTable.Rows.Add(dataRow);
-                        }
-                        else
-                        {
-                            dataRow = dataTable.Rows[rowNum];
-                        }
-                        // 说明需要增加时间和单位数据
-                        if (lolumnIndex == 2 || rowNum > maxRowNum - 1)
-                        {
-                            dataRow[0] = c.AddTime;
-                            dataRow[1] = c.Unit;
-                        }
-                        dataRow[lolumnIndex] = c.Chroma;
-                        rowNum++;
-                    });
-                    maxRowNum = maxRowNum > rowNum ? maxRowNum : rowNum;
-                    float max = data.Max(c => c.Chroma);
-                    float min = data.Min(c => c.Chroma);
-                    textEdit7.Text = max.ToString();
-                    textEdit5.Text = min.ToString();
-                    textEdit6.Text = ((max + min) / 2).ToString();
-
-                    //data.Sort((customer1, customer2) => customer1.AddTime.CompareTo(customer2.AddTime));
-                    //if (dt1 == DateTime.MinValue)
-                    //{
-                    //    dt1 = data.First().AddTime;
-                    //}
-                    //else
-                    //{
-                    //    dt1 = dt1 < data.First().AddTime ? dt1 : data.First().AddTime;
-                    //}
-
-                    //if (dt2 == DateTime.MaxValue)
-                    //{
-                    //    dt2 = data.Last().AddTime;
-                    //}
-                    //else
-                    //{
-                    //    dt2 = dt2 > data.Last().AddTime ? dt2 : data.Last().AddTime;
-                    //}
-                    chartControl2.Series.Add(series);
-                }
-
-                gridControl2.DataSource = dataTable;
-                gridView2.BestFitColumns();
-                if (chartControl2.Series.Count <= 0)
-                {
-                    chartControl2.Series.Add(new Series("曲线", ViewType.SwiftPlot));
-                }
-                //// 更改曲线纵坐标描述
-                SwiftPlotDiagram diagram_Tem = chartControl2.Diagram as SwiftPlotDiagram;
-                diagram_Tem.EnableAxisXScrolling = true;
-                diagram_Tem.AxisY.Title.Text = "浓度";
-
-
-                //diagram_Tem.AxisX.DateTimeGridAlignment = DateTimeMeasurementUnit.Minute;
-                //diagram_Tem.AxisX.DateTimeMeasureUnit = DateTimeMeasurementUnit.Second;
-                //diagram_Tem.AxisX.DateTimeOptions.Format = DateTimeFormat.LongTime;
-
-
-                //diagram_Tem.AxisX.Range.ScrollingRange.Auto = false;
-                //diagram_Tem.AxisX.Range.ScrollingRange.SetMinMaxValues(dt1.AddMinutes(-1), dt2.AddMinutes(1));
-                //diagram_Tem.AxisX.Range.Auto = false;
-                //diagram_Tem.AxisX.Range.SetMinMaxValues(dt1, dt1.AddMinutes(2));
-
-
-
-                //if (dt1 != DateTime.MinValue && dt2 != DateTime.MaxValue)
-                //{
-                //    setX(dt1, dt2);
-                //}
-
-
-                //9.16从时间控件上获取的值，与数据库记录格式不统一，须做进一步处理
-                //9.18格式化日期，以2015-0X-0X方式对齐
-
-                //string str1 = dateEdit1.Text;
-                //DateTime format_time1;
-                //DateTime.TryParse(str1, out format_time1);
-                //str1 = format_time1.ToString("yyyy-MM-dd HH:mm:ss");
-
-                //string str2 = dateEdit2.Text;
-                //DateTime format_time2;
-                //DateTime.TryParse(str2, out format_time2);
-                //str2 = format_time2.ToString("yyyy-MM-dd HH:mm:ss");
-                //List<EquipmentData> data = EquipmentDataDal.GetListByTime(eq.ID, dateEdit1.DateTime, dateEdit2.DateTime) 
-
-
-                //if (eq.Max > 0)
-                //{
-                //    diagram_Tem.AxisY.Range.SetMinMaxValues(0, eq.Max);
-                //}
-                //chartControl2.Series.EndUpdate();
-            }
-            catch (Exception ex)
-            {
-                LogLib.Log.GetLogger(this).Warn(ex);
-            }
-
-        }
         private void simpleButton3_Click(object sender, EventArgs e)
         {
             try
@@ -315,7 +157,7 @@ namespace WADApplication
                 chartControl2.Series.Clear();
                 gridView2.Columns.Clear();
 
-                if (checkedComboBoxEdit1.Text.Trim() == string.Empty)
+                if (comboBoxEdit1.Text.Trim() == string.Empty)
                 {
                     XtraMessageBox.Show("请选择设备");
                     return;
@@ -330,33 +172,31 @@ namespace WADApplication
 
                 DataTable dataTable = new DataTable();
                 dataTable.Columns.Add("时间");
-                dataTable.Columns.Add("单位");
 
                 List<int> listeqid = new List<int>();
-                
-                foreach (CheckedListBoxItem item in checkedComboBoxEdit1.Properties.Items)
+                byte address = Convert.ToByte(comboBoxEdit1.Text.Split(new string[] { "-" }, StringSplitOptions.None)[0]);
+                foreach (Equipment item in mainList)
                 {
-                    if (item.CheckState != CheckState.Checked)
+                    if (item.Address != address)
                     {
                         continue;
                     }
-                    listeqid.Add(Convert.ToInt32(item.Value));
-                    dataTable.Columns.Add(item.Description);     
+                    listeqid.Add(item.ID);
+                    dataTable.Columns.Add(string.Format("地址{0}-{1}---{2}（{3}）", item.Address, item.SensorNum, item.GasName, item.UnitName));
                 }
-                Series[] listSeries = new Series[dataTable.Columns.Count-2];
+                Series[] listSeries = new Series[dataTable.Columns.Count - 2];
                 for (int i = 0; i < listSeries.Length; i++)
                 {
                     listSeries[i] = new Series(dataTable.Columns[i + 2].ColumnName, ViewType.SwiftPlot);
                     listSeries[i].ArgumentScaleType = ScaleType.DateTime;
                     listSeries[i].Tag = listeqid[i];
-                    
                 }
                 List<object> listobj = new List<object>();
                 listobj.Add(dataTable);
                 listobj.Add(listSeries);
                 listobj.Add(listeqid);
-                ThreadPool.QueueUserWorkItem(new WaitCallback(GethistorydataNew), listobj);                
-                
+                ThreadPool.QueueUserWorkItem(new WaitCallback(GethistorydataNew), listobj);
+
             }
             catch (Exception ex)
             {
@@ -365,73 +205,8 @@ namespace WADApplication
 
         }
 
-        private void Gethistorydata(object parm)
-        {
-            DataTable dataTable = (parm as List<object>)[0] as DataTable;
-            Series[] listSeries = (parm as List<object>)[1] as Series[];
-            List<int> listeqid = (parm as List<object>)[2] as List<int>;
 
-            Stopwatch watch = new Stopwatch();
-            watch.Start();
-            List<EquipmentData> data = new List<EquipmentData>();
-            listeqid.ForEach(c =>
-            {
-                var tl = EquipmentDataBusiness.GetList(dateEdit1.DateTime, dateEdit2.DateTime, c,2);
-                data.AddRange(tl);
-            });
-            Trace.WriteLine("get database: " + watch.Elapsed);
-            watch.Restart();
-            IEnumerable<IGrouping<long, EquipmentData>> gridTable = data.GroupBy(c => c.AddTimeGroup);
-            foreach (var item in gridTable)
-            {
-                DataRow row = dataTable.NewRow();
-                row[0] = item.Key;
-                row[1] = item.FirstOrDefault().Unit;
-                List<EquipmentData> list2 = item.OrderBy(c => c.ID).ToList();
-                for (int i = 0; i < list2.Count; i++)
-                {
-                    row[i + 2] = list2[i].Chroma;
-                }
-                dataTable.Rows.Add(row);
-            }
-            Trace.WriteLine("table foreach: " + watch.Elapsed);
-            watch.Restart();
-            IEnumerable<IGrouping<int, EquipmentData>> chartTable = data.GroupBy(c => c.EquipmentID);
-
-            foreach (var item in chartTable)
-            {
-                Series series = listSeries.FirstOrDefault(c => ((int)c.Tag) == item.Key);
-                foreach (var item2 in item)
-                {
-                    series.Points.Add(new SeriesPoint(item2.AddTime, item2.Chroma));
-                }
-            }
-
-            Trace.WriteLine("series foreach: " + watch.Elapsed);
-            watch.Restart();
-            this.Invoke(new Action<DataTable>((datatable) => this.gridControl2.DataSource = datatable), dataTable);
-            Trace.WriteLine("banding table: " + watch.Elapsed);
-            watch.Restart();
-            //gridView2.BestFitColumns();
-            this.Invoke(new Action<Series[], IEnumerable<IGrouping<string, EquipmentData>>>((listseries, gridtable) =>
-            {
-                //chartControl2.
-                this.chartControl2.Series.AddRange(listseries);
-                Trace.WriteLine("bangding series: " + watch.Elapsed);
-                watch.Stop();
-                if (this.chartControl2.Series.Count <= 0)
-                {
-                    this.chartControl2.Series.Add(new Series("曲线", ViewType.SwiftPlot));
-                }
-                //// 更改曲线纵坐标描述
-                SwiftPlotDiagram diagram_Tem = this.chartControl2.Diagram as SwiftPlotDiagram;
-                diagram_Tem.EnableAxisXScrolling = true;
-                diagram_Tem.AxisY.Title.Text = "浓度";
-
-                setX(DateTime.Parse(gridtable.FirstOrDefault().Key), DateTime.Parse(gridtable.LastOrDefault().Key));
-            }), listSeries, gridTable);
-        }
-
+        List<EquipmentReportData> seriesData = null;
         private void GethistorydataNew(object parm)
         {
             DataTable dataTable = (parm as List<object>)[0] as DataTable;
@@ -447,20 +222,24 @@ namespace WADApplication
                 rd.ID = c;
                 rd.GasName = mainList.Find(m => m.ID == c).GasName;
                 rd.UnitName = mainList.Find(m => m.ID == c).UnitName;
-                rd.DataList = EquipmentDataBusiness.GetList(dateEdit1.DateTime, dateEdit2.DateTime, c,2);
+                byte point = mainList.Find(m => m.ID == c).Point;
+                rd.DataList = EquipmentDataBusiness.GetList(dateEdit1.DateTime, dateEdit2.DateTime, c, point);
                 reportData.Add(rd);
             });
+
+            seriesData = reportData;
 
             watch.Stop();
             Trace.WriteLine("get database: " + watch.Elapsed);
 
-            RenderSeries(listSeries, reportData);
+            //RenderSeries(listSeries, reportData);
 
             RenderGrid(dataTable, reportData, listeqid);
-            
+
         }
 
-        private void RenderGrid(DataTable dataTable,List<EquipmentReportData> reportData,  List<int> listeqid)
+        private DataTable exportTable = null;
+        private void RenderGrid(DataTable dataTable, List<EquipmentReportData> reportData, List<int> listeqid)
         {
             Stopwatch watch = new Stopwatch();
             watch.Start();
@@ -469,42 +248,34 @@ namespace WADApplication
             {
                 return;
             }
+
             List<EquipmentData> data = new List<EquipmentData>();
             foreach (var item in reportData)
             {
                 data.AddRange(item.DataList);
             }
 
-            if (data.Count <=0)
+            if (data.Count <= 0)
             {
                 return;
             }
 
-            string unitStr = mainList.Find(c => c.ID == listeqid.First()).UnitName;
-
-            IEnumerable<IGrouping<long, EquipmentData>> gridTable = data.GroupBy(c => c.AddTimeGroup);
+            IEnumerable<IGrouping<DateTime, EquipmentData>> gridTable = data.GroupBy(c => c.AddTime);
             foreach (var item in gridTable)
             {
-                IEnumerable<IGrouping<int, EquipmentData>> one = item.GroupBy(g => g.EquipmentID);
                 DataRow row = dataTable.NewRow();
-                row[0] = new DateTime(item.Key*10000000*60);
-                row[1] = unitStr;
+                row[0] = item.Key; // 第一列为时间
                 for (int i = 0; i < listeqid.Count; i++)
                 {
-                    var io = one.FirstOrDefault(c=>c.Key == listeqid[i]);
-                    if (io == null)
-                    {
-                        continue;
-                    }
-                    var ch = io.Average(c=>c.Chroma);
-                    row[i + 2] = ch;
+                    var da = item.FirstOrDefault(dd => dd.EquipmentID == listeqid[i]);
+                    row[i + 1] = da == null ? string.Empty : da.Chroma.ToString();
                 }
                 dataTable.Rows.Add(row);
             }
             Trace.WriteLine("table foreach: " + watch.Elapsed);
             watch.Restart();
-
-            this.Invoke(new Action<DataTable>((datatable) => this.gridControl2.DataSource = datatable), dataTable);
+            exportTable = dataTable;
+            this.Invoke(new Action<DataTable>((datatable) => { this.gridControl2.DataSource = datatable; gridControl2.RefreshDataSource(); this.gridView2.BestFitColumns(); }), dataTable);
             watch.Stop();
             Trace.WriteLine("banding table: " + watch.Elapsed);
         }
@@ -513,7 +284,7 @@ namespace WADApplication
         {
             Stopwatch watch = new Stopwatch();
             watch.Start();
-            if (reportData ==null || reportData.Count <=0 || listSeries == null || listSeries.Length <=0)
+            if (reportData == null || reportData.Count <= 0 || listSeries == null || listSeries.Length <= 0)
             {
                 return;
             }
@@ -522,7 +293,7 @@ namespace WADApplication
             {
                 Series sp = listSeries[i];
                 var rd = reportData.Find(c => c.ID == (int)sp.Tag);
-                if (rd == null || rd.DataList == null || rd.DataList.Count <=0)
+                if (rd == null || rd.DataList == null || rd.DataList.Count <= 0)
                 {
                     continue;
                 }
@@ -531,14 +302,14 @@ namespace WADApplication
             Trace.WriteLine("series foreach: " + watch.Elapsed);
             watch.Restart();
 
-            this.Invoke(new Action<Series[],string>((listseries,a) =>
+            this.Invoke(new Action<Series[], string>((listseries, a) =>
             {
                 this.chartControl2.Series.AddRange(listseries);
                 if (this.chartControl2.Series.Count <= 0)
                 {
                     this.chartControl2.Series.Add(new Series("曲线", ViewType.SwiftPlot));
                 }
-                 //更改曲线纵坐标描述
+                //更改曲线纵坐标描述
                 SwiftPlotDiagram diagram_Tem = this.chartControl2.Diagram as SwiftPlotDiagram;
                 diagram_Tem.EnableAxisXScrolling = true;
                 diagram_Tem.AxisY.Title.Text = "浓度";
@@ -554,25 +325,13 @@ namespace WADApplication
             try
             {
                 SaveFileDialog mTempSaveDialog = new SaveFileDialog();
-                mTempSaveDialog.Filter = "Excel files (*xls)|*.xls| Excel files (*xlsx)|*.xlsx";
+                mTempSaveDialog.Filter = "csv files (*csv)|*.csv";
                 mTempSaveDialog.RestoreDirectory = true;
+                mTempSaveDialog.FileName = comboBoxEdit1.Text;
                 if (DialogResult.OK == mTempSaveDialog.ShowDialog() && null != mTempSaveDialog.FileName.Trim())
                 {
                     string mTempSavePath = mTempSaveDialog.FileName;
-                    if (mTempSavePath.Contains("xlsx"))    // 导出07及以上版本的文件
-                    {
-                        DevExpress.XtraPrinting.XlsxExportOptions options = new DevExpress.XtraPrinting.XlsxExportOptions(DevExpress.XtraPrinting.TextExportMode.Value);
-                        options.TextExportMode = DevExpress.XtraPrinting.TextExportMode.Text;
-                        options.ExportMode = DevExpress.XtraPrinting.XlsxExportMode.SingleFile;
-                        this.gridView2.ExportToXlsx(mTempSaveDialog.FileName);
-                    }
-                    else if (mTempSavePath.Contains("xls"))  // 导出03版本的文件
-                    {
-                        DevExpress.XtraPrinting.XlsExportOptions options = new DevExpress.XtraPrinting.XlsExportOptions(DevExpress.XtraPrinting.TextExportMode.Value);
-                        options.TextExportMode = DevExpress.XtraPrinting.TextExportMode.Text;
-                        options.ExportMode = DevExpress.XtraPrinting.XlsExportMode.SingleFile;
-                        this.gridView2.ExportToXls(mTempSaveDialog.FileName, options);
-                    }
+                    ExcelHelper.ExportDataGridToCSV(exportTable, mTempSavePath);
                 }
             }
             catch (Exception ex)
@@ -591,7 +350,7 @@ namespace WADApplication
                     return;
                 }
 
-                foreach (CheckedListBoxItem item in checkedComboBoxEdit1.Properties.Items)
+                foreach (CheckedListBoxItem item in comboBoxEdit1.Properties.Items)
                 {
                     if (item.CheckState != CheckState.Checked)
                     {
@@ -698,9 +457,17 @@ namespace WADApplication
         private void loadData()
         {
             mainList = EquipmentBusiness.GetListIncludeDelete();
-            mainList = mainList.OrderBy(c => c.ID).ToList();
-            checkedComboBoxEdit1.Properties.Items.Clear();
-            mainList.ForEach(c => { checkedComboBoxEdit1.Properties.Items.Add(c.ID, c.Address + "," + c.GasName); });
+            comboBoxEdit1.Properties.Items.Clear();
+            IEnumerable<IGrouping<byte, Equipment>> gl = mainList.GroupBy(item=> { return item.Address;});
+            foreach (IGrouping<byte, Equipment> ig in gl)
+            {
+                Equipment one = ig.FirstOrDefault();
+                comboBoxEdit1.Properties.Items.Add(string.Format("{0}-{1}", one.Address, one.Name));
+            }
+            if (mainList.Count > 0)
+            {
+                comboBoxEdit1.SelectedIndex = 0;
+            }
         }
 
         private void comboBoxEdit1_SelectedValueChanged(object sender, EventArgs e)
@@ -783,7 +550,7 @@ namespace WADApplication
                                 DateTime keytime = new DateTime(Convert.ToInt32(item.Key.Substring(0, 4)), Convert.ToInt32(item.Key.Substring(4, 2)), 1);
                                 EquipmentDataBusiness.CreateDbByMonth(id, keytime);
                                 EquipmentDataBusiness.AddList(item.Value, id, keytime);
-                            } 
+                            }
                         }
                         catch (Exception ex)
                         {
@@ -805,9 +572,35 @@ namespace WADApplication
                     //        Console.WriteLine("Exception: " + ex.Message);
                     //    }
                     //}
-                    
+
                 }
             }
+        }
+
+        private void gridView2_RowCellClick(object sender, DevExpress.XtraGrid.Views.Grid.RowCellClickEventArgs e)
+        {
+            if (e.Column.FieldName == "时间")
+            {
+                return;
+            }
+            Match cm = Regex.Match(e.Column.FieldName, @"(\d+)-(\d+)---(\w+)");
+            byte address = byte.Parse(cm.Groups[1].Value);
+            byte senn = byte.Parse(cm.Groups[2].Value);
+            int id = mainList.Find(ii=> ii.Address == address && ii.SensorNum == senn).ID;
+            if (chartControl2.Series != null && chartControl2.Series.Count > 0 && chartControl2.Series[0].Tag.ToString() == id.ToString())
+            {
+                return;
+            }
+            chartControl2.Series.Clear();
+            Series[] listSeries = new Series[1];
+
+            listSeries[0] = new Series(e.Column.FieldName, ViewType.SwiftPlot);
+            listSeries[0].ArgumentScaleType = ScaleType.DateTime;
+            listSeries[0].Tag = id;
+
+            List<EquipmentReportData> ll = new List<EquipmentReportData>();
+            ll.Add(seriesData.Find(ff=> ff.ID == id));
+            RenderSeries(listSeries, ll);
         }
 
 

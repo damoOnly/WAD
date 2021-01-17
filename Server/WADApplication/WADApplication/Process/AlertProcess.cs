@@ -50,12 +50,17 @@ namespace WADApplication.Process
             originalData.AlertStatus = alertStatus;
         }
 
+        // 有报警状态
         private static void HasAlert(EM_AlertType alertStatus, ref Equipment originalData)
         {
             // update
             if (alertStatus == originalData.AlertStatus)
             {
                 originalData.AlertObject.EndTime = Utility.CutOffMillisecond(DateTime.Now);
+                if (originalData.Chroma > originalData.AlertObject.Chroma)
+                {
+                    originalData.AlertObject.Chroma = originalData.Chroma;
+                }
                 AlertDal.UpdateOne(originalData.AlertObject);
             }
             else
@@ -64,21 +69,27 @@ namespace WADApplication.Process
                 if (originalData.AlertStatus != EM_AlertType.normal)
                 {
                     originalData.AlertObject.EndTime = Utility.CutOffMillisecond(DateTime.Now);
+                    if (originalData.Chroma > originalData.AlertObject.Chroma)
+                    {
+                        originalData.AlertObject.Chroma = originalData.Chroma;
+                    }
                     AlertDal.UpdateOne(originalData.AlertObject);
                 }
 
                 originalData.AlertStatus = alertStatus;
 
-                Alert art = new Alert();
+                StructAlert art = new StructAlert();
                 art.AlertName = originalData.AlertStr;
                 art.EquipmentID = originalData.ID;
                 art.StratTime = Utility.CutOffMillisecond(DateTime.Now);
                 art.EndTime = Utility.CutOffMillisecond(DateTime.Now);
+                art.Chroma = originalData.Chroma;
                 AlertDal.AddOneR(ref art);
                 originalData.AlertObject = art;                                
             }
         }
 
+        // 无报警状态
         private static void NoAlert(ref Equipment originalData)
         {
             if (originalData.AlertStatus != EM_AlertType.normal)

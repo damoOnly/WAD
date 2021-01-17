@@ -64,7 +64,7 @@
       <Name>GlobalMemory</Name>
     </ProjectReference>
     <ProjectReference Include="..\LogLib\LogLib.csproj">
-      <Project>{664237F0-6F59-477A-9B2E-3879E6128F7E}</Project>
+      <Project>{664237f0-6f59-477a-9b2e-3879e6128f7e}</Project>
       <Name>LogLib</Name>
     </ProjectReference>
   </ItemGroup>

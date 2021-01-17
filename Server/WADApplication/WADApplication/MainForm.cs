@@ -1353,13 +1353,13 @@ namespace WADApplication
 
         private void simpleButton7_Click(object sender, EventArgs e)
         {
-            Form_History fh = new Form_History();
+            Form_HistoryNew fh = new Form_HistoryNew();
             fh.ShowDialog();
         }
 
         private void simpleButton8_Click(object sender, EventArgs e)
         {
-            Form_AlertHistory fa = new Form_AlertHistory();
+            Form_AlertHistoryNew fa = new Form_AlertHistoryNew();
             fa.ShowDialog();
         }
 

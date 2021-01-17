@@ -33,5 +33,7 @@ namespace Entity
         public string DataCenterST2 = "";
         public string DataCenterCN2 = "";
         public string DataCenterPW2 = "";
+        public string AgreementType = "协议1";
+
     }
 }

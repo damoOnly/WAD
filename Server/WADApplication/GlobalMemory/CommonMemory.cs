@@ -70,6 +70,7 @@ namespace GlobalMemory
             SysConfig.DataCenterST2 = ConfigurationManager.AppSettings["DataCenterST2"].ToString();
             SysConfig.DataCenterCN2 = ConfigurationManager.AppSettings["DataCenterCN2"].ToString();
             SysConfig.DataCenterPW2 = ConfigurationManager.AppSettings["DataCenterPW2"].ToString();
+            SysConfig.AgreementType = ConfigurationManager.AppSettings["AgreementType"].ToString();
         }
     }
 

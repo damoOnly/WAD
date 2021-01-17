@@ -47,13 +47,13 @@
     <Compile Include="XmlSerializerProvider.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CommonConfig.xml" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Entity\Entity.csproj">
       <Project>{920662a5-8768-42fb-aca4-4df8eb1351f0}</Project>
       <Name>Entity</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="CommonConfig.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

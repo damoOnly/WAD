@@ -284,6 +284,52 @@ namespace WADApplication.Process
             return result;
         }
 
+        /// <summary>
+        /// Export the data from datatable to CSV file
+        /// </summary>
+        /// <param name="grid"></param>
+        public static void ExportDataGridToCSV(System.Data.DataTable dt, string path)
+        {
+            System.IO.FileStream fs = new FileStream(path, System.IO.FileMode.OpenOrCreate, System.IO.FileAccess.Write);
+            StreamWriter sw = new StreamWriter(fs, new System.Text.UnicodeEncoding());
+            //Tabel header
+            for (int i = 0; i < dt.Columns.Count; i++)
+            {
+                sw.Write(dt.Columns[i].ColumnName);
+                sw.Write("\t");
+            }
+            sw.WriteLine("");
+            //Table body
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                for (int j = 0; j < dt.Columns.Count; j++)
+                {
+                    sw.Write(dt.Rows[i][j].ToString());
+                    sw.Write("\t");
+                }
+                sw.WriteLine("");
+            }
+            sw.Flush();
+            sw.Close();
+        }
+
+
+        /// <summary>
+        /// Delete special symbol
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static string DelQuota(string str)
+        {
+            string result = str;
+            string[] strQuota = { "~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "`", ";", "'", ",", ".", "/", ":", "/,", "<", ">", "?" };
+            for (int i = 0; i < strQuota.Length; i++)
+            {
+                if (result.IndexOf(strQuota[i]) > -1)
+                    result = result.Replace(strQuota[i], "");
+            }
+            return result;
+        }
 
         public static System.Text.Encoding GetType(string FILE_NAME)
         {

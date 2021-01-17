@@ -68,22 +68,6 @@ namespace Entity
                 AliasGasName = value;
             }
         }
-        /// <summary>
-        /// 气体名称
-        /// </summary>
-        //public string GasName
-        //{
-        //    get
-        //    {
-        //        string nstr = string.Empty;
-        //        nstr = Enum.GetName(typeof(EM_GasType), GasType);
-        //        if (nstr == null)
-        //        {
-        //            nstr = "未知";
-        //        }
-        //        return nstr;
-        //    }
-        //}
 
 
         /// <summary>
@@ -297,7 +281,7 @@ namespace Entity
         /// </summary>
         public string THAlertStr { get; set; }
 
-        public Alert AlertObject { get; set; }
+        public StructAlert AlertObject { get; set; }
         public Alert THAlertObject { get; set; }
 
         public string PointStr

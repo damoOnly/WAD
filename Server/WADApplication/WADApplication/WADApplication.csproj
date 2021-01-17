@@ -160,6 +160,18 @@
     <Compile Include="AddDeviceForm.Designer.cs">
       <DependentUpon>AddDeviceForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form_AlertHistoryNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_AlertHistoryNew.Designer.cs">
+      <DependentUpon>Form_AlertHistoryNew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_HistoryNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_HistoryNew.Designer.cs">
+      <DependentUpon>Form_HistoryNew.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_map.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -290,6 +302,9 @@
     <EmbeddedResource Include="AddDeviceForm.resx">
       <DependentUpon>AddDeviceForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form_AlertHistoryNew.resx">
+      <DependentUpon>Form_AlertHistoryNew.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_AlertHistory.resx">
       <DependentUpon>Form_AlertHistory.cs</DependentUpon>
     </EmbeddedResource>
@@ -301,6 +316,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Debug.resx">
       <DependentUpon>Form_Debug.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_HistoryNew.resx">
+      <DependentUpon>Form_HistoryNew.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_History.resx">
       <DependentUpon>Form_History.cs</DependentUpon>
@@ -376,36 +394,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Business\Business.csproj">
-      <Project>{a14e2acd-0f4e-454c-a3fb-41a27be78a64}</Project>
-      <Name>Business</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CommandManager\CommandManager.csproj">
-      <Project>{b9fc7165-c65b-4ccc-906d-2ed31bdf07b5}</Project>
-      <Name>CommandManager</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DataStruct\DataStruct.csproj">
-      <Project>{7F4AA805-6668-460F-A960-CD76F944100D}</Project>
-      <Name>DataStruct</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Entity\Entity.csproj">
-      <Project>{920662a5-8768-42fb-aca4-4df8eb1351f0}</Project>
-      <Name>Entity</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GlobalMemory\GlobalMemory.csproj">
-      <Project>{21b0214b-4aaa-4db8-8514-d1adca8c6f09}</Project>
-      <Name>GlobalMemory</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LibMessageHelper\LibMessageHelper.csproj">
-      <Project>{76EB986A-7BDF-4C54-A759-12A6DF83B82E}</Project>
-      <Name>LibMessageHelper</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LogLib\LogLib.csproj">
-      <Project>{664237F0-6F59-477A-9B2E-3879E6128F7E}</Project>
-      <Name>LogLib</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\停止.png" />
   </ItemGroup>
   <ItemGroup>
@@ -428,6 +416,36 @@
     <None Include="Resources\close_32x321.png" />
     <None Include="Resources\ignoremasterfilter_32x32.png" />
     <Content Include="wnd.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Business\Business.csproj">
+      <Project>{a14e2acd-0f4e-454c-a3fb-41a27be78a64}</Project>
+      <Name>Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CommandManager\CommandManager.csproj">
+      <Project>{b9fc7165-c65b-4ccc-906d-2ed31bdf07b5}</Project>
+      <Name>CommandManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataStruct\DataStruct.csproj">
+      <Project>{7f4aa805-6668-460f-a960-cd76f944100d}</Project>
+      <Name>DataStruct</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entity\Entity.csproj">
+      <Project>{920662a5-8768-42fb-aca4-4df8eb1351f0}</Project>
+      <Name>Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GlobalMemory\GlobalMemory.csproj">
+      <Project>{21b0214b-4aaa-4db8-8514-d1adca8c6f09}</Project>
+      <Name>GlobalMemory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LibMessageHelper\LibMessageHelper.csproj">
+      <Project>{76eb986a-7bdf-4c54-a759-12a6df83b82e}</Project>
+      <Name>LibMessageHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LogLib\LogLib.csproj">
+      <Project>{664237f0-6f59-477a-9b2e-3879e6128f7e}</Project>
+      <Name>LogLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

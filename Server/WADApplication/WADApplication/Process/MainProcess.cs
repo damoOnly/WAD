@@ -27,7 +27,7 @@ namespace WADApplication.Process
         {
             byte low = 0x52;
 
-            if (eq.IsNew)
+            if (!eq.IsNew)
             {
                 low = 0x4e;
             }
@@ -265,7 +265,7 @@ namespace WADApplication.Process
                     spsv1.LineStyle.Thickness = 2;
                     series.View = spsv1;
                     // 新勾选的曲线需要查出历史数据，补充前面时间的空白
-                    List<EquipmentData> datalist = EquipmentDataBusiness.GetList(minTime, maxTime, item.ID);
+                    List<EquipmentData> datalist = EquipmentDataBusiness.GetList(minTime, maxTime, item.ID,2);
                     if (datalist == null || datalist.Count <= 0)
                     {
                         continue;

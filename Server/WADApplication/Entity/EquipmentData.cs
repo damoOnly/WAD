@@ -72,7 +72,8 @@ namespace Entity
                 return unit;
             }
         }
-
-        public long AddTimeGroup { get { return AddTime.Ticks/(10000000*60); } }
+        // 根据秒分组
+        // 
+        public long AddTimeGroup { get { return AddTime.Ticks/(10000000); } }
     }
 }

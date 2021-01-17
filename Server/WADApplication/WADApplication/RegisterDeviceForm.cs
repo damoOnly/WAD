@@ -107,7 +107,7 @@ namespace WADApplication
             //    simpleButton5.Visible = false;
 
             //}
-            comboBoxEdit1.EditValue = ConfigurationManager.AppSettings["AgreementType"];
+            comboBoxEdit1.EditValue = CommonMemory.SysConfig.AgreementType;
             InitList();
             if (list != null && list.Count > 0)
             {
@@ -305,6 +305,7 @@ namespace WADApplication
         private void comboBoxEdit1_SelectedIndexChanged(object sender, EventArgs e)
         {
             AppConfigProcess.SaveOne("AgreementType", comboBoxEdit1.EditValue.ToString());
+            CommonMemory.SysConfig.AgreementType = comboBoxEdit1.EditValue.ToString();
         }
 
         private void simpleButton4_Click_1(object sender, EventArgs e)
