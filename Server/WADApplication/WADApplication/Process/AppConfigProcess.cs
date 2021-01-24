@@ -40,6 +40,8 @@ namespace WADApplication.Process
                 config.AppSettings.Settings["DataCenterCN2"].Value = sysConfig.DataCenterCN2;
                 config.AppSettings.Settings["DataCenterPW2"].Value = sysConfig.DataCenterPW2;
 
+                config.AppSettings.Settings["Language"].Value = sysConfig.Language;
+
                 // Save the changes in App.config file.
                 config.Save(ConfigurationSaveMode.Modified);
 

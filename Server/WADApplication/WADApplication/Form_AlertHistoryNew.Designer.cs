@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
+            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.simpleButton8 = new DevExpress.XtraEditors.SimpleButton();
@@ -49,7 +50,6 @@
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             this.splitContainerControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit_end.Properties.CalendarTimeProperties)).BeginInit();
@@ -84,6 +84,15 @@
             this.splitContainerControl1.TabIndex = 0;
             this.splitContainerControl1.Text = "splitContainerControl1";
             // 
+            // simpleButton2
+            // 
+            this.simpleButton2.Location = new System.Drawing.Point(753, 9);
+            this.simpleButton2.Name = "simpleButton2";
+            this.simpleButton2.Size = new System.Drawing.Size(64, 20);
+            this.simpleButton2.TabIndex = 15;
+            this.simpleButton2.Text = "导出";
+            this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
+            // 
             // labelControl2
             // 
             this.labelControl2.Location = new System.Drawing.Point(502, 12);
@@ -102,7 +111,7 @@
             // 
             // simpleButton8
             // 
-            this.simpleButton8.Location = new System.Drawing.Point(638, 9);
+            this.simpleButton8.Location = new System.Drawing.Point(683, 9);
             this.simpleButton8.Name = "simpleButton8";
             this.simpleButton8.Size = new System.Drawing.Size(64, 20);
             this.simpleButton8.TabIndex = 5;
@@ -130,12 +139,12 @@
             this.dateEdit_end.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom;
             this.dateEdit_end.Properties.Mask.EditMask = "yyyy-MM-dd HH:mm:ss";
             this.dateEdit_end.Properties.VistaDisplayMode = DevExpress.Utils.DefaultBoolean.True;
-            this.dateEdit_end.Size = new System.Drawing.Size(112, 20);
+            this.dateEdit_end.Size = new System.Drawing.Size(145, 20);
             this.dateEdit_end.TabIndex = 9;
             // 
             // simpleButton1
             // 
-            this.simpleButton1.Location = new System.Drawing.Point(778, 9);
+            this.simpleButton1.Location = new System.Drawing.Point(823, 9);
             this.simpleButton1.Name = "simpleButton1";
             this.simpleButton1.Size = new System.Drawing.Size(64, 20);
             this.simpleButton1.TabIndex = 10;
@@ -145,7 +154,7 @@
             // dateEdit_Start
             // 
             this.dateEdit_Start.EditValue = null;
-            this.dateEdit_Start.Location = new System.Drawing.Point(384, 8);
+            this.dateEdit_Start.Location = new System.Drawing.Point(351, 8);
             this.dateEdit_Start.Name = "dateEdit_Start";
             this.dateEdit_Start.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.dateEdit_Start.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -163,7 +172,7 @@
             this.dateEdit_Start.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom;
             this.dateEdit_Start.Properties.Mask.EditMask = "yyyy-MM-dd HH:mm:ss";
             this.dateEdit_Start.Properties.VistaDisplayMode = DevExpress.Utils.DefaultBoolean.True;
-            this.dateEdit_Start.Size = new System.Drawing.Size(112, 20);
+            this.dateEdit_Start.Size = new System.Drawing.Size(145, 20);
             this.dateEdit_Start.TabIndex = 8;
             // 
             // comboBoxEdit_SensorName
@@ -177,7 +186,7 @@
             this.comboBoxEdit_SensorName.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.comboBoxEdit_SensorName.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.comboBoxEdit_SensorName.Size = new System.Drawing.Size(306, 20);
+            this.comboBoxEdit_SensorName.Size = new System.Drawing.Size(273, 20);
             this.comboBoxEdit_SensorName.TabIndex = 13;
             this.comboBoxEdit_SensorName.SelectedValueChanged += new System.EventHandler(this.comboBoxEdit_SensorName_SelectedValueChanged);
             // 
@@ -279,8 +288,6 @@
             this.gridColumn2.Caption = "单位";
             this.gridColumn2.FieldName = "UnitName";
             this.gridColumn2.Name = "gridColumn2";
-            this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 6;
             // 
             // gridColumn5
             // 
@@ -313,15 +320,6 @@
             this.gridColumn11.Name = "gridColumn11";
             this.gridColumn11.Visible = true;
             this.gridColumn11.VisibleIndex = 10;
-            // 
-            // simpleButton2
-            // 
-            this.simpleButton2.Location = new System.Drawing.Point(708, 9);
-            this.simpleButton2.Name = "simpleButton2";
-            this.simpleButton2.Size = new System.Drawing.Size(64, 20);
-            this.simpleButton2.TabIndex = 15;
-            this.simpleButton2.Text = "导出";
-            this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
             // 
             // Form_AlertHistoryNew
             // 

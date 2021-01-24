@@ -214,6 +214,18 @@ namespace WADApplication
 
         private void simpleButton2_Click(object sender, EventArgs e)
         {
+            string filename = string.Empty;
+            if (comboBoxEdit_SensorName.Text == "全部")
+            {
+                filename = "全部报警记录-" + DateTime.Now.ToString("yyyyMMdd") + "-" + DateTime.Now.ToString("HHmmss");
+            }
+            else
+            {
+                byte address = Convert.ToByte(comboBoxEdit_SensorName.Text.Split(new string[] { "-" }, StringSplitOptions.None)[0]);
+                var eq = mainList.Find(m => m.Address == address);
+                filename = string.Format("{0}-{1}报警记录-{2}-{3}", eq.Address, eq.Name, DateTime.Now.ToString("yyyyMMdd"), DateTime.Now.ToString("HHmmss"));
+            }            
+
             if (data == null || data.Count <= 0)
             {
                 return;

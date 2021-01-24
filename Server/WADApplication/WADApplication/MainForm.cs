@@ -1335,11 +1335,11 @@ namespace WADApplication
 
         private void simpleButton6_Click(object sender, EventArgs e)
         {
-            if (CommonMemory.IsOpen == false)
-            {
-                XtraMessageBox.Show("请先打开串口");
-                return;
-            }
+            //if (CommonMemory.IsOpen == false)
+            //{
+            //    XtraMessageBox.Show("请先打开串口");
+            //    return;
+            //}
 
             if (simpleButton4.Enabled == false)
             {

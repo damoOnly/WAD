@@ -182,7 +182,7 @@ namespace WADApplication
                         continue;
                     }
                     listeqid.Add(item.ID);
-                    dataTable.Columns.Add(string.Format("地址{0}-{1}---{2}（{3}）", item.Address, item.SensorNum, item.GasName, item.UnitName));
+                    dataTable.Columns.Add(string.Format("地址{0}-{1}-{2}（{3}）", item.Address, item.SensorNum, item.GasName, item.UnitName));
                 }
                 Series[] listSeries = new Series[dataTable.Columns.Count - 2];
                 for (int i = 0; i < listSeries.Length; i++)
@@ -324,10 +324,13 @@ namespace WADApplication
         {
             try
             {
+                byte address = Convert.ToByte(comboBoxEdit1.Text.Split(new string[] { "-" }, StringSplitOptions.None)[0]);
+                var eq = mainList.Find(m=> m.Address == address);
+                string filename = string.Format("{0}-{1}-{2}-{3}", eq.Address, eq.Name, DateTime.Now.ToString("yyyyMMdd"), DateTime.Now.ToString("HHmmss"));
                 SaveFileDialog mTempSaveDialog = new SaveFileDialog();
                 mTempSaveDialog.Filter = "csv files (*csv)|*.csv";
                 mTempSaveDialog.RestoreDirectory = true;
-                mTempSaveDialog.FileName = comboBoxEdit1.Text;
+                mTempSaveDialog.FileName = filename;
                 if (DialogResult.OK == mTempSaveDialog.ShowDialog() && null != mTempSaveDialog.FileName.Trim())
                 {
                     string mTempSavePath = mTempSaveDialog.FileName;
@@ -583,7 +586,7 @@ namespace WADApplication
             {
                 return;
             }
-            Match cm = Regex.Match(e.Column.FieldName, @"(\d+)-(\d+)---(\w+)");
+            Match cm = Regex.Match(e.Column.FieldName, @"(\d+)-(\d+)-(\w+)");
             byte address = byte.Parse(cm.Groups[1].Value);
             byte senn = byte.Parse(cm.Groups[2].Value);
             int id = mainList.Find(ii=> ii.Address == address && ii.SensorNum == senn).ID;

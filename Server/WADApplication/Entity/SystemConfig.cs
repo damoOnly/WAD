@@ -35,5 +35,8 @@ namespace Entity
         public string DataCenterPW2 = "";
         public string AgreementType = "协议1";
 
+        // 语言
+        public string Language = "中文";
+
     }
 }
