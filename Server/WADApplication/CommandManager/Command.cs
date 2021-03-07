@@ -14,6 +14,7 @@ namespace CommandManager
         /// <param name="highAdr">寄存器起始地址高位</param>
         /// <param name="lowAdr">寄存器起始地址地位</param>
         /// <param name="num">寄存器个数</param>
+        /// 读命令
         public Command(byte address, byte highAdr, byte lowAdr, short num)
         {
             byte[] sendb = new byte[8];
@@ -29,25 +30,26 @@ namespace CommandManager
             ResultLength = 5 + 2 * num;
             SendByte = sendb;
         }
-        //public Command(byte address, byte highAdr, byte lowAdr,byte[] content)
-        //{
+        // 写命令
+        public Command(byte address, byte highAdr, byte lowAdr, byte[] content)
+        {
 
-        //    byte[] sendb = new byte[9+content.Length];
-        //    sendb[0] = address;
-        //    sendb[1] = 0x10;
-        //    sendb[2] = highAdr;
-        //    sendb[3] = lowAdr;
+            byte[] sendb = new byte[9 + content.Length];
+            sendb[0] = address;
+            sendb[1] = 0x10;
+            sendb[2] = highAdr;
+            sendb[3] = lowAdr;
 
-        //    byte[] num = BitConverter.GetBytes(Convert.ToInt16(content.Length / 2));
-        //    Array.Reverse(num);
-        //    Array.Copy(num, 0, sendb, 4, 2);
-        //    sendb[6] = Convert.ToByte(content.Length);
-        //    Array.Copy(content, 0, sendb, 7, content.Length);
-        //    Array.Copy(CRC.GetCRC(sendb), 0, sendb, sendb.Length-2, 2);
+            byte[] num = BitConverter.GetBytes(Convert.ToInt16(content.Length / 2));
+            Array.Reverse(num);
+            Array.Copy(num, 0, sendb, 4, 2);
+            sendb[6] = Convert.ToByte(content.Length);
+            Array.Copy(content, 0, sendb, 7, content.Length);
+            Array.Copy(CRC.GetCRC(sendb), 0, sendb, sendb.Length - 2, 2);
 
-        //    ResultLength = 8;
-        //    SendByte = sendb;
-        //}
+            ResultLength = 8;
+            SendByte = sendb;
+        }
      //   byte relayNum = 4;
         //public Command(byte address, short Adr, short num)
         //{

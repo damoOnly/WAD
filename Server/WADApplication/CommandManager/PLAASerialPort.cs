@@ -214,10 +214,11 @@ namespace CommandManager
             int bytelength = serialport.BytesToRead;
             byte[] data = new byte[bytelength];
             int num = serialport.Read(data, 0, bytelength);
+            string str = "R  " + byteToHexStr(data);
+            Trace.WriteLine(str);
             if (IsInputData)
             {
-                string str = "R  " + byteToHexStr(data);
-                //Trace.WriteLine(str);
+               
                 lock(lockbufferlist)
                 {
                     inputDatalist.AddRange(data);
@@ -226,7 +227,7 @@ namespace CommandManager
             }
             else
             {
-                string str = "R  " + byteToHexStr(data);
+                //string str = "R  " + byteToHexStr(data);
                 //Trace.WriteLine(str);
                 foreach (byte bt in data)
                 {

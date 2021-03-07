@@ -17,46 +17,52 @@ namespace WADApplication
 {
     public partial class Form_InputData : DevExpress.XtraEditors.XtraForm
     {
-        private List<Equipment> mainList = new List<Equipment>();
-        Equipment eqq;
-        PLAASerialPort port;
-        public Form_InputData()
+        Equipment eq;
+        PLAASerialPort port = PLAASerialPort.GetInstance();
+        public Form_InputData(Equipment _eq)
         {
+            this.eq = _eq;
             InitializeComponent();
         }
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            
-            //if (simpleButton1.Text == "开始上传")
-            //{
-            //    if (eqq == null)
-            //    {
-            //        XtraMessageBox.Show("请选择设备");
-            //        return;
-            //    }
-            //    XtraMessageBox.Show("数据上传需花费较长时间，请耐心等待");
-                
-            //    port.IsInputData = true;
-            //    byte[] cont = new byte[2];
-            //    cont[0] = 0x00;
-            //    cont[1] = 0x01;
-            //    Command rcd = new Command(eqq.Address, (byte)EM_HighType.通用, (byte)EM_LowType_T.数据上传, cont);
-            //    port.Write(rcd.SendByte);
-            //    myThread = new Thread(new ThreadStart(getData));
-            //    myThread.Start();
-                
-            //    simpleButton1.Text = "停止上传";
-               
-            //}
-            //else if (simpleButton1.Text == "停止上传")
-            //{
-            //    port.IsInputData = false;
-            //    simpleButton1.Text = "开始上传";
-            //    myThread.Abort();
-            //    myThread = null;
-            //}
+            try
+            {
+                uint count = 0;
+                uint.TryParse(textEdit3.Text, out count);
+                if (count <= 0 || count > total)
+                {
+                    addText("输入上传数量不合法");
+                    return;
+                }
+                list = new List<EquipmentData>();
+                simpleButton1.Enabled = false;
+                addText("数据上传需花费较长时间，请耐心等待");
+                byte[] content = BitConverter.GetBytes(count);
+                Array.Reverse(content, 0, 2);
+                Array.Reverse(content, 2, 2);
+                Command cd = new Command(eq.Address, eq.SensorNum, 0xd2, content);
+                addText(PLAASerialPort.byteToHexStr(cd.SendByte));
+                if (CommandResult.GetResult(cd))
+                {
+                    port.Close();
+
+                    port.IsInputData = true;
+                    port.Open(port.PortName, 115200);
+                    Thread myThread = new Thread(new ThreadStart(getData));
+                    myThread.Start();
+                }
+
+                //port.Write(cd.SendByte);
+
+            }
+            catch (Exception ex)
+            {
+                LogLib.Log.GetLogger("Form_InputData").Error(ex);
+            }
         }
+        List<EquipmentData> list = new List<EquipmentData>();
 
         private void getData()
         {
@@ -74,44 +80,33 @@ namespace WADApplication
                         // 数据帧
                         if (data.Length == 19)
                         {
-                            Equipment eqoo = mainList.Find(c => c.Address == data[1] && c.SensorType == (EM_HighType)data[2] && c.GasType == data[3]);
-                            if (eqoo == null)
-                            {
-                                continue;
-                            }
-
                             EquipmentData ed = new EquipmentData();
-                            
-                            ed.AddTime = Parse.GetDateTime(data, 9);
-                          //  DateTime format_dt;
-                          //  DateTime.TryParse(ed.AddTime,out format_dt);
-                          //  ed.AddTime = format_dt;
-                            ed.Chroma = (float)Math.Round(Parse.GetFloatValue(data, 5),eqoo.Point);
-                            ed.EquipmentID = eqoo.ID;
-                            ed.UnitType = data[4];
-                            if (!InputDataDal.AddOne(ed))
-                            {
-                                LogLib.Log.GetLogger(this).Warn("插入数据库错误");
-                            }
-                            
-                            this.Invoke(new Action<string>(addText), string.Format("{0},{1},浓度:{2},时间:{3}\r\n", eqoo.Name, eqoo.GasName, ed.Chroma,ed.AddTime));
-                            
+
+                            ed.AddTime = Parse.GetDateTime(data, 4);
+                            ed.Chroma = (float)Math.Round(Parse.GetFloatValue(data, 10), eq.Point);
+                            ed.EquipmentID = eq.ID;
+                            ed.UnitType = data[14];
+                            list.Add(ed);
+
+                            this.Invoke(new Action<string>(addText), string.Format("{0},{1},浓度:{2},时间:{3}\r\n", eq.Name, eq.GasName, ed.Chroma, ed.AddTime));
+
                         }
-                        else if(data.Length == 6) // 结束桢
+                        else if (data.Length == 12) // 结束桢
                         {
                             isOver = true;
                             port.IsInputData = false;
                             this.Invoke(new Action<string>(addText), "上传完成----------------------------------------------------");
-                            
-                            this.Invoke(new Action<string>(c => simpleButton1.Text = c), "开始上传");
+                            string fileName = string.Format("{0}-{1}-{2}-{3}-{4}", eq.Address, eq.Name, eq.SensorNum, eq.GasName, DateTime.Now.ToString("yyyyMMddHHmmss"));
+                            //InputDataDal dd = new InputDataDal(fileName, eq);
+                            //dd.AddList(list);
                             break;
-                        }                       
+                        }
                     }
                 }
-                
+
                 Thread.Sleep(200);
             }
-            
+
         }
 
         private void addText(string txt)
@@ -122,45 +117,39 @@ namespace WADApplication
             {
                 richTextBox1.Clear();
             }
-            
+
             richTextBox1.AppendText(txt);
             // 自动滚到底部
             richTextBox1.SelectionStart = richTextBox1.Text.Length;
             richTextBox1.ScrollToCaret();
             richTextBox1.AppendText(Environment.NewLine);
-        }        
+        }
+        uint total;
 
         private void Form_InputData_Load(object sender, EventArgs e)
         {
-            mainList = EquipmentBusiness.GetAllListNotDelete();
-            var sql = from a in mainList
-                      group a by a.Name into g
-                      select new
-                      {
-                          g.Key
-                      };
-            sql.ToList().ForEach(c => { comboBoxEdit1.Properties.Items.Add(c.Key); });
-            if (sql.ToList().Count > 0)
+            try
             {
-                comboBoxEdit1.SelectedIndex = 0;
+                Command cd = new Command(eq.Address, eq.SensorNum, 0xd0, 2);
+                addText("获取总数，发送: " + PLAASerialPort.byteToHexStr(cd.SendByte));
+                if (CommandResult.GetResult(cd))
+                {
+                    addText("获取总数，收到: " + PLAASerialPort.byteToHexStr(cd.ResultByte));
+                    Array.Reverse(cd.ResultByte, 3, 2);
+                    Array.Reverse(cd.ResultByte, 5, 2);
+                    total = BitConverter.ToUInt32(cd.ResultByte, 3);
+                    textEdit1.Text = total.ToString();
+                }
+                else
+                {
+                    throw new CommandException(eq.Address + ": 读取错误");
+                }
             }
-
-            port = PLAASerialPort.GetInstance();
+            catch (Exception ex)
+            {
+                LogLib.Log.GetLogger("Form_InputData").Error(ex);
+            }
         }
-
-        private void comboBoxEdit1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            eqq = mainList.Find(c => c.Name == comboBoxEdit1.Text);
-            textEdit2.Text = eqq.Address.ToString();
-        }
-
-        private void btn_LookData_Click(object sender, EventArgs e)
-        {
-            Form_InputHistory fi = new Form_InputHistory();
-            fi.ShowDialog();
-        }
-
-      
 
     }
 }

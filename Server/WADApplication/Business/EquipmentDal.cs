@@ -31,15 +31,16 @@ namespace Business
             }
 
             var list = GetListIncludeDelete();
-            if (list != null && list.Count >0)
+            if (list != null && list.Count > 0)
             {
-                list.ForEach(c => {
+                list.ForEach(c =>
+                {
                     EquipmentDataBusiness.CreateDb(c.ID);
                 });
             }
         }
 
-        private static void CreateTable(SQLiteConnection conn)
+        public static void CreateTable(SQLiteConnection conn)
         {
             string sql = string.Format(@"create table tb_Equipment (
                                                            Name TEXT NOT NULL,
@@ -109,6 +110,36 @@ select last_insert_rowid();";
             EquipmentDataBusiness.CreateDb(data.ID);
         }
 
+        public static void AddOneByFile(SQLiteConnection conn,SQLiteTransaction tran,  StructEquipment data)
+        {
+            string sql = @"insert into tb_Equipment (Name,Address,GasType,SensorNum,UnitType,Point,Magnification,Low,High,Max,IsGas,IsDel,IsNew,AlertModel,Factor,AliasGasName,AliasUnitName,MN,CreateTime) 
+values (@Name,@Address,@GasType,@SensorNum,@UnitType,@Point,@Magnification,@Low,@High,@Max,@IsGas,@IsDel,@IsNew,@AlertModel,@Factor,@AliasGasName,@AliasUnitName,@MN,@CreateTime);";
+            using (SQLiteCommand cmd = new SQLiteCommand(sql, conn, tran))
+            {
+                cmd.Parameters.AddWithValue("@Name", data.Name);
+                cmd.Parameters.AddWithValue("@Address", data.Address);
+                cmd.Parameters.AddWithValue("@GasType", data.GasType);
+                cmd.Parameters.AddWithValue("@SensorNum", data.SensorNum);
+                cmd.Parameters.AddWithValue("@UnitType", data.UnitType);
+                cmd.Parameters.AddWithValue("@Point", data.Point);
+                cmd.Parameters.AddWithValue("@Magnification", data.Magnification);
+                cmd.Parameters.AddWithValue("@Low", data.A1);
+                cmd.Parameters.AddWithValue("@High", data.A2);
+                cmd.Parameters.AddWithValue("@Max", data.Max);
+                cmd.Parameters.AddWithValue("@IsGas", data.IsGas);
+                cmd.Parameters.AddWithValue("@IsDel", data.IsDel);
+                cmd.Parameters.AddWithValue("@IsNew", data.IsNew);
+                cmd.Parameters.AddWithValue("@AlertModel", data.AlertModel);
+                cmd.Parameters.AddWithValue("@Factor", data.Factor);
+                cmd.Parameters.AddWithValue("@AliasGasName", data.AliasGasName);
+                cmd.Parameters.AddWithValue("@AliasUnitName", data.AliasUnitName);
+                cmd.Parameters.AddWithValue("@MN", data.MN);
+                cmd.Parameters.AddWithValue("@CreateTime", Utility.CutOffMillisecond(DateTime.Now));
+
+                cmd.ExecuteNonQuery();
+            }
+        }
+
         public static void UpdateOne(StructEquipment data)
         {
             string sql = @"UPDATE tb_Equipment SET Name=@Name,Address=@Address,GasType=@GasType,SensorNum=@SensorNum,UnitType=@UnitType,
@@ -151,7 +182,7 @@ select last_insert_rowid();";
             using (SQLiteConnection conn = new SQLiteConnection(connstr))
             {
                 conn.Open();
-                using (SQLiteCommand cmd = new SQLiteCommand(sql,conn))
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
                 {
                     using (SQLiteDataReader reader = cmd.ExecuteReader())
                     {
@@ -186,7 +217,7 @@ select last_insert_rowid();";
                         }
                     }
                 }
-            } 
+            }
             return list;
         }
 
@@ -239,6 +270,42 @@ select last_insert_rowid();";
             return list;
         }
 
+        public static StructEquipment GetOneByFile(SQLiteConnection conn)
+        {
+            string sql = "select rowid,Name,Address,GasType,SensorNum,UnitType,Point,Magnification,Low,High,Max,IsGas,IsNew,AlertModel,Factor,AliasGasName,AliasUnitName,MN,CreateTime from tb_Equipment";
+            using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
+            {
+                using (SQLiteDataReader reader = cmd.ExecuteReader())
+                {
+                    reader.Read();
+                    StructEquipment eq = new StructEquipment();
+                    eq.ID = reader.GetInt32(0);
+                    eq.Name = reader.GetString(1);
+                    eq.Address = reader.GetByte(2);
+                    eq.GasType = reader.GetByte(3);
+                    eq.SensorNum = reader.GetByte(4);
+                    eq.UnitType = reader.GetByte(5);
+                    eq.Point = reader.GetByte(6);
+                    eq.Magnification = reader.GetInt32(7);
+                    eq.A1 = reader.GetFloat(8);
+                    eq.A2 = reader.GetFloat(9);
+                    eq.Max = reader.GetFloat(10);
+                    eq.IsGas = reader.GetBoolean(11);
+                    eq.IsNew = reader.GetBoolean(12);
+                    eq.AlertModel = reader.GetByte(13);
+                    eq.Factor = reader.GetString(14);
+                    eq.AliasGasName = reader.GetString(15);
+                    eq.AliasUnitName = reader.GetString(16);
+                    eq.MN = reader.GetString(17);
+
+                    eq.IsDel = false;
+                    eq.CreateTime = reader.GetDateTime(18);
+
+                    return eq;
+                }
+            }
+        }
+
         /// <summary>
         /// 获取有效的设备地址
         /// </summary>
@@ -288,7 +355,7 @@ select last_insert_rowid();";
             }
             return list;
         }
-        
+
         /// <summary>
         /// 按设备名称删除
         /// </summary>
@@ -329,7 +396,7 @@ select last_insert_rowid();";
             using (SQLiteConnection conn = new SQLiteConnection(connstr))
             {
                 conn.Open();
-                
+
                 string sql1 = "select rowid from tb_Equipment where Address=@address and SensorNum=@sensorNum";
                 using (SQLiteCommand cmd = new SQLiteCommand(sql1, conn))
                 {

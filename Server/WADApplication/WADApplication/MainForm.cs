@@ -636,10 +636,10 @@ namespace WADApplication
                 XtraMessageBox.Show("请先停止检测");
                 return;
             }
-            CommonMemory.IsReadConnect = false;
-            Form_InputData fi = new Form_InputData();
-            fi.ShowDialog();
-            CommonMemory.IsReadConnect = true;
+            //CommonMemory.IsReadConnect = false;
+            //Form_InputData fi = new Form_InputData();
+            //fi.ShowDialog();
+            //CommonMemory.IsReadConnect = true;
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -1365,19 +1365,19 @@ namespace WADApplication
 
         private void simpleButton9_Click(object sender, EventArgs e)
         {
-            if (CommonMemory.IsOpen == false)
-            {
-                XtraMessageBox.Show("请先打开串口");
-                return;
-            }
+            //if (CommonMemory.IsOpen == false)
+            //{
+            //    XtraMessageBox.Show("请先打开串口");
+            //    return;
+            //}
 
-            if (simpleButton4.Enabled == false)
-            {
-                XtraMessageBox.Show("请先停止检测");
-                return;
-            }
+            //if (simpleButton4.Enabled == false)
+            //{
+            //    XtraMessageBox.Show("请先停止检测");
+            //    return;
+            //}
             CommonMemory.IsReadConnect = false;
-            Form_InputData fi = new Form_InputData();
+            Form_InputHistory fi = new Form_InputHistory();
             fi.ShowDialog();
             CommonMemory.IsReadConnect = true;
         }
@@ -1386,7 +1386,7 @@ namespace WADApplication
         {
             if (simpleButton10.Text == "关闭声音")
             {
-                AlertProcess.CloseLight("sound");
+                //AlertProcess.CloseLight("sound");
                 CommonMemory.player.Stop();
                 CommonMemory.IsClosePlay = true;
                 simpleButton10.Text = "打开声音";
@@ -1404,7 +1404,6 @@ namespace WADApplication
                 return;
 
             GridHitInfo hitInfo = gridView_nowData2.CalcHitInfo(e.ControlMousePosition);
-            Console.WriteLine("aaaa");
 
             if (hitInfo.InRow == false)
                 return;

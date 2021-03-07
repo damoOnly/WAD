@@ -105,7 +105,7 @@ namespace WADApplication.Process
         {
             bool isNotAlert = main.All(c => c.AlertStatus == EM_AlertType.normal);
             bool isAllConnect = main.All(c => c.IsConnect);
-            if (!isNotAlert)
+            if (!isNotAlert && !CommonMemory.IsClosePlay)
             {
                 if (!CommonMemory.IsClosePlay)
                 {

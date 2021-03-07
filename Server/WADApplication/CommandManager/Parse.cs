@@ -193,26 +193,23 @@ namespace CommandManager
             return dt;
         }
 
-        public static DateTime GetDateTime(byte[] data,int index)
+        public static DateTime GetDateTime(byte[] data,int _index)
         {
-            short year = 0;
+            int index = _index;
+            byte year = 0;
             byte month = 0;
             byte day = 0;
             byte hour = 0;
             byte minute = 0;
             byte second = 0;
+            year = data[index++]; // 最后2位数，比如2020，就是20
+            month = data[index++];
+            day = data[index++];
+            hour = data[index++];
+            minute = data[index++];
+            second = data[index++];
 
-            byte[] FB = new byte[2];
-            Array.Copy(data, index, FB, 0, 2);
-            Array.Reverse(FB);
-            year = BitConverter.ToInt16(FB, 0);
-            month = data[index+2];
-            day = data[index + 3];
-            hour = data[index + 4];
-            minute = data[index + 5];
-            second = data[index + 6];
-
-            if (year < 1900 ||
+            if (year < 0 || year > 99 ||
                 month < 1 || month >= 12 ||
                 day < 1 || day >= 31 ||
                 hour < 0 || hour >= 24 ||
@@ -221,8 +218,8 @@ namespace CommandManager
             {
                 return DateTime.MinValue;
             }
-
-            string Tstr = string.Format("{0}-{1}-{2} {3}:{4}:{5}", year, month, day, hour, minute, second);
+            string yy = DateTime.Now.Year.ToString().Substring(0,2);
+            string Tstr = string.Format("{0}{1}-{2}-{3} {4}:{5}:{6}",yy, year, month, day, hour, minute, second);
             DateTime dt = Convert.ToDateTime(Tstr);
             return dt;
         }

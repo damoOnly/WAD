@@ -81,6 +81,27 @@ namespace Business
             return list;
         }
 
+        public static List<EquipmentData> GetListByFile(SQLiteConnection conn)
+        {
+            string sql = string.Format("select a.Chroma, a.AddTime from tb_EquipmentData a");
+
+            List<EquipmentData> list = new List<EquipmentData>();
+            SQLiteCommand cmd = new SQLiteCommand(sql, conn);
+
+            using (SQLiteDataReader reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    EquipmentData eq = new EquipmentData();
+                    eq.Chroma = reader.GetFloat(0);
+                    eq.AddTime = reader.GetDateTime(1);
+                    list.Add(eq);
+                }
+            }
+
+            return list;
+        }
+
         public static void DeleteTableRow(SQLiteConnection conn, DateTime dt1, DateTime dt2)
         {
             string sql = "delete from tb_EquipmentData where AddTime >= @dt1 and AddTime <= @dt2";

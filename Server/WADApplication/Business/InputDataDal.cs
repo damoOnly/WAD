@@ -4,62 +4,96 @@ using System.Linq;
 using System.Text;
 using Entity;
 using System.Data;
+using System.IO;
+using System.Data.SQLite;
 
 namespace Business
 {
-    public static class InputDataDal
+    public class InputDataDal
     {
-        public static bool AddOne(EquipmentData ed)
+        string filePath = string.Empty;
+        string connstr = string.Empty;
+        Equipment eq = new Equipment();
+        public InputDataDal(string _fileName, Equipment _eq)
         {
-            //string sql = string.Format("insert into [tb_InputData] (EquipmentID,Chroma,Temperature,Humidity,AddTime) values ({0},{1},{2},{3},'{4}')", ed.EquipmentID, ed.Chroma, ed.Temperature, ed.Humidity, ed.AddTime);
-            
-            string sql = string.Format("insert into tb_InputData (EquipmentID,Chroma,AddTime) values ({0},{1},'{2}')", ed.EquipmentID, ed.Chroma, ed.AddTime.ToString("yyyy-MM-dd HH:mm:ss"));
-            if (SqliteHelper.ExecuteNonQuery(sql) == 1)
-            {
-                return true;
-            }
-            else
-            {
-                LogLib.Log.GetLogger("EquipmentDataDal").Warn("添加浓度数据失败");
-                return false;
-            }
+            filePath = string.Format(@"{0}waddb\inputData\{1}.db3", AppDomain.CurrentDomain.BaseDirectory, _fileName);
+            connstr = string.Format(CreateDbFile.connectionStringTemp, filePath);
+            eq = _eq;
         }
-        //9.17格式化日期和时间，改参数类型
-        //public static List<EquipmentData> GetListByTime(long equipmentID,string dt1,string dt2)
-        public static List<EquipmentData> GetListByTime(long equipmentID,DateTime dt1,DateTime dt2)
-        
+        public void AddList(List<EquipmentData> list)
         {
-            //dt2 = dt2.AddDays(1);
-
-            string sql = string.Format("select a.EquipmentID,a.Chroma,a.Temperature,a.Humidity,a.AddTime,b.UnitType from tb_InputData a left join tb_Equipment b on a.EquipmentID=b.ID where EquipmentID={0} and AddTime >='{1}' and AddTime <='{2}'", equipmentID, dt1.ToString("yyyy-MM-dd HH:mm:ss"), dt2.ToString("yyyy-MM-dd HH:mm:ss"));
-            DataSet ds = new DataSet();
-            ds = SqliteHelper.Query(sql);
-            if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            CreateDb();
+            using (SQLiteConnection conn = new SQLiteConnection(connstr))
             {
-                List<EquipmentData> list = new List<EquipmentData>();
-                foreach (DataRow row in ds.Tables[0].Rows)
+                conn.Open();
+                SQLiteTransaction tran = conn.BeginTransaction();
+                foreach (var item in list)
                 {
-                    EquipmentData eq = new EquipmentData();
-                    eq.EquipmentID = Convert.ToInt32(row["EquipmentID"]);
-                    eq.Chroma = Convert.ToSingle(row["Chroma"]);
-                    //eq.Temperature = Convert.ToSingle(row["Temperature"]);
-                    //eq.Humidity = Convert.ToSingle(row["Humidity"]);
-                    eq.AddTime = Convert.ToDateTime(row["AddTime"]);
-                    eq.UnitType = Convert.ToByte(row["UnitType"]);
-                    list.Add(eq);
+                    EquipmentDataAccess.Add(item, conn, tran);
                 }
-                return list;
+
+                EquipmentDal.AddOneByFile(conn, tran, eq);
+                tran.Commit();
             }
-            LogLib.Log.GetLogger("EquipmentDataDal").Warn("获取浓度数据失败");
-            return null;
+        }
+        public List<EquipmentData> GetList()
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(connstr))
+            {
+                conn.Open();
+                return EquipmentDataAccess.GetListByFile(conn);
+            }
         }
 
-        public static int DeleteByTime(long equipmentID, DateTime dt1, DateTime dt2)
+        public StructEquipment GetEq()
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(connstr))
+            {
+                conn.Open();
+                return EquipmentDal.GetOneByFile(conn);
+            }
+        }
+        private void CreateDb()
+        {
+            if (File.Exists(filePath))
+            {
+                return;
+            }
+            SQLiteConnection.CreateFile(filePath);
+
+            using (SQLiteConnection conn = new SQLiteConnection(connstr))
+            {
+                conn.Open();
+                if (!EquipmentDataAccess.IsTableExist(conn))
+                {
+                    EquipmentDataAccess.CreateTable(conn);
+                    EquipmentDal.CreateTable(conn);
+                }
+            }
+        }
+
+        public List<EquipmentData> GetListByTime(DateTime dt1, DateTime dt2)
+        {
+            List<EquipmentData> result = new List<EquipmentData>();
+            using (SQLiteConnection conn = new SQLiteConnection(connstr))
+            {
+                conn.Open();
+                result = EquipmentDataAccess.GetListByTime(conn, dt1, dt2, eq.ID, eq.Point);
+            }
+            return result;
+        }
+
+        public void DeleteDb()
+        {
+            File.Delete(filePath);
+        }
+
+        public int DeleteByTime(long equipmentID, DateTime dt1, DateTime dt2)
         {
             string sql = string.Format("delete from tb_InputData where EquipmentID={0} and AddTime >='{1}' and AddTime <='{2}'", equipmentID, dt1.ToString(), dt2.ToString());
             return SqliteHelper.ExecuteNonQuery(sql);
         }
-        public static int DeleteAll()
+        public int DeleteAll()
         {
             string sql = "delete from tb_InputData";
             return SqliteHelper.ExecuteNonQuery(sql);
@@ -75,5 +109,25 @@ namespace Business
             string sql = string.Format("delete from tb_InputData where EquipmentID={0}", equipmentID);
             return SqliteHelper.ExecuteNonQuery(sql);
         }
+
+        public static List<string> ReadInputDataFileNames()
+        {
+            List<string> list = new List<string>();
+            string path = string.Format(@"{0}waddb\inputData", AppDomain.CurrentDomain.BaseDirectory); ;
+            DirectoryInfo root = new DirectoryInfo(path);
+            FileInfo[] files = root.GetFiles();
+            for (int i = 0; i < files.Length; i++)
+            {
+                FileInfo file = files[i];
+                if (file.Extension != ".db3")
+                {
+                    continue;
+                }
+                list.Add(file.Name.Replace(file.Extension, ""));
+            }
+            return list;
+        }
+
+
     }
 }

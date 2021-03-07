@@ -41,7 +41,6 @@ namespace CommandManager
                 }                
             }
             LogLib.Log.GetLogger("CommandResult").Warn(string.Format("命令超时:{0}",PLAASerialPort.byteToHexStr(cd.SendByte)));
-            Trace.WriteLine("超时");
             return result;
         }
 
