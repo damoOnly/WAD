@@ -116,6 +116,10 @@ namespace Business
             string path = string.Format(@"{0}waddb\inputData", AppDomain.CurrentDomain.BaseDirectory); ;
             DirectoryInfo root = new DirectoryInfo(path);
             FileInfo[] files = root.GetFiles();
+            if (files != null && files.Length > 0)
+            {
+                Array.Sort(files, (FileInfo x, FileInfo y) => y.LastWriteTime.CompareTo(x.LastWriteTime));
+            }
             for (int i = 0; i < files.Length; i++)
             {
                 FileInfo file = files[i];

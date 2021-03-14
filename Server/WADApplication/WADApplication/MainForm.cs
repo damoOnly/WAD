@@ -198,7 +198,7 @@ namespace WADApplication
                             MainProcess.RemovePoint(chartControl1);
                         }
                     }
-                    AlertProcess.OperatorAlert(mainList);
+                    AlertProcess.OperatorAlert(mainList, simpleButton11);
                     IsReadBasic = false;
                     this.Invoke(new Action(gridControl_nowData2.RefreshDataSource));
                     //this.Invoke(new Action(gridView_nowData2.BestFitColumns));
@@ -1389,10 +1389,12 @@ namespace WADApplication
                 //AlertProcess.CloseLight("sound");
                 CommonMemory.player.Stop();
                 CommonMemory.IsClosePlay = true;
+                simpleButton10.Image = Resources.convert_32x32;
                 simpleButton10.Text = "打开声音";
             }
             else if (simpleButton10.Text == "打开声音")
             {
+                simpleButton10.Image = Resources.close_32x32;
                 CommonMemory.IsClosePlay = false;
                 simpleButton10.Text = "关闭声音";
             }
@@ -1558,6 +1560,23 @@ namespace WADApplication
             }
 
             isselecting = false;
+        }
+
+        private void simpleButton11_Click(object sender, EventArgs e)
+        {
+            if (simpleButton11.Text == "消音")
+            {
+                CommonMemory.player.Stop();
+                CommonMemory.IsCloseSoundTemp = true;
+                simpleButton11.Image = Resources.filterbyargument_chart_32x32;
+                simpleButton11.Text = "恢复";
+            }
+            else if (simpleButton11.Text == "恢复")
+            {
+                simpleButton11.Image = Resources.ignoremasterfilter_32x32;
+                CommonMemory.IsCloseSoundTemp = false;
+                simpleButton11.Text = "消音";
+            }
         }
     }
 }

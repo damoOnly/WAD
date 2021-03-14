@@ -27,6 +27,10 @@ namespace GlobalMemory
         /// </summary>
         public static bool IsSoundPlayed = false;
 
+        /// <summary>
+        /// 是否零时关闭声音（消音）
+        /// </summary>
+        public static bool IsCloseSoundTemp = false;
 
         /// <summary>
         /// 声音播放对象

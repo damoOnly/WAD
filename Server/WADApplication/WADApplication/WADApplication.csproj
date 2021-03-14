@@ -416,6 +416,8 @@
     <None Include="Resources\close_32x32.png" />
     <None Include="Resources\close_32x321.png" />
     <None Include="Resources\ignoremasterfilter_32x32.png" />
+    <None Include="Resources\convert_32x32.png" />
+    <None Include="Resources\filterbyargument_chart_32x32.png" />
     <Content Include="wnd.ico" />
   </ItemGroup>
   <ItemGroup>

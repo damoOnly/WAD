@@ -1147,6 +1147,7 @@
             this.simpleButton11.Size = new System.Drawing.Size(59, 54);
             this.simpleButton11.TabIndex = 14;
             this.simpleButton11.Text = "消音";
+            this.simpleButton11.Click += new System.EventHandler(this.simpleButton11_Click);
             // 
             // simpleButton5
             // 

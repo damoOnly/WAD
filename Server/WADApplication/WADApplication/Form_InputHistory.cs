@@ -587,6 +587,8 @@ namespace WADApplication
             Equipment eq = mainList.Find(ii => ii.Address == address && ii.SensorNum == senn);
             Form_InputData form = new Form_InputData(eq);
             form.ShowDialog();
+            initCombobox2();
+            simpleButton6_Click(null, null);
         }
 
         private void simpleButton5_Click_1(object sender, EventArgs e)

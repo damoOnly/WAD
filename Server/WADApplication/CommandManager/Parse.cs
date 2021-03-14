@@ -108,10 +108,10 @@ namespace CommandManager
         public static float GetFloatValue(byte[] data,int index)
         {
             byte[] FB = new byte[4];
-            FB[0] = data[index+1];
+            FB[0] = data[index + 1];
             FB[1] = data[index];
-            FB[2] = data[index+3];
-            FB[3] = data[index+2];
+            FB[2] = data[index + 3];
+            FB[3] = data[index + 2];
             return BitConverter.ToSingle(FB, 0);
         }
 

@@ -8,6 +8,7 @@ using GlobalMemory;
 using DevExpress.XtraEditors;
 using System.Net;
 using System.Net.Sockets;
+using WADApplication.Properties;
 
 namespace WADApplication.Process
 {
@@ -50,14 +51,23 @@ namespace WADApplication.Process
             originalData.AlertStatus = alertStatus;
         }
 
-        // 有报警状态
+        /// <summary>
+        /// 有报警状态
+        /// </summary>
+        /// <param name="alertStatus"></param>
+        /// <param name="originalData">最新的实时数据</param>
+ 
         private static void HasAlert(EM_AlertType alertStatus, ref Equipment originalData)
         {
             // update
             if (alertStatus == originalData.AlertStatus)
             {
                 originalData.AlertObject.EndTime = Utility.CutOffMillisecond(DateTime.Now);
-                if (originalData.Chroma > originalData.AlertObject.Chroma)
+                if ((alertStatus == EM_AlertType.outRange || (alertStatus == EM_AlertType.A2 && originalData.AlertModel == 1) || originalData.AlertModel == 0) && originalData.Chroma > originalData.AlertObject.Chroma)
+                {
+                    originalData.AlertObject.Chroma = originalData.Chroma;
+                }
+                else if (((alertStatus == EM_AlertType.A1 && originalData.AlertModel ==1) || originalData.AlertModel == 2 ) && originalData.Chroma < originalData.AlertObject.Chroma)
                 {
                     originalData.AlertObject.Chroma = originalData.Chroma;
                 }
@@ -101,9 +111,20 @@ namespace WADApplication.Process
 
         }
 
-        public static void OperatorAlert(List<Equipment> main)
+        public static void OperatorAlert(List<Equipment> main, DevExpress.XtraEditors.SimpleButton btn)
         {
             bool isNotAlert = main.All(c => c.AlertStatus == EM_AlertType.normal);
+            if (isNotAlert)
+            {
+                CommonMemory.IsCloseSoundTemp = false;
+                if (btn.InvokeRequired)
+                {
+                    btn.Invoke(new Action(() => {
+                        btn.Text = "消音";
+                        btn.Image = Resources.ignoremasterfilter_32x32;
+                    }));
+                }
+            }
             bool isAllConnect = main.All(c => c.IsConnect);
             if (!isNotAlert && !CommonMemory.IsClosePlay)
             {
