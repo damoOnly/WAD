@@ -13,7 +13,8 @@ namespace WADApplication
         [STAThread]
         static void Main()
         {
-            DevExpress.Skins.SkinManager.Default.RegisterAssembly(typeof(DevExpress.UserSkins.WADSkinProject).Assembly); //Register!
+            // 去掉自定义皮肤
+            //DevExpress.Skins.SkinManager.Default.RegisterAssembly(typeof(DevExpress.UserSkins.WADSkinProject).Assembly); //Register!
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             if (!DevExpress.Skins.SkinManager.AllowFormSkins)

@@ -214,10 +214,11 @@ namespace CommandManager
             int bytelength = serialport.BytesToRead;
             byte[] data = new byte[bytelength];
             int num = serialport.Read(data, 0, bytelength);
+            string str = "R  " + byteToHexStr(data);
+            Trace.WriteLine(str);
             if (IsInputData)
             {
-                string str = "R  " + byteToHexStr(data);
-                Trace.WriteLine(str);
+               
                 lock(lockbufferlist)
                 {
                     inputDatalist.AddRange(data);
@@ -226,8 +227,8 @@ namespace CommandManager
             }
             else
             {
-                string str = "R  " + byteToHexStr(data);
-                Trace.WriteLine(str);
+                //string str = "R  " + byteToHexStr(data);
+                //Trace.WriteLine(str);
                 foreach (byte bt in data)
                 {
                     dataBufferList.Enqueue(bt);
@@ -312,7 +313,7 @@ namespace CommandManager
                 //第一个字节是包头
                 if (data[0] == startByte)
                 {
-                    Trace.WriteLine("是包头");
+                    //Trace.WriteLine("是包头");
                     #region 第一个字节是包头
                     //lock (Gloary.LockedObj)
                     //{
@@ -348,7 +349,7 @@ namespace CommandManager
                                     //有数据来，则发出信号
                                     //RevDataAutoLock.Set();
                                     //Thread.Sleep(2);
-                                    Trace.WriteLine("合格的一帧");
+                                    //Trace.WriteLine("合格的一帧");
                                 }
                             }
 
@@ -375,7 +376,7 @@ namespace CommandManager
                 }
                 else//第一个字节不是包头
                 {
-                    Trace.WriteLine("不是包头");
+                    //Trace.WriteLine("不是包头");
                     if (packetdata == null)//没有粘包数据，丢包了！
                     {
                         for (int i = 0; i < data.Length; i++)

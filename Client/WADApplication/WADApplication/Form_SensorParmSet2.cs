@@ -9,7 +9,7 @@ using DevExpress.XtraEditors;
 using System.Linq;
 
 using Entity;
-using Dal;
+using Business;
 using CommandManager;
 using System.Diagnostics;
 using WADApplication.Properties;
@@ -76,7 +76,7 @@ namespace WADApplication
                 if(eq.ID == item.ID)
                 {
                     item.Chroma = eq.Chroma;
-                    item.ChromaAlertStr = eq.ChromaAlertStr;
+                    item.AlertStatus = eq.AlertStatus;
                     item.GasType = eq.GasType;
                     item.A2 = eq.A2;
                     item.TWA = eq.TWA;            //2015.8.27
@@ -191,13 +191,13 @@ namespace WADApplication
         private void setControlText(Equipment equi)
         {
             textEdit_address.Text = equi.Address.ToString();
-            if (string.IsNullOrWhiteSpace(equi.ChromaAlertStr))
+            if (string.IsNullOrWhiteSpace(equi.AlertStr))
             {
                 textEdit_choramAlert.Text = "无";
             }
             else
             {
-                textEdit_choramAlert.Text = equi.ChromaAlertStr;
+                textEdit_choramAlert.Text = equi.AlertStr;
             }
 
             if (string.IsNullOrWhiteSpace(equi.THAlertStr))
@@ -210,7 +210,7 @@ namespace WADApplication
             }
             textEdit_chrom.Text = equi.ChromaStr;
             textEdit_gasname.Text = equi.GasName;
-            textEdit_gasUnit.Text = equi.Unit;
+            textEdit_gasUnit.Text = equi.UnitName;
             textEdit_hit.Text = equi.Humidity;
             textEdit_low.Text = equi.LowChromaStr;
             textEdit_name.Text = equi.Name;
@@ -267,86 +267,106 @@ namespace WADApplication
 
         private void btn_one_Click(object sender, EventArgs e)
         {
-            //Form_set fs = new Form_set("一级报警点");
-            //if (fs.ShowDialog() != System.Windows.Forms.DialogResult.OK)
-            //    return;
-            //float f1;
-            //if (float.TryParse(fs.valueStr, out f1))
-            //{
-            //    if (f1>eqOne.A2 || f1>eqOne.Max)
-            //    {
-            //        XtraMessageBox.Show("A1报警值超过量程或者A2");
-            //        return;
-            //    }
-            //    if (f1<0 || f1 > 999999)
-            //    {
-            //         XtraMessageBox.Show("设置值只能为0~999999");
-            //         return;
-            //    }
-            //    byte[] content = BitConverter.GetBytes(f1);
-            //    Array.Reverse(content, 0, 2);
-            //    Array.Reverse(content, 2, 2);
-            //    Command cd = new Command(eqOne.Address, (byte)eqOne.SensorType, (byte)EM_LowType_U.A1报警点, content);
-            //    if (CommandResult.GetResult(cd))
-            //    {
-            //        SendSaveCommand();
-            //        eqOne.A1 = f1;
-            //        EquipmentDal.UpdateOne(eqOne);
-            //        UpdateGridControl(eqOne);
-            //        textEdit_One.Text = eqOne.A1Str;
-            //        XtraMessageBox.Show("设置一级报警点成功");
-            //    }
-            //    else
-            //    {
-            //        XtraMessageBox.Show("设置一级报警点失败");
-            //    }
-            //}
-            //else
-            //{
-            //    XtraMessageBox.Show("只能为数字");
-            //}
+            
+            Form_set fs = new Form_set("一级报警点");
+            if (fs.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+                return;
+            float f1;
+            if (float.TryParse(fs.valueStr, out f1))
+            {
+                if (f1 > eqOne.A2 || f1 > eqOne.Max)
+                {
+                    XtraMessageBox.Show("A1报警值超过量程或者A2");
+                    return;
+                }
+                if (f1 < 0 || f1 > 999999)
+                {
+                    XtraMessageBox.Show("设置值只能为0~999999");
+                    return;
+                }                
+
+                eqOne.A1 = f1;
+                EquipmentDal.UpdateOne(eqOne);
+                UpdateGridControl(eqOne);
+                textEdit_One.Text = eqOne.A1Str;
+                XtraMessageBox.Show("设置一级报警点成功");
+
+                #region 以前设置到仪器里面
+                //byte[] content = BitConverter.GetBytes(f1);
+                //Array.Reverse(content, 0, 2);
+                //Array.Reverse(content, 2, 2);
+                //Command cd = new Command(eqOne.Address, (byte)eqOne.SensorType, (byte)EM_LowType_U.A1报警点, content);
+                //if (CommandResult.GetResult(cd))
+                //{
+                //    SendSaveCommand();
+                //    eqOne.A1 = f1;
+                //    EquipmentDal.UpdateOne(eqOne);
+                //    UpdateGridControl(eqOne);
+                //    textEdit_One.Text = eqOne.A1Str;
+                //    XtraMessageBox.Show("设置一级报警点成功");
+                //}
+                //else
+                //{
+                //    XtraMessageBox.Show("设置一级报警点失败");
+                //}
+                #endregion
+            }
+            else
+            {
+                XtraMessageBox.Show("只能为数字");
+            }
+            
         }
 
         private void btn_two_Click(object sender, EventArgs e)
         {
-            //Form_set fs = new Form_set("二级报警点");
-            //if (fs.ShowDialog() != System.Windows.Forms.DialogResult.OK)
-            //    return;
-            //float f1;
-            //if (float.TryParse(fs.valueStr, out f1))
-            //{
-            //    if (f1 < eqOne.A1 || f1 > eqOne.Max)
-            //    {
-            //        XtraMessageBox.Show("A2报警值超过量程或者小于A1");
-            //        return;
-            //    }
-            //    if (f1 < 0 || f1 > 999999)
-            //    {
-            //        XtraMessageBox.Show("设置值只能为0~999999");
-            //        return;
-            //    }
-            //    byte[] content = BitConverter.GetBytes(f1);
-            //    Array.Reverse(content, 0, 2);
-            //    Array.Reverse(content, 2, 2);
-            //    Command cd = new Command(eqOne.Address, (byte)eqOne.SensorType, (byte)EM_LowType_U.A2报警点, content);
-            //    if (CommandResult.GetResult(cd))
-            //    {
-            //        SendSaveCommand();
-            //        eqOne.A2 = f1;
-            //        EquipmentDal.UpdateOne(eqOne);
-            //        UpdateGridControl(eqOne);
-            //        textEdit_Two.Text = eqOne.A2Str;
-            //        XtraMessageBox.Show("设置二级报警点成功");
-            //    }
-            //    else
-            //    {
-            //        XtraMessageBox.Show("设置二级报警点失败");
-            //    }
-            //}
-            //else
-            //{
-            //    XtraMessageBox.Show("只能为数字");
-            //}
+            Form_set fs = new Form_set("二级报警点");
+            if (fs.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+                return;
+            float f1;
+            if (float.TryParse(fs.valueStr, out f1))
+            {
+                if (f1 < eqOne.A1 || f1 > eqOne.Max)
+                {
+                    XtraMessageBox.Show("A2报警值超过量程或者小于A1");
+                    return;
+                }
+                if (f1 < 0 || f1 > 999999)
+                {
+                    XtraMessageBox.Show("设置值只能为0~999999");
+                    return;
+                }
+
+                eqOne.A2 = f1;
+                EquipmentDal.UpdateOne(eqOne);
+                UpdateGridControl(eqOne);
+                textEdit_Two.Text = eqOne.A2Str;
+                XtraMessageBox.Show("设置二级报警点成功");
+
+                #region 以前设置到仪器里面
+                //byte[] content = BitConverter.GetBytes(f1);
+                //Array.Reverse(content, 0, 2);
+                //Array.Reverse(content, 2, 2);
+                //Command cd = new Command(eqOne.Address, (byte)eqOne.SensorType, (byte)EM_LowType_U.A2报警点, content);
+                //if (CommandResult.GetResult(cd))
+                //{
+                //    SendSaveCommand();
+                //    eqOne.A2 = f1;
+                //    EquipmentDal.UpdateOne(eqOne);
+                //    UpdateGridControl(eqOne);
+                //    textEdit_Two.Text = eqOne.A2Str;
+                //    XtraMessageBox.Show("设置二级报警点成功");
+                //}
+                //else
+                //{
+                //    XtraMessageBox.Show("设置二级报警点失败");
+                //}
+                #endregion
+            }
+            else
+            {
+                XtraMessageBox.Show("只能为数字");
+            }
         }
 
         private void btn_low_Click(object sender, EventArgs e)

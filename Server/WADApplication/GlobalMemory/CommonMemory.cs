@@ -47,6 +47,7 @@ namespace GlobalMemory
         public static CommonConfig Config = new CommonConfig();
 
         public static StructSystemConfig SysConfig = new StructSystemConfig();
+        public static AsyncTCPServer server;
 
         public static void Init()
         {

@@ -108,10 +108,10 @@ namespace CommandManager
         public static float GetFloatValue(byte[] data,int index)
         {
             byte[] FB = new byte[4];
-            FB[0] = data[index+1];
+            FB[0] = data[index + 1];
             FB[1] = data[index];
-            FB[2] = data[index+3];
-            FB[3] = data[index+2];
+            FB[2] = data[index + 3];
+            FB[3] = data[index + 2];
             return BitConverter.ToSingle(FB, 0);
         }
 
@@ -193,26 +193,23 @@ namespace CommandManager
             return dt;
         }
 
-        public static DateTime GetDateTime(byte[] data,int index)
+        public static DateTime GetDateTime(byte[] data,int _index)
         {
-            short year = 0;
+            int index = _index;
+            byte year = 0;
             byte month = 0;
             byte day = 0;
             byte hour = 0;
             byte minute = 0;
             byte second = 0;
+            year = data[index++]; // 最后2位数，比如2020，就是20
+            month = data[index++];
+            day = data[index++];
+            hour = data[index++];
+            minute = data[index++];
+            second = data[index++];
 
-            byte[] FB = new byte[2];
-            Array.Copy(data, index, FB, 0, 2);
-            Array.Reverse(FB);
-            year = BitConverter.ToInt16(FB, 0);
-            month = data[index+2];
-            day = data[index + 3];
-            hour = data[index + 4];
-            minute = data[index + 5];
-            second = data[index + 6];
-
-            if (year < 1900 ||
+            if (year < 0 || year > 99 ||
                 month < 1 || month >= 12 ||
                 day < 1 || day >= 31 ||
                 hour < 0 || hour >= 24 ||
@@ -221,8 +218,8 @@ namespace CommandManager
             {
                 return DateTime.MinValue;
             }
-
-            string Tstr = string.Format("{0}-{1}-{2} {3}:{4}:{5}", year, month, day, hour, minute, second);
+            string yy = DateTime.Now.Year.ToString().Substring(0,2);
+            string Tstr = string.Format("{0}{1}-{2}-{3} {4}:{5}:{6}",yy, year, month, day, hour, minute, second);
             DateTime dt = Convert.ToDateTime(Tstr);
             return dt;
         }
@@ -232,59 +229,23 @@ namespace CommandManager
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public static Equipment GetRealData(byte[] data)
+        public static void GetRealData(byte[] data, out float chrome, out EM_AlertType alertStatus)
         {
-            Equipment eq = new Equipment();
-            byte[] cb = new byte[4];
-            cb[0] = data[3];
-            cb[1] = data[4];
-            cb[2] = data[5];
-            cb[3] = data[6];
-            //限制实时浓度值，最大不超过传感器量程2015.9.9
-            //eq.Chroma = eq.Chroma > eq.Max ? eq.Max : BitConverter.ToSingle(cb,0);
-            eq.Chroma = ((cb[0] << 24) | (cb[1] << 16) | (cb[2] << 8) | cb[3]);
-         //   eq.Chroma = BitConverter.ToSingle(cb, 0);
-            Array.Reverse(data, 7, 2);
-            ushort alart = BitConverter.ToUInt16(data, 7);
-            switch (alart)
-            { 
-                case 0x00:
-                    eq.ChromaAlertStr = "无报警";
-                    break;
-                case 0x01:
-                    eq.ChromaAlertStr = "低报警";
-                    break;
-                case 0x02:
-                    eq.ChromaAlertStr = "高报警";
-                    break;
-            }
-
-           /*
-            eq.THAlertStr = Parse.GetTHAlertStr(data[7]);
-            eq.ChromaAlertStr = Parse.GetChromaAlertStr(data[8]);
+            Array.Reverse(data, 3, 2);
+            Array.Reverse(data, 5, 2);
+            float ch = Convert.ToSingle(Math.Round(BitConverter.ToSingle(data, 3), 3));
+            // 有时出现异常数据，需要过滤为0
+            chrome = ch > 100000 || ch < -100000 ? 0 : ch;
+            alertStatus = (EM_AlertType)data[8];
+            //Equipment eq = new Equipment();
+            //byte[] cb = new byte[4];
+            //cb[0] = data[3];
+            //cb[1] = data[4];
+            //cb[2] = data[5];
+            //cb[3] = data[6];
             
-            cb[0] = data[10];
-            cb[1] = data[9];
-            cb[2] = data[12];
-            cb[3] = data[11];
-            eq.Temperature = string.Format("{0}℃", BitConverter.ToSingle(cb, 0).ToString("f1"));
-
-            cb[0] = data[14];
-            cb[1] = data[13];
-            cb[2] = data[16];
-            cb[3] = data[15];
-            eq.Humidity = string.Format("{0}%", BitConverter.ToSingle(cb, 0).ToString("f0"));
-
-            if (data[18] == 0x01)
-            {
-                eq.IsConnect = true;
-            }
-            else
-            {
-                eq.IsConnect = false;
-            }
-            * */
-            return eq;
+            //eq.Chroma =(float)((cb[0] << 24) | (cb[1] << 16) | (cb[2] << 8) | cb[3]);
+            //return eq;
         }
 
         public static Equipment GetSetData(byte[] data)
@@ -294,7 +255,7 @@ namespace CommandManager
             eq.UnitType = data[4];
             Array.Reverse(data, 11, 2);
             Array.Reverse(data, 13, 2);
-            eq.Max = BitConverter.ToUInt32(data, 11);
+            eq.Max = BitConverter.ToInt32(data, 11);
             if (eq.Max < 0)
             {
                 eq.Max = 0;
@@ -319,7 +280,7 @@ namespace CommandManager
             eq.UnitType = data[4];
             Array.Reverse(data, 11, 2);
             Array.Reverse(data, 13, 2);
-            eq.Max = BitConverter.ToUInt32(data, 11);
+            eq.Max = BitConverter.ToInt32(data, 11);
             if (eq.Max < 0)
             {
                 eq.Max = 0;
@@ -337,7 +298,7 @@ namespace CommandManager
             Array.Reverse(data, 65, 2);
             eq.Chroma = BitConverter.ToSingle(data, 63);
             eq.THAlertStr = Parse.GetTHAlertStr(data[67]);
-            eq.ChromaAlertStr = Parse.GetChromaAlertStr(data[68]);            
+            //eq.ChromaAlertStr = Parse.GetChromaAlertStr(data[68]);            
             Array.Reverse(data, 69, 2);
             Array.Reverse(data, 71, 2);
             eq.Temperature = string.Format("{0}℃", BitConverter.ToSingle(data, 69).ToString("f1"));

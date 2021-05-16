@@ -6,6 +6,7 @@ using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using Entity;
 using GlobalMemory;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -414,6 +415,23 @@ namespace WADApplication.Process
 
             return result;
         }
-        
+
+
+        public static void sendClientData(List<Equipment> data)
+        {
+            if (CommonMemory.server == null || !CommonMemory.server.IsRunning || CommonMemory.server.Clients == null)
+            {
+                return;
+            }
+            ReceiveData resp = new ReceiveData();
+            resp.Type = EM_ReceiveType.RealData;
+            resp.Data = JsonConvert.SerializeObject(data);
+            string str = JsonConvert.SerializeObject(resp);
+            byte[] buffer = UTF8Encoding.Default.GetBytes(str);
+            foreach (var item in CommonMemory.server.Clients)
+            {
+                CommonMemory.server.Send(item, buffer);
+            }
+        }
     }
 }

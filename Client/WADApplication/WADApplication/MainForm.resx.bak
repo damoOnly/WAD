@@ -498,6 +498,9 @@
         8R7xLvE+5Z2WTv5vwnhAMZpaUxIAAAAASUVORK5CYII=
 </value>
   </data>
+  <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>336, 17</value>
+  </metadata>
   <data name="gridView_Status.Appearance.Empty.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAABwgAAAXcCAYAAAA2o9qWAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -2536,6 +2539,26 @@
         43E8jvm/r7xh43E8jsfxOB7He97zGzPe83fvNh7H43gcj+NxdOiN7/mBu43H8Tgex+N4HB16Y/7vL814
         SOBxPI7H8Tj+/zj+0uViuv3f75vhk/L/nvFG4cfxOB7H4/j/+tD79MAf0Bwvl8t7/h82xsdapCT7cAAA
         AABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="pictureEdit_seriaPort.EditValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAGwAAAAZCAYAAADUicu/AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAxxJREFUaEPt2k1u
+        FDEQBWBLiGxQlDsQJDhCljkCfytQluEscA9WwAGIAhKnAAELfo7ACtgM79mpmerq57Y7M4tB6sU3Pf1c
+        ZVuOSDoT0mq1WvxHZLjYXzKsSukAHsNL+AZ/4Bd8uso4xhrWLnqoc54gQyml+/AV3sMzuAP84hDfM3sH
+        rHkA480txtRZT5DhQEo34AXwX9GpGI9OgbXsYa+qWZh4ng0yHCgH/wEOK+PKIbDnucsWijrTCTJcS+kh
+        8F/LUWUcr9lwE8URsPeRy+aqzb0PanublyOdQ4ZZ+dn0A07kOLG9GG5i4wQ4x3UfRKbm3pbtvYfqJzXW
+        U2/z1uFVkWGW0hO4lGNms4BtSLmEpyFTbK4eu+jrNdUXx+avgQ55rioHGWYpvYJzOWbYXmw2MHYOr0Om
+        qHl6stb6prcuUuv1in3+vkCKKy7hXP29I8Mspe9wLMcM24uyuHYMnEuNeWqenqy1vtlVn3L9GqS44hLO
+        1d87MsxS+g0HcsywvSiLa/z5xV+w1Zhnc/WIff6+Zld9ypwaXuvwur4KMszKJxj6Ud5sFuL7mt4vmNKa
+        m3pqKNbZ3nv4PmWbmrIGXgfn6u8dGWYpfYa7cszYYnoj5ja0viXaPHP4Xj9XTazr7fNs7Tl8r5+rZEjX
+        VxPvHRlm5UHhTI55401EZ/AmZBFmGmW9ea0minW9fS02T2s+vT5e83teTbx3ZJiVR/G3cswbbkK5gNZj
+        PWYaZb15rSaKdb19LTZPaz4/vnmPd/meVxPvHRlmu/vF+Se0fnG2eebwvX6umljX2zdlzpw2NqzBXc54
+        NfHekeFa+XPJNh9NfQTOoca92hw9ue2hR22OFlVb65+TMyvwOjhXf+/IcGC7D3/Zq8Z7YYVRFvXUUKzr
+        7aO5vWpc9yAVZ4qLyEGGA8M/r4y/PY43wW+Du/rzClYYZbvE+Xv5+jiPEmt1H1J3lqwpfO7IUCqf3H8B
+        PkTw4yY+rt+EW3DvKuMYa1g73NhCU2c9QYZV5eGBT3x8TOd/Efh7he+Zcaz1gLHw1DlPkOFif8lwsb9k
+        uNhXq/QPvBCNufK8M1kAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="gridView_nowData2.Appearance.Empty.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

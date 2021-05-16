@@ -1159,6 +1159,7 @@
             this.simpleButton5.Size = new System.Drawing.Size(59, 54);
             this.simpleButton5.TabIndex = 13;
             this.simpleButton5.Text = "客户端";
+            this.simpleButton5.Click += new System.EventHandler(this.simpleButton5_Click_1);
             // 
             // simpleButton10
             // 

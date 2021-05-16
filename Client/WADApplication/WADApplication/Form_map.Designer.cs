@@ -213,9 +213,9 @@
             // 
             // pictureEdit1
             // 
+            this.pictureEdit1.BackgroundImage = global::WADApplication.Properties.Resources.点位图1;
             this.pictureEdit1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureEdit1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureEdit1.EditValue = global::WADApplication.Properties.Resources.点位图1;
             this.pictureEdit1.Location = new System.Drawing.Point(0, 0);
             this.pictureEdit1.Name = "pictureEdit1";
             this.pictureEdit1.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
@@ -403,9 +403,9 @@
             // 
             // pictureEdit2
             // 
+            this.pictureEdit2.BackgroundImage = global::WADApplication.Properties.Resources.点位图2;
             this.pictureEdit2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureEdit2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureEdit2.EditValue = global::WADApplication.Properties.Resources.点位图2;
             this.pictureEdit2.Location = new System.Drawing.Point(0, 0);
             this.pictureEdit2.Name = "pictureEdit2";
             this.pictureEdit2.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;

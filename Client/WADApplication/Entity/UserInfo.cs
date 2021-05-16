@@ -31,5 +31,6 @@ namespace Entity
         /// 级别
         /// </summary>
         public EM_UserType Level { get; set; }
+
     }
 }

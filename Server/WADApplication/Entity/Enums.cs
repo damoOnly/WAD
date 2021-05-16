@@ -376,4 +376,10 @@ namespace Entity
         Admin = 1,
         Super = 2
     }
+
+    public enum EM_ReceiveType : int
+    {
+        RealData = 0,
+        HistoryData = 1
+    }
 }

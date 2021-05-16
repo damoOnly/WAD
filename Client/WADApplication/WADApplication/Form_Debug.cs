@@ -9,7 +9,7 @@ using System.Linq;
 using DevExpress.XtraEditors;
 using Entity;
 using CommandManager;
-using Dal;
+using Business;
 using WADApplication.Properties;
 using System.Threading;
 
@@ -20,10 +20,6 @@ namespace WADApplication
         #region 变量
         private List<Equipment> list2;
         private Equipment eqNow;
-        /// <summary>
-        /// 结束采样
-        /// </summary>
-        private bool Cancel = false;
         #endregion
         public Form_Debug()
         {
@@ -131,7 +127,7 @@ namespace WADApplication
 
         private void Initlist()
         {
-            List<Equipment> list = EquipmentDal.GetAllList();
+            List<Equipment> list = EquipmentBusiness.GetAllListNotDelete();
             if (list == null || list.Count < 1)
             {
                 UnEnabled();
@@ -177,7 +173,6 @@ namespace WADApplication
 
         private void simpleButton7_Click(object sender, EventArgs e)
         {
-            Cancel = false;
             Thread thread = new Thread(new ThreadStart(sample));
             thread.Start();
         }

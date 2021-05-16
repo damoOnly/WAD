@@ -6,13 +6,14 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
+using GlobalMemory;
 
 
 namespace WADApplication
 {
     public partial class Form_setTime : DevExpress.XtraEditors.XtraForm
     {
-        public DateTime DT = DateTime.Now;
+        public DateTime DT = Utility.CutOffMillisecond(DateTime.Now);
         public Form_setTime()
         {
             
@@ -32,7 +33,8 @@ namespace WADApplication
         //在开启子线程前，初始化皮肤，传入用户SkinName,否则子按钮样式获取失败   2015.8.28
         public void InitiateDevExpressSkins()
         {
-            DevExpress.Skins.SkinManager.Default.RegisterAssembly(typeof(DevExpress.UserSkins.WADSkinProject).Assembly); //Register!
+            // 去掉皮肤
+            //DevExpress.Skins.SkinManager.Default.RegisterAssembly(typeof(DevExpress.UserSkins.WADSkinProject).Assembly); //Register!
             DevExpress.Skins.SkinManager.EnableFormSkins();
             DevExpress.Skins.SkinManager.EnableFormSkinsIfNotVista();
             DevExpress.XtraEditors.Controls.Localizer.Active = new LocalizationCHS();
@@ -42,7 +44,7 @@ namespace WADApplication
         private void Form_setTime_Load(object sender, EventArgs e)
         {
             InitiateDevExpressSkins();
-            dateEdit1.DateTime = DateTime.Now;
+            dateEdit1.DateTime = Utility.CutOffMillisecond(DateTime.Now);
         }
     }
 }

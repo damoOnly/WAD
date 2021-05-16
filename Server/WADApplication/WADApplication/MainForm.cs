@@ -202,6 +202,7 @@ namespace WADApplication
                     IsReadBasic = false;
                     this.Invoke(new Action(gridControl_nowData2.RefreshDataSource));
                     //this.Invoke(new Action(gridView_nowData2.BestFitColumns));
+                    MainProcess.sendClientData(mainList);
                     Thread.Sleep(readHz * 1000);
                 }
                 catch
@@ -255,7 +256,7 @@ namespace WADApplication
         {
 
         }
-
+        
         /// <summary>
         /// 设置状态文字
         /// </summary>
@@ -340,18 +341,6 @@ namespace WADApplication
             // 重置消息
             resetMessageCallBack = new ResetMessage(resetMessage);
             #endregion
-        }
-
-        static string GetLocalIp()//获取本地IP
-        {
-            string hostname = Dns.GetHostName();
-            IPHostEntry localhost = Dns.GetHostEntry(hostname);
-            IPAddress localaddr;
-            if (localhost.AddressList.Length > 1)
-                localaddr = localhost.AddressList[1];//win7
-            else
-                localaddr = localhost.AddressList[0];//xp
-            return localaddr.ToString();
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
@@ -830,7 +819,7 @@ namespace WADApplication
             //}
             //try
             //{
-            //    tcpLister = new TcpListener(new IPEndPoint(IPAddress.Parse(tbxserverIp.Text), Convert.ToInt32(tbxPort.Text)));
+            //tcpLister = new TcpListener(new IPEndPoint(IPAddress.Parse(tbxserverIp.Text), Convert.ToInt32(tbxPort.Text)));
             //    //  tcpLister = new TcpListener(ipaddress,Port);
             //    tcpLister.Start();
             //    // 启动一个线程来接受请求
@@ -1577,6 +1566,12 @@ namespace WADApplication
                 CommonMemory.IsCloseSoundTemp = false;
                 simpleButton11.Text = "消音";
             }
+        }
+
+        private void simpleButton5_Click_1(object sender, EventArgs e)
+        {
+            Form_Client fc = new Form_Client();
+            fc.ShowDialog();
         }
     }
 }

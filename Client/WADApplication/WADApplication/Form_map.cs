@@ -25,7 +25,7 @@ namespace WADApplication
                 DevExpress.XtraEditors.LabelControl con = item as DevExpress.XtraEditors.LabelControl;
                 if (con != null && Convert.ToInt32(item.Tag) == id)
                 {
-                    con.Invoke(new Action(() => { con.Text = name + ": " + chroma; }));
+                    con.Text = name + ": " + chroma;
                     break;
                 }
             }
@@ -34,7 +34,7 @@ namespace WADApplication
                 DevExpress.XtraEditors.LabelControl con = item as DevExpress.XtraEditors.LabelControl;
                 if (con != null && Convert.ToInt32(item.Tag) == id)
                 {
-                    con.Invoke(new Action(() => { con.Text = name + ": " + chroma; }));
+                    con.Text = name + ": " + chroma;
                     break;
                 }
             }

@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_History));
-            DevExpress.XtraCharts.SwiftPlotDiagram swiftPlotDiagram1 = new DevExpress.XtraCharts.SwiftPlotDiagram();
-            DevExpress.XtraCharts.Series series1 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.SwiftPlotSeriesView swiftPlotSeriesView1 = new DevExpress.XtraCharts.SwiftPlotSeriesView();
-            DevExpress.XtraCharts.SwiftPlotSeriesView swiftPlotSeriesView2 = new DevExpress.XtraCharts.SwiftPlotSeriesView();
+            DevExpress.XtraCharts.SwiftPlotDiagram swiftPlotDiagram2 = new DevExpress.XtraCharts.SwiftPlotDiagram();
+            DevExpress.XtraCharts.Series series2 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.SwiftPlotSeriesView swiftPlotSeriesView3 = new DevExpress.XtraCharts.SwiftPlotSeriesView();
+            DevExpress.XtraCharts.SwiftPlotSeriesView swiftPlotSeriesView4 = new DevExpress.XtraCharts.SwiftPlotSeriesView();
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
             this.splitContainerControl3 = new DevExpress.XtraEditors.SplitContainerControl();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -48,6 +48,7 @@
             this.gridControl2 = new DevExpress.XtraGrid.GridControl();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.checkedComboBoxEdit1 = new DevExpress.XtraEditors.CheckedComboBoxEdit();
             this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton7 = new DevExpress.XtraEditors.SimpleButton();
@@ -69,19 +70,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.textEdit7.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit5.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartControl2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(swiftPlotDiagram1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(swiftPlotSeriesView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(swiftPlotSeriesView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(swiftPlotDiagram2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(swiftPlotSeriesView3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(swiftPlotSeriesView4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2)).BeginInit();
             this.splitContainerControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.checkedComboBoxEdit1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties.VistaTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties.VistaTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties)).BeginInit();
             this.SuspendLayout();
             // 
@@ -95,8 +96,8 @@
             this.splitContainerControl1.Panel1.Text = "Panel1";
             this.splitContainerControl1.Panel2.Controls.Add(this.splitContainerControl2);
             this.splitContainerControl1.Panel2.Text = "Panel2";
-            this.splitContainerControl1.Size = new System.Drawing.Size(904, 427);
-            this.splitContainerControl1.SplitterPosition = 306;
+            this.splitContainerControl1.Size = new System.Drawing.Size(801, 444);
+            this.splitContainerControl1.SplitterPosition = 303;
             this.splitContainerControl1.TabIndex = 0;
             this.splitContainerControl1.Text = "splitContainerControl1";
             // 
@@ -110,8 +111,8 @@
             this.splitContainerControl3.Panel1.Text = "Panel1";
             this.splitContainerControl3.Panel2.Controls.Add(this.chartControl2);
             this.splitContainerControl3.Panel2.Text = "Panel2";
-            this.splitContainerControl3.Size = new System.Drawing.Size(593, 427);
-            this.splitContainerControl3.SplitterPosition = 99;
+            this.splitContainerControl3.Size = new System.Drawing.Size(493, 444);
+            this.splitContainerControl3.SplitterPosition = 96;
             this.splitContainerControl3.TabIndex = 0;
             this.splitContainerControl3.Text = "splitContainerControl3";
             // 
@@ -137,44 +138,46 @@
             this.tableLayoutPanel1.Controls.Add(this.textEdit7, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.labelControl14, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.textEdit5, 4, 1);
-            this.tableLayoutPanel1.Controls.Add(this.labelControl2, 4, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.labelControl2, 3, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 5);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(590, 97);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(491, 82);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // textEdit6
             // 
             this.textEdit6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textEdit6.Enabled = false;
-            this.textEdit6.Location = new System.Drawing.Point(514, 62);
+            this.textEdit6.Location = new System.Drawing.Point(430, 51);
             this.textEdit6.Name = "textEdit6";
             this.textEdit6.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.textEdit6.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.textEdit6.Properties.Appearance.Options.UseBackColor = true;
             this.textEdit6.Properties.Appearance.Options.UseForeColor = true;
             this.textEdit6.Properties.ReadOnly = true;
-            this.textEdit6.Size = new System.Drawing.Size(73, 20);
+            this.textEdit6.Size = new System.Drawing.Size(58, 20);
             this.textEdit6.TabIndex = 10;
             // 
             // labelControl15
             // 
             this.labelControl15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelControl15.Location = new System.Drawing.Point(441, 65);
+            this.labelControl15.Appearance.ForeColor = System.Drawing.Color.White;
+            this.labelControl15.Location = new System.Drawing.Point(369, 55);
             this.labelControl15.Name = "labelControl15";
-            this.labelControl15.Size = new System.Drawing.Size(48, 14);
+            this.labelControl15.Size = new System.Drawing.Size(48, 13);
             this.labelControl15.TabIndex = 8;
             this.labelControl15.Text = "平均浓度";
             // 
             // labelControl1
             // 
             this.labelControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelControl1.Location = new System.Drawing.Point(3, 65);
+            this.labelControl1.Appearance.ForeColor = System.Drawing.Color.White;
+            this.labelControl1.Location = new System.Drawing.Point(3, 55);
             this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(48, 14);
+            this.labelControl1.Size = new System.Drawing.Size(48, 13);
             this.labelControl1.TabIndex = 6;
             this.labelControl1.Text = "最高浓度";
             // 
@@ -182,22 +185,23 @@
             // 
             this.textEdit7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textEdit7.Enabled = false;
-            this.textEdit7.Location = new System.Drawing.Point(76, 62);
+            this.textEdit7.Location = new System.Drawing.Point(64, 51);
             this.textEdit7.Name = "textEdit7";
             this.textEdit7.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.textEdit7.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.textEdit7.Properties.Appearance.Options.UseBackColor = true;
             this.textEdit7.Properties.Appearance.Options.UseForeColor = true;
             this.textEdit7.Properties.ReadOnly = true;
-            this.textEdit7.Size = new System.Drawing.Size(67, 20);
+            this.textEdit7.Size = new System.Drawing.Size(55, 20);
             this.textEdit7.TabIndex = 11;
             // 
             // labelControl14
             // 
             this.labelControl14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelControl14.Location = new System.Drawing.Point(222, 65);
+            this.labelControl14.Appearance.ForeColor = System.Drawing.Color.White;
+            this.labelControl14.Location = new System.Drawing.Point(186, 55);
             this.labelControl14.Name = "labelControl14";
-            this.labelControl14.Size = new System.Drawing.Size(48, 14);
+            this.labelControl14.Size = new System.Drawing.Size(48, 13);
             this.labelControl14.TabIndex = 7;
             this.labelControl14.Text = "最低浓度";
             // 
@@ -205,20 +209,20 @@
             // 
             this.textEdit5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textEdit5.Enabled = false;
-            this.textEdit5.Location = new System.Drawing.Point(295, 62);
+            this.textEdit5.Location = new System.Drawing.Point(247, 51);
             this.textEdit5.Name = "textEdit5";
             this.textEdit5.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.textEdit5.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.textEdit5.Properties.Appearance.Options.UseBackColor = true;
             this.textEdit5.Properties.Appearance.Options.UseForeColor = true;
             this.textEdit5.Properties.ReadOnly = true;
-            this.textEdit5.Size = new System.Drawing.Size(67, 20);
+            this.textEdit5.Size = new System.Drawing.Size(55, 20);
             this.textEdit5.TabIndex = 9;
             // 
             // labelControl2
             // 
             this.labelControl2.Appearance.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl2.Location = new System.Drawing.Point(295, 3);
+            this.labelControl2.Location = new System.Drawing.Point(186, 3);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(102, 16);
             this.labelControl2.TabIndex = 12;
@@ -228,28 +232,27 @@
             // 
             this.chartControl2.BackImage.Image = ((System.Drawing.Image)(resources.GetObject("chartControl2.BackImage.Image")));
             this.chartControl2.BackImage.Stretch = true;
-            swiftPlotDiagram1.AxisX.Range.ScrollingRange.SideMarginsEnabled = true;
-            swiftPlotDiagram1.AxisX.Range.SideMarginsEnabled = true;
-            swiftPlotDiagram1.AxisX.VisibleInPanesSerializable = "-1";
-            swiftPlotDiagram1.AxisY.Range.ScrollingRange.SideMarginsEnabled = true;
-            swiftPlotDiagram1.AxisY.Range.SideMarginsEnabled = true;
-            swiftPlotDiagram1.AxisY.VisibleInPanesSerializable = "-1";
-            swiftPlotDiagram1.DefaultPane.EnableAxisXScrolling = DevExpress.Utils.DefaultBoolean.True;
-            swiftPlotDiagram1.DefaultPane.EnableAxisXZooming = DevExpress.Utils.DefaultBoolean.True;
-            swiftPlotDiagram1.EnableAxisXScrolling = true;
-            swiftPlotDiagram1.EnableAxisXZooming = true;
-            this.chartControl2.Diagram = swiftPlotDiagram1;
+            this.chartControl2.CacheToMemory = true;
+            swiftPlotDiagram2.AxisX.VisibleInPanesSerializable = "-1";
+            swiftPlotDiagram2.AxisX.WholeRange.AutoSideMargins = true;
+            swiftPlotDiagram2.AxisY.VisibleInPanesSerializable = "-1";
+            swiftPlotDiagram2.AxisY.WholeRange.AutoSideMargins = true;
+            swiftPlotDiagram2.DefaultPane.EnableAxisXScrolling = DevExpress.Utils.DefaultBoolean.True;
+            swiftPlotDiagram2.DefaultPane.EnableAxisXZooming = DevExpress.Utils.DefaultBoolean.True;
+            this.chartControl2.Diagram = swiftPlotDiagram2;
             this.chartControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chartControl2.Legend.AlignmentHorizontal = DevExpress.XtraCharts.LegendAlignmentHorizontal.Right;
+            this.chartControl2.Legend.MarkerVisible = false;
             this.chartControl2.Location = new System.Drawing.Point(0, 0);
             this.chartControl2.Name = "chartControl2";
-            series1.ArgumentScaleType = DevExpress.XtraCharts.ScaleType.DateTime;
-            series1.Name = "Series 1";
-            series1.View = swiftPlotSeriesView1;
+            this.chartControl2.RefreshDataOnRepaint = false;
+            series2.ArgumentScaleType = DevExpress.XtraCharts.ScaleType.DateTime;
+            series2.Name = "Series 1";
+            series2.View = swiftPlotSeriesView3;
             this.chartControl2.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
-        series1};
-            this.chartControl2.SeriesTemplate.View = swiftPlotSeriesView2;
-            this.chartControl2.Size = new System.Drawing.Size(593, 323);
+        series2};
+            this.chartControl2.SeriesTemplate.View = swiftPlotSeriesView4;
+            this.chartControl2.Size = new System.Drawing.Size(493, 343);
             this.chartControl2.TabIndex = 1;
             // 
             // splitContainerControl2
@@ -263,8 +266,8 @@
             this.splitContainerControl2.Panel1.Text = "Panel1";
             this.splitContainerControl2.Panel2.Controls.Add(this.panel2);
             this.splitContainerControl2.Panel2.Text = "Panel2";
-            this.splitContainerControl2.Size = new System.Drawing.Size(306, 427);
-            this.splitContainerControl2.SplitterPosition = 187;
+            this.splitContainerControl2.Size = new System.Drawing.Size(303, 444);
+            this.splitContainerControl2.SplitterPosition = 181;
             this.splitContainerControl2.TabIndex = 0;
             this.splitContainerControl2.Text = "splitContainerControl2";
             // 
@@ -274,7 +277,7 @@
             this.gridControl2.Location = new System.Drawing.Point(0, 0);
             this.gridControl2.MainView = this.gridView2;
             this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(306, 235);
+            this.gridControl2.Size = new System.Drawing.Size(303, 258);
             this.gridControl2.TabIndex = 1;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
@@ -307,6 +310,7 @@
             // panel2
             // 
             this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
+            this.panel2.Controls.Add(this.simpleButton1);
             this.panel2.Controls.Add(this.checkedComboBoxEdit1);
             this.panel2.Controls.Add(this.simpleButton3);
             this.panel2.Controls.Add(this.simpleButton7);
@@ -319,34 +323,44 @@
             this.panel2.Controls.Add(this.simpleButton2);
             this.panel2.Controls.Add(this.labelControl19);
             this.panel2.Controls.Add(this.labelControl18);
-            this.panel2.Location = new System.Drawing.Point(3, 4);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(300, 180);
+            this.panel2.Size = new System.Drawing.Size(303, 181);
             this.panel2.TabIndex = 28;
+            // 
+            // simpleButton1
+            // 
+            this.simpleButton1.Location = new System.Drawing.Point(189, 139);
+            this.simpleButton1.Name = "simpleButton1";
+            this.simpleButton1.Size = new System.Drawing.Size(87, 21);
+            this.simpleButton1.TabIndex = 32;
+            this.simpleButton1.Text = "导入数据";
+            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
             // checkedComboBoxEdit1
             // 
-            this.checkedComboBoxEdit1.Location = new System.Drawing.Point(69, 21);
+            this.checkedComboBoxEdit1.Location = new System.Drawing.Point(65, 19);
             this.checkedComboBoxEdit1.Name = "checkedComboBoxEdit1";
             this.checkedComboBoxEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.checkedComboBoxEdit1.Size = new System.Drawing.Size(138, 20);
+            this.checkedComboBoxEdit1.Size = new System.Drawing.Size(118, 20);
             this.checkedComboBoxEdit1.TabIndex = 31;
             // 
             // simpleButton3
             // 
-            this.simpleButton3.Location = new System.Drawing.Point(211, 147);
+            this.simpleButton3.Location = new System.Drawing.Point(45, 138);
             this.simpleButton3.Name = "simpleButton3";
-            this.simpleButton3.Size = new System.Drawing.Size(80, 23);
+            this.simpleButton3.Size = new System.Drawing.Size(87, 21);
             this.simpleButton3.TabIndex = 23;
             this.simpleButton3.Text = "查找";
             this.simpleButton3.Click += new System.EventHandler(this.simpleButton3_Click);
             // 
             // simpleButton7
             // 
-            this.simpleButton7.Location = new System.Drawing.Point(211, 121);
+            this.simpleButton7.Location = new System.Drawing.Point(189, 112);
             this.simpleButton7.Name = "simpleButton7";
-            this.simpleButton7.Size = new System.Drawing.Size(80, 23);
+            this.simpleButton7.Size = new System.Drawing.Size(87, 21);
             this.simpleButton7.TabIndex = 27;
             this.simpleButton7.Text = "屏幕截图";
             this.simpleButton7.Click += new System.EventHandler(this.simpleButton7_Click);
@@ -354,7 +368,7 @@
             // dateEdit2
             // 
             this.dateEdit2.EditValue = null;
-            this.dateEdit2.Location = new System.Drawing.Point(69, 141);
+            this.dateEdit2.Location = new System.Drawing.Point(65, 112);
             this.dateEdit2.Name = "dateEdit2";
             this.dateEdit2.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.dateEdit2.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -362,40 +376,42 @@
             this.dateEdit2.Properties.Appearance.Options.UseForeColor = true;
             this.dateEdit2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dateEdit2.Properties.CalendarTimeEditing = DevExpress.Utils.DefaultBoolean.True;
+            this.dateEdit2.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.dateEdit2.Properties.CalendarView = DevExpress.XtraEditors.Repository.CalendarView.Vista;
             this.dateEdit2.Properties.DisplayFormat.FormatString = "yyyy-MM-dd HH:mm:ss";
             this.dateEdit2.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
             this.dateEdit2.Properties.EditFormat.FormatString = "yyyy-MM-dd HH:mm:ss";
             this.dateEdit2.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom;
             this.dateEdit2.Properties.Mask.EditMask = "yyyy-MM-dd HH:mm:ss";
             this.dateEdit2.Properties.VistaDisplayMode = DevExpress.Utils.DefaultBoolean.True;
-            this.dateEdit2.Properties.VistaEditTime = DevExpress.Utils.DefaultBoolean.True;
-            this.dateEdit2.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.dateEdit2.Size = new System.Drawing.Size(138, 20);
+            this.dateEdit2.Size = new System.Drawing.Size(118, 20);
             this.dateEdit2.TabIndex = 21;
             // 
             // btn_ClearDB
             // 
-            this.btn_ClearDB.Location = new System.Drawing.Point(211, 95);
+            this.btn_ClearDB.Location = new System.Drawing.Point(189, 88);
             this.btn_ClearDB.Name = "btn_ClearDB";
-            this.btn_ClearDB.Size = new System.Drawing.Size(80, 23);
+            this.btn_ClearDB.Size = new System.Drawing.Size(87, 21);
             this.btn_ClearDB.TabIndex = 26;
             this.btn_ClearDB.Text = "清空本地数据";
             this.btn_ClearDB.Click += new System.EventHandler(this.btn_ClearDB_Click);
             // 
             // labelControl16
             // 
-            this.labelControl16.Location = new System.Drawing.Point(11, 24);
+            this.labelControl16.Appearance.ForeColor = System.Drawing.Color.White;
+            this.labelControl16.Location = new System.Drawing.Point(9, 22);
             this.labelControl16.Name = "labelControl16";
-            this.labelControl16.Size = new System.Drawing.Size(52, 14);
+            this.labelControl16.Size = new System.Drawing.Size(52, 13);
             this.labelControl16.TabIndex = 14;
             this.labelControl16.Text = "设备名称:";
             // 
             // simpleButton5
             // 
-            this.simpleButton5.Location = new System.Drawing.Point(211, 69);
+            this.simpleButton5.Location = new System.Drawing.Point(189, 64);
             this.simpleButton5.Name = "simpleButton5";
-            this.simpleButton5.Size = new System.Drawing.Size(80, 23);
+            this.simpleButton5.Size = new System.Drawing.Size(87, 21);
             this.simpleButton5.TabIndex = 25;
             this.simpleButton5.Text = "清空设备数据";
             this.simpleButton5.Click += new System.EventHandler(this.simpleButton5_Click);
@@ -403,7 +419,7 @@
             // dateEdit1
             // 
             this.dateEdit1.EditValue = null;
-            this.dateEdit1.Location = new System.Drawing.Point(69, 81);
+            this.dateEdit1.Location = new System.Drawing.Point(65, 64);
             this.dateEdit1.Name = "dateEdit1";
             this.dateEdit1.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.dateEdit1.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -411,63 +427,66 @@
             this.dateEdit1.Properties.Appearance.Options.UseForeColor = true;
             this.dateEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dateEdit1.Properties.CalendarTimeEditing = DevExpress.Utils.DefaultBoolean.True;
+            this.dateEdit1.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.dateEdit1.Properties.CalendarView = DevExpress.XtraEditors.Repository.CalendarView.Vista;
             this.dateEdit1.Properties.DisplayFormat.FormatString = "yyyy-MM-dd HH:mm:ss";
             this.dateEdit1.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
             this.dateEdit1.Properties.EditFormat.FormatString = "yyyy-MM-dd HH:mm:ss";
             this.dateEdit1.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom;
             this.dateEdit1.Properties.Mask.EditMask = "yyyy-MM-dd HH:mm:ss";
             this.dateEdit1.Properties.VistaDisplayMode = DevExpress.Utils.DefaultBoolean.True;
-            this.dateEdit1.Properties.VistaEditTime = DevExpress.Utils.DefaultBoolean.True;
-            this.dateEdit1.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.dateEdit1.Size = new System.Drawing.Size(138, 20);
+            this.dateEdit1.Size = new System.Drawing.Size(118, 20);
             this.dateEdit1.TabIndex = 20;
             // 
             // simpleButton4
             // 
-            this.simpleButton4.Location = new System.Drawing.Point(211, 43);
+            this.simpleButton4.Location = new System.Drawing.Point(189, 40);
             this.simpleButton4.Name = "simpleButton4";
-            this.simpleButton4.Size = new System.Drawing.Size(80, 23);
+            this.simpleButton4.Size = new System.Drawing.Size(87, 21);
             this.simpleButton4.TabIndex = 24;
             this.simpleButton4.Text = "导出数据";
             this.simpleButton4.Click += new System.EventHandler(this.simpleButton4_Click);
             // 
             // simpleButton2
             // 
-            this.simpleButton2.Location = new System.Drawing.Point(211, 17);
+            this.simpleButton2.Location = new System.Drawing.Point(189, 16);
             this.simpleButton2.Name = "simpleButton2";
-            this.simpleButton2.Size = new System.Drawing.Size(80, 23);
+            this.simpleButton2.Size = new System.Drawing.Size(87, 21);
             this.simpleButton2.TabIndex = 22;
             this.simpleButton2.Text = "删除所查数据";
             this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
             // 
             // labelControl19
             // 
-            this.labelControl19.Location = new System.Drawing.Point(12, 144);
+            this.labelControl19.Appearance.ForeColor = System.Drawing.Color.White;
+            this.labelControl19.Location = new System.Drawing.Point(10, 115);
             this.labelControl19.Name = "labelControl19";
-            this.labelControl19.Size = new System.Drawing.Size(52, 14);
+            this.labelControl19.Size = new System.Drawing.Size(52, 13);
             this.labelControl19.TabIndex = 17;
             this.labelControl19.Text = "截止时间:";
             // 
             // labelControl18
             // 
-            this.labelControl18.Location = new System.Drawing.Point(11, 84);
+            this.labelControl18.Appearance.ForeColor = System.Drawing.Color.White;
+            this.labelControl18.Location = new System.Drawing.Point(9, 67);
             this.labelControl18.Name = "labelControl18";
-            this.labelControl18.Size = new System.Drawing.Size(52, 14);
+            this.labelControl18.Size = new System.Drawing.Size(52, 13);
             this.labelControl18.TabIndex = 16;
             this.labelControl18.Text = "起始时间:";
             // 
             // Form_History
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(904, 427);
+            this.ClientSize = new System.Drawing.Size(801, 444);
             this.Controls.Add(this.splitContainerControl1);
             this.MinimizeBox = false;
             this.Name = "Form_History";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "历史监控记录";
+            this.Text = "监测数据";
             this.Load += new System.EventHandler(this.Form_History_Load);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();
             this.splitContainerControl1.ResumeLayout(false);
@@ -478,10 +497,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.textEdit6.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit7.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit5.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(swiftPlotDiagram1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(swiftPlotSeriesView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(swiftPlotSeriesView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(swiftPlotDiagram2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(swiftPlotSeriesView3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(swiftPlotSeriesView4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartControl2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2)).EndInit();
             this.splitContainerControl2.ResumeLayout(false);
@@ -490,9 +509,9 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.checkedComboBoxEdit1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties.VistaTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties.VistaTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties)).EndInit();
             this.ResumeLayout(false);
 
@@ -527,5 +546,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel2;
         private DevExpress.XtraEditors.CheckedComboBoxEdit checkedComboBoxEdit1;
+        private DevExpress.XtraEditors.SimpleButton simpleButton1;
     }
 }

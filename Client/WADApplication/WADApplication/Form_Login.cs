@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using Entity;
-using Dal;
+using Business;
 
 namespace WADApplication
 {

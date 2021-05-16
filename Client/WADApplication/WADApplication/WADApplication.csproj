@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WADApplication</RootNamespace>
     <AssemblyName>WADApplication</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -33,6 +34,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>wnd.ico</ApplicationIcon>
@@ -40,82 +42,111 @@
   <ItemGroup>
     <Reference Include="DevExpress.Charts.v14.2.Core, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      
       <Private>True</Private>
     </Reference>
     <Reference Include="DevExpress.Data.v14.2, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      
       <Private>True</Private>
     </Reference>
     <Reference Include="DevExpress.Printing.v14.2.Core, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      
       <Private>True</Private>
     </Reference>
     <Reference Include="DevExpress.Office.v14.2.Core, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      
       <Private>True</Private>
     </Reference>
     <Reference Include="DevExpress.RichEdit.v14.2.Core, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.SpellChecker.v14.2.Core, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
       <Private>True</Private>
     </Reference>
     <Reference Include="DevExpress.Utils.v14.2, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      
       <Private>True</Private>
     </Reference>
     <Reference Include="DevExpress.XtraBars.v14.2, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      
       <Private>True</Private>
     </Reference>
     <Reference Include="DevExpress.XtraCharts.v14.2.Wizard, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      
       <Private>True</Private>
     </Reference>
     <Reference Include="DevExpress.XtraCharts.v14.2, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      
       <Private>True</Private>
     </Reference>
     <Reference Include="DevExpress.XtraCharts.v14.2.UI, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      
       <Private>True</Private>
     </Reference>
     <Reference Include="DevExpress.XtraEditors.v14.2, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      
       <Private>True</Private>
     </Reference>
+    <Reference Include="DevExpress.XtraNavBar.v14.2, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraPrinting.v14.2, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      
       <Private>True</Private>
     </Reference>
     <Reference Include="DevExpress.XtraGrid.v14.2, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      
       <Private>True</Private>
     </Reference>
     <Reference Include="DevExpress.XtraLayout.v14.2, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      
       <Private>True</Private>
     </Reference>
     <Reference Include="DevExpress.XtraRichEdit.v14.2, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      
       <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraScheduler.v14.2.Reporting.Extensions, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraScheduler.v14.2, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraScheduler.v14.2.Core, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraScheduler.v14.2.Extensions, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraSpellChecker.v14.2, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraTreeList.v14.2, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MQTTnet, Version=2.1.5.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MQTTnet.2.2.0\lib\net45\MQTTnet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MQTTnet.Core, Version=2.1.5.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MQTTnet.2.2.0\lib\net45\MQTTnet.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI">
+      <HintPath>..\Libs\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML">
+      <HintPath>..\Libs\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net">
+      <HintPath>..\Libs\NPOI.OpenXml4Net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Speech" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -125,10 +156,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="WAD_SkinProject, Version=11.2.11.0, Culture=neutral, PublicKeyToken=95fc6c5621878f0a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\WAD_SkinProject\WAD_SkinProject.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddDeviceForm.cs">
@@ -136,6 +163,36 @@
     </Compile>
     <Compile Include="AddDeviceForm.Designer.cs">
       <DependentUpon>AddDeviceForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_AlertHistoryNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_AlertHistoryNew.Designer.cs">
+      <DependentUpon>Form_AlertHistoryNew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Client.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Client.Designer.cs">
+      <DependentUpon>Form_Client.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_InputHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_InputHistory.Designer.cs">
+      <DependentUpon>Form_InputHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_HistoryNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_HistoryNew.Designer.cs">
+      <DependentUpon>Form_HistoryNew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_map.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_map.Designer.cs">
+      <DependentUpon>Form_map.cs</DependentUpon>
     </Compile>
     <Compile Include="Form_AlertHistory.cs">
       <SubType>Form</SubType>
@@ -179,11 +236,11 @@
     <Compile Include="Form_Login.Designer.cs">
       <DependentUpon>Form_Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_map.cs">
+    <Compile Include="Form_OneParmSet.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_map.Designer.cs">
-      <DependentUpon>Form_map.cs</DependentUpon>
+    <Compile Include="Form_OneParmSet.Designer.cs">
+      <DependentUpon>Form_OneParmSet.cs</DependentUpon>
     </Compile>
     <Compile Include="Form_SensorParmSet.cs">
       <SubType>Form</SubType>
@@ -215,8 +272,23 @@
     <Compile Include="Form_zero.Designer.cs">
       <DependentUpon>Form_zero.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gloabl.cs" />
+    <Compile Include="ImportExcel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImportExcel.Designer.cs">
+      <DependentUpon>ImportExcel.cs</DependentUpon>
+    </Compile>
     <Compile Include="LocalizationCHS.cs" />
+    <Compile Include="MDIParent1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MDIParent1.Designer.cs">
+      <DependentUpon>MDIParent1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\AlertProcess.cs" />
+    <Compile Include="Process\AppConfigProcess.cs" />
+    <Compile Include="Process\ExcelHelper.cs" />
+    <Compile Include="Process\MainProcess.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MainForm.cs">
@@ -231,18 +303,21 @@
     <Compile Include="RegisterDeviceForm.Designer.cs">
       <DependentUpon>RegisterDeviceForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_InputHistory.cs">
+    <Compile Include="SystemConfig.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_InputHistory.Designer.cs">
-      <DependentUpon>Form_InputHistory.cs</DependentUpon>
+    <Compile Include="SystemConfig.Designer.cs">
+      <DependentUpon>SystemConfig.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="AddDeviceForm.resx">
       <DependentUpon>AddDeviceForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_AlertHistoryNew.resx">
+      <DependentUpon>Form_AlertHistoryNew.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_AlertHistory.resx">
       <DependentUpon>Form_AlertHistory.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_ChangeAdmin.resx">
       <DependentUpon>Form_ChangeAdmin.cs</DependentUpon>
@@ -250,8 +325,17 @@
     <EmbeddedResource Include="Form_ChangePassWord.resx">
       <DependentUpon>Form_ChangePassWord.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form_Client.resx">
+      <DependentUpon>Form_Client.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_Debug.resx">
       <DependentUpon>Form_Debug.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_InputHistory.resx">
+      <DependentUpon>Form_InputHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_HistoryNew.resx">
+      <DependentUpon>Form_HistoryNew.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_History.resx">
       <DependentUpon>Form_History.cs</DependentUpon>
@@ -264,6 +348,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_map.resx">
       <DependentUpon>Form_map.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_OneParmSet.resx">
+      <DependentUpon>Form_OneParmSet.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_SensorParmSet.resx">
       <DependentUpon>Form_SensorParmSet.cs</DependentUpon>
@@ -279,6 +366,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_zero.resx">
       <DependentUpon>Form_zero.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportExcel.resx">
+      <DependentUpon>ImportExcel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MDIParent1.resx">
+      <DependentUpon>MDIParent1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -297,12 +390,13 @@
     <EmbeddedResource Include="RegisterDeviceForm.resx">
       <DependentUpon>RegisterDeviceForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_InputHistory.resx">
-      <DependentUpon>Form_InputHistory.cs</DependentUpon>
+    <EmbeddedResource Include="SystemConfig.resx">
+      <DependentUpon>SystemConfig.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -312,32 +406,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CommandManager\CommandManager.csproj">
-      <Project>{B9FC7165-C65B-4CCC-906D-2ED31BDF07B5}</Project>
-      <Name>CommandManager</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Dal\Dal.csproj">
-      <Project>{8C9BA776-E9A5-474C-AC73-4CF67121D408}</Project>
-      <Name>Dal</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DataStruct\DataStruct.csproj">
-      <Project>{7F4AA805-6668-460F-A960-CD76F944100D}</Project>
-      <Name>DataStruct</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Entity\Entity.csproj">
-      <Project>{920662A5-8768-42FB-ACA4-4DF8EB1351F0}</Project>
-      <Name>Entity</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LibMessageHelper\LibMessageHelper.csproj">
-      <Project>{76EB986A-7BDF-4C54-A759-12A6DF83B82E}</Project>
-      <Name>LibMessageHelper</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LogLib\LogLib.csproj">
-      <Project>{664237F0-6F59-477A-9B2E-3879E6128F7E}</Project>
-      <Name>LogLib</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\停止.png" />
@@ -354,7 +422,46 @@
   <ItemGroup>
     <None Include="Resources\点位图1.png" />
     <None Include="Resources\点位图2.png" />
+    <None Include="Resources\add_32x32.png" />
+    <None Include="Resources\next_32x32.png" />
+    <None Include="Resources\remove_32x32.png" />
+    <None Include="Resources\chartsshowlegend_32x32.png" />
+    <None Include="Resources\close_32x32.png" />
+    <None Include="Resources\close_32x321.png" />
+    <None Include="Resources\ignoremasterfilter_32x32.png" />
+    <None Include="Resources\convert_32x32.png" />
+    <None Include="Resources\filterbyargument_chart_32x32.png" />
     <Content Include="wnd.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Business\Business.csproj">
+      <Project>{a14e2acd-0f4e-454c-a3fb-41a27be78a64}</Project>
+      <Name>Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CommandManager\CommandManager.csproj">
+      <Project>{b9fc7165-c65b-4ccc-906d-2ed31bdf07b5}</Project>
+      <Name>CommandManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataStruct\DataStruct.csproj">
+      <Project>{7f4aa805-6668-460f-a960-cd76f944100d}</Project>
+      <Name>DataStruct</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entity\Entity.csproj">
+      <Project>{920662a5-8768-42fb-aca4-4df8eb1351f0}</Project>
+      <Name>Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GlobalMemory\GlobalMemory.csproj">
+      <Project>{21b0214b-4aaa-4db8-8514-d1adca8c6f09}</Project>
+      <Name>GlobalMemory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LibMessageHelper\LibMessageHelper.csproj">
+      <Project>{76eb986a-7bdf-4c54-a759-12a6df83b82e}</Project>
+      <Name>LibMessageHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LogLib\LogLib.csproj">
+      <Project>{664237f0-6f59-477a-9b2e-3879e6128f7e}</Project>
+      <Name>LogLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -7,9 +7,10 @@ using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using Entity;
-using Dal;
+using Business;
 using CommandManager;
 using WADApplication.Properties;
+using GlobalMemory;
 
 namespace WADApplication
 {
@@ -23,7 +24,7 @@ namespace WADApplication
 
         private void initList()
         {
-            list = EquipmentDal.GetAllList();
+            list = EquipmentBusiness.GetAllListNotDelete();
             if (list == null || list.Count < 1)
             {
                 return;

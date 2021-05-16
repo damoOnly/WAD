@@ -130,6 +130,10 @@
       <HintPath>..\packages\MQTTnet.2.2.0\lib\net45\MQTTnet.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NPOI">
       <HintPath>..\Libs\NPOI.dll</HintPath>
     </Reference>
@@ -165,6 +169,12 @@
     </Compile>
     <Compile Include="Form_AlertHistoryNew.Designer.cs">
       <DependentUpon>Form_AlertHistoryNew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Client.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Client.Designer.cs">
+      <DependentUpon>Form_Client.cs</DependentUpon>
     </Compile>
     <Compile Include="Form_InputHistory.cs">
       <SubType>Form</SubType>
@@ -314,6 +324,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_ChangePassWord.resx">
       <DependentUpon>Form_ChangePassWord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Client.resx">
+      <DependentUpon>Form_Client.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Debug.resx">
       <DependentUpon>Form_Debug.cs</DependentUpon>
