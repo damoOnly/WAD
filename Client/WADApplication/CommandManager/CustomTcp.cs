@@ -81,15 +81,37 @@ namespace CommandManager
             {
                 byte[] buffer = new byte[numOfBytesRead];
                 Array.Copy(state.Buffer, 0, buffer, 0, numOfBytesRead);
-                string respstr = UTF8Encoding.Default.GetString(buffer, 0, numOfBytesRead);
+                this.ParseReceiveData(buffer);
+                stream.BeginRead(state.Buffer, 0, state.Buffer.Length, new AsyncCallback(AsyncReadCallBack), state);
+            }
+        }
+        byte[] prevBuffer;
+        void ParseReceiveData(byte[] _buffer)
+        {
+            try
+            {
+                byte[] totalB = prevBuffer == null ? _buffer : prevBuffer.Concat(_buffer).ToArray();
+                string respstr = UTF8Encoding.Default.GetString(totalB);
+                respstr = respstr.Trim("\0".ToCharArray());
                 ReceiveData respData = new ReceiveData();
                 respData = JsonConvert.DeserializeObject<ReceiveData>(respstr);
+                prevBuffer = null;
                 if (OnDataReceive != null)
                 {
                     OnDataReceive(this, respData);
                 }
                 Trace.WriteLine(string.Format("Received: {0}", respstr));
-                stream.BeginRead(state.Buffer, 0, state.Buffer.Length, new AsyncCallback(AsyncReadCallBack), state);
+            }
+            catch (Exception)
+            {
+                if (prevBuffer != null)
+                {
+                    prevBuffer = prevBuffer.Concat(_buffer).ToArray();
+                }
+                else
+                {
+                    prevBuffer = _buffer;
+                }
             }
         }
 
@@ -100,6 +122,16 @@ namespace CommandManager
             if ((tcp != null) && (tcp.Connected))
             {
                 tcp.Close();
+            }
+        }
+
+        public void Send(byte[] data)
+        {
+            if ((tcp != null) && (tcp.Connected))
+            {
+                NetworkStream stream = tcp.GetStream();
+                // Send the message to the connected TcpServer.
+                stream.Write(data, 0, data.Length);
             }
         }
 

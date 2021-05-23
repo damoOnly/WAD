@@ -17,6 +17,8 @@ using System.Diagnostics;
 using System.Threading;
 using WADApplication.Process;
 using System.Text.RegularExpressions;
+using CommandManager;
+using Newtonsoft.Json;
 
 namespace WADApplication
 {
@@ -26,7 +28,7 @@ namespace WADApplication
         /// 最后一次连接的设备
         /// </summary>
         private string lastSensor = string.Empty;
-
+        CustomTcp tcp = new CustomTcp();
         /// <summary>
         /// 最后一次连接的气体
         /// </summary>
@@ -148,6 +150,9 @@ namespace WADApplication
 
         }
 
+        DataTable dataTable = new DataTable();
+        Series[] listSeries;
+        List<int> listeqid;
         // 查询数据
         private void simpleButton3_Click(object sender, EventArgs e)
         {
@@ -170,10 +175,10 @@ namespace WADApplication
                     return;
                 }
 
-                DataTable dataTable = new DataTable();
+                dataTable = new DataTable();
                 dataTable.Columns.Add("时间");
 
-                List<int> listeqid = new List<int>();
+               listeqid = new List<int>();
                 byte address = Convert.ToByte(comboBoxEdit1.Text.Split(new string[] { "-" }, StringSplitOptions.None)[0]);
                 foreach (Equipment item in mainList)
                 {
@@ -184,7 +189,7 @@ namespace WADApplication
                     listeqid.Add(item.ID);
                     dataTable.Columns.Add(string.Format("地址{0}-{1}-{2}（{3}）", item.Address, item.SensorNum, item.GasName, item.UnitName));
                 }
-                Series[] listSeries = new Series[dataTable.Columns.Count - 2];
+                listSeries = new Series[dataTable.Columns.Count - 2];
                 for (int i = 0; i < listSeries.Length; i++)
                 {
                     listSeries[i] = new Series(dataTable.Columns[i + 2].ColumnName, ViewType.SwiftPlot);
@@ -195,7 +200,17 @@ namespace WADApplication
                 listobj.Add(dataTable);
                 listobj.Add(listSeries);
                 listobj.Add(listeqid);
-                ThreadPool.QueueUserWorkItem(new WaitCallback(GethistorydataNew), listobj);
+                HistoryQueryParam param = new HistoryQueryParam();
+                param.dt1 = dateEdit1.DateTime;
+                param.dt2 = dateEdit2.DateTime;
+                param.Ids = listeqid;
+                ReceiveData rd = new ReceiveData();
+                rd.Type = EM_ReceiveType.HistoryData;
+                rd.Data = JsonConvert.SerializeObject(param);
+                string str = JsonConvert.SerializeObject(rd);
+                byte[] buffer = UTF8Encoding.Default.GetBytes(str);
+                tcp.Send(buffer);
+                //ThreadPool.QueueUserWorkItem(new WaitCallback(GethistorydataNew), listobj);
 
             }
             catch (Exception ex)
@@ -207,35 +222,14 @@ namespace WADApplication
 
 
         List<EquipmentReportData> seriesData = null;
-        private void GethistorydataNew(object parm)
+        private void GethistorydataNew(string data)
         {
-            DataTable dataTable = (parm as List<object>)[0] as DataTable;
-            Series[] listSeries = (parm as List<object>)[1] as Series[];
-            List<int> listeqid = (parm as List<object>)[2] as List<int>;
-
-            Stopwatch watch = new Stopwatch();
-            watch.Start();
-            List<EquipmentReportData> reportData = new List<EquipmentReportData>();
-            listeqid.ForEach(c =>
-            {
-                EquipmentReportData rd = new EquipmentReportData();
-                rd.ID = c;
-                rd.GasName = mainList.Find(m => m.ID == c).GasName;
-                rd.UnitName = mainList.Find(m => m.ID == c).UnitName;
-                byte point = mainList.Find(m => m.ID == c).Point;
-                rd.DataList = EquipmentDataBusiness.GetList(dateEdit1.DateTime, dateEdit2.DateTime, c, point);
-                reportData.Add(rd);
-            });
-
+            List<EquipmentReportData> reportData = JsonConvert.DeserializeObject<List<EquipmentReportData>>(data);
             seriesData = reportData;
-
-            watch.Stop();
-            Trace.WriteLine("get database: " + watch.Elapsed);
 
             //RenderSeries(listSeries, reportData);
 
             RenderGrid(dataTable, reportData, listeqid);
-
         }
 
         private DataTable exportTable = null;
@@ -459,17 +453,36 @@ namespace WADApplication
 
         private void loadData()
         {
-            mainList = EquipmentBusiness.GetListIncludeDelete();
-            comboBoxEdit1.Properties.Items.Clear();
-            IEnumerable<IGrouping<byte, Equipment>> gl = mainList.GroupBy(item=> { return item.Address;});
-            foreach (IGrouping<byte, Equipment> ig in gl)
+            tcp = CustomTcp.GetInstance();
+            tcp.OnDataReceive += tcp_OnDataReceive;
+            ReceiveData rd = new ReceiveData();
+            rd.Type = EM_ReceiveType.EqList;
+            string str = JsonConvert.SerializeObject(rd);
+            byte[] buffer = UTF8Encoding.Default.GetBytes(str);
+            tcp.Send(buffer);
+        }
+
+        void tcp_OnDataReceive(object sender, ReceiveData e)
+        {
+            if (e.Type == EM_ReceiveType.EqList)
             {
-                Equipment one = ig.FirstOrDefault();
-                comboBoxEdit1.Properties.Items.Add(string.Format("{0}-{1}", one.Address, one.Name));
+                comboBoxEdit1.Properties.Items.Clear();
+                List<Equipment> list = JsonConvert.DeserializeObject<List<Equipment>>(e.Data);
+                mainList = list;
+                IEnumerable<IGrouping<byte, Equipment>> gl = mainList.GroupBy(item => { return item.Address; });
+                foreach (IGrouping<byte, Equipment> ig in gl)
+                {
+                    Equipment one = ig.FirstOrDefault();
+                    comboBoxEdit1.Properties.Items.Add(string.Format("{0}-{1}", one.Address, one.Name));
+                }
+                if (mainList.Count > 0)
+                {
+                    comboBoxEdit1.SelectedIndex = 0;
+                }
             }
-            if (mainList.Count > 0)
+            else if(e.Type == EM_ReceiveType.HistoryData)
             {
-                comboBoxEdit1.SelectedIndex = 0;
+                GethistorydataNew(e.Data);
             }
         }
 

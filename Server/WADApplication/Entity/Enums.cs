@@ -380,6 +380,7 @@ namespace Entity
     public enum EM_ReceiveType : int
     {
         RealData = 0,
-        HistoryData = 1
+        HistoryData = 1,
+        EqList = 2
     }
 }

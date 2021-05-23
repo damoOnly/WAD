@@ -144,6 +144,7 @@
             this.simpleButton2.Size = new System.Drawing.Size(53, 21);
             this.simpleButton2.TabIndex = 22;
             this.simpleButton2.Text = "删除";
+            this.simpleButton2.Visible = false;
             this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
             // 
             // simpleButton4

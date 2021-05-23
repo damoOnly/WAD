@@ -11,6 +11,11 @@ using DevExpress.XtraEditors;
 using CommandManager;
 using System.Net;
 using GlobalMemory;
+using Entity;
+using Newtonsoft.Json;
+using Business;
+using System.Net.Sockets;
+using System.Threading;
 
 namespace WADApplication
 {
@@ -50,6 +55,7 @@ namespace WADApplication
                 CommonMemory.server = new AsyncTCPServer(ip, port);
                 CommonMemory.server.ClientConnected += server_ClientConnected;
                 CommonMemory.server.ClientDisconnected += server_ClientDisconnected;
+                CommonMemory.server.DataReceived += server_DataReceived;
                 CommonMemory.server.Start();
                 simpleButton1.Text = "停止服务器";
             }
@@ -58,8 +64,87 @@ namespace WADApplication
                 CommonMemory.server.Stop();
                 simpleButton1.Text = "启动服务器";
             }
-            
+
         }
+
+        void server_DataReceived(object sender, AsyncEventArgs e)
+        {
+            try
+            {
+                string str = UTF8Encoding.Default.GetString(e._state.Buffer, 0, e._state.Buffer.Length);
+                str = str.Trim("\0".ToCharArray());
+                ReceiveData rec = JsonConvert.DeserializeObject<ReceiveData>(str);
+                if (rec.Type == EM_ReceiveType.HistoryData)
+                {
+                    SendHistoryData(rec.Data, e._state.TcpClient);
+                }
+                else if (rec.Type == EM_ReceiveType.EqList)
+                {
+                    SendEqList(e._state.TcpClient);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogLib.Log.GetLogger(this).Error(ex);
+            }
+        }
+
+        private void SendEqList(TcpClient client)
+        {
+            List<Equipment> mainList = EquipmentBusiness.GetListIncludeDelete();
+            ReceiveData resp = new ReceiveData();
+            resp.Type = EM_ReceiveType.EqList;
+            resp.Data = JsonConvert.SerializeObject(mainList);
+            string str = JsonConvert.SerializeObject(resp);
+            byte[] buffer = UTF8Encoding.Default.GetBytes(str);
+            GlobalMemory.CommonMemory.server.Send(client, buffer);
+        }
+
+        void SendHistoryData(string param, TcpClient client)
+        {
+            HistoryQueryParam qp = JsonConvert.DeserializeObject<HistoryQueryParam>(param);
+            if (qp == null || qp.Ids == null)
+            {
+                return;
+            }
+            List<object> listobj = new List<object>();
+            listobj.Add(qp);
+            listobj.Add(client);
+
+            ThreadPool.QueueUserWorkItem(new WaitCallback(GethistorydataNew), listobj);
+        }
+
+        private void GethistorydataNew(object param)
+        {
+            try
+            {
+                List<Equipment> mainList = EquipmentBusiness.GetListIncludeDelete();
+                HistoryQueryParam qp = (param as List<object>)[0] as HistoryQueryParam;
+                TcpClient client = (param as List<object>)[1] as TcpClient;
+                List<EquipmentReportData> reportData = new List<EquipmentReportData>();
+                qp.Ids.ForEach(c =>
+                {
+                    EquipmentReportData rd = new EquipmentReportData();
+                    rd.ID = c;
+                    rd.GasName = mainList.Find(m => m.ID == c).GasName;
+                    rd.UnitName = mainList.Find(m => m.ID == c).UnitName;
+                    byte point = mainList.Find(m => m.ID == c).Point;
+                    rd.DataList = EquipmentDataBusiness.GetList(qp.dt1, qp.dt2, c, point);
+                    reportData.Add(rd);
+                });
+                ReceiveData resp = new ReceiveData();
+                resp.Type = EM_ReceiveType.HistoryData;
+                resp.Data = JsonConvert.SerializeObject(reportData);
+                string str = JsonConvert.SerializeObject(resp);
+                byte[] buffer = UTF8Encoding.Default.GetBytes(str);
+                GlobalMemory.CommonMemory.server.Send(client, buffer);
+            }
+            catch (Exception ex)
+            {
+                LogLib.Log.GetLogger(this).Error(ex);
+            }
+        }
+
 
         void server_ClientDisconnected(object sender, AsyncEventArgs e)
         {
