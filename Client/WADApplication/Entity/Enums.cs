@@ -381,6 +381,7 @@ namespace Entity
     {
         RealData=0,
         HistoryData=1,
-        EqList = 2
+        EqList = 2,
+        AlertData= 3
     }
 }

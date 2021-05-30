@@ -82,6 +82,10 @@ namespace WADApplication
                 {
                     SendEqList(e._state.TcpClient);
                 }
+                else if (rec.Type == EM_ReceiveType.AlertData)
+                {
+                    SendAlertData(rec.Data, e._state.TcpClient);
+                }
             }
             catch (Exception ex)
             {
@@ -145,6 +149,50 @@ namespace WADApplication
             }
         }
 
+        void SendAlertData(string param, TcpClient client)
+        {
+            HistoryQueryParam qp = JsonConvert.DeserializeObject<HistoryQueryParam>(param);
+            if (qp == null || qp.address < 0)
+            {
+                return;
+            }
+            List<object> listobj = new List<object>();
+            listobj.Add(qp);
+            listobj.Add(client);
+            ThreadPool.QueueUserWorkItem(new WaitCallback(GetAlertdataNew), listobj);
+        }
+
+        private void GetAlertdataNew(object param)
+        {
+            try
+            {
+                List<Equipment> mainList = EquipmentBusiness.GetListIncludeDelete();
+                HistoryQueryParam qp = (param as List<object>)[0] as HistoryQueryParam;
+                TcpClient client = (param as List<object>)[1] as TcpClient;
+                List<Alert> reportData = new List<Alert>();
+                foreach (Equipment eq in mainList)
+                {
+                    if (qp.address == 255)
+                    {
+                        reportData.AddRange(AlertDal.GetListByTime(qp.dt1, qp.dt2, eq));
+                    }
+                    if (eq.Address == qp.address)
+                    {
+                        reportData.AddRange(AlertDal.GetListByTime(qp.dt1, qp.dt2, eq));
+                    }
+                }
+                ReceiveData resp = new ReceiveData();
+                resp.Type = EM_ReceiveType.AlertData;
+                resp.Data = JsonConvert.SerializeObject(reportData);
+                string str = JsonConvert.SerializeObject(resp);
+                byte[] buffer = UTF8Encoding.Default.GetBytes(str);
+                GlobalMemory.CommonMemory.server.Send(client, buffer);
+            }
+            catch (Exception ex)
+            {
+                LogLib.Log.GetLogger(this).Error(ex);
+            }
+        }
 
         void server_ClientDisconnected(object sender, AsyncEventArgs e)
         {

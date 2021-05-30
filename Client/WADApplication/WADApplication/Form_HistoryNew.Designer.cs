@@ -273,6 +273,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "监测数据";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_HistoryNew_FormClosing);
             this.Load += new System.EventHandler(this.Form_History_Load);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();
             this.splitContainerControl1.ResumeLayout(false);

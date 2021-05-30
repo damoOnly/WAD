@@ -13,12 +13,16 @@ using System.Configuration;
 using GlobalMemory;
 using System.Text.RegularExpressions;
 using WADApplication.Process;
+using CommandManager;
+using Newtonsoft.Json;
 
 namespace WADApplication
 {
     public partial class Form_AlertHistoryNew : DevExpress.XtraEditors.XtraForm
     {
         LogLib.Log log = LogLib.Log.GetLogger("Form_AlertHistory");
+        CustomTcp tcp = new CustomTcp();
+
         #region 变量
         /// <summary>
         /// 最后一次连接的设备
@@ -39,11 +43,31 @@ namespace WADApplication
         #region 私有方法
         private void loadData()
         {
-            mainList = EquipmentBusiness.GetListIncludeDelete();
-            if (mainList.Count <= 0)
+            tcp = CustomTcp.GetInstance();
+            tcp.OnDataReceive += tcp_OnDataReceive;
+            ReceiveData rd = new ReceiveData();
+            rd.Type = EM_ReceiveType.EqList;
+            string str = JsonConvert.SerializeObject(rd);
+            byte[] buffer = UTF8Encoding.Default.GetBytes(str);
+            tcp.Send(buffer);
+        }
+
+        void tcp_OnDataReceive(object sender, ReceiveData e)
+        {
+            if (e.Type == EM_ReceiveType.EqList)
             {
-                return;
+                this.Invoke(new Action<string>((dataStr) => { InitCombox(dataStr); }), e.Data);
             }
+            else if (e.Type == EM_ReceiveType.AlertData)
+            {
+                this.Invoke(new Action<string>((dataStr) => { GetAlertDataNew(dataStr); }), e.Data);
+            }
+        }
+
+        void InitCombox(string dataStr)
+        {
+            List<Equipment> list = JsonConvert.DeserializeObject<List<Equipment>>(dataStr);
+            mainList = list;
 
             comboBoxEdit_SensorName.Properties.Items.Clear();
             comboBoxEdit_SensorName.Properties.Items.Add("全部");
@@ -58,8 +82,22 @@ namespace WADApplication
             {
                 comboBoxEdit_SensorName.SelectedIndex = 1;
             }
-
         }
+
+        void GetAlertDataNew(string data)
+        {
+            dataList = JsonConvert.DeserializeObject<List<Alert>>(data);
+            if (dataList == null || dataList.Count < 1)
+            {
+                gridControl3.DataSource = null;
+                log.Warn("数据库中没有记录");
+                return;
+            }
+
+            gridControl3.DataSource = dataList;
+            gridView3.BestFitColumns();
+        }
+
         #endregion
 
         public Form_AlertHistoryNew()
@@ -67,7 +105,7 @@ namespace WADApplication
             InitializeComponent();
         }
 
-        List<Alert> data = new List<Alert>();
+        List<Alert> dataList = new List<Alert>();
         private void simpleButton8_Click(object sender, EventArgs e)
         {
             try
@@ -85,37 +123,19 @@ namespace WADApplication
                     XtraMessageBox.Show("截止时间必须大于起始时间");
                     return;
                 }
-                data = new List<Alert>();
-
-                if (comboBoxEdit_SensorName.Text.Trim() == "全部")
-                {
-                    foreach (Equipment eq in mainList)
-                    {
-                        data.AddRange(AlertDal.GetListByTime(dateEdit_Start.DateTime, dateEdit_end.DateTime, eq));
-                    }
-                }
-                else
-                {
-                    Match match = Regex.Match(comboBoxEdit_SensorName.Text.Trim(), @"(\d+)-\w+");
-                    byte address = byte.Parse(match.Groups[1].Value);
-                    foreach (Equipment eq in mainList)
-                    {
-                        if (eq.Address == address)
-                        {
-                            data.AddRange(AlertDal.GetListByTime(dateEdit_Start.DateTime, dateEdit_end.DateTime, eq));
-                        }
-                    }
-                }
-
-                if (data == null || data.Count < 1)
-                {
-                    gridControl3.DataSource = null;
-                    log.Warn("数据库中没有记录");
-                    return;
-                }
-
-                gridControl3.DataSource = data;
-                gridView3.BestFitColumns();
+                Match match = Regex.Match(comboBoxEdit_SensorName.Text.Trim(), @"(\d+)-\w+");
+                byte address = comboBoxEdit_SensorName.Text.Trim() == "全部" ? (byte)255: byte.Parse(match.Groups[1].Value);
+                HistoryQueryParam param = new HistoryQueryParam();
+                param.dt1 = dateEdit_Start.DateTime;
+                param.dt2 = dateEdit_end.DateTime;
+                param.address = address;
+                ReceiveData rd = new ReceiveData();
+                rd.Type = EM_ReceiveType.AlertData;
+                rd.Data = JsonConvert.SerializeObject(param);
+                string str = JsonConvert.SerializeObject(rd);
+                byte[] buffer = UTF8Encoding.Default.GetBytes(str);
+                tcp.Send(buffer);
+                
             }
             catch (Exception ex)
             {
@@ -226,7 +246,7 @@ namespace WADApplication
                 filename = string.Format("{0}-{1}报警记录-{2}-{3}", eq.Address, eq.Name, DateTime.Now.ToString("yyyyMMdd"), DateTime.Now.ToString("HHmmss"));
             }            
 
-            if (data == null || data.Count <= 0)
+            if (dataList == null || dataList.Count <= 0)
             {
                 return;
             }
@@ -243,7 +263,7 @@ namespace WADApplication
             table.Columns.Add("A2报警值");
             table.Columns.Add("量程");
 
-            foreach (var item in data)
+            foreach (var item in dataList)
             {
                 DataRow row = table.NewRow();
                 row[0] = item.StratTime;
@@ -277,6 +297,11 @@ namespace WADApplication
             {
                 LogLib.Log.GetLogger(this).Warn(ex);
             }
+        }
+
+        private void Form_AlertHistoryNew_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            tcp.OnDataReceive -= tcp_OnDataReceive;
         }
 
     }

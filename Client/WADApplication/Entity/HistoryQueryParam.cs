@@ -11,5 +11,6 @@ namespace Entity
         public DateTime dt1 { get; set; }
         public DateTime dt2 { get; set; }
         public List<int> Ids { get; set; }
+        public byte address { get; set; }
     }
 }

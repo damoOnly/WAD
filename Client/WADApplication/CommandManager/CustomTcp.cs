@@ -85,7 +85,7 @@ namespace CommandManager
                 stream.BeginRead(state.Buffer, 0, state.Buffer.Length, new AsyncCallback(AsyncReadCallBack), state);
             }
         }
-        byte[] prevBuffer;
+        List<byte> prevBuffer = new List<byte>();
         void ParseReceiveData(byte[] _buffer)
         {
             try
@@ -95,7 +95,7 @@ namespace CommandManager
                 respstr = respstr.Trim("\0".ToCharArray());
                 ReceiveData respData = new ReceiveData();
                 respData = JsonConvert.DeserializeObject<ReceiveData>(respstr);
-                prevBuffer = null;
+                prevBuffer.Clear();
                 if (OnDataReceive != null)
                 {
                     OnDataReceive(this, respData);
@@ -104,14 +104,7 @@ namespace CommandManager
             }
             catch (Exception)
             {
-                if (prevBuffer != null)
-                {
-                    prevBuffer = prevBuffer.Concat(_buffer).ToArray();
-                }
-                else
-                {
-                    prevBuffer = _buffer;
-                }
+                prevBuffer.AddRange(_buffer);
             }
         }
 

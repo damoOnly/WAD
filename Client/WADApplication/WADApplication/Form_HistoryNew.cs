@@ -196,10 +196,6 @@ namespace WADApplication
                     listSeries[i].ArgumentScaleType = ScaleType.DateTime;
                     listSeries[i].Tag = listeqid[i];
                 }
-                List<object> listobj = new List<object>();
-                listobj.Add(dataTable);
-                listobj.Add(listSeries);
-                listobj.Add(listeqid);
                 HistoryQueryParam param = new HistoryQueryParam();
                 param.dt1 = dateEdit1.DateTime;
                 param.dt2 = dateEdit2.DateTime;
@@ -466,23 +462,28 @@ namespace WADApplication
         {
             if (e.Type == EM_ReceiveType.EqList)
             {
-                comboBoxEdit1.Properties.Items.Clear();
-                List<Equipment> list = JsonConvert.DeserializeObject<List<Equipment>>(e.Data);
-                mainList = list;
-                IEnumerable<IGrouping<byte, Equipment>> gl = mainList.GroupBy(item => { return item.Address; });
-                foreach (IGrouping<byte, Equipment> ig in gl)
-                {
-                    Equipment one = ig.FirstOrDefault();
-                    comboBoxEdit1.Properties.Items.Add(string.Format("{0}-{1}", one.Address, one.Name));
-                }
-                if (mainList.Count > 0)
-                {
-                    comboBoxEdit1.SelectedIndex = 0;
-                }
+                this.Invoke(new Action<string>((dataStr) => { InitCombox(dataStr); }), e.Data);
             }
             else if(e.Type == EM_ReceiveType.HistoryData)
             {
                 GethistorydataNew(e.Data);
+            }
+        }
+
+        void InitCombox(string dataStr)
+        {
+            comboBoxEdit1.Properties.Items.Clear();
+            List<Equipment> list = JsonConvert.DeserializeObject<List<Equipment>>(dataStr);
+            mainList = list;
+            IEnumerable<IGrouping<byte, Equipment>> gl = mainList.GroupBy(item => { return item.Address; });
+            foreach (IGrouping<byte, Equipment> ig in gl)
+            {
+                Equipment one = ig.FirstOrDefault();
+                comboBoxEdit1.Properties.Items.Add(string.Format("{0}-{1}", one.Address, one.Name));
+            }
+            if (mainList.Count > 0)
+            {
+                comboBoxEdit1.SelectedIndex = 0;
             }
         }
 
@@ -617,6 +618,11 @@ namespace WADApplication
             List<EquipmentReportData> ll = new List<EquipmentReportData>();
             ll.Add(seriesData.Find(ff=> ff.ID == id));
             RenderSeries(listSeries, ll);
+        }
+
+        private void Form_HistoryNew_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            tcp.OnDataReceive -= tcp_OnDataReceive;
         }
 
 

@@ -149,6 +149,7 @@
             this.simpleButton1.Size = new System.Drawing.Size(64, 20);
             this.simpleButton1.TabIndex = 10;
             this.simpleButton1.Text = "删除";
+            this.simpleButton1.Visible = false;
             this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
             // dateEdit_Start
@@ -295,7 +296,7 @@
             this.gridColumn5.FieldName = "AlertModelStr";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 7;
+            this.gridColumn5.VisibleIndex = 6;
             // 
             // gridColumn3
             // 
@@ -303,7 +304,7 @@
             this.gridColumn3.FieldName = "A1Str";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 8;
+            this.gridColumn3.VisibleIndex = 7;
             // 
             // gridColumn10
             // 
@@ -311,7 +312,7 @@
             this.gridColumn10.FieldName = "A2Str";
             this.gridColumn10.Name = "gridColumn10";
             this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 9;
+            this.gridColumn10.VisibleIndex = 8;
             // 
             // gridColumn11
             // 
@@ -319,7 +320,7 @@
             this.gridColumn11.FieldName = "MaxStr";
             this.gridColumn11.Name = "gridColumn11";
             this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 10;
+            this.gridColumn11.VisibleIndex = 9;
             // 
             // Form_AlertHistoryNew
             // 
@@ -332,6 +333,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "报警记录";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_AlertHistoryNew_FormClosing);
             this.Load += new System.EventHandler(this.Form_AlertHistory_Load);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();
             this.splitContainerControl1.ResumeLayout(false);
