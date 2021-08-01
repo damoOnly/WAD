@@ -133,6 +133,7 @@ namespace CommandManager
                 List<byte> gases = new List<byte>();
                 if (CommandResult.GetResult(cd))
                 {
+                    // 用于检测传感器开关是否打开，打开才意味着设备是可以添加的
                     byte qts = cd.ResultByte[4];
                     if ((qts & 0x01) == 0x01)
                     {
@@ -171,7 +172,10 @@ namespace CommandManager
                 {
                     throw new CommandException(address + "read old error");
                 }
-                List<StructEquipment> gasList = ReadOldGas(gases, address, name);
+
+                var mnAndFactorList = ReadOldMnAndFactor(address);
+
+                List<StructEquipment> gasList = ReadOldGas(gases, address, name, mnAndFactorList);
                 return gasList;
 
             }
@@ -187,7 +191,61 @@ namespace CommandManager
             }
         }
 
-        public static List<StructEquipment> ReadOldGas(List<byte> gases, byte address, string gasName)
+        public static MnAndFactorList ReadOldMnAndFactor(byte address)
+        {
+            MnAndFactorList mnfactor = new MnAndFactorList();
+            try
+            {
+                string mn = string.Empty;
+                Command cd = new Command(address, 0x00, 0x50, 14);
+                if (CommandResult.GetResult(cd))
+                {
+                    List<byte> byteTemp = new List<byte>();
+                    for (int i = 3; i < 3 + 28; )
+                    {
+                        if (cd.ResultByte[i + 1] != 0x00)
+                        {
+                            byteTemp.Add(cd.ResultByte[i + 1]);
+                        }
+                        i += 2;
+                    }
+                    mn = ASCIIEncoding.ASCII.GetString(byteTemp.ToArray());
+                }
+
+                List<string> factorStrList = new List<string>();
+                Command cd2 = new Command(address, 0x00, 0xa0, 60);
+                if (CommandResult.GetResult(cd2))
+                {
+                    for (int j = 3; j < cd2.ResultLength; j += 12)
+                    {
+                        byte[] factorArray = new byte[12];
+                        Array.Copy(cd2.ResultByte, j, factorArray, 0, 12);
+                        List<byte> byteTemp = new List<byte>();
+                        for (int i = 0; i < 12; )
+                        {
+                            if (factorArray[i + 1] != 0x00)
+                            {
+                                byteTemp.Add(factorArray[i + 1]);
+                            }
+                            i += 2;
+                        }
+                        string factor = ASCIIEncoding.ASCII.GetString(byteTemp.ToArray());
+                        factorStrList.Add(factor);
+                    }
+                }
+
+                mnfactor.mn = mn;
+                mnfactor.factorStrList = factorStrList;
+            }
+            catch (Exception e)
+            {
+                log.Error(e);
+            }
+
+            return mnfactor;
+        }
+
+        public static List<StructEquipment> ReadOldGas(List<byte> gases, byte address, string gasName, MnAndFactorList mnAndFactorList)
         {
             List<StructEquipment> gasList = new List<StructEquipment>();
             for (int i = 0; i < gases.Count; i++)
@@ -198,6 +256,8 @@ namespace CommandManager
                 se.SensorNum = gases[i];
                 se.IsGas = true;
                 se.IsNew = false;
+                se.MN = mnAndFactorList.mn;
+                se.Factor = mnAndFactorList != null && mnAndFactorList.factorStrList.Count >= se.SensorNum ? mnAndFactorList.factorStrList[se.SensorNum - 1] : string.Empty;
                 try
                 {
                     // 读取报警模式
@@ -212,7 +272,7 @@ namespace CommandManager
                         log.Error(address + "读取老气体配置错误！");
                     }
 
-                    Command cd = new Command(address, se.SensorNum, 0x30, 21);
+                    Command cd = new Command(address, se.SensorNum, 0x30, 49);
 
                     if (CommandResult.GetResult(cd))
                     {
@@ -238,14 +298,16 @@ namespace CommandManager
             eq.GasType = resultBytes[3];
             eq.UnitType = resultBytes[4];
             Array.Reverse(resultBytes, 11, 2);
-            eq.Max = BitConverter.ToInt16(resultBytes, 11);
+            Array.Reverse(resultBytes, 13, 2);
+            eq.Max = BitConverter.ToUInt32(resultBytes, 11);
             Array.Reverse(resultBytes, 37, 2);
             Array.Reverse(resultBytes, 39, 2);
             eq.A1 = Convert.ToSingle(Math.Round(BitConverter.ToSingle(resultBytes, 37), 3));
             Array.Reverse(resultBytes, 41, 2);
             Array.Reverse(resultBytes, 43, 2);
             eq.A2 = BitConverter.ToSingle(resultBytes, 41);
-            eq.A2 = Convert.ToSingle(Math.Round(eq.A2 > eq.Max ? eq.Max : eq.A2, 3));
+            eq.Point = resultBytes[100];
+            //eq.A2 = Convert.ToSingle(Math.Round(eq.A2 > eq.Max ? eq.Max : eq.A2, 3));
         }
 
         public static void ReadNewGas(ref StructEquipment eq)
@@ -288,7 +350,7 @@ namespace CommandManager
             Array.Reverse(resultBytes, 33, 2);
             Array.Reverse(resultBytes, 35, 2);
             eq.A2 = BitConverter.ToSingle(resultBytes, 33);
-            eq.A2 = Convert.ToSingle(Math.Round(eq.A2 > eq.Max ? eq.Max : eq.A2, 3));
+            //eq.A2 = Convert.ToSingle(Math.Round(eq.A2 > eq.Max ? eq.Max : eq.A2, 3));
         }
 
         public static void ReadWeather(ref StructEquipment eq)
@@ -325,5 +387,11 @@ namespace CommandManager
             }
             eq.Factor = ASCIIEncoding.ASCII.GetString(byteTemp.ToArray());
         }
+    }
+
+    public class MnAndFactorList
+    {
+        public string mn = string.Empty;
+        public List<string> factorStrList = new List<string>();
     }
 }

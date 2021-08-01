@@ -33,17 +33,31 @@ namespace Business
             }
             return result;
         }
-
+        public static List<Equipment> GetListIncludeDeleteByAdrress(byte address)
+        {
+            var list = EquipmentDal.GetListIncludeDeleteByAddress(address);
+            List<Equipment> result = new List<Equipment>();
+            foreach (var item in list)
+            {
+                result.Add(Utility.ConvertToEq(item));
+            }
+            return result;
+        }
         public static List<Equipment> AddOrUpdateOrDeleteList(List<StructEquipment> gases)
         {
             List<Equipment> result = new List<Equipment>();
+            if (gases == null || gases.Count <= 0)
+            {
+                return result;
+            }
             foreach (var item in gases)
             {
                 StructEquipment eq = item;
                 EquipmentDal.AddorUpdate(ref eq);
                 result.Add(Utility.ConvertToEq(eq));
             }
-            List<Equipment> originList = GetAllListNotDelete();
+            List<Equipment> originList = GetListIncludeDeleteByAdrress(gases[0].Address);
+            // 添加设备的时候，旧的设备需要删除
             var dis = originList.Except(result, new EquipmentEquality());
             foreach (var item in dis)
             {

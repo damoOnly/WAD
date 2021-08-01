@@ -47,21 +47,23 @@ namespace WADApplication
             tcp.OnDataReceive += tcp_OnDataReceive;
             ReceiveData rd = new ReceiveData();
             rd.Type = EM_ReceiveType.EqList;
-            string str = JsonConvert.SerializeObject(rd);
-            byte[] buffer = UTF8Encoding.Default.GetBytes(str);
+            byte[] buffer = ByteConvertHelper.Object2Bytes<ReceiveData>(rd);
             tcp.Send(buffer);
         }
 
-        void tcp_OnDataReceive(object sender, ReceiveData e)
-        {
-            if (e.Type == EM_ReceiveType.EqList)
+        void tcp_OnDataReceive(object sender, List<ReceiveData> e)
+        {            
+            foreach (var item in e)
             {
-                this.Invoke(new Action<string>((dataStr) => { InitCombox(dataStr); }), e.Data);
-            }
-            else if (e.Type == EM_ReceiveType.AlertData)
-            {
-                this.Invoke(new Action<string>((dataStr) => { GetAlertDataNew(dataStr); }), e.Data);
-            }
+                if (item.Type == EM_ReceiveType.EqList)
+                {
+                    this.Invoke(new Action<string>((dataStr) => { InitCombox(dataStr); }), item.Data);
+                }
+                else if (item.Type == EM_ReceiveType.AlertData)
+                {
+                    this.Invoke(new Action<string>((dataStr) => { GetAlertDataNew(dataStr); }), item.Data);
+                }
+            }            
         }
 
         void InitCombox(string dataStr)
@@ -132,8 +134,7 @@ namespace WADApplication
                 ReceiveData rd = new ReceiveData();
                 rd.Type = EM_ReceiveType.AlertData;
                 rd.Data = JsonConvert.SerializeObject(param);
-                string str = JsonConvert.SerializeObject(rd);
-                byte[] buffer = UTF8Encoding.Default.GetBytes(str);
+                byte[] buffer = ByteConvertHelper.Object2Bytes<ReceiveData>(rd);
                 tcp.Send(buffer);
                 
             }

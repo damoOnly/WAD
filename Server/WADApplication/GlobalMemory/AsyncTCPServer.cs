@@ -243,15 +243,21 @@ namespace GlobalMemory
         /// <param name="data">报文</param>
         public void Send(TcpClient client, byte[] data)
         {
+            byte[] sendBuffer = new byte[data.Length + 4]; // 加上包头和包尾发送
+            sendBuffer[0] = 0xff;
+            sendBuffer[1] = 0xff;
+            data.CopyTo(sendBuffer, 2);
+            sendBuffer[sendBuffer.Length - 2] = 0xdd;
+            sendBuffer[sendBuffer.Length - 1] = 0xdd; 
             if (!IsRunning)
                 throw new InvalidProgramException("This TCP Scoket server has not been started.");
 
             if (client == null)
                 throw new ArgumentNullException("client");
 
-            if (data == null)
+            if (sendBuffer == null)
                 throw new ArgumentNullException("data");
-            client.GetStream().BeginWrite(data, 0, data.Length, SendDataEnd, client);
+            client.GetStream().BeginWrite(sendBuffer, 0, sendBuffer.Length, SendDataEnd, client);
         }
 
         /// <summary>

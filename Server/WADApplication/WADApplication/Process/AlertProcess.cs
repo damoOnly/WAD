@@ -63,12 +63,14 @@ namespace WADApplication.Process
             if (alertStatus == originalData.AlertStatus)
             {
                 originalData.AlertObject.EndTime = Utility.CutOffMillisecond(DateTime.Now);
-                if ((alertStatus == EM_AlertType.outRange || (alertStatus == EM_AlertType.A2 && originalData.AlertModel == 1) || originalData.AlertModel == 0) && originalData.Chroma > originalData.AlertObject.Chroma)
+                if ((alertStatus == EM_AlertType.outRange || (alertStatus == EM_AlertType.A2 && originalData.AlertModel == (byte)EM_AlertModel.RangModel) || originalData.AlertModel == (byte)EM_AlertModel.HighModel) && originalData.Chroma > originalData.AlertObject.Chroma)
                 {
+                    // 记录最小值
                     originalData.AlertObject.Chroma = originalData.Chroma;
                 }
-                else if (((alertStatus == EM_AlertType.A1 && originalData.AlertModel ==1) || originalData.AlertModel == 2 ) && originalData.Chroma < originalData.AlertObject.Chroma)
+                else if (((alertStatus == EM_AlertType.A1 && originalData.AlertModel == (byte)EM_AlertModel.RangModel) || originalData.AlertModel == (byte)EM_AlertModel.LowModel) && originalData.Chroma < originalData.AlertObject.Chroma)
                 {
+                    // 记录最小值
                     originalData.AlertObject.Chroma = originalData.Chroma;
                 }
                 AlertDal.UpdateOne(originalData.AlertObject);
@@ -79,10 +81,10 @@ namespace WADApplication.Process
                 if (originalData.AlertStatus != EM_AlertType.normal)
                 {
                     originalData.AlertObject.EndTime = Utility.CutOffMillisecond(DateTime.Now);
-                    if (originalData.Chroma > originalData.AlertObject.Chroma)
-                    {
-                        originalData.AlertObject.Chroma = originalData.Chroma;
-                    }
+                    //if (originalData.Chroma > originalData.AlertObject.Chroma)
+                    //{
+                    //    originalData.AlertObject.Chroma = originalData.Chroma;
+                    //}
                     AlertDal.UpdateOne(originalData.AlertObject);
                 }
 
@@ -114,15 +116,19 @@ namespace WADApplication.Process
         public static void OperatorAlert(List<Equipment> main, DevExpress.XtraEditors.SimpleButton btn)
         {
             bool isNotAlert = main.All(c => c.AlertStatus == EM_AlertType.normal);
-            if (isNotAlert)
+            if (!isNotAlert)
             {
-                CommonMemory.IsCloseSoundTemp = false;
-                if (btn.InvokeRequired)
+                if (CommonMemory.IsCloseSoundTemp)
                 {
-                    btn.Invoke(new Action(() => {
-                        btn.Text = "消音";
-                        btn.Image = Resources.ignoremasterfilter_32x32;
-                    }));
+                    CommonMemory.IsCloseSoundTemp = false;
+                    if (btn.InvokeRequired)
+                    {
+                        btn.Invoke(new Action(() =>
+                        {
+                            btn.Text = "消音";
+                            btn.Image = Resources.ignoremasterfilter_32x32;
+                        }));
+                    }
                 }
             }
             bool isAllConnect = main.All(c => c.IsConnect);
@@ -305,32 +311,43 @@ namespace WADApplication.Process
         /// <param name="isp"></param>
         public static void PlaySound(bool isp)
         {
-            if (CommonMemory.IsClosePlay)
+            if (CommonMemory.IsClosePlay || !isp)
             {
-                if (CommonMemory.IsSoundPlayed)
-                {
-                    CommonMemory.player.Stop();
-                    CommonMemory.IsSoundPlayed = false;
-                }
-                return;
-            }
-
-            if (isp)
-            {
-                if (!CommonMemory.IsSoundPlayed)
-                {
-                    CommonMemory.player.PlayLooping();
-                    CommonMemory.IsSoundPlayed = true;
-                }
+                CommonMemory.player.Stop();
             }
             else
             {
-                if (CommonMemory.IsSoundPlayed)
-                {
-                    CommonMemory.player.Stop();
-                    CommonMemory.IsSoundPlayed = false;
-                }
+                CommonMemory.player.PlayLooping();
             }
+            //if (CommonMemory.IsClosePlay)
+            //{
+            //    //if (CommonMemory.IsSoundPlayed)
+            //    //{
+            //    //    CommonMemory.IsSoundPlayed = false;
+            //    //    CommonMemory.player.Stop();
+            //    //}
+            //    CommonMemory.player.Stop();
+            //    return;
+            //}
+
+            //if (isp)
+            //{
+            //    //if (!CommonMemory.IsSoundPlayed)
+            //    //{
+            //    //    CommonMemory.IsSoundPlayed = true;
+            //    //    CommonMemory.player.PlayLooping();
+            //    //}
+            //    CommonMemory.player.PlayLooping();
+            //}
+            //else
+            //{
+            //    //if (CommonMemory.IsSoundPlayed)
+            //    //{
+            //    //    CommonMemory.IsSoundPlayed = false;
+            //    //    CommonMemory.player.Stop();
+            //    //}
+            //    CommonMemory.player.Stop();
+            //}
         }
     }
 }

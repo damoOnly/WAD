@@ -67,13 +67,32 @@ namespace WADApplication
 
         }
 
+        // 暂时不做粘包处理，认为每次事件触发都是完整的包
         void server_DataReceived(object sender, AsyncEventArgs e)
         {
             try
             {
-                string str = UTF8Encoding.Default.GetString(e._state.Buffer, 0, e._state.Buffer.Length);
-                str = str.Trim("\0".ToCharArray());
-                ReceiveData rec = JsonConvert.DeserializeObject<ReceiveData>(str);
+                byte[] buffer = e._state.Buffer;
+                if (buffer.Length <= 4 || buffer[0] != 0xff || buffer[1] != 0xff)
+                {
+                    return; // 没有找到包头和包尾，直接返回
+                }
+                int endIndex = -1;
+                for (int i = 0; i < buffer.Length; i++)
+                {
+                    if (buffer[i] == 0xdd && i < buffer.Length -1 && buffer[i + 1] == 0xdd)
+                    {
+                        endIndex = i;
+                        break; // 找到了包尾
+                    }
+                }
+                if (endIndex == -1)
+                {
+                    return; // 没有找到包尾
+                }
+                byte[] packageArray = new byte[endIndex - 2];
+                Array.Copy(buffer,2, packageArray, 0, packageArray.Length);
+                ReceiveData rec = ByteConvertHelper.Bytes2Object<ReceiveData>(packageArray);
                 if (rec.Type == EM_ReceiveType.HistoryData)
                 {
                     SendHistoryData(rec.Data, e._state.TcpClient);
@@ -93,14 +112,39 @@ namespace WADApplication
             }
         }
 
+        //void server_DataReceived(object sender, AsyncEventArgs e)
+        //{
+        //    try
+        //    {
+        //        string str = UTF8Encoding.Default.GetString(e._state.Buffer, 0, e._state.Buffer.Length);
+        //        str = str.Trim("\0".ToCharArray());
+        //        ReceiveData rec = JsonConvert.DeserializeObject<ReceiveData>(str);
+        //        if (rec.Type == EM_ReceiveType.HistoryData)
+        //        {
+        //            SendHistoryData(rec.Data, e._state.TcpClient);
+        //        }
+        //        else if (rec.Type == EM_ReceiveType.EqList)
+        //        {
+        //            SendEqList(e._state.TcpClient);
+        //        }
+        //        else if (rec.Type == EM_ReceiveType.AlertData)
+        //        {
+        //            SendAlertData(rec.Data, e._state.TcpClient);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        LogLib.Log.GetLogger(this).Error(ex);
+        //    }
+        //}
+
         private void SendEqList(TcpClient client)
         {
             List<Equipment> mainList = EquipmentBusiness.GetListIncludeDelete();
             ReceiveData resp = new ReceiveData();
             resp.Type = EM_ReceiveType.EqList;
             resp.Data = JsonConvert.SerializeObject(mainList);
-            string str = JsonConvert.SerializeObject(resp);
-            byte[] buffer = UTF8Encoding.Default.GetBytes(str);
+            byte[] buffer = ByteConvertHelper.Object2Bytes<ReceiveData>(resp);
             GlobalMemory.CommonMemory.server.Send(client, buffer);
         }
 
@@ -139,8 +183,7 @@ namespace WADApplication
                 ReceiveData resp = new ReceiveData();
                 resp.Type = EM_ReceiveType.HistoryData;
                 resp.Data = JsonConvert.SerializeObject(reportData);
-                string str = JsonConvert.SerializeObject(resp);
-                byte[] buffer = UTF8Encoding.Default.GetBytes(str);
+                byte[] buffer = ByteConvertHelper.Object2Bytes<ReceiveData>(resp);
                 GlobalMemory.CommonMemory.server.Send(client, buffer);
             }
             catch (Exception ex)
@@ -184,8 +227,7 @@ namespace WADApplication
                 ReceiveData resp = new ReceiveData();
                 resp.Type = EM_ReceiveType.AlertData;
                 resp.Data = JsonConvert.SerializeObject(reportData);
-                string str = JsonConvert.SerializeObject(resp);
-                byte[] buffer = UTF8Encoding.Default.GetBytes(str);
+                byte[] buffer = ByteConvertHelper.Object2Bytes<ReceiveData>(resp);
                 GlobalMemory.CommonMemory.server.Send(client, buffer);
             }
             catch (Exception ex)

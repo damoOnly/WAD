@@ -78,6 +78,7 @@
             this.splitContainerControl1.Panel1.Controls.Add(this.simpleButton4);
             this.splitContainerControl1.Panel1.Controls.Add(this.dateEdit2);
             this.splitContainerControl1.Panel1.Controls.Add(this.labelControl18);
+            this.splitContainerControl1.Panel1.MinSize = 35;
             this.splitContainerControl1.Panel1.Text = "Panel1";
             this.splitContainerControl1.Panel2.Controls.Add(this.splitContainerControl2);
             this.splitContainerControl1.Panel2.Text = "Panel2";

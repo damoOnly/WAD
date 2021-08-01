@@ -203,8 +203,7 @@ namespace WADApplication
                 ReceiveData rd = new ReceiveData();
                 rd.Type = EM_ReceiveType.HistoryData;
                 rd.Data = JsonConvert.SerializeObject(param);
-                string str = JsonConvert.SerializeObject(rd);
-                byte[] buffer = UTF8Encoding.Default.GetBytes(str);
+                byte[] buffer = ByteConvertHelper.Object2Bytes<ReceiveData>(rd);
                 tcp.Send(buffer);
                 //ThreadPool.QueueUserWorkItem(new WaitCallback(GethistorydataNew), listobj);
 
@@ -453,21 +452,24 @@ namespace WADApplication
             tcp.OnDataReceive += tcp_OnDataReceive;
             ReceiveData rd = new ReceiveData();
             rd.Type = EM_ReceiveType.EqList;
-            string str = JsonConvert.SerializeObject(rd);
-            byte[] buffer = UTF8Encoding.Default.GetBytes(str);
+            byte[] buffer = ByteConvertHelper.Object2Bytes<ReceiveData>(rd);
             tcp.Send(buffer);
         }
 
-        void tcp_OnDataReceive(object sender, ReceiveData e)
+        void tcp_OnDataReceive(object sender, List<ReceiveData> e)
         {
-            if (e.Type == EM_ReceiveType.EqList)
+            foreach (var item in e)
             {
-                this.Invoke(new Action<string>((dataStr) => { InitCombox(dataStr); }), e.Data);
+                if (item.Type == EM_ReceiveType.EqList)
+                {
+                    this.Invoke(new Action<string>((dataStr) => { InitCombox(dataStr); }), item.Data);
+                }
+                else if (item.Type == EM_ReceiveType.HistoryData)
+                {
+                    GethistorydataNew(item.Data);
+                }
             }
-            else if(e.Type == EM_ReceiveType.HistoryData)
-            {
-                GethistorydataNew(e.Data);
-            }
+            
         }
 
         void InitCombox(string dataStr)

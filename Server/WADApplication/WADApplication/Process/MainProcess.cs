@@ -24,7 +24,7 @@ namespace WADApplication.Process
         public static DateTime lastRemoteTime = Utility.CutOffMillisecond(DateTime.Now);
         // 用于控制增加点的频率，实时曲线不是每个点都需要显示
         public static DateTime lastAddTime = Utility.CutOffMillisecond(DateTime.Now);
-        public static void readMain(Equipment eq, bool isReadBasic, int selectedEqId, TextEdit t1, TextEdit t2, TextEdit t3, TextEdit t4, ChartControl chart,Form_map set, bool isAddPont, DateTime dt)    //浓度读取处理函数
+        public static void readMain(Equipment eq, bool isReadBasic, int selectedEqId, TextEdit t1, TextEdit t2, TextEdit t3, TextEdit t4, ChartControl chart, Form_map set, bool isAddPont, DateTime dt)    //浓度读取处理函数
         {
             byte low = 0x52;
 
@@ -121,7 +121,7 @@ namespace WADApplication.Process
                 // 绘制曲线
                 addPoint(ed, selectedEqId, t1, t2, t3, t4, chart);
             }
-            
+
             if (set.Visible)
             {
                 set.set(eq.SensorTypeB, eq.Address, ed.Chroma.ToString());
@@ -131,7 +131,7 @@ namespace WADApplication.Process
             AlertProcess.AddAlert(alertStatus, ref eq);
         }
 
-        private static void addPoint(EquipmentData ed, int selectedEqId, TextEdit t1,TextEdit t2,TextEdit t3,TextEdit t4, ChartControl chart)
+        private static void addPoint(EquipmentData ed, int selectedEqId, TextEdit t1, TextEdit t2, TextEdit t3, TextEdit t4, ChartControl chart)
         {
             if (chart.Series == null)
             {
@@ -141,7 +141,37 @@ namespace WADApplication.Process
             if (selectedEqId == ed.EquipmentID)
             {
                 t1.Text = ed.Chroma.ToString();
+                float d2;
+                if (float.TryParse(t2.Text, out d2))
+                {
+                    if (ed.Chroma > d2)
+                    {
+                        d2 = ed.Chroma;
+                    }
+                }
+                else
+                {
+                    d2 = ed.Chroma;
+                }
+
+                float d3;
+                if (float.TryParse(t3.Text, out d3))
+                {
+                    if (ed.Chroma < d3)
+                    {
+                        d3 = ed.Chroma;
+                    }
+                }
+                else
+                {
+                    d3 = ed.Chroma;
+                }
+
+                t2.Text = d2.ToString();
+                t3.Text = d3.ToString();
+                t4.Text = ((d2 + d3) / 2).ToString();
             }
+
             // 找到曲线增加点
             foreach (Series series in chart.Series)
             {
@@ -162,7 +192,7 @@ namespace WADApplication.Process
             }
             // 移除最小时间以前的点
             DateTime minTime = Utility.CutOffMillisecond(DateTime.Now).AddMinutes(-realTimeRangeX);
-            
+
             foreach (Series series in chart.Series)
             {
                 int pointsToRemoveCount = 0;
@@ -171,7 +201,7 @@ namespace WADApplication.Process
                     if (point.DateTimeArgument < minTime)
                         pointsToRemoveCount++;
                 }
-                    
+
                 if (pointsToRemoveCount > series.Points.Count)
                 {
                     pointsToRemoveCount = series.Points.Count - 1;
@@ -180,7 +210,7 @@ namespace WADApplication.Process
                 {
                     series.Points.RemoveRange(0, pointsToRemoveCount);
                 }
-            }            
+            }
 
             lastRemoteTime = Utility.CutOffMillisecond(DateTime.Now);
         }
@@ -200,7 +230,7 @@ namespace WADApplication.Process
                 int n = 0;
                 foreach (Equipment item in mainList)
                 {
-                    Command cd = new Command(item.Address, 1,1, 3);
+                    Command cd = new Command(item.Address, 1, 1, 3);
                     if (!CommandResult.GetResult(cd))
                     {
                         Trace.WriteLine("读取错误");
@@ -244,7 +274,7 @@ namespace WADApplication.Process
         }
 
         public static void ManageSeries(ChartControl chartControl, List<Equipment> mainList, DateTime minTime, DateTime maxTime)
-        {            
+        {
             // 这里要添加多线程信号量来控制曲线的增加和删除
             chartControl.Series.BeginUpdate();
 
@@ -257,7 +287,7 @@ namespace WADApplication.Process
 
             foreach (Equipment item in mainList)
             {
-                if (item.IfShowSeries && !IsCondionsSeries(item.ID,chartControl))
+                if (item.IfShowSeries && !IsCondionsSeries(item.ID, chartControl))
                 {
                     Series series = new Series(item.GasName, ViewType.SwiftPlot);
                     series.Tag = item.ID;
@@ -266,7 +296,7 @@ namespace WADApplication.Process
                     spsv1.LineStyle.Thickness = 2;
                     series.View = spsv1;
                     // 新勾选的曲线需要查出历史数据，补充前面时间的空白
-                    List<EquipmentData> datalist = EquipmentDataBusiness.GetList(minTime, maxTime, item.ID,2);
+                    List<EquipmentData> datalist = EquipmentDataBusiness.GetList(minTime, maxTime, item.ID, 2);
                     if (datalist == null || datalist.Count <= 0)
                     {
                         continue;
@@ -277,7 +307,7 @@ namespace WADApplication.Process
                         SeriesPoint sp = new SeriesPoint(c.AddTime, Math.Round(c.Chroma, 2));
                         series.Points.Add(sp);
                     });
-                    chartControl.Series.Add(series);                    
+                    chartControl.Series.Add(series);
                 }
                 else if (!item.IfShowSeries && IsCondionsSeries(item.ID, chartControl))
                 {
@@ -345,6 +375,97 @@ namespace WADApplication.Process
             chartControl.Refresh();
         }
 
+        // 暂时先实现支持一条曲线显示
+        public static void ManageSeriesV2(ChartControl chartControl, Equipment one, DateTime minTime, DateTime maxTime)
+        {
+            // 这里要添加多线程信号量来控制曲线的增加和删除
+            chartControl.Series.BeginUpdate();
+
+            chartControl.Legend.AlignmentHorizontal = LegendAlignmentHorizontal.Right;
+            chartControl.Series.Clear();
+
+            if (one != null)
+            {
+                if (one.IfShowSeries && !IsCondionsSeries(one.ID, chartControl))
+                {
+                    Series series = new Series(one.GasName, ViewType.SwiftPlot);
+                    series.Tag = one.ID;
+                    series.ArgumentScaleType = ScaleType.DateTime;
+                    SwiftPlotSeriesView spsv1 = new SwiftPlotSeriesView();
+                    spsv1.LineStyle.Thickness = 2;
+                    series.View = spsv1;
+                    // 新勾选的曲线需要查出历史数据，补充前面时间的空白
+                    List<EquipmentData> datalist = EquipmentDataBusiness.GetList(minTime, maxTime, one.ID, 2);
+
+                    // 控制最多点个数 
+                    cutListDate(datalist).ForEach(c =>
+                    {
+                        SeriesPoint sp = new SeriesPoint(c.AddTime, Math.Round(c.Chroma, 2));
+                        series.Points.Add(sp);
+                    });
+                    chartControl.Series.Add(series);
+                }
+                else if (!one.IfShowSeries && IsCondionsSeries(one.ID, chartControl))
+                {
+                    int index = 0;
+                    for (int i = 0; i < chartControl.Series.Count; i++)
+                    {
+                        if (one.ID == Convert.ToInt32(chartControl.Series[i].Tag))
+                        {
+                            index = i;
+                            break;
+                        }
+                    }
+                    chartControl.Series.RemoveAt(index);
+                }
+            }
+            
+
+
+            if (chartControl.Series.Count == 0)
+            {
+                chartControl.Series.Add(new Series("曲线", ViewType.SwiftPlot));
+            }
+
+            chartControl.Series.EndUpdate();
+
+            SwiftPlotDiagram diagram_Tem = chartControl.Diagram as SwiftPlotDiagram;
+            diagram_Tem.AxisX.WholeRange.SetMinMaxValues(minTime, maxTime);
+            //diagram_Tem.AxisX.DateTimeScaleOptions.AutoGrid = true;
+            //diagram_Tem.AxisX.WholeRange.Auto = true;
+            diagram_Tem.AxisX.WholeRange.AutoSideMargins = true;
+            diagram_Tem.AxisX.VisualRange.Auto = true;
+            diagram_Tem.AxisX.VisualRange.AutoSideMargins = true;
+            diagram_Tem.Margins.Right = 15;
+            //diagram_Tem.AxisX.
+
+            //diagram_Tem.AxisX.DateTimeScaleOptions.MeasureUnit = DateTimeMeasureUnit.Second;
+            //diagram_Tem.AxisX.DateTimeScaleOptions.GridAlignment = DateTimeGridAlignment.Minute;
+            //diagram_Tem.AxisX.Label.TextPattern = "A:HH:mm:ss";
+            ////diagram_Tem.AxisX.GridLines.Visible = true;
+            //diagram_Tem.AxisX.VisualRange.AutoSideMargins = false;
+            //diagram_Tem.AxisX.WholeRange.AutoSideMargins = true;
+            diagram_Tem.AxisX.Title.Text = "时间";
+            diagram_Tem.AxisX.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
+            diagram_Tem.AxisX.Title.Alignment = StringAlignment.Far;
+            diagram_Tem.AxisX.Title.Antialiasing = false;
+            diagram_Tem.AxisX.Title.Font = new System.Drawing.Font("Tahoma", 8);
+
+            diagram_Tem.AxisY.WholeRange.AlwaysShowZeroLevel = false;
+            //diagram_Tem.EnableAxisYZooming = true;
+            //diagram_Tem.EnableAxisYScrolling = true;
+            diagram_Tem.AxisY.Interlaced = true;
+            diagram_Tem.AxisY.VisualRange.AutoSideMargins = true;
+            diagram_Tem.AxisY.WholeRange.AutoSideMargins = true;
+            diagram_Tem.AxisY.Title.Text = string.Format("浓度({0})", one == null ? "" : one.UnitName);
+            diagram_Tem.AxisY.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
+            diagram_Tem.AxisY.Title.Alignment = StringAlignment.Far;
+            diagram_Tem.AxisY.Title.Antialiasing = false;
+            diagram_Tem.AxisY.Title.Font = new System.Drawing.Font("Tahoma", 8);
+
+            chartControl.Refresh();
+        }
+
         private static bool IsCondionsSeries(int id, ChartControl chartControl)
         {
             bool isCondion = false;
@@ -363,10 +484,14 @@ namespace WADApplication.Process
         private static List<EquipmentData> cutListDate(List<EquipmentData> datalist)
         {
             List<EquipmentData> result = new List<EquipmentData>();
+            if (datalist == null || datalist.Count <= 0)
+            {
+                return result;
+            }
             int multiple = (int)Math.Ceiling(datalist.Count / 10000.00);
             if (multiple > 1)
             {
-                for (int i = 0, count = datalist.Count; i < count;)
+                for (int i = 0, count = datalist.Count; i < count; )
                 {
                     result.Add(datalist[i]);
                     i += multiple;
@@ -419,19 +544,29 @@ namespace WADApplication.Process
 
         public static void sendClientData(List<Equipment> data)
         {
-            if (CommonMemory.server == null || !CommonMemory.server.IsRunning || CommonMemory.server.Clients == null)
+            try
             {
-                return;
+                if (CommonMemory.server == null || !CommonMemory.server.IsRunning || CommonMemory.server.Clients == null)
+                {
+                    return;
+                }
+                ReceiveData resp = new ReceiveData();
+                resp.Type = (byte)EM_ReceiveType.RealData;
+                resp.Data = JsonConvert.SerializeObject(data);
+
+                //string str = JsonConvert.SerializeObject(resp);
+                byte[] buffer = ByteConvertHelper.Object2Bytes<ReceiveData>(resp);
+
+                foreach (var item in CommonMemory.server.Clients)
+                {
+                    CommonMemory.server.Send(item, buffer);
+                }
             }
-            ReceiveData resp = new ReceiveData();
-            resp.Type = EM_ReceiveType.RealData;
-            resp.Data = JsonConvert.SerializeObject(data);
-            string str = JsonConvert.SerializeObject(resp);
-            byte[] buffer = UTF8Encoding.Default.GetBytes(str);
-            foreach (var item in CommonMemory.server.Clients)
+            catch (Exception ex)
             {
-                CommonMemory.server.Send(item, buffer);
+                LogLib.Log.GetLogger("MainProcess").Error(ex);                
             }
+            
         }
     }
 }

@@ -193,8 +193,8 @@ namespace Entity
         {
             get
             {
-                //return string.Format("{0}", Chroma.ToString("f" + Point));
-                return string.Format("{0}", Chroma.ToString());
+                return string.Format("{0}", Chroma.ToString("f" + Point));
+                //return string.Format("{0}", Chroma.ToString());
             }
         }
 
@@ -373,8 +373,8 @@ namespace Entity
         public const string noStr = "正常";
         public const string fault = "故障";
         public const string outRange = "超量程";
-        public const string highStr = "高报警";
-        public const string lowStr = "低报警";
+        public const string highStr = "A2报警";
+        public const string lowStr = "A1报警";
     }
 
     public class EquipmentComparer : IEqualityComparer<Equipment>

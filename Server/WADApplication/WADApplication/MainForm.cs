@@ -451,16 +451,16 @@ namespace WADApplication
 
         private void gridView1_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
         {
-            if (e.Button == System.Windows.Forms.MouseButtons.Left)
-            {
-                selecteq = gridView_nowData2.GetRow(e.RowHandle) as Equipment;
-                textEdit1.Text = selecteq.Chroma.ToString();
-                textEdit2.Text = selecteq.HighChroma.ToString();
-                textEdit3.Text = selecteq.LowChromadata.ToString();
-                textEdit4.Text = ((selecteq.HighChroma + selecteq.LowChromadata) / 2).ToString();
-                // 设置右下角单位
-                setUnitText(selecteq);
-            }
+            //if (e.Button == System.Windows.Forms.MouseButtons.Left)
+            //{
+            //    selecteq = gridView_nowData2.GetRow(e.RowHandle) as Equipment;
+            //    textEdit1.Text = selecteq.Chroma.ToString();
+            //    textEdit2.Text = selecteq.HighChroma.ToString();
+            //    textEdit3.Text = selecteq.LowChromadata.ToString();
+            //    textEdit4.Text = ((selecteq.HighChroma + selecteq.LowChromadata) / 2).ToString();
+            //    // 设置右下角单位
+            //    setUnitText(selecteq);
+            //}
         }
 
         // add equipment
@@ -735,7 +735,7 @@ namespace WADApplication
                 }
             }
 
-            XtraMessageBox.Show("设置成功");
+            //XtraMessageBox.Show("设置成功");
         }
 
         private void comboBoxEdit5_KeyPress(object sender, KeyPressEventArgs e)
@@ -1386,32 +1386,35 @@ namespace WADApplication
                 simpleButton10.Image = Resources.close_32x32;
                 CommonMemory.IsClosePlay = false;
                 simpleButton10.Text = "关闭声音";
+                // 客户要求打开声音的时候立即报警，但是觉得还是没有这个必要
+                AlertProcess.OperatorAlert(mainList, simpleButton11);
             }
         }
 
         private void toolTipController1_GetActiveObjectInfo(object sender, ToolTipControllerGetActiveObjectInfoEventArgs e)
         {
-            if (e.SelectedControl != gridControl_nowData2)
-                return;
+            // 暂时注释掉，鼠标移动会导致多线程问题
+            //if (e.SelectedControl != gridControl_nowData2)
+            //    return;
 
-            GridHitInfo hitInfo = gridView_nowData2.CalcHitInfo(e.ControlMousePosition);
+            //GridHitInfo hitInfo = gridView_nowData2.CalcHitInfo(e.ControlMousePosition);
 
-            if (hitInfo.InRow == false)
-                return;
+            //if (hitInfo.InRow == false)
+            //    return;
 
-            if (hitInfo.Column == null)
-                return;
+            //if (hitInfo.Column == null)
+            //    return;
 
-            int rowid = hitInfo.RowHandle;
-            Equipment eq = gridView_nowData2.GetRow(rowid) as Equipment;
-            string toolTip = eq.IsConnect ? "连接" : "断开";
-            Object o = hitInfo.HitTest.ToString() + hitInfo.RowHandle.ToString();
+            //int rowid = hitInfo.RowHandle;
+            //Equipment eq = gridView_nowData2.GetRow(rowid) as Equipment;
+            //string toolTip = eq.IsConnect ? "连接" : "断开";
+            //Object o = hitInfo.HitTest.ToString() + hitInfo.RowHandle.ToString();
 
-            ToolTipControlInfo info = new ToolTipControlInfo(o, toolTip);
-            if (info != null)
-            {
-                e.Info = info;
-            }
+            //ToolTipControlInfo info = new ToolTipControlInfo(o, toolTip);
+            //if (info != null)
+            //{
+            //    e.Info = info;
+            //}
 
             //    SuperToolTipSetupArgs toolTipArgs = new SuperToolTipSetupArgs();
             //toolTipArgs.Title.Text = string.Empty;
@@ -1484,71 +1487,71 @@ namespace WADApplication
         private int lastRow = -1;
         private void gridView_nowData2_SelectionChanged(object sender, DevExpress.Data.SelectionChangedEventArgs e)
         {
-            if (isselecting)
-            {
-                return;
-            }
-            isselecting = true;
-            int[] rows = gridView_nowData2.GetSelectedRows();
+            //if (isselecting)
+            //{
+            //    return;
+            //}
+            //isselecting = true;
+            //int[] rows = gridView_nowData2.GetSelectedRows();
 
-            List<Equipment> selectionList = new List<Equipment>();
-            Equipment lasteq = null;
-            if (rows.Length == mainList.Count)
-            {
-                if (lastRow > -1)
-                {
-                    lasteq = gridView_nowData2.GetRow(lastRow) as Equipment;
-                }
-                else 
-                {
-                    lasteq = gridView_nowData2.GetRow(0) as Equipment;
-                }
-                selectionList = mainList.FindAll(oo => { return oo.GasType == lasteq.GasType; });
-            }
-            else if (rows.Length > 0)
-            {
-                if (lastRow > -1)
-                {
-                    lasteq = gridView_nowData2.GetRow(lastRow) as Equipment;
-                    for (int i = 0; i < rows.Length; i++)
-                    {
-                        Equipment eq = gridView_nowData2.GetRow(rows[i]) as Equipment;
-                        // 同一时间只能有同一种类型的曲线
-                        if (eq.GasType != lasteq.GasType)
-                        {
-                            selectionList = new List<Equipment>();
-                            selectionList.Add(eq);
-                            break;
-                        }
-                        else
-                        {
-                            selectionList.Add(eq);
-                        }
-                    }
-                }
-                else
-                {
-                    lasteq = gridView_nowData2.GetRow(lastRow) as Equipment;
-                    selectionList.Add(lasteq);
-                }
-            }
+            //List<Equipment> selectionList = new List<Equipment>();
+            //Equipment lasteq = null;
+            //if (rows.Length == mainList.Count)
+            //{
+            //    if (lastRow > -1)
+            //    {
+            //        lasteq = gridView_nowData2.GetRow(lastRow) as Equipment;
+            //    }
+            //    else 
+            //    {
+            //        lasteq = gridView_nowData2.GetRow(0) as Equipment;
+            //    }
+            //    selectionList = mainList.FindAll(oo => { return oo.GasType == lasteq.GasType; });
+            //}
+            //else if (rows.Length > 0)
+            //{
+            //    if (lastRow > -1)
+            //    {
+            //        lasteq = gridView_nowData2.GetRow(lastRow) as Equipment;
+            //        for (int i = 0; i < rows.Length; i++)
+            //        {
+            //            Equipment eq = gridView_nowData2.GetRow(rows[i]) as Equipment;
+            //            // 同一时间只能有同一种类型的曲线
+            //            if (eq.GasType != lasteq.GasType)
+            //            {
+            //                selectionList = new List<Equipment>();
+            //                selectionList.Add(eq);
+            //                break;
+            //            }
+            //            else
+            //            {
+            //                selectionList.Add(eq);
+            //            }
+            //        }
+            //    }
+            //    else
+            //    {
+            //        lasteq = gridView_nowData2.GetRow(lastRow) as Equipment;
+            //        selectionList.Add(lasteq);
+            //    }
+            //}
 
-            for (int i = 0; i < mainList.Count; i++)
-            {
-                mainList[i].IfShowSeries = selectionList.FirstOrDefault(ss => { return ss.ID == mainList[i].ID; }) != null;
-                int rowhandle = gridView_nowData2.GetRowHandle(i);
-                if (mainList[i].IfShowSeries)
-                {
-                    gridView_nowData2.SelectRow(rowhandle);
-                    lastRow = rowhandle;
-                }
-                else
-                {
-                    gridView_nowData2.UnselectRow(rowhandle);
-                }
-            }
+            //for (int i = 0; i < mainList.Count; i++)
+            //{
+            //    mainList[i].IfShowSeries = selectionList.FirstOrDefault(ss => { return ss.ID == mainList[i].ID; }) != null;
+            //    int rowhandle = gridView_nowData2.GetRowHandle(i);
+            //    if (mainList[i].IfShowSeries)
+            //    {
+            //        gridView_nowData2.SelectRow(rowhandle);
+            //        lastRow = rowhandle;
+            //    }
+            //    else
+            //    {
+            //        gridView_nowData2.UnselectRow(rowhandle);
+            //    }
+            //}
 
-            isselecting = false;
+            //isselecting = false;
         }
 
         private void simpleButton11_Click(object sender, EventArgs e)
@@ -1572,6 +1575,68 @@ namespace WADApplication
         {
             Form_Client fc = new Form_Client();
             fc.ShowDialog();
+        }
+
+        private void gridView_nowData2_RowCellClick(object sender, DevExpress.XtraGrid.Views.Grid.RowCellClickEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left || e.Column.VisibleIndex != 0)
+            {
+                return; // 判断是否是用鼠标点击 
+            }
+            DevExpress.XtraGrid.Views.Grid.ViewInfo.GridHitInfo ghi = gridView_nowData2.CalcHitInfo(new Point(e.X, e.Y));
+            if (!ghi.InRow)
+            {
+                return;  // 判断光标是否在行内  
+            }
+
+            selecteq = gridView_nowData2.GetRow(e.RowHandle) as Equipment;
+            if (selecteq == null)
+            {
+                return; // 对象没有正常获取
+            }
+            // 这里的触发再勾选实际生效之前，所以这里是前一个状态的值
+            if (e.CellValue.ToString() == "False")
+            {
+                textEdit1.Text = "";
+                textEdit2.Text = "";
+                textEdit3.Text = "";
+                textEdit4.Text = "";
+            }
+            setUnitText(selecteq);
+            int idexeq = mainList.FindIndex(c => c.ID == selecteq.ID);
+
+            mainList[idexeq].IfShowSeries = e.CellValue.ToString() == "False";
+            maxTime = Utility.CutOffMillisecond(DateTime.Now);
+            minTime = maxTime.AddMinutes(-CommonMemory.SysConfig.RealTimeRangeX);
+            EquipmentDal.UpdateOne(mainList[idexeq]);
+            // 只有在开始监听的情况下，才显示曲线，所以这里加条件判断
+            if (isRead)
+            {
+                lock (mainList)
+                {
+                    MainProcess.ManageSeriesV2(chartControl1, selecteq, minTime, maxTime);
+                }
+            }
+            //清空勾选项
+            for (int i = 0; i < gridView_nowData2.DataRowCount; i++)
+            {
+                if (gridView_nowData2.FocusedRowHandle != i)
+                {
+                    gridView_nowData2.UnselectRow(i);
+                    mainList[i].IfShowSeries = false; //索引应该是一一对应的
+                    //Trace.WriteLine(gridView_nowData2.GetRow(i));
+                    //gridView_nowData2.GetDataRow(i)["selected"] = false;
+                }
+            }
+            //if ((bool)gridView_nowData2.GetDataRow(ghi.RowHandle)["selected"] == true)
+            //{
+            //    gridView_nowData2.GetDataRow(e.RowHandle)["selected"] = false;
+            //}
+            //else
+            //{
+            //    gridView_nowData2.GetDataRow(e.RowHandle)["selected"] = true;
+            //}
+
         }
     }
 }

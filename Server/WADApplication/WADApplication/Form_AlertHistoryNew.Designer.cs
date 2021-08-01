@@ -76,6 +76,7 @@
             this.splitContainerControl1.Panel1.Controls.Add(this.simpleButton1);
             this.splitContainerControl1.Panel1.Controls.Add(this.dateEdit_Start);
             this.splitContainerControl1.Panel1.Controls.Add(this.comboBoxEdit_SensorName);
+            this.splitContainerControl1.Panel1.MinSize = 37;
             this.splitContainerControl1.Panel1.Text = "Panel1";
             this.splitContainerControl1.Panel2.Controls.Add(this.gridControl3);
             this.splitContainerControl1.Panel2.Text = "Panel2";
@@ -295,7 +296,7 @@
             this.gridColumn5.FieldName = "AlertModelStr";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 7;
+            this.gridColumn5.VisibleIndex = 6;
             // 
             // gridColumn3
             // 
@@ -303,7 +304,7 @@
             this.gridColumn3.FieldName = "A1Str";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 8;
+            this.gridColumn3.VisibleIndex = 7;
             // 
             // gridColumn10
             // 
@@ -311,7 +312,7 @@
             this.gridColumn10.FieldName = "A2Str";
             this.gridColumn10.Name = "gridColumn10";
             this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 9;
+            this.gridColumn10.VisibleIndex = 8;
             // 
             // gridColumn11
             // 
@@ -319,7 +320,7 @@
             this.gridColumn11.FieldName = "MaxStr";
             this.gridColumn11.Name = "gridColumn11";
             this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 10;
+            this.gridColumn11.VisibleIndex = 9;
             // 
             // Form_AlertHistoryNew
             // 

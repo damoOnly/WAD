@@ -384,4 +384,12 @@ namespace Entity
         EqList = 2,
         AlertData= 3
     }
+
+    public enum EM_AlertModel: byte
+    {
+        HighModel = 0,
+        RangModel = 1,
+        LowModel = 2
+    }
+
 }

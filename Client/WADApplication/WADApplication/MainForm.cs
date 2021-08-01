@@ -357,7 +357,7 @@ namespace WADApplication
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
-            textEdit5.Text = "192.168.0.110";
+            textEdit5.Text = "192.168.1.106";
             textEdit6.Text = "9005";
             //Form_Login fl = new Form_Login();
             //if (fl.ShowDialog() != System.Windows.Forms.DialogResult.OK)
@@ -893,56 +893,60 @@ namespace WADApplication
             }
         }
 
-        void tcp_OnDataReceive(object sender, ReceiveData e)
+        void tcp_OnDataReceive(object sender, List<ReceiveData> e)
         {
-            if (e.Type != EM_ReceiveType.RealData)
+            foreach (var item in e)
             {
-                return;
-            }
-
-            List<Equipment> list = JsonConvert.DeserializeObject < List < Equipment >>(e.Data);
-            if (mainList2 == null)
-            {
-                mainList2 = list;
-                this.Invoke(new Action(() =>
+                if (item.Type != EM_ReceiveType.RealData)
                 {
-                    gridControl_nowData2.DataSource = mainList2;
-                    gridView_nowData2.BestFitColumns();
-                }));
-            }
-            else
-            {
-                for (int i = 0; i < mainList2.Count; i++)
-                {
-                    Equipment one = list.FirstOrDefault(ii => ii.ID == mainList2[i].ID);
-                    mainList2[i] = one;
+                    return;
                 }
-                this.Invoke(new Action(() =>
+
+                List<Equipment> list = JsonConvert.DeserializeObject<List<Equipment>>(item.Data);
+                if (mainList2 == null)
                 {
-                    gridView_nowData2.RefreshData();
-                    gridView_nowData2.BestFitColumns();
-                }));
+                    mainList2 = list;
+                    this.Invoke(new Action(() =>
+                    {
+                        gridControl_nowData2.DataSource = mainList2;
+                        gridView_nowData2.BestFitColumns();
+                    }));
+                }
+                else
+                {
+                    for (int i = 0; i < mainList2.Count; i++)
+                    {
+                        Equipment one = list.FirstOrDefault(ii => ii.ID == mainList2[i].ID);
+                        mainList2[i] = one;
+                    }
+                    this.Invoke(new Action(() =>
+                    {
+                        gridView_nowData2.RefreshData();
+                        gridView_nowData2.BestFitColumns();
+                    }));
+                }
+
+
+                Equipment sone = null;
+                int[] rows = gridView_nowData2.GetSelectedRows();
+
+                DateTime nowTemp = Utility.CutOffMillisecond(DateTime.Now);
+                if (rows.Length > 0)
+                {
+                    sone = gridView_nowData2.GetRow(rows[0]) as Equipment;
+                    //SwiftPlotDiagram diagram = chartControl1.Diagram as SwiftPlotDiagram;
+                    //if (diagram != null)
+                    //    diagram.AxisX.WholeRange.SetMinMaxValues(minTime, nowTemp);
+                    MainProcess.addPoint(list, sone.ID, textEdit1, textEdit2, textEdit3, textEdit4, chartControl1, nowTemp);
+
+                    // 每30秒清除一次最小数据(多余的点)
+                    if (Utility.CutOffMillisecond(DateTime.Now.AddSeconds(-30)) > MainProcess.lastRemoteTime)
+                    {
+                        MainProcess.RemovePoint(chartControl1);
+                    }
+                }
             }
             
-
-            Equipment sone = null;
-            int[] rows = gridView_nowData2.GetSelectedRows();
-
-            DateTime nowTemp = Utility.CutOffMillisecond(DateTime.Now);
-            if (rows.Length > 0)
-            {
-                sone = gridView_nowData2.GetRow(rows[0]) as Equipment;
-                //SwiftPlotDiagram diagram = chartControl1.Diagram as SwiftPlotDiagram;
-                //if (diagram != null)
-                //    diagram.AxisX.WholeRange.SetMinMaxValues(minTime, nowTemp);
-                MainProcess.addPoint(list, sone.ID, textEdit1, textEdit2, textEdit3, textEdit4, chartControl1, nowTemp);
-
-                // 每30秒清除一次最小数据(多余的点)
-                if (Utility.CutOffMillisecond(DateTime.Now.AddSeconds(-30)) > MainProcess.lastRemoteTime)
-                {
-                    MainProcess.RemovePoint(chartControl1);
-                }
-            }
         }
 
         private void simpleButton3_Click(object sender, EventArgs e)
@@ -1151,10 +1155,9 @@ namespace WADApplication
                 if (ghi.InRow)  // 判断光标是否在行内  
                 {
                     
-                    Equipment one = null;
+                    Equipment one = gridView_nowData2.GetRow(e.RowHandle) as Equipment;
                     if (e.CellValue.ToString() == "False")
                     {
-                        one = gridView_nowData2.GetRow(e.RowHandle) as Equipment;
                         textEdit1.Text = "";
                         textEdit2.Text = "";
                         textEdit3.Text = "";

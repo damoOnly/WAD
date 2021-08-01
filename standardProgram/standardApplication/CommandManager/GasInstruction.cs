@@ -39,54 +39,54 @@ namespace CommandManager
             Array.Reverse(byteTemp, 0, 2);
             Array.Reverse(byteTemp, 2, 2);
             content.AddRange(byteTemp);
-            content.AddRange(new byte[9]);
-            content.Add(gas.ProbeAddress);
-            content.Add(0);
-            content.Add(gas.ProbeChannel);
-            byteTemp = ASCIIEncoding.ASCII.GetBytes(gas.qu.Trim());
-            if (byteTemp.Length == 2)
-            {
-                content.AddRange(byteTemp.Reverse());
-            }
-            else if (byteTemp.Length == 1)
-            {
-                content.Add(0);
-                content.AddRange(byteTemp);
-            }
-            else
-            {
-                content.AddRange(new byte[2]);
-            }
-            content.Add(0);
-            content.Add(Convert.ToByte(gas.dong.Trim()));
-            content.Add(0);
-            content.Add(Convert.ToByte(gas.ceng.Trim()));
-            content.Add(0);
-            content.Add(Convert.ToByte(gas.hao.Trim()));
-            byteTemp = BitConverter.GetBytes(gas.OneAD);
-            Array.Reverse(byteTemp, 0, 2);
-            Array.Reverse(byteTemp, 2, 2);
-            content.AddRange(byteTemp);
-            byteTemp = BitConverter.GetBytes(gas.OneChroma);
-            Array.Reverse(byteTemp, 0, 2);
-            Array.Reverse(byteTemp, 2, 2);
-            content.AddRange(byteTemp);
-            byteTemp = BitConverter.GetBytes(gas.TwoAD);
-            Array.Reverse(byteTemp, 0, 2);
-            Array.Reverse(byteTemp, 2, 2);
-            content.AddRange(byteTemp);
-            byteTemp = BitConverter.GetBytes(gas.TwoChroma);
-            Array.Reverse(byteTemp, 0, 2);
-            Array.Reverse(byteTemp, 2, 2);
-            content.AddRange(byteTemp);
-            byteTemp = BitConverter.GetBytes(gas.ThreeAD);
-            Array.Reverse(byteTemp, 0, 2);
-            Array.Reverse(byteTemp, 2, 2);
-            content.AddRange(byteTemp);
-            byteTemp = BitConverter.GetBytes(gas.ThreeChroma);
-            Array.Reverse(byteTemp, 0, 2);
-            Array.Reverse(byteTemp, 2, 2);
-            content.AddRange(byteTemp);
+            //content.AddRange(new byte[9]);
+            //content.Add(gas.ProbeAddress);
+            //content.Add(0);
+            //content.Add(gas.ProbeChannel);
+            //byteTemp = ASCIIEncoding.ASCII.GetBytes(gas.qu.Trim());
+            //if (byteTemp.Length == 2)
+            //{
+            //    content.AddRange(byteTemp.Reverse());
+            //}
+            //else if (byteTemp.Length == 1)
+            //{
+            //    content.Add(0);
+            //    content.AddRange(byteTemp);
+            //}
+            //else
+            //{
+            //    content.AddRange(new byte[2]);
+            //}
+            //content.Add(0);
+            //content.Add(Convert.ToByte(gas.dong.Trim()));
+            //content.Add(0);
+            //content.Add(Convert.ToByte(gas.ceng.Trim()));
+            //content.Add(0);
+            //content.Add(Convert.ToByte(gas.hao.Trim()));
+            //byteTemp = BitConverter.GetBytes(gas.OneAD);
+            //Array.Reverse(byteTemp, 0, 2);
+            //Array.Reverse(byteTemp, 2, 2);
+            //content.AddRange(byteTemp);
+            //byteTemp = BitConverter.GetBytes(gas.OneChroma);
+            //Array.Reverse(byteTemp, 0, 2);
+            //Array.Reverse(byteTemp, 2, 2);
+            //content.AddRange(byteTemp);
+            //byteTemp = BitConverter.GetBytes(gas.TwoAD);
+            //Array.Reverse(byteTemp, 0, 2);
+            //Array.Reverse(byteTemp, 2, 2);
+            //content.AddRange(byteTemp);
+            //byteTemp = BitConverter.GetBytes(gas.TwoChroma);
+            //Array.Reverse(byteTemp, 0, 2);
+            //Array.Reverse(byteTemp, 2, 2);
+            //content.AddRange(byteTemp);
+            //byteTemp = BitConverter.GetBytes(gas.ThreeAD);
+            //Array.Reverse(byteTemp, 0, 2);
+            //Array.Reverse(byteTemp, 2, 2);
+            //content.AddRange(byteTemp);
+            //byteTemp = BitConverter.GetBytes(gas.ThreeChroma);
+            //Array.Reverse(byteTemp, 0, 2);
+            //Array.Reverse(byteTemp, 2, 2);
+            //content.AddRange(byteTemp);
 
             byte[] sendb = Command.GetWiteSendByte(address, (byte)gas.GasID, 0x10, content.ToArray());
             callback(string.Format("W: {0}", CommandUnits.ByteToHexStr(sendb)));
@@ -190,7 +190,7 @@ namespace CommandManager
         public static List<GasEntity> ReadGasList(byte address, CommonConfig config, Action<string> callback)
         {
             List<GasEntity> list = new List<GasEntity>();
-            byte[] sendb1 = Command.GetReadSendByte(address, 0x00, 0x12, 1);
+            byte[] sendb1 = Command.GetReadSendByte(address, 0x00, 0x20, 1);
             callback(string.Format("W: {0}", CommandUnits.ByteToHexStr(sendb1)));
             byte[] rbytes1 = CommandUnits.DataCenter.Read(sendb1);
             callback(string.Format("R: {0}", CommandUnits.ByteToHexStr(rbytes1)));

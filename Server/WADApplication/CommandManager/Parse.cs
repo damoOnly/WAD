@@ -235,7 +235,7 @@ namespace CommandManager
             Array.Reverse(data, 5, 2);
             float ch = Convert.ToSingle(Math.Round(BitConverter.ToSingle(data, 3), 3));
             // 有时出现异常数据，需要过滤为0
-            chrome = ch > 100000 || ch < -100000 ? 0 : ch;
+            chrome = (ch > 100000 || ch < -100000) ? 0 : ch;
             alertStatus = (EM_AlertType)data[8];
             //Equipment eq = new Equipment();
             //byte[] cb = new byte[4];

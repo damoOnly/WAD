@@ -515,7 +515,7 @@
             this.gridControl_nowData2.Name = "gridControl_nowData2";
             this.gridControl_nowData2.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemCheckEdit1});
-            this.gridControl_nowData2.Size = new System.Drawing.Size(957, 518);
+            this.gridControl_nowData2.Size = new System.Drawing.Size(957, 286);
             this.gridControl_nowData2.TabIndex = 3;
             this.gridControl_nowData2.ToolTipController = this.toolTipController1;
             this.gridControl_nowData2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -560,7 +560,7 @@
             formatConditionRuleExpression1.Appearance.BackColor = System.Drawing.Color.Red;
             formatConditionRuleExpression1.Appearance.BackColor2 = System.Drawing.Color.Red;
             formatConditionRuleExpression1.Appearance.Options.UseBackColor = true;
-            formatConditionRuleExpression1.Expression = "[AlertStr] == \'超量程\' Or [AlertStr] == \'高报警\'";
+            formatConditionRuleExpression1.Expression = "[AlertStr] == \'超量程\' Or [AlertStr] == \'A2报警\'";
             formatConditionRuleExpression1.PredefinedName = "Bold Text";
             gridFormatRule1.Rule = formatConditionRuleExpression1;
             gridFormatRule1.Tag = "报警";
@@ -607,10 +607,11 @@
             this.gridView_nowData2.OptionsSelection.EnableAppearanceHideSelection = false;
             this.gridView_nowData2.OptionsSelection.MultiSelect = true;
             this.gridView_nowData2.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
-            this.gridView_nowData2.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
+            this.gridView_nowData2.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.False;
             this.gridView_nowData2.OptionsView.ShowGroupPanel = false;
             this.gridView_nowData2.OptionsView.ShowVerticalLines = DevExpress.Utils.DefaultBoolean.False;
             this.gridView_nowData2.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(this.gridView1_RowClick);
+            this.gridView_nowData2.RowCellClick += new DevExpress.XtraGrid.Views.Grid.RowCellClickEventHandler(this.gridView_nowData2_RowCellClick);
             this.gridView_nowData2.SelectionChanged += new DevExpress.Data.SelectionChangedEventHandler(this.gridView_nowData2_SelectionChanged);
             // 
             // gridColumn3
@@ -775,7 +776,6 @@
             // 
             // chartControl1
             // 
-            this.chartControl1.BackImage.Image = ((System.Drawing.Image)(resources.GetObject("chartControl1.BackImage.Image")));
             this.chartControl1.BackImage.Stretch = true;
             this.chartControl1.CrosshairEnabled = DevExpress.Utils.DefaultBoolean.False;
             swiftPlotDiagram1.AxisX.Label.TextAlignment = System.Drawing.StringAlignment.Far;
@@ -791,17 +791,16 @@
             this.chartControl1.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
         series1};
             this.chartControl1.SeriesTemplate.View = swiftPlotSeriesView2;
-            this.chartControl1.Size = new System.Drawing.Size(0, 0);
+            this.chartControl1.Size = new System.Drawing.Size(719, 232);
             this.chartControl1.TabIndex = 0;
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(40)))), ((int)(((byte)(62)))));
             this.panel2.Controls.Add(this.labelControl4);
             this.panel2.Controls.Add(this.textEdit1);
             this.panel2.Controls.Add(this.labelControl5);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(2, 1);
+            this.panel2.Location = new System.Drawing.Point(2, 2);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(232, 28);
             this.panel2.TabIndex = 11;
@@ -809,7 +808,6 @@
             // labelControl4
             // 
             this.labelControl4.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl4.Appearance.ForeColor = System.Drawing.Color.White;
             this.labelControl4.Location = new System.Drawing.Point(4, 7);
             this.labelControl4.Name = "labelControl4";
             this.labelControl4.Size = new System.Drawing.Size(48, 14);
@@ -822,12 +820,8 @@
             this.textEdit1.Location = new System.Drawing.Point(69, 6);
             this.textEdit1.MenuManager = this.ribbon;
             this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
             this.textEdit1.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textEdit1.Properties.Appearance.ForeColor = System.Drawing.Color.White;
-            this.textEdit1.Properties.Appearance.Options.UseBackColor = true;
             this.textEdit1.Properties.Appearance.Options.UseFont = true;
-            this.textEdit1.Properties.Appearance.Options.UseForeColor = true;
             this.textEdit1.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.textEdit1.Properties.ReadOnly = true;
             this.textEdit1.Size = new System.Drawing.Size(77, 18);
@@ -836,7 +830,6 @@
             // labelControl5
             // 
             this.labelControl5.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl5.Appearance.ForeColor = System.Drawing.Color.White;
             this.labelControl5.Location = new System.Drawing.Point(169, 5);
             this.labelControl5.Name = "labelControl5";
             this.labelControl5.Size = new System.Drawing.Size(35, 14);
@@ -845,12 +838,11 @@
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(9)))), ((int)(((byte)(20)))), ((int)(((byte)(31)))));
             this.panel3.Controls.Add(this.labelControl7);
             this.panel3.Controls.Add(this.textEdit2);
             this.panel3.Controls.Add(this.labelControl6);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(2, 29);
+            this.panel3.Location = new System.Drawing.Point(2, 30);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(232, 28);
             this.panel3.TabIndex = 11;
@@ -858,7 +850,6 @@
             // labelControl7
             // 
             this.labelControl7.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl7.Appearance.ForeColor = System.Drawing.Color.White;
             this.labelControl7.Location = new System.Drawing.Point(4, 7);
             this.labelControl7.Name = "labelControl7";
             this.labelControl7.Size = new System.Drawing.Size(48, 14);
@@ -871,12 +862,8 @@
             this.textEdit2.Location = new System.Drawing.Point(69, 6);
             this.textEdit2.MenuManager = this.ribbon;
             this.textEdit2.Name = "textEdit2";
-            this.textEdit2.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(9)))), ((int)(((byte)(20)))), ((int)(((byte)(31)))));
             this.textEdit2.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textEdit2.Properties.Appearance.ForeColor = System.Drawing.Color.White;
-            this.textEdit2.Properties.Appearance.Options.UseBackColor = true;
             this.textEdit2.Properties.Appearance.Options.UseFont = true;
-            this.textEdit2.Properties.Appearance.Options.UseForeColor = true;
             this.textEdit2.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.textEdit2.Properties.ReadOnly = true;
             this.textEdit2.Size = new System.Drawing.Size(77, 18);
@@ -885,7 +872,6 @@
             // labelControl6
             // 
             this.labelControl6.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl6.Appearance.ForeColor = System.Drawing.Color.White;
             this.labelControl6.Location = new System.Drawing.Point(168, 5);
             this.labelControl6.Name = "labelControl6";
             this.labelControl6.Size = new System.Drawing.Size(35, 14);
@@ -894,12 +880,11 @@
             // 
             // panel4
             // 
-            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(40)))), ((int)(((byte)(62)))));
             this.panel4.Controls.Add(this.labelControl9);
             this.panel4.Controls.Add(this.textEdit3);
             this.panel4.Controls.Add(this.labelControl8);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(2, 57);
+            this.panel4.Location = new System.Drawing.Point(2, 58);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(232, 28);
             this.panel4.TabIndex = 11;
@@ -907,7 +892,6 @@
             // labelControl9
             // 
             this.labelControl9.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl9.Appearance.ForeColor = System.Drawing.Color.White;
             this.labelControl9.Location = new System.Drawing.Point(4, 6);
             this.labelControl9.Name = "labelControl9";
             this.labelControl9.Size = new System.Drawing.Size(48, 14);
@@ -920,12 +904,8 @@
             this.textEdit3.Location = new System.Drawing.Point(69, 4);
             this.textEdit3.MenuManager = this.ribbon;
             this.textEdit3.Name = "textEdit3";
-            this.textEdit3.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(40)))), ((int)(((byte)(62)))));
             this.textEdit3.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textEdit3.Properties.Appearance.ForeColor = System.Drawing.Color.White;
-            this.textEdit3.Properties.Appearance.Options.UseBackColor = true;
             this.textEdit3.Properties.Appearance.Options.UseFont = true;
-            this.textEdit3.Properties.Appearance.Options.UseForeColor = true;
             this.textEdit3.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.textEdit3.Properties.ReadOnly = true;
             this.textEdit3.Size = new System.Drawing.Size(76, 18);
@@ -934,7 +914,6 @@
             // labelControl8
             // 
             this.labelControl8.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl8.Appearance.ForeColor = System.Drawing.Color.White;
             this.labelControl8.Location = new System.Drawing.Point(168, 4);
             this.labelControl8.Name = "labelControl8";
             this.labelControl8.Size = new System.Drawing.Size(35, 14);
@@ -943,12 +922,11 @@
             // 
             // panel5
             // 
-            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(9)))), ((int)(((byte)(20)))), ((int)(((byte)(31)))));
             this.panel5.Controls.Add(this.labelControl11);
             this.panel5.Controls.Add(this.textEdit4);
             this.panel5.Controls.Add(this.labelControl10);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel5.Location = new System.Drawing.Point(2, 85);
+            this.panel5.Location = new System.Drawing.Point(2, 86);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(232, 28);
             this.panel5.TabIndex = 23;
@@ -956,7 +934,6 @@
             // labelControl11
             // 
             this.labelControl11.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl11.Appearance.ForeColor = System.Drawing.Color.White;
             this.labelControl11.Location = new System.Drawing.Point(4, 6);
             this.labelControl11.Name = "labelControl11";
             this.labelControl11.Size = new System.Drawing.Size(48, 14);
@@ -969,12 +946,8 @@
             this.textEdit4.Location = new System.Drawing.Point(68, 6);
             this.textEdit4.MenuManager = this.ribbon;
             this.textEdit4.Name = "textEdit4";
-            this.textEdit4.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(9)))), ((int)(((byte)(20)))), ((int)(((byte)(31)))));
             this.textEdit4.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textEdit4.Properties.Appearance.ForeColor = System.Drawing.Color.White;
-            this.textEdit4.Properties.Appearance.Options.UseBackColor = true;
             this.textEdit4.Properties.Appearance.Options.UseFont = true;
-            this.textEdit4.Properties.Appearance.Options.UseForeColor = true;
             this.textEdit4.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.textEdit4.Properties.ReadOnly = true;
             this.textEdit4.Size = new System.Drawing.Size(77, 18);
@@ -983,7 +956,6 @@
             // labelControl10
             // 
             this.labelControl10.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl10.Appearance.ForeColor = System.Drawing.Color.White;
             this.labelControl10.Location = new System.Drawing.Point(168, 3);
             this.labelControl10.Name = "labelControl10";
             this.labelControl10.Size = new System.Drawing.Size(35, 14);
@@ -992,13 +964,12 @@
             // 
             // panel6
             // 
-            this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(40)))), ((int)(((byte)(62)))));
             this.panel6.Controls.Add(this.btn_setVTime);
             this.panel6.Controls.Add(this.labelControl13);
             this.panel6.Controls.Add(this.comboBoxEdit_VTime);
             this.panel6.Controls.Add(this.labelControl12);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel6.Location = new System.Drawing.Point(2, 113);
+            this.panel6.Location = new System.Drawing.Point(2, 114);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(232, 28);
             this.panel6.TabIndex = 12;
@@ -1015,7 +986,6 @@
             // labelControl13
             // 
             this.labelControl13.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl13.Appearance.ForeColor = System.Drawing.Color.White;
             this.labelControl13.Location = new System.Drawing.Point(133, 7);
             this.labelControl13.Name = "labelControl13";
             this.labelControl13.Size = new System.Drawing.Size(24, 14);
@@ -1027,12 +997,8 @@
             this.comboBoxEdit_VTime.Location = new System.Drawing.Point(72, 5);
             this.comboBoxEdit_VTime.MenuManager = this.ribbon;
             this.comboBoxEdit_VTime.Name = "comboBoxEdit_VTime";
-            this.comboBoxEdit_VTime.Properties.Appearance.BackColor = System.Drawing.Color.SteelBlue;
             this.comboBoxEdit_VTime.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBoxEdit_VTime.Properties.Appearance.ForeColor = System.Drawing.Color.White;
-            this.comboBoxEdit_VTime.Properties.Appearance.Options.UseBackColor = true;
             this.comboBoxEdit_VTime.Properties.Appearance.Options.UseFont = true;
-            this.comboBoxEdit_VTime.Properties.Appearance.Options.UseForeColor = true;
             this.comboBoxEdit_VTime.Properties.AutoComplete = false;
             this.comboBoxEdit_VTime.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.comboBoxEdit_VTime.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -1063,7 +1029,6 @@
             // labelControl12
             // 
             this.labelControl12.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl12.Appearance.ForeColor = System.Drawing.Color.White;
             this.labelControl12.Location = new System.Drawing.Point(4, 6);
             this.labelControl12.Name = "labelControl12";
             this.labelControl12.Size = new System.Drawing.Size(48, 14);
@@ -1092,7 +1057,6 @@
             // 
             // splitContainerControl1
             // 
-            this.splitContainerControl1.Collapsed = true;
             this.splitContainerControl1.CollapsePanel = DevExpress.XtraEditors.SplitCollapsePanel.Panel2;
             this.splitContainerControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainerControl1.FixedPanel = DevExpress.XtraEditors.SplitFixedPanel.Panel2;
@@ -1129,10 +1093,11 @@
             this.splitContainerControl3.Panel1.Controls.Add(this.simpleButton2);
             this.splitContainerControl3.Panel1.Controls.Add(this.comboBoxEdit1);
             this.splitContainerControl3.Panel1.Controls.Add(this.simpleButton1);
+            this.splitContainerControl3.Panel1.MinSize = 63;
             this.splitContainerControl3.Panel1.Text = "Panel1";
             this.splitContainerControl3.Panel2.Controls.Add(this.gridControl_nowData2);
             this.splitContainerControl3.Panel2.Text = "Panel2";
-            this.splitContainerControl3.Size = new System.Drawing.Size(957, 586);
+            this.splitContainerControl3.Size = new System.Drawing.Size(957, 354);
             this.splitContainerControl3.SplitterPosition = 63;
             this.splitContainerControl3.TabIndex = 4;
             this.splitContainerControl3.Text = "splitContainerControl3";
@@ -1309,7 +1274,7 @@
             this.splitContainerControl2.Panel1.Text = "Panel1";
             this.splitContainerControl2.Panel2.Controls.Add(this.panelControl1);
             this.splitContainerControl2.Panel2.Text = "Panel2";
-            this.splitContainerControl2.Size = new System.Drawing.Size(0, 0);
+            this.splitContainerControl2.Size = new System.Drawing.Size(957, 232);
             this.splitContainerControl2.SplitterPosition = 233;
             this.splitContainerControl2.TabIndex = 1;
             this.splitContainerControl2.Text = "splitContainerControl2";
@@ -1322,9 +1287,9 @@
             this.panelControl1.Controls.Add(this.panel3);
             this.panelControl1.Controls.Add(this.panel2);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelControl1.Location = new System.Drawing.Point(-236, 0);
+            this.panelControl1.Location = new System.Drawing.Point(-3, 0);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(236, 0);
+            this.panelControl1.Size = new System.Drawing.Size(236, 232);
             this.panelControl1.TabIndex = 0;
             // 
             // MainForm

@@ -255,7 +255,7 @@
             this.splitContainerControl4.Panel1.Text = "Panel1";
             this.splitContainerControl4.Panel2.Controls.Add(this.listBoxControl1);
             this.splitContainerControl4.Panel2.Text = "Panel2";
-            this.splitContainerControl4.Size = new System.Drawing.Size(961, 440);
+            this.splitContainerControl4.Size = new System.Drawing.Size(961, 417);
             this.splitContainerControl4.SplitterPosition = 176;
             this.splitContainerControl4.TabIndex = 0;
             this.splitContainerControl4.Text = "splitContainerControl4";
@@ -266,7 +266,7 @@
             this.xtraTabControl1.Location = new System.Drawing.Point(0, 0);
             this.xtraTabControl1.Name = "xtraTabControl1";
             this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
-            this.xtraTabControl1.Size = new System.Drawing.Size(805, 440);
+            this.xtraTabControl1.Size = new System.Drawing.Size(780, 417);
             this.xtraTabControl1.TabIndex = 0;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPage1,
@@ -280,7 +280,7 @@
             this.xtraTabPage1.AutoScroll = true;
             this.xtraTabPage1.Controls.Add(this.xtraScrollableControl1);
             this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(799, 412);
+            this.xtraTabPage1.Size = new System.Drawing.Size(774, 389);
             this.xtraTabPage1.Text = "全部参数";
             // 
             // xtraScrollableControl1
@@ -290,7 +290,7 @@
             this.xtraScrollableControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.xtraScrollableControl1.Location = new System.Drawing.Point(0, 0);
             this.xtraScrollableControl1.Name = "xtraScrollableControl1";
-            this.xtraScrollableControl1.Size = new System.Drawing.Size(799, 412);
+            this.xtraScrollableControl1.Size = new System.Drawing.Size(774, 389);
             this.xtraScrollableControl1.TabIndex = 4;
             // 
             // gridControl2
@@ -299,7 +299,7 @@
             this.gridControl2.Location = new System.Drawing.Point(0, 201);
             this.gridControl2.MainView = this.gridView2;
             this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(799, 167);
+            this.gridControl2.Size = new System.Drawing.Size(774, 167);
             this.gridControl2.TabIndex = 2;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
@@ -460,7 +460,7 @@
             this.gridControl1.Location = new System.Drawing.Point(0, 0);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(799, 201);
+            this.gridControl1.Size = new System.Drawing.Size(774, 201);
             this.gridControl1.TabIndex = 1;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -591,7 +591,7 @@
             // 
             this.xtraTabPage2.Controls.Add(this.splitContainerControl6);
             this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(799, 412);
+            this.xtraTabPage2.Size = new System.Drawing.Size(774, 389);
             this.xtraTabPage2.Text = "气体参数";
             // 
             // splitContainerControl6
@@ -604,7 +604,7 @@
             this.splitContainerControl6.Panel1.Text = "Panel1";
             this.splitContainerControl6.Panel2.Controls.Add(this.splitContainerControl5);
             this.splitContainerControl6.Panel2.Text = "Panel2";
-            this.splitContainerControl6.Size = new System.Drawing.Size(799, 412);
+            this.splitContainerControl6.Size = new System.Drawing.Size(774, 389);
             this.splitContainerControl6.SplitterPosition = 129;
             this.splitContainerControl6.TabIndex = 0;
             this.splitContainerControl6.Text = "splitContainerControl6";
@@ -620,7 +620,7 @@
             this.splitContainerControl7.Panel1.Text = "Panel1";
             this.splitContainerControl7.Panel2.Controls.Add(this.checkedListBoxControl1);
             this.splitContainerControl7.Panel2.Text = "Panel2";
-            this.splitContainerControl7.Size = new System.Drawing.Size(111, 412);
+            this.splitContainerControl7.Size = new System.Drawing.Size(129, 389);
             this.splitContainerControl7.SplitterPosition = 30;
             this.splitContainerControl7.TabIndex = 0;
             this.splitContainerControl7.Text = "splitContainerControl7";
@@ -631,7 +631,7 @@
             this.checkEdit1.Location = new System.Drawing.Point(0, 24);
             this.checkEdit1.Name = "checkEdit1";
             this.checkEdit1.Properties.Caption = "全选";
-            this.checkEdit1.Size = new System.Drawing.Size(111, 19);
+            this.checkEdit1.Size = new System.Drawing.Size(129, 19);
             this.checkEdit1.TabIndex = 1;
             this.checkEdit1.CheckedChanged += new System.EventHandler(this.checkEdit1_CheckedChanged);
             // 
@@ -645,7 +645,7 @@
             this.searchControl1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Repository.ClearButton(),
             new DevExpress.XtraEditors.Repository.SearchButton()});
-            this.searchControl1.Size = new System.Drawing.Size(111, 24);
+            this.searchControl1.Size = new System.Drawing.Size(129, 24);
             this.searchControl1.TabIndex = 0;
             this.searchControl1.TextChanged += new System.EventHandler(this.searchControl1_TextChanged);
             // 
@@ -656,7 +656,7 @@
             this.checkedListBoxControl1.Location = new System.Drawing.Point(0, 0);
             this.checkedListBoxControl1.Name = "checkedListBoxControl1";
             this.checkedListBoxControl1.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.checkedListBoxControl1.Size = new System.Drawing.Size(111, 381);
+            this.checkedListBoxControl1.Size = new System.Drawing.Size(129, 354);
             this.checkedListBoxControl1.TabIndex = 1;
             this.checkedListBoxControl1.SelectedIndexChanged += new System.EventHandler(this.checkedListBoxControl1_SelectedIndexChanged);
             // 
@@ -673,8 +673,8 @@
             this.splitContainerControl5.Panel1.Text = "Panel1";
             this.splitContainerControl5.Panel2.Controls.Add(this.userControl11);
             this.splitContainerControl5.Panel2.Text = "Panel2";
-            this.splitContainerControl5.Size = new System.Drawing.Size(683, 412);
-            this.splitContainerControl5.SplitterPosition = 19;
+            this.splitContainerControl5.Size = new System.Drawing.Size(640, 389);
+            this.splitContainerControl5.SplitterPosition = 66;
             this.splitContainerControl5.TabIndex = 0;
             this.splitContainerControl5.Text = "splitContainerControl5";
             // 
@@ -732,14 +732,14 @@
             this.userControl11.GasID = 0;
             this.userControl11.Location = new System.Drawing.Point(0, 0);
             this.userControl11.Name = "userControl11";
-            this.userControl11.Size = new System.Drawing.Size(683, 390);
+            this.userControl11.Size = new System.Drawing.Size(640, 318);
             this.userControl11.TabIndex = 0;
             // 
             // xtraTabPage6
             // 
             this.xtraTabPage6.Controls.Add(this.userControlNormal1);
             this.xtraTabPage6.Name = "xtraTabPage6";
-            this.xtraTabPage6.Size = new System.Drawing.Size(795, 398);
+            this.xtraTabPage6.Size = new System.Drawing.Size(774, 389);
             this.xtraTabPage6.Text = "通用参数";
             // 
             // userControlNormal1
@@ -748,7 +748,7 @@
             this.userControlNormal1.Location = new System.Drawing.Point(0, 0);
             this.userControlNormal1.Name = "userControlNormal1";
             this.userControlNormal1.normalParam = null;
-            this.userControlNormal1.Size = new System.Drawing.Size(795, 398);
+            this.userControlNormal1.Size = new System.Drawing.Size(774, 389);
             this.userControlNormal1.TabIndex = 0;
             this.userControlNormal1.ChangeNormalEvent += new standardApplication.UserControlNormal.ChangeNormalEventHandler(this.userControlNormal1_ChangeNormalEvent);
             this.userControlNormal1.SaveModelFileEvent += new standardApplication.UserControlNormal.SaveModelFileEventHandler(this.userControlNormal1_SaveModelFileEvent);
@@ -758,7 +758,7 @@
             this.xtraTabPage7.Controls.Add(this.splitContainerControl9);
             this.xtraTabPage7.Name = "xtraTabPage7";
             this.xtraTabPage7.PageVisible = false;
-            this.xtraTabPage7.Size = new System.Drawing.Size(795, 398);
+            this.xtraTabPage7.Size = new System.Drawing.Size(774, 389);
             this.xtraTabPage7.Text = "串口参数";
             // 
             // splitContainerControl9
@@ -771,7 +771,7 @@
             this.splitContainerControl9.Panel1.Text = "Panel1";
             this.splitContainerControl9.Panel2.Controls.Add(this.splitContainerControl10);
             this.splitContainerControl9.Panel2.Text = "Panel2";
-            this.splitContainerControl9.Size = new System.Drawing.Size(795, 398);
+            this.splitContainerControl9.Size = new System.Drawing.Size(774, 389);
             this.splitContainerControl9.SplitterPosition = 153;
             this.splitContainerControl9.TabIndex = 0;
             this.splitContainerControl9.Text = "splitContainerControl9";
@@ -797,7 +797,7 @@
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(795, 132);
+            this.groupControl1.Size = new System.Drawing.Size(774, 153);
             this.groupControl1.TabIndex = 0;
             this.groupControl1.Text = "串口1设置";
             // 
@@ -963,7 +963,7 @@
             this.splitContainerControl10.Panel2.Controls.Add(this.simpleButton21);
             this.splitContainerControl10.Panel2.Controls.Add(this.simpleButton20);
             this.splitContainerControl10.Panel2.Text = "Panel2";
-            this.splitContainerControl10.Size = new System.Drawing.Size(795, 261);
+            this.splitContainerControl10.Size = new System.Drawing.Size(774, 231);
             this.splitContainerControl10.SplitterPosition = 151;
             this.splitContainerControl10.TabIndex = 0;
             this.splitContainerControl10.Text = "splitContainerControl10";
@@ -989,7 +989,7 @@
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl2.Location = new System.Drawing.Point(0, 0);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(795, 130);
+            this.groupControl2.Size = new System.Drawing.Size(774, 151);
             this.groupControl2.TabIndex = 1;
             this.groupControl2.Text = "串口2设置";
             this.groupControl2.Visible = false;
@@ -1186,7 +1186,7 @@
             this.listBoxControl1.Location = new System.Drawing.Point(0, 0);
             this.listBoxControl1.MaximumSize = new System.Drawing.Size(197, 0);
             this.listBoxControl1.Name = "listBoxControl1";
-            this.listBoxControl1.Size = new System.Drawing.Size(151, 440);
+            this.listBoxControl1.Size = new System.Drawing.Size(176, 417);
             this.listBoxControl1.TabIndex = 0;
             this.listBoxControl1.DoubleClick += new System.EventHandler(this.listBoxControl1_DoubleClick);
             this.listBoxControl1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listBoxControl1_MouseDown);
@@ -1207,7 +1207,7 @@
             this.splitContainerControl2.Panel1.Text = "Panel1";
             this.splitContainerControl2.Panel2.Controls.Add(this.splitContainerControl3);
             this.splitContainerControl2.Panel2.Text = "Panel2";
-            this.splitContainerControl2.Size = new System.Drawing.Size(961, 140);
+            this.splitContainerControl2.Size = new System.Drawing.Size(961, 163);
             this.splitContainerControl2.SplitterPosition = 201;
             this.splitContainerControl2.TabIndex = 0;
             this.splitContainerControl2.Text = "splitContainerControl2";
@@ -1435,7 +1435,7 @@
             this.splitContainerControl3.Panel1.Text = "Panel1";
             this.splitContainerControl3.Panel2.Controls.Add(this.richTextBox1);
             this.splitContainerControl3.Panel2.Text = "Panel2";
-            this.splitContainerControl3.Size = new System.Drawing.Size(783, 140);
+            this.splitContainerControl3.Size = new System.Drawing.Size(755, 163);
             this.splitContainerControl3.SplitterPosition = 587;
             this.splitContainerControl3.TabIndex = 0;
             this.splitContainerControl3.Text = "splitContainerControl3";
@@ -1653,7 +1653,7 @@
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox1.Location = new System.Drawing.Point(0, 0);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(274, 140);
+            this.richTextBox1.Size = new System.Drawing.Size(163, 163);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 

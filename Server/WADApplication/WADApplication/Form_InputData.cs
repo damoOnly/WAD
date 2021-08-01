@@ -91,6 +91,7 @@ namespace WADApplication
                     Array.Reverse(cd.ResultByte, 5, 2);
                     total = BitConverter.ToUInt32(cd.ResultByte, 3);
                     textEdit1.Text = total.ToString();
+                    textEdit3.Text = total.ToString();
                 }
                 else
                 {

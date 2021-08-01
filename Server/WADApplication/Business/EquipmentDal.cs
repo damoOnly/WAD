@@ -270,6 +270,52 @@ values (@Name,@Address,@GasType,@SensorNum,@UnitType,@Point,@Magnification,@Low,
             return list;
         }
 
+        public static List<StructEquipment> GetListIncludeDeleteByAddress(byte address)
+        {
+            List<StructEquipment> list = new List<StructEquipment>();
+            string sql = "select rowid,Name,Address,GasType,SensorNum,UnitType,Point,Magnification,Low,High,Max,IsGas,IsDel,IsNew,AlertModel,Factor,AliasGasName,AliasUnitName,MN,CreateTime from tb_Equipment where Address=@Address";
+            using (SQLiteConnection conn = new SQLiteConnection(connstr))
+            {
+                conn.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Address", address);                    
+                    using (SQLiteDataReader reader = cmd.ExecuteReader())
+                    {
+                        int orderNo = 1;
+                        while (reader.Read())
+                        {
+                            StructEquipment eq = new StructEquipment();
+                            eq.OrderNo = orderNo;
+                            eq.ID = reader.GetInt32(0);
+                            eq.Name = reader.GetString(1);
+                            eq.Address = reader.GetByte(2);
+                            eq.GasType = reader.GetByte(3);
+                            eq.SensorNum = reader.GetByte(4);
+                            eq.UnitType = reader.GetByte(5);
+                            eq.Point = reader.GetByte(6);
+                            eq.Magnification = reader.GetInt32(7);
+                            eq.A1 = reader.GetFloat(8);
+                            eq.A2 = reader.GetFloat(9);
+                            eq.Max = reader.GetFloat(10);
+                            eq.IsGas = reader.GetBoolean(11);
+                            eq.IsDel = reader.GetBoolean(12);
+                            eq.IsNew = reader.GetBoolean(13);
+                            eq.AlertModel = reader.GetByte(14);
+                            eq.Factor = reader.GetString(15);
+                            eq.AliasGasName = reader.GetString(16);
+                            eq.AliasUnitName = reader.GetString(17);
+                            eq.MN = reader.GetString(18);
+                            eq.CreateTime = reader.GetDateTime(19);
+                            list.Add(eq);
+                            orderNo = orderNo + 1;
+                        }
+                    }
+                }
+            }
+            return list;
+        }
+
         public static StructEquipment GetOneByFile(SQLiteConnection conn)
         {
             string sql = "select rowid,Name,Address,GasType,SensorNum,UnitType,Point,Magnification,Low,High,Max,IsGas,IsNew,AlertModel,Factor,AliasGasName,AliasUnitName,MN,CreateTime from tb_Equipment";

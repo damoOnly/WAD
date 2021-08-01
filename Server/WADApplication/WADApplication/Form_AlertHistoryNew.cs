@@ -269,7 +269,7 @@ namespace WADApplication
                 mTempSaveDialog.FileName = comboBoxEdit_SensorName.Text;
                 if (DialogResult.OK == mTempSaveDialog.ShowDialog() && null != mTempSaveDialog.FileName.Trim())
                 {
-                    string mTempSavePath = mTempSaveDialog.FileName;
+                    string mTempSavePath = string.Format("{0}报警记录-{1}-{2}", mTempSaveDialog.FileName, DateTime.Now.ToString("yyyyMMdd"), DateTime.Now.ToString("HHmmss"));
                     ExcelHelper.ExportDataGridToCSV(table, mTempSavePath);
                 }
             }
