@@ -117,6 +117,7 @@ namespace Business
                             alr.A1Str = eq.A1Str;
                             alr.A2Str = eq.A2Str;
                             alr.MaxStr = eq.MaxStr;
+                            alr.Point = eq.Point;
                             list.Add(alr);
                         }
                     }

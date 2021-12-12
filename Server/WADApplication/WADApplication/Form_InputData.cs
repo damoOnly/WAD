@@ -52,6 +52,10 @@ namespace WADApplication
                     serialPort1.PortName = CommonMemory.SysConfig.PortName;
                     serialPort1.Open();
                 }
+                else
+                {
+                    throw new Exception("准备数据上传error");
+                }
 
             }
             catch (Exception ex)

@@ -120,11 +120,6 @@ namespace WADApplication
         /// </summary>
         // private List<Equipment> mainList2;
 
-        /// <summary>
-        /// 读取频率（秒）
-        /// </summary>
-        private int readHz = 5;
-
         ///// <summary>
         ///// 保存周期（秒）
         ///// </summary>
@@ -174,7 +169,7 @@ namespace WADApplication
                 // 暂停
                 if (suspend)
                 {
-                    Thread.Sleep(readHz * 1000);
+                    Thread.Sleep(CommonMemory.SysConfig.HzNum * 1000);
                     continue;
                 }
                 try
@@ -203,7 +198,7 @@ namespace WADApplication
                     this.Invoke(new Action(gridControl_nowData2.RefreshDataSource));
                     //this.Invoke(new Action(gridView_nowData2.BestFitColumns));
                     MainProcess.sendClientData(mainList);
-                    Thread.Sleep(readHz * 1000);
+                    Thread.Sleep(CommonMemory.SysConfig.HzNum * 1000);
                 }
                 catch
                 {

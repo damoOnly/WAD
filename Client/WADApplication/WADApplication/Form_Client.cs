@@ -37,6 +37,7 @@ namespace WADApplication
                 }
                 CommonMemory.server = new AsyncTCPServer(ip, port);
                 CommonMemory.server.ClientConnected += server_ClientConnected;
+                CommonMemory.server.ClientDisconnected += server_ClientDisconnected;
                 CommonMemory.server.Start();
                 simpleButton1.Text = "停止服务器";
             }
@@ -46,6 +47,12 @@ namespace WADApplication
                 simpleButton1.Text = "启动服务器";
             }
             
+        }
+
+        void server_ClientDisconnected(object sender, AsyncEventArgs e)
+        {
+            
+            throw new NotImplementedException();
         }
 
         void server_ClientConnected(object sender, AsyncEventArgs e)

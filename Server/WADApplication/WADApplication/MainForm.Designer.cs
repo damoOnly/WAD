@@ -585,7 +585,7 @@
             formatConditionRuleExpression4.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             formatConditionRuleExpression4.Appearance.BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             formatConditionRuleExpression4.Appearance.Options.UseBackColor = true;
-            formatConditionRuleExpression4.Expression = "[AlertStr] == \'低报警\'  Or [AlertStr] == \'故障\'";
+            formatConditionRuleExpression4.Expression = "[AlertStr] == \'A1报警\'  Or [AlertStr] == \'故障\'";
             formatConditionRuleExpression4.PredefinedName = "Bold Text";
             gridFormatRule4.Rule = formatConditionRuleExpression4;
             gridFormatRule4.Tag = "报警";

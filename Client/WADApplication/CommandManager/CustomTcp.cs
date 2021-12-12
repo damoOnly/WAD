@@ -85,7 +85,14 @@ namespace CommandManager
         private void AsyncReadCallBack(IAsyncResult iar)
         {
             TCPClientState state = (TCPClientState)iar.AsyncState;
-            if ((state.TcpClient == null) || (!state.TcpClient.Connected)) return;
+            if ((state.TcpClient == null) || (!state.TcpClient.Connected))
+            {
+                if (OnDisConnected != null)
+                {
+                    OnDisConnected(null, null);
+                }
+                return;
+            } 
             NetworkStream stream = state.NetworkStream;
             int numOfBytesRead = stream.EndRead(iar);
             if (numOfBytesRead > 0)
@@ -239,6 +246,7 @@ namespace CommandManager
         }
 
         public event EventHandler<List<ReceiveData>> OnDataReceive;
+        public event EventHandler OnDisConnected;
 
         public void Close()
         {

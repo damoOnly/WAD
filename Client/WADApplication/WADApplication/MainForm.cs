@@ -883,12 +883,24 @@ namespace WADApplication
                 tcp = CustomTcp.GetInstance();
                 tcp.Connect(ip, port);
                 tcp.OnDataReceive += tcp_OnDataReceive;
+                tcp.OnDisConnected += tcp_OnDisConnected;
 
                 simpleButton1.Text = "断开";
             }
             else
             {
                 tcp.Close();
+                simpleButton1.Text = "连接";
+            }
+        }
+
+        void tcp_OnDisConnected(object sender, EventArgs e)
+        {
+            if (mainList2 != null)
+            {
+                mainList2.ForEach((item) => {
+                    item.IsConnect = false;
+                });
                 simpleButton1.Text = "连接";
             }
         }

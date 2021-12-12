@@ -38,8 +38,14 @@ namespace Entity
         /// 报警类别
         /// </summary>
         public string AlertName { get; set; }
+        public byte Point { get; set; }
 
         public float Chroma { get; set; }
+
+        public string ChromaStr { get
+            {
+                return string.Format("{0}", Chroma.ToString("f" + Point));
+            } }
 
         public string ATimeSpan 
         {

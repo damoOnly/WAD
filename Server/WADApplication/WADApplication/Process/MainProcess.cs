@@ -119,7 +119,7 @@ namespace WADApplication.Process
             if (isAddPont)
             {
                 // 绘制曲线
-                addPoint(ed, selectedEqId, t1, t2, t3, t4, chart);
+                addPoint(ed, selectedEqId, t1, t2, t3, t4, chart, eq.Point);
             }
 
             if (set.Visible)
@@ -131,7 +131,7 @@ namespace WADApplication.Process
             AlertProcess.AddAlert(alertStatus, ref eq);
         }
 
-        private static void addPoint(EquipmentData ed, int selectedEqId, TextEdit t1, TextEdit t2, TextEdit t3, TextEdit t4, ChartControl chart)
+        private static void addPoint(EquipmentData ed, int selectedEqId, TextEdit t1, TextEdit t2, TextEdit t3, TextEdit t4, ChartControl chart, byte point)
         {
             if (chart.Series == null)
             {
@@ -140,7 +140,7 @@ namespace WADApplication.Process
             // 如果是当前选择的曲线
             if (selectedEqId == ed.EquipmentID)
             {
-                t1.Text = ed.Chroma.ToString();
+                t1.Text = Math.Round(ed.Chroma, point).ToString();
                 float d2;
                 if (float.TryParse(t2.Text, out d2))
                 {
@@ -167,9 +167,9 @@ namespace WADApplication.Process
                     d3 = ed.Chroma;
                 }
 
-                t2.Text = d2.ToString();
-                t3.Text = d3.ToString();
-                t4.Text = ((d2 + d3) / 2).ToString();
+                t2.Text = Math.Round(d2, point).ToString();
+                t3.Text = Math.Round(d3, point).ToString();
+                t4.Text = Math.Round((d2 + d3) / 2, point).ToString();
             }
 
             // 找到曲线增加点

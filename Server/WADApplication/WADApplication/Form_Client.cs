@@ -30,12 +30,7 @@ namespace WADApplication
         {
             string hostname = Dns.GetHostName();
             IPHostEntry localhost = Dns.GetHostEntry(hostname);
-            IPAddress localaddr;
-            if (localhost.AddressList.Length > 1)
-                localaddr = localhost.AddressList[1];//win7
-            else
-                localaddr = localhost.AddressList[0];//xp
-            return localaddr.ToString();
+            return localhost.AddressList.FirstOrDefault(p => p.AddressFamily.ToString() == "InterNetwork").ToString();
         }
 
         private void simpleButton1_Click(object sender, EventArgs e)

@@ -116,8 +116,8 @@ namespace WADApplication.Process
         public static void OperatorAlert(List<Equipment> main, DevExpress.XtraEditors.SimpleButton btn)
         {
             bool isNotAlert = main.All(c => c.AlertStatus == EM_AlertType.normal);
-            if (!isNotAlert)
-            {
+            if (isNotAlert)
+            {// 只有全部无报警之后，本次消音才算结束，否则如果一直有报警，则一直是消音状态
                 if (CommonMemory.IsCloseSoundTemp)
                 {
                     CommonMemory.IsCloseSoundTemp = false;
@@ -132,12 +132,9 @@ namespace WADApplication.Process
                 }
             }
             bool isAllConnect = main.All(c => c.IsConnect);
-            if (!isNotAlert && !CommonMemory.IsClosePlay)
+            if (!isNotAlert && !CommonMemory.IsClosePlay && !CommonMemory.IsCloseSoundTemp)
             {
-                if (!CommonMemory.IsClosePlay)
-                {
-                    OpenLight("sound");
-                }
+                OpenLight("sound");
                 //3 闭合  //红灯
                 OpenLight("red");
                 PlaySound(true);
@@ -311,7 +308,7 @@ namespace WADApplication.Process
         /// <param name="isp"></param>
         public static void PlaySound(bool isp)
         {
-            if (CommonMemory.IsClosePlay || !isp)
+            if (CommonMemory.IsClosePlay || !isp || CommonMemory.IsCloseSoundTemp)
             {
                 CommonMemory.player.Stop();
             }

@@ -279,7 +279,7 @@
             // gridColumn1
             // 
             this.gridColumn1.Caption = "报警浓度";
-            this.gridColumn1.FieldName = "Chroma";
+            this.gridColumn1.FieldName = "ChromaStr";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 5;

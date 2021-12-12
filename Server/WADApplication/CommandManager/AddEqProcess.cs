@@ -29,7 +29,8 @@ namespace CommandManager
                 }
                 else
                 {
-                    throw new CommandException(address + "readNew error");
+                    return new List<StructEquipment>();
+                    //throw new CommandException(address + "readNew error");
                 }
                 if (gasCount > 255 || weatherCount > 255)
                 {
@@ -53,7 +54,8 @@ namespace CommandManager
                 }
                 else
                 {
-                    throw new CommandException(address + "readNew error");
+                    return new List<StructEquipment>();
+                    //throw new CommandException(address + "readNew error");
                 }
 
                 List<StructEquipment> gasList = readNewGas(address, gasCount, name, mn);
@@ -170,7 +172,8 @@ namespace CommandManager
                 }
                 else
                 {
-                    throw new CommandException(address + "read old error");
+                    return new List<StructEquipment>();
+                    //throw new CommandException(address + "read old error");
                 }
 
                 var mnAndFactorList = ReadOldMnAndFactor(address);
@@ -305,8 +308,8 @@ namespace CommandManager
             eq.A1 = Convert.ToSingle(Math.Round(BitConverter.ToSingle(resultBytes, 37), 3));
             Array.Reverse(resultBytes, 41, 2);
             Array.Reverse(resultBytes, 43, 2);
-            eq.A2 = BitConverter.ToSingle(resultBytes, 41);
-            eq.Point = resultBytes[100];
+            eq.A2 = Convert.ToSingle(Math.Round(BitConverter.ToSingle(resultBytes, 41), 3));
+            eq.Point = resultBytes[80];
             //eq.A2 = Convert.ToSingle(Math.Round(eq.A2 > eq.Max ? eq.Max : eq.A2, 3));
         }
 
@@ -332,7 +335,7 @@ namespace CommandManager
             eq.Point = resultBytes[8];
             Array.Reverse(resultBytes, 9, 2);
             Array.Reverse(resultBytes, 11, 2);
-            eq.Max = BitConverter.ToSingle(resultBytes, 9);
+            eq.Max = Convert.ToSingle(Math.Round(BitConverter.ToSingle(resultBytes, 9), 3));
             List<byte> byteTemp = new List<byte>();
             for (int i = 13; i < 13 + 12; )
             {
@@ -349,7 +352,7 @@ namespace CommandManager
             eq.A1 = Convert.ToSingle(Math.Round(BitConverter.ToSingle(resultBytes, 29), 3));
             Array.Reverse(resultBytes, 33, 2);
             Array.Reverse(resultBytes, 35, 2);
-            eq.A2 = BitConverter.ToSingle(resultBytes, 33);
+            eq.A2 = Convert.ToSingle(Math.Round(BitConverter.ToSingle(resultBytes, 33), 3));
             //eq.A2 = Convert.ToSingle(Math.Round(eq.A2 > eq.Max ? eq.Max : eq.A2, 3));
         }
 
@@ -375,7 +378,7 @@ namespace CommandManager
             eq.Point = resultBytes[8];
             Array.Reverse(resultBytes, 9, 2);
             Array.Reverse(resultBytes, 11, 2);
-            eq.Max = BitConverter.ToSingle(resultBytes, 9);
+            eq.Max = Convert.ToSingle(Math.Round(BitConverter.ToSingle(resultBytes, 9), 3));
             List<byte> byteTemp = new List<byte>();
             for (int i = 13; i < 13 + 12; )
             {

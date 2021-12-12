@@ -251,7 +251,7 @@ namespace WADApplication
                 row[2] = item.ATimeSpan;
                 row[3] = item.SensorName;
                 row[4] = item.AlertName;
-                row[5] = item.Chroma;
+                row[5] = item.ChromaStr;
                 row[6] = item.UnitName;
                 row[7] = item.AlertModelStr;
                 row[8] = item.A1Str;
@@ -266,7 +266,7 @@ namespace WADApplication
                 mTempSaveDialog.Title = "保存文件";
                 mTempSaveDialog.Filter = "csv files (*csv)|*.csv";
                 mTempSaveDialog.RestoreDirectory = true;
-                mTempSaveDialog.FileName = comboBoxEdit_SensorName.Text;
+                mTempSaveDialog.FileName = filename;
                 if (DialogResult.OK == mTempSaveDialog.ShowDialog() && null != mTempSaveDialog.FileName.Trim())
                 {
                     string mTempSavePath = string.Format("{0}报警记录-{1}-{2}", mTempSaveDialog.FileName, DateTime.Now.ToString("yyyyMMdd"), DateTime.Now.ToString("HHmmss"));

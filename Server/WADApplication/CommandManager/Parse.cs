@@ -195,24 +195,23 @@ namespace CommandManager
 
         public static DateTime GetDateTime(byte[] data,int _index)
         {
-            int index = _index;
             byte year = 0;
             byte month = 0;
             byte day = 0;
             byte hour = 0;
             byte minute = 0;
             byte second = 0;
-            year = data[index++]; // 最后2位数，比如2020，就是20
-            month = data[index++];
-            day = data[index++];
-            hour = data[index++];
-            minute = data[index++];
-            second = data[index++];
+            year = data[_index]; // 最后2位数，比如2020，就是20
+            month = data[_index+1];
+            day = data[_index+2];
+            hour = data[_index+3];
+            minute = data[_index+4];
+            second = data[_index+5];
 
             if (year < 0 || year > 99 ||
-                month < 1 || month >= 12 ||
-                day < 1 || day >= 31 ||
-                hour < 0 || hour >= 24 ||
+                month < 1 || month > 12 ||
+                day < 1 || day > 31 ||
+                hour < 0 || hour > 24 ||
                 minute < 0 || minute >= 60 ||
                 second < 0 || second >= 60)
             {
