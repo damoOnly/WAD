@@ -1,0 +1,25 @@
+﻿<?xml version="1.0"?>
+<SystemConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="SystemConfig">
+  <HzNum>5</HzNum>
+  <CmmDelay>20</CmmDelay>
+  <CommandOutTime>500</CommandOutTime>
+  <Range>30</Range>
+  <PortName>COM5</PortName>
+  <PortRate>9600</PortRate>
+  <User>1</User>
+  <SoundPath>ALARM1.WAV</SoundPath>
+  <lastSensor></lastSensor>
+  <lastGas></lastGas>
+  <DataCenterIP1>192.168.0.53</DataCenterIP1>
+  <DataCenterPort1>5671</DataCenterPort1>
+  <DataCenterST1></DataCenterST1>
+  <DataCenterCN1></DataCenterCN1>
+  <DataCenterPW1></DataCenterPW1>
+  <DataCenterIP2>192.168.0.53</DataCenterIP2>
+  <DataCenterPort2>5671</DataCenterPort2>
+  <DataCenterST2></DataCenterST2>
+  <DataCenterCN2></DataCenterCN2>
+  <DataCenterPW2></DataCenterPW2>
+  <AgreementType>协议2</AgreementType>
+  <Language>中文</Language>
+</SystemConfig>

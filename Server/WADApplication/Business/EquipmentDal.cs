@@ -110,7 +110,7 @@ select last_insert_rowid();";
             EquipmentDataBusiness.CreateDb(data.ID);
         }
 
-        public static void AddOneByFile(SQLiteConnection conn,SQLiteTransaction tran,  StructEquipment data)
+        public static void AddOneByFile(SQLiteConnection conn, SQLiteTransaction tran, StructEquipment data)
         {
             string sql = @"insert into tb_Equipment (Name,Address,GasType,SensorNum,UnitType,Point,Magnification,Low,High,Max,IsGas,IsDel,IsNew,AlertModel,Factor,AliasGasName,AliasUnitName,MN,CreateTime) 
 values (@Name,@Address,@GasType,@SensorNum,@UnitType,@Point,@Magnification,@Low,@High,@Max,@IsGas,@IsDel,@IsNew,@AlertModel,@Factor,@AliasGasName,@AliasUnitName,@MN,@CreateTime);";
@@ -186,11 +186,11 @@ values (@Name,@Address,@GasType,@SensorNum,@UnitType,@Point,@Magnification,@Low,
                 {
                     using (SQLiteDataReader reader = cmd.ExecuteReader())
                     {
-                        int orderNo = 1;
+                        List<StructEquipment> orderList = new List<StructEquipment>();
                         while (reader.Read())
                         {
+
                             StructEquipment eq = new StructEquipment();
-                            eq.OrderNo = orderNo;
                             eq.ID = reader.GetInt32(0);
                             eq.Name = reader.GetString(1);
                             eq.Address = reader.GetByte(2);
@@ -212,8 +212,28 @@ values (@Name,@Address,@GasType,@SensorNum,@UnitType,@Point,@Magnification,@Low,
 
                             eq.IsDel = false;
                             eq.CreateTime = reader.GetDateTime(18);
+                            if (orderList.Exists((oo) =>
+                            {
+                                return oo.Address == eq.Address;
+                            }))
+                            {
+                                StructEquipment oo = orderList.Find((ol) =>
+                                {
+                                    return ol.Address == eq.Address;
+                                });
+                                eq.OrderNo = oo.OrderNo + 1;
+                            }
+                            else
+                            {
+                                orderList.Add(new StructEquipment()
+                                {
+                                    OrderNo = 1,
+                                    Address = eq.Address
+                                });
+                                eq.OrderNo = 1;
+                            }
                             list.Add(eq);
-                            orderNo = orderNo + 1;
+
                         }
                     }
                 }
@@ -236,11 +256,10 @@ values (@Name,@Address,@GasType,@SensorNum,@UnitType,@Point,@Magnification,@Low,
                 {
                     using (SQLiteDataReader reader = cmd.ExecuteReader())
                     {
-                        int orderNo = 1;
+                        List<StructEquipment> orderList = new List<StructEquipment>();                        
                         while (reader.Read())
                         {
                             StructEquipment eq = new StructEquipment();
-                            eq.OrderNo = orderNo;
                             eq.ID = reader.GetInt32(0);
                             eq.Name = reader.GetString(1);
                             eq.Address = reader.GetByte(2);
@@ -261,8 +280,28 @@ values (@Name,@Address,@GasType,@SensorNum,@UnitType,@Point,@Magnification,@Low,
                             eq.AliasUnitName = reader.GetString(17);
                             eq.MN = reader.GetString(18);
                             eq.CreateTime = reader.GetDateTime(19);
+                            if (orderList.Exists((oo) =>
+                            {
+                                return oo.Address == eq.Address;
+                            }))
+                            {
+                                StructEquipment oo = orderList.Find((ol) =>
+                                {
+                                    return ol.Address == eq.Address;
+                                });
+                                eq.OrderNo = oo.OrderNo + 1;
+                            }
+                            else
+                            {
+                                orderList.Add(new StructEquipment()
+                                {
+                                    OrderNo = 1,
+                                    Address = eq.Address
+                                });
+                                eq.OrderNo = 1;
+
+                            }
                             list.Add(eq);
-                            orderNo = orderNo + 1;
                         }
                     }
                 }
@@ -279,14 +318,14 @@ values (@Name,@Address,@GasType,@SensorNum,@UnitType,@Point,@Magnification,@Low,
                 conn.Open();
                 using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
                 {
-                    cmd.Parameters.AddWithValue("@Address", address);                    
+                    cmd.Parameters.AddWithValue("@Address", address);
                     using (SQLiteDataReader reader = cmd.ExecuteReader())
                     {
-                        int orderNo = 1;
+                        List<StructEquipment> orderList = new List<StructEquipment>();
+
                         while (reader.Read())
                         {
                             StructEquipment eq = new StructEquipment();
-                            eq.OrderNo = orderNo;
                             eq.ID = reader.GetInt32(0);
                             eq.Name = reader.GetString(1);
                             eq.Address = reader.GetByte(2);
@@ -307,8 +346,27 @@ values (@Name,@Address,@GasType,@SensorNum,@UnitType,@Point,@Magnification,@Low,
                             eq.AliasUnitName = reader.GetString(17);
                             eq.MN = reader.GetString(18);
                             eq.CreateTime = reader.GetDateTime(19);
+                            if (orderList.Exists((oo) =>
+                            {
+                                return oo.Address == eq.Address;
+                            }))
+                            {
+                                StructEquipment oo = orderList.Find((ol) =>
+                                {
+                                    return ol.Address == eq.Address;
+                                });
+                                eq.OrderNo = oo.OrderNo + 1;
+                            }
+                            else
+                            {
+                                orderList.Add(new StructEquipment()
+                                {
+                                    OrderNo = 1,
+                                    Address = eq.Address
+                                });
+                                eq.OrderNo = 1;
+                            }
                             list.Add(eq);
-                            orderNo = orderNo + 1;
                         }
                     }
                 }

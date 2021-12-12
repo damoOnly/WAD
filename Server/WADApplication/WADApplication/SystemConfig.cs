@@ -64,7 +64,7 @@ namespace WADApplication
         private void simpleButton2_Click(object sender, EventArgs e)
         {
             CommonMemory.SysConfig.Language = comboBoxEdit1.Text;
-            AppConfigProcess.SaveOne("Language", comboBoxEdit1.Text);
+            AppConfigProcess.Save();
         }
 
         private void simpleButton3_Click(object sender, EventArgs e)
@@ -73,21 +73,21 @@ namespace WADApplication
             if (int.TryParse(textEdit2.EditValue.ToString(), out commandDelay))
             {
                 CommonMemory.SysConfig.CommandDelay = commandDelay;
-                AppConfigProcess.SaveOne("CommandDelay", textEdit2.EditValue.ToString());
+                AppConfigProcess.Save();
             }
 
             int commandOutTime;
             if (int.TryParse(textEdit3.EditValue.ToString(), out commandOutTime))
             {
                 CommonMemory.SysConfig.CommandOutTime = commandOutTime;
-                AppConfigProcess.SaveOne("CommandOutTime", textEdit3.EditValue.ToString());
+                AppConfigProcess.Save();
             }
 
             int hz;
             if (int.TryParse(textEdit1.EditValue.ToString(), out hz))
             {
                 CommonMemory.SysConfig.HzNum = hz;
-                AppConfigProcess.SaveOne("HzNum", textEdit1.EditValue.ToString());
+                AppConfigProcess.Save();
             }
         }
 

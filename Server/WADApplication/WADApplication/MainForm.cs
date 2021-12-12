@@ -213,7 +213,6 @@ namespace WADApplication
         // 初始化Form
         private void InitializeForm()
         {
-            AppConfigProcess.CheckVersion();
             CommonMemory.Init();
             CreateDbFile.InitDb();
 
@@ -312,11 +311,9 @@ namespace WADApplication
             {
                 if (item.IsConnect == true)
                 {
-                    Configuration config =
-                    ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                    config.AppSettings.Settings["lastSensor"].Value = item.Name;
-                    config.AppSettings.Settings["lastGas"].Value = item.GasName;
-                    config.Save(ConfigurationSaveMode.Modified);
+                    CommonMemory.SysConfig.lastSensor = item.Name;
+                    CommonMemory.SysConfig.lastGas = item.Name;
+                    AppConfigProcess.Save();
                     break;
                 }
             }
@@ -345,7 +342,7 @@ namespace WADApplication
             //    this.Close();
             //    return;
             //}
-            int i1 = Convert.ToInt32(ConfigurationManager.AppSettings["User"].ToString());
+            int i1 = CommonMemory.SysConfig.User;
 
             CommonMemory.Userinfo = new UserInfo();
             CommonMemory.Userinfo.Level = EM_UserType.User;

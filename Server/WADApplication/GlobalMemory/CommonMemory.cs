@@ -42,8 +42,6 @@ namespace GlobalMemory
         /// </summary>
         public static bool IsReadConnect = false;
 
-        public static bool IsOlden = false;
-
         public static CommonConfig Config = new CommonConfig();
 
         public static StructSystemConfig SysConfig = new StructSystemConfig();
@@ -52,32 +50,10 @@ namespace GlobalMemory
         public static void Init()
         {
             Config = (new XmlSerializerProvider()).Deserialize<CommonConfig>(AppDomain.CurrentDomain.BaseDirectory + "CommonConfig.xml");
+            SysConfig = (new XmlSerializerProvider()).Deserialize<StructSystemConfig>(AppDomain.CurrentDomain.BaseDirectory + "SystemConfig.xml");
             CommonMemory.player = new SoundPlayer();
-            CommonMemory.player.SoundLocation = AppDomain.CurrentDomain.BaseDirectory + "\\" + ConfigurationManager.AppSettings["SoundPath"].ToString();
+            CommonMemory.player.SoundLocation = AppDomain.CurrentDomain.BaseDirectory + "\\" +SysConfig.SoundPath;
             CommonMemory.player.Load();
-            bool.TryParse(ConfigurationManager.AppSettings["IsOlden"].ToString(), out IsOlden);
-
-            SysConfig.CommandDelay = Convert.ToInt32(ConfigurationManager.AppSettings["CmmDelay"]);
-            SysConfig.CommandOutTime = Convert.ToInt32(ConfigurationManager.AppSettings["CommandOutTime"]);
-            SysConfig.HzNum = Convert.ToInt32(ConfigurationManager.AppSettings["HzNum"]);
-            SysConfig.PortName = ConfigurationManager.AppSettings["PortName"].ToString();
-            SysConfig.PortRate = Convert.ToInt32(ConfigurationManager.AppSettings["PortRate"]);
-            SysConfig.RealTimeRangeX = Convert.ToInt32(ConfigurationManager.AppSettings["Range"]);
-
-            SysConfig.DataCenterIP1 = ConfigurationManager.AppSettings["DataCenterIP1"].ToString();
-            SysConfig.DataCenterPort1 = Convert.ToInt32(ConfigurationManager.AppSettings["DataCenterPort1"]);
-            SysConfig.DataCenterST1 = ConfigurationManager.AppSettings["DataCenterST1"].ToString();
-            SysConfig.DataCenterCN1 = ConfigurationManager.AppSettings["DataCenterCN1"].ToString();
-            SysConfig.DataCenterPW1 = ConfigurationManager.AppSettings["DataCenterPW1"].ToString();
-
-            SysConfig.DataCenterIP2 = ConfigurationManager.AppSettings["DataCenterIP2"].ToString();
-            SysConfig.DataCenterPort2 = Convert.ToInt32(ConfigurationManager.AppSettings["DataCenterPort2"]);
-            SysConfig.DataCenterST2 = ConfigurationManager.AppSettings["DataCenterST2"].ToString();
-            SysConfig.DataCenterCN2 = ConfigurationManager.AppSettings["DataCenterCN2"].ToString();
-            SysConfig.DataCenterPW2 = ConfigurationManager.AppSettings["DataCenterPW2"].ToString();
-            SysConfig.AgreementType = ConfigurationManager.AppSettings["AgreementType"].ToString();
-
-            SysConfig.Language = ConfigurationManager.AppSettings["Language"].ToString();
         }
     }
 

@@ -19,7 +19,6 @@ namespace WADApplication
         {
             InitializeComponent();
             textEdit2.Text = "123456";
-            //SqliteHelper.SetConnectionString(string.Format("Data Source={0};Version=3;", AppDomain.CurrentDomain.BaseDirectory + "\\" + ConfigurationManager.AppSettings["DBPath"].ToString()));
         }
 
         private void simpleButton1_Click(object sender, EventArgs e)

@@ -42,8 +42,8 @@ namespace WADApplication
         #region 私有方法
         private void loadData()
         {
-            lastSensor = ConfigurationManager.AppSettings["lastSensor"].ToString();
-            lastGas = ConfigurationManager.AppSettings["lastGas"].ToString();
+            lastSensor = CommonMemory.SysConfig.lastSensor;
+            lastGas = CommonMemory.SysConfig.lastGas;
             mainList = EquipmentBusiness.GetListIncludeDelete();
 
             List<IGrouping<string, Equipment>> list1 = mainList.GroupBy(c => c.Name).ToList();

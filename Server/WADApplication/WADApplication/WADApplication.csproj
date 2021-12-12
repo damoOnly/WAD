@@ -393,9 +393,6 @@
     <EmbeddedResource Include="SystemConfig.resx">
       <DependentUpon>SystemConfig.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="App.config">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -420,6 +417,9 @@
     <None Include="Resources\串口已关闭.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SystemConfig.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Resources\点位图1.png" />
     <None Include="Resources\点位图2.png" />
     <None Include="Resources\add_32x32.png" />

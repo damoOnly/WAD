@@ -304,8 +304,8 @@ namespace WADApplication
 
         private void comboBoxEdit1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            AppConfigProcess.SaveOne("AgreementType", comboBoxEdit1.EditValue.ToString());
             CommonMemory.SysConfig.AgreementType = comboBoxEdit1.EditValue.ToString();
+            AppConfigProcess.Save();
         }
 
         private void simpleButton4_Click_1(object sender, EventArgs e)
