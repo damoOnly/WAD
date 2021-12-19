@@ -1179,6 +1179,10 @@ namespace WADApplication
         {
             if (simpleButton1.Text == "打开")
             {
+                // 保存配置文件
+                CommonMemory.SysConfig.PortName = comboBoxEdit1.EditValue.ToString();
+                CommonMemory.SysConfig.PortRate = Convert.ToInt32(comboBoxEdit2.EditValue.ToString());
+                AppConfigProcess.Save();
                 if (PLAASerialPort.serialport.IsOpen)
                 {
                     XtraMessageBox.Show("串口已打开");

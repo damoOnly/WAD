@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Entity
 {
-    public class EquipmentData
+    public class EquipmentData : IComparable<EquipmentData>
     {
         public EquipmentData()
         {
@@ -75,5 +75,17 @@ namespace Entity
         // 根据秒分组
         // 
         public long AddTimeGroup { get { return AddTime.Ticks/(10000000); } }
+
+        //重写的CompareTo方法，根据Id排序
+        public int CompareTo(EquipmentData other)
+        {
+            if (null == other)
+            {
+                return 1;//空值比较大，返回1
+            }
+            return this.AddTime.CompareTo(other.AddTime);//升序
+            //return other.AddTime.CompareTo(this.AddTime);//降序
+        }
     }
+
 }

@@ -178,12 +178,14 @@ namespace Business
                     continue;
                 }
                 string connStr = GetConnStr(equipmentId, i);
+                List<EquipmentData> list2 = new List<EquipmentData>();
                 using (SQLiteConnection conn = new SQLiteConnection(connStr))
                 {
                     conn.Open();
-                    List<EquipmentData> list2 = EquipmentDataAccess.GetListByTime(conn, dt1, dt2, equipmentId, point);
-                    list.AddRange(list2);
+                    list2 = EquipmentDataAccess.GetListByTime(conn, dt1, dt2, equipmentId, point);
                 }
+                list2.Sort();
+                list.AddRange(list2);
             }
             return list;
         }

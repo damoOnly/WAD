@@ -359,7 +359,7 @@ namespace WADApplication
                 }
                 gridControl1.RefreshDataSource();
             }
-
+            gridView1.BestFitColumns();
         }
 
         private void RegisterDeviceForm_FormClosing(object sender, FormClosingEventArgs e)
