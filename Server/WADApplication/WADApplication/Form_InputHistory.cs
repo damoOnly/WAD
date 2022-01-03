@@ -616,6 +616,7 @@ namespace WADApplication
                         for (int i = 0; i < dt.Rows.Count; i++)
                         {
                             EquipmentData edd = new EquipmentData();
+                            string tstr = dt.Rows[i][0].ToString();
                             edd.AddTime = DateTime.Parse(dt.Rows[i][0].ToString());
                             edd.Chroma = float.Parse(dt.Rows[i][1].ToString());
                             edd.EquipmentID = eq.ID;
@@ -639,19 +640,27 @@ namespace WADApplication
         Equipment oneEq = null;
         private void simpleButton6_Click(object sender, EventArgs e)
         {
-            onelist = new List<EquipmentData>();
-            string filename = comboBoxEdit2.Text;
-            Match cm = Regex.Match(comboBoxEdit1.Text, @"(\d+)-(\w+)-(\d+)");
-            byte address = byte.Parse(cm.Groups[1].Value);
-            byte senn = byte.Parse(cm.Groups[3].Value);
-            Equipment eq = mainList.Find(ii => ii.Address == address && ii.SensorNum == senn);
-            // 其实这里不需要传设备进去
-            InputDataDal idd = new InputDataDal(filename, eq);
-            StructEquipment eqq = idd.GetEq();
-            Equipment eqqa = Utility.ConvertToEq(eqq);
-            oneEq = eqqa;
-            onelist = idd.GetList();
-            renderTableAndChart(onelist, eqqa);
+            try
+            {
+                onelist = new List<EquipmentData>();
+                string filename = comboBoxEdit2.Text;
+                Match cm = Regex.Match(comboBoxEdit1.Text, @"(\d+)-(\w+)-(\d+)");
+                byte address = byte.Parse(cm.Groups[1].Value);
+                byte senn = byte.Parse(cm.Groups[3].Value);
+                Equipment eq = mainList.Find(ii => ii.Address == address && ii.SensorNum == senn);
+                // 其实这里不需要传设备进去
+                InputDataDal idd = new InputDataDal(filename, eq);
+                StructEquipment eqq = idd.GetEq();
+                Equipment eqqa = Utility.ConvertToEq(eqq);
+                oneEq = eqqa;
+                onelist = idd.GetList();
+                renderTableAndChart(onelist, eqqa);
+            }
+            catch (Exception ex)
+            {
+                LogLib.Log.GetLogger(this).Warn(ex);
+            }
+            
         }
 
         private void renderTableAndChart(List<EquipmentData> _list, Equipment eqqa)

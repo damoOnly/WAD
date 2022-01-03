@@ -109,8 +109,6 @@
             this.textEdit4 = new DevExpress.XtraEditors.TextEdit();
             this.labelControl10 = new DevExpress.XtraEditors.LabelControl();
             this.btn_setVTime = new DevExpress.XtraEditors.SimpleButton();
-            this.labelControl13 = new DevExpress.XtraEditors.LabelControl();
-            this.comboBoxEdit_VTime = new DevExpress.XtraEditors.ComboBoxEdit();
             this.labelControl12 = new DevExpress.XtraEditors.LabelControl();
             this.lstbxMessageView = new System.Windows.Forms.ListBox();
             this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
@@ -134,6 +132,7 @@
             this.splitContainerControl2 = new DevExpress.XtraEditors.SplitContainerControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.groupControl5 = new DevExpress.XtraEditors.GroupControl();
+            this.lookUpEdit1 = new DevExpress.XtraEditors.LookUpEdit();
             this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
@@ -160,7 +159,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit3.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit4.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit_VTime.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             this.splitContainerControl1.SuspendLayout();
@@ -174,6 +172,7 @@
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).BeginInit();
             this.groupControl5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).BeginInit();
             this.groupControl4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
@@ -924,60 +923,17 @@
             // 
             // btn_setVTime
             // 
-            this.btn_setVTime.Location = new System.Drawing.Point(163, 2);
+            this.btn_setVTime.Location = new System.Drawing.Point(172, 2);
             this.btn_setVTime.Name = "btn_setVTime";
             this.btn_setVTime.Size = new System.Drawing.Size(50, 23);
             this.btn_setVTime.TabIndex = 22;
             this.btn_setVTime.Text = "确定";
             this.btn_setVTime.Click += new System.EventHandler(this.btn_setVTime_Click);
             // 
-            // labelControl13
-            // 
-            this.labelControl13.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl13.Location = new System.Drawing.Point(137, 6);
-            this.labelControl13.Name = "labelControl13";
-            this.labelControl13.Size = new System.Drawing.Size(24, 14);
-            this.labelControl13.TabIndex = 14;
-            this.labelControl13.Text = "分钟";
-            // 
-            // comboBoxEdit_VTime
-            // 
-            this.comboBoxEdit_VTime.Location = new System.Drawing.Point(78, 5);
-            this.comboBoxEdit_VTime.MenuManager = this.ribbon;
-            this.comboBoxEdit_VTime.Name = "comboBoxEdit_VTime";
-            this.comboBoxEdit_VTime.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBoxEdit_VTime.Properties.Appearance.Options.UseFont = true;
-            this.comboBoxEdit_VTime.Properties.AutoComplete = false;
-            this.comboBoxEdit_VTime.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.comboBoxEdit_VTime.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.comboBoxEdit_VTime.Properties.Items.AddRange(new object[] {
-            "10",
-            "20",
-            "30",
-            "60",
-            "90",
-            "120",
-            "150",
-            "180",
-            "210",
-            "240",
-            "270",
-            "300",
-            "600",
-            "900",
-            "1440",
-            "7200",
-            "14400"});
-            this.comboBoxEdit_VTime.Size = new System.Drawing.Size(55, 18);
-            this.comboBoxEdit_VTime.TabIndex = 21;
-            this.comboBoxEdit_VTime.SelectedIndexChanged += new System.EventHandler(this.comboBoxEdit_VTime_SelectedIndexChanged);
-            this.comboBoxEdit_VTime.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxEdit5_KeyPress);
-            // 
             // labelControl12
             // 
             this.labelControl12.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl12.Location = new System.Drawing.Point(8, 6);
+            this.labelControl12.Location = new System.Drawing.Point(16, 6);
             this.labelControl12.Name = "labelControl12";
             this.labelControl12.Size = new System.Drawing.Size(48, 14);
             this.labelControl12.TabIndex = 12;
@@ -1243,10 +1199,9 @@
             // groupControl5
             // 
             this.groupControl5.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.groupControl5.Controls.Add(this.lookUpEdit1);
             this.groupControl5.Controls.Add(this.btn_setVTime);
-            this.groupControl5.Controls.Add(this.labelControl13);
             this.groupControl5.Controls.Add(this.labelControl12);
-            this.groupControl5.Controls.Add(this.comboBoxEdit_VTime);
             this.groupControl5.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupControl5.Location = new System.Drawing.Point(2, 114);
             this.groupControl5.Name = "groupControl5";
@@ -1254,6 +1209,18 @@
             this.groupControl5.Size = new System.Drawing.Size(232, 28);
             this.groupControl5.TabIndex = 28;
             this.groupControl5.Text = "groupControl5";
+            // 
+            // lookUpEdit1
+            // 
+            this.lookUpEdit1.Location = new System.Drawing.Point(83, 5);
+            this.lookUpEdit1.MenuManager = this.ribbon;
+            this.lookUpEdit1.Name = "lookUpEdit1";
+            this.lookUpEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookUpEdit1.Properties.PopupFormMinSize = new System.Drawing.Size(77, 0);
+            this.lookUpEdit1.Properties.PopupWidth = 77;
+            this.lookUpEdit1.Size = new System.Drawing.Size(77, 20);
+            this.lookUpEdit1.TabIndex = 23;
             // 
             // groupControl4
             // 
@@ -1353,7 +1320,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit3.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit4.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit_VTime.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();
             this.splitContainerControl1.ResumeLayout(false);
@@ -1368,6 +1334,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).EndInit();
             this.groupControl5.ResumeLayout(false);
             this.groupControl5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).EndInit();
             this.groupControl4.ResumeLayout(false);
             this.groupControl4.PerformLayout();
@@ -1397,7 +1364,6 @@
         private DevExpress.XtraBars.BarButtonItem btn_pramSet;
         private DevExpress.XtraBars.BarButtonItem btn_About;
         private DevExpress.XtraBars.BarButtonItem btn_CloseSound;
-        private DevExpress.XtraEditors.LabelControl labelControl13;
         private DevExpress.XtraEditors.LabelControl labelControl12;
         private DevExpress.XtraEditors.LabelControl labelControl10;
         private DevExpress.XtraEditors.TextEdit textEdit4;
@@ -1429,7 +1395,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn18;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn19;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn20;
-        private DevExpress.XtraEditors.ComboBoxEdit comboBoxEdit_VTime;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn_TH;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn21;
         private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel1;
@@ -1483,5 +1448,6 @@
         private DevExpress.XtraEditors.GroupControl groupControl1;
         private DevExpress.XtraEditors.GroupControl groupControl5;
         private DevExpress.XtraEditors.GroupControl groupControl4;
+        private DevExpress.XtraEditors.LookUpEdit lookUpEdit1;
     }
 }

@@ -26,7 +26,7 @@ namespace WADApplication
             this.eq = _eq;
             InitializeComponent();
         }
-
+        Thread mainThread = null;
         private void simpleButton1_Click(object sender, EventArgs e)
         {
             try
@@ -56,7 +56,8 @@ namespace WADApplication
                 {
                     throw new Exception("准备数据上传error");
                 }
-
+                mainThread = new Thread(new ThreadStart(readData));
+                mainThread.Start();
             }
             catch (Exception ex)
             {
@@ -81,6 +82,8 @@ namespace WADApplication
             richTextBox1.AppendText(Environment.NewLine);
         }
         uint total;
+
+        object lockObject = new object();
 
         private void Form_InputData_Load(object sender, EventArgs e)
         {
@@ -108,6 +111,7 @@ namespace WADApplication
             }
         }
         List<byte> tempList = new List<byte>();
+
         private void serialPort1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
             if (e.EventType != SerialData.Chars)
@@ -116,73 +120,176 @@ namespace WADApplication
             int bytelength = serialPort1.BytesToRead;
             byte[] data = new byte[bytelength];
             int num = serialPort1.Read(data, 0, bytelength);
-            string str = "R  " + PLAASerialPort.byteToHexStr(data);
-            Trace.WriteLine(str);
-
-            if (data.Length == 19 && data[0] == 0xaa && data[1] == 0xaa && data[17] == 0xbb && data[18] == 0xbb)
+            lock (lockObject)
             {
-                tempList.Clear();
-                EquipmentData ed = new EquipmentData();
-
-                ed.AddTime = Parse.GetDateTime(data, 4);
-                ed.Chroma = (float)Math.Round(Parse.GetFloatValue(data, 10), eq.Point);
-                ed.EquipmentID = eq.ID;
-                ed.UnitType = data[14];
-                list.Add(ed);
-
-                this.Invoke(new Action<string>(addText), string.Format("{0},{1},浓度:{2},时间:{3}\r\n", eq.Name, eq.GasName, ed.Chroma, ed.AddTime));
-
+                tempList.AddRange(data);
             }
-            else if (data.Length == 12 && data[0] == 0xcc && data[1] == 0xcc && data[10] == 0xdd && data[11] == 0xdd) // 结束桢
+            //string str = "R  " + PLAASerialPort.byteToHexStr(data);
+            //Trace.WriteLine(str);
+            //this.Invoke(new Action<string>(addText), "上传完成----------------------------------------------------");
+        }
+
+
+        void readData()
+        {
+            while (!simpleButton1.Enabled)
             {
-                tempList.Clear();
-                serialPort1.Close();
-                simpleButton1.Enabled = true;
-                this.Invoke(new Action<string>(addText), "上传完成----------------------------------------------------");
-                string fileName = string.Format("{0}-{1}-{2}-{3}-{4}", eq.Address, eq.Name, eq.SensorNum, eq.GasName, DateTime.Now.ToString("yyyyMMdd-HHmmss"));
-                InputDataDal dd = new InputDataDal(fileName, eq);
-                dd.AddList(list);
-                port.Open(CommonMemory.SysConfig.PortName, CommonMemory.SysConfig.PortRate);
+                parseUpdateData();
+                Thread.Sleep(1000);
             }
-            else if (tempList.Count > 0)
+        }
+        private void parseUpdateData()
+        {
+            List<List<byte>> oneList = new List<List<byte>>();
+            List<byte> oneTemp = new List<byte>();
+            int lastIndex = -1;
+            //string str = "R1  " + PLAASerialPort.byteToHexStr(tempList.ToArray());
+            //Trace.WriteLine(str);
+
+            lock (lockObject)
             {
-                List<byte> aar = data.ToList();
-                List<byte> allr = tempList.Concat(aar).ToList();
-                if (allr.Count == 19 && allr[0] == 0xaa && allr[1] == 0xaa && allr[17] == 0xbb && allr[18] == 0xbb)
+                for (int i = 0; i < tempList.Count - 1;)
                 {
-                    tempList.Clear();
+                    oneTemp.Add(tempList[i]);
+                    //遇到结束帧生成一个完整的包
+                    if ((tempList[i] == 0xbb && tempList[i + 1] == 0xbb) || (tempList[i] == 0xdd && tempList[i + 1] == 0xdd))
+                    {
+                        oneTemp.Add(tempList[i + 1]);
+                        oneList.Add(oneTemp);
+                        oneTemp = new List<byte>();
+                        lastIndex = i + 1;
+                        i = i + 1; // 遇到结束包就相当于+2
+                    }
+                    i = i + 1;
+                }
+
+                if (lastIndex < tempList.Count && tempList.Count > 0)
+                {
+                    //Trace.WriteLine("more");
+                   tempList =  tempList.GetRange(lastIndex + 1, tempList.Count - lastIndex -1);
+                }
+            }
+            //Trace.WriteLine("item: " + oneList.Count);
+            foreach (var item in oneList)
+            {
+                if (item.Count == 19 && item[0] == 0xaa && item[1] == 0xaa && item[17] == 0xbb && item[18] == 0xbb)
+                {
                     EquipmentData ed = new EquipmentData();
 
-                    ed.AddTime = Parse.GetDateTime(allr.ToArray(), 4);
-                    ed.Chroma = (float)Math.Round(Parse.GetFloatValue(allr.ToArray(), 10), eq.Point);
+                    ed.AddTime = Parse.GetDateTime(item.ToArray(), 4);
+                    ed.Chroma = (float)Math.Round(Parse.GetFloatValue(item.ToArray(), 10), eq.Point);
                     ed.EquipmentID = eq.ID;
-                    ed.UnitType = allr[14];
+                    ed.UnitType = item[14];
                     list.Add(ed);
-
-                    this.Invoke(new Action<string>(addText), string.Format("{0},{1},浓度:{2},时间:{3}\r\n", eq.Name, eq.GasName, ed.Chroma, ed.AddTime));
-
                 }
-                else if (allr.Count == 12 && allr[0] == 0xcc && allr[1] == 0xcc && allr[10] == 0xdd && allr[11] == 0xdd) // 结束桢
+                else if (item.Count == 12 && item[0] == 0xcc && item[1] == 0xcc && item[10] == 0xdd && item[11] == 0xdd) // 结束桢
                 {
-                    tempList.Clear();
                     serialPort1.Close();
-                    simpleButton1.Enabled = true;
+                    this.Invoke(new Action(() => {
+                        simpleButton1.Enabled = true;
+                    }));
                     this.Invoke(new Action<string>(addText), "上传完成----------------------------------------------------");
                     string fileName = string.Format("{0}-{1}-{2}-{3}-{4}", eq.Address, eq.Name, eq.SensorNum, eq.GasName, DateTime.Now.ToString("yyyyMMdd-HHmmss"));
                     InputDataDal dd = new InputDataDal(fileName, eq);
                     dd.AddList(list);
                     port.Open(CommonMemory.SysConfig.PortName, CommonMemory.SysConfig.PortRate);
                 }
+                else if (item.Count > 19)
+                {
+                    List<byte> other = item.GetRange(item.Count - 19 , 19);
+                    if (other[0] == 0xaa && other[1] == 0xaa && other[17] == 0xbb && other[18] == 0xbb)
+                    {
+                        EquipmentData ed = new EquipmentData();
+                    ed.AddTime = Parse.GetDateTime(item.ToArray(), 4);
+                    ed.Chroma = (float)Math.Round(Parse.GetFloatValue(item.ToArray(), 10), eq.Point);
+                    ed.EquipmentID = eq.ID;
+                    ed.UnitType = item[14];
+                    list.Add(ed);
+                    }
+                }
                 else
                 {
-                    tempList.Clear();
+                    LogLib.Log.GetLogger("Form_InputData").Error("数据上传错误的帧");
                 }
             }
-            else
-            {
-                tempList.AddRange(data);
-            }
         }
+
+        //private void serialPort1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
+        //{
+        //    if (e.EventType != SerialData.Chars)
+        //        return;
+        //    rdt = DateTime.Now;
+        //    int bytelength = serialPort1.BytesToRead;
+        //    byte[] data = new byte[bytelength];
+        //    int num = serialPort1.Read(data, 0, bytelength);
+        //    string str = "R  " + PLAASerialPort.byteToHexStr(data);
+        //    Trace.WriteLine(str);
+
+        //    if (data.Length == 19 && data[0] == 0xaa && data[1] == 0xaa && data[17] == 0xbb && data[18] == 0xbb)
+        //    {
+        //        tempList.Clear();
+        //        EquipmentData ed = new EquipmentData();
+
+        //        ed.AddTime = Parse.GetDateTime(data, 4);
+        //        ed.Chroma = (float)Math.Round(Parse.GetFloatValue(data, 10), eq.Point);
+        //        ed.EquipmentID = eq.ID;
+        //        ed.UnitType = data[14];
+        //        list.Add(ed);
+
+        //        this.Invoke(new Action<string>(addText), string.Format("{0},{1},浓度:{2},时间:{3}\r\n", eq.Name, eq.GasName, ed.Chroma, ed.AddTime));
+
+        //    }
+        //    else if (data.Length == 12 && data[0] == 0xcc && data[1] == 0xcc && data[10] == 0xdd && data[11] == 0xdd) // 结束桢
+        //    {
+        //        tempList.Clear();
+        //        serialPort1.Close();
+        //        simpleButton1.Enabled = true;
+        //        this.Invoke(new Action<string>(addText), "上传完成----------------------------------------------------");
+        //        string fileName = string.Format("{0}-{1}-{2}-{3}-{4}", eq.Address, eq.Name, eq.SensorNum, eq.GasName, DateTime.Now.ToString("yyyyMMdd-HHmmss"));
+        //        InputDataDal dd = new InputDataDal(fileName, eq);
+        //        dd.AddList(list);
+        //        port.Open(CommonMemory.SysConfig.PortName, CommonMemory.SysConfig.PortRate);
+        //    }
+        //    else if (tempList.Count > 0)
+        //    {
+        //        List<byte> aar = data.ToList();
+        //        List<byte> allr = tempList.Concat(aar).ToList();
+        //        if (allr.Count == 19 && allr[0] == 0xaa && allr[1] == 0xaa && allr[17] == 0xbb && allr[18] == 0xbb)
+        //        {
+        //            tempList.Clear();
+        //            EquipmentData ed = new EquipmentData();
+
+        //            ed.AddTime = Parse.GetDateTime(allr.ToArray(), 4);
+        //            ed.Chroma = (float)Math.Round(Parse.GetFloatValue(allr.ToArray(), 10), eq.Point);
+        //            ed.EquipmentID = eq.ID;
+        //            ed.UnitType = allr[14];
+        //            list.Add(ed);
+
+        //            this.Invoke(new Action<string>(addText), string.Format("{0},{1},浓度:{2},时间:{3}\r\n", eq.Name, eq.GasName, ed.Chroma, ed.AddTime));
+
+        //        }
+        //        else if (allr.Count == 12 && allr[0] == 0xcc && allr[1] == 0xcc && allr[10] == 0xdd && allr[11] == 0xdd) // 结束桢
+        //        {
+        //            tempList.Clear();
+        //            serialPort1.Close();
+        //            simpleButton1.Enabled = true;
+        //            this.Invoke(new Action<string>(addText), "上传完成----------------------------------------------------");
+        //            string fileName = string.Format("{0}-{1}-{2}-{3}-{4}", eq.Address, eq.Name, eq.SensorNum, eq.GasName, DateTime.Now.ToString("yyyyMMdd-HHmmss"));
+        //            InputDataDal dd = new InputDataDal(fileName, eq);
+        //            dd.AddList(list);
+        //            port.Open(CommonMemory.SysConfig.PortName, CommonMemory.SysConfig.PortRate);
+        //        }
+        //        else
+        //        {
+        //            tempList.Clear();
+        //        }
+        //    }
+        //    else
+        //    {
+        //        tempList.AddRange(data);
+        //    }
+        //}
+
         DateTime rdt = DateTime.Now;
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -195,15 +302,18 @@ namespace WADApplication
                     try
                     {
                         serialPort1.Close();
-                        simpleButton1.Enabled = true;
+                        this.Invoke(new Action(() =>
+                        {
+                            simpleButton1.Enabled = true;
+                        }));
                         this.Invoke(new Action<string>(addText), "上传异常----------------------------------------------------");
                         port.Open(CommonMemory.SysConfig.PortName, CommonMemory.SysConfig.PortRate);
                     }
                     catch (Exception ex)
                     {
-                        
+                        LogLib.Log.GetLogger("Form_InputData").Error("关闭上传串口并打开普通串口失败");
                     }
-                    
+
                 }
             }
             else

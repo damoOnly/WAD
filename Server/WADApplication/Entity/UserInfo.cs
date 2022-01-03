@@ -33,4 +33,15 @@ namespace Entity
         public EM_UserType Level { get; set; }
 
     }
+
+    public class RealTimeItem
+    {
+        public RealTimeItem(string _name, int _value)
+        {
+            name = _name;
+            value = _value;
+        }
+        public string name { get; set; }
+        public int value { get; set; }
+    }
 }

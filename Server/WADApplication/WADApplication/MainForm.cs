@@ -98,17 +98,12 @@ namespace WADApplication
         /// <summary>
         /// 读取数据线程开关
         /// </summary>
-        private bool isRead = true;
+        private bool isRead = false;
 
         /// <summary>
         /// 暂停
         /// </summary>
         private bool suspend = false;
-
-        /// <summary>
-        /// 是否读取基础信息标志
-        /// </summary>
-        private bool IsReadBasic = true;
 
         /// <summary>
         /// 设备列表
@@ -177,27 +172,32 @@ namespace WADApplication
                     bool isAddPont = MainProcess.GetIsAddPoint();
                     lock (mainList)
                     {
-                        SwiftPlotDiagram diagram = chartControl1.Diagram as SwiftPlotDiagram;
                         DateTime nowTemp = Utility.CutOffMillisecond(DateTime.Now);
-                        if (diagram != null)
-                            diagram.AxisX.WholeRange.SetMinMaxValues(minTime, nowTemp);
+                        
 
                         for (int i = 0, length = mainList.Count; i < length; i++)
                         {
-                            MainProcess.readMain(mainList[i], IsReadBasic, selecteq.ID, textEdit1, textEdit2, textEdit3, textEdit4, chartControl1, set, isAddPont, nowTemp);
+                            if (!isRead)
+                            {
+                                break;
+                            }
+                            MainProcess.readMain(mainList[i], selecteq.ID, textEdit1, textEdit2, textEdit3, textEdit4, chartControl1, set, isAddPont, nowTemp);
                             Thread.Sleep(CommDelay);
                         }
                         // 每30秒清除一次最小数据(多余的点)
-                        if (Utility.CutOffMillisecond(DateTime.Now.AddSeconds(-30)) > MainProcess.lastRemoteTime)
+                        if (nowTemp.AddSeconds(-30) > MainProcess.lastRemoteTime)
                         {
                             MainProcess.RemovePoint(chartControl1);
                         }
                     }
                     AlertProcess.OperatorAlert(mainList, simpleButton11);
-                    IsReadBasic = false;
                     this.Invoke(new Action(gridControl_nowData2.RefreshDataSource));
                     //this.Invoke(new Action(gridView_nowData2.BestFitColumns));
                     MainProcess.sendClientData(mainList);
+                    if (!isRead)
+                    {
+                        break;
+                    }
                     Thread.Sleep(CommonMemory.SysConfig.HzNum * 1000);
                 }
                 catch
@@ -209,6 +209,7 @@ namespace WADApplication
             }
 
             this.Invoke(new Action<bool>(c => simpleButton4.Enabled = c), true);
+            this.getLastSensor();
         }
         // 初始化Form
         private void InitializeForm()
@@ -241,7 +242,23 @@ namespace WADApplication
         private void InitControls()
         {
             enableControls();
-            comboBoxEdit_VTime.EditValue = CommonMemory.SysConfig.RealTimeRangeX;
+            List<RealTimeItem> lu = new List<RealTimeItem>();
+            lu.Add(new RealTimeItem("10min", 10));
+            lu.Add(new RealTimeItem("30min", 30));
+            lu.Add(new RealTimeItem("2h", 120));
+            lu.Add(new RealTimeItem("8h", 480));
+            lu.Add(new RealTimeItem("24h", 1440));
+
+            lookUpEdit1.Properties.DisplayMember = "name";
+            lookUpEdit1.Properties.ValueMember = "value";
+            lookUpEdit1.EditValue = CommonMemory.SysConfig.RealTimeRangeX;
+            lookUpEdit1.Properties.DataSource = lu;
+            lookUpEdit1.Properties.Columns.Add((new DevExpress.XtraEditors.Controls.LookUpColumnInfo("name", 77)));
+            lookUpEdit1.Properties.HotTrackItems = false;
+            lookUpEdit1.Properties.ShowFooter = false;
+            lookUpEdit1.Properties.ShowHeader = false;
+            lookUpEdit1.Properties.ShowLines = false;
+            //lookUpEdit1.Properties.PopupWidth = 77;
             barButtonItem4_ItemClick(null, null);
         }
 
@@ -298,14 +315,6 @@ namespace WADApplication
         /// </summary>
         private void getLastSensor()
         {
-            // 重置报警状态
-            foreach (var item in mainList)
-            {
-                item.AlertObject = null;
-                item.AlertStatus = EM_AlertType.normal;
-                item.THAlertObject = null;
-                item.THAlertStr = string.Empty;
-            }
             // 保存最后一个在线设备
             foreach (var item in mainList)
             {
@@ -317,7 +326,17 @@ namespace WADApplication
                     break;
                 }
             }
-
+            // 重置报警状态
+            foreach (var item in mainList)
+            {
+                item.AlertObject = null;
+                item.AlertStatus = EM_AlertType.normal;
+                item.THAlertObject = null;
+                item.THAlertStr = string.Empty;
+                // 重置连接状态
+                item.IsConnect = false;
+            }
+            this.Invoke(new Action(gridControl_nowData2.RefreshDataSource));
         }
 
         #endregion
@@ -411,7 +430,6 @@ namespace WADApplication
 
             mainThread = new Thread(new ThreadStart(ReadData));
             isRead = true;
-            IsReadBasic = true;
             mainThread.Start();
             simpleButton4.Enabled = false;
             simpleButton3.Enabled = false;
@@ -704,7 +722,7 @@ namespace WADApplication
         private void changeXRange()
         {
             int val;
-            if (!int.TryParse(comboBoxEdit_VTime.EditValue.ToString(), out val))
+            if (!int.TryParse(lookUpEdit1.EditValue.ToString(), out val))
             {
                 XtraMessageBox.Show("设置错误");
                 return;
@@ -728,16 +746,6 @@ namespace WADApplication
             }
 
             //XtraMessageBox.Show("设置成功");
-        }
-
-        private void comboBoxEdit5_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar != 13)
-            {
-                return;
-            }
-            Trace.WriteLine("按键触发");
-            changeXRange();
         }
 
 
@@ -1035,11 +1043,6 @@ namespace WADApplication
 
         }
 
-        private void comboBoxEdit_VTime_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         // 前面勾选按钮
         private void repositoryItemCheckEdit1_CheckedChanged(object sender, EventArgs e)
         {
@@ -1251,7 +1254,8 @@ namespace WADApplication
 
         private void simpleButton4_Click(object sender, EventArgs e)
         {
-            if (simpleButton4.Text == "开始监测")
+            // 必须要等线程结束之后才能开启第二次检测线程
+            if (simpleButton4.Text == "开始监测" && !isRead)
             {
                 if (CommonMemory.IsOpen == false)
                 {
@@ -1269,7 +1273,6 @@ namespace WADApplication
 
                 mainThread = new Thread(new ThreadStart(ReadData));
                 isRead = true;
-                IsReadBasic = true;
                 mainThread.Start();
                 simpleButton4.Text = "停止监测";
                 simpleButton4.Image = Resources.remove_32x32;
@@ -1278,44 +1281,23 @@ namespace WADApplication
             }
             else
             {
-                // 保存最后一次连接的设备
-                getLastSensor();
+                
                 AlertProcess.PlaySound(false);
                 isRead = false;
-                if (mainThread != null)
-                {
-                    mainThread.Abort();
-                    simpleButton4.Text = "开始监测";
-                    simpleButton4.Image = Resources.next_32x32;
-                }
+                //if (mainThread != null)
+                //{
+                //    mainThread.Abort();
+                //}
                 simpleButton3.Enabled = true;
                 simpleButton1.Enabled = true;
                 CommonMemory.IsReadConnect = true;
                 // closeLight("red");
                 AlertProcess.CloseLight("all");
+                simpleButton4.Text = "开始监测";
+                simpleButton4.Image = Resources.next_32x32;
+                // 保存最后一次连接的设备
+                getLastSensor();
             }
-        }
-
-        private void simpleButton5_Click(object sender, EventArgs e)
-        {
-            // 保存最后一次连接的设备
-            getLastSensor();
-            AlertProcess.PlaySound(false);
-            isRead = false;
-            if (mainThread != null)
-            {
-                mainThread.Abort();
-                simpleButton4.Enabled = true;
-            }
-            simpleButton3.Enabled = true;
-            simpleButton1.Enabled = true;
-            CommonMemory.IsReadConnect = true;
-            // closeLight("red");
-            AlertProcess.CloseLight("all");
-            //if (saveThread != null)
-            //{
-            //    saveThread.Abort();
-            //}
         }
 
         private void simpleButton6_Click(object sender, EventArgs e)

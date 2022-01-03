@@ -194,28 +194,51 @@ namespace WADApplication.Process
             //逐行读取CSV中的数据
             while ((strLine = sr.ReadLine()) != null)
             {
-                if (IsFirst == true)
+                try
                 {
-                    tableHead = strLine.Split(',');
-                    IsFirst = false;
-                    columnCount = tableHead.Length;
-                    //创建列
-                    for (int i = 0; i < columnCount; i++)
+                    if (IsFirst == true)
                     {
-                        DataColumn dc = new DataColumn(tableHead[i]);
-                        dt.Columns.Add(dc);
+                        tableHead = strLine.Split(new string[2] {",","\t"},StringSplitOptions.RemoveEmptyEntries);
+                        IsFirst = false;
+                        columnCount = tableHead.Length;
+                        //创建列
+                        for (int i = 0; i < columnCount; i++)
+                        {
+                            DataColumn dc = new DataColumn(tableHead[i]);
+                            dt.Columns.Add(dc);
+                        }
+                    }
+                    else
+                    {
+                        aryLine = strLine.Split(new string[2] { ",", "\t" }, StringSplitOptions.RemoveEmptyEntries);
+                        bool isContinue = false;
+                        DataRow dr = dt.NewRow();
+                        for (int j = 0; j < columnCount; j++)
+                        {
+                            if (aryLine[j] == null || aryLine[j] == string.Empty)
+                            {
+                                isContinue = true;
+                                break;
+                            }
+
+                            if (j == 0 && aryLine[j].Trim() == "0001/1/1 0:00:00")
+                            {
+                                isContinue = true;
+                                break;
+                            }
+                            dr[j] = aryLine[j];
+                        }
+                        if (!isContinue)
+                        {
+                            dt.Rows.Add(dr);
+                        }
                     }
                 }
-                else
+                catch (Exception)
                 {
-                    aryLine = strLine.Split(',');
-                    DataRow dr = dt.NewRow();
-                    for (int j = 0; j < columnCount; j++)
-                    {
-                        dr[j] = aryLine[j];
-                    }
-                    dt.Rows.Add(dr);
+                    throw;
                 }
+                
             }
             if (aryLine != null && aryLine.Length > 0)
             {

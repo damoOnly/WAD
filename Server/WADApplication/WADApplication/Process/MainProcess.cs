@@ -24,7 +24,7 @@ namespace WADApplication.Process
         public static DateTime lastRemoteTime = Utility.CutOffMillisecond(DateTime.Now);
         // 用于控制增加点的频率，实时曲线不是每个点都需要显示
         public static DateTime lastAddTime = Utility.CutOffMillisecond(DateTime.Now);
-        public static void readMain(Equipment eq, bool isReadBasic, int selectedEqId, TextEdit t1, TextEdit t2, TextEdit t3, TextEdit t4, ChartControl chart, Form_map set, bool isAddPont, DateTime dt)    //浓度读取处理函数
+        public static void readMain(Equipment eq,int selectedEqId, TextEdit t1, TextEdit t2, TextEdit t3, TextEdit t4, ChartControl chart, Form_map set, bool isAddPont, DateTime dt)    //浓度读取处理函数
         {
             byte low = 0x52;
 
@@ -198,7 +198,7 @@ namespace WADApplication.Process
                 int pointsToRemoveCount = 0;
                 foreach (SeriesPoint point in series.Points)
                 {
-                    if (point.DateTimeArgument < minTime)
+                    if (point.DateTimeArgument <= minTime)
                         pointsToRemoveCount++;
                 }
 
@@ -211,6 +211,9 @@ namespace WADApplication.Process
                     series.Points.RemoveRange(0, pointsToRemoveCount);
                 }
             }
+            //SwiftPlotDiagram diagram = chart.Diagram as SwiftPlotDiagram;
+            //if (diagram != null)
+                //diagram.AxisX.WholeRange.SetMinMaxValues(minTime, Utility.CutOffMillisecond(DateTime.Now));
 
             lastRemoteTime = Utility.CutOffMillisecond(DateTime.Now);
         }
@@ -332,9 +335,9 @@ namespace WADApplication.Process
             chartControl.Series.EndUpdate();
 
             SwiftPlotDiagram diagram_Tem = chartControl.Diagram as SwiftPlotDiagram;
-            diagram_Tem.AxisX.WholeRange.SetMinMaxValues(minTime, maxTime);
-            //diagram_Tem.AxisX.DateTimeScaleOptions.AutoGrid = true;
-            //diagram_Tem.AxisX.WholeRange.Auto = true;
+            //diagram_Tem.AxisX.WholeRange.SetMinMaxValues(minTime, maxTime);
+            diagram_Tem.AxisX.DateTimeScaleOptions.AutoGrid = true;
+            diagram_Tem.AxisX.WholeRange.Auto = true;
             diagram_Tem.AxisX.WholeRange.AutoSideMargins = true;
             diagram_Tem.AxisX.VisualRange.Auto = true;
             diagram_Tem.AxisX.VisualRange.AutoSideMargins = true;
@@ -430,9 +433,9 @@ namespace WADApplication.Process
             chartControl.Series.EndUpdate();
 
             SwiftPlotDiagram diagram_Tem = chartControl.Diagram as SwiftPlotDiagram;
-            diagram_Tem.AxisX.WholeRange.SetMinMaxValues(minTime, maxTime);
-            //diagram_Tem.AxisX.DateTimeScaleOptions.AutoGrid = true;
-            //diagram_Tem.AxisX.WholeRange.Auto = true;
+            //diagram_Tem.AxisX.WholeRange.SetMinMaxValues(minTime, maxTime);
+            diagram_Tem.AxisX.DateTimeScaleOptions.AutoGrid = true;
+            diagram_Tem.AxisX.WholeRange.Auto = true;
             diagram_Tem.AxisX.WholeRange.AutoSideMargins = true;
             diagram_Tem.AxisX.VisualRange.Auto = true;
             diagram_Tem.AxisX.VisualRange.AutoSideMargins = true;
