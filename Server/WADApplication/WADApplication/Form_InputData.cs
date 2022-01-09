@@ -193,6 +193,7 @@ namespace WADApplication
                     InputDataDal dd = new InputDataDal(fileName, eq);
                     dd.AddList(list);
                     port.Open(CommonMemory.SysConfig.PortName, CommonMemory.SysConfig.PortRate);
+                    this.Close();
                 }
                 else if (item.Count > 19)
                 {
@@ -308,6 +309,7 @@ namespace WADApplication
                         }));
                         this.Invoke(new Action<string>(addText), "上传异常----------------------------------------------------");
                         port.Open(CommonMemory.SysConfig.PortName, CommonMemory.SysConfig.PortRate);
+                        this.Close();
                     }
                     catch (Exception ex)
                     {

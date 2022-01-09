@@ -221,7 +221,8 @@ values (@Name,@Address,@GasType,@SensorNum,@UnitType,@Point,@Magnification,@Low,
                                 {
                                     return ol.Address == eq.Address;
                                 });
-                                eq.OrderNo = oo.OrderNo + 1;
+                                oo.OrderNo = oo.OrderNo + 1;
+                                eq.OrderNo = oo.OrderNo;
                             }
                             else
                             {
