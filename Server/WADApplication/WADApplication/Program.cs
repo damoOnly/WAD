@@ -13,19 +13,9 @@ namespace WADApplication
         [STAThread]
         static void Main()
         {
-            // 去掉自定义皮肤
-            //DevExpress.Skins.SkinManager.Default.RegisterAssembly(typeof(DevExpress.UserSkins.WADSkinProject).Assembly); //Register!
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            if (!DevExpress.Skins.SkinManager.AllowFormSkins)
-            {
-                DevExpress.Skins.SkinManager.EnableFormSkins();
-                DevExpress.Skins.SkinManager.EnableFormSkinsIfNotVista();
-                DevExpress.Skins.SkinManager.EnableMdiFormSkins();
-                
-            }
-            DevExpress.XtraEditors.Controls.Localizer.Active = new LocalizationCHS();
-            Application.Run(new MainForm());
+            Application.Run(new MainWebForm());
         }
         
     }

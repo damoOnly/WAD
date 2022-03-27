@@ -14,4 +14,16 @@ namespace Entity
 
         public List<EquipmentData> DataList { get; set; }
     }
+
+    public class HistoryTableData
+    {
+        public HistoryTableData()
+        {
+            header = new List<string>();
+            list = new List<List<string>>();
+        }
+        public List<string> header { get; set; }
+        public List<List<string>> list { get; set; }
+         
+    }
 }

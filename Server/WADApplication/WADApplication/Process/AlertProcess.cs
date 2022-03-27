@@ -115,13 +115,15 @@ namespace WADApplication.Process
 
         public static void OperatorAlert(List<Equipment> main, DevExpress.XtraEditors.SimpleButton btn)
         {
+
             bool isNotAlert = main.All(c => c.AlertStatus == EM_AlertType.normal);
             if (isNotAlert)
             {// 只有全部无报警之后，本次消音才算结束，否则如果一直有报警，则一直是消音状态
+                CommonMemory.IsCloseSoundTemp = false;
                 if (CommonMemory.IsCloseSoundTemp)
                 {
                     CommonMemory.IsCloseSoundTemp = false;
-                    if (btn.InvokeRequired)
+                    if (btn !=null && btn.InvokeRequired)
                     {
                         btn.Invoke(new Action(() =>
                         {

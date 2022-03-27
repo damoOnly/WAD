@@ -1,4 +1,5 @@
 ﻿using Business;
+using CefSharp.WinForms;
 using CommandManager;
 using DevExpress.XtraCharts;
 using DevExpress.XtraEditors;
@@ -19,11 +20,17 @@ using System.Threading.Tasks;
 
 namespace WADApplication.Process
 {
-    class MainProcess
+    public class MainProcess
     {
         public static DateTime lastRemoteTime = Utility.CutOffMillisecond(DateTime.Now);
         // 用于控制增加点的频率，实时曲线不是每个点都需要显示
         public static DateTime lastAddTime = Utility.CutOffMillisecond(DateTime.Now);
+
+        public static Thread mainThread;
+
+        public static ChromiumWebBrowser chromeBrower;
+
+
         public static void readMain(Equipment eq,int selectedEqId, TextEdit t1, TextEdit t2, TextEdit t3, TextEdit t4, ChartControl chart, Form_map set, bool isAddPont, DateTime dt)    //浓度读取处理函数
         {
             byte low = 0x52;
@@ -128,6 +135,59 @@ namespace WADApplication.Process
             }
             //为了处理报警
             //data.Chroma = eq.Chroma;
+            AlertProcess.AddAlert(alertStatus, ref eq);
+        }
+
+        //浓度读取处理函数
+        public static void readMainV2(Equipment eq, bool isAddPont, DateTime dt)   
+        {
+            byte low = 0x52;
+
+            if (!eq.IsNew)
+            {
+                low = 0x4e;
+            }
+            else if (!eq.IsGas)
+            {
+                low = 0x20;
+            }
+
+            Command cd = new Command(eq.Address, eq.SensorNum, low, 3);
+            if (!CommandResult.GetResult(cd))
+            {
+                eq.ReadFailureNum++;
+                if (eq.ReadFailureNum > 4)
+                {
+                    eq.IsConnect = false;
+                }
+                Trace.WriteLine("读取错误");
+                LogLib.Log.GetLogger("readMain").Warn(eq.Address + "读取错误！");
+                return;
+            }
+            else
+            {
+                eq.ReadFailureNum = 0;
+                eq.IsConnect = true;
+            }
+            float chrome;
+            EM_AlertType alertStatus;
+            Parse.GetRealData(cd.ResultByte, out chrome, out alertStatus);
+            eq.Chroma = chrome;
+            TimeSpan ts = dt.ToUniversalTime() - new DateTime(1970,1,1,0,0,0,0);
+            eq.time = ts.TotalMilliseconds.ToString();
+
+            EquipmentData ed = new EquipmentData();
+            ed.AddTime = dt;
+            ed.EquipmentID = eq.ID;
+            ed.Chroma = eq.Chroma;
+            // 添加数据库
+            EquipmentDataBusiness.Add(ed);
+            if (isAddPont)
+            {
+                // 绘制曲线
+            }
+
+            //为了处理报警
             AlertProcess.AddAlert(alertStatus, ref eq);
         }
 
@@ -570,6 +630,78 @@ namespace WADApplication.Process
                 LogLib.Log.GetLogger("MainProcess").Error(ex);                
             }
             
+        }
+
+        private static void ReadData()
+        {
+            while (CommonMemory.isRead)
+            {
+                try
+                {
+                    bool isAddPont = MainProcess.GetIsAddPoint();
+                    lock (CommonMemory.mainList)
+                    {
+                        DateTime nowTemp = Utility.CutOffMillisecond(DateTime.Now);
+
+
+                        for (int i = 0, length = CommonMemory.mainList.Count; i < length; i++)
+                        {
+                            if (!CommonMemory.isRead)
+                            {
+                                break;
+                            }
+                            MainProcess.readMainV2(CommonMemory.mainList[i], isAddPont, nowTemp);
+                            Thread.Sleep(50);
+                        }
+                        // 每30秒清除一次最小数据(多余的点)
+                        if (nowTemp.AddSeconds(-30) > MainProcess.lastRemoteTime)
+                        {
+                            //MainProcess.RemovePoint(chartControl1);
+                        }
+                    }
+                    AlertProcess.OperatorAlert(CommonMemory.mainList, null);
+                    MainProcess.sendClientData(CommonMemory.mainList);
+                    if (!CommonMemory.isRead)
+                    {
+                        break;
+                    }
+                    string str = JsonConvert.SerializeObject(CommonMemory.mainList);
+                    MainProcess.chromeBrower.GetBrowser().MainFrame.ExecuteJavaScriptAsync(string.Format(@"window.setMainList('{0}');", str));
+                    Thread.Sleep(CommonMemory.SysConfig.HzNum * 1000);
+                }
+                catch
+                {
+
+
+                }
+
+            }
+
+        }
+
+        public static void StartRead()
+        {
+            if (!CommonMemory.isRead)
+            {
+                CommonMemory.IsReadConnect = false;
+                mainThread = new Thread(new ThreadStart(ReadData));
+                CommonMemory.isRead = true;
+                mainThread.Start();
+            }
+            
+        }
+
+        public static void EndRead()
+        {
+            CommonMemory.isRead = false;
+            AlertProcess.PlaySound(false);
+            CommonMemory.IsReadConnect = true;
+            AlertProcess.CloseLight("all");
+            //if (mainThread != null)
+            //{
+            //    mainThread.Abort();
+            //    mainThread = null;
+            //}
         }
     }
 }

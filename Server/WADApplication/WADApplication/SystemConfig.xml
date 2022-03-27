@@ -3,7 +3,7 @@
   <HzNum>5</HzNum>
   <CmmDelay>20</CmmDelay>
   <CommandOutTime>500</CommandOutTime>
-  <Range>30</Range>
+  <RealTimeRangeX>30</RealTimeRangeX>
   <PortName>COM5</PortName>
   <PortRate>9600</PortRate>
   <User>1</User>

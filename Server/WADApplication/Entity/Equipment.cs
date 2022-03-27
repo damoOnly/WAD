@@ -375,6 +375,7 @@ namespace Entity
         public const string outRange = "超量程";
         public const string highStr = "A2报警";
         public const string lowStr = "A1报警";
+        public string time { get; set; }
     }
 
     public class EquipmentComparer : IEqualityComparer<Equipment>

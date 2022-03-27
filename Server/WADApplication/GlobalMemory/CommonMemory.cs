@@ -33,6 +33,11 @@ namespace GlobalMemory
         public static bool IsCloseSoundTemp = false;
 
         /// <summary>
+        /// 读取数据线程开关
+        /// </summary>
+        public static bool isRead = false;
+
+        /// <summary>
         /// 声音播放对象
         /// </summary>
         public static SoundPlayer player;
@@ -46,6 +51,12 @@ namespace GlobalMemory
 
         public static StructSystemConfig SysConfig = new StructSystemConfig();
         public static AsyncTCPServer server;
+
+        public static List<Equipment> mainList = new List<Equipment>();
+
+        public static List<int> seriesIds = new List<int>();
+
+        public static List<EquipmentReportData> series = new List<EquipmentReportData>();
 
         public static void Init()
         {

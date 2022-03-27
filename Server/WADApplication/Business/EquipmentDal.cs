@@ -494,6 +494,20 @@ values (@Name,@Address,@GasType,@SensorNum,@UnitType,@Point,@Magnification,@Low,
             }
         }
 
+        public static void DeleteOneById(int id)
+        {
+            string sql = "delete from tb_Equipment where rowid = @id";
+            using (SQLiteConnection conn = new SQLiteConnection(connstr))
+            {
+                conn.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
         public static void AddorUpdate(ref StructEquipment eq)
         {
             eq.IsDel = false;

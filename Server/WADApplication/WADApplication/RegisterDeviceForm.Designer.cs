@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraGrid.GridFormatRule gridFormatRule2 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule1 = new DevExpress.XtraGrid.GridFormatRule();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
@@ -76,6 +76,7 @@
             this.gridColumn7.OptionsColumn.AllowEdit = false;
             this.gridColumn7.Visible = true;
             this.gridColumn7.VisibleIndex = 12;
+            this.gridColumn7.Width = 69;
             // 
             // simpleButton1
             // 
@@ -263,9 +264,9 @@
             this.gridColumn7,
             this.gridColumn_IsRegister,
             this.gridColumn_Select});
-            gridFormatRule2.Name = "Format0";
-            gridFormatRule2.Rule = null;
-            this.gridView1.FormatRules.Add(gridFormatRule2);
+            gridFormatRule1.Name = "Format0";
+            gridFormatRule1.Rule = null;
+            this.gridView1.FormatRules.Add(gridFormatRule1);
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsCustomization.AllowColumnMoving = false;
@@ -289,6 +290,7 @@
             this.gridColumn_Address.OptionsColumn.AllowEdit = false;
             this.gridColumn_Address.Visible = true;
             this.gridColumn_Address.VisibleIndex = 1;
+            this.gridColumn_Address.Width = 56;
             // 
             // gridColumn_Name
             // 
@@ -297,6 +299,7 @@
             this.gridColumn_Name.Name = "gridColumn_Name";
             this.gridColumn_Name.Visible = true;
             this.gridColumn_Name.VisibleIndex = 2;
+            this.gridColumn_Name.Width = 56;
             // 
             // gridColumn_SensorType
             // 
@@ -306,6 +309,7 @@
             this.gridColumn_SensorType.OptionsColumn.AllowEdit = false;
             this.gridColumn_SensorType.Visible = true;
             this.gridColumn_SensorType.VisibleIndex = 3;
+            this.gridColumn_SensorType.Width = 56;
             // 
             // gridColumn_Gas
             // 
@@ -314,6 +318,7 @@
             this.gridColumn_Gas.Name = "gridColumn_Gas";
             this.gridColumn_Gas.Visible = true;
             this.gridColumn_Gas.VisibleIndex = 4;
+            this.gridColumn_Gas.Width = 74;
             // 
             // gridColumn3
             // 
@@ -322,6 +327,7 @@
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 5;
+            this.gridColumn3.Width = 53;
             // 
             // gridColumn5
             // 
@@ -331,6 +337,7 @@
             this.gridColumn5.OptionsColumn.AllowEdit = false;
             this.gridColumn5.Visible = true;
             this.gridColumn5.VisibleIndex = 6;
+            this.gridColumn5.Width = 53;
             // 
             // gridColumn1
             // 
@@ -340,6 +347,7 @@
             this.gridColumn1.OptionsColumn.AllowEdit = false;
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 7;
+            this.gridColumn1.Width = 53;
             // 
             // gridColumn2
             // 
@@ -349,6 +357,7 @@
             this.gridColumn2.OptionsColumn.AllowEdit = false;
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 8;
+            this.gridColumn2.Width = 53;
             // 
             // gridColumn4
             // 
@@ -358,6 +367,7 @@
             this.gridColumn4.OptionsColumn.AllowEdit = false;
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 9;
+            this.gridColumn4.Width = 53;
             // 
             // gridColumn8
             // 
@@ -366,6 +376,7 @@
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
             this.gridColumn8.VisibleIndex = 10;
+            this.gridColumn8.Width = 53;
             // 
             // gridColumn6
             // 
@@ -374,6 +385,7 @@
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
             this.gridColumn6.VisibleIndex = 11;
+            this.gridColumn6.Width = 53;
             // 
             // gridColumn_IsRegister
             // 

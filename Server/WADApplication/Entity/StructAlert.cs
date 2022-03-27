@@ -28,11 +28,21 @@ namespace Entity
         /// 报警开始时间
         /// </summary>
         public DateTime StratTime { get; set; }
+        public string startStr { get {
+            return StratTime.ToString();
+        } }
 
         /// <summary>
         /// 报警结束时间
         /// </summary>
         public DateTime EndTime { get; set; }
+        public string endStr
+        {
+            get
+            {
+                return EndTime.ToString();
+            }
+        }
         
         /// <summary>
         /// 报警类别
