@@ -8,6 +8,10 @@ namespace Entity
 {
     public class EquipmentReportData
     {
+        public EquipmentReportData()
+        {
+            DataList = new List<EquipmentData>();
+        }
         public int ID { get; set; }
         public string GasName { get; set; }
         public string UnitName { get; set; }

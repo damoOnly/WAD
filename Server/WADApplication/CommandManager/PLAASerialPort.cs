@@ -96,8 +96,8 @@ namespace CommandManager
         /// </summary>
         private PLAASerialPort()
         {
-            InputThread = new Thread(new ThreadStart(getInputData));
-            InputThread.Start();
+            //InputThread = new Thread(new ThreadStart(getInputData));
+            //InputThread.Start();
             //if (PortName != null && BaudRate != 0)
             //{
             //    serialport = new SerialPort();

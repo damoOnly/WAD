@@ -24,6 +24,7 @@ namespace WADApplication.Process
         public static DateTime lastRemoteTime = Utility.CutOffMillisecond(DateTime.Now);
         // 用于控制增加点的频率，实时曲线不是每个点都需要显示
         public static DateTime lastAddTime = Utility.CutOffMillisecond(DateTime.Now);
+        public static List<EquipmentReportData> dataList = new List<EquipmentReportData>();
         public static void readMain(Equipment eq,int selectedEqId, TextEdit t1, TextEdit t2, TextEdit t3, TextEdit t4, ChartControl chart, Form_map set, bool isAddPont, DateTime dt)    //浓度读取处理函数
         {
             byte low = 0x52;
@@ -114,8 +115,13 @@ namespace WADApplication.Process
             //ed.HighChroma = eq.HighChroma;
             //ed.LowChromadata = eq.LowChromadata;
             //ed.Point = eq.Point;
-            // 添加数据库
-            EquipmentDataBusiness.Add(ed);
+            // 这里只是把数据放在内存中，然后30秒存一次
+            EquipmentReportData dd = dataList.FirstOrDefault((dl) => eq.ID == dl.ID);
+            if (dd != null)
+            {
+                dd.DataList.Add(ed);
+            }
+
             if (isAddPont)
             {
                 // 绘制曲线
@@ -177,7 +183,6 @@ namespace WADApplication.Process
             {
                 if (ed.EquipmentID == Convert.ToInt32(series.Tag) && series.View is SwiftPlotSeriesViewBase)
                 {
-                    Trace.WriteLine(ed.EquipmentID);
                     series.Points.Add(new SeriesPoint(ed.AddTime, ed.Chroma));
                 }
             }
@@ -570,6 +575,19 @@ namespace WADApplication.Process
                 LogLib.Log.GetLogger("MainProcess").Error(ex);                
             }
             
+        }
+
+        public static void saveData(object state)
+        {
+            foreach (var item in MainProcess.dataList)
+            {
+                if (item.DataList.Count <= 0)
+                {
+                    continue;
+                }
+                EquipmentDataBusiness.AddList(item.DataList, item.ID, DateTime.Now);
+                item.DataList.Clear();
+            }
         }
     }
 }

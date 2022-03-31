@@ -188,6 +188,7 @@ namespace WADApplication
                         if (nowTemp.AddSeconds(-30) > MainProcess.lastRemoteTime)
                         {
                             MainProcess.RemovePoint(chartControl1);
+                            ThreadPool.QueueUserWorkItem(MainProcess.saveData);
                         }
                     }
                     AlertProcess.OperatorAlert(mainList, simpleButton11);
@@ -221,11 +222,11 @@ namespace WADApplication
             gridControl_nowData2.DataSource = mainList;
             gridView_nowData2.BestFitColumns();
             selecteq = mainList.FirstOrDefault();
-            //// 初始化报警列表
-            //mainList.ForEach(c =>
-            //{
-            //    alertList.Add(c.ID, new List<Alert>());
-            //});
+            // 初始化内存数据对象
+            mainList.ForEach(c =>
+            {
+                MainProcess.dataList.Add(new EquipmentReportData() { ID = c.ID });
+            });
 
             InitControls();
 
@@ -645,6 +646,7 @@ namespace WADApplication
         {
             AppConfigProcess.Save();
             AlertProcess.CloseLight("all");
+            MainProcess.saveData(null);
             if (PLAASerialPort.serialport.IsOpen)
             {
                 PLAASerialPort.GetInstance().Close();
@@ -657,6 +659,10 @@ namespace WADApplication
             {
                 LogLib.Log.GetLogger(this).Warn(ex);
             }
+
+            
+
+
             //sendStat = false;      
             //acceptConnect = false;
             //if (thMain != null)

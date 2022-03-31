@@ -70,91 +70,91 @@ namespace SQLiteTest
 
         private void TestAddList()
         {
-            try
-            {
-                EquipmentData d1 = new EquipmentData()
-                {
-                    EquipmentID = 1,
-                    Chroma = 1.2f,
-                    AddTime = DateTime.Now,
-                };
+            //try
+            //{
+            //    EquipmentData d1 = new EquipmentData()
+            //    {
+            //        EquipmentID = 1,
+            //        Chroma = 1.2f,
+            //        AddTime = DateTime.Now,
+            //    };
 
-                EquipmentData d2 = new EquipmentData()
-                {
-                    EquipmentID = 1,
-                    Chroma = 2.2f,
-                    AddTime = DateTime.Now.AddMinutes(5),
-                };
+            //    EquipmentData d2 = new EquipmentData()
+            //    {
+            //        EquipmentID = 1,
+            //        Chroma = 2.2f,
+            //        AddTime = DateTime.Now.AddMinutes(5),
+            //    };
 
-                List<EquipmentData> list = new List<EquipmentData>();
-                list.Add(d1);
-                list.Add(d2);
+            //    List<EquipmentData> list = new List<EquipmentData>();
+            //    list.Add(d1);
+            //    list.Add(d2);
 
-                EquipmentDataBusiness.AddList(list);
-                Console.WriteLine("TestAddList: Ok");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
+            //    EquipmentDataBusiness.AddList(list);
+            //    Console.WriteLine("TestAddList: Ok");
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine(e.Message);
+            //}
         }
 
         private void TestAddList2()
         {
-            try
-            {
-                EquipmentData d1 = new EquipmentData()
-                {
-                    EquipmentID = 1,
-                    Chroma = 1.2f,
-                    AddTime = DateTime.Now.AddMonths(1)
-                };
+            //try
+            //{
+            //    EquipmentData d1 = new EquipmentData()
+            //    {
+            //        EquipmentID = 1,
+            //        Chroma = 1.2f,
+            //        AddTime = DateTime.Now.AddMonths(1)
+            //    };
 
-                EquipmentData d2 = new EquipmentData()
-                {
-                    EquipmentID = 1,
-                    Chroma = 2.2f,
-                    AddTime = DateTime.Now.AddMonths(1).AddMinutes(5),
-                };
+            //    EquipmentData d2 = new EquipmentData()
+            //    {
+            //        EquipmentID = 1,
+            //        Chroma = 2.2f,
+            //        AddTime = DateTime.Now.AddMonths(1).AddMinutes(5),
+            //    };
 
-                List<EquipmentData> list = new List<EquipmentData>();
-                list.Add(d1);
-                list.Add(d2);
+            //    List<EquipmentData> list = new List<EquipmentData>();
+            //    list.Add(d1);
+            //    list.Add(d2);
 
-                EquipmentDataBusiness.AddList(list);
-                Console.WriteLine("TestAddList2: Ok");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
+            //    EquipmentDataBusiness.AddList(list);
+            //    Console.WriteLine("TestAddList2: Ok");
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine(e.Message);
+            //}
         }
 
         private void TestGets()
         {
-            try
-            {
-                List<EquipmentData> list = EquipmentDataBusiness.GetList(DateTime.Now.AddMonths(-1), DateTime.Now.AddMonths(2), 1);
-                Console.WriteLine("TestGets: OK " + list.Count);
-                Console.WriteLine(list.Count);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
+            //try
+            //{
+            //    List<EquipmentData> list = EquipmentDataBusiness.GetList(DateTime.Now.AddMonths(-1), DateTime.Now.AddMonths(2), 1);
+            //    Console.WriteLine("TestGets: OK " + list.Count);
+            //    Console.WriteLine(list.Count);
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine(e.Message);
+            //}
         }
 
         private void TestGets2()
         {
-            try
-            {
-                List<EquipmentData> list = EquipmentDataBusiness.GetList(DateTime.Now.AddHours(-6), DateTime.Now.AddHours(2), 1);
-                Console.WriteLine("TestGets2: OK " + list.Count);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
+            //try
+            //{
+            //    List<EquipmentData> list = EquipmentDataBusiness.GetList(DateTime.Now.AddHours(-6), DateTime.Now.AddHours(2), 1);
+            //    Console.WriteLine("TestGets2: OK " + list.Count);
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine(e.Message);
+            //}
         }
 
         // 测试删除当月的数据
