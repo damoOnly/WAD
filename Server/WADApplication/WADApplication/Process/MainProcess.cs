@@ -403,14 +403,14 @@ namespace WADApplication.Process
                     spsv1.LineStyle.Thickness = 2;
                     series.View = spsv1;
                     // 新勾选的曲线需要查出历史数据，补充前面时间的空白
-                    List<EquipmentData> datalist = EquipmentDataBusiness.GetList(minTime, maxTime, one.ID, 2);
+                    //List<EquipmentData> datalist = EquipmentDataBusiness.GetList(minTime, maxTime, one.ID, 2);
 
                     // 控制最多点个数 
-                    cutListDate(datalist).ForEach(c =>
-                    {
-                        SeriesPoint sp = new SeriesPoint(c.AddTime, Math.Round(c.Chroma, 2));
-                        series.Points.Add(sp);
-                    });
+                    //cutListDate(datalist).ForEach(c =>
+                    //{
+                    //    SeriesPoint sp = new SeriesPoint(c.AddTime, Math.Round(c.Chroma, 2));
+                    //    series.Points.Add(sp);
+                    //});
                     chartControl.Series.Add(series);
                 }
                 else if (!one.IfShowSeries && IsCondionsSeries(one.ID, chartControl))
@@ -471,7 +471,7 @@ namespace WADApplication.Process
             diagram_Tem.AxisY.Title.Antialiasing = false;
             diagram_Tem.AxisY.Title.Font = new System.Drawing.Font("Tahoma", 8);
 
-            chartControl.Refresh();
+            //chartControl.Refresh();
         }
 
         private static bool IsCondionsSeries(int id, ChartControl chartControl)

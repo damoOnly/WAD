@@ -311,10 +311,12 @@ namespace WADApplication.Process
             if (CommonMemory.IsClosePlay || !isp || CommonMemory.IsCloseSoundTemp)
             {
                 CommonMemory.player.Stop();
+                CommonMemory.IsSoundPlayed = false;
             }
-            else
+            else if (!CommonMemory.IsSoundPlayed)
             {
                 CommonMemory.player.PlayLooping();
+                CommonMemory.IsSoundPlayed = true;
             }
             //if (CommonMemory.IsClosePlay)
             //{

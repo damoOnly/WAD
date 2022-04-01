@@ -145,7 +145,7 @@ namespace WADApplication
         /// <summary>
         /// 每个通道命令延时（毫秒）
         /// </summary>
-        private int CommDelay = 100;
+        private int CommDelay = 20;
 
         /// <summary>
         /// 开始检测时间
@@ -1596,10 +1596,7 @@ namespace WADApplication
             // 只有在开始监听的情况下，才显示曲线，所以这里加条件判断
             if (isRead)
             {
-                lock (mainList)
-                {
                     MainProcess.ManageSeriesV2(chartControl1, selecteq, minTime, maxTime);
-                }
             }
             //清空勾选项
             for (int i = 0; i < gridView_nowData2.DataRowCount; i++)
