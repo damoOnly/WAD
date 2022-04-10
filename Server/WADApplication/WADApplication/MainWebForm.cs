@@ -42,10 +42,6 @@ namespace WADApplication
 {
     public partial class MainWebForm : Form
     {
-        /// <summary>
-        /// 设备列表
-        /// </summary>
-        private List<Equipment> mainList;
         #region 私有方法
 
         // 初始化Form
@@ -55,6 +51,11 @@ namespace WADApplication
             CreateDbFile.InitDb();
 
             CommonMemory.mainList = EquipmentBusiness.GetAllListNotDelete();
+            // 初始化内存数据对象
+            CommonMemory.mainList.ForEach(c =>
+            {
+                MainProcess.dataList.Add(new EquipmentReportData() { ID = c.ID });
+            });
 
             initializeChromium();
         }
@@ -80,7 +81,7 @@ namespace WADApplication
             base.WndProc(ref m);
         }
 
-        
+
 
         private void initializeChromium()
         {
@@ -115,15 +116,10 @@ namespace WADApplication
 
             MainProcess.chromeBrower.FrameLoadEnd += chromeBrower_FrameLoadEnd;
 
-            //Wait for the MainFrame to finish loading
-            MainProcess.chromeBrower.FrameLoadEnd += (sender, args) =>
-            {
-
-            };
-
-            this.Controls.Add(MainProcess.chromeBrower);
 
             MainProcess.chromeBrower.Dock = DockStyle.Fill;
+            this.Controls.Add(MainProcess.chromeBrower);
+
 
             // Allow the use of local resources in the browser
             //BrowserSettings browserSettings = new BrowserSettings();
@@ -134,6 +130,7 @@ namespace WADApplication
 
         void chromeBrower_FrameLoadEnd(object sender, FrameLoadEndEventArgs args)
         {
+            Console.WriteLine("chromeBrower_FrameLoadEnd");
             //Wait for the MainFrame to finish loading
             if (args.Frame.IsMain)
             {
@@ -143,7 +140,7 @@ namespace WADApplication
                     _state.portList.Add(port);
                 }
                 _state.sysConfig = CommonMemory.SysConfig;
-                _state.mainList = this.mainList;
+                _state.mainList = CommonMemory.mainList;
                 string str = JsonConvert.SerializeObject(_state);
                 //args.Frame.ExecuteJavaScriptAsync(string.Format(@"window.setInitState('{0}');", "aa"));
             }
@@ -156,7 +153,9 @@ namespace WADApplication
 
         private void MainWebForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+
             CommonMemory.isRead = false;
+            MainProcess.saveData(null);
             Cef.Shutdown();
         }
 

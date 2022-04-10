@@ -313,40 +313,13 @@ namespace WADApplication.Process
             if (CommonMemory.IsClosePlay || !isp || CommonMemory.IsCloseSoundTemp)
             {
                 CommonMemory.player.Stop();
+                CommonMemory.IsSoundPlayed = false;
             }
-            else
+            else if (!CommonMemory.IsSoundPlayed)
             {
                 CommonMemory.player.PlayLooping();
+                CommonMemory.IsSoundPlayed = true;
             }
-            //if (CommonMemory.IsClosePlay)
-            //{
-            //    //if (CommonMemory.IsSoundPlayed)
-            //    //{
-            //    //    CommonMemory.IsSoundPlayed = false;
-            //    //    CommonMemory.player.Stop();
-            //    //}
-            //    CommonMemory.player.Stop();
-            //    return;
-            //}
-
-            //if (isp)
-            //{
-            //    //if (!CommonMemory.IsSoundPlayed)
-            //    //{
-            //    //    CommonMemory.IsSoundPlayed = true;
-            //    //    CommonMemory.player.PlayLooping();
-            //    //}
-            //    CommonMemory.player.PlayLooping();
-            //}
-            //else
-            //{
-            //    //if (CommonMemory.IsSoundPlayed)
-            //    //{
-            //    //    CommonMemory.IsSoundPlayed = false;
-            //    //    CommonMemory.player.Stop();
-            //    //}
-            //    CommonMemory.player.Stop();
-            //}
         }
     }
 }

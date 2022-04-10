@@ -26,12 +26,14 @@ namespace WADApplication.Process
         // 用于控制增加点的频率，实时曲线不是每个点都需要显示
         public static DateTime lastAddTime = Utility.CutOffMillisecond(DateTime.Now);
 
+        public static List<EquipmentReportData> dataList = new List<EquipmentReportData>();
+
         public static Thread mainThread;
 
         public static ChromiumWebBrowser chromeBrower;
 
 
-        public static void readMain(Equipment eq,int selectedEqId, TextEdit t1, TextEdit t2, TextEdit t3, TextEdit t4, ChartControl chart, Form_map set, bool isAddPont, DateTime dt)    //浓度读取处理函数
+        public static void readMain(Equipment eq, int selectedEqId, TextEdit t1, TextEdit t2, TextEdit t3, TextEdit t4, ChartControl chart, Form_map set, bool isAddPont, DateTime dt)    //浓度读取处理函数
         {
             byte low = 0x52;
 
@@ -65,64 +67,18 @@ namespace WADApplication.Process
             EM_AlertType alertStatus;
             Parse.GetRealData(cd.ResultByte, out chrome, out alertStatus);
             eq.Chroma = chrome;
-            ////丢包浓度为0显示上次的20151211   
-            //float tempChroma1 = 0;
-            //if (chrome > (float)0.0001)
-            //{
-            //    // eq.Chroma = Convert.ToSingle(Math.Round(data.Chroma, eq.Point)) / eq.BigNum;
-            //    tempChroma1 = Convert.ToSingle(chrome / (float)eq.BigNum);
-            //    // eq.Chroma = data.Chroma ;
-            //}
-
-            //if (tempChroma1 > 50/*(float)(eq.Max * 10)*/)
-            //{
-            //    Thread.Sleep(300);
-            //    if (CommandResult.GetResult(cd))
-            //    {
-            //        Equipment data2 = Parse.GetRealData(cd.ResultByte);
-            //        if (data2.Chroma > 0)
-            //        {
-            //            float tempChroma = Convert.ToSingle(data2.Chroma / (float)eq.BigNum);
-            //            if (tempChroma > (float)(eq.Max))
-            //            {
-            //                eq.Chroma = tempChroma;
-            //            }
-            //            if (tempChroma >= (float)0.0001 && System.Math.Abs((eq.Chroma - tempChroma)) >= (float)(eq.Max / 5))
-            //            {
-            //                eq.Chroma = tempChroma;
-            //            }
-            //        }
-            //    }
-            //}
-            //else
-            //{
-            //    eq.Chroma = tempChroma1;
-            //}
-
-            //if (isReadBasic)
-            //{
-            //    eq.HighChroma = eq.Chroma;
-            //    eq.LowChromadata = eq.Chroma;
-            //}
-            //else
-            //{
-            //    eq.HighChroma = eq.HighChroma > eq.Chroma ? eq.HighChroma : eq.Chroma;
-            //    eq.LowChromadata = eq.LowChromadata < eq.Chroma ? eq.LowChromadata : eq.Chroma;
-            //    //2015.9.9限定浓度最大值不超过传感器量程
-            //    //   eq.Chroma = eq.Chroma > eq.Max ? eq.Max : eq.Chroma;
-            //}
 
             EquipmentData ed = new EquipmentData();
             ed.AddTime = dt;
             ed.EquipmentID = eq.ID;
             ed.Chroma = eq.Chroma;
-            //ed.Temperature = eq.Temperature.Remove(eq.Temperature.Length - 1);
-            //ed.Humidity = eq.Humidity.Remove(eq.Humidity.Length - 1);
-            //ed.HighChroma = eq.HighChroma;
-            //ed.LowChromadata = eq.LowChromadata;
-            //ed.Point = eq.Point;
-            // 添加数据库
-            EquipmentDataBusiness.Add(ed);
+
+            // 这里只是把数据放在内存中，然后30秒存一次
+            EquipmentReportData dd = dataList.FirstOrDefault((dl) => eq.ID == dl.ID);
+            if (dd != null)
+            {
+                dd.DataList.Add(ed);
+            }
             if (isAddPont)
             {
                 // 绘制曲线
@@ -139,7 +95,7 @@ namespace WADApplication.Process
         }
 
         //浓度读取处理函数
-        public static void readMainV2(Equipment eq, bool isAddPont, DateTime dt)   
+        public static void readMainV2(Equipment eq, DateTime dt)
         {
             byte low = 0x52;
 
@@ -173,18 +129,19 @@ namespace WADApplication.Process
             EM_AlertType alertStatus;
             Parse.GetRealData(cd.ResultByte, out chrome, out alertStatus);
             eq.Chroma = chrome;
-            TimeSpan ts = dt.ToUniversalTime() - new DateTime(1970,1,1,0,0,0,0);
+            TimeSpan ts = dt.ToUniversalTime() - new DateTime(1970, 1, 1, 0, 0, 0, 0);
             eq.time = ts.TotalMilliseconds.ToString();
 
             EquipmentData ed = new EquipmentData();
             ed.AddTime = dt;
             ed.EquipmentID = eq.ID;
             ed.Chroma = eq.Chroma;
-            // 添加数据库
-            EquipmentDataBusiness.Add(ed);
-            if (isAddPont)
+
+            // 这里只是把数据放在内存中，然后30秒存一次
+            EquipmentReportData dd = dataList.FirstOrDefault((dl) => eq.ID == dl.ID);
+            if (dd != null)
             {
-                // 绘制曲线
+                dd.DataList.Add(ed);
             }
 
             //为了处理报警
@@ -273,9 +230,8 @@ namespace WADApplication.Process
             }
             //SwiftPlotDiagram diagram = chart.Diagram as SwiftPlotDiagram;
             //if (diagram != null)
-                //diagram.AxisX.WholeRange.SetMinMaxValues(minTime, Utility.CutOffMillisecond(DateTime.Now));
+            //diagram.AxisX.WholeRange.SetMinMaxValues(minTime, Utility.CutOffMillisecond(DateTime.Now));
 
-            lastRemoteTime = Utility.CutOffMillisecond(DateTime.Now);
         }
 
         /// <summary>
@@ -482,7 +438,7 @@ namespace WADApplication.Process
                     chartControl.Series.RemoveAt(index);
                 }
             }
-            
+
 
 
             if (chartControl.Series.Count == 0)
@@ -544,14 +500,14 @@ namespace WADApplication.Process
         }
 
         // 每条线显示的点不能大于1w
-        private static List<EquipmentData> cutListDate(List<EquipmentData> datalist)
+        public static List<EquipmentData> cutListDate(List<EquipmentData> datalist)
         {
             List<EquipmentData> result = new List<EquipmentData>();
             if (datalist == null || datalist.Count <= 0)
             {
                 return result;
             }
-            int multiple = (int)Math.Ceiling(datalist.Count / 10000.00);
+            int multiple = (int)Math.Ceiling(datalist.Count / 5000.00);
             if (multiple > 1)
             {
                 for (int i = 0, count = datalist.Count; i < count; )
@@ -627,9 +583,9 @@ namespace WADApplication.Process
             }
             catch (Exception ex)
             {
-                LogLib.Log.GetLogger("MainProcess").Error(ex);                
+                LogLib.Log.GetLogger("MainProcess").Error(ex);
             }
-            
+
         }
 
         private static void ReadData()
@@ -639,25 +595,26 @@ namespace WADApplication.Process
                 try
                 {
                     bool isAddPont = MainProcess.GetIsAddPoint();
+                    DateTime nowTemp = Utility.CutOffMillisecond(DateTime.Now);
                     lock (CommonMemory.mainList)
                     {
-                        DateTime nowTemp = Utility.CutOffMillisecond(DateTime.Now);
-
-
                         for (int i = 0, length = CommonMemory.mainList.Count; i < length; i++)
                         {
                             if (!CommonMemory.isRead)
                             {
                                 break;
                             }
-                            MainProcess.readMainV2(CommonMemory.mainList[i], isAddPont, nowTemp);
-                            Thread.Sleep(50);
+                            MainProcess.readMainV2(CommonMemory.mainList[i], nowTemp);
+                            Thread.Sleep(20);
                         }
-                        // 每30秒清除一次最小数据(多余的点)
-                        if (nowTemp.AddSeconds(-30) > MainProcess.lastRemoteTime)
-                        {
-                            //MainProcess.RemovePoint(chartControl1);
-                        }
+                    }
+
+                    // 每30秒清除一次最小数据(多余的点) + 存儲數據
+                    if (nowTemp.AddSeconds(-30) > MainProcess.lastRemoteTime)
+                    {
+                        MainProcess.chromeBrower.GetBrowser().MainFrame.ExecuteJavaScriptAsync(string.Format(@"window.removePoint();"));
+                        ThreadPool.QueueUserWorkItem(MainProcess.saveData);
+                        MainProcess.lastRemoteTime = Utility.CutOffMillisecond(DateTime.Now);
                     }
                     AlertProcess.OperatorAlert(CommonMemory.mainList, null);
                     MainProcess.sendClientData(CommonMemory.mainList);
@@ -667,6 +624,9 @@ namespace WADApplication.Process
                     }
                     string str = JsonConvert.SerializeObject(CommonMemory.mainList);
                     MainProcess.chromeBrower.GetBrowser().MainFrame.ExecuteJavaScriptAsync(string.Format(@"window.setMainList('{0}');", str));
+
+                    MainProcess.addPoint(nowTemp);
+
                     Thread.Sleep(CommonMemory.SysConfig.HzNum * 1000);
                 }
                 catch
@@ -688,7 +648,7 @@ namespace WADApplication.Process
                 CommonMemory.isRead = true;
                 mainThread.Start();
             }
-            
+
         }
 
         public static void EndRead()
@@ -702,6 +662,36 @@ namespace WADApplication.Process
             //    mainThread.Abort();
             //    mainThread = null;
             //}
+        }
+
+        public static void saveData(object state)
+        {
+            foreach (var item in MainProcess.dataList)
+            {
+                if (item.DataList.Count <= 0)
+                {
+                    continue;
+                }
+                EquipmentDataBusiness.AddList(item.DataList, item.ID, DateTime.Now);
+                item.DataList.Clear();
+            }
+        }
+
+        public static void addPoint(DateTime dt)
+        {
+            List<EquipmentData> list = new List<EquipmentData>();
+            CommonMemory.mainList.ForEach((mm) =>
+            {
+                list.Add(new EquipmentData()
+                {
+                    EquipmentID = mm.ID,
+                    Chroma = mm.Chroma,
+                    AddTime = dt,                
+                });
+            });
+
+            string str = JsonConvert.SerializeObject(list);
+            MainProcess.chromeBrower.GetBrowser().MainFrame.ExecuteJavaScriptAsync(string.Format(@"window.addPoint('{0}');", str));
         }
     }
 }

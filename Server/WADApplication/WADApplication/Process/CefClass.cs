@@ -88,6 +88,9 @@ namespace WADApplication.Process
             }
 
             config.portList = portList;
+            if (config.systemConfig.PortName == "") {
+                config.systemConfig.PortName = portList.FirstOrDefault() ?? "";
+            }
             config.commonConfig = CommonMemory.Config;
 
             string str = JsonConvert.SerializeObject(config);
@@ -98,6 +101,19 @@ namespace WADApplication.Process
         {
             string str = JsonConvert.SerializeObject(CommonMemory.SysConfig);
             return str;
+        }
+
+        public void saveSysConfig(string name, int value)
+        {
+            Type type = CommonMemory.SysConfig.GetType();
+            System.Reflection.PropertyInfo info = type.GetProperty(name);
+            if (info == null)
+            {
+                ShowError("非法設置");
+                return;
+            }
+            info.SetValue(CommonMemory.SysConfig, value);
+            AppConfigProcess.Save();
         }
 
         public string getPortList()
@@ -192,7 +208,7 @@ namespace WADApplication.Process
                         CommonMemory.IsReadConnect = true;
                     }
                 }
-                
+
             }
             else
             {
@@ -288,7 +304,7 @@ namespace WADApplication.Process
             {
                 log.Error(ex.Message, ex);
             }
-            
+
         }
 
         public bool onMute(bool isMute)
@@ -313,7 +329,7 @@ namespace WADApplication.Process
                 log.Error(ex.Message, ex);
                 return false;
             }
-            
+
         }
 
         public void setCheck(int id, bool check)
@@ -332,7 +348,7 @@ namespace WADApplication.Process
             {
                 log.Error(ex.Message, ex);
             }
-            
+
         }
 
         public string getAlertEqList()
@@ -360,7 +376,7 @@ namespace WADApplication.Process
                 string str = JsonConvert.SerializeObject(new List<string>());
                 return str;
             }
-            
+
         }
 
         private List<Alert> alertExportData = new List<Alert>();
@@ -445,7 +461,8 @@ namespace WADApplication.Process
 
         public void alertExport(string sensorName)
         {
-            Thread thread = new Thread(new ThreadStart(() => {
+            Thread thread = new Thread(new ThreadStart(() =>
+            {
                 alertExportThead(sensorName);
             }));
             thread.SetApartmentState(ApartmentState.STA); //重点
@@ -543,7 +560,7 @@ namespace WADApplication.Process
 
                 List<int> listeqid = new List<int>();
                 byte address = Convert.ToByte(sensorName.Split(new string[] { "-" }, StringSplitOptions.None)[0]);
-                
+
                 foreach (Equipment item in list)
                 {
                     if (item.Address != address)
@@ -566,7 +583,7 @@ namespace WADApplication.Process
                     rd.GasName = one.GasName;
                     rd.UnitName = one.UnitName;
                     byte point = one.Point;
-                    rd.DataList = EquipmentDataBusiness.GetList(start,end, c, point);
+                    rd.DataList = EquipmentDataBusiness.GetList(start, end, c, point);
                     reportData.Add(rd);
 
                     data.AddRange(rd.DataList);
@@ -587,7 +604,7 @@ namespace WADApplication.Process
                         string valueStr = da == null ? string.Empty : da.Chroma.ToString();
                         row.Add(valueStr);
 
-                        dr[i + 1] = da == null ? string.Empty : da.Chroma.ToString();                        
+                        dr[i + 1] = da == null ? string.Empty : da.Chroma.ToString();
                     }
 
                     result.Add(row);
@@ -623,7 +640,7 @@ namespace WADApplication.Process
                     {
                         continue;
                     }
-                    EquipmentDataBusiness.DeleteByTime(start,end, item.ID);
+                    EquipmentDataBusiness.DeleteByTime(start, end, item.ID);
                 }
             }
             catch (Exception ex)
@@ -693,7 +710,7 @@ namespace WADApplication.Process
                 string str = JsonConvert.SerializeObject(new EquipmentReportData());
                 return str;
             }
-            
+
         }
 
         public void ShowError(string msg)
@@ -711,6 +728,38 @@ namespace WADApplication.Process
             });
             string str = JsonConvert.SerializeObject(CommonMemory.mainList);
             MainProcess.chromeBrower.GetBrowser().MainFrame.ExecuteJavaScriptAsync(string.Format(@"window.setMainList('{0}');", str));
+        }
+
+        public void onSystemConfigClick()
+        {
+            SystemConfig set = new SystemConfig();
+            set.ShowDialog();
+        }
+
+        public void onImportClick()
+        {
+            CommonMemory.IsReadConnect = false;
+            Form_InputHistory fi = new Form_InputHistory();
+            fi.ShowDialog();
+            CommonMemory.IsReadConnect = true;
+        }
+
+        public void onClientClick()
+        {
+            Form_Client fc = new Form_Client();
+            fc.ShowDialog();
+        }
+
+        public string getRealTimeHistory(int id, string dt1, string dt2)
+        {
+            DateTime start = DateTime.Parse(dt1);
+            DateTime end = DateTime.Parse(dt2);
+            // 新勾选的曲线需要查出历史数据，补充前面时间的空白
+            List<EquipmentData> datalist = EquipmentDataBusiness.GetList(start, end, id, 2);
+            datalist = MainProcess.cutListDate(datalist);
+
+            string str = JsonConvert.SerializeObject(datalist);
+            return str;
         }
 
     }

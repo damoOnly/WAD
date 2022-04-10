@@ -16,7 +16,7 @@ namespace Entity
 
         #region 数据库字段
         public ulong ID { get; set; }
-        
+
         public float Chroma { get; set; }
 
         public DateTime AddTime { get; set; }
@@ -74,7 +74,15 @@ namespace Entity
         }
         // 根据秒分组
         // 
-        public long AddTimeGroup { get { return AddTime.Ticks/(10000000); } }
+        public long AddTimeGroup { get { return AddTime.Ticks / (10000000); } }
+        public string time
+        {
+            get
+            {
+                TimeSpan ts = AddTime.ToUniversalTime() - new DateTime(1970, 1, 1, 0, 0, 0, 0);
+                return ts.TotalMilliseconds.ToString();
+            }
+        }
 
         //重写的CompareTo方法，根据Id排序
         public int CompareTo(EquipmentData other)

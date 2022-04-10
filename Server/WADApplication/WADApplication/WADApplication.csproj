@@ -469,6 +469,7 @@
   <ItemGroup>
     <None Include="Resources\documentmap_32x32.png" />
     <None Include="Resources\next_32x321.png" />
+    <None Include="Resources\loading.png" />
     <Content Include="SystemConfig.xml">
       <SubType>Designer</SubType>
     </Content>
