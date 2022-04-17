@@ -129,8 +129,8 @@ namespace WADApplication.Process
 
         public string getList()
         {
-            var mainList = EquipmentBusiness.GetAllListNotDelete();
-            string str = JsonConvert.SerializeObject(mainList);
+            CommonMemory.mainList = EquipmentBusiness.GetAllListNotDelete();
+            string str = JsonConvert.SerializeObject(CommonMemory.mainList);
             return str;
         }
 

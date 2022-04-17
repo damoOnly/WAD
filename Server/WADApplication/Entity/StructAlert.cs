@@ -28,9 +28,13 @@ namespace Entity
         /// 报警开始时间
         /// </summary>
         public DateTime StratTime { get; set; }
-        public string startStr { get {
-            return StratTime.ToString();
-        } }
+        public string startStr
+        {
+            get
+            {
+                return StratTime.ToString("yyyy-MM-dd HH:mm:ss");
+            }
+        }
 
         /// <summary>
         /// 报警结束时间
@@ -40,10 +44,10 @@ namespace Entity
         {
             get
             {
-                return EndTime.ToString();
+                return EndTime.ToString("yyyy-MM-dd HH:mm:ss");
             }
         }
-        
+
         /// <summary>
         /// 报警类别
         /// </summary>
@@ -52,23 +56,26 @@ namespace Entity
 
         public float Chroma { get; set; }
 
-        public string ChromaStr { get
+        public string ChromaStr
+        {
+            get
             {
                 return string.Format("{0}", Chroma.ToString("f" + Point));
-            } }
+            }
+        }
 
-        public string ATimeSpan 
+        public string ATimeSpan
         {
             get
             {
                 TimeSpan ts = EndTime - StratTime;
                 TimeSpan ts1 = new TimeSpan(0, 0, 0, 1);
-                if (ts<ts1)
+                if (ts < ts1)
                 {
                     return "00:00:00";
                 }
                 return ts.ToString();
-            } 
+            }
         }
     }
 
