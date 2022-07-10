@@ -18,6 +18,7 @@ namespace Entity
         public ulong ID { get; set; }
 
         public float Chroma { get; set; }
+        public string ChromaStr { get;set;}
 
         public DateTime AddTime { get; set; }
         #endregion

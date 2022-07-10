@@ -79,88 +79,6 @@
       <HintPath>..\packages\CefSharp.WinForms.96.0.180\lib\net452\CefSharp.WinForms.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DevExpress.Charts.v14.2.Core, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="DevExpress.Data.v14.2, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="DevExpress.Printing.v14.2.Core, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="DevExpress.Office.v14.2.Core, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="DevExpress.RichEdit.v14.2.Core, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="DevExpress.SpellChecker.v14.2.Core, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="DevExpress.Utils.v14.2, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="DevExpress.XtraBars.v14.2, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="DevExpress.XtraCharts.v14.2.Wizard, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="DevExpress.XtraCharts.v14.2, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="DevExpress.XtraCharts.v14.2.UI, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="DevExpress.XtraEditors.v14.2, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="DevExpress.XtraNavBar.v14.2, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraPrinting.v14.2, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="DevExpress.XtraGrid.v14.2, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="DevExpress.XtraLayout.v14.2, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="DevExpress.XtraRichEdit.v14.2, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="DevExpress.XtraScheduler.v14.2.Reporting.Extensions, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="DevExpress.XtraScheduler.v14.2, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="DevExpress.XtraScheduler.v14.2.Core, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="DevExpress.XtraScheduler.v14.2.Extensions, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="DevExpress.XtraSpellChecker.v14.2, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="DevExpress.XtraTreeList.v14.2, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
-      <Private>True</Private>
-    </Reference>
     <Reference Include="MQTTnet, Version=2.1.5.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MQTTnet.2.2.0\lib\net45\MQTTnet.dll</HintPath>
       <Private>True</Private>
@@ -187,6 +105,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Speech" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -197,71 +116,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddDeviceForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AddDeviceForm.Designer.cs">
-      <DependentUpon>AddDeviceForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form_AlertHistoryNew.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form_AlertHistoryNew.Designer.cs">
-      <DependentUpon>Form_AlertHistoryNew.cs</DependentUpon>
-    </Compile>
     <Compile Include="Form_Client.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form_Client.Designer.cs">
       <DependentUpon>Form_Client.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form_InputHistory.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form_InputHistory.Designer.cs">
-      <DependentUpon>Form_InputHistory.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form_HistoryNew.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form_HistoryNew.Designer.cs">
-      <DependentUpon>Form_HistoryNew.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form_map.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form_map.Designer.cs">
-      <DependentUpon>Form_map.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form_AlertHistory.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form_AlertHistory.Designer.cs">
-      <DependentUpon>Form_AlertHistory.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form_ChangeAdmin.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form_ChangeAdmin.Designer.cs">
-      <DependentUpon>Form_ChangeAdmin.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form_ChangePassWord.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form_ChangePassWord.Designer.cs">
-      <DependentUpon>Form_ChangePassWord.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form_Debug.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form_Debug.Designer.cs">
-      <DependentUpon>Form_Debug.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form_History.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form_History.Designer.cs">
-      <DependentUpon>Form_History.cs</DependentUpon>
     </Compile>
     <Compile Include="Form_InputData.cs">
       <SubType>Form</SubType>
@@ -269,66 +128,11 @@
     <Compile Include="Form_InputData.Designer.cs">
       <DependentUpon>Form_InputData.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_Login.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form_Login.Designer.cs">
-      <DependentUpon>Form_Login.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form_OneParmSet.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form_OneParmSet.Designer.cs">
-      <DependentUpon>Form_OneParmSet.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form_SensorParmSet.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form_SensorParmSet.Designer.cs">
-      <DependentUpon>Form_SensorParmSet.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form_SensorParmSet2.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form_SensorParmSet2.Designer.cs">
-      <DependentUpon>Form_SensorParmSet2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form_set.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form_set.Designer.cs">
-      <DependentUpon>Form_set.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form_setTime.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form_setTime.Designer.cs">
-      <DependentUpon>Form_setTime.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form_zero.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form_zero.Designer.cs">
-      <DependentUpon>Form_zero.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ImportExcel.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ImportExcel.Designer.cs">
-      <DependentUpon>ImportExcel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="LocalizationCHS.cs" />
     <Compile Include="MainWebForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainWebForm.Designer.cs">
       <DependentUpon>MainWebForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MDIParent1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MDIParent1.Designer.cs">
-      <DependentUpon>MDIParent1.cs</DependentUpon>
     </Compile>
     <Compile Include="Process\AlertProcess.cs" />
     <Compile Include="Process\AppConfigProcess.cs" />
@@ -337,90 +141,20 @@
     <Compile Include="Process\MainProcess.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="RegisterDeviceForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="RegisterDeviceForm.Designer.cs">
-      <DependentUpon>RegisterDeviceForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="SystemConfig.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SystemConfig.Designer.cs">
       <DependentUpon>SystemConfig.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AddDeviceForm.resx">
-      <DependentUpon>AddDeviceForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form_AlertHistoryNew.resx">
-      <DependentUpon>Form_AlertHistoryNew.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form_AlertHistory.resx">
-      <DependentUpon>Form_AlertHistory.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form_ChangeAdmin.resx">
-      <DependentUpon>Form_ChangeAdmin.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form_ChangePassWord.resx">
-      <DependentUpon>Form_ChangePassWord.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Form_Client.resx">
       <DependentUpon>Form_Client.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form_Debug.resx">
-      <DependentUpon>Form_Debug.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form_InputHistory.resx">
-      <DependentUpon>Form_InputHistory.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form_HistoryNew.resx">
-      <DependentUpon>Form_HistoryNew.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form_History.resx">
-      <DependentUpon>Form_History.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_InputData.resx">
       <DependentUpon>Form_InputData.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_Login.resx">
-      <DependentUpon>Form_Login.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form_map.resx">
-      <DependentUpon>Form_map.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form_OneParmSet.resx">
-      <DependentUpon>Form_OneParmSet.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form_SensorParmSet.resx">
-      <DependentUpon>Form_SensorParmSet.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form_SensorParmSet2.resx">
-      <DependentUpon>Form_SensorParmSet2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form_set.resx">
-      <DependentUpon>Form_set.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form_setTime.resx">
-      <DependentUpon>Form_setTime.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form_zero.resx">
-      <DependentUpon>Form_zero.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImportExcel.resx">
-      <DependentUpon>ImportExcel.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="MainWebForm.resx">
       <DependentUpon>MainWebForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MDIParent1.resx">
-      <DependentUpon>MDIParent1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -433,12 +167,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="RegisterDeviceForm.resx">
-      <DependentUpon>RegisterDeviceForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="SystemConfig.resx">
       <DependentUpon>SystemConfig.cs</DependentUpon>
     </EmbeddedResource>

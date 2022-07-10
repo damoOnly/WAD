@@ -7,7 +7,6 @@ using System.Text;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DevExpress.XtraEditors;
 using CommandManager;
 using System.Net;
 using GlobalMemory;
@@ -19,7 +18,7 @@ using System.Threading;
 
 namespace WADApplication
 {
-    public partial class Form_Client : DevExpress.XtraEditors.XtraForm
+    public partial class Form_Client : Form
     {
         public Form_Client()
         {
@@ -256,7 +255,7 @@ namespace WADApplication
 
         private void refreshList()
         {
-            listBoxControl1.Items.Clear();
+            listBox1.Items.Clear();
             if (CommonMemory.server.Clients == null)
             {
                 return;
@@ -267,7 +266,7 @@ namespace WADApplication
                 IPEndPoint po = item.TcpClient.Client.RemoteEndPoint as IPEndPoint;
 
                 string str = string.Format("{0}.{1}:{2}", i + 1, po.Address, po.Port);
-                listBoxControl1.Items.Add(str);
+                listBox1.Items.Add(str);
             }
         }
     }

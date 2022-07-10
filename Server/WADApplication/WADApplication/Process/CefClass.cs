@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -88,7 +89,8 @@ namespace WADApplication.Process
             }
 
             config.portList = portList;
-            if (config.systemConfig.PortName == "") {
+            if (config.systemConfig.PortName == "")
+            {
                 config.systemConfig.PortName = portList.FirstOrDefault() ?? "";
             }
             config.commonConfig = CommonMemory.Config;
@@ -177,7 +179,7 @@ namespace WADApplication.Process
             catch (CommandException ex)
             {
                 log.Error("添加设备失败", ex);
-                ShowError("添加设备失败");
+                ShowError("请检查串口、波特率、协议类型和设备地址");
                 return getList();
             }
         }
@@ -199,7 +201,21 @@ namespace WADApplication.Process
                 {
                     if (!PLAASerialPort.GetInstance().Open(_name, _rate))
                     {
-                        ShowError("打开串口失败");
+                        List<string> portList = new List<string>();
+                        foreach (string port in System.IO.Ports.SerialPort.GetPortNames())
+                        {
+                            portList.Add(port);
+                        }
+                        if (portList.FindIndex((pp) => pp == _name) > -1)
+                        {
+                            ShowError("串口已被占用");
+
+                        }
+                        else
+                        {
+                            ShowError("串口不存在");
+
+                        }
                         return false;
                     }
                     else
@@ -320,7 +336,7 @@ namespace WADApplication.Process
                 {
                     CommonMemory.IsClosePlay = false;
                     // 客户要求打开声音的时候立即报警，但是觉得还是没有这个必要
-                    AlertProcess.OperatorAlert(CommonMemory.mainList, null);
+                    AlertProcess.OperatorAlert(CommonMemory.mainList);
                 }
                 return CommonMemory.IsCloseSoundTemp;
             }
@@ -568,7 +584,7 @@ namespace WADApplication.Process
                         continue;
                     }
                     listeqid.Add(item.ID);
-                    string tit = string.Format("地址{0}-{1}-{2}（{3}）", item.Address, item.SensorNum, item.GasName, item.UnitName);
+                    string tit = string.Format("地址{0}-{1}-{2}（{3}）", item.Address, item.OrderNo, item.GasName, item.UnitName);
                     dataTable.Columns.Add(tit);
                     historyData.header.Add(tit);
                 }
@@ -601,10 +617,10 @@ namespace WADApplication.Process
                     for (int i = 0; i < listeqid.Count; i++)
                     {
                         var da = item.FirstOrDefault(dd => dd.EquipmentID == listeqid[i]);
-                        string valueStr = da == null ? string.Empty : da.Chroma.ToString();
+                        string valueStr = da == null ? string.Empty : da.ChromaStr;
                         row.Add(valueStr);
 
-                        dr[i + 1] = da == null ? string.Empty : da.Chroma.ToString();
+                        dr[i + 1] = da == null ? string.Empty : da.ChromaStr;
                     }
 
                     result.Add(row);
@@ -738,10 +754,10 @@ namespace WADApplication.Process
 
         public void onImportClick()
         {
-            CommonMemory.IsReadConnect = false;
-            Form_InputHistory fi = new Form_InputHistory();
-            fi.ShowDialog();
-            CommonMemory.IsReadConnect = true;
+            //CommonMemory.IsReadConnect = false;
+            //Form_InputHistory fi = new Form_InputHistory();
+            //fi.ShowDialog();
+            //CommonMemory.IsReadConnect = true;
         }
 
         public void onClientClick()
@@ -762,6 +778,199 @@ namespace WADApplication.Process
             return str;
         }
 
+        List<EquipmentData> inputOnelist = new List<EquipmentData>();
+
+        public string getInputFiles()
+        {
+            List<string> files = InputDataDal.ReadInputDataFileNames();
+            string str = JsonConvert.SerializeObject(files);
+            return str;
+        }
+
+        public string deleteInputFile(string filename)
+        {
+            string filePath = string.Format(@"{0}waddb\inputData\{1}.db3", AppDomain.CurrentDomain.BaseDirectory, filename);
+            File.Delete(filePath);
+            return getInputFiles();
+        }
+
+        private void inputFromFileMethod(string sensorName)
+        {
+            inputOnelist = new List<EquipmentData>();
+            List<EquipmentData> list = new List<EquipmentData>();
+
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            // 目前只支持csv
+            openFileDialog.Filter = "csv files (*csv)|*.csv";
+            DialogResult dre = openFileDialog.ShowDialog();
+            string FileName = openFileDialog.FileName;
+
+            if (dre != DialogResult.OK || FileName.ToLower().IndexOf(".csv") < 0)
+            {
+                return;
+            }
+
+            try
+            {
+                DataTable dt = ExcelHelper.OpenCSV(FileName);
+                string nn = Path.GetFileNameWithoutExtension(openFileDialog.SafeFileName);
+                string fileName = string.Format("{0}-{1}", nn, DateTime.Now.ToString("yyyyMMddHHmmss"));
+                Match cm = Regex.Match(sensorName, @"(\d+)-(\w+)-(\d+)");
+                byte address = byte.Parse(cm.Groups[1].Value);
+                byte senn = byte.Parse(cm.Groups[3].Value);
+                Equipment eq = CommonMemory.mainList.Find(ii => ii.Address == address && ii.SensorNum == senn);
+
+                InputDataDal dd = new InputDataDal(fileName, eq);
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    EquipmentData edd = new EquipmentData();
+                    edd.AddTime = DateTime.Parse(dt.Rows[i][0].ToString());
+                    edd.Chroma = float.Parse(dt.Rows[i][1].ToString());
+                    edd.EquipmentID = eq.ID;
+                    list.Add(edd);
+                }
+                dd.AddList(list);
+                inputOnelist = list;
+                string text = System.Web.HttpUtility.UrlEncode(FileName, System.Text.Encoding.UTF8);
+                MainProcess.chromeBrower.GetBrowser().MainFrame.ExecuteJavaScriptAsync(string.Format(@"window.setFileName('{0}');", JsonConvert.SerializeObject(new List<string>() { text, fileName })));
+
+            }
+            catch (Exception ex)
+            {
+                LogLib.Log.GetLogger(this).Warn(ex);
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        public void inputFromFile(string sensorName)
+        {
+            if (sensorName == string.Empty)
+            {
+                return;
+            }
+            Thread thread = new Thread(new ThreadStart(() =>
+            {
+                inputFromFileMethod(sensorName);
+            }));
+            thread.SetApartmentState(ApartmentState.STA); //重点
+            thread.Start();
+            thread.Join();
+        }
+
+        public string loadInputData(string sensorName, string fileName)
+        {
+            inputOnelist = new List<EquipmentData>();
+            List<EquipmentData> list = new List<EquipmentData>();
+
+            try
+            {
+                Match cm = Regex.Match(sensorName, @"(\d+)-(\w+)-(\d+)");
+                byte address = byte.Parse(cm.Groups[1].Value);
+                byte senn = byte.Parse(cm.Groups[3].Value);
+                Equipment eq = CommonMemory.mainList.Find(ii => ii.Address == address && ii.SensorNum == senn);
+                // 其实这里不需要传设备进去
+                InputDataDal idd = new InputDataDal(fileName, eq);
+                StructEquipment eqq = idd.GetEq();
+                Equipment eqqa = Utility.ConvertToEq(eqq);
+                list = idd.GetList();
+                inputOnelist = list;
+            }
+            catch (Exception ex)
+            {
+                LogLib.Log.GetLogger(this).Warn(ex);
+            }
+            string str = JsonConvert.SerializeObject(list);
+            return str; 
+        }
+
+        public string searchInputData(string dt1, string dt2)
+        {
+            List<EquipmentData> list = new List<EquipmentData>();
+
+            try
+            {
+                DateTime start = DateTime.Parse(dt1);
+                DateTime end = DateTime.Parse(dt2);
+                TimeSpan ts = end - start;
+                TimeSpan ts1 = new TimeSpan(0, 0, 0, 1);
+
+                if (inputOnelist.Count <= 0 && ts < ts1)
+                {
+                    return JsonConvert.SerializeObject(list);
+                }
+
+                List<EquipmentData> slist = inputOnelist.Where((item) =>
+                {
+                    return item.AddTime >= start && item.AddTime <= end;
+                }).ToList();
+            }
+            catch (Exception ex)
+            {
+                LogLib.Log.GetLogger(this).Warn(ex);
+            }
+
+            string str = JsonConvert.SerializeObject(list);
+            return str; 
+        }
+
+        public void exportInputData(string sensorName, string fileName)
+        {
+            try
+            {
+                Match cm = Regex.Match(sensorName, @"(\d+)-(\w+)-(\d+)");
+                byte address = byte.Parse(cm.Groups[1].Value);
+                byte senn = byte.Parse(cm.Groups[3].Value);
+                Equipment eq = CommonMemory.mainList.Find(ii => ii.Address == address && ii.SensorNum == senn);
+
+                DataTable dataTable = new DataTable();
+                dataTable.Columns.Add("时间");
+                dataTable.Columns.Add(string.Format("地址{0}-{1}-{2}（{3}）", eq.Address, eq.SensorNum, eq.GasName, eq.UnitName));
+
+                for (int i = 0; i < inputOnelist.Count; i++)
+                {
+                    EquipmentData one = inputOnelist[i];
+                    DataRow row = dataTable.NewRow();
+                    row[0] = one.AddTime;
+                    row[1] = one.Chroma;
+                    dataTable.Rows.Add(row);
+                }
+                SaveFileDialog mTempSaveDialog = new SaveFileDialog();
+                mTempSaveDialog.Filter = "csv files (*csv)|*.csv";
+                mTempSaveDialog.RestoreDirectory = true;
+                mTempSaveDialog.FileName = fileName;
+                if (DialogResult.OK == mTempSaveDialog.ShowDialog() && null != mTempSaveDialog.FileName.Trim())
+                {
+                    string mTempSavePath = mTempSaveDialog.FileName;
+                    ExcelHelper.ExportDataGridToCSV(dataTable, mTempSavePath);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogLib.Log.GetLogger(this).Warn(ex);
+            }
+        }
+
+        public string inputFromSensor(string sensorName)
+        {
+            try
+            {
+                Match cm = Regex.Match(sensorName, @"(\d+)-(\w+)-(\d+)");
+            byte address = byte.Parse(cm.Groups[1].Value);
+            byte senn = byte.Parse(cm.Groups[3].Value);
+            Equipment eq = CommonMemory.mainList.Find(ii => ii.Address == address && ii.SensorNum == senn);
+            string fileName = string.Format("{0}-{1}-{2}-{3}-{4}", eq.Address, eq.Name, eq.SensorNum, eq.GasName, DateTime.Now.ToString("yyyyMMdd-HHmmss"));
+            Form_InputData form = new Form_InputData(eq, fileName);
+            form.ShowDialog();
+            return fileName;
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+                return string.Empty;
+            }
+        }
     }
 
     public class InitState

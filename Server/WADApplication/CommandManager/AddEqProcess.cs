@@ -29,8 +29,8 @@ namespace CommandManager
                 }
                 else
                 {
-                    return new List<StructEquipment>();
-                    //throw new CommandException(address + "readNew error");
+                    //return new List<StructEquipment>();
+                    throw new CommandException(address + "readNew error");
                 }
                 if (gasCount > 255 || weatherCount > 255)
                 {
@@ -54,8 +54,8 @@ namespace CommandManager
                 }
                 else
                 {
-                    return new List<StructEquipment>();
-                    //throw new CommandException(address + "readNew error");
+                    // return new List<StructEquipment>();
+                    throw new CommandException(address + "readNew error");
                 }
 
                 List<StructEquipment> gasList = readNewGas(address, gasCount, name, mn);
@@ -161,19 +161,19 @@ namespace CommandManager
                     {
                         gases.Add(0x06);
                     }
-                    if ((qts & 0x20) == 0x40)
+                    if ((qts & 0x40) == 0x40)
                     {
                         gases.Add(0x07);
                     }
-                    if ((qts & 0x20) == 0x80)
+                    if ((qts & 0x80) == 0x80)
                     {
                         gases.Add(0x08);
                     }
                 }
                 else
                 {
-                    return new List<StructEquipment>();
-                    //throw new CommandException(address + "read old error");
+                    //return new List<StructEquipment>();
+                    throw new CommandException(address + "read old error");
                 }
 
                 var mnAndFactorList = ReadOldMnAndFactor(address);

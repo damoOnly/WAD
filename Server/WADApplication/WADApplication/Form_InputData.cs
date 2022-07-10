@@ -5,7 +5,6 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using DevExpress.XtraEditors;
 using CommandManager;
 using Business;
 using Entity;
@@ -17,13 +16,15 @@ using System.IO.Ports;
 
 namespace WADApplication
 {
-    public partial class Form_InputData : DevExpress.XtraEditors.XtraForm
+    public partial class Form_InputData : Form
     {
         Equipment eq;
+        string filename;
         PLAASerialPort port = PLAASerialPort.GetInstance();
-        public Form_InputData(Equipment _eq)
+        public Form_InputData(Equipment _eq, string filename)
         {
             this.eq = _eq;
+            this.filename = filename;
             InitializeComponent();
         }
         Thread mainThread = null;
@@ -322,6 +323,26 @@ namespace WADApplication
             {
                 rdt = DateTime.Now;
             }
+        }
+
+        private void labelControl1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textEdit1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labelControl3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textEdit3_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
     }

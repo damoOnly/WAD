@@ -1,5 +1,4 @@
-﻿using DevExpress.XtraEditors;
-using Entity;
+﻿using Entity;
 using GlobalMemory;
 using System;
 using System.Collections.Generic;

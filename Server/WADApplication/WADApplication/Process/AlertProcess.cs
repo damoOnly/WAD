@@ -5,7 +5,6 @@ using System.Text;
 using Entity;
 using Business;
 using GlobalMemory;
-using DevExpress.XtraEditors;
 using System.Net;
 using System.Net.Sockets;
 using WADApplication.Properties;
@@ -113,7 +112,7 @@ namespace WADApplication.Process
 
         }
 
-        public static void OperatorAlert(List<Equipment> main, DevExpress.XtraEditors.SimpleButton btn)
+        public static void OperatorAlert(List<Equipment> main)
         {
 
             bool isNotAlert = main.All(c => c.AlertStatus == EM_AlertType.normal);
@@ -123,14 +122,6 @@ namespace WADApplication.Process
                 if (CommonMemory.IsCloseSoundTemp)
                 {
                     CommonMemory.IsCloseSoundTemp = false;
-                    if (btn !=null && btn.InvokeRequired)
-                    {
-                        btn.Invoke(new Action(() =>
-                        {
-                            btn.Text = "消音";
-                            btn.Image = Resources.ignoremasterfilter_32x32;
-                        }));
-                    }
                 }
             }
             bool isAllConnect = main.All(c => c.IsConnect);
@@ -164,35 +155,6 @@ namespace WADApplication.Process
             else
             {
                 CloseLight("green");
-            }
-        }
-
-        public static void Connect(string ip, string aport)
-        {
-            try
-            {
-                if (ip == string.Empty || aport == string.Empty)
-                {
-                    XtraMessageBox.Show("没有配置声音设备服务器的IP地址和端口号");
-                }
-
-                IPAddress ipaddress = IPAddress.Parse(ip);
-                mClient = new TcpClient();
-                mClient.Connect(ipaddress, int.Parse(aport));
-                // Thread.Sleep(1000);
-                if (mClient != null)
-                {
-                    // label1.Text = "连接成功";
-                    ns = mClient.GetStream();
-                    ns.ReadTimeout = 500;
-                    ns.WriteTimeout = 500;
-
-                }
-            }
-            catch
-            {
-                LogLib.Log.GetLogger("mClient").Warn("报警灯设备没有连接好！");
-                // label1.Text = ex.Message;
             }
         }
 

@@ -29,60 +29,41 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
-            this.textEdit3 = new DevExpress.XtraEditors.TextEdit();
-            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
-            this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.textEdit3 = new System.Windows.Forms.TextBox();
+            this.labelControl3 = new System.Windows.Forms.Label();
+            this.simpleButton1 = new System.Windows.Forms.Button();
+            this.textEdit1 = new System.Windows.Forms.TextBox();
+            this.labelControl1 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
-            this.splitContainerControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit3.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // splitContainerControl1
-            // 
-            this.splitContainerControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerControl1.Horizontal = false;
-            this.splitContainerControl1.IsSplitterFixed = true;
-            this.splitContainerControl1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainerControl1.Name = "splitContainerControl1";
-            this.splitContainerControl1.Panel1.Controls.Add(this.textEdit3);
-            this.splitContainerControl1.Panel1.Controls.Add(this.labelControl3);
-            this.splitContainerControl1.Panel1.Controls.Add(this.simpleButton1);
-            this.splitContainerControl1.Panel1.Controls.Add(this.textEdit1);
-            this.splitContainerControl1.Panel1.Controls.Add(this.labelControl1);
-            this.splitContainerControl1.Panel1.MinSize = 42;
-            this.splitContainerControl1.Panel1.Text = "Panel1";
-            this.splitContainerControl1.Panel2.Controls.Add(this.richTextBox1);
-            this.splitContainerControl1.Panel2.Text = "Panel2";
-            this.splitContainerControl1.Size = new System.Drawing.Size(775, 396);
-            this.splitContainerControl1.SplitterPosition = 42;
-            this.splitContainerControl1.TabIndex = 0;
-            this.splitContainerControl1.Text = "splitContainerControl1";
             // 
             // textEdit3
             // 
-            this.textEdit3.Location = new System.Drawing.Point(379, 9);
+            this.textEdit3.Location = new System.Drawing.Point(400, 13);
             this.textEdit3.Name = "textEdit3";
-            this.textEdit3.Size = new System.Drawing.Size(100, 20);
+            this.textEdit3.Size = new System.Drawing.Size(100, 21);
             this.textEdit3.TabIndex = 4;
+            this.textEdit3.TextChanged += new System.EventHandler(this.textEdit3_TextChanged);
             // 
             // labelControl3
             // 
-            this.labelControl3.Location = new System.Drawing.Point(289, 12);
+            this.labelControl3.Location = new System.Drawing.Point(310, 16);
             this.labelControl3.Name = "labelControl3";
             this.labelControl3.Size = new System.Drawing.Size(84, 13);
             this.labelControl3.TabIndex = 3;
             this.labelControl3.Text = "本次上传数量：";
+            this.labelControl3.Click += new System.EventHandler(this.labelControl3_Click);
             // 
             // simpleButton1
             // 
-            this.simpleButton1.Location = new System.Drawing.Point(533, 7);
+            this.simpleButton1.Location = new System.Drawing.Point(568, 11);
             this.simpleButton1.Name = "simpleButton1";
             this.simpleButton1.Size = new System.Drawing.Size(63, 23);
             this.simpleButton1.TabIndex = 0;
@@ -91,19 +72,21 @@
             // 
             // textEdit1
             // 
-            this.textEdit1.Location = new System.Drawing.Point(126, 9);
+            this.textEdit1.Location = new System.Drawing.Point(147, 13);
             this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Properties.ReadOnly = true;
-            this.textEdit1.Size = new System.Drawing.Size(100, 20);
+            this.textEdit1.ReadOnly = true;
+            this.textEdit1.Size = new System.Drawing.Size(100, 21);
             this.textEdit1.TabIndex = 2;
+            this.textEdit1.TextChanged += new System.EventHandler(this.textEdit1_TextChanged);
             // 
             // labelControl1
             // 
-            this.labelControl1.Location = new System.Drawing.Point(48, 12);
+            this.labelControl1.Location = new System.Drawing.Point(69, 16);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(72, 13);
             this.labelControl1.TabIndex = 1;
             this.labelControl1.Text = "可上传总数：";
+            this.labelControl1.Click += new System.EventHandler(this.labelControl1_Click);
             // 
             // richTextBox1
             // 
@@ -112,7 +95,7 @@
             this.richTextBox1.ForeColor = System.Drawing.Color.DimGray;
             this.richTextBox1.Location = new System.Drawing.Point(0, 0);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(775, 349);
+            this.richTextBox1.Size = new System.Drawing.Size(775, 351);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
@@ -127,36 +110,59 @@
             this.timer1.Interval = 2000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.simpleButton1);
+            this.splitContainer1.Panel1.Controls.Add(this.textEdit3);
+            this.splitContainer1.Panel1.Controls.Add(this.labelControl1);
+            this.splitContainer1.Panel1.Controls.Add(this.labelControl3);
+            this.splitContainer1.Panel1.Controls.Add(this.textEdit1);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.richTextBox1);
+            this.splitContainer1.Size = new System.Drawing.Size(775, 396);
+            this.splitContainer1.SplitterDistance = 41;
+            this.splitContainer1.TabIndex = 1;
+            // 
             // Form_InputData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(775, 396);
-            this.Controls.Add(this.splitContainerControl1);
+            this.Controls.Add(this.splitContainer1);
             this.MinimizeBox = false;
             this.Name = "Form_InputData";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "设备数据上传";
             this.Load += new System.EventHandler(this.Form_InputData_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();
-            this.splitContainerControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit3.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.PerformLayout();
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private DevExpress.XtraEditors.SplitContainerControl splitContainerControl1;
-        private DevExpress.XtraEditors.LabelControl labelControl1;
-        private DevExpress.XtraEditors.SimpleButton simpleButton1;
+        private System.Windows.Forms.Label labelControl1;
+        private System.Windows.Forms.Button simpleButton1;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private DevExpress.XtraEditors.TextEdit textEdit3;
-        private DevExpress.XtraEditors.LabelControl labelControl3;
-        private DevExpress.XtraEditors.TextEdit textEdit1;
+        private System.Windows.Forms.TextBox textEdit3;
+        private System.Windows.Forms.Label labelControl3;
+        private System.Windows.Forms.TextBox textEdit1;
         private System.IO.Ports.SerialPort serialPort1;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.SplitContainer splitContainer1;
     }
 }

@@ -66,12 +66,35 @@ namespace Business
             cmd.Parameters.AddWithValue("@dt1", dt1);
             cmd.Parameters.AddWithValue("@dt2", dt2);
 
+
+
+            string ft = "";
+            switch (point)
+            {
+                case 1:
+                    ft = "0.0";
+                    break;
+                case 2:
+                    ft = "0.00";
+                    break;
+                case 3:
+                    ft = "0.000";
+                    break;
+                case 4:
+                    ft = "0.0000";
+                    break;
+                case 5:
+                    ft = "0.00000";
+                    break;
+            }
+
             using (SQLiteDataReader reader = cmd.ExecuteReader())
             {
                 while (reader.Read())
                 {
                     EquipmentData eq = new EquipmentData();
                     eq.Chroma = Convert.ToSingle(Math.Round(reader.GetFloat(0), point));
+                    eq.ChromaStr = eq.Chroma.ToString(ft);
                     eq.AddTime = reader.GetDateTime(1);
                     eq.EquipmentID = eqid;
                     list.Add(eq);

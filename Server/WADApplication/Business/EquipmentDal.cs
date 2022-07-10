@@ -175,10 +175,37 @@ values (@Name,@Address,@GasType,@SensorNum,@UnitType,@Point,@Magnification,@Low,
             }
         }
 
+        private static int calcOrderNo(List<StructEquipment> _orderList, byte _address)
+        {
+            int oNo;
+            if (_orderList.Exists((oo) =>
+            {
+                return oo.Address == _address;
+            }))
+            {
+                StructEquipment oo = _orderList.Find((ol) =>
+                {
+                    return ol.Address == _address;
+                });
+                oo.OrderNo = oo.OrderNo + 1;
+                oNo = oo.OrderNo;
+            }
+            else
+            {
+                _orderList.Add(new StructEquipment()
+                {
+                    OrderNo = 1,
+                    Address = _address
+                });
+                oNo = 1;
+            }
+            return oNo;
+        }
+
         public static List<StructEquipment> GetAllListNotDelete()
         {
             List<StructEquipment> list = new List<StructEquipment>();
-            string sql = "select rowid,Name,Address,GasType,SensorNum,UnitType,Point,Magnification,Low,High,Max,IsGas,IsNew,AlertModel,Factor,AliasGasName,AliasUnitName,MN,CreateTime from tb_Equipment where IsDel=0";
+            string sql = "select rowid,Name,Address,GasType,SensorNum,UnitType,Point,Magnification,Low,High,Max,IsGas,IsNew,AlertModel,Factor,AliasGasName,AliasUnitName,MN,CreateTime from tb_Equipment";
             using (SQLiteConnection conn = new SQLiteConnection(connstr))
             {
                 conn.Open();
@@ -212,33 +239,19 @@ values (@Name,@Address,@GasType,@SensorNum,@UnitType,@Point,@Magnification,@Low,
 
                             eq.IsDel = false;
                             eq.CreateTime = reader.GetDateTime(18);
-                            if (orderList.Exists((oo) =>
+                            eq.OrderNo = calcOrderNo(orderList, eq.Address);
+
+                            if (!eq.IsDel)
                             {
-                                return oo.Address == eq.Address;
-                            }))
-                            {
-                                StructEquipment oo = orderList.Find((ol) =>
-                                {
-                                    return ol.Address == eq.Address;
-                                });
-                                oo.OrderNo = oo.OrderNo + 1;
-                                eq.OrderNo = oo.OrderNo;
+                                list.Add(eq);
                             }
-                            else
-                            {
-                                orderList.Add(new StructEquipment()
-                                {
-                                    OrderNo = 1,
-                                    Address = eq.Address
-                                });
-                                eq.OrderNo = 1;
-                            }
-                            list.Add(eq);
 
                         }
                     }
                 }
             }
+            // 排序
+            list = list.OrderBy((ee) => ee.Address).ThenBy((tt) => tt.OrderNo).ToList();
             return list;
         }
 
@@ -281,32 +294,16 @@ values (@Name,@Address,@GasType,@SensorNum,@UnitType,@Point,@Magnification,@Low,
                             eq.AliasUnitName = reader.GetString(17);
                             eq.MN = reader.GetString(18);
                             eq.CreateTime = reader.GetDateTime(19);
-                            if (orderList.Exists((oo) =>
-                            {
-                                return oo.Address == eq.Address;
-                            }))
-                            {
-                                StructEquipment oo = orderList.Find((ol) =>
-                                {
-                                    return ol.Address == eq.Address;
-                                });
-                                eq.OrderNo = oo.OrderNo + 1;
-                            }
-                            else
-                            {
-                                orderList.Add(new StructEquipment()
-                                {
-                                    OrderNo = 1,
-                                    Address = eq.Address
-                                });
-                                eq.OrderNo = 1;
 
-                            }
+                            eq.OrderNo = calcOrderNo(orderList, eq.Address);
+
                             list.Add(eq);
                         }
                     }
                 }
             }
+
+            list = list.OrderBy((ee) => ee.Address).ThenBy((tt) => tt.OrderNo).ToList();
             return list;
         }
 

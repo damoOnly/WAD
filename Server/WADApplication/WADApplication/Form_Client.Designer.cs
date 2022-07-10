@@ -28,19 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
-            this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
-            this.textEdit2 = new DevExpress.XtraEditors.TextEdit();
-            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
-            this.textEdit3 = new DevExpress.XtraEditors.TextEdit();
-            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
-            this.listBoxControl1 = new DevExpress.XtraEditors.ListBoxControl();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit3.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.listBoxControl1)).BeginInit();
+            this.simpleButton1 = new System.Windows.Forms.Button();
+            this.textEdit1 = new System.Windows.Forms.TextBox();
+            this.labelControl1 = new System.Windows.Forms.Label();
+            this.labelControl2 = new System.Windows.Forms.Label();
+            this.textEdit2 = new System.Windows.Forms.TextBox();
+            this.labelControl3 = new System.Windows.Forms.Label();
+            this.textEdit3 = new System.Windows.Forms.TextBox();
+            this.simpleButton2 = new System.Windows.Forms.Button();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // simpleButton1
@@ -92,11 +88,11 @@
             // 
             // textEdit3
             // 
-            this.textEdit3.EditValue = "100";
             this.textEdit3.Location = new System.Drawing.Point(582, 9);
             this.textEdit3.Name = "textEdit3";
             this.textEdit3.Size = new System.Drawing.Size(80, 20);
             this.textEdit3.TabIndex = 6;
+            this.textEdit3.Text = "100";
             // 
             // simpleButton2
             // 
@@ -106,19 +102,20 @@
             this.simpleButton2.TabIndex = 7;
             this.simpleButton2.Text = "应用";
             // 
-            // listBoxControl1
+            // listBox1
             // 
-            this.listBoxControl1.Location = new System.Drawing.Point(176, 54);
-            this.listBoxControl1.Name = "listBoxControl1";
-            this.listBoxControl1.Size = new System.Drawing.Size(416, 443);
-            this.listBoxControl1.TabIndex = 8;
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(227, 57);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(426, 446);
+            this.listBox1.TabIndex = 9;
             // 
             // Form_Client
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(888, 526);
-            this.Controls.Add(this.listBoxControl1);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.simpleButton2);
             this.Controls.Add(this.textEdit3);
             this.Controls.Add(this.labelControl3);
@@ -133,10 +130,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "客户端";
             this.Load += new System.EventHandler(this.Form_Client_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit3.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.listBoxControl1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -144,14 +137,14 @@
 
         #endregion
 
-        private DevExpress.XtraEditors.SimpleButton simpleButton1;
-        private DevExpress.XtraEditors.TextEdit textEdit1;
-        private DevExpress.XtraEditors.LabelControl labelControl1;
-        private DevExpress.XtraEditors.LabelControl labelControl2;
-        private DevExpress.XtraEditors.TextEdit textEdit2;
-        private DevExpress.XtraEditors.LabelControl labelControl3;
-        private DevExpress.XtraEditors.TextEdit textEdit3;
-        private DevExpress.XtraEditors.SimpleButton simpleButton2;
-        private DevExpress.XtraEditors.ListBoxControl listBoxControl1;
+        private System.Windows.Forms.Button simpleButton1;
+        private System.Windows.Forms.TextBox textEdit1;
+        private System.Windows.Forms.Label labelControl1;
+        private System.Windows.Forms.Label labelControl2;
+        private System.Windows.Forms.TextBox textEdit2;
+        private System.Windows.Forms.Label labelControl3;
+        private System.Windows.Forms.TextBox textEdit3;
+        private System.Windows.Forms.Button simpleButton2;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }

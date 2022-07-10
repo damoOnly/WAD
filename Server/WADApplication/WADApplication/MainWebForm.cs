@@ -6,32 +6,25 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Linq;
-using DevExpress.XtraBars;
 using CommandManager;
-using DevExpress.XtraEditors;
 using System.Threading;
 using Business;
 using Entity;
 using WADApplication.Properties;
 using System.Diagnostics;
 using System.Configuration;
-using DevExpress.XtraCharts;
-using DevExpress.Utils;
 using System.Speech;
 using System.Speech.Synthesis;
 using System.Media;
 using WADApplication;
-using DevExpress.UserSkins;
 
 using System.IO;
 
 
 using System.Net;
 using System.Net.Sockets;
-using DevExpress.XtraEditors.Repository;
 using WADApplication.Process;
 using GlobalMemory;
-using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using CefSharp;
 using CefSharp.WinForms;
 using CefSharp.SchemeHandler;
