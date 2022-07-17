@@ -46,44 +46,44 @@
             // 
             // textEdit3
             // 
-            this.textEdit3.Location = new System.Drawing.Point(400, 13);
+            this.textEdit3.Location = new System.Drawing.Point(400, 9);
             this.textEdit3.Name = "textEdit3";
-            this.textEdit3.Size = new System.Drawing.Size(100, 21);
+            this.textEdit3.Size = new System.Drawing.Size(100, 20);
             this.textEdit3.TabIndex = 4;
             this.textEdit3.TextChanged += new System.EventHandler(this.textEdit3_TextChanged);
             // 
             // labelControl3
             // 
-            this.labelControl3.Location = new System.Drawing.Point(310, 16);
+            this.labelControl3.Location = new System.Drawing.Point(310, 12);
             this.labelControl3.Name = "labelControl3";
-            this.labelControl3.Size = new System.Drawing.Size(84, 13);
+            this.labelControl3.Size = new System.Drawing.Size(84, 20);
             this.labelControl3.TabIndex = 3;
             this.labelControl3.Text = "本次上传数量：";
             this.labelControl3.Click += new System.EventHandler(this.labelControl3_Click);
             // 
             // simpleButton1
             // 
-            this.simpleButton1.Location = new System.Drawing.Point(568, 11);
+            this.simpleButton1.Location = new System.Drawing.Point(568, 3);
             this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(63, 23);
+            this.simpleButton1.Size = new System.Drawing.Size(74, 31);
             this.simpleButton1.TabIndex = 0;
             this.simpleButton1.Text = "开始上传";
             this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
             // textEdit1
             // 
-            this.textEdit1.Location = new System.Drawing.Point(147, 13);
+            this.textEdit1.Location = new System.Drawing.Point(159, 9);
             this.textEdit1.Name = "textEdit1";
             this.textEdit1.ReadOnly = true;
-            this.textEdit1.Size = new System.Drawing.Size(100, 21);
+            this.textEdit1.Size = new System.Drawing.Size(100, 20);
             this.textEdit1.TabIndex = 2;
             this.textEdit1.TextChanged += new System.EventHandler(this.textEdit1_TextChanged);
             // 
             // labelControl1
             // 
-            this.labelControl1.Location = new System.Drawing.Point(69, 16);
+            this.labelControl1.Location = new System.Drawing.Point(69, 11);
             this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(72, 13);
+            this.labelControl1.Size = new System.Drawing.Size(84, 26);
             this.labelControl1.TabIndex = 1;
             this.labelControl1.Text = "可上传总数：";
             this.labelControl1.Click += new System.EventHandler(this.labelControl1_Click);

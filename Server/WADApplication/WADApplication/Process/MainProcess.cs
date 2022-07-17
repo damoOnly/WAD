@@ -135,6 +135,11 @@ namespace WADApplication.Process
 
             // 这里只是把数据放在内存中，然后30秒存一次
             EquipmentReportData dd = dataList.FirstOrDefault((dl) => eq.ID == dl.ID);
+            if (dd == null)
+            {
+                dd = new EquipmentReportData() { ID=eq.ID};
+                dataList.Add(dd);
+            }
             if (dd != null)
             {
                 dd.DataList.Add(ed);

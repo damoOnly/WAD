@@ -61,7 +61,8 @@ namespace Business
             var dis = originList.Except(result, new EquipmentEquality());
             foreach (var item in dis)
             {
-                EquipmentDal.DeleteOne(item); // to do delete eq data fold
+                EquipmentDal.DeleteOne(item);
+                EquipmentDataBusiness.DeleteById(item.ID);
             }
             return result;
         }

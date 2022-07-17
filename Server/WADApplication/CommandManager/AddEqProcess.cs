@@ -61,6 +61,10 @@ namespace CommandManager
                 List<StructEquipment> gasList = readNewGas(address, gasCount, name, mn);
                 List<StructEquipment> weatherList = readNewWeather(address, weatherCount, name, mn);
                 gasList.AddRange(weatherList);
+                if (gasList.Count <= 0)
+                {
+                    throw new CommandException(address + "readNew error");                    
+                }
                 return gasList;
             }
             catch (CommandException ex)

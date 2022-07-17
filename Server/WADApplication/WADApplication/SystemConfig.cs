@@ -72,22 +72,23 @@ namespace WADApplication
             if (int.TryParse(textEdit2.Text.ToString(), out commandDelay))
             {
                 CommonMemory.SysConfig.CommandDelay = commandDelay;
-                AppConfigProcess.Save();
             }
 
             int commandOutTime;
             if (int.TryParse(textEdit3.Text.ToString(), out commandOutTime))
             {
                 CommonMemory.SysConfig.CommandOutTime = commandOutTime;
-                AppConfigProcess.Save();
             }
 
             int hz;
             if (int.TryParse(textEdit1.Text.ToString(), out hz))
             {
                 CommonMemory.SysConfig.HzNum = hz;
-                AppConfigProcess.Save();
             }
+            AppConfigProcess.Save();
+
+            MainProcess.chromeBrower.GetBrowser().MainFrame.ExecuteJavaScriptAsync(string.Format(@"window.showError('{0}');", "设置成功"));
+
         }
 
         private void simpleButton4_Click(object sender, EventArgs e)

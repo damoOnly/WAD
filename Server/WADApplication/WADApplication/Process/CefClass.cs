@@ -145,6 +145,7 @@ namespace WADApplication.Process
                 for (int i = 0; i < ids.Length; i++)
                 {
                     EquipmentDal.DeleteOneById(ids[i]);
+                    EquipmentDataBusiness.DeleteById(ids[i]);
                 }
                 return getList();
             }
@@ -171,6 +172,11 @@ namespace WADApplication.Process
                 else
                 {
                     list = ReadEqProcess.readOld((byte)address, name);
+                }
+
+                if (list.Count <= 0)
+                {
+                    throw new CommandException(address + "readNew error");
                 }
 
                 EquipmentBusiness.AddOrUpdateOrDeleteList(list);
@@ -870,11 +876,18 @@ namespace WADApplication.Process
                 byte address = byte.Parse(cm.Groups[1].Value);
                 byte senn = byte.Parse(cm.Groups[3].Value);
                 Equipment eq = CommonMemory.mainList.Find(ii => ii.Address == address && ii.SensorNum == senn);
-                // 其实这里不需要传设备进去
-                InputDataDal idd = new InputDataDal(fileName, eq);
-                StructEquipment eqq = idd.GetEq();
-                Equipment eqqa = Utility.ConvertToEq(eqq);
-                list = idd.GetList();
+                string filePath = string.Format(@"{0}waddb\inputData\{1}.db3", AppDomain.CurrentDomain.BaseDirectory, fileName);
+
+                if (File.Exists(filePath))
+                {
+                    // 其实这里不需要传设备进去
+                    InputDataDal idd = new InputDataDal(fileName, eq);
+
+                    StructEquipment eqq = idd.GetEq();
+                    Equipment eqqa = Utility.ConvertToEq(eqq);
+                    list = idd.GetList();
+                }
+                
                 inputOnelist = list;
             }
             catch (Exception ex)

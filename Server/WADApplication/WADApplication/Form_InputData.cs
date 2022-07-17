@@ -149,7 +149,7 @@ namespace WADApplication
 
             lock (lockObject)
             {
-                for (int i = 0; i < tempList.Count - 1;)
+                for (int i = 0; i < tempList.Count - 1; )
                 {
                     oneTemp.Add(tempList[i]);
                     //遇到结束帧生成一个完整的包
@@ -167,7 +167,7 @@ namespace WADApplication
                 if (lastIndex < tempList.Count && tempList.Count > 0)
                 {
                     //Trace.WriteLine("more");
-                   tempList =  tempList.GetRange(lastIndex + 1, tempList.Count - lastIndex -1);
+                    tempList = tempList.GetRange(lastIndex + 1, tempList.Count - lastIndex - 1);
                 }
             }
             //Trace.WriteLine("item: " + oneList.Count);
@@ -186,27 +186,32 @@ namespace WADApplication
                 else if (item.Count == 12 && item[0] == 0xcc && item[1] == 0xcc && item[10] == 0xdd && item[11] == 0xdd) // 结束桢
                 {
                     serialPort1.Close();
-                    this.Invoke(new Action(() => {
+                    this.Invoke(new Action(() =>
+                    {
                         simpleButton1.Enabled = true;
                     }));
                     this.Invoke(new Action<string>(addText), "上传完成----------------------------------------------------");
-                    string fileName = string.Format("{0}-{1}-{2}-{3}-{4}", eq.Address, eq.Name, eq.SensorNum, eq.GasName, DateTime.Now.ToString("yyyyMMdd-HHmmss"));
-                    InputDataDal dd = new InputDataDal(fileName, eq);
-                    dd.AddList(list);
+                    InputDataDal dd = new InputDataDal(this.filename, eq);
+                    LogLib.Log.GetLogger("aa").Error("dd");
+                    Trace.WriteLine("AddList");
+                    if (list != null && list.Count > 0)
+                    {
+                        dd.AddList(list);
+                    }
                     port.Open(CommonMemory.SysConfig.PortName, CommonMemory.SysConfig.PortRate);
-                    this.Close();
+                    //this.Close();
                 }
                 else if (item.Count > 19)
                 {
-                    List<byte> other = item.GetRange(item.Count - 19 , 19);
+                    List<byte> other = item.GetRange(item.Count - 19, 19);
                     if (other[0] == 0xaa && other[1] == 0xaa && other[17] == 0xbb && other[18] == 0xbb)
                     {
                         EquipmentData ed = new EquipmentData();
-                    ed.AddTime = Parse.GetDateTime(item.ToArray(), 4);
-                    ed.Chroma = (float)Math.Round(Parse.GetFloatValue(item.ToArray(), 10), eq.Point);
-                    ed.EquipmentID = eq.ID;
-                    ed.UnitType = item[14];
-                    list.Add(ed);
+                        ed.AddTime = Parse.GetDateTime(item.ToArray(), 4);
+                        ed.Chroma = (float)Math.Round(Parse.GetFloatValue(item.ToArray(), 10), eq.Point);
+                        ed.EquipmentID = eq.ID;
+                        ed.UnitType = item[14];
+                        list.Add(ed);
                     }
                 }
                 else

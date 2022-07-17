@@ -64,8 +64,8 @@ namespace WADApplication
         const int HTCAPTION = 2;
         protected override void WndProc(ref Message m)
         {
-            if (m.Msg == WM_NCLBUTTONDOWN && m.WParam.ToInt32() == HTCAPTION)
-                return;
+            //if (m.Msg == WM_NCLBUTTONDOWN && m.WParam.ToInt32() == HTCAPTION)
+            //    return;
 
             if (m.Msg == LibMessageHelper.MessageHelper.WM_COPYDATA)
             {
@@ -147,7 +147,7 @@ namespace WADApplication
         {
             InitializeForm();
             //this.WindowState = FormWindowState.Maximized;
-            this.MaximizeBox = false;
+            //this.MaximizeBox = false;
         }
 
         private void MainWebForm_FormClosing(object sender, FormClosingEventArgs e)

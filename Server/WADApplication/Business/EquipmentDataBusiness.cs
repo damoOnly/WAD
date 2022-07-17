@@ -190,7 +190,7 @@ namespace Business
             return list;
         }
 
-        // 删除数据是不可恢复的，并且删除之后会重新创建一个文件
+        // 用于按时间删除历史数据， 删除数据是不可恢复的，并且删除之后会重新创建一个文件
         public static void DeleteDb(DateTime dt, int eqid)
         {
             // sqlite 连接之后不能立马释放进程，需要手动执行垃圾回收
@@ -241,13 +241,13 @@ namespace Business
             }
         }
 
+        // 用于删除设备
         public static void DeleteById(int eqid)
         {
             GC.Collect();
             GC.WaitForPendingFinalizers();
             string dbPath = string.Format(dbPathTemp, eqid);
             Directory.Delete(dbPath, true);
-            CreateDb(eqid);
         }
 
     }
