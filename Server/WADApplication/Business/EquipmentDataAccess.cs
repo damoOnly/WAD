@@ -22,39 +22,47 @@ namespace Business
                                                            Chroma REAL NOT NULL,
                                                            AddTime INTEGER NOT NULL
                 )");
-            SQLiteCommand command = new SQLiteCommand(sql, conn);
-            command.ExecuteNonQuery();
+            using (SQLiteCommand command = new SQLiteCommand(sql, conn))
+            {
+                command.ExecuteNonQuery();
+                
+            }
         }
 
         public static bool IsTableExist(SQLiteConnection conn)
         {
             string sql = string.Format(@"SELECT COUNT(*) FROM sqlite_master where type='table' and name='tb_EquipmentData'");
-            SQLiteCommand command = new SQLiteCommand(sql, conn);
-            return Convert.ToInt32(command.ExecuteScalar()) > 0;
+            using (SQLiteCommand command = new SQLiteCommand(sql, conn))
+            {
+                return Convert.ToInt32(command.ExecuteScalar()) > 0;
+            }
         }
 
         public static bool Add(EquipmentData ed, SQLiteConnection conn)
         {
             string sql = string.Format("insert into tb_EquipmentData (Chroma,AddTime) values (@chroma, @addTime)");
+            using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@chroma", ed.Chroma);
+                cmd.Parameters.AddWithValue("@addTime", ed.AddTime);
 
-
-            SQLiteCommand cmd = new SQLiteCommand(sql, conn);
-            cmd.Parameters.AddWithValue("@chroma", ed.Chroma);
-            cmd.Parameters.AddWithValue("@addTime", ed.AddTime);
-
-            return cmd.ExecuteNonQuery() == 1;
+                return cmd.ExecuteNonQuery() == 1;
+            }
+            
         }
 
         public static bool Add(EquipmentData ed, SQLiteConnection conn, SQLiteTransaction trans)
         {
             string sql = string.Format("insert into tb_EquipmentData (Chroma,AddTime) values (@chroma, @addTime)");
 
+            using (SQLiteCommand cmd = new SQLiteCommand(sql, conn, trans))
+            {
+                cmd.Parameters.AddWithValue("@chroma", ed.Chroma);
+                cmd.Parameters.AddWithValue("@addTime", ed.AddTime);
 
-            SQLiteCommand cmd = new SQLiteCommand(sql, conn, trans);
-            cmd.Parameters.AddWithValue("@chroma", ed.Chroma);
-            cmd.Parameters.AddWithValue("@addTime", ed.AddTime);
-
-            return cmd.ExecuteNonQuery() == 1;
+                return cmd.ExecuteNonQuery() == 1;
+            }
+            
         }
         
         public static List<EquipmentData> GetListByTime(SQLiteConnection conn, DateTime dt1, DateTime dt2, int eqid, byte point)
@@ -62,46 +70,49 @@ namespace Business
             string sql = string.Format("select a.Chroma, a.AddTime from tb_EquipmentData a where AddTime >= @dt1 and AddTime <= @dt2");
 
             List<EquipmentData> list = new List<EquipmentData>();
-            SQLiteCommand cmd = new SQLiteCommand(sql, conn);
-            cmd.Parameters.AddWithValue("@dt1", dt1);
-            cmd.Parameters.AddWithValue("@dt2", dt2);
-
-
-
-            string ft = "";
-            switch (point)
+            using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
             {
-                case 1:
-                    ft = "0.0";
-                    break;
-                case 2:
-                    ft = "0.00";
-                    break;
-                case 3:
-                    ft = "0.000";
-                    break;
-                case 4:
-                    ft = "0.0000";
-                    break;
-                case 5:
-                    ft = "0.00000";
-                    break;
-            }
+                cmd.Parameters.AddWithValue("@dt1", dt1);
+                cmd.Parameters.AddWithValue("@dt2", dt2);
 
-            using (SQLiteDataReader reader = cmd.ExecuteReader())
-            {
-                while (reader.Read())
+
+
+                string ft = "";
+                switch (point)
                 {
-                    EquipmentData eq = new EquipmentData();
-                    eq.Chroma = Convert.ToSingle(Math.Round(reader.GetFloat(0), point));
-                    eq.ChromaStr = eq.Chroma.ToString(ft);
-                    eq.AddTime = reader.GetDateTime(1);
-                    eq.EquipmentID = eqid;
-                    list.Add(eq);
+                    case 1:
+                        ft = "0.0";
+                        break;
+                    case 2:
+                        ft = "0.00";
+                        break;
+                    case 3:
+                        ft = "0.000";
+                        break;
+                    case 4:
+                        ft = "0.0000";
+                        break;
+                    case 5:
+                        ft = "0.00000";
+                        break;
                 }
-            }
 
-            return list;
+                using (SQLiteDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        EquipmentData eq = new EquipmentData();
+                        eq.Chroma = Convert.ToSingle(Math.Round(reader.GetFloat(0), point));
+                        eq.ChromaStr = eq.Chroma.ToString(ft);
+                        eq.AddTime = reader.GetDateTime(1);
+                        eq.EquipmentID = eqid;
+                        list.Add(eq);
+                    }
+                }
+
+                return list;
+            }
+            
         }
 
         public static List<EquipmentData> GetListByFile(SQLiteConnection conn)
@@ -109,18 +120,23 @@ namespace Business
             string sql = string.Format("select a.Chroma, a.AddTime from tb_EquipmentData a");
 
             List<EquipmentData> list = new List<EquipmentData>();
-            SQLiteCommand cmd = new SQLiteCommand(sql, conn);
-
-            using (SQLiteDataReader reader = cmd.ExecuteReader())
+            using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
             {
-                while (reader.Read())
+                using (SQLiteDataReader reader = cmd.ExecuteReader())
                 {
-                    EquipmentData eq = new EquipmentData();
-                    eq.Chroma = reader.GetFloat(0);
-                    eq.AddTime = reader.GetDateTime(1);
-                    list.Add(eq);
+                    while (reader.Read())
+                    {
+                        EquipmentData eq = new EquipmentData();
+                        eq.Chroma = reader.GetFloat(0);
+                        eq.AddTime = reader.GetDateTime(1);
+                        list.Add(eq);
+                    }
+                    //reader.Close();
                 }
+                //cmd.Dispose();
             }
+
+            
 
             return list;
         }
@@ -128,10 +144,13 @@ namespace Business
         public static void DeleteTableRow(SQLiteConnection conn, DateTime dt1, DateTime dt2)
         {
             string sql = "delete from tb_EquipmentData where AddTime >= @dt1 and AddTime <= @dt2";
-            SQLiteCommand cmd = new SQLiteCommand(sql, conn);
-            cmd.Parameters.AddWithValue("@dt1", dt1);
-            cmd.Parameters.AddWithValue("@dt2", dt2);
-            cmd.ExecuteNonQuery();
+            using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@dt1", dt1);
+                cmd.Parameters.AddWithValue("@dt2", dt2);
+                cmd.ExecuteNonQuery();
+            }
+            
         }
     }
 }

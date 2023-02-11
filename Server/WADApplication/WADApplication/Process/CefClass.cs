@@ -53,6 +53,12 @@ namespace WADApplication.Process
     public class BoundObject
     {
         LogLib.Log log = LogLib.Log.GetLogger("BoundObject");
+        private MainWebForm form = null;
+
+        public BoundObject(MainWebForm _form)
+        {
+            this.form = _form;
+        }
 
         public void OnFrameLoadEnd(object sender, FrameLoadEndEventArgs e)
         {
@@ -180,6 +186,7 @@ namespace WADApplication.Process
                 }
 
                 EquipmentBusiness.AddOrUpdateOrDeleteList(list);
+                ShowSuccess(string.Format("设备{0}添加成功", address));
                 return getList();
             }
             catch (CommandException ex)
@@ -263,6 +270,7 @@ namespace WADApplication.Process
                 {
                     EquipmentBusiness.UpdateNameOrAliasGasName(modifylist);
                 }
+                ShowSuccess("修改成功");
             }
             catch (Exception)
             {
@@ -435,6 +443,10 @@ namespace WADApplication.Process
                     }
                 }
                 alertExportData = data;
+                if (data.Count <= 0)
+                {
+                    ShowError("无报警记录");
+                }
                 string str = JsonConvert.SerializeObject(data);
                 return str;
             }
@@ -606,6 +618,7 @@ namespace WADApplication.Process
                     rd.UnitName = one.UnitName;
                     byte point = one.Point;
                     rd.DataList = EquipmentDataBusiness.GetList(start, end, c, point);
+                    rd.Point = one.Point;
                     reportData.Add(rd);
 
                     data.AddRange(rd.DataList);
@@ -615,7 +628,7 @@ namespace WADApplication.Process
                 foreach (var item in gridTable)
                 {
                     List<string> row = new List<string>();
-                    row.Add(item.Key.ToString("yyy-MM-dd HH:mm:ss")); // 第一列为时间
+                    row.Add(item.Key.ToString("yyyy-MM-dd HH:mm:ss")); // 第一列为时间
 
                     DataRow dr = dataTable.NewRow();
                     dr[0] = item.Key; // 第一列为时间
@@ -635,6 +648,10 @@ namespace WADApplication.Process
 
                 reportTable = dataTable;
                 historyData.list = result;
+                if (result.Count <= 0)
+                {
+                    ShowError("无数据");
+                }
                 string str = JsonConvert.SerializeObject(historyData);
                 return str;
 
@@ -675,7 +692,7 @@ namespace WADApplication.Process
         {
             Thread thread = new Thread(new ThreadStart(() =>
             {
-                historyExportThead(sensorName);
+                this.form.Invoke(new Action<string>(historyExportThead), sensorName);
             }));
             thread.SetApartmentState(ApartmentState.STA); //重点
             thread.Start();
@@ -693,7 +710,7 @@ namespace WADApplication.Process
                 mTempSaveDialog.Filter = "csv files (*csv)|*.csv";
                 mTempSaveDialog.RestoreDirectory = true;
                 mTempSaveDialog.FileName = filename;
-                if (DialogResult.OK == mTempSaveDialog.ShowDialog() && null != mTempSaveDialog.FileName.Trim())
+                if (DialogResult.OK == mTempSaveDialog.ShowDialog(this.form) && null != mTempSaveDialog.FileName.Trim())
                 {
                     string mTempSavePath = mTempSaveDialog.FileName;
                     ExcelHelper.ExportDataGridToCSV(reportTable, mTempSavePath);
@@ -740,6 +757,11 @@ namespace WADApplication.Process
             MainProcess.chromeBrower.GetBrowser().MainFrame.ExecuteJavaScriptAsync(string.Format(@"window.showError('{0}');", msg));
         }
 
+        public void ShowSuccess(string msg)
+        {
+            MainProcess.chromeBrower.GetBrowser().MainFrame.ExecuteJavaScriptAsync(string.Format(@"window.showSuccess('{0}');", msg));
+        }
+
         public void resetMainList()
         {
             CommonMemory.mainList.ForEach((m) =>
@@ -749,7 +771,7 @@ namespace WADApplication.Process
                 m.AlertObject = null;
             });
             string str = JsonConvert.SerializeObject(CommonMemory.mainList);
-            MainProcess.chromeBrower.GetBrowser().MainFrame.ExecuteJavaScriptAsync(string.Format(@"window.setMainList('{0}');", str));
+            MainProcess.chromeBrower.GetBrowser().MainFrame.ExecuteJavaScriptAsync(string.Format(@"window.setMainList({0});", str));
         }
 
         public void onSystemConfigClick()
@@ -778,6 +800,13 @@ namespace WADApplication.Process
             DateTime end = DateTime.Parse(dt2);
             // 新勾选的曲线需要查出历史数据，补充前面时间的空白
             List<EquipmentData> datalist = EquipmentDataBusiness.GetList(start, end, id, 2);
+            EquipmentReportData memoItem = MainProcess.dataList.FirstOrDefault((ff) => { return ff.ID == id; });
+            if (memoItem != null && memoItem.DataList != null)
+            {
+                datalist.AddRange(memoItem.DataList);
+            }
+
+
             datalist = MainProcess.cutListDate(datalist);
 
             string str = JsonConvert.SerializeObject(datalist);
@@ -809,7 +838,7 @@ namespace WADApplication.Process
             openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             // 目前只支持csv
             openFileDialog.Filter = "csv files (*csv)|*.csv";
-            DialogResult dre = openFileDialog.ShowDialog();
+            DialogResult dre = openFileDialog.ShowDialog(this.form);
             string FileName = openFileDialog.FileName;
 
             if (dre != DialogResult.OK || FileName.ToLower().IndexOf(".csv") < 0)
@@ -821,8 +850,8 @@ namespace WADApplication.Process
             {
                 DataTable dt = ExcelHelper.OpenCSV(FileName);
                 string nn = Path.GetFileNameWithoutExtension(openFileDialog.SafeFileName);
-                string fileName = string.Format("{0}-{1}", nn, DateTime.Now.ToString("yyyyMMddHHmmss"));
-                Match cm = Regex.Match(sensorName, @"(\d+)-(\w+)-(\d+)");
+                Match cm = Regex.Match(nn, @"(\d+)-(\w+)-(\d+)-(\w+)-");
+                string fileName = string.Format("{0}-{1}-{2}-{3}-{4}-{5}", cm.Groups[1].Value, cm.Groups[2].Value, cm.Groups[3].Value, cm.Groups[4].Value, DateTime.Now.ToString("yyyyMMdd"), DateTime.Now.ToString("HHmmss"));
                 byte address = byte.Parse(cm.Groups[1].Value);
                 byte senn = byte.Parse(cm.Groups[3].Value);
                 Equipment eq = CommonMemory.mainList.Find(ii => ii.Address == address && ii.SensorNum == senn);
@@ -858,7 +887,7 @@ namespace WADApplication.Process
             }
             Thread thread = new Thread(new ThreadStart(() =>
             {
-                inputFromFileMethod(sensorName);
+                this.form.Invoke(new Action<string>(inputFromFileMethod), sensorName);
             }));
             thread.SetApartmentState(ApartmentState.STA); //重点
             thread.Start();
@@ -887,7 +916,7 @@ namespace WADApplication.Process
                     Equipment eqqa = Utility.ConvertToEq(eqq);
                     list = idd.GetList();
                 }
-                
+
                 inputOnelist = list;
             }
             catch (Exception ex)
@@ -895,7 +924,7 @@ namespace WADApplication.Process
                 LogLib.Log.GetLogger(this).Warn(ex);
             }
             string str = JsonConvert.SerializeObject(list);
-            return str; 
+            return str;
         }
 
         public string searchInputData(string dt1, string dt2)
@@ -914,7 +943,7 @@ namespace WADApplication.Process
                     return JsonConvert.SerializeObject(list);
                 }
 
-                List<EquipmentData> slist = inputOnelist.Where((item) =>
+                list = inputOnelist.Where((item) =>
                 {
                     return item.AddTime >= start && item.AddTime <= end;
                 }).ToList();
@@ -925,14 +954,14 @@ namespace WADApplication.Process
             }
 
             string str = JsonConvert.SerializeObject(list);
-            return str; 
+            return str;
         }
 
-        public void exportInputData(string sensorName, string fileName)
+        public void exportInputDataMethod(string fileName)
         {
             try
             {
-                Match cm = Regex.Match(sensorName, @"(\d+)-(\w+)-(\d+)");
+                Match cm = Regex.Match(fileName, @"(\d+)-(\w+)-(\d+)-");
                 byte address = byte.Parse(cm.Groups[1].Value);
                 byte senn = byte.Parse(cm.Groups[3].Value);
                 Equipment eq = CommonMemory.mainList.Find(ii => ii.Address == address && ii.SensorNum == senn);
@@ -953,7 +982,7 @@ namespace WADApplication.Process
                 mTempSaveDialog.Filter = "csv files (*csv)|*.csv";
                 mTempSaveDialog.RestoreDirectory = true;
                 mTempSaveDialog.FileName = fileName;
-                if (DialogResult.OK == mTempSaveDialog.ShowDialog() && null != mTempSaveDialog.FileName.Trim())
+                if (DialogResult.OK == mTempSaveDialog.ShowDialog(this.form) && null != mTempSaveDialog.FileName.Trim())
                 {
                     string mTempSavePath = mTempSaveDialog.FileName;
                     ExcelHelper.ExportDataGridToCSV(dataTable, mTempSavePath);
@@ -965,18 +994,35 @@ namespace WADApplication.Process
             }
         }
 
+        public void exportInputData(string fileName)
+        {
+            if ( fileName == string.Empty)
+            {
+                return;
+            }
+            Thread thread = new Thread(new ThreadStart(() =>
+            {
+                this.form.Invoke(new Action< string>(exportInputDataMethod), fileName);
+            }));
+            thread.SetApartmentState(ApartmentState.STA); //重点
+            thread.Start();
+            thread.Join();
+        }
+
+
         public string inputFromSensor(string sensorName)
         {
             try
             {
                 Match cm = Regex.Match(sensorName, @"(\d+)-(\w+)-(\d+)");
-            byte address = byte.Parse(cm.Groups[1].Value);
-            byte senn = byte.Parse(cm.Groups[3].Value);
-            Equipment eq = CommonMemory.mainList.Find(ii => ii.Address == address && ii.SensorNum == senn);
-            string fileName = string.Format("{0}-{1}-{2}-{3}-{4}", eq.Address, eq.Name, eq.SensorNum, eq.GasName, DateTime.Now.ToString("yyyyMMdd-HHmmss"));
-            Form_InputData form = new Form_InputData(eq, fileName);
-            form.ShowDialog();
-            return fileName;
+                byte address = byte.Parse(cm.Groups[1].Value);
+                byte senn = byte.Parse(cm.Groups[3].Value);
+                Equipment eq = CommonMemory.mainList.Find(ii => ii.Address == address && ii.SensorNum == senn);
+                string fileName = string.Format("{0}-{1}-{2}-{3}-{4}", eq.Address, eq.Name, eq.SensorNum, eq.GasName, DateTime.Now.ToString("yyyyMMdd-HHmmss"));
+                Form_InputData form = new Form_InputData(eq, fileName);
+                DialogResult result = form.ShowDialog();
+                
+                return result == DialogResult.OK ? fileName: string.Empty;
             }
             catch (Exception ex)
             {

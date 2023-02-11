@@ -59,6 +59,7 @@ namespace WADApplication
                 }
                 mainThread = new Thread(new ThreadStart(readData));
                 mainThread.Start();
+                timer1.Start();
             }
             catch (Exception ex)
             {
@@ -125,9 +126,11 @@ namespace WADApplication
             {
                 tempList.AddRange(data);
             }
-            //string str = "R  " + PLAASerialPort.byteToHexStr(data);
-            //Trace.WriteLine(str);
-            //this.Invoke(new Action<string>(addText), "上传完成----------------------------------------------------");
+            string str = "R  " + PLAASerialPort.byteToHexStr(data);
+            Trace.WriteLine(str);
+            if (checkBox1.Checked) {
+                this.Invoke(new Action<string>(addText), str);
+            }
         }
 
 
@@ -153,7 +156,9 @@ namespace WADApplication
                 {
                     oneTemp.Add(tempList[i]);
                     //遇到结束帧生成一个完整的包
-                    if ((tempList[i] == 0xbb && tempList[i + 1] == 0xbb) || (tempList[i] == 0xdd && tempList[i + 1] == 0xdd))
+                    bool isDataSuccess = tempList[i] == 0xbb && tempList[i + 1] == 0xbb && oneTemp.Count == 18;
+                    bool isEndData = tempList[i] == 0xdd && tempList[i + 1] == 0xdd && oneTemp.Count == 11;
+                    if (isDataSuccess || isEndData)
                     {
                         oneTemp.Add(tempList[i + 1]);
                         oneList.Add(oneTemp);
@@ -189,17 +194,22 @@ namespace WADApplication
                     this.Invoke(new Action(() =>
                     {
                         simpleButton1.Enabled = true;
+                        timer1.Stop();
                     }));
                     this.Invoke(new Action<string>(addText), "上传完成----------------------------------------------------");
                     InputDataDal dd = new InputDataDal(this.filename, eq);
-                    LogLib.Log.GetLogger("aa").Error("dd");
                     Trace.WriteLine("AddList");
                     if (list != null && list.Count > 0)
                     {
                         dd.AddList(list);
                     }
                     port.Open(CommonMemory.SysConfig.PortName, CommonMemory.SysConfig.PortRate);
-                    //this.Close();
+                   
+                    this.Invoke(new Action(() =>
+                    {
+                        this.DialogResult = System.Windows.Forms.DialogResult.OK;
+                        //this.Close();
+                    }));
                 }
                 else if (item.Count > 19)
                 {
@@ -315,7 +325,7 @@ namespace WADApplication
                         }));
                         this.Invoke(new Action<string>(addText), "上传异常----------------------------------------------------");
                         port.Open(CommonMemory.SysConfig.PortName, CommonMemory.SysConfig.PortRate);
-                        this.Close();
+                        //this.Close();
                     }
                     catch (Exception ex)
                     {
@@ -348,6 +358,11 @@ namespace WADApplication
         private void textEdit3_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            
         }
 
     }

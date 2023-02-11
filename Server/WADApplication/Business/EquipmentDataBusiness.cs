@@ -36,11 +36,12 @@ namespace Business
                 {
                     string ds = Utility.CutOffMillisecond(DateTime.Now).AddMonths(i).ToString("yyyyMM");
                     string fileName = string.Format(fileNameTemp, ds);
+                    string connStr = GetConnStr(equipmentId, Utility.CutOffMillisecond(DateTime.Now).AddMonths(i));
+
 
                     if (!File.Exists(dbPath + fileName))
                     {
                         EquipmentDataAccess.CreateDb(dbPath + fileName);
-                        string connStr = GetConnStr(equipmentId, Utility.CutOffMillisecond(DateTime.Now).AddMonths(i));
                         using (SQLiteConnection conn = new SQLiteConnection(connStr))
                         {
                             conn.Open();
@@ -49,8 +50,6 @@ namespace Business
                     }
                     else
                     {
-
-                        string connStr = GetConnStr(equipmentId, Utility.CutOffMillisecond(DateTime.Now).AddMonths(i));
                         using (SQLiteConnection conn = new SQLiteConnection(connStr))
                         {
                             conn.Open();
@@ -61,9 +60,10 @@ namespace Business
 
                         }
                     }
+                    CommonMemory.DbList.Add(string.Format("{0}-{1}", equipmentId, ds));
+
                 }
 
-                CommonMemory.DbList.Add(equipmentId);
             }
             catch (Exception e)
             {
@@ -126,7 +126,9 @@ namespace Business
         }
         public static void Add(EquipmentData data)
         {
-            if (!CommonMemory.DbList.Contains(data.EquipmentID))
+
+            string ds = DateTime.Now.ToString("yyyyMM");
+            if (!CommonMemory.DbList.Contains(string.Format("{0}-{1}", data.EquipmentID, ds)))
                 return;
             string connStr = GetConnStr(data.EquipmentID, data.AddTime);
             using (SQLiteConnection conn = new SQLiteConnection(connStr))
@@ -149,8 +151,15 @@ namespace Business
             {
                 return;
             }
-            if (!CommonMemory.DbList.Contains(eqId))
-                return;
+
+            string ds = DateTime.Now.ToString("yyyyMM");
+            string aa = string.Format("{0}-{1}", eqId, ds);
+            if (!CommonMemory.DbList.Contains(aa))
+            {
+                EquipmentDal.CreateDb();
+
+            }
+
 
             string connStr = GetConnStr(eqId, date);
             using (SQLiteConnection conn = new SQLiteConnection(connStr))

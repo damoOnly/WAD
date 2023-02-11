@@ -465,6 +465,48 @@
       <Value>8</Value>
     </DictionaryFieldValue>
   </GasUnit>
+  <GasUnitNew>
+    <DictionaryFieldValue>
+      <Key>ppm</Key>
+      <Value>0</Value>
+    </DictionaryFieldValue>
+    <DictionaryFieldValue>
+      <Key>mg/m3</Key>
+      <Value>1</Value>
+    </DictionaryFieldValue>
+    <DictionaryFieldValue>
+      <Key>ppb</Key>
+      <Value>2</Value>
+    </DictionaryFieldValue>
+    <DictionaryFieldValue>
+      <Key>ug/m3</Key>
+      <Value>3</Value>
+    </DictionaryFieldValue>
+    <DictionaryFieldValue>
+      <Key>%Vol</Key>
+      <Value>4</Value>
+    </DictionaryFieldValue>
+    <DictionaryFieldValue>
+      <Key>g/m3</Key>
+      <Value>5</Value>
+    </DictionaryFieldValue>
+    <DictionaryFieldValue>
+      <Key>%LEL</Key>
+      <Value>6</Value>
+    </DictionaryFieldValue>
+    <DictionaryFieldValue>
+      <Key>空白</Key>
+      <Value>7</Value>
+    </DictionaryFieldValue>
+    <DictionaryFieldValue>
+      <Key>umol/mol</Key>
+      <Value>8</Value>
+    </DictionaryFieldValue>
+    <DictionaryFieldValue>
+      <Key>nmol/mol</Key>
+      <Value>9</Value>
+    </DictionaryFieldValue>
+  </GasUnitNew>
   <Point>
     <DictionaryFieldValue>
       <Key>整形</Key>
@@ -566,6 +608,10 @@
       <Key>噪音</Key>
       <Value>6</Value>
     </DictionaryFieldValue>
+    <DictionaryFieldValue>
+      <Key>降雨量</Key>
+      <Value>6</Value>
+    </DictionaryFieldValue>
   </WeatherName>
   <WeatherUnit>
     <DictionaryFieldValue>
@@ -594,6 +640,10 @@
     </DictionaryFieldValue>
     <DictionaryFieldValue>
       <Key>dB</Key>
+      <Value>6</Value>
+    </DictionaryFieldValue>
+    <DictionaryFieldValue>
+      <Key>mm/min</Key>
       <Value>6</Value>
     </DictionaryFieldValue>
   </WeatherUnit>

@@ -63,8 +63,11 @@ namespace Business
                                                            MN TEXT NOT NULL,
                                                            CreateTime INTEGER NOT NULL
                 )");
-            SQLiteCommand command = new SQLiteCommand(sql, conn);
-            command.ExecuteNonQuery();
+            using (SQLiteCommand command = new SQLiteCommand(sql, conn))
+            {
+                command.ExecuteNonQuery();                
+            }
+            
         }
 
         private static bool IsTableExist(SQLiteConnection conn)
@@ -596,17 +599,19 @@ select last_insert_rowid();";
         {
             string sql = string.Format("UPDATE tb_Equipment SET Name=@Name,AliasGasName=@AliasGasName,Factor=@Factor,AliasUnitName=@AliasUnitName,MN=@MN WHERE rowid=@id");
 
+            using (SQLiteCommand cmd = new SQLiteCommand(sql, conn, trans))
+            {
+                cmd.Parameters.AddWithValue("@Name", eq.Name);
+                cmd.Parameters.AddWithValue("@AliasGasName", eq.AliasGasName);
+                cmd.Parameters.AddWithValue("@Factor", eq.Factor);
+                cmd.Parameters.AddWithValue("@AliasUnitName", eq.AliasUnitName);
+                cmd.Parameters.AddWithValue("@MN", eq.MN);
+                cmd.Parameters.AddWithValue("@id", eq.ID);
 
-            SQLiteCommand cmd = new SQLiteCommand(sql, conn, trans);
-            cmd.Parameters.AddWithValue("@Name", eq.Name);
-            cmd.Parameters.AddWithValue("@AliasGasName", eq.AliasGasName);
-            cmd.Parameters.AddWithValue("@Factor", eq.Factor);
-            cmd.Parameters.AddWithValue("@AliasUnitName", eq.AliasUnitName);
-            cmd.Parameters.AddWithValue("@MN", eq.MN);
-            cmd.Parameters.AddWithValue("@id", eq.ID);
 
-
-            return cmd.ExecuteNonQuery() == 1;
+                return cmd.ExecuteNonQuery() == 1;
+            }
+            
         }
     }
 }

@@ -226,6 +226,10 @@ namespace CommandManager
                     for (int j = 3; j < cd2.ResultLength; j += 12)
                     {
                         byte[] factorArray = new byte[12];
+                        if (j + 12 > cd2.ResultByte.Length)
+                        {
+                            break;
+                        }
                         Array.Copy(cd2.ResultByte, j, factorArray, 0, 12);
                         List<byte> byteTemp = new List<byte>();
                         for (int i = 0; i < 12; )

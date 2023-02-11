@@ -14,11 +14,11 @@ namespace GlobalMemory
             DictionaryFieldValue gas = null;
             if (isOld)
             {
-                gas = CommonMemory.Config.GasOldenName.Find(c=>c.Value == gasType);
+                gas = CommonMemory.Config.GasOldenName.FirstOrDefault(c => c.Value == gasType);
             }
             else
             {
-                gas = CommonMemory.Config.GasName.Find(c => c.Value == gasType);
+                gas = CommonMemory.Config.GasName.FirstOrDefault(c => c.Value == gasType);
             }
             
             return gas == null ? string.Empty : gas.Key;
@@ -26,19 +26,30 @@ namespace GlobalMemory
 
         public static string GetWeatherName(byte weatherType)
         {
-            var weather = CommonMemory.Config.WeatherName.Find(c => c.Value == weatherType);
+            var weather = CommonMemory.Config.WeatherName.FirstOrDefault(c => c.Value == weatherType);
             return weather == null ? string.Empty : weather.Key;
         }
 
-        public static string GetGasUnitName(byte unit)
+        public static string GetGasUnitName(byte unit, bool isNew)
         {
-            var gas = CommonMemory.Config.GasUnit.Find(c => c.Value == unit);
+            DictionaryFieldValue gas;
+           
+            if (isNew)
+            {
+                 gas = CommonMemory.Config.GasUnitNew.FirstOrDefault(c => c.Value == unit);
+
+            }
+            else
+            {
+                 gas = CommonMemory.Config.GasUnit.FirstOrDefault(c => c.Value == unit);
+
+            }
             return gas == null ? string.Empty : gas.Key;
         }
 
         public static string GetWeatherUnitName(byte unit)
         {
-            var weather = CommonMemory.Config.WeatherUnit.Find(c => c.Value == unit);
+            var weather = CommonMemory.Config.WeatherUnit.FirstOrDefault(c => c.Value == unit);
             return weather == null ? string.Empty : weather.Key;
         }
 
@@ -70,7 +81,7 @@ namespace GlobalMemory
             if (result.IsGas)
             {
                 result._gasName = GetGasName(result.GasType, !eq.IsNew);
-                result._unitName = GetGasUnitName(result.UnitType);
+                result._unitName = GetGasUnitName(result.UnitType, result.IsNew);
             }
             else
             {

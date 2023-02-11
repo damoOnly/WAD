@@ -15,6 +15,7 @@ namespace Entity
         public int ID { get; set; }
         public string GasName { get; set; }
         public string UnitName { get; set; }
+        public byte Point { get; set; }
 
         public List<EquipmentData> DataList { get; set; }
     }

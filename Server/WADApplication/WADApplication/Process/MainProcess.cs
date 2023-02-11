@@ -606,6 +606,8 @@ namespace WADApplication.Process
                                 break;
                             }
                             MainProcess.readMainV2(CommonMemory.mainList[i], nowTemp);
+                            string _str = JsonConvert.SerializeObject(CommonMemory.mainList);
+                            MainProcess.chromeBrower.GetBrowser().MainFrame.ExecuteJavaScriptAsync(string.Format(@"window.setMainList({0});", _str));
                             Thread.Sleep(20);
                         }
                     }
@@ -623,8 +625,8 @@ namespace WADApplication.Process
                     {
                         break;
                     }
-                    string str = JsonConvert.SerializeObject(CommonMemory.mainList);
-                    MainProcess.chromeBrower.GetBrowser().MainFrame.ExecuteJavaScriptAsync(string.Format(@"window.setMainList('{0}');", str));
+                    //string str = JsonConvert.SerializeObject(CommonMemory.mainList);
+                    //MainProcess.chromeBrower.GetBrowser().MainFrame.ExecuteJavaScriptAsync(string.Format(@"window.setMainList('{0}');", str));
 
                     MainProcess.addPoint(nowTemp);
 

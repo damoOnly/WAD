@@ -38,11 +38,16 @@ namespace Business
         }
         public List<EquipmentData> GetList()
         {
+            List<EquipmentData> list = new List<EquipmentData>();
             using (SQLiteConnection conn = new SQLiteConnection(connstr))
             {
                 conn.Open();
-                return EquipmentDataAccess.GetListByFile(conn);
+                list = EquipmentDataAccess.GetListByFile(conn);
+                //conn.Close();
             }
+            //System.Data.SQLite.SQLiteConnection.ClearAllPools();
+
+            return list;
         }
 
         public StructEquipment GetEq()

@@ -12,14 +12,14 @@ namespace GlobalMemory
 {
     public static class CommonMemory
     {
-        public static ConcurrentBag<int> DbList = new ConcurrentBag<int>();
-        public static UserInfo Userinfo { get; set; }
+        public static ConcurrentBag<string> DbList = new ConcurrentBag<string>();
+        public static UserInfo Userinfo { get; set; }                                                                                         
 
-        public static bool IsOpen { get; set; }
-
-        /// <summary>
+        public static bool IsOpen { get; set; }                         
+                               
+        /// <summary>                
         /// 关闭声音播放
-        /// </summary>
+        /// </summary>                          
         public static bool IsClosePlay = false;
 
         /// <summary>

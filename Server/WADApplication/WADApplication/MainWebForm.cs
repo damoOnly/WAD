@@ -33,8 +33,11 @@ using Newtonsoft.Json;
 
 namespace WADApplication
 {
+
     public partial class MainWebForm : Form
     {
+        LogLib.Log log = LogLib.Log.GetLogger("MainWebForm");
+
         #region 私有方法
 
         // 初始化Form
@@ -51,6 +54,12 @@ namespace WADApplication
             });
 
             initializeChromium();
+            CommandResult.CommandText += addCommandText;
+        }
+
+        void addCommandText(string text)
+        {
+            MainProcess.chromeBrower.GetBrowser().MainFrame.ExecuteJavaScriptAsync(string.Format(@"window.addOutput('{0}');", text));
         }
 
         #endregion
@@ -78,8 +87,6 @@ namespace WADApplication
             base.WndProc(ref m);
         }
 
-
-
         private void initializeChromium()
         {
             Cef.EnableHighDPISupport();
@@ -96,6 +103,7 @@ namespace WADApplication
                     defaultPage: "index.html" // will default to index.html
                 )
             });
+            settings.LogSeverity = LogSeverity.Disable;
             Cef.Initialize(settings);
             String page = string.Format(@"{0}\html\index.html", Application.StartupPath);
 
@@ -107,7 +115,7 @@ namespace WADApplication
             //chromeBrower.ShowDevTools();
             MainProcess.chromeBrower.MenuHandler = new MenuHandler();
 
-            var obj = new BoundObject();
+            var obj = new BoundObject(this);
             //For async object registration (equivalent to the old RegisterAsyncJsObject)
             MainProcess.chromeBrower.JavascriptObjectRepository.Register("boundAsync", obj, true, BindingOptions.DefaultBinder);
 
@@ -152,7 +160,7 @@ namespace WADApplication
 
         private void MainWebForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-
+            CommandResult.CommandText -= addCommandText;
             CommonMemory.isRead = false;
             MainProcess.saveData(null);
             Cef.Shutdown();

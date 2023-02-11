@@ -11,6 +11,7 @@ namespace Entity
         public List<DictionaryFieldValue> GasName { get; set; }
 
         public List<DictionaryFieldValue> GasUnit { get; set; }
+        public List<DictionaryFieldValue> GasUnitNew { get; set; }
 
         public List<DictionaryFieldValue> Point { get; set; }
 
@@ -37,6 +38,7 @@ namespace Entity
         {
             GasName = new List<DictionaryFieldValue>();
             GasUnit = new List<DictionaryFieldValue>();
+            GasUnitNew = new List<DictionaryFieldValue>();
             Point = new List<DictionaryFieldValue>();
             BaudRate = new List<DictionaryFieldValue>();
             AlertModel = new List<DictionaryFieldValue>();
